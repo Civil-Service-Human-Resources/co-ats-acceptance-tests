@@ -20,7 +20,6 @@ class newVacancySpec extends BaseFeatureSpec {
       fillVacancyDetails(newVacancy)
 
       Then("The vacancy is successfully created and posted")
-
     }
   }
 }
