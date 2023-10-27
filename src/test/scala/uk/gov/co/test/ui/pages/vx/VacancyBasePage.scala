@@ -23,7 +23,6 @@ trait VacancyBasePage extends Matchers with BasePage with BrowserDriver {
   def navigateToVxConfigLogin(): Unit = {
     go to vxConfigUrl
     eventually(pageTitle shouldEqual vxConfigTitle)
-//    eventually(onPage(vxConfigTitle))
   }
 
   def enterUsername(recruiterDetails: RecruiterDetails): Unit =

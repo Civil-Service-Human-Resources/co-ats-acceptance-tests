@@ -11,7 +11,6 @@ class newVacancySpec extends BaseFeatureSpec {
     Scenario("An Existing Recruiter Is Able To Create A New Vacancy", RunInVX) {
       Given("A recruiter logins in to vx config")
       val registeredRecruiter = RECRUITERS
-      navigateToVxConfigLogin()
       fillRecruiterDetails(registeredRecruiter)
       eventually(pageTitle shouldEqual vxConfigHomePageTitle)
 
