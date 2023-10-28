@@ -14,7 +14,7 @@ import scala.util.Random
 
 trait CSJobsBasePage extends Matchers with BasePage with BrowserDriver {
 
-  val url: String           = TestConfiguration.url("v9test")
+  val url: String                     = TestConfiguration.url("v9test")
   val acceptAdditionalCookies: String = "accept_all_cookies_button"
   val randomLastName: String          = randomnessName()
 
