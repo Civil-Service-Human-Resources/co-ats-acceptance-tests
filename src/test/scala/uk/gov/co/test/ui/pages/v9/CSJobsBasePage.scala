@@ -1,21 +1,35 @@
 package uk.gov.co.test.ui.pages.v9
 
-import org.openqa.selenium.By
+import org.openqa.selenium.{By, WebElement}
 import org.scalatest.concurrent.Eventually.eventually
 import org.scalatest.matchers.should.Matchers
 import uk.gov.co.test.ui.driver.BrowserDriver
 import uk.gov.co.test.ui.pages.BasePage
 import uk.gov.co.test.ui.pages.v9.SearchJobsPage.cSSearchJobsTitle
+import uk.gov.co.test.ui.pages.v9.SignInPage.signOut
+
+import java.util
+import scala.util.Random
 
 trait CSJobsBasePage extends Matchers with BasePage with BrowserDriver {
 
   val url: String                     = "https://csrtesting.wcn.co.uk/csr/jobs.cgi"
   val acceptAdditionalCookies: String = "accept_all_cookies_button"
+  val randomLastName: String          = randomnessName()
+
+  def randomnessName(): String = {
+    val randomLastName = Iterator.continually(Random.nextPrintableChar()).filter(_.isLetter).take(10).mkString
+    val autoLastName   = s"Test-$randomLastName"
+    autoLastName
+  }
 
   def back(): Unit = clickOn("back-link")
 
   def acceptAllCookies(): Unit =
     click on acceptAdditionalCookies
+
+  def searchCookiesById(): util.List[WebElement] =
+    driver.findElements(By.id(acceptAdditionalCookies))
 
   def navigateToV9Test(): Unit = {
     go to url
@@ -41,5 +55,13 @@ trait CSJobsBasePage extends Matchers with BasePage with BrowserDriver {
     }
 
   case class LanguageSwitcherException(message: String) extends RuntimeException(message)
+
+  def linkUrl(linkText: String): String =
+    driver.findElement(By.linkText(linkText)).getAttribute("href")
+
+  def signOutProcess(): Unit = {
+    signOut().click()
+    eventually(pageTitle shouldEqual cSSearchJobsTitle)
+  }
 
 }

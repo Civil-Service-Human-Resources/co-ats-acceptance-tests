@@ -1,5 +1,6 @@
 package uk.gov.co.test.ui.pages.vx
 
+import org.openqa.selenium.WebElement
 import org.scalatest.concurrent.Eventually.eventually
 import org.scalatest.matchers.should.Matchers
 import uk.gov.co.test.ui.driver.BrowserDriver
@@ -33,5 +34,15 @@ trait VacancyBasePage extends Matchers with BasePage with BrowserDriver {
 
   def loginProcess(): Unit =
     waitForElementToBeClickableByPath("*//button[@id='login-button']").click()
+
+  def userProfile(): WebElement = waitForElementToBeClickableByPath(
+    "//*[@class='user_link']"
+  )
+
+  def logoutVX(): Unit = {
+    userProfile().click()
+    waitForElementClickableByPath(".//a[@class='logout_button']").click()
+    eventually(onPage(vxConfigTitle))
+  }
 
 }

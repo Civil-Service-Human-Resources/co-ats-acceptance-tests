@@ -20,12 +20,16 @@ object SignInPage extends CSJobsBasePage {
     "//*[@id='login_button']"
   )
 
+  def signOut(): WebElement = waitForElementToBeClickableByPath(
+    "//*[@title='Sign out']"
+  )
+
   def createAnAccount(): WebElement = waitForElementToBeClickableByPath(
     "//*[@id='login_form']/div[2]/p[2]/a"
   )
 
   def fillInUserDetails(user: CandidateDetails): Unit = {
-    email().value = user.email
+    email().value = user.email.toLowerCase
     password().value = user.password
   }
 

@@ -1,13 +1,19 @@
 #!/bin/bash -e
-DEFAULT_BROWSER=chrome
-BROWSER_TYPE=$1
 
-if [ -z "$BROWSER_TYPE" ]; then
-    echo "BROWSER_TYPE value not set, defaulting to $DEFAULT_BROWSER..."
-    echo ""
+ENV=${1:-test}
+BROWSER=${2:-chrome}
+DRIVER=
+
+if [ "$ENV" = "test" ]; then
+    if [ "$BROWSER" = "chrome" ]; then
+        DRIVER="-Dwebdriver.chrome.driver=/usr/local/bin/chromedriver"
+    elif [ "$BROWSER" = "firefox" ]; then
+        DRIVER="-Dwebdriver.gecko.driver=/usr/local/bin/geckodriver"
+    fi
+
+    #sbt scalafmtCheckAll scalafmtSbtCheck
+
+     sbt -Denvironment=$ENV -Dbrowser=$BROWSER -Dsbt.color=true "testOnly uk.gov.co.test.ui.specs.*"
+else
+     sbt -Denvironment=$ENV -Dbrowser="remote-$BROWSER" -Dsbt.color=true "testOnly uk.gov.co.test.ui.specs.*"
 fi
-
-
-#sbt scalafmtCheckAll scalafmtSbtCheck
-
-sbt -Dbrowser="${BROWSER_TYPE:=$DEFAULT_BROWSER}" -Dsbt.color=true clean "testOnly uk.gov.co.test.ui.specs.*"

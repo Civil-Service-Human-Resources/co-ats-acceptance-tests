@@ -36,8 +36,7 @@ object CreateAccountPage extends CSJobsBasePage {
   def navigateToCreateAccountPage(): Unit = {
     navigateToSignInOrCreateAccount()
     clickOn(createAnAccount())
-    eventually(pageTitle shouldEqual createAccountTitle)
-//    eventually(onPage(createAccountTitle))
+    eventually(onPage(createAccountTitle))
   }
 
   def enterFirstName(user: CandidateDetails): Unit =
@@ -47,10 +46,10 @@ object CreateAccountPage extends CSJobsBasePage {
     lastName().value = user.lastname
 
   def enterEmail(user: CandidateDetails): Unit =
-    email().value = user.email
+    email().value = user.email.toLowerCase
 
   def enterConfirmEmail(user: CandidateDetails): Unit =
-    confirmEmail().value = user.email
+    confirmEmail().value = user.email.toLowerCase
 
   def enterPassword(user: CandidateDetails): Unit =
     createPassword().value = user.password
