@@ -30,6 +30,6 @@ object CreateNewVacancyPage extends VacancyBasePage {
       vacancySection.click()
       newVacancy.click()
     }
-    eventually(pageTitle shouldEqual createVacancyTitle)
+    eventually(onPage(createVacancyTitle))
   }
 }

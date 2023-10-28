@@ -34,7 +34,7 @@ trait CSJobsBasePage extends Matchers with BasePage with BrowserDriver {
 
   def navigateToV9Test(): Unit = {
     go to url
-    eventually(pageTitle shouldEqual cSSearchJobsTitle)
+    eventually(onPage(cSSearchJobsTitle))
   }
 
   def changeLanguage(lang: String): Unit = {
