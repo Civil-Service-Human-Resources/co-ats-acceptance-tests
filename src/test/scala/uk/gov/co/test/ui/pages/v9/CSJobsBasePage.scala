@@ -3,6 +3,7 @@ package uk.gov.co.test.ui.pages.v9
 import org.openqa.selenium.{By, WebElement}
 import org.scalatest.concurrent.Eventually.eventually
 import org.scalatest.matchers.should.Matchers
+import uk.gov.co.test.ui.conf.TestConfiguration
 import uk.gov.co.test.ui.driver.BrowserDriver
 import uk.gov.co.test.ui.pages.BasePage
 import uk.gov.co.test.ui.pages.v9.SearchJobsPage.cSSearchJobsTitle
@@ -13,7 +14,7 @@ import scala.util.Random
 
 trait CSJobsBasePage extends Matchers with BasePage with BrowserDriver {
 
-  val url: String                     = "https://csrtesting.wcn.co.uk/csr/jobs.cgi"
+  val url: String           = TestConfiguration.url("v9test")
   val acceptAdditionalCookies: String = "accept_all_cookies_button"
   val randomLastName: String          = randomnessName()
 
