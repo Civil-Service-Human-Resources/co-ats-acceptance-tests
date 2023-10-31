@@ -15,9 +15,9 @@ case class RecruiterDetails(
 
 trait VacancyBasePage extends Matchers with BasePage with BrowserDriver {
 
-  val url: String                        = TestConfiguration.url("vxconfig")
-  val vxConfigTitle                      = "Oleeo vX Login : CSR"
-  val vxConfigHomePageTitle              = "Home : Civil Service Jobs - GOV.UK"
+  val url: String              = TestConfiguration.url("vxconfig")
+  val vxConfigTitle            = "Oleeo vX Login : CSR"
+  val vxConfigHomePageTitle    = "Home : Civil Service Jobs - GOV.UK"
   val usernameVxConfig: String = readProperty("services.vxconfig.admin.username")
   val passwordVxConfig: String = readProperty("services.vxconfig.admin.password")
 

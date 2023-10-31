@@ -5,4 +5,5 @@ import uk.gov.co.test.ui.pages.vx.{RecruiterDetails, VacancyDetails}
 
 object RECRUITERS extends RecruiterDetails(s"$usernameVxConfig", s"$passwordVxConfig")
 
-object VACANCIES extends VacancyDetails("Cabinet Office - apply online")
+object GRS_VACANCY
+    extends VacancyDetails("Department for Environment, Food and Rural Affairs - Apply online", "GCQA OGD DEFRA", 32)
