@@ -1,6 +1,6 @@
 package uk.gov.co.test.ui.utils
 
-import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.{passwordVxConfig, usernameVxConfig}
+import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.{passwordVxConfig, usernameVxConfig, vacancyEmailVxConfig}
 import uk.gov.co.test.ui.pages.vx.{RecruiterDetails, VacancyDetails}
 
 object RECRUITERS extends RecruiterDetails(s"$usernameVxConfig", s"$passwordVxConfig")
@@ -14,7 +14,8 @@ object GRS_VACANCY
       "Analytical",
       "Other",
       "1",
-      "External",
+      "Internal",
+      true,
       true,
       "Autotest",
       false,
@@ -31,9 +32,9 @@ object GRS_VACANCY
       "Autotest",
       "Autotest",
       "Autotest",
-      "Gulam Choudhury",
-      "gulam.choudhury@digital.cabinet-office.gov.uk",
-      "Gulam Choudhury",
-      "gulam.choudhury@digital.cabinet-office.gov.uk",
-      "gulam.choudhury@digital.cabinet-office.gov.uk"
+      "Automation Tester",
+      s"$vacancyEmailVxConfig",
+      "Automation Tester",
+      s"$vacancyEmailVxConfig",
+      s"$vacancyEmailVxConfig"
     )

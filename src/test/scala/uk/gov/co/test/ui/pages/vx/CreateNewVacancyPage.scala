@@ -15,6 +15,7 @@ case class VacancyDetails(
   profession: String,
   noOfJobs: String,
   approach: String,
+  statementRequired: Boolean,
   approval: Boolean,
   budgetaryAuthInfo: String,
   reserveList: Boolean,
@@ -67,6 +68,10 @@ object CreateNewVacancyPage extends VacancyBasePage {
 
   def title(): TextField       = textField("title")
   def closingDate(): TextField = textField("edit_opp_form_pcd")
+  def eligibilityStatement(): Unit = {
+    val statement = waitForVisibilityOfElementById(s"${formId}_datafield_154373_1_1_en-GB")
+    statement.sendKeys("Autotest")
+  }
 
   def templateSelect: WebElement = waitForVisibilityOfElementByPath(
     "//*[@id='select2-edit_opp_form_template_id-container']"
@@ -141,6 +146,34 @@ object CreateNewVacancyPage extends VacancyBasePage {
       case "External"          => clickOnRadioButton(s"${formId}_datafield_154380_1_1_11774")
       case _                   => throw new IllegalStateException("Please select valid 'Approach' option")
     }
+    selectInternalApproach(vacancyDetails)
+  }
+
+  def selectInternalApproach(vacancyDetails: VacancyDetails): Unit = {
+    if (vacancyDetails.approach == "Internal") {
+      clickOnRadioButton(
+        if (vacancyDetails.statementRequired) s"${formId}_datafield_154388_1_1_1"
+        else s"${formId}_datafield_154388_1_1_2"
+      )
+    } else if (vacancyDetails.approach == "Across government") {
+      clickOnRadioButton(
+        if (vacancyDetails.statementRequired) s"${formId}_datafield_154384_1_1_1"
+        else s"${formId}_datafield_154384_1_1_2"
+      )
+    }
+    if (vacancyDetails.statementRequired) eligibilityStatement()
     println("Done!")
+  }
+
+  def jobInformationSection(vacancyDetails: VacancyDetails): Unit = {
+    selectBusinessArea(vacancyDetails)
+    selectTypeOfRole(vacancyDetails)
+    whichProfessionIsJob(vacancyDetails)
+    noOfJobsAvailable(vacancyDetails)
+  }
+
+  def approachSection(vacancyDetails: VacancyDetails): Unit = {
+    selectApproach(vacancyDetails)
+    selectInternalApproach(vacancyDetails)
   }
 }
