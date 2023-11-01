@@ -1,8 +1,8 @@
 package uk.gov.co.test.ui.pages
 
+import org.openqa.selenium._
 import org.openqa.selenium.support.ui.ExpectedConditions.{elementToBeClickable, visibilityOfElementLocated}
 import org.openqa.selenium.support.ui.{ExpectedCondition, ExpectedConditions, WebDriverWait}
-import org.openqa.selenium.{By, JavascriptExecutor, WebDriver, WebElement}
 import org.scalactic.source.Position
 import org.scalatest.concurrent.Eventually.eventually
 import org.scalatest.concurrent.PatienceConfiguration
@@ -108,5 +108,11 @@ trait BasePage extends Matchers with Page with WebBrowser with PatienceConfigura
 
   def randNumbers(howManyNos: Integer): String =
     Seq.fill(howManyNos)(Random.nextInt(9)).mkString
+
+  def selectOption(enterText: String, addOption: String)(implicit driver: WebDriver): Unit = {
+    val selectOption = waitForVisibilityOfElementByPath(enterText)
+    selectOption.sendKeys(addOption)
+    selectOption.sendKeys(Keys.ENTER)
+  }
 
 }
