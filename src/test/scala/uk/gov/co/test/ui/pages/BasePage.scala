@@ -32,7 +32,7 @@ trait BasePage extends Matchers with Page with WebBrowser with PatienceConfigura
   }
 
   def waitForVisibilityOfElementByPath(pathway: String)(implicit driver: WebDriver): WebElement = {
-    val wait = new WebDriverWait(driver, 10, 200)
+    val wait = new WebDriverWait(driver, 15, 200)
     wait.until(visibilityOfElementLocated(By.xpath(pathway)))
 
   }
@@ -62,9 +62,9 @@ trait BasePage extends Matchers with Page with WebBrowser with PatienceConfigura
     wait.until(visibilityOfElementLocated(ele))
   }
 
-  def waitForElementToBeClickableByLink(id: String)(implicit driver: WebDriver): WebElement = {
+  def waitForElementToBeClickableByLink(optionName: String)(implicit driver: WebDriver): WebElement = {
     val wait = new WebDriverWait(driver, 2, 200)
-    wait.until(visibilityOfElementLocated(By.linkText(s"$id")))
+    wait.until(visibilityOfElementLocated(By.linkText(optionName)))
   }
 
   def waitForElementToBeClickableByLabel(id: String)(implicit driver: WebDriver): WebElement = {

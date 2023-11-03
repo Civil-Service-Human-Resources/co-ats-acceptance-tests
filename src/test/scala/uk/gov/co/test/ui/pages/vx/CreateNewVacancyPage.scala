@@ -18,8 +18,14 @@ case class VacancyDetails(
   statementRequired: Boolean,
   approval: Boolean,
   budgetaryAuthInfo: String,
+  costCentre: String,
   reserveList: Boolean,
+  reserveListLength: String,
   locationType: String,
+  postcodes: String,
+  cityOrTown: String,
+  region: String,
+  overseas: String,
   vacancyInNI: Boolean,
   giveLocationPreference: Boolean,
   contractType: String,
@@ -44,13 +50,21 @@ object CreateNewVacancyPage extends VacancyBasePage {
   val createVacancyTitle = "Create New Vacancy : Civil Service Jobs - GOV.UK"
   var formId: String     = ""
 
-  private lazy val businessAreaId    = s"select2-${formId}_datafield_155221_1_1-container"
-  private lazy val whichProfessionId = s"select2-${formId}_datafield_155435_1_1-container"
-  private lazy val noOfJobsId        = s"${formId}_datafield_155332_1_1"
-  private lazy val generalInput      = "//input[@class='select2-search__field']"
-  private lazy val typeOfRoleId      = s"select2-${formId}_datafield_155369_1_1-container"
-  private lazy val typeOfRoleInput   = s".//*[@aria-describedby='$typeOfRoleId']"
-  private lazy val approachId        = s"${formId}_field_154380_1"
+  private lazy val businessAreaId      = s"select2-${formId}_datafield_155221_1_1-container"
+  private lazy val whichProfessionId   = s"select2-${formId}_datafield_155435_1_1-container"
+  private lazy val noOfJobsId          = s"${formId}_datafield_155332_1_1"
+  private lazy val generalInput        = "//input[@class='select2-search__field']"
+  private lazy val typeOfRoleId        = s"select2-${formId}_datafield_155369_1_1-container"
+  private lazy val typeOfRoleInput     = s".//*[@aria-describedby='$typeOfRoleId']"
+  private lazy val cityOrTownInput     = s".//*[@aria-describedby='select2-${formId}_datafield_155622_1_1-container']"
+  private lazy val approachId          = s"${formId}_field_154380_1"
+  private lazy val approvalId          = s"${formId}_field_154507_1"
+  private lazy val reserveListId       = s"${formId}_field_154633_1"
+  private lazy val reserveListLengthId = s"select2-${formId}_datafield_154637_1_1-container"
+  private lazy val locationTypeId      = s"select2-${formId}_datafield_155639_1_1-container"
+  private lazy val reserveLengthsId    = s".//ul[@id='select2-${formId}_datafield_154637_1_1-results']"
+  private lazy val overseasId          = s"select2-${formId}_datafield_155904_1_1-container"
+  private lazy val regionInput         = s".//*[@aria-describedby='select2-${formId}_datafield_155584_1_1-container']"
 
   def extractFormId(): String = {
     val formClass = driver.findElement(By.className("opp_form_bd"))
@@ -137,6 +151,16 @@ object CreateNewVacancyPage extends VacancyBasePage {
   def noOfJobsAvailable(vacancyDetails: VacancyDetails): Unit =
     noOfJobsInput().value = vacancyDetails.noOfJobs
 
+  def budgetaryInfo(info: String): Unit = {
+    val field = waitForVisibilityOfElementById(s"${formId}_datafield_154500_1_1")
+    field.sendKeys(info)
+  }
+
+  def costCentre(centre: String): Unit = {
+    val field = waitForVisibilityOfElementById(s"${formId}_datafield_154493_1_1")
+    field.sendKeys(centre)
+  }
+
   def selectApproach(vacancyDetails: VacancyDetails): Unit = {
     scrollToElement(By.id(approachId))
     vacancyDetails.approach match {
@@ -146,23 +170,101 @@ object CreateNewVacancyPage extends VacancyBasePage {
       case "External"          => clickOnRadioButton(s"${formId}_datafield_154380_1_1_11774")
       case _                   => throw new IllegalStateException("Please select valid 'Approach' option")
     }
-    selectInternalApproach(vacancyDetails)
   }
 
-  def selectInternalApproach(vacancyDetails: VacancyDetails): Unit = {
-    if (vacancyDetails.approach == "Internal") {
-      clickOnRadioButton(
-        if (vacancyDetails.statementRequired) s"${formId}_datafield_154388_1_1_1"
-        else s"${formId}_datafield_154388_1_1_2"
-      )
-    } else if (vacancyDetails.approach == "Across government") {
-      clickOnRadioButton(
-        if (vacancyDetails.statementRequired) s"${formId}_datafield_154384_1_1_1"
-        else s"${formId}_datafield_154384_1_1_2"
-      )
+  private def selectStatementRequired(vacancyDetails: VacancyDetails): Unit =
+    if (
+      (vacancyDetails.approach == "Internal" || vacancyDetails.approach == "Across government") && vacancyDetails.statementRequired
+    ) {
+      vacancyDetails.approach match {
+        case "Internal"          => clickOnRadioButton(s"${formId}_datafield_154388_1_1_1")
+        case "Across government" => clickOnRadioButton(s"${formId}_datafield_154384_1_1_1")
+      }
+      eligibilityStatement()
+    } else if (
+      (vacancyDetails.approach == "Internal" || vacancyDetails.approach == "Across government") && !vacancyDetails.statementRequired
+    ) {
+      vacancyDetails.approach match {
+        case "Internal"          => clickOnRadioButton(s"${formId}_datafield_154388_1_1_2")
+        case "Across government" => clickOnRadioButton(s"${formId}_datafield_154384_1_1_2")
+      }
     }
-    if (vacancyDetails.statementRequired) eligibilityStatement()
-    println("Done!")
+
+  def selectApproval(vacancyDetails: VacancyDetails): Unit = {
+    scrollToElement(By.id(approvalId))
+    if (vacancyDetails.approval) {
+      clickOnRadioButton(s"${formId}_datafield_154507_1_1_1")
+      budgetaryInfo(vacancyDetails.budgetaryAuthInfo)
+    } else {
+      clickOnRadioButton(s"${formId}_datafield_154507_1_1_2")
+    }
+    costCentre(vacancyDetails.costCentre)
+  }
+
+  def selectReserveList(vacancyDetails: VacancyDetails): Unit = {
+    scrollToElement(By.id(reserveListId))
+    if (vacancyDetails.reserveList) {
+      clickOnRadioButton(s"${formId}_datafield_154633_1_1_1")
+      lengthOfReserveList(vacancyDetails.reserveListLength)
+    } else {
+      clickOnRadioButton(s"${formId}_datafield_154633_1_1_2")
+    }
+  }
+
+  def waitForDropdownOption(option: String): WebElement =
+    waitForVisibilityOfElementByPath(s".//li[@title='$option']")
+
+  def lengthOfReserveList(length: String): Unit = {
+    waitForVisibilityOfElementById(reserveListLengthId).click()
+    action().moveToElement(waitForDropdownOption(length)).perform()
+    waitForDropdownOption(length).click()
+  }
+
+  def locationType(locationType: String): Unit = {
+    waitForVisibilityOfElementById(locationTypeId).click()
+    action().moveToElement(waitForDropdownOption(locationType)).perform()
+    waitForDropdownOption(locationType).click()
+  }
+
+  def selectLocationType(vacancyDetails: VacancyDetails): Unit = {
+    scrollToElement(By.id(locationTypeId))
+    locationType(vacancyDetails.locationType)
+    vacancyDetails.locationType match {
+      case "Postcodes" => enterPostcodes(vacancyDetails.postcodes)
+      case "Towns"     => selectCityOrTown(vacancyDetails.cityOrTown)
+      case "Regions"   => selectRegion(vacancyDetails.region)
+      case "Overseas"  => selectOverseas(vacancyDetails.overseas)
+    }
+  }
+
+  def enterPostcodes(postcode: String): Unit = {
+    val field = waitForVisibilityOfElementById(s"${formId}_datafield_155601_1_1")
+    field.sendKeys(postcode)
+  }
+
+  def waitForCityOrTownOption(option: String): WebElement =
+    waitForVisibilityOfElementByPath(s".//li[text()='$option ']")
+
+  def waitForRegionOption(region: String): WebElement =
+    waitForVisibilityOfElementByPath(s".//li[text()='$region']")
+
+  def selectCityOrTown(cityTown: String): Unit = {
+    val selectOption = waitForVisibilityOfElementByPath(cityOrTownInput)
+    selectOption.sendKeys(cityTown)
+    action().moveToElement(waitForCityOrTownOption(cityTown)).perform()
+    waitForCityOrTownOption(cityTown).click()
+  }
+
+  def selectRegion(region: String): Unit = {
+    val selectOption = waitForVisibilityOfElementByPath(regionInput)
+    selectOption.sendKeys(region)
+    action().moveToElement(waitForRegionOption(region)).perform()
+    waitForRegionOption(region).click()
+  }
+
+  def selectOverseas(country: String): Unit = {
+    waitForVisibilityOfElementById(overseasId).click()
+    selectOption(generalInput, country)
   }
 
   def jobInformationSection(vacancyDetails: VacancyDetails): Unit = {
@@ -174,6 +276,15 @@ object CreateNewVacancyPage extends VacancyBasePage {
 
   def approachSection(vacancyDetails: VacancyDetails): Unit = {
     selectApproach(vacancyDetails)
-    selectInternalApproach(vacancyDetails)
+    selectStatementRequired(vacancyDetails)
   }
+
+  def approvalSection(vacancyDetails: VacancyDetails): Unit =
+    selectApproval(vacancyDetails)
+
+  def reserveListSection(vacancyDetails: VacancyDetails): Unit =
+    selectReserveList(vacancyDetails)
+
+  def locationsSection(vacancyDetails: VacancyDetails): Unit =
+    selectLocationType(vacancyDetails)
 }
