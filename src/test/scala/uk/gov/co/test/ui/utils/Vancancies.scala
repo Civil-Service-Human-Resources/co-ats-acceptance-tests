@@ -52,7 +52,8 @@ case class NewVacancyDetails(
   approachDetails: ApproachDetails,
   approvalDetails: ApprovalDetails,
   reserveListDetails: ReserveListDetails,
-  locationsDetails: LocationsDetails
+  locationsDetails: LocationsDetails,
+  contractDetails: ContractDetails
 )
 object VACANCY_DATA
     extends NewVacancyDetails(
@@ -61,7 +62,8 @@ object VACANCY_DATA
       VACANCY_APPROACH,
       VACANCY_APPROVAL,
       VACANCY_RESERVE_LIST,
-      VACANCY_LOCATIONS
+      VACANCY_LOCATIONS,
+      VACANCY_CONTRACT_DETAILS
     )
 
 object VACANCY_BASIC_DETAILS
@@ -113,4 +115,18 @@ object VACANCY_LOCATIONS
       true,
       "2",
       "London"
+    )
+
+object VACANCY_CONTRACT_DETAILS
+    extends ContractDetails(
+      "Permanent",
+      "Full-time",
+      "Senior Executive Officer",
+      "Grade 7",
+      "GBP (£)",
+      75000,
+      95000,
+      "Can agree on the higher bracket",
+      true,
+      18750
     )
