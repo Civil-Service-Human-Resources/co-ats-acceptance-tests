@@ -50,10 +50,19 @@ case class NewVacancyDetails(
   basicDetails: BasicDetails,
   jobInfoDetails: JobInfoDetails,
   approachDetails: ApproachDetails,
-  approvalDetails: ApprovalDetails
+  approvalDetails: ApprovalDetails,
+  reserveListDetails: ReserveListDetails,
+  locationsDetails: LocationsDetails
 )
 object VACANCY_DATA
-    extends NewVacancyDetails(VACANCY_BASIC_DETAILS, VACANCY_JOB_INFORMATION, VACANCY_APPROACH, VACANCY_APPROVAL)
+    extends NewVacancyDetails(
+      VACANCY_BASIC_DETAILS,
+      VACANCY_JOB_INFORMATION,
+      VACANCY_APPROACH,
+      VACANCY_APPROVAL,
+      VACANCY_RESERVE_LIST,
+      VACANCY_LOCATIONS
+    )
 
 object VACANCY_BASIC_DETAILS
     extends BasicDetails(
@@ -82,4 +91,26 @@ object VACANCY_APPROVAL
       true,
       "Autotest - budgetary authorisation info",
       "Autotest - Cost centre"
+    )
+
+object VACANCY_RESERVE_LIST
+    extends ReserveListDetails(
+      true,
+      "6 Months"
+    )
+
+object VACANCY_LOCATIONS
+    extends LocationsDetails(
+      "Postcodes",
+      "SK1 3BX",
+      "Manchester",
+      "North West",
+      "Germany",
+      "Newcastle, Liverpool, Cardiff",
+      true,
+      true,
+      "All communities",
+      true,
+      "2",
+      "London"
     )

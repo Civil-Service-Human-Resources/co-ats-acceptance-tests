@@ -44,10 +44,8 @@ object ApprovalSection extends VacancyBasePage {
     selectApproval
   )
 
-  def approvalSection(newVacancyDetails: NewVacancyDetails): Unit = {
+  def approvalSection(newVacancyDetails: NewVacancyDetails): Unit =
     approval.foreach { f =>
       f(newVacancyDetails.approvalDetails)
     }
-    println("Done")
-  }
 }
