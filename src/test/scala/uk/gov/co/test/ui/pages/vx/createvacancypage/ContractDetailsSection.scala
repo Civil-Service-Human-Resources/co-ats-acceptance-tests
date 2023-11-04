@@ -80,13 +80,15 @@ object ContractDetailsSection extends VacancyBasePage {
     moreDetails.value = contractDetails.moreDetails
   }
 
-  def selectCivilServicePension(contractDetails: ContractDetails): Unit =
+  def selectCivilServicePension(contractDetails: ContractDetails): Unit = {
+    scrollToElement(By.id(civilServiceId))
     if (contractDetails.civilServicePension) {
       clickOnRadioButton(civilServicePensionYesId)
       enterEmployerContribution(contractDetails.employerContribution)
     } else {
       clickOnRadioButton(civilServicePensionNoId)
     }
+  }
 
   private def enterEmployerContribution(contribution: Int): Unit = {
     val con = textField(employerContributionInput)
