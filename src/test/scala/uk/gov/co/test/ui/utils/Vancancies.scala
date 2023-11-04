@@ -1,6 +1,7 @@
 package uk.gov.co.test.ui.utils
 
 import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.{passwordVxConfig, usernameVxConfig, vacancyEmailVxConfig}
+import uk.gov.co.test.ui.pages.vx.createvacancypage._
 import uk.gov.co.test.ui.pages.vx.{RecruiterDetails, VacancyDetails}
 
 object RECRUITERS extends RecruiterDetails(s"$usernameVxConfig", s"$passwordVxConfig")
@@ -43,4 +44,42 @@ object GRS_VACANCY
       "Automation Tester",
       s"$vacancyEmailVxConfig",
       s"$vacancyEmailVxConfig"
+    )
+
+case class NewVacancyDetails(
+  basicDetails: BasicDetails,
+  jobInfoDetails: JobInfoDetails,
+  approachDetails: ApproachDetails,
+  approvalDetails: ApprovalDetails
+)
+object VACANCY_DATA
+    extends NewVacancyDetails(VACANCY_BASIC_DETAILS, VACANCY_JOB_INFORMATION, VACANCY_APPROACH, VACANCY_APPROVAL)
+
+object VACANCY_BASIC_DETAILS
+    extends BasicDetails(
+      "Department for Environment, Food and Rural Affairs - Apply online",
+      "GCQA OGD DEFRA (CORE)",
+      32
+    )
+object VACANCY_JOB_INFORMATION
+    extends JobInfoDetails(
+      true,
+      "Department for Environment, Food and Rural Affairs - Apply online",
+      "DEFRA - COO - Commercial",
+      "Autotest - Business area detail",
+      "Analytical",
+      "Other",
+      "1"
+    )
+object VACANCY_APPROACH
+    extends ApproachDetails(
+      "Internal",
+      true,
+      "Autotest - Eligibility statement"
+    )
+object VACANCY_APPROVAL
+    extends ApprovalDetails(
+      true,
+      "Autotest - budgetary authorisation info",
+      "Autotest - Cost centre"
     )

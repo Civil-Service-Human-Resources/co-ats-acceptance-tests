@@ -1,6 +1,6 @@
 package uk.gov.co.test.ui.flows.vx
 
-import uk.gov.co.test.ui.pages.vx.CreateNewVacancyPage.{approachSection, approvalSection, createNewVacancy, enterVacancyTitle, jobInformationSection, locationsSection, reserveListSection, selectApproach, selectClosingDate, selectTemplate}
+import uk.gov.co.test.ui.pages.vx.CreateNewVacancyPage.{approachSection, approvalSection, createNewVacancy, enterVacancyTitle, jobInformationSection, locationsSection, reserveListSection, selectClosingDate, selectTemplate}
 import uk.gov.co.test.ui.pages.vx.{VacancyBasePage, VacancyDetails}
 
 object NewVacancyFlow extends VacancyBasePage {

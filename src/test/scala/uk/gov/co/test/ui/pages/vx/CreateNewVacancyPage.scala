@@ -285,6 +285,8 @@ object CreateNewVacancyPage extends VacancyBasePage {
   def reserveListSection(vacancyDetails: VacancyDetails): Unit =
     selectReserveList(vacancyDetails)
 
-  def locationsSection(vacancyDetails: VacancyDetails): Unit =
+  def locationsSection(vacancyDetails: VacancyDetails): Unit = {
     selectLocationType(vacancyDetails)
+    println("Done!")
+  }
 }
