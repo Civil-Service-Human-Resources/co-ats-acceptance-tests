@@ -1,6 +1,6 @@
 package uk.gov.co.test.ui.utils
 
-import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.{passwordVxConfig, usernameVxConfig, vacancyEmailVxConfig}
+import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.{emailVxConfig, nameVxConfig, passwordVxConfig, usernameVxConfig}
 import uk.gov.co.test.ui.pages.vx.createvacancypage._
 import uk.gov.co.test.ui.pages.vx.{RecruiterDetails, VacancyDetails}
 
@@ -40,10 +40,10 @@ object GRS_VACANCY
       "Autotest",
       "Autotest",
       "Automation Tester",
-      s"$vacancyEmailVxConfig",
+      s"$emailVxConfig",
       "Automation Tester",
-      s"$vacancyEmailVxConfig",
-      s"$vacancyEmailVxConfig"
+      s"$emailVxConfig",
+      s"$emailVxConfig"
     )
 
 case class NewVacancyDetails(
@@ -54,7 +54,8 @@ case class NewVacancyDetails(
   reserveListDetails: ReserveListDetails,
   locationsDetails: LocationsDetails,
   contractDetails: ContractDetails,
-  advertDetails: AdvertDetails
+  advertDetails: AdvertDetails,
+  contactDetails: ContactDetails
 )
 object VACANCY_DATA
     extends NewVacancyDetails(
@@ -65,7 +66,8 @@ object VACANCY_DATA
       VACANCY_RESERVE_LIST,
       VACANCY_LOCATIONS,
       VACANCY_CONTRACT_DETAILS,
-      VACANCY_ADVERT
+      VACANCY_ADVERT,
+      VACANCY_CONTACT_DETAILS
     )
 
 object VACANCY_BASIC_DETAILS
@@ -140,4 +142,14 @@ object VACANCY_ADVERT
       "Autotest - Person specification",
       "Autotest - Offered benefits",
       "Autotest - Selection process details"
+    )
+
+object VACANCY_CONTACT_DETAILS
+    extends ContactDetails(
+      s"$nameVxConfig",
+      s"$emailVxConfig",
+      "01000 000000",
+      s"$nameVxConfig",
+      s"$emailVxConfig",
+      s"$emailVxConfig"
     )

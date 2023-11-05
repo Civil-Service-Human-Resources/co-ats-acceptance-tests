@@ -18,9 +18,11 @@ trait VacancyBasePage extends Matchers with BasePage with BrowserDriver {
   val url: String              = TestConfiguration.url("vxconfig")
   val vxConfigTitle            = "Oleeo vX Login : CSR"
   val vxConfigHomePageTitle    = "Home : Civil Service Jobs - GOV.UK"
-  val vacancyEmailVxConfig: String = readProperty("services.vxconfig.admin.vacancy_email")
+  val nameVxConfig: String     = readProperty("services.vxconfig.admin.contact_name")
+  val emailVxConfig: String    = readProperty("services.vxconfig.admin.contact_email")
   val usernameVxConfig: String = readProperty("services.vxconfig.admin.username")
   val passwordVxConfig: String = readProperty("services.vxconfig.admin.password")
+  val getOs: String            = System.getProperty("os.name").toLowerCase
 
   def username(): TextField     = textField("user")
   def password(): PasswordField = pwdField("password")
