@@ -9,7 +9,7 @@ import uk.gov.co.test.ui.specs.BaseFeatureSpec
 import uk.gov.co.test.ui.tags.RunInVX
 import uk.gov.co.test.ui.utils._
 
-class ogdProcessSpec extends BaseFeatureSpec {
+class oGDTransferProcessSpec extends BaseFeatureSpec {
   Feature("Recruiter Creates A Master Vacancy") {
     Scenario("A Recruiter Is Successful In Creating A New Templated Master Vacancy", RunInVX) {
       Given("a recruiter logs in vx config")
