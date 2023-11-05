@@ -75,11 +75,9 @@ object ContactDetailsSection extends VacancyBasePage {
     enterVacancyTeamEmail
   )
 
-  def contactDetailsSection(newVacancyDetails: NewVacancyDetails): Unit = {
+  def contactDetailsSection(newVacancyDetails: NewVacancyDetails): Unit =
     contactInfo.foreach { f =>
       f(newVacancyDetails.contactDetails)
     }
-    println("Done!")
-  }
 
 }

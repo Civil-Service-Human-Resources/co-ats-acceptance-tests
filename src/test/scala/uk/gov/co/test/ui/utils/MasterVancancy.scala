@@ -1,0 +1,61 @@
+package uk.gov.co.test.ui.utils
+
+import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.{emailVxConfig, nameVxConfig, passwordVxConfig, usernameVxConfig}
+import uk.gov.co.test.ui.pages.vx.{MasterVacancyDetails, RecruiterDetails}
+
+object MASTER_RECRUITER extends RecruiterDetails(s"$usernameVxConfig", s"$passwordVxConfig")
+
+object MASTER_VACANCY_DATA
+    extends MasterVacancyDetails(
+      "Department for Environment, Food and Rural Affairs - Apply online",
+      "GCQA OGD DEFRA (CORE)",
+      32,
+      true,
+      "Department for Environment, Food and Rural Affairs - Apply online",
+      "DEFRA - COO - Commercial",
+      "Autotest - Business area detail",
+      "Analytical",
+      "Other",
+      "1",
+      "Internal",
+      true,
+      "Autotest - Eligibility statement",
+      true,
+      "Autotest - budgetary authorisation info",
+      "Autotest - Cost centre",
+      true,
+      "6 Months",
+      "Postcodes",
+      "SK1 3BX",
+      "Manchester",
+      "North West",
+      "Germany",
+      "Newcastle, Liverpool, Cardiff",
+      true,
+      true,
+      "All communities",
+      true,
+      "2",
+      "London",
+      "Permanent",
+      "Full-time",
+      "Senior Executive Officer",
+      "Grade 7",
+      "GBP (£)",
+      75000,
+      95000,
+      "Can agree on the higher bracket",
+      true,
+      18750,
+      "Autotest - Job summary",
+      "Autotest - Job description",
+      "Autotest - Person specification",
+      "Autotest - Offered benefits",
+      "Autotest - Selection process details",
+      s"$nameVxConfig",
+      s"$emailVxConfig",
+      "01000 000000",
+      s"$nameVxConfig",
+      s"$emailVxConfig",
+      s"$emailVxConfig"
+    )

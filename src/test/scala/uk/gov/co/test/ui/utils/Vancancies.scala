@@ -1,50 +1,10 @@
 package uk.gov.co.test.ui.utils
 
 import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.{emailVxConfig, nameVxConfig, passwordVxConfig, usernameVxConfig}
+import uk.gov.co.test.ui.pages.vx.RecruiterDetails
 import uk.gov.co.test.ui.pages.vx.createvacancypage._
-import uk.gov.co.test.ui.pages.vx.{RecruiterDetails, VacancyDetails}
 
 object RECRUITERS extends RecruiterDetails(s"$usernameVxConfig", s"$passwordVxConfig")
-
-object GRS_VACANCY
-    extends VacancyDetails(
-      "Department for Environment, Food and Rural Affairs - Apply online",
-      "GCQA OGD DEFRA (CORE)",
-      32,
-      "DEFRA - COO - Commercial",
-      "Analytical",
-      "Other",
-      "1",
-      "Internal",
-      true,
-      true,
-      "Autotest",
-      "Autotest",
-      true,
-      "6 Months",
-      "Remote (anywhere in the UK)",
-      "SK1 3BX",
-      "Manchester",
-      "North West",
-      "Germany",
-      false,
-      false,
-      "Permanent",
-      "Full-time",
-      "Administrative Assistant",
-      "GBP (£)",
-      25000,
-      false,
-      "Autotest",
-      "Autotest",
-      "Autotest",
-      "Autotest",
-      "Automation Tester",
-      s"$emailVxConfig",
-      "Automation Tester",
-      s"$emailVxConfig",
-      s"$emailVxConfig"
-    )
 
 case class NewVacancyDetails(
   basicDetails: BasicDetails,
@@ -57,7 +17,7 @@ case class NewVacancyDetails(
   advertDetails: AdvertDetails,
   contactDetails: ContactDetails
 )
-object VACANCY_DATA
+object NEW_VACANCY_DATA
     extends NewVacancyDetails(
       VACANCY_BASIC_DETAILS,
       VACANCY_JOB_INFORMATION,
