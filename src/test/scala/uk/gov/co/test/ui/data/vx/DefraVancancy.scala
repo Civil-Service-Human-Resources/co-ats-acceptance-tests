@@ -13,7 +13,8 @@ case class DefraApplyOnlyDetails(
   contractDetails: ContractDetails,
   advertDetails: AdvertDetails,
   contactDetails: ContactDetails,
-  vettingDetails: VettingDetails
+  vettingDetails: VettingDetails,
+  interviewsDetails: InterviewsDetails
 )
 object DEFRA_APPLY_ONLY_DATA
     extends DefraApplyOnlyDetails(
@@ -26,7 +27,8 @@ object DEFRA_APPLY_ONLY_DATA
       VACANCY_CONTRACT_DETAILS,
       VACANCY_ADVERT,
       VACANCY_CONTACT_DETAILS,
-      VACANCY_VETTING_DETAILS
+      VACANCY_VETTING_DETAILS,
+      VACANCY_INTERVIEWS_DETAILS
     )
 
 object VACANCY_BASIC_DETAILS
@@ -119,5 +121,15 @@ object VACANCY_VETTING_DETAILS
       "Basic",
       "Disclosure barring service (DBS)",
       "Security check",
+      true
+    )
+
+object VACANCY_INTERVIEWS_DETAILS
+    extends InterviewsDetails(
+      "4",
+      "Telephone",
+      "Assessment",
+      "Video",
+      "Interview",
       true
     )

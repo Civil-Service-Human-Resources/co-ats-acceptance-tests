@@ -62,5 +62,11 @@ object MASTER_VACANCY_DATA
       "Basic",
       "Disclosure barring service (DBS)",
       "Security check",
+      true,
+      "4",
+      "Telephone",
+      "Assessment",
+      "Video",
+      "Interview",
       true
     )

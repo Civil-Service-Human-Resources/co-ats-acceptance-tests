@@ -1,6 +1,6 @@
 package uk.gov.co.test.ui.flows.vx
 
-import uk.gov.co.test.ui.pages.vx.MasterVacancyPage.{advertSection, approachSection, approvalSection, basicDetailsSection, checkVettingSection, contactDetailsSection, contractDetailsSection, createNewVacancy, jobInformationSection, locationsSection, reserveListSection}
+import uk.gov.co.test.ui.pages.vx.MasterVacancyPage.{advertSection, approachSection, approvalSection, basicDetailsSection, checkVettingSection, contactDetailsSection, contractDetailsSection, createNewVacancy, interviewsSection, jobInformationSection, locationsSection, reserveListSection}
 import uk.gov.co.test.ui.pages.vx.{MasterVacancyDetails, VacancyBasePage}
 
 object MasterVacancyFlow extends VacancyBasePage {
@@ -15,7 +15,8 @@ object MasterVacancyFlow extends VacancyBasePage {
     contractDetailsSection,
     advertSection,
     contactDetailsSection,
-    checkVettingSection
+    checkVettingSection,
+    interviewsSection
   )
 
   def fillMasterVacancyForm(masterVacancyFlow: MasterVacancyDetails): Unit = {

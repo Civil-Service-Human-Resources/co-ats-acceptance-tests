@@ -62,7 +62,13 @@ case class MasterVacancyDetails(
   checkLevelRequired: String,
   whichProvider: String,
   vettingLevelRequired: String,
-  medicalRequired: Boolean
+  medicalRequired: Boolean,
+  expectedRounds: String,
+  interviewOneType: String,
+  interviewTwoType: String,
+  interviewThreeType: String,
+  interviewFourType: String,
+  availableOffline: Boolean
 )
 
 object MasterVacancyPage extends VacancyBasePage {
@@ -174,6 +180,29 @@ object MasterVacancyPage extends VacancyBasePage {
   private lazy val noVettingRequiredId            = s"${formId}_datafield_93637_1_1_15341"
   private lazy val medicalRequiredYesId           = s"${formId}_datafield_59608_1_1_1"
   private lazy val medicalRequiredNoId            = s"${formId}_datafield_59608_1_1_2"
+  private lazy val noInterviewsId                 = s"${formId}_datafield_91703_1_1_15327"
+  private lazy val oneInterviewId                 = s"${formId}_datafield_91703_1_1_15328"
+  private lazy val twoInterviewId                 = s"${formId}_datafield_91703_1_1_15329"
+  private lazy val threeInterviewId               = s"${formId}_datafield_91703_1_1_15330"
+  private lazy val fourInterviewId                = s"${formId}_datafield_91703_1_1_15331"
+  private lazy val availableOfflineYesId          = s"${formId}_datafield_125052_1_1_1"
+  private lazy val availableOfflineNoId           = s"${formId}_datafield_125052_1_1_2"
+  private lazy val assessmentOneId                = s"${formId}_datafield_125056_1_1_17756"
+  private lazy val interviewOneId                 = s"${formId}_datafield_125056_1_1_17753"
+  private lazy val telephoneOneId                 = s"${formId}_datafield_125056_1_1_17755"
+  private lazy val videoOneId                     = s"${formId}_datafield_125056_1_1_17754"
+  private lazy val assessmentTwoId                = s"${formId}_datafield_125060_1_1_17756"
+  private lazy val interviewTwoId                 = s"${formId}_datafield_125060_1_1_17753"
+  private lazy val telephoneTwoId                 = s"${formId}_datafield_125060_1_1_17755"
+  private lazy val videoTwoId                     = s"${formId}_datafield_125060_1_1_17754"
+  private lazy val assessmentThreeId              = s"${formId}_datafield_125063_1_1_17756"
+  private lazy val interviewThreeId               = s"${formId}_datafield_125063_1_1_17753"
+  private lazy val telephoneThreeId               = s"${formId}_datafield_125063_1_1_17755"
+  private lazy val videoThreeId                   = s"${formId}_datafield_125063_1_1_17754"
+  private lazy val assessmentFourId               = s"${formId}_datafield_125066_1_1_17756"
+  private lazy val interviewFourId                = s"${formId}_datafield_125066_1_1_17753"
+  private lazy val telephoneFourId                = s"${formId}_datafield_125066_1_1_17755"
+  private lazy val videoFourId                    = s"${formId}_datafield_125066_1_1_17754"
 
   private def displayWelshVersion(): WebElement = waitForVisibilityOfElementByPath(displayWelshPath)
   private def title(): TextField                = textField("title")
@@ -721,6 +750,75 @@ object MasterVacancyPage extends VacancyBasePage {
 
   def checkVettingSection(masterVacancyDetails: MasterVacancyDetails): Unit =
     checkAndVetting.foreach { f =>
+      f(masterVacancyDetails)
+    }
+
+  private def selectInterviewRoundsExpected(masterVacancyDetails: MasterVacancyDetails): Unit =
+    masterVacancyDetails.expectedRounds match {
+      case "No interviews" => clickOnRadioButton(noInterviewsId)
+      case "1"             =>
+        clickOnRadioButton(oneInterviewId)
+        selectInterviewRoundOneType(masterVacancyDetails)
+      case "2"             =>
+        clickOnRadioButton(twoInterviewId)
+        selectInterviewRoundOneType(masterVacancyDetails)
+        selectInterviewRoundTwoType(masterVacancyDetails)
+      case "3"             =>
+        clickOnRadioButton(threeInterviewId)
+        selectInterviewRoundOneType(masterVacancyDetails)
+        selectInterviewRoundTwoType(masterVacancyDetails)
+        selectInterviewRoundThreeType(masterVacancyDetails)
+      case "4"             =>
+        clickOnRadioButton(fourInterviewId)
+        selectInterviewRoundOneType(masterVacancyDetails)
+        selectInterviewRoundTwoType(masterVacancyDetails)
+        selectInterviewRoundThreeType(masterVacancyDetails)
+        selectInterviewRoundFourType(masterVacancyDetails)
+    }
+
+  private def selectInterviewRoundOneType(masterVacancyDetails: MasterVacancyDetails): Unit =
+    masterVacancyDetails.interviewOneType match {
+      case "Assessment" => clickOnRadioButton(assessmentOneId)
+      case "Interview"  => clickOnRadioButton(interviewOneId)
+      case "Telephone"  => clickOnRadioButton(telephoneOneId)
+      case "Video"      => clickOnRadioButton(videoOneId)
+    }
+
+  private def selectInterviewRoundTwoType(masterVacancyDetails: MasterVacancyDetails): Unit =
+    masterVacancyDetails.interviewTwoType match {
+      case "Assessment" => clickOnRadioButton(assessmentTwoId)
+      case "Interview"  => clickOnRadioButton(interviewTwoId)
+      case "Telephone"  => clickOnRadioButton(telephoneTwoId)
+      case "Video"      => clickOnRadioButton(videoTwoId)
+    }
+
+  private def selectInterviewRoundThreeType(masterVacancyDetails: MasterVacancyDetails): Unit =
+    masterVacancyDetails.interviewThreeType match {
+      case "Assessment" => clickOnRadioButton(assessmentThreeId)
+      case "Interview"  => clickOnRadioButton(interviewThreeId)
+      case "Telephone"  => clickOnRadioButton(telephoneThreeId)
+      case "Video"      => clickOnRadioButton(videoThreeId)
+    }
+
+  private def selectInterviewRoundFourType(masterVacancyDetails: MasterVacancyDetails): Unit =
+    masterVacancyDetails.interviewFourType match {
+      case "Assessment" => clickOnRadioButton(assessmentFourId)
+      case "Interview"  => clickOnRadioButton(interviewFourId)
+      case "Telephone"  => clickOnRadioButton(telephoneFourId)
+      case "Video"      => clickOnRadioButton(videoFourId)
+    }
+
+  private def selectAvailableOffline(masterVacancyDetails: MasterVacancyDetails): Unit =
+    if (masterVacancyDetails.availableOffline) clickOnRadioButton(availableOfflineYesId)
+    else clickOnRadioButton(availableOfflineNoId)
+
+  private val interviews: Seq[MasterVacancyDetails => Unit] = Seq(
+    selectInterviewRoundsExpected,
+    selectAvailableOffline
+  )
+
+  def interviewsSection(masterVacancyDetails: MasterVacancyDetails): Unit =
+    interviews.foreach { f =>
       f(masterVacancyDetails)
     }
 }
