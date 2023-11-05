@@ -1,9 +1,9 @@
 package uk.gov.co.test.ui.pages.vx.createvacancypage
 
 import org.openqa.selenium.By
+import uk.gov.co.test.ui.data.vx.DefraApplyOnlyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.formId
-import uk.gov.co.test.ui.utils.NewVacancyDetails
 
 case class AdvertDetails(
   jobSummary: String,
@@ -80,7 +80,7 @@ object AdvertSection extends VacancyBasePage {
     enterSelectionProcess
   )
 
-  def advertSection(newVacancyDetails: NewVacancyDetails): Unit =
+  def advertSection(newVacancyDetails: DefraApplyOnlyDetails): Unit =
     advert.foreach { f =>
       f(newVacancyDetails.advertDetails)
     }

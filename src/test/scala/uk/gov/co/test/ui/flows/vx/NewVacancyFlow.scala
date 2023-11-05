@@ -1,5 +1,6 @@
 package uk.gov.co.test.ui.flows.vx
 
+import uk.gov.co.test.ui.data.vx.DefraApplyOnlyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 import uk.gov.co.test.ui.pages.vx.createvacancypage.AdvertSection.advertSection
 import uk.gov.co.test.ui.pages.vx.createvacancypage.ApproachSection.approachSection
@@ -10,11 +11,10 @@ import uk.gov.co.test.ui.pages.vx.createvacancypage.ContractDetailsSection.contr
 import uk.gov.co.test.ui.pages.vx.createvacancypage.JobInfoSection.jobInformationSection
 import uk.gov.co.test.ui.pages.vx.createvacancypage.LocationsSection.locationsSection
 import uk.gov.co.test.ui.pages.vx.createvacancypage.ReserveListSection.reserveListSection
-import uk.gov.co.test.ui.utils.NewVacancyDetails
 
 object NewVacancyFlow extends VacancyBasePage {
 
-  private val newVacancy: Seq[NewVacancyDetails => Unit] = Seq(
+  private val defraVacancy: Seq[DefraApplyOnlyDetails => Unit] = Seq(
     basicDetailsSection,
     jobInformationSection,
     approachSection,
@@ -26,9 +26,9 @@ object NewVacancyFlow extends VacancyBasePage {
     contactDetailsSection
   )
 
-  def fillNewVacancyForm(vacancy: NewVacancyDetails): Unit = {
+  def fillNewVacancyForm(vacancy: DefraApplyOnlyDetails): Unit = {
     createNewVacancy()
-    newVacancy.foreach { f =>
+    defraVacancy.foreach { f =>
       f(vacancy)
     }
   }

@@ -1,16 +1,16 @@
 package uk.gov.co.test.ui.specs.vx
 
+import uk.gov.co.test.ui.data.vx.RECRUITER
 import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.vxConfigHomePageTitle
 import uk.gov.co.test.ui.flows.vx.RecruiterLoginFlow.fillRecruiterDetails
 import uk.gov.co.test.ui.specs.BaseFeatureSpec
 import uk.gov.co.test.ui.tags.RunInVX
-import uk.gov.co.test.ui.utils.RECRUITERS
 
 class vxConfigLoginSpec extends BaseFeatureSpec {
   Feature("Recruiter Login To VX Config System") {
     Scenario("An Existing Recruiter Logs In VX Config", RunInVX) {
       Given("A recruiter navigates to the login page")
-      val registeredRecruiter = RECRUITERS
+      val registeredRecruiter = RECRUITER
 
       When("The recruiter logins into their vx config account")
       fillRecruiterDetails(registeredRecruiter)

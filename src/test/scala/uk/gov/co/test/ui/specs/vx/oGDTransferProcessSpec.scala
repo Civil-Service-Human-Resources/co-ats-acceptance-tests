@@ -1,5 +1,6 @@
 package uk.gov.co.test.ui.specs.vx
 
+import uk.gov.co.test.ui.data.vx.{DEFRA_APPLY_ONLY_DATA, MASTER_VACANCY_DATA, RECRUITER}
 import uk.gov.co.test.ui.flows.v9.RegisterCandidateFlow
 import uk.gov.co.test.ui.flows.vx.MasterVacancyFlow.fillMasterVacancyForm
 import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.fillNewVacancyForm
@@ -13,7 +14,7 @@ class oGDTransferProcessSpec extends BaseFeatureSpec {
   Feature("Recruiter Creates A Master Vacancy") {
     Scenario("A Recruiter Is Successful In Creating A New Templated Master Vacancy", RunInVX) {
       Given("a recruiter logs in vx config")
-      val registeredRecruiter = MASTER_RECRUITER
+      val registeredRecruiter = RECRUITER
       fillRecruiterDetails(registeredRecruiter)
 
       When("a recruiter creates a templated master vacancy")
@@ -28,11 +29,11 @@ class oGDTransferProcessSpec extends BaseFeatureSpec {
 
     Scenario("An External Recruiter Offer Acceptance Does Not Send An Email", RunInVX) {
       Given("a recruiter logs in vx config")
-      val registeredRecruiter = RECRUITERS
+      val registeredRecruiter = RECRUITER
       fillRecruiterDetails(registeredRecruiter)
 
       When("a recruiter creates a grs vacancy (non-scs)")
-      val grsVacancy   = NEW_VACANCY_DATA
+      val grsVacancy   = DEFRA_APPLY_ONLY_DATA
       fillNewVacancyForm(grsVacancy)
       val newCandidate = REGISTER_CANDIDATE
       navigateToCreateAccountPage()

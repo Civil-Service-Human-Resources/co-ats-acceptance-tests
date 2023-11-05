@@ -1,12 +1,9 @@
-package uk.gov.co.test.ui.utils
+package uk.gov.co.test.ui.data.vx
 
-import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.{emailVxConfig, nameVxConfig, passwordVxConfig, usernameVxConfig}
-import uk.gov.co.test.ui.pages.vx.RecruiterDetails
+import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.{emailVxConfig, nameVxConfig}
 import uk.gov.co.test.ui.pages.vx.createvacancypage._
 
-object RECRUITERS extends RecruiterDetails(s"$usernameVxConfig", s"$passwordVxConfig")
-
-case class NewVacancyDetails(
+case class DefraApplyOnlyDetails(
   basicDetails: BasicDetails,
   jobInfoDetails: JobInfoDetails,
   approachDetails: ApproachDetails,
@@ -17,8 +14,8 @@ case class NewVacancyDetails(
   advertDetails: AdvertDetails,
   contactDetails: ContactDetails
 )
-object NEW_VACANCY_DATA
-    extends NewVacancyDetails(
+object DEFRA_APPLY_ONLY_DATA
+    extends DefraApplyOnlyDetails(
       VACANCY_BASIC_DETAILS,
       VACANCY_JOB_INFORMATION,
       VACANCY_APPROACH,

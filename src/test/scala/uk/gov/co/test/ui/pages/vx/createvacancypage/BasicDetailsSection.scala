@@ -2,8 +2,8 @@ package uk.gov.co.test.ui.pages.vx.createvacancypage
 
 import org.openqa.selenium.{By, Keys, WebElement}
 import org.scalatest.concurrent.Eventually.eventually
+import uk.gov.co.test.ui.data.vx.DefraApplyOnlyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
-import uk.gov.co.test.ui.utils.NewVacancyDetails
 
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -78,7 +78,7 @@ object BasicDetailsSection extends VacancyBasePage {
     selectClosingDate
   )
 
-  def basicDetailsSection(newVacancyDetails: NewVacancyDetails): Unit = {
+  def basicDetailsSection(newVacancyDetails: DefraApplyOnlyDetails): Unit = {
     basicInfo.foreach { f =>
       f(newVacancyDetails.basicDetails)
     }

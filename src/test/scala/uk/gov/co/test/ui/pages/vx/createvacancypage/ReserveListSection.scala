@@ -1,9 +1,9 @@
 package uk.gov.co.test.ui.pages.vx.createvacancypage
 
 import org.openqa.selenium.{By, WebElement}
+import uk.gov.co.test.ui.data.vx.DefraApplyOnlyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.formId
-import uk.gov.co.test.ui.utils.NewVacancyDetails
 
 case class ReserveListDetails(
   reserveList: Boolean,
@@ -40,7 +40,7 @@ object ReserveListSection extends VacancyBasePage {
     selectReserveList
   )
 
-  def reserveListSection(newVacancyDetails: NewVacancyDetails): Unit =
+  def reserveListSection(newVacancyDetails: DefraApplyOnlyDetails): Unit =
     reserve.foreach { f =>
       f(newVacancyDetails.reserveListDetails)
     }

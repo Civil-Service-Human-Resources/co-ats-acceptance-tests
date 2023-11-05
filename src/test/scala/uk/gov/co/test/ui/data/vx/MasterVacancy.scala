@@ -1,9 +1,9 @@
-package uk.gov.co.test.ui.utils
+package uk.gov.co.test.ui.data.vx
 
-import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.{emailVxConfig, nameVxConfig, passwordVxConfig, usernameVxConfig}
-import uk.gov.co.test.ui.pages.vx.{MasterVacancyDetails, RecruiterDetails}
+import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.{emailVxConfig, nameVxConfig}
+import uk.gov.co.test.ui.pages.vx.MasterVacancyDetails
 
-object MASTER_RECRUITER extends RecruiterDetails(s"$usernameVxConfig", s"$passwordVxConfig")
+case class MasterVacancy(masterVacancy: MasterVacancy)
 
 object MASTER_VACANCY_DATA
     extends MasterVacancyDetails(

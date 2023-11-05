@@ -1,9 +1,9 @@
 package uk.gov.co.test.ui.pages.vx.createvacancypage
 
 import org.openqa.selenium.By
+import uk.gov.co.test.ui.data.vx.DefraApplyOnlyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.formId
-import uk.gov.co.test.ui.utils.NewVacancyDetails
 
 case class ApprovalDetails(
   approval: Boolean,
@@ -44,7 +44,7 @@ object ApprovalSection extends VacancyBasePage {
     selectApproval
   )
 
-  def approvalSection(newVacancyDetails: NewVacancyDetails): Unit =
+  def approvalSection(newVacancyDetails: DefraApplyOnlyDetails): Unit =
     approval.foreach { f =>
       f(newVacancyDetails.approvalDetails)
     }
