@@ -57,7 +57,12 @@ case class MasterVacancyDetails(
   contactPhone: String,
   vacancyHolderName: String,
   vacancyHolderEmail: String,
-  vacancyTeamEmail: String
+  vacancyTeamEmail: String,
+  reservedStatus: Boolean,
+  checkLevelRequired: String,
+  whichProvider: String,
+  vettingLevelRequired: String,
+  medicalRequired: Boolean
 )
 
 object MasterVacancyPage extends VacancyBasePage {
@@ -152,6 +157,23 @@ object MasterVacancyPage extends VacancyBasePage {
   private lazy val vacancyHolderNameInput         = s"${formId}_datafield_115926_1_1"
   private lazy val vacancyHolderEmailInput        = s"${formId}_datafield_115708_1_1"
   private lazy val vacancyTeamEmailInput          = s"${formId}_datafield_59450_1_1"
+  private lazy val reservedStatusId               = s"${formId}_datafield_59601_1_1_fieldset"
+  private lazy val reservedYesId                  = s"${formId}_datafield_59601_1_1_868"
+  private lazy val reservedNoId                   = s"${formId}_datafield_59601_1_1_869"
+  private lazy val basicCheckId                   = s"${formId}_datafield_59611_1_1_12650"
+  private lazy val standardCheckId                = s"${formId}_datafield_59611_1_1_11340"
+  private lazy val enhancedCheckId                = s"${formId}_datafield_59611_1_1_11341"
+  private lazy val noCheckRequiredId              = s"${formId}_datafield_59611_1_1_15464"
+  private lazy val dbsProviderId                  = s"${formId}_datafield_97307_1_1_15345"
+  private lazy val disclosureScotlandProviderId   = s"${formId}_datafield_97307_1_1_15346"
+  private lazy val accessNIProviderId             = s"${formId}_datafield_97307_1_1_15346"
+  private lazy val vettingRequiredId              = s"${formId}_field_value_93637_1"
+  private lazy val counterTerroristCheckId        = s"${formId}_datafield_93637_1_1_15342"
+  private lazy val securityCheckId                = s"${formId}_datafield_93637_1_1_15343"
+  private lazy val developedVettingId             = s"${formId}_datafield_93637_1_1_15344"
+  private lazy val noVettingRequiredId            = s"${formId}_datafield_93637_1_1_15341"
+  private lazy val medicalRequiredYesId           = s"${formId}_datafield_59608_1_1_1"
+  private lazy val medicalRequiredNoId            = s"${formId}_datafield_59608_1_1_2"
 
   private def displayWelshVersion(): WebElement = waitForVisibilityOfElementByPath(displayWelshPath)
   private def title(): TextField                = textField("title")
@@ -652,6 +674,53 @@ object MasterVacancyPage extends VacancyBasePage {
 
   def contactDetailsSection(masterVacancyDetails: MasterVacancyDetails): Unit =
     contactInfo.foreach { f =>
+      f(masterVacancyDetails)
+    }
+
+  private def selectCheckLevelRequired(masterVacancyDetails: MasterVacancyDetails): Unit =
+    masterVacancyDetails.checkLevelRequired match {
+      case "Basic"    => clickOnRadioButton(basicCheckId)
+      case "Standard" => clickOnRadioButton(standardCheckId)
+      case "Enhanced" => clickOnRadioButton(enhancedCheckId)
+      case "None"     => clickOnRadioButton(noCheckRequiredId)
+    }
+
+  private def checkWhichProvider(masterVacancyDetails: MasterVacancyDetails): Unit =
+    masterVacancyDetails.whichProvider match {
+      case "Disclosure barring service (DBS)" => checkbox(dbsProviderId).select()
+      case "Disclosure Scotland"              => checkbox(disclosureScotlandProviderId).select()
+      case "Access NI"                        => checkbox(accessNIProviderId).select()
+    }
+
+  private def selectVettingLevelRequired(masterVacancyDetails: MasterVacancyDetails): Unit = {
+    scrollToElement(By.id(vettingRequiredId))
+    masterVacancyDetails.vettingLevelRequired match {
+      case "Counter terrorist check" => clickOnRadioButton(counterTerroristCheckId)
+      case "Security check"          => clickOnRadioButton(securityCheckId)
+      case "Developed vetting"       => clickOnRadioButton(developedVettingId)
+      case "None"                    => clickOnRadioButton(noVettingRequiredId)
+    }
+  }
+
+  private def selectReservedStatus(masterVacancyDetails: MasterVacancyDetails): Unit = {
+    scrollToElement(By.id(reservedStatusId))
+    if (masterVacancyDetails.reservedStatus) clickOnRadioButton(reservedYesId) else clickOnRadioButton(reservedNoId)
+  }
+
+  private def selectMedicalRequired(masterVacancyDetails: MasterVacancyDetails): Unit =
+    if (masterVacancyDetails.medicalRequired) clickOnRadioButton(medicalRequiredYesId)
+    else clickOnRadioButton(medicalRequiredNoId)
+
+  private val checkAndVetting: Seq[MasterVacancyDetails => Unit] = Seq(
+    selectReservedStatus,
+    selectCheckLevelRequired,
+    checkWhichProvider,
+    selectVettingLevelRequired,
+    selectMedicalRequired
+  )
+
+  def checkVettingSection(masterVacancyDetails: MasterVacancyDetails): Unit =
+    checkAndVetting.foreach { f =>
       f(masterVacancyDetails)
     }
 }

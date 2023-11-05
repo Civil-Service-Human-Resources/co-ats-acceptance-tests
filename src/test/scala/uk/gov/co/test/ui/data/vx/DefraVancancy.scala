@@ -12,7 +12,8 @@ case class DefraApplyOnlyDetails(
   locationsDetails: LocationsDetails,
   contractDetails: ContractDetails,
   advertDetails: AdvertDetails,
-  contactDetails: ContactDetails
+  contactDetails: ContactDetails,
+  vettingDetails: VettingDetails
 )
 object DEFRA_APPLY_ONLY_DATA
     extends DefraApplyOnlyDetails(
@@ -24,7 +25,8 @@ object DEFRA_APPLY_ONLY_DATA
       VACANCY_LOCATIONS,
       VACANCY_CONTRACT_DETAILS,
       VACANCY_ADVERT,
-      VACANCY_CONTACT_DETAILS
+      VACANCY_CONTACT_DETAILS,
+      VACANCY_VETTING_DETAILS
     )
 
 object VACANCY_BASIC_DETAILS
@@ -97,7 +99,7 @@ object VACANCY_ADVERT
       "Autotest - Job summary",
       "Autotest - Job description",
       "Autotest - Person specification",
-      "Autotest - Offered benefits",
+      "• Learning and development tailored to your role\n• An environment with flexible working options\n• A culture encouraging inclusion and diversity\n• A Civil Service pension",
       "Autotest - Selection process details"
     )
 
@@ -109,4 +111,13 @@ object VACANCY_CONTACT_DETAILS
       s"$nameVxConfig",
       s"$emailVxConfig",
       s"$emailVxConfig"
+    )
+
+object VACANCY_VETTING_DETAILS
+    extends VettingDetails(
+      true,
+      "Basic",
+      "Disclosure barring service (DBS)",
+      "Security check",
+      true
     )

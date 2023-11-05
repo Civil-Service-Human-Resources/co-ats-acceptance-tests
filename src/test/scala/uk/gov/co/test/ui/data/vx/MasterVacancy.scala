@@ -50,12 +50,17 @@ object MASTER_VACANCY_DATA
       "Autotest - Job summary",
       "Autotest - Job description",
       "Autotest - Person specification",
-      "Autotest - Offered benefits",
+      "• Learning and development tailored to your role\n• An environment with flexible working options\n• A culture encouraging inclusion and diversity\n• A Civil Service pension",
       "Autotest - Selection process details",
       s"$nameVxConfig",
       s"$emailVxConfig",
       "01000 000000",
       s"$nameVxConfig",
       s"$emailVxConfig",
-      s"$emailVxConfig"
+      s"$emailVxConfig",
+      true,
+      "Basic",
+      "Disclosure barring service (DBS)",
+      "Security check",
+      true
     )
