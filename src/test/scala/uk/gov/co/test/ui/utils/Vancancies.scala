@@ -53,7 +53,8 @@ case class NewVacancyDetails(
   approvalDetails: ApprovalDetails,
   reserveListDetails: ReserveListDetails,
   locationsDetails: LocationsDetails,
-  contractDetails: ContractDetails
+  contractDetails: ContractDetails,
+  advertDetails: AdvertDetails
 )
 object VACANCY_DATA
     extends NewVacancyDetails(
@@ -63,7 +64,8 @@ object VACANCY_DATA
       VACANCY_APPROVAL,
       VACANCY_RESERVE_LIST,
       VACANCY_LOCATIONS,
-      VACANCY_CONTRACT_DETAILS
+      VACANCY_CONTRACT_DETAILS,
+      VACANCY_ADVERT
     )
 
 object VACANCY_BASIC_DETAILS
@@ -129,4 +131,13 @@ object VACANCY_CONTRACT_DETAILS
       "Can agree on the higher bracket",
       true,
       18750
+    )
+
+object VACANCY_ADVERT
+    extends AdvertDetails(
+      "Autotest - Job summary",
+      "Autotest - Job description",
+      "Autotest - Person specification",
+      "Autotest - Offered benefits",
+      "Autotest - Selection process details"
     )

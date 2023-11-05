@@ -1,6 +1,7 @@
 package uk.gov.co.test.ui.flows.vx
 
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
+import uk.gov.co.test.ui.pages.vx.createvacancypage.AdvertSection.advertSection
 import uk.gov.co.test.ui.pages.vx.createvacancypage.ApproachSection.approachSection
 import uk.gov.co.test.ui.pages.vx.createvacancypage.ApprovalSection.approvalSection
 import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.{basicDetailsSection, createNewVacancy}
@@ -19,7 +20,8 @@ object NewTemplateVacancyFlow extends VacancyBasePage {
     approvalSection,
     reserveListSection,
     locationsSection,
-    contractDetailsSection
+    contractDetailsSection,
+    advertSection
   )
 
   def fillNewVacancyTemplatedForm(vacancy: NewVacancyDetails): Unit = {
