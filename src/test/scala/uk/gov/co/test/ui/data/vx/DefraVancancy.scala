@@ -79,7 +79,7 @@ object VACANCY_LOCATIONS
       "All communities",
       true,
       "2",
-      "London"
+      Vector("London", "Southampton", "Leicester")
     )
 
 object VACANCY_CONTRACT_DETAILS

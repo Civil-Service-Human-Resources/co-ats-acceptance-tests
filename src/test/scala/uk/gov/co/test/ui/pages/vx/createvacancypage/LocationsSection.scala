@@ -17,14 +17,15 @@ case class LocationsDetails(
   whichCommunityEncouraged: String,
   giveLocationPreference: Boolean,
   maxLocations: String,
-  otherCityOrTown: String
+  otherCityOrTown: Vector[String]
 )
 
 object LocationsSection extends VacancyBasePage {
 
   private lazy val generalInput            = "//input[@class='select2-search__field']"
   private lazy val cityOrTownInput         = s".//*[@aria-describedby='select2-${formId}_datafield_155622_1_1-container']"
-  private lazy val otherCityOrTownInput    = s".//*[@aria-describedby='select2-${formId}_datafield_155836_1_1-container']"
+  private lazy val otherCityOrTownInput    =
+    s".//textarea[@aria-describedby='select2-${formId}_datafield_155836_1_1-container']"
   private lazy val locationTypeId          = s"select2-${formId}_datafield_155639_1_1-container"
   private lazy val overseasId              = s"select2-${formId}_datafield_155904_1_1-container"
   private lazy val regionInput             = s".//*[@aria-describedby='select2-${formId}_datafield_155584_1_1-container']"
@@ -102,10 +103,6 @@ object LocationsSection extends VacancyBasePage {
     selectOption.sendKeys(otherCityTown)
     action().moveToElement(waitForCityOrTownOption(otherCityTown)).perform()
     waitForCityOrTownOption(otherCityTown).click()
-
-    selectOption.sendKeys("Southampton")
-    action().moveToElement(waitForCityOrTownOption("Southampton")).perform()
-    waitForCityOrTownOption("Southampton").click()
   }
 
   def selectRegion(region: String): Unit = {
@@ -127,7 +124,8 @@ object LocationsSection extends VacancyBasePage {
     if (locationsDetails.giveLocationPreference) {
       clickOnRadioButton(locationPreferenceYesId)
       chooseMaxLocations(locationsDetails.maxLocations)
-      selectOtherCityOrTown(locationsDetails.otherCityOrTown)
+      for (cityOrTown <- locationsDetails.otherCityOrTown)
+        selectOtherCityOrTown(cityOrTown)
     } else {
       clickOnRadioButton(locationPreferenceNoId)
     }
