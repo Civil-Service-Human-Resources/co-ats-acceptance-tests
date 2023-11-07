@@ -36,7 +36,7 @@ case class MasterVacancyDetails(
   whichCommunityEncouraged: String,
   giveLocationPreference: Boolean,
   maxLocations: String,
-  otherCityOrTown: String,
+  otherCityOrTown: Vector[String],
   contractType: String,
   workingPattern: String,
   jobGrade: String,
@@ -111,7 +111,7 @@ object MasterVacancyPage extends VacancyBasePage {
   private lazy val reserveListLengthId            = s"select2-${formId}_datafield_154637_1_1-container"
   private lazy val generalInput                   = "//input[@class='select2-search__field']"
   private lazy val cityOrTownInput                = s".//*[@aria-describedby='select2-${formId}_datafield_155622_1_1-container']"
-  private lazy val otherCityOrTownInput           = s".//*[@aria-describedby='select2-${formId}_datafield_155836_1_1-container']"
+  private lazy val otherCityOrTownInput           = s".//textarea[@aria-describedby='select2-${formId}_datafield_155836_1_1-container']"
   private lazy val locationTypeId                 = s"select2-${formId}_datafield_155639_1_1-container"
   private lazy val overseasId                     = s"select2-${formId}_datafield_155904_1_1-container"
   private lazy val regionInput                    = s".//*[@aria-describedby='select2-${formId}_datafield_155584_1_1-container']"
@@ -464,10 +464,6 @@ object MasterVacancyPage extends VacancyBasePage {
     selectOption.sendKeys(otherCityTown)
     action().moveToElement(waitForCityOrTownOption(otherCityTown)).perform()
     waitForCityOrTownOption(otherCityTown).click()
-
-    selectOption.sendKeys("Southampton")
-    action().moveToElement(waitForCityOrTownOption("Southampton")).perform()
-    waitForCityOrTownOption("Southampton").click()
   }
 
   def selectRegion(region: String): Unit = {
@@ -489,7 +485,8 @@ object MasterVacancyPage extends VacancyBasePage {
     if (masterVacancyDetails.giveLocationPreference) {
       clickOnRadioButton(locationPreferenceYesId)
       chooseMaxLocations(masterVacancyDetails.maxLocations)
-      selectOtherCityOrTown(masterVacancyDetails.otherCityOrTown)
+      for (cityOrTown <- masterVacancyDetails.otherCityOrTown)
+        selectOtherCityOrTown(cityOrTown)
     } else {
       clickOnRadioButton(locationPreferenceNoId)
     }
