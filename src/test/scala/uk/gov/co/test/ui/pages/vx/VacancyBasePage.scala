@@ -1,6 +1,6 @@
 package uk.gov.co.test.ui.pages.vx
 
-import org.openqa.selenium.WebElement
+import org.openqa.selenium.{By, WebElement}
 import org.scalatest.concurrent.Eventually.eventually
 import org.scalatest.matchers.should.Matchers
 import uk.gov.co.test.ui.conf.TestConfiguration
@@ -15,11 +15,15 @@ case class RecruiterDetails(
 
 trait VacancyBasePage extends Matchers with BasePage with BrowserDriver {
 
-  val url: String                        = TestConfiguration.url("vxconfig")
-  val vxConfigTitle                      = "Oleeo vX Login : CSR"
-  val vxConfigHomePageTitle              = "Home : Civil Service Jobs - GOV.UK"
+  val url: String              = TestConfiguration.url("vxconfig")
+  val vxConfigTitle            = "Oleeo vX Login : CSR"
+  val vxConfigHomePageTitle    = "Home : Civil Service Jobs - GOV.UK"
+  val nameVxConfig: String     = readProperty("services.vxconfig.admin.contact_name")
+  val emailVxConfig: String    = readProperty("services.vxconfig.admin.contact_email")
   val usernameVxConfig: String = readProperty("services.vxconfig.admin.username")
   val passwordVxConfig: String = readProperty("services.vxconfig.admin.password")
+  val getOs: String            = System.getProperty("os.name").toLowerCase
+  lazy val generalInput        = "//input[@class='select2-search__field']"
 
   def username(): TextField     = textField("user")
   def password(): PasswordField = pwdField("password")
@@ -47,5 +51,15 @@ trait VacancyBasePage extends Matchers with BasePage with BrowserDriver {
     waitForElementClickableByPath(".//a[@class='logout_button']").click()
     eventually(onPage(vxConfigTitle))
   }
+
+  def getAssessSectionText(sectionTextId: String): String = {
+    scrollToElement(By.id(sectionTextId))
+    val assessment     = waitForVisibilityOfElementById(sectionTextId)
+    val onlineTestText = assessment.getText
+    onlineTestText
+  }
+
+  def waitForDropdownOption(option: String): WebElement =
+    waitForVisibilityOfElementByPath(s".//li[@title='$option']")
 
 }

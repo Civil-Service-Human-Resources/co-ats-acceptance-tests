@@ -1,8 +1,8 @@
 package uk.gov.co.test.ui.pages
 
+import org.openqa.selenium._
 import org.openqa.selenium.support.ui.ExpectedConditions.{elementToBeClickable, visibilityOfElementLocated}
 import org.openqa.selenium.support.ui.{ExpectedCondition, ExpectedConditions, WebDriverWait}
-import org.openqa.selenium.{By, JavascriptExecutor, WebDriver, WebElement}
 import org.scalactic.source.Position
 import org.scalatest.concurrent.Eventually.eventually
 import org.scalatest.concurrent.PatienceConfiguration
@@ -32,7 +32,7 @@ trait BasePage extends Matchers with Page with WebBrowser with PatienceConfigura
   }
 
   def waitForVisibilityOfElementByPath(pathway: String)(implicit driver: WebDriver): WebElement = {
-    val wait = new WebDriverWait(driver, 2, 200)
+    val wait = new WebDriverWait(driver, 15, 200)
     wait.until(visibilityOfElementLocated(By.xpath(pathway)))
 
   }
@@ -62,9 +62,9 @@ trait BasePage extends Matchers with Page with WebBrowser with PatienceConfigura
     wait.until(visibilityOfElementLocated(ele))
   }
 
-  def waitForElementToBeClickableByLink(id: String)(implicit driver: WebDriver): WebElement = {
+  def waitForElementToBeClickableByLink(optionName: String)(implicit driver: WebDriver): WebElement = {
     val wait = new WebDriverWait(driver, 2, 200)
-    wait.until(visibilityOfElementLocated(By.linkText(s"$id")))
+    wait.until(visibilityOfElementLocated(By.linkText(optionName)))
   }
 
   def waitForElementToBeClickableByLabel(id: String)(implicit driver: WebDriver): WebElement = {
@@ -108,5 +108,15 @@ trait BasePage extends Matchers with Page with WebBrowser with PatienceConfigura
 
   def randNumbers(howManyNos: Integer): String =
     Seq.fill(howManyNos)(Random.nextInt(9)).mkString
+
+  def selectOption(enterText: String, addOption: String)(implicit driver: WebDriver): Unit = {
+    val selectOption = waitForVisibilityOfElementByPath(enterText)
+    selectOption.sendKeys(addOption)
+    selectOption.sendKeys(Keys.ENTER)
+  }
+
+  def find(by: By)(implicit driver: WebDriver): Any = driver.findElement(by)
+
+  def findAll(by: By)(implicit driver: WebDriver): Any = driver.findElements(by)
 
 }
