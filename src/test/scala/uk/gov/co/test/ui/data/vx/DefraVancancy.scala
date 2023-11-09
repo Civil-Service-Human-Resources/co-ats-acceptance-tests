@@ -143,26 +143,34 @@ object VACANCY_SUCCESS_PROFILES
       true,
       true,
       true,
-      Some(AbilitiesDetails("""The following online tests can be used to assess abilities:
-          |Civil Service Numerical Test
-          |Civil Service Verbal Test""".stripMargin)),
-      Some(
-        BehavioursDetails(
-          """The following online tests can be used to assess behaviours:
-          |Civil Service Judgement Test
-          |Civil Service Management Judgement Test""".stripMargin,
-          8,
-          Some(Behaviours("Changing and Improving", stageApplication = true, stageInterview = true)),
-          Some(Behaviours("Communicating and Influencing", stageApplication = true, stageInterview = true)),
-          Some(Behaviours("Delivering at Pace", stageApplication = true, stageInterview = true)),
-          Some(Behaviours("Developing Self and Others", stageApplication = true, stageInterview = true)),
-          Some(Behaviours("Leadership", stageApplication = true, stageInterview = true)),
-          Some(Behaviours("Making Effective Decisions", stageApplication = true, stageInterview = true)),
-          Some(Behaviours("Managing a Quality Service", stageApplication = true, stageInterview = true)),
-          Some(Behaviours("Working Together", stageApplication = true, stageInterview = true))
-        )
-      ),
+      Some(VACANCY_ABILITIES),
+      Some(VACANCY_BEHAVIOURS),
       Some(VACANCY_EXPERIENCES)
+    )
+
+object VACANCY_ABILITIES
+    extends AbilitiesDetails(
+      """The following online tests can be used to assess abilities:
+                           |Civil Service Numerical Test
+                           |Civil Service Verbal Test""".stripMargin
+    )
+
+object VACANCY_BEHAVIOURS
+    extends BehavioursDetails(
+      """The following online tests can be used to assess behaviours:
+    |Civil Service Judgement Test
+    |Civil Service Management Judgement Test""".stripMargin,
+      8,
+      Some(Behaviours(chosenBehaviour = "Changing and Improving", stageApplication = true, stageInterview = true)),
+      Some(
+        Behaviours(chosenBehaviour = "Communicating and Influencing", stageApplication = true, stageInterview = true)
+      ),
+      Some(Behaviours(chosenBehaviour = "Delivering at Pace", stageApplication = true, stageInterview = true)),
+      Some(Behaviours(chosenBehaviour = "Developing Self and Others", stageApplication = true, stageInterview = true)),
+      Some(Behaviours(chosenBehaviour = "Leadership", stageApplication = true, stageInterview = true)),
+      Some(Behaviours(chosenBehaviour = "Making Effective Decisions", stageApplication = true, stageInterview = true)),
+      Some(Behaviours(chosenBehaviour = "Managing a Quality Service", stageApplication = true, stageInterview = true)),
+      Some(Behaviours(chosenBehaviour = "Working Together", stageApplication = true, stageInterview = true))
     )
 
 object VACANCY_EXPERIENCES
@@ -179,8 +187,8 @@ object VACANCY_EXPERIENCES
       "Autotest - Enter guidance text for the candidate",
       true,
       "Autotest - Specific past experience/skills",
-      Some(MandatoryRequirements(requirements = true, "Autotest - Specific licence requirements")),
-      Some(MandatoryRequirements(requirements = true, "Autotest - Specific memberships requirements")),
-      Some(MandatoryRequirements(requirements = true, "Autotest - Specific language requirements")),
-      Some(MandatoryRequirements(requirements = true, "Autotest - Specific qualification requirements"))
+      Some(MandatoryRequirements(requirements = true, requirementsInfo = "Autotest - Specific licence requirements")),
+      Some(MandatoryRequirements(requirements = true, requirementsInfo = "Autotest - Specific memberships requirements")),
+      Some(MandatoryRequirements(requirements = true, requirementsInfo = "Autotest - Specific language requirements")),
+      Some(MandatoryRequirements(requirements = true, requirementsInfo = "Autotest - Specific qualification requirements"))
     )
