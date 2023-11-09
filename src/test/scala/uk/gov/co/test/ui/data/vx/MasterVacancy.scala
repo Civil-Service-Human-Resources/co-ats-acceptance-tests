@@ -4,9 +4,6 @@ import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.{emailVxConfig, nameVxConfig}
 import uk.gov.co.test.ui.pages.vx.MasterVacancyDetails
 
 case class MasterVacancy(masterVacancy: MasterVacancy)
-//case class AbilitiesDetails(abilitiesDetails: AbilitiesDetails)
-//case class BehavioursDetails(behavioursDetails: BehavioursDetails)
-//case class Behaviours(behaviours: Behaviours)
 
 object MASTER_VACANCY_DATA
     extends MasterVacancyDetails(
@@ -71,51 +68,61 @@ object MASTER_VACANCY_DATA
       "Assessment",
       "Video",
       "Interview",
-      true
-//      true,
-//      true,
-//      true,
-//      true,
-//      true,
-//      Some(AbilitiesDetails(
-//        """The following online tests can be used to assess abilities:
-//          |Civil Service Numerical Test
-//          |Civil Service Verbal Test""".stripMargin)),
-//      Some(
-//        BehavioursDetails(
-//          """The following online tests can be used to assess behaviours:
-//            |Civil Service Judgement Test
-//            |Civil Service Management Judgement Test""".stripMargin,
-//          8,
-//          Some(Behaviours("Changing and Improving", stageApplication = true, stageInterview = true)),
-//          Some(Behaviours("Communicating and Influencing", stageApplication = true, stageInterview = true)),
-//          Some(Behaviours("Delivering at Pace", stageApplication = true, stageInterview = true)),
-//          Some(Behaviours("Developing Self and Others", stageApplication = true, stageInterview = true)),
-//          Some(Behaviours("Leadership", stageApplication = true, stageInterview = true)),
-//          Some(Behaviours("Making Effective Decisions", stageApplication = true, stageInterview = true)),
-//          Some(Behaviours("Managing a Quality Service", stageApplication = true, stageInterview = true)),
-//          Some(Behaviours("Working Together", stageApplication = true, stageInterview = true))
-//        )
-//      ),
-//      Some(VACANCY_EXPERIENCES)
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      assessAbilities = """The following online tests can be used to assess abilities:
+          |Civil Service Numerical Test
+          |Civil Service Verbal Test""".stripMargin,
+      assessBehaviours = """The following online tests can be used to assess behaviours:
+          |Civil Service Judgement Test
+          |Civil Service Management Judgement Test""".stripMargin,
+      8,
+      "Changing and Improving",
+      true,
+      true,
+      "Communicating and Influencing",
+      true,
+      true,
+      "Delivering at Pace",
+      true,
+      true,
+      "Developing Self and Others",
+      true,
+      true,
+      "Leadership",
+      true,
+      true,
+      "Making Effective Decisions",
+      true,
+      true,
+      "Managing a Quality Service",
+      true,
+      true,
+      "Working Together",
+      true,
+      true,
+      true,
+      "0 - 100",
+      true,
+      true,
+      true,
+      true,
+      "0 - 7",
+      250,
+      true,
+      "Autotest - Enter guidance text for the candidate",
+      true,
+      "Autotest - Specific past experience/skills",
+      true,
+      "Autotest - Specific licence requirements",
+      true,
+      "Autotest - Specific memberships requirements",
+      true,
+      "Autotest - Specific language requirements",
+      true,
+      "Autotest - Specific qualification requirements"
     )
-
-//object VACANCY_EXPERIENCES
-//  extends ExperienceDetails(
-//    true,
-//    "0 - 100",
-//    true,
-//    true,
-//    true,
-//    true,
-//    "0 - 7",
-//    250,
-//    true,
-//    "Autotest - Enter guidance text for the candidate",
-//    true,
-//    "Autotest - Specific past experience/skills",
-//    Some(MandatoryRequirements(requirements = true, "Autotest - Specific licence requirements")),
-//    Some(MandatoryRequirements(requirements = true, "Autotest - Specific memberships requirements")),
-//    Some(MandatoryRequirements(requirements = true, "Autotest - Specific language requirements")),
-//    Some(MandatoryRequirements(requirements = true, "Autotest - Specific qualification requirements"))
-//  )

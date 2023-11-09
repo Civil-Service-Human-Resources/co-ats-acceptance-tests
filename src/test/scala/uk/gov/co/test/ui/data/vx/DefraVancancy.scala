@@ -162,9 +162,7 @@ object VACANCY_BEHAVIOURS
     |Civil Service Management Judgement Test""".stripMargin,
       8,
       Some(Behaviours(chosenBehaviour = "Changing and Improving", stageApplication = true, stageInterview = true)),
-      Some(
-        Behaviours(chosenBehaviour = "Communicating and Influencing", stageApplication = true, stageInterview = true)
-      ),
+      Some(Behaviours(chosenBehaviour = "Communicating and Influencing", stageApplication = true, stageInterview = true)),
       Some(Behaviours(chosenBehaviour = "Delivering at Pace", stageApplication = true, stageInterview = true)),
       Some(Behaviours(chosenBehaviour = "Developing Self and Others", stageApplication = true, stageInterview = true)),
       Some(Behaviours(chosenBehaviour = "Leadership", stageApplication = true, stageInterview = true)),

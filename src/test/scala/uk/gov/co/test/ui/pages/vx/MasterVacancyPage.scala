@@ -6,65 +6,6 @@ import org.scalatest.concurrent.Eventually.eventually
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
-//case class AbilitiesDetails(assessAbilities: String)
-//
-//case class Behaviours(chosenBehaviour: String, stageApplication: Boolean, stageInterview: Boolean)
-//
-//case class BehavioursDetails(
-//  assessBehaviours: String,
-//  howManyAssessed: Int,
-//  behaviourOne: Option[Behaviours] = None,
-//  behaviourTwo: Option[Behaviours] = None,
-//  behaviourThree: Option[Behaviours] = None,
-//  behaviourFour: Option[Behaviours] = None,
-//  behaviourFive: Option[Behaviours] = None,
-//  behaviourSix: Option[Behaviours] = None,
-//  behaviourSeven: Option[Behaviours] = None,
-//  behaviourEight: Option[Behaviours] = None
-//)
-
-//case class MandatoryRequirements(requirements: Boolean, requirementsInfo: String)
-
-//case class ExperienceDetails(
-//  provideCV: Boolean,
-//  cvScoreRange: String,
-//  cvJobHistory: Boolean,
-//  cvQualifications: Boolean,
-//  cvPreviousSkills: Boolean,
-//  provideStatement: Boolean,
-//  statementScoreRange: String,
-//  statementWordLimit: Int,
-//  statementGuidance: Boolean,
-//  statementGuidanceText: String,
-//  pastExperience: Boolean,
-//  pastExperienceText: String,
-//  licences: Option[MandatoryRequirements] = None,
-//  memberships: Option[MandatoryRequirements] = None,
-//  languages: Option[MandatoryRequirements] = None,
-//  qualifications: Option[MandatoryRequirements] = None
-//)
-
-//case class MandatoryRequirements(requirements: Boolean, requirementsInfo: String)
-//
-//case class ExperienceDetails(
-//  provideCV: Boolean,
-//  cvScoreRange: String,
-//  cvJobHistory: Boolean,
-//  cvQualifications: Boolean,
-//  cvPreviousSkills: Boolean,
-//  provideStatement: Boolean,
-//  statementScoreRange: String,
-//  statementWordLimit: Int,
-//  statementGuidance: Boolean,
-//  statementGuidanceText: String,
-//  pastExperience: Boolean,
-//  pastExperienceText: String,
-//  licences: Option[MandatoryRequirements] = None,
-//  memberships: Option[MandatoryRequirements] = None,
-//  languages: Option[MandatoryRequirements] = None,
-//  qualifications: Option[MandatoryRequirements] = None
-//)
-
 case class MasterVacancyDetails(
   template: String,
   vacancyTitle: String,
@@ -127,15 +68,59 @@ case class MasterVacancyDetails(
   interviewTwoType: String,
   interviewThreeType: String,
   interviewFourType: String,
-  availableOffline: Boolean
-//  abilities: Boolean,
-//  behaviours: Boolean,
-//  experience: Boolean,
-//  strengths: Boolean,
-//  technicalSkills: Boolean,
-//  abilitiesSection: Option[AbilitiesDetails] = None,
-//  behavioursSection: Option[BehavioursDetails] = None,
-//  experienceSection: Option[ExperienceDetails] = None
+  availableOffline: Boolean,
+  abilities: Boolean,
+  behaviours: Boolean,
+  experience: Boolean,
+  strengths: Boolean,
+  technicalSkills: Boolean,
+  assessAbilities: String, //abilities section
+  assessBehaviours: String, //behaviours section
+  howManyAssessed: Int,
+  behaviourOne: String,
+  stageApplication1: Boolean,
+  stageInterview1: Boolean,
+  behaviourTwo: String,
+  stageApplication2: Boolean,
+  stageInterview2: Boolean,
+  behaviourThree: String,
+  stageApplication3: Boolean,
+  stageInterview3: Boolean,
+  behaviourFour: String,
+  stageApplication4: Boolean,
+  stageInterview4: Boolean,
+  behaviourFive: String,
+  stageApplication5: Boolean,
+  stageInterview5: Boolean,
+  behaviourSix: String,
+  stageApplication6: Boolean,
+  stageInterview6: Boolean,
+  behaviourSeven: String,
+  stageApplication7: Boolean,
+  stageInterview7: Boolean,
+  behaviourEight: String,
+  stageApplication8: Boolean,
+  stageInterview8: Boolean,
+  provideCV: Boolean, // mandatory requirements section
+  cvScoreRange: String,
+  cvJobHistory: Boolean,
+  cvQualifications: Boolean,
+  cvPreviousSkills: Boolean,
+  provideStatement: Boolean,
+  statementScoreRange: String,
+  statementWordLimit: Int,
+  statementGuidance: Boolean,
+  statementGuidanceText: String,
+  pastExperience: Boolean,
+  pastExperienceText: String,
+  licences: Boolean,
+  licencesInfo: String,
+  memberships: Boolean,
+  membershipsInfo: String,
+  languages: Boolean,
+  languagesInfo: String,
+  qualifications: Boolean,
+  qualificationsInfo: String
 )
 
 object MasterVacancyPage extends VacancyBasePage {
@@ -952,333 +937,329 @@ object MasterVacancyPage extends VacancyBasePage {
       f(masterVacancyDetails)
     }
 
-//  private def whichSuccessProfiles(masterVacancyDetails: MasterVacancyDetails): Unit = {
-//    if (masterVacancyDetails.abilities) {
-//      checkbox(abilitiesId).select()
-//      selectAbilitiesProfile(masterVacancyDetails)
-//    }
-//    if (masterVacancyDetails.behaviours) {
-//      checkbox(behavioursId).select()
-//      selectBehavioursProfile(masterVacancyDetails)
-//    }
-//    if (masterVacancyDetails.experience) {
-//      checkbox(experienceId).select()
-//      experiencesSection(masterVacancyDetails)
-//    }
-//    if (masterVacancyDetails.strengths) {
-//      checkbox(strengthsId).select()
-//    }
-//    if (masterVacancyDetails.technicalSkills) {
-//      checkbox(technicalSkillsId).select()
-//    }
-//  }
-//
-//  private val successProfiles: Seq[MasterVacancyDetails => Unit] = Seq(
-//    whichSuccessProfiles
-//  )
-//
-//  def successProfilesSection(masterVacancyDetails: MasterVacancyDetails): Unit =
-//    successProfiles.foreach { f =>
-//      f(masterVacancyDetails)
-//    }
-//
-//  def selectAbilitiesProfile(masterVacancyDetails: MasterVacancyDetails): Unit =
-//    if (masterVacancyDetails.abilities) {
-//      scrollToElement(By.id(abilitiesSectionId))
-//      getAssessSectionText(assessAbilitiesId) shouldBe masterVacancyDetails.abilitiesSection
-//        .map(_.assessAbilities)
-//        .get
-//    }
-//
-//  def selectBehavioursProfile(masterVacancyDetails: MasterVacancyDetails): Unit = {
-//    scrollToElement(By.id(successProfilesSectionId))
-//    val behaviour = masterVacancyDetails.behavioursSection
-//    if (masterVacancyDetails.behaviours) {
-//      checkbox(behavioursId).select()
-//      getAssessSectionText(assessBehavioursId) shouldBe behaviour
-//        .map(_.assessBehaviours)
-//        .get
-//      selectHowManyBehaviours(behaviour.map(_.howManyAssessed).get)
-//      behaviour.map(_.howManyAssessed).get match {
-//        case 1 =>
-//          selectBehaviourOne(masterVacancyDetails)
-//        case 2 =>
-//          selectBehaviourOne(masterVacancyDetails)
-//          selectBehaviourTwo(masterVacancyDetails)
-//        case 3 =>
-//          selectBehaviourOne(masterVacancyDetails)
-//          selectBehaviourTwo(masterVacancyDetails)
-//          selectBehaviourThree(masterVacancyDetails)
-//        case 4 =>
-//          selectBehaviourOne(masterVacancyDetails)
-//          selectBehaviourTwo(masterVacancyDetails)
-//          selectBehaviourThree(masterVacancyDetails)
-//          selectBehaviourFour(masterVacancyDetails)
-//        case 5 =>
-//          selectBehaviourOne(masterVacancyDetails)
-//          selectBehaviourTwo(masterVacancyDetails)
-//          selectBehaviourThree(masterVacancyDetails)
-//          selectBehaviourFour(masterVacancyDetails)
-//          selectBehaviourFive(masterVacancyDetails)
-//        case 6 =>
-//          selectBehaviourOne(masterVacancyDetails)
-//          selectBehaviourTwo(masterVacancyDetails)
-//          selectBehaviourThree(masterVacancyDetails)
-//          selectBehaviourFour(masterVacancyDetails)
-//          selectBehaviourFive(masterVacancyDetails)
-//          selectBehaviourSix(masterVacancyDetails)
-//        case 7 =>
-//          selectBehaviourOne(masterVacancyDetails)
-//          selectBehaviourTwo(masterVacancyDetails)
-//          selectBehaviourThree(masterVacancyDetails)
-//          selectBehaviourFour(masterVacancyDetails)
-//          selectBehaviourFive(masterVacancyDetails)
-//          selectBehaviourSix(masterVacancyDetails)
-//          selectBehaviourSeven(masterVacancyDetails)
-//        case 8 =>
-//          selectBehaviourOne(masterVacancyDetails)
-//          selectBehaviourTwo(masterVacancyDetails)
-//          selectBehaviourThree(masterVacancyDetails)
-//          selectBehaviourFour(masterVacancyDetails)
-//          selectBehaviourFive(masterVacancyDetails)
-//          selectBehaviourSix(masterVacancyDetails)
-//          selectBehaviourSeven(masterVacancyDetails)
-//          selectBehaviourEight(masterVacancyDetails)
-//      }
-//    }
-//  }
-//
-//  private def selectBehaviourOne(masterVacancyDetails: MasterVacancyDetails): Unit = {
-//    val behaviour = masterVacancyDetails.behavioursSection
-//    scrollToElement(By.id(behavioursOneId))
-//    waitForVisibilityOfElementById(behavioursOneId).click()
-//    selectOption(generalInput, behaviour.map(_.behaviourOne.map(_.chosenBehaviour).get).get)
-//    if (behaviour.map(_.behaviourOne.map(_.stageApplication).get).get) checkbox(applicationOneId).select()
-//    if (behaviour.map(_.behaviourOne.map(_.stageInterview).get).get) checkbox(interviewsOneId).select()
-//  }
-//
-//  private def selectBehaviourTwo(masterVacancyDetails: MasterVacancyDetails): Unit = {
-//    val behaviour = masterVacancyDetails.behavioursSection
-//    scrollToElement(By.id(behavioursTwoId))
-//    waitForVisibilityOfElementById(behavioursTwoId).click()
-//    selectOption(generalInput, behaviour.map(_.behaviourTwo.map(_.chosenBehaviour).get).get)
-//    if (behaviour.map(_.behaviourTwo.map(_.stageApplication).get).get) checkbox(applicationTwoId).select()
-//    if (behaviour.map(_.behaviourTwo.map(_.stageInterview).get).get) checkbox(interviewsTwoId).select()
-//  }
-//
-//  private def selectBehaviourThree(masterVacancyDetails: MasterVacancyDetails): Unit = {
-//    val behaviour = masterVacancyDetails.behavioursSection
-//    scrollToElement(By.id(behavioursThreeId))
-//    waitForVisibilityOfElementById(behavioursThreeId).click()
-//    selectOption(generalInput, behaviour.map(_.behaviourThree.map(_.chosenBehaviour).get).get)
-//    if (behaviour.map(_.behaviourThree.map(_.stageApplication).get).get) checkbox(applicationThreeId).select()
-//    if (behaviour.map(_.behaviourThree.map(_.stageInterview).get).get) checkbox(interviewsThreeId).select()
-//  }
-//
-//  private def selectBehaviourFour(masterVacancyDetails: MasterVacancyDetails): Unit = {
-//    val behaviour = masterVacancyDetails.behavioursSection
-//    scrollToElement(By.id(behavioursFourId))
-//    waitForVisibilityOfElementById(behavioursFourId).click()
-//    selectOption(generalInput, behaviour.map(_.behaviourFour.map(_.chosenBehaviour).get).get)
-//    if (behaviour.map(_.behaviourFour.map(_.stageApplication).get).get) checkbox(applicationFourId).select()
-//    if (behaviour.map(_.behaviourFour.map(_.stageInterview).get).get) checkbox(interviewsFourId).select()
-//  }
-//
-//  private def selectBehaviourFive(masterVacancyDetails: MasterVacancyDetails): Unit = {
-//    val behaviour = masterVacancyDetails.behavioursSection
-//    scrollToElement(By.id(behavioursFiveId))
-//    waitForVisibilityOfElementById(behavioursFiveId).click()
-//    selectOption(generalInput, behaviour.map(_.behaviourFive.map(_.chosenBehaviour).get).get)
-//    if (behaviour.map(_.behaviourFive.map(_.stageApplication).get).get) checkbox(applicationFiveId).select()
-//    if (behaviour.map(_.behaviourFive.map(_.stageInterview).get).get) checkbox(interviewFiveId).select()
-//  }
-//
-//  private def selectBehaviourSix(masterVacancyDetails: MasterVacancyDetails): Unit = {
-//    val behaviour = masterVacancyDetails.behavioursSection
-//    scrollToElement(By.id(behavioursSixId))
-//    waitForVisibilityOfElementById(behavioursSixId).click()
-//    selectOption(generalInput, behaviour.map(_.behaviourSix.map(_.chosenBehaviour).get).get)
-//    if (behaviour.map(_.behaviourSix.map(_.stageApplication).get).get) checkbox(applicationSixId).select()
-//    if (behaviour.map(_.behaviourSix.map(_.stageInterview).get).get) checkbox(interviewSixId).select()
-//  }
-//
-//  private def selectBehaviourSeven(masterVacancyDetails: MasterVacancyDetails): Unit = {
-//    val behaviour = masterVacancyDetails.behavioursSection
-//    scrollToElement(By.id(behavioursSevenId))
-//    waitForVisibilityOfElementById(behavioursSevenId).click()
-//    selectOption(generalInput, behaviour.map(_.behaviourSeven.map(_.chosenBehaviour).get).get)
-//    if (behaviour.map(_.behaviourSeven.map(_.stageApplication).get).get) checkbox(applicationSevenId).select()
-//    if (behaviour.map(_.behaviourSeven.map(_.stageInterview).get).get) checkbox(interviewSevenId).select()
-//  }
-//
-//  private def selectBehaviourEight(masterVacancyDetails: MasterVacancyDetails): Unit = {
-//    val behaviour = masterVacancyDetails.behavioursSection
-//    scrollToElement(By.id(behavioursEightId))
-//    waitForVisibilityOfElementById(behavioursEightId).click()
-//    selectOption(generalInput, behaviour.map(_.behaviourEight.map(_.chosenBehaviour).get).get)
-//    if (behaviour.map(_.behaviourEight.map(_.stageApplication).get).get) checkbox(applicationEightId).select()
-//    if (behaviour.map(_.behaviourEight.map(_.stageInterview).get).get) checkbox(interviewEightId).select()
-//  }
-//
-//  private def selectHowManyBehaviours(howMany: Int): Unit = {
-//    scrollToElement(By.id(behavioursSectionId))
-//    waitForVisibilityOfElementById(howManyBehavioursId).click()
-//    selectOption(generalInput, howMany.toString)
-//  }
-//
-//  private def provideCV(masterVacancyDetails: MasterVacancyDetails): Unit = {
-//    val cv = masterVacancyDetails.experienceSection
-//    if (cv.map(_.provideCV).get) clickOnRadioButton(provideCvYesId) else clickOnRadioButton(provideCvNoId)
-//  }
-//
-//  private def selectCVScoreRange(masterVacancyDetails: MasterVacancyDetails): Unit = {
-//    val score = masterVacancyDetails.experienceSection
-//    score.map(_.cvScoreRange).get match {
-//      case "0 - 100" => clickOnRadioButton(cvScore0to100Id)
-//      case "0 - 7"   => clickOnRadioButton(cvScore0to7Id)
-//      case _         => throw new IllegalStateException("CV Score not correct")
-//    }
-//  }
-//
-//  private def selectJobHistory(masterVacancyDetails: MasterVacancyDetails): Unit = {
-//    val history = masterVacancyDetails.experienceSection
-//    if (history.map(_.cvJobHistory).get) clickOnRadioButton(jobHistoryYesId) else clickOnRadioButton(jobHistoryNoId)
-//  }
-//
-//  private def selectQualificationDetails(masterVacancyDetails: MasterVacancyDetails): Unit = {
-//    val qualifications = masterVacancyDetails.experienceSection
-//    if (qualifications.map(_.cvQualifications).get) clickOnRadioButton(qualificationDetailsYesId)
-//    else clickOnRadioButton(qualificationDetailsNoId)
-//  }
-//
-//  private def selectPreviousSkills(masterVacancyDetails: MasterVacancyDetails): Unit = {
-//    val qualifications = masterVacancyDetails.experienceSection
-//    if (qualifications.map(_.cvPreviousSkills).get) clickOnRadioButton(previousSkillsYesId)
-//    else clickOnRadioButton(previousSkillsNoId)
-//  }
-//
-//  private def selectProvideStatement(masterVacancyDetails: MasterVacancyDetails): Unit = {
-//    val statement = masterVacancyDetails.experienceSection
-//    if (statement.map(_.provideStatement).get) {
-//      clickOnRadioButton(personalStatementYesId)
-//      statement.map(_.statementScoreRange).get match {
-//        case "0 - 100" => clickOnRadioButton(statementScore0to100Id)
-//        case "0 - 7"   => clickOnRadioButton(statementScore0to7Id)
-//        case _         => throw new IllegalStateException("Personal Statement score not correct")
-//      }
-//      selectStatementWordLimit(masterVacancyDetails)
-//    } else clickOnRadioButton(personalStatementNoId)
-//  }
-//
-//  def selectStatementWordLimit(masterVacancyDetails: MasterVacancyDetails): Unit = {
-//    val limit = masterVacancyDetails.experienceSection.map(_.statementWordLimit).get.toString
-//    scrollToElement(By.id(statementWordLimitId))
-//    waitForVisibilityOfElementById(statementWordLimitId).click()
-//    action().moveToElement(waitForDropdownOption(limit)).perform()
-//    waitForDropdownOption(limit).click()
-//  }
-//
-//  private def selectStatementGuidanceText(masterVacancyDetails: MasterVacancyDetails): Unit = {
-//    val guidance = masterVacancyDetails.experienceSection
-//    if (guidance.map(_.statementGuidance).get) {
-//      clickOnRadioButton(guidanceTextYesId)
-//      enterGuidanceText(masterVacancyDetails)
-//    } else clickOnRadioButton(guidanceTextNoId)
-//  }
-//
-//  private def enterGuidanceText(masterVacancyDetails: MasterVacancyDetails): Unit = {
-//    val text         = masterVacancyDetails.experienceSection
-//    val guidanceText = waitForVisibilityOfElementById(guidanceTextInputId)
-//    guidanceText.sendKeys(text.map(_.statementGuidanceText).get)
-//  }
-//
-//  private def selectPastExperiences(masterVacancyDetails: MasterVacancyDetails): Unit = {
-//    val pastExperience = masterVacancyDetails.experienceSection.map(_.pastExperience).get
-//    if (pastExperience) {
-//      clickOnRadioButton(pastExperiencesYesId)
-//      enterPastExperience(masterVacancyDetails)
-//    } else clickOnRadioButton(pastExperiencesNoId)
-//  }
-//
-//  private def enterPastExperience(masterVacancyDetails: MasterVacancyDetails): Unit = {
-//    val pastExperienceText = masterVacancyDetails.experienceSection.map(_.pastExperienceText).get
-//    val pastExperience     = waitForVisibilityOfElementById(pastExperiencesInputId)
-//    pastExperience.sendKeys(pastExperienceText)
-//  }
-//
-//  private def selectMandatoryLicences(masterVacancyDetails: MasterVacancyDetails): Unit = {
-//    val licences = masterVacancyDetails.experienceSection.map(_.licences.map(_.requirements).get).get
-//    if (licences) {
-//      clickOnRadioButton(mandatoryLicencesYesId)
-//      enterLicenceRequirements(masterVacancyDetails)
-//    } else clickOnRadioButton(mandatoryLicencesNoId)
-//  }
-//
-//  private def enterLicenceRequirements(masterVacancyDetails: MasterVacancyDetails): Unit = {
-//    val requirementInfo = masterVacancyDetails.experienceSection.map(_.licences.map(_.requirementsInfo).get).get
-//    val requirement     = waitForVisibilityOfElementById(mandatoryLicencesInputId)
-//    requirement.sendKeys(requirementInfo)
-//  }
-//
-//  private def selectMandatoryMemberships(masterVacancyDetails: MasterVacancyDetails): Unit = {
-//    val memberships = masterVacancyDetails.experienceSection.map(_.memberships.map(_.requirements).get).get
-//    if (memberships) {
-//      clickOnRadioButton(mandatoryMembershipsYesId)
-//      enterMembershipsRequirements(masterVacancyDetails)
-//    } else clickOnRadioButton(mandatoryMembershipsNoId)
-//  }
-//
-//  private def enterMembershipsRequirements(masterVacancyDetails: MasterVacancyDetails): Unit = {
-//    val requirementInfo = masterVacancyDetails.experienceSection.map(_.memberships.map(_.requirementsInfo).get).get
-//    val requirement     = waitForVisibilityOfElementById(mandatoryMembershipsInputId)
-//    requirement.sendKeys(requirementInfo)
-//  }
-//
-//  private def selectMandatoryLanguages(masterVacancyDetails: MasterVacancyDetails): Unit = {
-//    val languages = masterVacancyDetails.experienceSection.map(_.languages.map(_.requirements).get).get
-//    if (languages) {
-//      clickOnRadioButton(mandatoryLanguagesYesId)
-//      enterLanguagesRequirements(masterVacancyDetails)
-//    } else clickOnRadioButton(mandatoryLanguagesNoId)
-//  }
-//
-//  private def enterLanguagesRequirements(masterVacancyDetails: MasterVacancyDetails): Unit = {
-//    val requirementInfo = masterVacancyDetails.experienceSection.map(_.languages.map(_.requirementsInfo).get).get
-//    val requirement     = waitForVisibilityOfElementById(mandatoryLanguagesInputId)
-//    requirement.sendKeys(requirementInfo)
-//  }
-//
-//  private def selectMandatoryQualifications(masterVacancyDetails: MasterVacancyDetails): Unit = {
-//    val qualifications = masterVacancyDetails.experienceSection.map(_.qualifications.map(_.requirements).get).get
-//    if (qualifications) {
-//      clickOnRadioButton(mandatoryQualificationsYesId)
-//      enterQualificationsRequirements(masterVacancyDetails)
-//    } else clickOnRadioButton(mandatoryQualificationsNoId)
-//  }
-//
-//  private def enterQualificationsRequirements(masterVacancyDetails: MasterVacancyDetails): Unit = {
-//    val requirementInfo = masterVacancyDetails.experienceSection.map(_.qualifications.map(_.requirementsInfo).get).get
-//    val requirement     = waitForVisibilityOfElementById(mandatoryQualificationsInputId)
-//    requirement.sendKeys(requirementInfo)
-//  }
-//
-//  private val experiences: Seq[MasterVacancyDetails => Unit] = Seq(
-//    provideCV,
-//    selectCVScoreRange,
-//    selectJobHistory,
-//    selectQualificationDetails,
-//    selectPreviousSkills,
-//    selectProvideStatement,
-//    selectStatementGuidanceText,
-//    selectPastExperiences,
-//    selectMandatoryLicences,
-//    selectMandatoryMemberships,
-//    selectMandatoryLanguages,
-//    selectMandatoryQualifications
-//  )
-//
-//  def experiencesSection(masterVacancyDetails: MasterVacancyDetails): Unit =
-//    experiences.foreach { f =>
-//      f(masterVacancyDetails)
-//    }
+  private def whichSuccessProfiles(masterVacancyDetails: MasterVacancyDetails): Unit = {
+    if (masterVacancyDetails.abilities) {
+      checkbox(abilitiesId).select()
+      selectAbilitiesProfile(masterVacancyDetails)
+    }
+    if (masterVacancyDetails.behaviours) {
+      checkbox(behavioursId).select()
+      selectBehavioursProfile(masterVacancyDetails)
+    }
+    if (masterVacancyDetails.experience) {
+      checkbox(experienceId).select()
+      experiencesSection(masterVacancyDetails)
+    }
+    if (masterVacancyDetails.strengths) {
+      checkbox(strengthsId).select()
+    }
+    if (masterVacancyDetails.technicalSkills) {
+      checkbox(technicalSkillsId).select()
+    }
+  }
+
+  private val successProfiles: Seq[MasterVacancyDetails => Unit] = Seq(
+    whichSuccessProfiles
+  )
+
+  def successProfilesSection(masterVacancyDetails: MasterVacancyDetails): Unit =
+    successProfiles.foreach { f =>
+      f(masterVacancyDetails)
+    }
+
+  def selectAbilitiesProfile(masterVacancyDetails: MasterVacancyDetails): Unit =
+    if (masterVacancyDetails.abilities) {
+      scrollToElement(By.id(abilitiesSectionId))
+      getAssessSectionText(assessAbilitiesId) shouldBe masterVacancyDetails.assessAbilities
+    }
+
+  def selectBehavioursProfile(masterVacancyDetails: MasterVacancyDetails): Unit = {
+    scrollToElement(By.id(successProfilesSectionId))
+    val behaviour = masterVacancyDetails
+    if (masterVacancyDetails.behaviours) {
+      checkbox(behavioursId).select()
+      getAssessSectionText(assessBehavioursId) shouldBe behaviour.assessBehaviours
+      selectHowManyBehaviours(behaviour.howManyAssessed)
+      behaviour.howManyAssessed match {
+        case 1 =>
+          selectBehaviourOne(masterVacancyDetails)
+        case 2 =>
+          selectBehaviourOne(masterVacancyDetails)
+          selectBehaviourTwo(masterVacancyDetails)
+        case 3 =>
+          selectBehaviourOne(masterVacancyDetails)
+          selectBehaviourTwo(masterVacancyDetails)
+          selectBehaviourThree(masterVacancyDetails)
+        case 4 =>
+          selectBehaviourOne(masterVacancyDetails)
+          selectBehaviourTwo(masterVacancyDetails)
+          selectBehaviourThree(masterVacancyDetails)
+          selectBehaviourFour(masterVacancyDetails)
+        case 5 =>
+          selectBehaviourOne(masterVacancyDetails)
+          selectBehaviourTwo(masterVacancyDetails)
+          selectBehaviourThree(masterVacancyDetails)
+          selectBehaviourFour(masterVacancyDetails)
+          selectBehaviourFive(masterVacancyDetails)
+        case 6 =>
+          selectBehaviourOne(masterVacancyDetails)
+          selectBehaviourTwo(masterVacancyDetails)
+          selectBehaviourThree(masterVacancyDetails)
+          selectBehaviourFour(masterVacancyDetails)
+          selectBehaviourFive(masterVacancyDetails)
+          selectBehaviourSix(masterVacancyDetails)
+        case 7 =>
+          selectBehaviourOne(masterVacancyDetails)
+          selectBehaviourTwo(masterVacancyDetails)
+          selectBehaviourThree(masterVacancyDetails)
+          selectBehaviourFour(masterVacancyDetails)
+          selectBehaviourFive(masterVacancyDetails)
+          selectBehaviourSix(masterVacancyDetails)
+          selectBehaviourSeven(masterVacancyDetails)
+        case 8 =>
+          selectBehaviourOne(masterVacancyDetails)
+          selectBehaviourTwo(masterVacancyDetails)
+          selectBehaviourThree(masterVacancyDetails)
+          selectBehaviourFour(masterVacancyDetails)
+          selectBehaviourFive(masterVacancyDetails)
+          selectBehaviourSix(masterVacancyDetails)
+          selectBehaviourSeven(masterVacancyDetails)
+          selectBehaviourEight(masterVacancyDetails)
+      }
+    }
+  }
+
+  private def selectBehaviourOne(masterVacancyDetails: MasterVacancyDetails): Unit = {
+    val behaviour = masterVacancyDetails
+    scrollToElement(By.id(behavioursOneId))
+    waitForVisibilityOfElementById(behavioursOneId).click()
+    selectOption(generalInput, behaviour.behaviourOne)
+    if (behaviour.stageApplication1) checkbox(applicationOneId).select()
+    if (behaviour.stageInterview1) checkbox(interviewsOneId).select()
+  }
+
+  private def selectBehaviourTwo(masterVacancyDetails: MasterVacancyDetails): Unit = {
+    val behaviour = masterVacancyDetails
+    scrollToElement(By.id(behavioursTwoId))
+    waitForVisibilityOfElementById(behavioursTwoId).click()
+    selectOption(generalInput, behaviour.behaviourTwo)
+    if (behaviour.stageApplication2) checkbox(applicationTwoId).select()
+    if (behaviour.stageInterview2) checkbox(interviewsTwoId).select()
+  }
+
+  private def selectBehaviourThree(masterVacancyDetails: MasterVacancyDetails): Unit = {
+    val behaviour = masterVacancyDetails
+    scrollToElement(By.id(behavioursThreeId))
+    waitForVisibilityOfElementById(behavioursThreeId).click()
+    selectOption(generalInput, behaviour.behaviourThree)
+    if (behaviour.stageApplication3) checkbox(applicationThreeId).select()
+    if (behaviour.stageInterview3) checkbox(interviewsThreeId).select()
+  }
+
+  private def selectBehaviourFour(masterVacancyDetails: MasterVacancyDetails): Unit = {
+    val behaviour = masterVacancyDetails
+    scrollToElement(By.id(behavioursFourId))
+    waitForVisibilityOfElementById(behavioursFourId).click()
+    selectOption(generalInput, behaviour.behaviourFour)
+    if (behaviour.stageApplication4) checkbox(applicationFourId).select()
+    if (behaviour.stageInterview4) checkbox(interviewsFourId).select()
+  }
+
+  private def selectBehaviourFive(masterVacancyDetails: MasterVacancyDetails): Unit = {
+    val behaviour = masterVacancyDetails
+    scrollToElement(By.id(behavioursFiveId))
+    waitForVisibilityOfElementById(behavioursFiveId).click()
+    selectOption(generalInput, behaviour.behaviourFive)
+    if (behaviour.stageApplication5) checkbox(applicationFiveId).select()
+    if (behaviour.stageInterview5) checkbox(interviewFiveId).select()
+  }
+
+  private def selectBehaviourSix(masterVacancyDetails: MasterVacancyDetails): Unit = {
+    val behaviour = masterVacancyDetails
+    scrollToElement(By.id(behavioursSixId))
+    waitForVisibilityOfElementById(behavioursSixId).click()
+    selectOption(generalInput, behaviour.behaviourSix)
+    if (behaviour.stageApplication6) checkbox(applicationSixId).select()
+    if (behaviour.stageInterview6) checkbox(interviewSixId).select()
+  }
+
+  private def selectBehaviourSeven(masterVacancyDetails: MasterVacancyDetails): Unit = {
+    val behaviour = masterVacancyDetails
+    scrollToElement(By.id(behavioursSevenId))
+    waitForVisibilityOfElementById(behavioursSevenId).click()
+    selectOption(generalInput, behaviour.behaviourSeven)
+    if (behaviour.stageApplication7) checkbox(applicationSevenId).select()
+    if (behaviour.stageInterview7) checkbox(interviewSevenId).select()
+  }
+
+  private def selectBehaviourEight(masterVacancyDetails: MasterVacancyDetails): Unit = {
+    val behaviour = masterVacancyDetails
+    scrollToElement(By.id(behavioursEightId))
+    waitForVisibilityOfElementById(behavioursEightId).click()
+    selectOption(generalInput, behaviour.behaviourEight)
+    if (behaviour.stageApplication8) checkbox(applicationEightId).select()
+    if (behaviour.stageInterview8) checkbox(interviewEightId).select()
+  }
+
+  private def selectHowManyBehaviours(howMany: Int): Unit = {
+    scrollToElement(By.id(behavioursSectionId))
+    waitForVisibilityOfElementById(howManyBehavioursId).click()
+    selectOption(generalInput, howMany.toString)
+  }
+
+  private def provideCV(masterVacancyDetails: MasterVacancyDetails): Unit = {
+    val cv = masterVacancyDetails
+    if (cv.provideCV) clickOnRadioButton(provideCvYesId) else clickOnRadioButton(provideCvNoId)
+  }
+
+  private def selectCVScoreRange(masterVacancyDetails: MasterVacancyDetails): Unit = {
+    val score = masterVacancyDetails
+    score.cvScoreRange match {
+      case "0 - 100" => clickOnRadioButton(cvScore0to100Id)
+      case "0 - 7"   => clickOnRadioButton(cvScore0to7Id)
+      case _         => throw new IllegalStateException("CV Score not correct")
+    }
+  }
+
+  private def selectJobHistory(masterVacancyDetails: MasterVacancyDetails): Unit = {
+    val history = masterVacancyDetails
+    if (history.cvJobHistory) clickOnRadioButton(jobHistoryYesId) else clickOnRadioButton(jobHistoryNoId)
+  }
+
+  private def selectQualificationDetails(masterVacancyDetails: MasterVacancyDetails): Unit = {
+    val qualifications = masterVacancyDetails
+    if (qualifications.cvQualifications) clickOnRadioButton(qualificationDetailsYesId)
+    else clickOnRadioButton(qualificationDetailsNoId)
+  }
+
+  private def selectPreviousSkills(masterVacancyDetails: MasterVacancyDetails): Unit = {
+    val qualifications = masterVacancyDetails
+    if (qualifications.cvPreviousSkills) clickOnRadioButton(previousSkillsYesId)
+    else clickOnRadioButton(previousSkillsNoId)
+  }
+
+  private def selectProvideStatement(masterVacancyDetails: MasterVacancyDetails): Unit = {
+    val statement = masterVacancyDetails
+    if (statement.provideStatement) {
+      clickOnRadioButton(personalStatementYesId)
+      statement.statementScoreRange match {
+        case "0 - 100" => clickOnRadioButton(statementScore0to100Id)
+        case "0 - 7"   => clickOnRadioButton(statementScore0to7Id)
+        case _         => throw new IllegalStateException("Personal Statement score not correct")
+      }
+      selectStatementWordLimit(masterVacancyDetails)
+    } else clickOnRadioButton(personalStatementNoId)
+  }
+
+  def selectStatementWordLimit(masterVacancyDetails: MasterVacancyDetails): Unit = {
+    val limit = masterVacancyDetails.statementWordLimit.toString
+    scrollToElement(By.id(statementWordLimitId))
+    waitForVisibilityOfElementById(statementWordLimitId).click()
+    action().moveToElement(waitForDropdownOption(limit)).perform()
+    waitForDropdownOption(limit).click()
+  }
+
+  private def selectStatementGuidanceText(masterVacancyDetails: MasterVacancyDetails): Unit = {
+    val guidance = masterVacancyDetails
+    if (guidance.statementGuidance) {
+      clickOnRadioButton(guidanceTextYesId)
+      enterGuidanceText(masterVacancyDetails)
+    } else clickOnRadioButton(guidanceTextNoId)
+  }
+
+  private def enterGuidanceText(masterVacancyDetails: MasterVacancyDetails): Unit = {
+    val text         = masterVacancyDetails
+    val guidanceText = waitForVisibilityOfElementById(guidanceTextInputId)
+    guidanceText.sendKeys(text.statementGuidanceText)
+  }
+
+  private def selectPastExperiences(masterVacancyDetails: MasterVacancyDetails): Unit = {
+    val pastExperience = masterVacancyDetails.pastExperience
+    if (pastExperience) {
+      clickOnRadioButton(pastExperiencesYesId)
+      enterPastExperience(masterVacancyDetails)
+    } else clickOnRadioButton(pastExperiencesNoId)
+  }
+
+  private def enterPastExperience(masterVacancyDetails: MasterVacancyDetails): Unit = {
+    val pastExperienceText = masterVacancyDetails.pastExperienceText
+    val pastExperience     = waitForVisibilityOfElementById(pastExperiencesInputId)
+    pastExperience.sendKeys(pastExperienceText)
+  }
+
+  private def selectMandatoryLicences(masterVacancyDetails: MasterVacancyDetails): Unit = {
+    val licences = masterVacancyDetails.licences
+    if (licences) {
+      clickOnRadioButton(mandatoryLicencesYesId)
+      enterLicenceRequirements(masterVacancyDetails)
+    } else clickOnRadioButton(mandatoryLicencesNoId)
+  }
+
+  private def enterLicenceRequirements(masterVacancyDetails: MasterVacancyDetails): Unit = {
+    val requirementInfo = masterVacancyDetails.licencesInfo
+    val requirement     = waitForVisibilityOfElementById(mandatoryLicencesInputId)
+    requirement.sendKeys(requirementInfo)
+  }
+
+  private def selectMandatoryMemberships(masterVacancyDetails: MasterVacancyDetails): Unit = {
+    val memberships = masterVacancyDetails.memberships
+    if (memberships) {
+      clickOnRadioButton(mandatoryMembershipsYesId)
+      enterMembershipsRequirements(masterVacancyDetails)
+    } else clickOnRadioButton(mandatoryMembershipsNoId)
+  }
+
+  private def enterMembershipsRequirements(masterVacancyDetails: MasterVacancyDetails): Unit = {
+    val requirementInfo = masterVacancyDetails.membershipsInfo
+    val requirement     = waitForVisibilityOfElementById(mandatoryMembershipsInputId)
+    requirement.sendKeys(requirementInfo)
+  }
+
+  private def selectMandatoryLanguages(masterVacancyDetails: MasterVacancyDetails): Unit = {
+    val languages = masterVacancyDetails.languages
+    if (languages) {
+      clickOnRadioButton(mandatoryLanguagesYesId)
+      enterLanguagesRequirements(masterVacancyDetails)
+    } else clickOnRadioButton(mandatoryLanguagesNoId)
+  }
+
+  private def enterLanguagesRequirements(masterVacancyDetails: MasterVacancyDetails): Unit = {
+    val requirementInfo = masterVacancyDetails.languagesInfo
+    val requirement     = waitForVisibilityOfElementById(mandatoryLanguagesInputId)
+    requirement.sendKeys(requirementInfo)
+  }
+
+  private def selectMandatoryQualifications(masterVacancyDetails: MasterVacancyDetails): Unit = {
+    val qualifications = masterVacancyDetails.qualifications
+    if (qualifications) {
+      clickOnRadioButton(mandatoryQualificationsYesId)
+      enterQualificationsRequirements(masterVacancyDetails)
+    } else clickOnRadioButton(mandatoryQualificationsNoId)
+  }
+
+  private def enterQualificationsRequirements(masterVacancyDetails: MasterVacancyDetails): Unit = {
+    val requirementInfo = masterVacancyDetails.qualificationsInfo
+    val requirement     = waitForVisibilityOfElementById(mandatoryQualificationsInputId)
+    requirement.sendKeys(requirementInfo)
+  }
+
+  private val experiences: Seq[MasterVacancyDetails => Unit] = Seq(
+    provideCV,
+    selectCVScoreRange,
+    selectJobHistory,
+    selectQualificationDetails,
+    selectPreviousSkills,
+    selectProvideStatement,
+    selectStatementGuidanceText,
+    selectPastExperiences,
+    selectMandatoryLicences,
+    selectMandatoryMemberships,
+    selectMandatoryLanguages,
+    selectMandatoryQualifications
+  )
+
+  def experiencesSection(masterVacancyDetails: MasterVacancyDetails): Unit =
+    experiences.foreach { f =>
+      f(masterVacancyDetails)
+    }
 }
