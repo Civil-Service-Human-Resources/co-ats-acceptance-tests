@@ -6,6 +6,65 @@ import org.scalatest.concurrent.Eventually.eventually
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
+//case class AbilitiesDetails(assessAbilities: String)
+//
+//case class Behaviours(chosenBehaviour: String, stageApplication: Boolean, stageInterview: Boolean)
+//
+//case class BehavioursDetails(
+//  assessBehaviours: String,
+//  howManyAssessed: Int,
+//  behaviourOne: Option[Behaviours] = None,
+//  behaviourTwo: Option[Behaviours] = None,
+//  behaviourThree: Option[Behaviours] = None,
+//  behaviourFour: Option[Behaviours] = None,
+//  behaviourFive: Option[Behaviours] = None,
+//  behaviourSix: Option[Behaviours] = None,
+//  behaviourSeven: Option[Behaviours] = None,
+//  behaviourEight: Option[Behaviours] = None
+//)
+
+//case class MandatoryRequirements(requirements: Boolean, requirementsInfo: String)
+
+//case class ExperienceDetails(
+//  provideCV: Boolean,
+//  cvScoreRange: String,
+//  cvJobHistory: Boolean,
+//  cvQualifications: Boolean,
+//  cvPreviousSkills: Boolean,
+//  provideStatement: Boolean,
+//  statementScoreRange: String,
+//  statementWordLimit: Int,
+//  statementGuidance: Boolean,
+//  statementGuidanceText: String,
+//  pastExperience: Boolean,
+//  pastExperienceText: String,
+//  licences: Option[MandatoryRequirements] = None,
+//  memberships: Option[MandatoryRequirements] = None,
+//  languages: Option[MandatoryRequirements] = None,
+//  qualifications: Option[MandatoryRequirements] = None
+//)
+
+//case class MandatoryRequirements(requirements: Boolean, requirementsInfo: String)
+//
+//case class ExperienceDetails(
+//  provideCV: Boolean,
+//  cvScoreRange: String,
+//  cvJobHistory: Boolean,
+//  cvQualifications: Boolean,
+//  cvPreviousSkills: Boolean,
+//  provideStatement: Boolean,
+//  statementScoreRange: String,
+//  statementWordLimit: Int,
+//  statementGuidance: Boolean,
+//  statementGuidanceText: String,
+//  pastExperience: Boolean,
+//  pastExperienceText: String,
+//  licences: Option[MandatoryRequirements] = None,
+//  memberships: Option[MandatoryRequirements] = None,
+//  languages: Option[MandatoryRequirements] = None,
+//  qualifications: Option[MandatoryRequirements] = None
+//)
+
 case class MasterVacancyDetails(
   template: String,
   vacancyTitle: String,
@@ -69,6 +128,14 @@ case class MasterVacancyDetails(
   interviewThreeType: String,
   interviewFourType: String,
   availableOffline: Boolean
+//  abilities: Boolean,
+//  behaviours: Boolean,
+//  experience: Boolean,
+//  strengths: Boolean,
+//  technicalSkills: Boolean,
+//  abilitiesSection: Option[AbilitiesDetails] = None,
+//  behavioursSection: Option[BehavioursDetails] = None,
+//  experienceSection: Option[ExperienceDetails] = None
 )
 
 object MasterVacancyPage extends VacancyBasePage {
@@ -111,7 +178,8 @@ object MasterVacancyPage extends VacancyBasePage {
   private lazy val reserveListLengthId            = s"select2-${formId}_datafield_154637_1_1-container"
   private lazy val generalInput                   = "//input[@class='select2-search__field']"
   private lazy val cityOrTownInput                = s".//*[@aria-describedby='select2-${formId}_datafield_155622_1_1-container']"
-  private lazy val otherCityOrTownInput           = s".//textarea[@aria-describedby='select2-${formId}_datafield_155836_1_1-container']"
+  private lazy val otherCityOrTownInput           =
+    s".//textarea[@aria-describedby='select2-${formId}_datafield_155836_1_1-container']"
   private lazy val locationTypeId                 = s"select2-${formId}_datafield_155639_1_1-container"
   private lazy val overseasId                     = s"select2-${formId}_datafield_155904_1_1-container"
   private lazy val regionInput                    = s".//*[@aria-describedby='select2-${formId}_datafield_155584_1_1-container']"
@@ -203,6 +271,74 @@ object MasterVacancyPage extends VacancyBasePage {
   private lazy val interviewFourId                = s"${formId}_datafield_125066_1_1_17753"
   private lazy val telephoneFourId                = s"${formId}_datafield_125066_1_1_17755"
   private lazy val videoFourId                    = s"${formId}_datafield_125066_1_1_17754"
+  private lazy val abilitiesId                    = s"${formId}_datafield_154245_1_1_12685"
+  private lazy val behavioursId                   = s"${formId}_datafield_154245_1_1_12686"
+  private lazy val experienceId                   = s"${formId}_datafield_154245_1_1_12687"
+  private lazy val strengthsId                    = s"${formId}_datafield_154245_1_1_12689"
+  private lazy val technicalSkillsId              = s"${formId}_datafield_154245_1_1_12688"
+  private lazy val abilitiesSectionId             = s"${formId}_section_76647_col_0"
+  private lazy val assessAbilitiesId              = s"${formId}_label_130464_1"
+  private lazy val behavioursSectionId            = s"${formId}_section_60310_col_0"
+  private lazy val howManyBehavioursId            = s"select2-${formId}_datafield_60326_1_1-container"
+  private lazy val successProfilesSectionId       = s"${formId}_section_154224_col_0"
+  private lazy val assessBehavioursId             = s"${formId}_label_130493_1"
+  private lazy val behavioursOneId                = s"select2-${formId}_datafield_60342_1_1-container"
+  private lazy val behavioursTwoId                = s"select2-${formId}_datafield_60356_1_1-container"
+  private lazy val behavioursThreeId              = s"select2-${formId}_datafield_60370_1_1-container"
+  private lazy val behavioursFourId               = s"select2-${formId}_datafield_60384_1_1-container"
+  private lazy val behavioursFiveId               = s"select2-${formId}_datafield_60398_1_1-container"
+  private lazy val behavioursSixId                = s"select2-${formId}_datafield_60412_1_1-container"
+  private lazy val behavioursSevenId              = s"select2-${formId}_datafield_60426_1_1-container"
+  private lazy val behavioursEightId              = s"select2-${formId}_datafield_60440_1_1-container"
+  private lazy val applicationOneId               = s"${formId}_datafield_60338_1_1_12683"
+  private lazy val applicationTwoId               = s"${formId}_datafield_60352_1_1_12683"
+  private lazy val applicationThreeId             = s"${formId}_datafield_60366_1_1_12683"
+  private lazy val applicationFourId              = s"${formId}_datafield_60380_1_1_12683"
+  private lazy val applicationFiveId              = s"${formId}_datafield_60394_1_1_12683"
+  private lazy val applicationSixId               = s"${formId}_datafield_60408_1_1_12683"
+  private lazy val applicationSevenId             = s"${formId}_datafield_60422_1_1_12683"
+  private lazy val applicationEightId             = s"${formId}_datafield_60436_1_1_12683"
+  private lazy val interviewsOneId                = s"${formId}_datafield_60338_1_1_12684"
+  private lazy val interviewsTwoId                = s"${formId}_datafield_60352_1_1_12684"
+  private lazy val interviewsThreeId              = s"${formId}_datafield_60366_1_1_12684"
+  private lazy val interviewsFourId               = s"${formId}_datafield_60380_1_1_12684"
+  private lazy val interviewFiveId                = s"${formId}_datafield_60394_1_1_12684"
+  private lazy val interviewSixId                 = s"${formId}_datafield_60408_1_1_12684"
+  private lazy val interviewSevenId               = s"${formId}_datafield_60422_1_1_12684"
+  private lazy val interviewEightId               = s"${formId}_datafield_60436_1_1_12684"
+  private lazy val provideCvYesId                 = s"${formId}_datafield_59983_1_1_1"
+  private lazy val provideCvNoId                  = s"${formId}_datafield_59983_1_1_2"
+  private lazy val cvScore0to7Id                  = s"${formId}_datafield_187853_1_1_50711"
+  private lazy val cvScore0to100Id                = s"${formId}_datafield_187853_1_1_50712"
+  private lazy val jobHistoryYesId                = s"${formId}_datafield_60080_1_1_1"
+  private lazy val jobHistoryNoId                 = s"${formId}_datafield_60080_1_1_2"
+  private lazy val qualificationDetailsYesId      = s"${formId}_datafield_60086_1_1_1"
+  private lazy val qualificationDetailsNoId       = s"${formId}_datafield_60086_1_1_2"
+  private lazy val previousSkillsYesId            = s"${formId}_datafield_60090_1_1_1"
+  private lazy val previousSkillsNoId             = s"${formId}_datafield_60090_1_1_2"
+  private lazy val personalStatementYesId         = s"${formId}_datafield_59992_1_1_1"
+  private lazy val personalStatementNoId          = s"${formId}_datafield_59992_1_1_2"
+  private lazy val statementScore0to7Id           = s"${formId}_datafield_187857_1_1_50711"
+  private lazy val statementScore0to100Id         = s"${formId}_datafield_187857_1_1_50712"
+  private lazy val statementWordLimitId           = s"select2-${formId}_datafield_72066_1_1-container"
+  private lazy val guidanceTextYesId              = s"${formId}_datafield_59989_1_1_1"
+  private lazy val guidanceTextNoId               = s"${formId}_datafield_59989_1_1_2"
+  private lazy val guidanceTextInputId            = s"${formId}_datafield_60060_1_1_en-GB"
+  private lazy val pastExperiencesYesId           = s"${formId}_datafield_60105_1_1_1"
+  private lazy val pastExperiencesNoId            = s"${formId}_datafield_60105_1_1_2"
+  private lazy val pastExperiencesInputId         = s"${formId}_datafield_116298_1_1_en-GB"
+  private lazy val mandatoryLicencesYesId         = s"${formId}_datafield_60168_1_1_1"
+  private lazy val mandatoryLicencesNoId          = s"${formId}_datafield_60168_1_1_2"
+  private lazy val mandatoryLicencesInputId       = s"${formId}_datafield_60172_1_1_en-GB"
+  private lazy val mandatoryMembershipsYesId      = s"${formId}_datafield_60185_1_1_1"
+  private lazy val mandatoryMembershipsNoId       = s"${formId}_datafield_60185_1_1_2"
+  private lazy val mandatoryMembershipsInputId    = s"${formId}_datafield_60179_1_1_en-GB"
+  private lazy val mandatoryLanguagesYesId        = s"${formId}_datafield_60190_1_1_1"
+  private lazy val mandatoryLanguagesNoId         = s"${formId}_datafield_60190_1_1_2"
+  private lazy val mandatoryLanguagesInputId      = s"${formId}_datafield_60200_1_1_en-GB"
+  private lazy val mandatoryQualificationsYesId   = s"${formId}_datafield_60215_1_1_1"
+  private lazy val mandatoryQualificationsNoId    = s"${formId}_datafield_60215_1_1_2"
+  private lazy val mandatoryQualificationsInputId = s"${formId}_datafield_60209_1_1_en-GB"
 
   private def displayWelshVersion(): WebElement = waitForVisibilityOfElementByPath(displayWelshPath)
   private def title(): TextField                = textField("title")
@@ -534,9 +670,6 @@ object MasterVacancyPage extends VacancyBasePage {
     equivalentGrade.value = masterVacancyDetails.equivalentGrade
   }
 
-  def waitForDropdownOption(option: String): WebElement =
-    waitForVisibilityOfElementByPath(s".//li[@title='$option']")
-
   def selectCurrency(masterVacancyDetails: MasterVacancyDetails): Unit = {
     scrollToElement(By.id(currencyId))
     waitForVisibilityOfElementById(currencyId).click()
@@ -818,4 +951,334 @@ object MasterVacancyPage extends VacancyBasePage {
     interviews.foreach { f =>
       f(masterVacancyDetails)
     }
+
+//  private def whichSuccessProfiles(masterVacancyDetails: MasterVacancyDetails): Unit = {
+//    if (masterVacancyDetails.abilities) {
+//      checkbox(abilitiesId).select()
+//      selectAbilitiesProfile(masterVacancyDetails)
+//    }
+//    if (masterVacancyDetails.behaviours) {
+//      checkbox(behavioursId).select()
+//      selectBehavioursProfile(masterVacancyDetails)
+//    }
+//    if (masterVacancyDetails.experience) {
+//      checkbox(experienceId).select()
+//      experiencesSection(masterVacancyDetails)
+//    }
+//    if (masterVacancyDetails.strengths) {
+//      checkbox(strengthsId).select()
+//    }
+//    if (masterVacancyDetails.technicalSkills) {
+//      checkbox(technicalSkillsId).select()
+//    }
+//  }
+//
+//  private val successProfiles: Seq[MasterVacancyDetails => Unit] = Seq(
+//    whichSuccessProfiles
+//  )
+//
+//  def successProfilesSection(masterVacancyDetails: MasterVacancyDetails): Unit =
+//    successProfiles.foreach { f =>
+//      f(masterVacancyDetails)
+//    }
+//
+//  def selectAbilitiesProfile(masterVacancyDetails: MasterVacancyDetails): Unit =
+//    if (masterVacancyDetails.abilities) {
+//      scrollToElement(By.id(abilitiesSectionId))
+//      getAssessSectionText(assessAbilitiesId) shouldBe masterVacancyDetails.abilitiesSection
+//        .map(_.assessAbilities)
+//        .get
+//    }
+//
+//  def selectBehavioursProfile(masterVacancyDetails: MasterVacancyDetails): Unit = {
+//    scrollToElement(By.id(successProfilesSectionId))
+//    val behaviour = masterVacancyDetails.behavioursSection
+//    if (masterVacancyDetails.behaviours) {
+//      checkbox(behavioursId).select()
+//      getAssessSectionText(assessBehavioursId) shouldBe behaviour
+//        .map(_.assessBehaviours)
+//        .get
+//      selectHowManyBehaviours(behaviour.map(_.howManyAssessed).get)
+//      behaviour.map(_.howManyAssessed).get match {
+//        case 1 =>
+//          selectBehaviourOne(masterVacancyDetails)
+//        case 2 =>
+//          selectBehaviourOne(masterVacancyDetails)
+//          selectBehaviourTwo(masterVacancyDetails)
+//        case 3 =>
+//          selectBehaviourOne(masterVacancyDetails)
+//          selectBehaviourTwo(masterVacancyDetails)
+//          selectBehaviourThree(masterVacancyDetails)
+//        case 4 =>
+//          selectBehaviourOne(masterVacancyDetails)
+//          selectBehaviourTwo(masterVacancyDetails)
+//          selectBehaviourThree(masterVacancyDetails)
+//          selectBehaviourFour(masterVacancyDetails)
+//        case 5 =>
+//          selectBehaviourOne(masterVacancyDetails)
+//          selectBehaviourTwo(masterVacancyDetails)
+//          selectBehaviourThree(masterVacancyDetails)
+//          selectBehaviourFour(masterVacancyDetails)
+//          selectBehaviourFive(masterVacancyDetails)
+//        case 6 =>
+//          selectBehaviourOne(masterVacancyDetails)
+//          selectBehaviourTwo(masterVacancyDetails)
+//          selectBehaviourThree(masterVacancyDetails)
+//          selectBehaviourFour(masterVacancyDetails)
+//          selectBehaviourFive(masterVacancyDetails)
+//          selectBehaviourSix(masterVacancyDetails)
+//        case 7 =>
+//          selectBehaviourOne(masterVacancyDetails)
+//          selectBehaviourTwo(masterVacancyDetails)
+//          selectBehaviourThree(masterVacancyDetails)
+//          selectBehaviourFour(masterVacancyDetails)
+//          selectBehaviourFive(masterVacancyDetails)
+//          selectBehaviourSix(masterVacancyDetails)
+//          selectBehaviourSeven(masterVacancyDetails)
+//        case 8 =>
+//          selectBehaviourOne(masterVacancyDetails)
+//          selectBehaviourTwo(masterVacancyDetails)
+//          selectBehaviourThree(masterVacancyDetails)
+//          selectBehaviourFour(masterVacancyDetails)
+//          selectBehaviourFive(masterVacancyDetails)
+//          selectBehaviourSix(masterVacancyDetails)
+//          selectBehaviourSeven(masterVacancyDetails)
+//          selectBehaviourEight(masterVacancyDetails)
+//      }
+//    }
+//  }
+//
+//  private def selectBehaviourOne(masterVacancyDetails: MasterVacancyDetails): Unit = {
+//    val behaviour = masterVacancyDetails.behavioursSection
+//    scrollToElement(By.id(behavioursOneId))
+//    waitForVisibilityOfElementById(behavioursOneId).click()
+//    selectOption(generalInput, behaviour.map(_.behaviourOne.map(_.chosenBehaviour).get).get)
+//    if (behaviour.map(_.behaviourOne.map(_.stageApplication).get).get) checkbox(applicationOneId).select()
+//    if (behaviour.map(_.behaviourOne.map(_.stageInterview).get).get) checkbox(interviewsOneId).select()
+//  }
+//
+//  private def selectBehaviourTwo(masterVacancyDetails: MasterVacancyDetails): Unit = {
+//    val behaviour = masterVacancyDetails.behavioursSection
+//    scrollToElement(By.id(behavioursTwoId))
+//    waitForVisibilityOfElementById(behavioursTwoId).click()
+//    selectOption(generalInput, behaviour.map(_.behaviourTwo.map(_.chosenBehaviour).get).get)
+//    if (behaviour.map(_.behaviourTwo.map(_.stageApplication).get).get) checkbox(applicationTwoId).select()
+//    if (behaviour.map(_.behaviourTwo.map(_.stageInterview).get).get) checkbox(interviewsTwoId).select()
+//  }
+//
+//  private def selectBehaviourThree(masterVacancyDetails: MasterVacancyDetails): Unit = {
+//    val behaviour = masterVacancyDetails.behavioursSection
+//    scrollToElement(By.id(behavioursThreeId))
+//    waitForVisibilityOfElementById(behavioursThreeId).click()
+//    selectOption(generalInput, behaviour.map(_.behaviourThree.map(_.chosenBehaviour).get).get)
+//    if (behaviour.map(_.behaviourThree.map(_.stageApplication).get).get) checkbox(applicationThreeId).select()
+//    if (behaviour.map(_.behaviourThree.map(_.stageInterview).get).get) checkbox(interviewsThreeId).select()
+//  }
+//
+//  private def selectBehaviourFour(masterVacancyDetails: MasterVacancyDetails): Unit = {
+//    val behaviour = masterVacancyDetails.behavioursSection
+//    scrollToElement(By.id(behavioursFourId))
+//    waitForVisibilityOfElementById(behavioursFourId).click()
+//    selectOption(generalInput, behaviour.map(_.behaviourFour.map(_.chosenBehaviour).get).get)
+//    if (behaviour.map(_.behaviourFour.map(_.stageApplication).get).get) checkbox(applicationFourId).select()
+//    if (behaviour.map(_.behaviourFour.map(_.stageInterview).get).get) checkbox(interviewsFourId).select()
+//  }
+//
+//  private def selectBehaviourFive(masterVacancyDetails: MasterVacancyDetails): Unit = {
+//    val behaviour = masterVacancyDetails.behavioursSection
+//    scrollToElement(By.id(behavioursFiveId))
+//    waitForVisibilityOfElementById(behavioursFiveId).click()
+//    selectOption(generalInput, behaviour.map(_.behaviourFive.map(_.chosenBehaviour).get).get)
+//    if (behaviour.map(_.behaviourFive.map(_.stageApplication).get).get) checkbox(applicationFiveId).select()
+//    if (behaviour.map(_.behaviourFive.map(_.stageInterview).get).get) checkbox(interviewFiveId).select()
+//  }
+//
+//  private def selectBehaviourSix(masterVacancyDetails: MasterVacancyDetails): Unit = {
+//    val behaviour = masterVacancyDetails.behavioursSection
+//    scrollToElement(By.id(behavioursSixId))
+//    waitForVisibilityOfElementById(behavioursSixId).click()
+//    selectOption(generalInput, behaviour.map(_.behaviourSix.map(_.chosenBehaviour).get).get)
+//    if (behaviour.map(_.behaviourSix.map(_.stageApplication).get).get) checkbox(applicationSixId).select()
+//    if (behaviour.map(_.behaviourSix.map(_.stageInterview).get).get) checkbox(interviewSixId).select()
+//  }
+//
+//  private def selectBehaviourSeven(masterVacancyDetails: MasterVacancyDetails): Unit = {
+//    val behaviour = masterVacancyDetails.behavioursSection
+//    scrollToElement(By.id(behavioursSevenId))
+//    waitForVisibilityOfElementById(behavioursSevenId).click()
+//    selectOption(generalInput, behaviour.map(_.behaviourSeven.map(_.chosenBehaviour).get).get)
+//    if (behaviour.map(_.behaviourSeven.map(_.stageApplication).get).get) checkbox(applicationSevenId).select()
+//    if (behaviour.map(_.behaviourSeven.map(_.stageInterview).get).get) checkbox(interviewSevenId).select()
+//  }
+//
+//  private def selectBehaviourEight(masterVacancyDetails: MasterVacancyDetails): Unit = {
+//    val behaviour = masterVacancyDetails.behavioursSection
+//    scrollToElement(By.id(behavioursEightId))
+//    waitForVisibilityOfElementById(behavioursEightId).click()
+//    selectOption(generalInput, behaviour.map(_.behaviourEight.map(_.chosenBehaviour).get).get)
+//    if (behaviour.map(_.behaviourEight.map(_.stageApplication).get).get) checkbox(applicationEightId).select()
+//    if (behaviour.map(_.behaviourEight.map(_.stageInterview).get).get) checkbox(interviewEightId).select()
+//  }
+//
+//  private def selectHowManyBehaviours(howMany: Int): Unit = {
+//    scrollToElement(By.id(behavioursSectionId))
+//    waitForVisibilityOfElementById(howManyBehavioursId).click()
+//    selectOption(generalInput, howMany.toString)
+//  }
+//
+//  private def provideCV(masterVacancyDetails: MasterVacancyDetails): Unit = {
+//    val cv = masterVacancyDetails.experienceSection
+//    if (cv.map(_.provideCV).get) clickOnRadioButton(provideCvYesId) else clickOnRadioButton(provideCvNoId)
+//  }
+//
+//  private def selectCVScoreRange(masterVacancyDetails: MasterVacancyDetails): Unit = {
+//    val score = masterVacancyDetails.experienceSection
+//    score.map(_.cvScoreRange).get match {
+//      case "0 - 100" => clickOnRadioButton(cvScore0to100Id)
+//      case "0 - 7"   => clickOnRadioButton(cvScore0to7Id)
+//      case _         => throw new IllegalStateException("CV Score not correct")
+//    }
+//  }
+//
+//  private def selectJobHistory(masterVacancyDetails: MasterVacancyDetails): Unit = {
+//    val history = masterVacancyDetails.experienceSection
+//    if (history.map(_.cvJobHistory).get) clickOnRadioButton(jobHistoryYesId) else clickOnRadioButton(jobHistoryNoId)
+//  }
+//
+//  private def selectQualificationDetails(masterVacancyDetails: MasterVacancyDetails): Unit = {
+//    val qualifications = masterVacancyDetails.experienceSection
+//    if (qualifications.map(_.cvQualifications).get) clickOnRadioButton(qualificationDetailsYesId)
+//    else clickOnRadioButton(qualificationDetailsNoId)
+//  }
+//
+//  private def selectPreviousSkills(masterVacancyDetails: MasterVacancyDetails): Unit = {
+//    val qualifications = masterVacancyDetails.experienceSection
+//    if (qualifications.map(_.cvPreviousSkills).get) clickOnRadioButton(previousSkillsYesId)
+//    else clickOnRadioButton(previousSkillsNoId)
+//  }
+//
+//  private def selectProvideStatement(masterVacancyDetails: MasterVacancyDetails): Unit = {
+//    val statement = masterVacancyDetails.experienceSection
+//    if (statement.map(_.provideStatement).get) {
+//      clickOnRadioButton(personalStatementYesId)
+//      statement.map(_.statementScoreRange).get match {
+//        case "0 - 100" => clickOnRadioButton(statementScore0to100Id)
+//        case "0 - 7"   => clickOnRadioButton(statementScore0to7Id)
+//        case _         => throw new IllegalStateException("Personal Statement score not correct")
+//      }
+//      selectStatementWordLimit(masterVacancyDetails)
+//    } else clickOnRadioButton(personalStatementNoId)
+//  }
+//
+//  def selectStatementWordLimit(masterVacancyDetails: MasterVacancyDetails): Unit = {
+//    val limit = masterVacancyDetails.experienceSection.map(_.statementWordLimit).get.toString
+//    scrollToElement(By.id(statementWordLimitId))
+//    waitForVisibilityOfElementById(statementWordLimitId).click()
+//    action().moveToElement(waitForDropdownOption(limit)).perform()
+//    waitForDropdownOption(limit).click()
+//  }
+//
+//  private def selectStatementGuidanceText(masterVacancyDetails: MasterVacancyDetails): Unit = {
+//    val guidance = masterVacancyDetails.experienceSection
+//    if (guidance.map(_.statementGuidance).get) {
+//      clickOnRadioButton(guidanceTextYesId)
+//      enterGuidanceText(masterVacancyDetails)
+//    } else clickOnRadioButton(guidanceTextNoId)
+//  }
+//
+//  private def enterGuidanceText(masterVacancyDetails: MasterVacancyDetails): Unit = {
+//    val text         = masterVacancyDetails.experienceSection
+//    val guidanceText = waitForVisibilityOfElementById(guidanceTextInputId)
+//    guidanceText.sendKeys(text.map(_.statementGuidanceText).get)
+//  }
+//
+//  private def selectPastExperiences(masterVacancyDetails: MasterVacancyDetails): Unit = {
+//    val pastExperience = masterVacancyDetails.experienceSection.map(_.pastExperience).get
+//    if (pastExperience) {
+//      clickOnRadioButton(pastExperiencesYesId)
+//      enterPastExperience(masterVacancyDetails)
+//    } else clickOnRadioButton(pastExperiencesNoId)
+//  }
+//
+//  private def enterPastExperience(masterVacancyDetails: MasterVacancyDetails): Unit = {
+//    val pastExperienceText = masterVacancyDetails.experienceSection.map(_.pastExperienceText).get
+//    val pastExperience     = waitForVisibilityOfElementById(pastExperiencesInputId)
+//    pastExperience.sendKeys(pastExperienceText)
+//  }
+//
+//  private def selectMandatoryLicences(masterVacancyDetails: MasterVacancyDetails): Unit = {
+//    val licences = masterVacancyDetails.experienceSection.map(_.licences.map(_.requirements).get).get
+//    if (licences) {
+//      clickOnRadioButton(mandatoryLicencesYesId)
+//      enterLicenceRequirements(masterVacancyDetails)
+//    } else clickOnRadioButton(mandatoryLicencesNoId)
+//  }
+//
+//  private def enterLicenceRequirements(masterVacancyDetails: MasterVacancyDetails): Unit = {
+//    val requirementInfo = masterVacancyDetails.experienceSection.map(_.licences.map(_.requirementsInfo).get).get
+//    val requirement     = waitForVisibilityOfElementById(mandatoryLicencesInputId)
+//    requirement.sendKeys(requirementInfo)
+//  }
+//
+//  private def selectMandatoryMemberships(masterVacancyDetails: MasterVacancyDetails): Unit = {
+//    val memberships = masterVacancyDetails.experienceSection.map(_.memberships.map(_.requirements).get).get
+//    if (memberships) {
+//      clickOnRadioButton(mandatoryMembershipsYesId)
+//      enterMembershipsRequirements(masterVacancyDetails)
+//    } else clickOnRadioButton(mandatoryMembershipsNoId)
+//  }
+//
+//  private def enterMembershipsRequirements(masterVacancyDetails: MasterVacancyDetails): Unit = {
+//    val requirementInfo = masterVacancyDetails.experienceSection.map(_.memberships.map(_.requirementsInfo).get).get
+//    val requirement     = waitForVisibilityOfElementById(mandatoryMembershipsInputId)
+//    requirement.sendKeys(requirementInfo)
+//  }
+//
+//  private def selectMandatoryLanguages(masterVacancyDetails: MasterVacancyDetails): Unit = {
+//    val languages = masterVacancyDetails.experienceSection.map(_.languages.map(_.requirements).get).get
+//    if (languages) {
+//      clickOnRadioButton(mandatoryLanguagesYesId)
+//      enterLanguagesRequirements(masterVacancyDetails)
+//    } else clickOnRadioButton(mandatoryLanguagesNoId)
+//  }
+//
+//  private def enterLanguagesRequirements(masterVacancyDetails: MasterVacancyDetails): Unit = {
+//    val requirementInfo = masterVacancyDetails.experienceSection.map(_.languages.map(_.requirementsInfo).get).get
+//    val requirement     = waitForVisibilityOfElementById(mandatoryLanguagesInputId)
+//    requirement.sendKeys(requirementInfo)
+//  }
+//
+//  private def selectMandatoryQualifications(masterVacancyDetails: MasterVacancyDetails): Unit = {
+//    val qualifications = masterVacancyDetails.experienceSection.map(_.qualifications.map(_.requirements).get).get
+//    if (qualifications) {
+//      clickOnRadioButton(mandatoryQualificationsYesId)
+//      enterQualificationsRequirements(masterVacancyDetails)
+//    } else clickOnRadioButton(mandatoryQualificationsNoId)
+//  }
+//
+//  private def enterQualificationsRequirements(masterVacancyDetails: MasterVacancyDetails): Unit = {
+//    val requirementInfo = masterVacancyDetails.experienceSection.map(_.qualifications.map(_.requirementsInfo).get).get
+//    val requirement     = waitForVisibilityOfElementById(mandatoryQualificationsInputId)
+//    requirement.sendKeys(requirementInfo)
+//  }
+//
+//  private val experiences: Seq[MasterVacancyDetails => Unit] = Seq(
+//    provideCV,
+//    selectCVScoreRange,
+//    selectJobHistory,
+//    selectQualificationDetails,
+//    selectPreviousSkills,
+//    selectProvideStatement,
+//    selectStatementGuidanceText,
+//    selectPastExperiences,
+//    selectMandatoryLicences,
+//    selectMandatoryMemberships,
+//    selectMandatoryLanguages,
+//    selectMandatoryQualifications
+//  )
+//
+//  def experiencesSection(masterVacancyDetails: MasterVacancyDetails): Unit =
+//    experiences.foreach { f =>
+//      f(masterVacancyDetails)
+//    }
 }

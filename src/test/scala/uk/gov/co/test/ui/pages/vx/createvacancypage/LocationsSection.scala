@@ -68,9 +68,6 @@ object LocationsSection extends VacancyBasePage {
       case "All communities" => clickOnRadioButton(allCommunitiesId)
     }
 
-  def waitForDropdownOption(option: String): WebElement =
-    waitForVisibilityOfElementByPath(s".//li[@title='$option']")
-
   def locationType(locationType: String): Unit = {
     waitForVisibilityOfElementById(locationTypeId).click()
     action().moveToElement(waitForDropdownOption(locationType)).perform()

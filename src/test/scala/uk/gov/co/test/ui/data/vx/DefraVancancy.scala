@@ -14,7 +14,8 @@ case class DefraApplyOnlyDetails(
   advertDetails: AdvertDetails,
   contactDetails: ContactDetails,
   vettingDetails: VettingDetails,
-  interviewsDetails: InterviewsDetails
+  interviewsDetails: InterviewsDetails,
+  successProfilesDetails: SuccessProfilesDetails
 )
 object DEFRA_APPLY_ONLY_DATA
     extends DefraApplyOnlyDetails(
@@ -28,7 +29,8 @@ object DEFRA_APPLY_ONLY_DATA
       VACANCY_ADVERT,
       VACANCY_CONTACT_DETAILS,
       VACANCY_VETTING_DETAILS,
-      VACANCY_INTERVIEWS_DETAILS
+      VACANCY_INTERVIEWS_DETAILS,
+      VACANCY_SUCCESS_PROFILES
     )
 
 object VACANCY_BASIC_DETAILS
@@ -132,4 +134,53 @@ object VACANCY_INTERVIEWS_DETAILS
       "Video",
       "Interview",
       true
+    )
+
+object VACANCY_SUCCESS_PROFILES
+    extends SuccessProfilesDetails(
+      true,
+      true,
+      true,
+      true,
+      true,
+      Some(AbilitiesDetails("""The following online tests can be used to assess abilities:
+          |Civil Service Numerical Test
+          |Civil Service Verbal Test""".stripMargin)),
+      Some(
+        BehavioursDetails(
+          """The following online tests can be used to assess behaviours:
+          |Civil Service Judgement Test
+          |Civil Service Management Judgement Test""".stripMargin,
+          8,
+          Some(Behaviours("Changing and Improving", stageApplication = true, stageInterview = true)),
+          Some(Behaviours("Communicating and Influencing", stageApplication = true, stageInterview = true)),
+          Some(Behaviours("Delivering at Pace", stageApplication = true, stageInterview = true)),
+          Some(Behaviours("Developing Self and Others", stageApplication = true, stageInterview = true)),
+          Some(Behaviours("Leadership", stageApplication = true, stageInterview = true)),
+          Some(Behaviours("Making Effective Decisions", stageApplication = true, stageInterview = true)),
+          Some(Behaviours("Managing a Quality Service", stageApplication = true, stageInterview = true)),
+          Some(Behaviours("Working Together", stageApplication = true, stageInterview = true))
+        )
+      ),
+      Some(VACANCY_EXPERIENCES)
+    )
+
+object VACANCY_EXPERIENCES
+    extends ExperienceDetails(
+      true,
+      "0 - 100",
+      true,
+      true,
+      true,
+      true,
+      "0 - 7",
+      250,
+      true,
+      "Autotest - Enter guidance text for the candidate",
+      true,
+      "Autotest - Specific past experience/skills",
+      Some(MandatoryRequirements(requirements = true, "Autotest - Specific licence requirements")),
+      Some(MandatoryRequirements(requirements = true, "Autotest - Specific memberships requirements")),
+      Some(MandatoryRequirements(requirements = true, "Autotest - Specific language requirements")),
+      Some(MandatoryRequirements(requirements = true, "Autotest - Specific qualification requirements"))
     )

@@ -1,6 +1,6 @@
 package uk.gov.co.test.ui.pages.vx
 
-import org.openqa.selenium.WebElement
+import org.openqa.selenium.{By, WebElement}
 import org.scalatest.concurrent.Eventually.eventually
 import org.scalatest.matchers.should.Matchers
 import uk.gov.co.test.ui.conf.TestConfiguration
@@ -50,5 +50,15 @@ trait VacancyBasePage extends Matchers with BasePage with BrowserDriver {
     waitForElementClickableByPath(".//a[@class='logout_button']").click()
     eventually(onPage(vxConfigTitle))
   }
+
+  def getAssessSectionText(sectionTextId: String): String = {
+    scrollToElement(By.id(sectionTextId))
+    val assessment = waitForVisibilityOfElementById(sectionTextId)
+    val onlineTestText = assessment.getText
+    onlineTestText
+  }
+
+  def waitForDropdownOption(option: String): WebElement =
+    waitForVisibilityOfElementByPath(s".//li[@title='$option']")
 
 }
