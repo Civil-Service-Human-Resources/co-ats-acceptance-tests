@@ -22,7 +22,6 @@ case class LocationsDetails(
 
 object LocationsSection extends VacancyBasePage {
 
-  private lazy val generalInput            = "//input[@class='select2-search__field']"
   private lazy val cityOrTownInput         = s".//*[@aria-describedby='select2-${formId}_datafield_155622_1_1-container']"
   private lazy val otherCityOrTownInput    =
     s".//textarea[@aria-describedby='select2-${formId}_datafield_155836_1_1-container']"

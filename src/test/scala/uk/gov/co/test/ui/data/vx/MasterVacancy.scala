@@ -124,5 +124,14 @@ object MASTER_VACANCY_DATA
       true,
       "Autotest - Specific language requirements",
       true,
-      "Autotest - Specific qualification requirements"
+      "Autotest - Specific qualification requirements",
+      8,
+      "Adaptable",
+      "Analytical",
+      "Improver",
+      "Relationship Builder",
+      "Challenger",
+      "Change Agent",
+      "Team Leader",
+      "Service Focussed"
     )

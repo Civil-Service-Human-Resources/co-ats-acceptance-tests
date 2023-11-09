@@ -120,7 +120,16 @@ case class MasterVacancyDetails(
   languages: Boolean,
   languagesInfo: String,
   qualifications: Boolean,
-  qualificationsInfo: String
+  qualificationsInfo: String,
+  strengthsAssessed: Int,
+  strengthOne: String,
+  strengthTwo: String,
+  strengthThree: String,
+  strengthFour: String,
+  strengthFive: String,
+  strengthSix: String,
+  strengthSeven: String,
+  strengthEight: String
 )
 
 object MasterVacancyPage extends VacancyBasePage {
@@ -161,7 +170,6 @@ object MasterVacancyPage extends VacancyBasePage {
   private lazy val reserveListYesId               = s"${formId}_datafield_154633_1_1_1"
   private lazy val reserveListNoId                = s"${formId}_datafield_154633_1_1_2"
   private lazy val reserveListLengthId            = s"select2-${formId}_datafield_154637_1_1-container"
-  private lazy val generalInput                   = "//input[@class='select2-search__field']"
   private lazy val cityOrTownInput                = s".//*[@aria-describedby='select2-${formId}_datafield_155622_1_1-container']"
   private lazy val otherCityOrTownInput           =
     s".//textarea[@aria-describedby='select2-${formId}_datafield_155836_1_1-container']"
@@ -324,6 +332,16 @@ object MasterVacancyPage extends VacancyBasePage {
   private lazy val mandatoryQualificationsYesId   = s"${formId}_datafield_60215_1_1_1"
   private lazy val mandatoryQualificationsNoId    = s"${formId}_datafield_60215_1_1_2"
   private lazy val mandatoryQualificationsInputId = s"${formId}_datafield_60209_1_1_en-GB"
+  private lazy val strengthsSectionId             = s"${formId}_section_52615_col_0"
+  private lazy val noOfStrengthsAssessedId        = s"select2-${formId}_datafield_117504_1_1-container"
+  private lazy val strengthOneId                  = s"select2-${formId}_datafield_117508_1_1-container"
+  private lazy val strengthTwoId                  = s"select2-${formId}_datafield_117512_1_1-container"
+  private lazy val strengthThreeId                = s"select2-${formId}_datafield_117516_1_1-container"
+  private lazy val strengthFourId                 = s"select2-${formId}_datafield_117520_1_1-container"
+  private lazy val strengthFiveId                 = s"select2-${formId}_datafield_117524_1_1-container"
+  private lazy val strengthSixId                  = s"select2-${formId}_datafield_117528_1_1-container"
+  private lazy val strengthSevenId                = s"select2-${formId}_datafield_117532_1_1-container"
+  private lazy val strengthEightId                = s"select2-${formId}_datafield_117536_1_1-container"
 
   private def displayWelshVersion(): WebElement = waitForVisibilityOfElementByPath(displayWelshPath)
   private def title(): TextField                = textField("title")
@@ -952,6 +970,7 @@ object MasterVacancyPage extends VacancyBasePage {
     }
     if (masterVacancyDetails.strengths) {
       checkbox(strengthsId).select()
+      selectStrengths(masterVacancyDetails)
     }
     if (masterVacancyDetails.technicalSkills) {
       checkbox(technicalSkillsId).select()
@@ -1260,6 +1279,120 @@ object MasterVacancyPage extends VacancyBasePage {
 
   def experiencesSection(masterVacancyDetails: MasterVacancyDetails): Unit =
     experiences.foreach { f =>
+      f(masterVacancyDetails)
+    }
+
+  private def selectStrengthsAssessed(masterVacancyDetails: MasterVacancyDetails): Unit = {
+    val strengths = masterVacancyDetails
+    waitForVisibilityOfElementById(noOfStrengthsAssessedId).click()
+    selectOption(generalInput, strengths.strengthsAssessed.toString)
+  }
+
+  private def selectStrengthOne(masterVacancyDetails: MasterVacancyDetails): Unit = {
+    val strength = masterVacancyDetails
+    waitForVisibilityOfElementById(strengthOneId).click()
+    selectOption(generalInput, strength.strengthOne)
+  }
+
+  private def selectStrengthTwo(masterVacancyDetails: MasterVacancyDetails): Unit = {
+    val strength = masterVacancyDetails
+    waitForVisibilityOfElementById(strengthTwoId).click()
+    selectOption(generalInput, strength.strengthTwo)
+  }
+
+  private def selectStrengthThree(masterVacancyDetails: MasterVacancyDetails): Unit = {
+    val strength = masterVacancyDetails
+    waitForVisibilityOfElementById(strengthThreeId).click()
+    selectOption(generalInput, strength.strengthThree)
+  }
+
+  private def selectStrengthFour(masterVacancyDetails: MasterVacancyDetails): Unit = {
+    val strength = masterVacancyDetails
+    waitForVisibilityOfElementById(strengthFourId).click()
+    selectOption(generalInput, strength.strengthFour)
+  }
+
+  private def selectStrengthFive(masterVacancyDetails: MasterVacancyDetails): Unit = {
+    val strength = masterVacancyDetails
+    waitForVisibilityOfElementById(strengthFiveId).click()
+    selectOption(generalInput, strength.strengthFive)
+  }
+
+  private def selectStrengthSix(masterVacancyDetails: MasterVacancyDetails): Unit = {
+    val strength = masterVacancyDetails
+    waitForVisibilityOfElementById(strengthSixId).click()
+    selectOption(generalInput, strength.strengthSix)
+  }
+
+  private def selectStrengthSeven(masterVacancyDetails: MasterVacancyDetails): Unit = {
+    val strength = masterVacancyDetails
+    waitForVisibilityOfElementById(strengthSevenId).click()
+    selectOption(generalInput, strength.strengthSeven)
+  }
+
+  private def selectStrengthEight(masterVacancyDetails: MasterVacancyDetails): Unit = {
+    val strength = masterVacancyDetails
+    waitForVisibilityOfElementById(strengthEightId).click()
+    selectOption(generalInput, strength.strengthEight)
+  }
+
+  private def selectStrengths(masterVacancyDetails: MasterVacancyDetails): Unit = {
+    scrollToElement(By.id(strengthsSectionId))
+    selectStrengthsAssessed(masterVacancyDetails)
+    masterVacancyDetails.strengthsAssessed match {
+      case 1 =>
+        selectStrengthOne(masterVacancyDetails)
+      case 2 =>
+        selectStrengthOne(masterVacancyDetails)
+        selectStrengthTwo(masterVacancyDetails)
+      case 3 =>
+        selectStrengthOne(masterVacancyDetails)
+        selectStrengthTwo(masterVacancyDetails)
+        selectStrengthThree(masterVacancyDetails)
+      case 4 =>
+        selectStrengthOne(masterVacancyDetails)
+        selectStrengthTwo(masterVacancyDetails)
+        selectStrengthThree(masterVacancyDetails)
+        selectStrengthFour(masterVacancyDetails)
+      case 5 =>
+        selectStrengthOne(masterVacancyDetails)
+        selectStrengthTwo(masterVacancyDetails)
+        selectStrengthThree(masterVacancyDetails)
+        selectStrengthFour(masterVacancyDetails)
+        selectStrengthFive(masterVacancyDetails)
+      case 6 =>
+        selectStrengthOne(masterVacancyDetails)
+        selectStrengthTwo(masterVacancyDetails)
+        selectStrengthThree(masterVacancyDetails)
+        selectStrengthFour(masterVacancyDetails)
+        selectStrengthFive(masterVacancyDetails)
+        selectStrengthSix(masterVacancyDetails)
+      case 7 =>
+        selectStrengthOne(masterVacancyDetails)
+        selectStrengthTwo(masterVacancyDetails)
+        selectStrengthThree(masterVacancyDetails)
+        selectStrengthFour(masterVacancyDetails)
+        selectStrengthFive(masterVacancyDetails)
+        selectStrengthSix(masterVacancyDetails)
+        selectStrengthSeven(masterVacancyDetails)
+      case 8 =>
+        selectStrengthOne(masterVacancyDetails)
+        selectStrengthTwo(masterVacancyDetails)
+        selectStrengthThree(masterVacancyDetails)
+        selectStrengthFour(masterVacancyDetails)
+        selectStrengthFive(masterVacancyDetails)
+        selectStrengthSix(masterVacancyDetails)
+        selectStrengthSeven(masterVacancyDetails)
+        selectStrengthEight(masterVacancyDetails)
+    }
+  }
+
+  private val strengths: Seq[MasterVacancyDetails => Unit] = Seq(
+    selectStrengths
+  )
+
+  def strengthsSection(masterVacancyDetails: MasterVacancyDetails): Unit =
+    strengths.foreach { f =>
       f(masterVacancyDetails)
     }
 }

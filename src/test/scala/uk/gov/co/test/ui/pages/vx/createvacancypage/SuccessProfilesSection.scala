@@ -5,7 +5,8 @@ import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 import uk.gov.co.test.ui.pages.vx.createvacancypage.AbilitiesSection.selectAbilitiesProfile
 import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.formId
 import uk.gov.co.test.ui.pages.vx.createvacancypage.BehavioursSection.selectBehavioursProfile
-import uk.gov.co.test.ui.pages.vx.createvacancypage.ExperienceSection.{experiencesSection, provideCV}
+import uk.gov.co.test.ui.pages.vx.createvacancypage.ExperienceSection.experiencesSection
+import uk.gov.co.test.ui.pages.vx.createvacancypage.StrengthsSection.strengthsSection
 
 case class SuccessProfilesDetails(
   abilities: Boolean,
@@ -15,7 +16,8 @@ case class SuccessProfilesDetails(
   technicalSkills: Boolean,
   abilitiesSection: Option[AbilitiesDetails] = None,
   behavioursSection: Option[BehavioursDetails] = None,
-  experienceSection: Option[ExperienceDetails] = None
+  experienceSection: Option[ExperienceDetails] = None,
+  strengthsSection: Option[StrengthsDetails] = None
 )
 
 object SuccessProfilesSection extends VacancyBasePage {
@@ -41,6 +43,7 @@ object SuccessProfilesSection extends VacancyBasePage {
     }
     if (successProfilesDetails.strengths) {
       checkbox(strengthsId).select()
+      strengthsSection(successProfilesDetails)
     }
     if (successProfilesDetails.technicalSkills) {
       checkbox(technicalSkillsId).select()

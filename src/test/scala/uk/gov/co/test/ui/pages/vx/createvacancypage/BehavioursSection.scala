@@ -34,7 +34,6 @@ object BehavioursSection extends VacancyBasePage {
   private lazy val behavioursSixId          = s"select2-${formId}_datafield_60412_1_1-container"
   private lazy val behavioursSevenId        = s"select2-${formId}_datafield_60426_1_1-container"
   private lazy val behavioursEightId        = s"select2-${formId}_datafield_60440_1_1-container"
-  private lazy val generalInput             = "//input[@class='select2-search__field']"
   private lazy val applicationOneId         = s"${formId}_datafield_60338_1_1_12683"
   private lazy val applicationTwoId         = s"${formId}_datafield_60352_1_1_12683"
   private lazy val applicationThreeId       = s"${formId}_datafield_60366_1_1_12683"

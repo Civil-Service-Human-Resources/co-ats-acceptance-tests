@@ -23,6 +23,7 @@ trait VacancyBasePage extends Matchers with BasePage with BrowserDriver {
   val usernameVxConfig: String = readProperty("services.vxconfig.admin.username")
   val passwordVxConfig: String = readProperty("services.vxconfig.admin.password")
   val getOs: String            = System.getProperty("os.name").toLowerCase
+  lazy val generalInput        = "//input[@class='select2-search__field']"
 
   def username(): TextField     = textField("user")
   def password(): PasswordField = pwdField("password")
@@ -53,7 +54,7 @@ trait VacancyBasePage extends Matchers with BasePage with BrowserDriver {
 
   def getAssessSectionText(sectionTextId: String): String = {
     scrollToElement(By.id(sectionTextId))
-    val assessment = waitForVisibilityOfElementById(sectionTextId)
+    val assessment     = waitForVisibilityOfElementById(sectionTextId)
     val onlineTestText = assessment.getText
     onlineTestText
   }

@@ -145,7 +145,8 @@ object VACANCY_SUCCESS_PROFILES
       true,
       Some(VACANCY_ABILITIES),
       Some(VACANCY_BEHAVIOURS),
-      Some(VACANCY_EXPERIENCES)
+      Some(VACANCY_EXPERIENCES),
+      Some(VACANCY_STRENGTHS)
     )
 
 object VACANCY_ABILITIES
@@ -162,7 +163,9 @@ object VACANCY_BEHAVIOURS
     |Civil Service Management Judgement Test""".stripMargin,
       8,
       Some(Behaviours(chosenBehaviour = "Changing and Improving", stageApplication = true, stageInterview = true)),
-      Some(Behaviours(chosenBehaviour = "Communicating and Influencing", stageApplication = true, stageInterview = true)),
+      Some(
+        Behaviours(chosenBehaviour = "Communicating and Influencing", stageApplication = true, stageInterview = true)
+      ),
       Some(Behaviours(chosenBehaviour = "Delivering at Pace", stageApplication = true, stageInterview = true)),
       Some(Behaviours(chosenBehaviour = "Developing Self and Others", stageApplication = true, stageInterview = true)),
       Some(Behaviours(chosenBehaviour = "Leadership", stageApplication = true, stageInterview = true)),
@@ -186,7 +189,24 @@ object VACANCY_EXPERIENCES
       true,
       "Autotest - Specific past experience/skills",
       Some(MandatoryRequirements(requirements = true, requirementsInfo = "Autotest - Specific licence requirements")),
-      Some(MandatoryRequirements(requirements = true, requirementsInfo = "Autotest - Specific memberships requirements")),
+      Some(
+        MandatoryRequirements(requirements = true, requirementsInfo = "Autotest - Specific memberships requirements")
+      ),
       Some(MandatoryRequirements(requirements = true, requirementsInfo = "Autotest - Specific language requirements")),
-      Some(MandatoryRequirements(requirements = true, requirementsInfo = "Autotest - Specific qualification requirements"))
+      Some(
+        MandatoryRequirements(requirements = true, requirementsInfo = "Autotest - Specific qualification requirements")
+      )
+    )
+
+object VACANCY_STRENGTHS
+    extends StrengthsDetails(
+      8,
+      "Adaptable",
+      "Analytical",
+      "Improver",
+      "Relationship Builder",
+      "Challenger",
+      "Change Agent",
+      "Team Leader",
+      "Service Focussed"
     )
