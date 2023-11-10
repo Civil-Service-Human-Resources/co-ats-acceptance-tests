@@ -115,6 +115,12 @@ trait BasePage extends Matchers with Page with WebBrowser with PatienceConfigura
     selectOption.sendKeys(Keys.ENTER)
   }
 
+  def selectOptionWithId(id: String, enterText: String)(implicit driver: WebDriver): Unit = {
+    val selectOption = waitForVisibilityOfElementById(id)
+    selectOption.sendKeys(enterText)
+    selectOption.sendKeys(Keys.ENTER)
+  }
+
   def find(by: By)(implicit driver: WebDriver): Any = driver.findElement(by)
 
   def findAll(by: By)(implicit driver: WebDriver): Any = driver.findElements(by)

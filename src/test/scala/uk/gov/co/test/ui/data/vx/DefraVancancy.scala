@@ -146,7 +146,8 @@ object VACANCY_SUCCESS_PROFILES
       Some(VACANCY_ABILITIES),
       Some(VACANCY_BEHAVIOURS),
       Some(VACANCY_EXPERIENCES),
-      Some(VACANCY_STRENGTHS)
+      Some(VACANCY_STRENGTHS),
+      Some(VACANCY_TECH_SKILLS)
     )
 
 object VACANCY_ABILITIES
@@ -210,3 +211,16 @@ object VACANCY_STRENGTHS
       "Team Leader",
       "Service Focussed"
     )
+
+object VACANCY_TECH_SKILLS
+extends TechSkillsDetails(
+  8,
+  Some(Skills(techSkill = "Autotest - technical skills 1", description = "Autotest - technical skills 1 description", techInterview = true, techApplication = true)),
+  Some(Skills(techSkill = "Autotest - technical skills 2", description = "Autotest - technical skills 2 description", techInterview = true, techApplication = true)),
+  Some(Skills(techSkill = "Autotest - technical skills 3", description = "Autotest - technical skills 3 description", techInterview = true, techApplication = true)),
+  Some(Skills(techSkill = "Autotest - technical skills 4", description = "Autotest - technical skills 4 description", techInterview = true, techApplication = true)),
+  Some(Skills(techSkill = "Autotest - technical skills 5", description = "Autotest - technical skills 5 description", techInterview = true, techApplication = true)),
+  Some(Skills(techSkill = "Autotest - technical skills 6", description = "Autotest - technical skills 6 description", techInterview = true, techApplication = true)),
+  Some(Skills(techSkill = "Autotest - technical skills 7", description = "Autotest - technical skills 7 description", techInterview = true, techApplication = true)),
+  Some(Skills(techSkill = "Autotest - technical skills 8", description = "Autotest - technical skills 8 description", techInterview = true, techApplication = true))
+)
