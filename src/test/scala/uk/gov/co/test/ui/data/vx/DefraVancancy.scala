@@ -15,7 +15,8 @@ case class DefraApplyOnlyDetails(
   contactDetails: ContactDetails,
   vettingDetails: VettingDetails,
   interviewsDetails: InterviewsDetails,
-  successProfilesDetails: SuccessProfilesDetails
+  successProfilesDetails: SuccessProfilesDetails,
+  onlineTestsDetails: OnlineTestsDetails
 )
 object DEFRA_APPLY_ONLY_DATA
     extends DefraApplyOnlyDetails(
@@ -30,7 +31,8 @@ object DEFRA_APPLY_ONLY_DATA
       VACANCY_CONTACT_DETAILS,
       VACANCY_VETTING_DETAILS,
       VACANCY_INTERVIEWS_DETAILS,
-      VACANCY_SUCCESS_PROFILES
+      VACANCY_SUCCESS_PROFILES,
+      VACANCY_ONLINE_TESTS
     )
 
 object VACANCY_BASIC_DETAILS
@@ -81,7 +83,7 @@ object VACANCY_LOCATIONS
       "All communities",
       true,
       "2",
-      Vector("London", "Southampton", "Leicester")
+      otherCityOrTown = Vector("London", "Southampton", "Leicester")
     )
 
 object VACANCY_CONTRACT_DETAILS
@@ -213,14 +215,88 @@ object VACANCY_STRENGTHS
     )
 
 object VACANCY_TECH_SKILLS
-extends TechSkillsDetails(
-  8,
-  Some(Skills(techSkill = "Autotest - technical skills 1", description = "Autotest - technical skills 1 description", techInterview = true, techApplication = true)),
-  Some(Skills(techSkill = "Autotest - technical skills 2", description = "Autotest - technical skills 2 description", techInterview = true, techApplication = true)),
-  Some(Skills(techSkill = "Autotest - technical skills 3", description = "Autotest - technical skills 3 description", techInterview = true, techApplication = true)),
-  Some(Skills(techSkill = "Autotest - technical skills 4", description = "Autotest - technical skills 4 description", techInterview = true, techApplication = true)),
-  Some(Skills(techSkill = "Autotest - technical skills 5", description = "Autotest - technical skills 5 description", techInterview = true, techApplication = true)),
-  Some(Skills(techSkill = "Autotest - technical skills 6", description = "Autotest - technical skills 6 description", techInterview = true, techApplication = true)),
-  Some(Skills(techSkill = "Autotest - technical skills 7", description = "Autotest - technical skills 7 description", techInterview = true, techApplication = true)),
-  Some(Skills(techSkill = "Autotest - technical skills 8", description = "Autotest - technical skills 8 description", techInterview = true, techApplication = true))
-)
+    extends TechSkillsDetails(
+      8,
+      Some(
+        Skills(
+          techSkill = "Autotest - technical skills 1",
+          description = "Autotest - technical skills 1 description",
+          techInterview = true,
+          techApplication = true
+        )
+      ),
+      Some(
+        Skills(
+          techSkill = "Autotest - technical skills 2",
+          description = "Autotest - technical skills 2 description",
+          techInterview = true,
+          techApplication = true
+        )
+      ),
+      Some(
+        Skills(
+          techSkill = "Autotest - technical skills 3",
+          description = "Autotest - technical skills 3 description",
+          techInterview = true,
+          techApplication = true
+        )
+      ),
+      Some(
+        Skills(
+          techSkill = "Autotest - technical skills 4",
+          description = "Autotest - technical skills 4 description",
+          techInterview = true,
+          techApplication = true
+        )
+      ),
+      Some(
+        Skills(
+          techSkill = "Autotest - technical skills 5",
+          description = "Autotest - technical skills 5 description",
+          techInterview = true,
+          techApplication = true
+        )
+      ),
+      Some(
+        Skills(
+          techSkill = "Autotest - technical skills 6",
+          description = "Autotest - technical skills 6 description",
+          techInterview = true,
+          techApplication = true
+        )
+      ),
+      Some(
+        Skills(
+          techSkill = "Autotest - technical skills 7",
+          description = "Autotest - technical skills 7 description",
+          techInterview = true,
+          techApplication = true
+        )
+      ),
+      Some(
+        Skills(
+          techSkill = "Autotest - technical skills 8",
+          description = "Autotest - technical skills 8 description",
+          techInterview = true,
+          techApplication = true
+        )
+      )
+    )
+
+object VACANCY_ONLINE_TESTS
+    extends OnlineTestsDetails(
+      true,
+      "Online Tests",
+      "Executive Officer",
+      testName = Vector(
+        "Civil Service Numerical Test",
+        "Civil Service Verbal Test",
+        "Civil Service Judgement Test",
+        "Civil Service Management Judgement Test",
+        "Civil Service Work Strengths Test",
+        "Casework Skills Test",
+        "Customer Service Skills Test"
+      ),
+      useRecommendedOption = false,
+      additionalDetails = "Autotest - Additional details for the recruitment team"
+    )
