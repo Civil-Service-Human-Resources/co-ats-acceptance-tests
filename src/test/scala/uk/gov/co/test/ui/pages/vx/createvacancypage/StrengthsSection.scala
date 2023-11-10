@@ -29,7 +29,7 @@ object StrengthsSection extends VacancyBasePage {
   private lazy val strengthSevenId         = s"select2-${formId}_datafield_117532_1_1-container"
   private lazy val strengthEightId         = s"select2-${formId}_datafield_117536_1_1-container"
 
-  private def selectStrengthsAssessed(successProfilesDetails: SuccessProfilesDetails): Unit = {
+  private def selectStrengthsRequired(successProfilesDetails: SuccessProfilesDetails): Unit = {
     val strengths = successProfilesDetails.strengthsSection
     waitForVisibilityOfElementById(noOfStrengthsAssessedId).click()
     selectOption(generalInput, strengths.map(_.strengthsAssessed).get.toString)
@@ -83,64 +83,35 @@ object StrengthsSection extends VacancyBasePage {
     selectOption(generalInput, strength.map(_.strengthEight).get)
   }
 
-  private def selectStrengths(successProfilesDetails: SuccessProfilesDetails): Unit = {
+  def selectStrengthsAssessed(successProfilesDetails: SuccessProfilesDetails): Unit = {
     scrollToElement(By.id(strengthsSectionId))
     val strength = successProfilesDetails.strengthsSection
-    selectStrengthsAssessed(successProfilesDetails)
+    selectStrengthsRequired(successProfilesDetails)
     strength.map(_.strengthsAssessed).get match {
-      case 1 =>
-        selectStrengthOne(successProfilesDetails)
-      case 2 =>
-        selectStrengthOne(successProfilesDetails)
-        selectStrengthTwo(successProfilesDetails)
-      case 3 =>
-        selectStrengthOne(successProfilesDetails)
-        selectStrengthTwo(successProfilesDetails)
-        selectStrengthThree(successProfilesDetails)
-      case 4 =>
-        selectStrengthOne(successProfilesDetails)
-        selectStrengthTwo(successProfilesDetails)
-        selectStrengthThree(successProfilesDetails)
-        selectStrengthFour(successProfilesDetails)
-      case 5 =>
-        selectStrengthOne(successProfilesDetails)
-        selectStrengthTwo(successProfilesDetails)
-        selectStrengthThree(successProfilesDetails)
-        selectStrengthFour(successProfilesDetails)
-        selectStrengthFive(successProfilesDetails)
-      case 6 =>
-        selectStrengthOne(successProfilesDetails)
-        selectStrengthTwo(successProfilesDetails)
-        selectStrengthThree(successProfilesDetails)
-        selectStrengthFour(successProfilesDetails)
-        selectStrengthFive(successProfilesDetails)
-        selectStrengthSix(successProfilesDetails)
-      case 7 =>
-        selectStrengthOne(successProfilesDetails)
-        selectStrengthTwo(successProfilesDetails)
-        selectStrengthThree(successProfilesDetails)
-        selectStrengthFour(successProfilesDetails)
-        selectStrengthFive(successProfilesDetails)
-        selectStrengthSix(successProfilesDetails)
-        selectStrengthSeven(successProfilesDetails)
-      case 8 =>
-        selectStrengthOne(successProfilesDetails)
-        selectStrengthTwo(successProfilesDetails)
-        selectStrengthThree(successProfilesDetails)
-        selectStrengthFour(successProfilesDetails)
-        selectStrengthFive(successProfilesDetails)
-        selectStrengthSix(successProfilesDetails)
-        selectStrengthSeven(successProfilesDetails)
-        selectStrengthEight(successProfilesDetails)
+      case 1 => strengthsRequired(successProfilesDetails, 1)
+      case 2 => strengthsRequired(successProfilesDetails, 2)
+      case 3 => strengthsRequired(successProfilesDetails, 3)
+      case 4 => strengthsRequired(successProfilesDetails, 4)
+      case 5 => strengthsRequired(successProfilesDetails, 5)
+      case 6 => strengthsRequired(successProfilesDetails, 6)
+      case 7 => strengthsRequired(successProfilesDetails, 7)
+      case 8 => strengthsRequired(successProfilesDetails, 8)
     }
   }
 
   private val strengths: Seq[SuccessProfilesDetails => Unit] = Seq(
-    selectStrengths
+    selectStrengthOne,
+    selectStrengthTwo,
+    selectStrengthThree,
+    selectStrengthFour,
+    selectStrengthFive,
+    selectStrengthSix,
+    selectStrengthSeven,
+    selectStrengthEight
   )
 
-  def strengthsSection(successProfilesDetails: SuccessProfilesDetails): Unit =
-    strengths.foreach { f =>
+  private def strengthsRequired(successProfilesDetails: SuccessProfilesDetails, strengthRequired: Int): Unit =
+    strengths.take(strengthRequired).foreach { f =>
       f(successProfilesDetails)
     }
 }
