@@ -299,7 +299,10 @@ object VACANCY_HOLDER_TESTS
       ),
       false,
       "Autotest - Additional details for the recruitment team",
-      Some(VACANCY_RECRUITER_TESTS)
+      Some(VACANCY_RECRUITER_TESTS),
+      Some(VACANCY_GROUP_A_TESTS),
+      Some(VACANCY_GROUP_B_TESTS),
+      Some(VACANCY_GROUP_C_TESTS)
     )
 
 object VACANCY_RECRUITER_TESTS
@@ -310,4 +313,29 @@ object VACANCY_RECRUITER_TESTS
       3,
       true,
       "Autotest - Online test instructions"
+    )
+
+object VACANCY_GROUP_A_TESTS
+    extends GroupATestsDetails(
+      "First",
+      "Three",
+      "Civil Service Numerical Test",
+      "Civil Service Verbal Test",
+      "New Civil Service Judgement Test"
+    )
+
+object VACANCY_GROUP_B_TESTS
+    extends GroupBTestsDetails(
+      "Second",
+      "Two",
+      "Civil Service Management Judgement Test",
+      "Civil Service Work Strengths Test"
+    )
+
+object VACANCY_GROUP_C_TESTS
+    extends GroupCTestsDetails(
+      "Third",
+      "Two",
+      "Casework Skills Test",
+      "Customer Service Skills Test"
     )
