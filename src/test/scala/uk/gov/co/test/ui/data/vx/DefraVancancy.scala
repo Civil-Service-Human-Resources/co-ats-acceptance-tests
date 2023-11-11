@@ -16,7 +16,7 @@ case class DefraApplyOnlyDetails(
   vettingDetails: VettingDetails,
   interviewsDetails: InterviewsDetails,
   successProfilesDetails: SuccessProfilesDetails,
-  onlineTestsDetails: OnlineTestsDetails
+  vacancyTestsDetails: VacancyTestsDetails
 )
 object DEFRA_APPLY_ONLY_DATA
     extends DefraApplyOnlyDetails(
@@ -32,7 +32,7 @@ object DEFRA_APPLY_ONLY_DATA
       VACANCY_VETTING_DETAILS,
       VACANCY_INTERVIEWS_DETAILS,
       VACANCY_SUCCESS_PROFILES,
-      VACANCY_ONLINE_TESTS
+      VACANCY_HOLDER_TESTS
     )
 
 object VACANCY_BASIC_DETAILS
@@ -283,8 +283,8 @@ object VACANCY_TECH_SKILLS
       )
     )
 
-object VACANCY_ONLINE_TESTS
-    extends OnlineTestsDetails(
+object VACANCY_HOLDER_TESTS
+    extends VacancyTestsDetails(
       true,
       "Online Tests",
       "Executive Officer",
@@ -297,6 +297,17 @@ object VACANCY_ONLINE_TESTS
         "Casework Skills Test",
         "Customer Service Skills Test"
       ),
-      useRecommendedOption = false,
-      additionalDetails = "Autotest - Additional details for the recruitment team"
+      false,
+      "Autotest - Additional details for the recruitment team",
+      Some(VACANCY_RECRUITER_TESTS)
+    )
+
+object VACANCY_RECRUITER_TESTS
+    extends RecruiterTestsDetails(
+      "Before the tests",
+      "Auto-progress after each test",
+      true,
+      3,
+      true,
+      "Autotest - Online test instructions"
     )

@@ -12,9 +12,9 @@ import uk.gov.co.test.ui.pages.vx.createvacancypage.ContractDetailsSection.contr
 import uk.gov.co.test.ui.pages.vx.createvacancypage.InterviewsSection.interviewsSection
 import uk.gov.co.test.ui.pages.vx.createvacancypage.JobInfoSection.jobInformationSection
 import uk.gov.co.test.ui.pages.vx.createvacancypage.LocationsSection.locationsSection
-import uk.gov.co.test.ui.pages.vx.createvacancypage.OnlineTestsSection.onlineTestsSection
 import uk.gov.co.test.ui.pages.vx.createvacancypage.ReserveListSection.reserveListSection
 import uk.gov.co.test.ui.pages.vx.createvacancypage.SuccessProfilesSection.successProfilesSection
+import uk.gov.co.test.ui.pages.vx.createvacancypage.VacancyTestsSection.vacancyTestsSection
 
 object NewVacancyFlow extends VacancyBasePage {
 
@@ -31,7 +31,7 @@ object NewVacancyFlow extends VacancyBasePage {
     checkVettingSection,
     interviewsSection,
     successProfilesSection,
-    onlineTestsSection
+    vacancyTestsSection
   )
 
   def fillNewVacancyForm(vacancy: DefraApplyOnlyDetails): Unit = {
@@ -39,5 +39,6 @@ object NewVacancyFlow extends VacancyBasePage {
     defraVacancy.foreach { f =>
       f(vacancy)
     }
+    println("Done!")
   }
 }

@@ -4,18 +4,19 @@ import org.openqa.selenium.{By, Keys}
 import uk.gov.co.test.ui.data.vx.DefraApplyOnlyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.formId
+import uk.gov.co.test.ui.pages.vx.createvacancypage.RecruiterTestsSection.recruiterTestsSection
 
-case class OnlineTestsDetails(
+case class VacancyTestsDetails(
   testsRequired: Boolean,
   onlineOrOffline: String,
   testGrade: String,
   testName: Vector[String],
   useRecommendedOption: Boolean,
   additionalDetails: String,
-  recruiterOptions: Option[OnlineTestsDetails] = None
+  recruiterOptions: Option[RecruiterTestsDetails] = None
 )
 
-object OnlineTestsSection extends VacancyBasePage {
+object VacancyTestsSection extends VacancyBasePage {
 
   private lazy val onlineTestsSectionId    = s"${formId}_section_129661_col_0"
   private lazy val testsRequiredYesId      = s"${formId}_datafield_129689_1_1_1"
@@ -28,21 +29,21 @@ object OnlineTestsSection extends VacancyBasePage {
   private lazy val recommendedOptionsNoId  = s"${formId}_datafield_129748_1_1_2"
   private lazy val additionalDetailId      = s"${formId}_datafield_129763_1_1"
 
-  def testsRequired(onlineTestsDetails: OnlineTestsDetails): Unit = {
+  def testsRequired(vacancyTestsDetails: VacancyTestsDetails): Unit = {
     scrollToElement(By.id(onlineTestsSectionId))
-    if (onlineTestsDetails.testsRequired) clickOnRadioButton(testsRequiredYesId)
+    if (vacancyTestsDetails.testsRequired) clickOnRadioButton(testsRequiredYesId)
     else clickOnRadioButton(testsRequiredNoId)
   }
 
-  def selectOnlineOrOffline(onlineTestsDetails: OnlineTestsDetails): Unit = {
+  def selectOnlineOrOffline(vacancyTestsDetails: VacancyTestsDetails): Unit = {
     waitForVisibilityOfElementById(onlineOrOfflineId).click()
-    action().moveToElement(waitForDropdownOption(onlineTestsDetails.onlineOrOffline)).perform()
-    waitForDropdownOption(onlineTestsDetails.onlineOrOffline).click()
+    action().moveToElement(waitForDropdownOption(vacancyTestsDetails.onlineOrOffline)).perform()
+    waitForDropdownOption(vacancyTestsDetails.onlineOrOffline).click()
   }
 
-  private def selectTestGrade(onlineTestsDetails: OnlineTestsDetails): Unit = {
+  private def selectTestGrade(vacancyTestsDetails: VacancyTestsDetails): Unit = {
     waitForVisibilityOfElementById(testGradeId).click()
-    selectOption(generalInput, onlineTestsDetails.testGrade)
+    selectOption(generalInput, vacancyTestsDetails.testGrade)
   }
 
   def onlineTestSelection(testName: String): Unit = {
@@ -51,28 +52,29 @@ object OnlineTestsSection extends VacancyBasePage {
     selectTest.sendKeys(Keys.ENTER)
   }
 
-  def selectRecommendedOption(onlineTestsDetails: OnlineTestsDetails): Unit =
-    if (onlineTestsDetails.useRecommendedOption) {
+  def selectRecommendedOption(vacancyTestsDetails: VacancyTestsDetails): Unit =
+    if (vacancyTestsDetails.useRecommendedOption) {
       clickOnRadioButton(recommendedOptionsYesId)
     } else {
       clickOnRadioButton(recommendedOptionsNoId)
-      selectOptionWithId(additionalDetailId, onlineTestsDetails.additionalDetails)
+      selectOptionWithId(additionalDetailId, vacancyTestsDetails.additionalDetails)
     }
 
-  def selectOnlineTests(onlineTestsDetails: OnlineTestsDetails): Unit =
-    for (test <- onlineTestsDetails.testName)
+  def selectOnlineTests(vacancyTestsDetails: VacancyTestsDetails): Unit =
+    for (test <- vacancyTestsDetails.testName)
       onlineTestSelection(test)
 
-  private val onlineTests: Seq[OnlineTestsDetails => Unit] = Seq(
+  private val onlineTests: Seq[VacancyTestsDetails => Unit] = Seq(
     testsRequired,
     selectOnlineOrOffline,
     selectTestGrade,
     selectOnlineTests,
-    selectRecommendedOption
+    selectRecommendedOption,
+    recruiterTestsSection
   )
 
-  def onlineTestsSection(newVacancyDetails: DefraApplyOnlyDetails): Unit =
+  def vacancyTestsSection(newVacancyDetails: DefraApplyOnlyDetails): Unit =
     onlineTests.foreach { f =>
-      f(newVacancyDetails.onlineTestsDetails)
+      f(newVacancyDetails.vacancyTestsDetails)
     }
 }

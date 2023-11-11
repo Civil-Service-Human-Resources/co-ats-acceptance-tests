@@ -12,15 +12,16 @@ case class BasicDetails(template: String, vacancyTitle: String, closingDate: Int
 
 object BasicDetailsSection extends VacancyBasePage {
 
-  val createVacancyTitle = "Create New Vacancy : Civil Service Jobs - GOV.UK"
-  val displayWelshPath   = ".//input[@name='datafield_179408_1_1']"
-  val closingDateId      = "edit_opp_form_pcd"
-  val selectTemplatePath = "//*[@id='select2-edit_opp_form_template_id-container']"
-  val enterTemplatePath  = ".//input[@class='select2-search__field']"
-  val newVacancyPath     = ".//a[contains(@href,'recruiter/opportunities/vacancy/create')]"
-  val vacancySectionPath = "//*[@id='lm-vacancies']/h3/a"
-  val extractFormClass   = "opp_form_bd"
-  var formId: String     = ""
+  val createVacancyTitle             = "Create New Vacancy : Civil Service Jobs - GOV.UK"
+  val displayWelshPath               = ".//input[@name='datafield_179408_1_1']"
+  val closingDateId                  = "edit_opp_form_pcd"
+  val selectTemplatePath             = "//*[@id='select2-edit_opp_form_template_id-container']"
+  val enterTemplatePath              = ".//input[@class='select2-search__field']"
+  val newVacancyPath                 = ".//a[contains(@href,'recruiter/opportunities/vacancy/create')]"
+  val vacancySectionPath             = "//*[@id='lm-vacancies']/h3/a"
+  val extractFormClass               = "opp_form_bd"
+  var formId: String                 = ""
+  var applicationClosingDate: String = ""
 
   private def displayWelshVersion(): WebElement =
     waitForVisibilityOfElementByPath(displayWelshPath)
@@ -54,12 +55,12 @@ object BasicDetailsSection extends VacancyBasePage {
     eventually(onPage(createVacancyTitle))
   }
 
-  private def appClosingDate(days: Int): String = {
-    val formatter   = DateTimeFormatter.ofPattern("dd/MM/yyyy")
-    val now         = LocalDate.now()
-    val addDays     = now.plusDays(days)
-    val closingDate = addDays.format(formatter)
-    closingDate
+  def appClosingDate(days: Int): String = {
+    val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
+    val now       = LocalDate.now()
+    val addDays   = now.plusDays(days)
+    applicationClosingDate = addDays.format(formatter)
+    applicationClosingDate
   }
 
   private def extractFormId(): String = {
