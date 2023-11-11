@@ -125,9 +125,7 @@ object RecruiterTestsSection extends VacancyBasePage {
   )
 
   def recruiterTestsSection(vacancyTestsDetails: VacancyTestsDetails): Unit =
-    if (vacancyTestsDetails.onlineOrOffline != "Offline Tests") {
-      recruiterTests.foreach { f =>
-        f(vacancyTestsDetails)
-      }
+    recruiterTests.foreach { f =>
+      f(vacancyTestsDetails)
     }
 }
