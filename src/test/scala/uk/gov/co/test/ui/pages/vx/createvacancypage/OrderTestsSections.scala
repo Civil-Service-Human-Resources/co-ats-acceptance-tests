@@ -30,19 +30,13 @@ object OrderTestsSections extends VacancyBasePage {
     if (vacancyTestsDetails.groupATests.map(_.order).get != "Not required") {
       selectGroupATestsUse(vacancyTestsDetails)
       vacancyTestsDetails.groupATests.map(_.howMany).get match {
-        case "One"   =>
-          selectGroupAFirstTest(vacancyTestsDetails)
-        case "Two"   =>
-          selectGroupAFirstTest(vacancyTestsDetails)
-          selectGroupASecondTest(vacancyTestsDetails)
+        case "One"   => groupATestsSelection(vacancyTestsDetails, 1)
+        case "Two"   => groupATestsSelection(vacancyTestsDetails, 2)
         case "Three" =>
           if (vacancyTestsDetails.testGrade != "Grade 6") {
-            selectGroupAFirstTest(vacancyTestsDetails)
-            selectGroupASecondTest(vacancyTestsDetails)
-            selectGroupAThirdTest(vacancyTestsDetails)
+            groupATestsSelection(vacancyTestsDetails, 3)
           } else {
-            selectGroupAFirstTest(vacancyTestsDetails)
-            selectGroupASecondTest(vacancyTestsDetails)
+            groupATestsSelection(vacancyTestsDetails, 2)
           }
       }
     }
@@ -80,6 +74,17 @@ object OrderTestsSections extends VacancyBasePage {
     waitForVisibilityOfElementById(groupAThirdTestId).click()
     selectActionLocator(third)
   }
+
+  private val groupATests: Seq[VacancyTestsDetails => Unit] = Seq(
+    selectGroupAFirstTest,
+    selectGroupASecondTest,
+    selectGroupAThirdTest
+  )
+
+  private def groupATestsSelection(vacancyTestsDetails: VacancyTestsDetails, take: Int): Unit =
+    groupATests.take(take).foreach { f =>
+      f(vacancyTestsDetails)
+    }
 
   private def selectGroupBTestsOrder(vacancyTestsDetails: VacancyTestsDetails): Unit = {
     val order = vacancyTestsDetails.groupBTests.map(_.order).get
