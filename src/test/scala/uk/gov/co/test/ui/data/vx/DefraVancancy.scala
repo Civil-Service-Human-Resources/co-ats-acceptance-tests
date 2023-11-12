@@ -289,7 +289,7 @@ object VACANCY_HOLDER_TESTS
     extends VacancyTestsDetails(
       true,
       "Online Tests",
-      "Executive Officer",
+      "Grade 7 ",
       testName = Map(
         "Administrative Assistant" -> List(
           "Civil Service Numerical Test",
@@ -372,8 +372,8 @@ object VACANCY_GROUP_B_TESTS
     extends GroupBTestsDetails(
       "Second",
       "Two",
-      "Civil Service Management Judgement Test",
-      "Civil Service Work Strengths Test"
+      "Civil Service Work Strengths Test",
+      "Civil Service Management Judgement Test"
     )
 
 object VACANCY_GROUP_C_TESTS
