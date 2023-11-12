@@ -289,7 +289,7 @@ object VACANCY_HOLDER_TESTS
     extends VacancyTestsDetails(
       true,
       "Online Tests",
-      "Grade 7 ",
+      "Executive Officer",
       testName = Map(
         "Administrative Assistant" -> List(
           "Civil Service Numerical Test",
@@ -298,7 +298,7 @@ object VACANCY_HOLDER_TESTS
           "Civil Service Work Strengths Test",
           "Customer Service Skills Test"
         ),
-        "Administrative Officer" -> List(
+        "Administrative Officer"   -> List(
           "Civil Service Numerical Test",
           "Civil Service Verbal Test",
           "Civil Service Judgement Test",
@@ -306,7 +306,7 @@ object VACANCY_HOLDER_TESTS
           "Casework Skills Test",
           "Customer Service Skills Test"
         ),
-        "Executive Officer" -> List(
+        "Executive Officer"        -> List(
           "Civil Service Numerical Test",
           "Civil Service Verbal Test",
           "Civil Service Judgement Test",
@@ -329,13 +329,13 @@ object VACANCY_HOLDER_TESTS
           "Civil Service Management Judgement Test",
           "Civil Service Work Strengths Test"
         ),
-        "Grade 7 " -> List(
+        "Grade 7 "                 -> List(
           "Civil Service Numerical Test",
           "Civil Service Verbal Test",
           "Civil Service Judgement Test",
           "Civil Service Work Strengths Test"
         ),
-        "Grade 6" -> List(
+        "Grade 6"                  -> List(
           "Civil Service Numerical Test",
           "Civil Service Verbal Test",
           "Civil Service Work Strengths Test"
@@ -380,8 +380,8 @@ object VACANCY_GROUP_C_TESTS
     extends GroupCTestsDetails(
       "Third",
       "Two",
-      "Casework Skills Test",
-      "Customer Service Skills Test"
+      "Customer Service Skills Test",
+      "Casework Skills Test"
     )
 
 object VACANCY_ADDITIONAL_QUESTIONS
