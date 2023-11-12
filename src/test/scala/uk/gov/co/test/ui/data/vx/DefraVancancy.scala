@@ -290,7 +290,7 @@ object VACANCY_HOLDER_TESTS
       true,
       "Online Tests",
       "Executive Officer",
-      testName = Vector(
+      testName = List(
         "Civil Service Numerical Test",
         "Civil Service Verbal Test",
         "Civil Service Judgement Test",

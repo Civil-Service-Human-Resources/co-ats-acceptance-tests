@@ -11,7 +11,7 @@ case class VacancyTestsDetails(
   testsRequired: Boolean,
   onlineOrOffline: String,
   testGrade: String,
-  testName: Vector[String],
+  testName: List[String],
   useRecommendedOption: Boolean,
   additionalDetails: String,
   recruiterOptions: Option[RecruiterTestsDetails] = None,
@@ -48,10 +48,10 @@ object VacancyTestsSection extends VacancyBasePage {
 //          case "Grade 7 "                 =>
 //          case "Grade 6"                  =>
 //        }
-        selectOnlineTests(vacancyTestsDetails)
+        selectOnlineTests(vacancyTestsDetails) //option appears depending on what testGrade was selected - logic needs refactor
         selectRecommendedOption(vacancyTestsDetails)
         recruiterTestsSection(vacancyTestsDetails)
-        testOrderingSection(vacancyTestsDetails)
+        testOrderingSection(vacancyTestsDetails) //relies on what testGrade was selected and testNames from list - logic needs refactor
       }
     }
   }
