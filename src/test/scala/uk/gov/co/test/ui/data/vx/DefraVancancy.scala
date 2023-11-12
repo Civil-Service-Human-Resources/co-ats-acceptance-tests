@@ -16,7 +16,8 @@ case class DefraApplyOnlyDetails(
   vettingDetails: VettingDetails,
   interviewsDetails: InterviewsDetails,
   successProfilesDetails: SuccessProfilesDetails,
-  vacancyTestsDetails: VacancyTestsDetails
+  vacancyTestsDetails: VacancyTestsDetails,
+  moreQuestionsDetails: MoreQuestionsDetails
 )
 object DEFRA_APPLY_ONLY_DATA
     extends DefraApplyOnlyDetails(
@@ -32,7 +33,8 @@ object DEFRA_APPLY_ONLY_DATA
       VACANCY_VETTING_DETAILS,
       VACANCY_INTERVIEWS_DETAILS,
       VACANCY_SUCCESS_PROFILES,
-      VACANCY_HOLDER_TESTS
+      VACANCY_HOLDER_TESTS,
+      VACANCY_ADDITIONAL_QUESTIONS
     )
 
 object VACANCY_BASIC_DETAILS
@@ -338,4 +340,13 @@ object VACANCY_GROUP_C_TESTS
       "Two",
       "Casework Skills Test",
       "Customer Service Skills Test"
+    )
+
+object VACANCY_ADDITIONAL_QUESTIONS
+    extends MoreQuestionsDetails(
+      false,
+      3,
+      "Autotest - Question 1",
+      "Autotest - Question 2",
+      "Autotest - Question 3"
     )
