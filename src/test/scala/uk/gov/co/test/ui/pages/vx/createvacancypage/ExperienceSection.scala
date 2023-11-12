@@ -105,7 +105,7 @@ object ExperienceSection extends VacancyBasePage {
     } else clickOnRadioButton(personalStatementNoId)
   }
 
-  def selectStatementWordLimit(successProfilesDetails: SuccessProfilesDetails): Unit = {
+  private def selectStatementWordLimit(successProfilesDetails: SuccessProfilesDetails): Unit = {
     val limit = successProfilesDetails.experienceSection.map(_.statementWordLimit).get.toString
     scrollToElement(By.id(statementWordLimitId))
     waitForVisibilityOfElementById(statementWordLimitId).click()
@@ -212,7 +212,7 @@ object ExperienceSection extends VacancyBasePage {
     selectMandatoryQualifications
   )
 
-  def experiencesSection(successProfilesDetails: SuccessProfilesDetails): Unit =
+  def experiencesRequired(successProfilesDetails: SuccessProfilesDetails): Unit =
     experiences.foreach { f =>
       f(successProfilesDetails)
     }

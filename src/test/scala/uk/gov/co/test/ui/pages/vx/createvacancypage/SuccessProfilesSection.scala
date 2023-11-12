@@ -4,9 +4,9 @@ import uk.gov.co.test.ui.data.vx.DefraApplyOnlyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 import uk.gov.co.test.ui.pages.vx.createvacancypage.AbilitiesSection.selectAbilitiesProfile
 import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.formId
-import uk.gov.co.test.ui.pages.vx.createvacancypage.BehavioursSection.selectBehavioursProfile
-import uk.gov.co.test.ui.pages.vx.createvacancypage.ExperienceSection.experiencesSection
-import uk.gov.co.test.ui.pages.vx.createvacancypage.StrengthsSection.strengthsSection
+import uk.gov.co.test.ui.pages.vx.createvacancypage.BehavioursSection.selectBehavioursProfiles
+import uk.gov.co.test.ui.pages.vx.createvacancypage.ExperienceSection.experiencesRequired
+import uk.gov.co.test.ui.pages.vx.createvacancypage.StrengthsSection.selectStrengthsAssessed
 import uk.gov.co.test.ui.pages.vx.createvacancypage.TechnicalSkillsSection.selectTechnicalSkills
 
 case class SuccessProfilesDetails(
@@ -37,15 +37,15 @@ object SuccessProfilesSection extends VacancyBasePage {
     }
     if (successProfilesDetails.behaviours) {
       checkbox(behavioursId).select()
-      selectBehavioursProfile(successProfilesDetails)
+      selectBehavioursProfiles(successProfilesDetails)
     }
     if (successProfilesDetails.experience) {
       checkbox(experienceId).select()
-      experiencesSection(successProfilesDetails)
+      experiencesRequired(successProfilesDetails)
     }
     if (successProfilesDetails.strengths) {
       checkbox(strengthsId).select()
-      strengthsSection(successProfilesDetails)
+      selectStrengthsAssessed(successProfilesDetails)
     }
     if (successProfilesDetails.technicalSkills) {
       checkbox(technicalSkillsId).select()

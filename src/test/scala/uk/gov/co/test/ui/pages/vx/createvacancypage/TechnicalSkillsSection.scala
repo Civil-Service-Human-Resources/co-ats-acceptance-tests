@@ -60,50 +60,14 @@ object TechnicalSkillsSection extends VacancyBasePage {
     if (successProfilesDetails.technicalSkills) {
       selectHowManyTechSkills(techSkills.map(_.howManySkills).get)
       techSkills.map(_.howManySkills).get match {
-        case 1 =>
-          selectTechSkillsOne(successProfilesDetails)
-        case 2 =>
-          selectTechSkillsOne(successProfilesDetails)
-          selectTechSkillsTwo(successProfilesDetails)
-        case 3 =>
-          selectTechSkillsOne(successProfilesDetails)
-          selectTechSkillsTwo(successProfilesDetails)
-          selectTechSkillsThree(successProfilesDetails)
-        case 4 =>
-          selectTechSkillsOne(successProfilesDetails)
-          selectTechSkillsTwo(successProfilesDetails)
-          selectTechSkillsThree(successProfilesDetails)
-          selectTechSkillsFour(successProfilesDetails)
-        case 5 =>
-          selectTechSkillsOne(successProfilesDetails)
-          selectTechSkillsTwo(successProfilesDetails)
-          selectTechSkillsThree(successProfilesDetails)
-          selectTechSkillsFour(successProfilesDetails)
-          selectTechSkillsFive(successProfilesDetails)
-        case 6 =>
-          selectTechSkillsOne(successProfilesDetails)
-          selectTechSkillsTwo(successProfilesDetails)
-          selectTechSkillsThree(successProfilesDetails)
-          selectTechSkillsFour(successProfilesDetails)
-          selectTechSkillsFive(successProfilesDetails)
-          selectTechSkillsSix(successProfilesDetails)
-        case 7 =>
-          selectTechSkillsOne(successProfilesDetails)
-          selectTechSkillsTwo(successProfilesDetails)
-          selectTechSkillsThree(successProfilesDetails)
-          selectTechSkillsFour(successProfilesDetails)
-          selectTechSkillsFive(successProfilesDetails)
-          selectTechSkillsSix(successProfilesDetails)
-          selectTechSkillsSeven(successProfilesDetails)
-        case 8 =>
-          selectTechSkillsOne(successProfilesDetails)
-          selectTechSkillsTwo(successProfilesDetails)
-          selectTechSkillsThree(successProfilesDetails)
-          selectTechSkillsFour(successProfilesDetails)
-          selectTechSkillsFive(successProfilesDetails)
-          selectTechSkillsSix(successProfilesDetails)
-          selectTechSkillsSeven(successProfilesDetails)
-          selectTechSkillsEight(successProfilesDetails)
+        case 1 => techSkillsRequired(successProfilesDetails, 1)
+        case 2 => techSkillsRequired(successProfilesDetails, 2)
+        case 3 => techSkillsRequired(successProfilesDetails, 3)
+        case 4 => techSkillsRequired(successProfilesDetails, 4)
+        case 5 => techSkillsRequired(successProfilesDetails, 5)
+        case 6 => techSkillsRequired(successProfilesDetails, 6)
+        case 7 => techSkillsRequired(successProfilesDetails, 7)
+        case 8 => techSkillsRequired(successProfilesDetails, 8)
       }
     }
   }
@@ -178,4 +142,20 @@ object TechnicalSkillsSection extends VacancyBasePage {
     if (techSkills.map(_.techSkillsEight.map(_.techApplication).get).get) checkbox(applicationEightId).select()
     if (techSkills.map(_.techSkillsEight.map(_.techInterview).get).get) checkbox(interviewEightId).select()
   }
+
+  private val techSkills: Seq[SuccessProfilesDetails => Unit] = Seq(
+    selectTechSkillsOne,
+    selectTechSkillsTwo,
+    selectTechSkillsThree,
+    selectTechSkillsFour,
+    selectTechSkillsFive,
+    selectTechSkillsSix,
+    selectTechSkillsSeven,
+    selectTechSkillsEight
+  )
+
+  private def techSkillsRequired(successProfilesDetails: SuccessProfilesDetails, take: Int): Unit =
+    techSkills.take(take).foreach { f =>
+      f(successProfilesDetails)
+    }
 }

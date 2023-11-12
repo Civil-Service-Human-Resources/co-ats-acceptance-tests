@@ -51,7 +51,7 @@ object BehavioursSection extends VacancyBasePage {
   private lazy val interviewSevenId         = s"${formId}_datafield_60422_1_1_12684"
   private lazy val interviewEightId         = s"${formId}_datafield_60436_1_1_12684"
 
-  def selectBehavioursProfile(successProfilesDetails: SuccessProfilesDetails): Unit = {
+  def selectBehavioursProfiles(successProfilesDetails: SuccessProfilesDetails): Unit = {
     scrollToElement(By.id(successProfilesSectionId))
     val behaviour = successProfilesDetails.behavioursSection
     if (successProfilesDetails.behaviours) {
@@ -61,50 +61,14 @@ object BehavioursSection extends VacancyBasePage {
         .get
       selectHowManyBehaviours(behaviour.map(_.howManyAssessed).get)
       behaviour.map(_.howManyAssessed).get match {
-        case 1 =>
-          selectBehaviourOne(successProfilesDetails)
-        case 2 =>
-          selectBehaviourOne(successProfilesDetails)
-          selectBehaviourTwo(successProfilesDetails)
-        case 3 =>
-          selectBehaviourOne(successProfilesDetails)
-          selectBehaviourTwo(successProfilesDetails)
-          selectBehaviourThree(successProfilesDetails)
-        case 4 =>
-          selectBehaviourOne(successProfilesDetails)
-          selectBehaviourTwo(successProfilesDetails)
-          selectBehaviourThree(successProfilesDetails)
-          selectBehaviourFour(successProfilesDetails)
-        case 5 =>
-          selectBehaviourOne(successProfilesDetails)
-          selectBehaviourTwo(successProfilesDetails)
-          selectBehaviourThree(successProfilesDetails)
-          selectBehaviourFour(successProfilesDetails)
-          selectBehaviourFive(successProfilesDetails)
-        case 6 =>
-          selectBehaviourOne(successProfilesDetails)
-          selectBehaviourTwo(successProfilesDetails)
-          selectBehaviourThree(successProfilesDetails)
-          selectBehaviourFour(successProfilesDetails)
-          selectBehaviourFive(successProfilesDetails)
-          selectBehaviourSix(successProfilesDetails)
-        case 7 =>
-          selectBehaviourOne(successProfilesDetails)
-          selectBehaviourTwo(successProfilesDetails)
-          selectBehaviourThree(successProfilesDetails)
-          selectBehaviourFour(successProfilesDetails)
-          selectBehaviourFive(successProfilesDetails)
-          selectBehaviourSix(successProfilesDetails)
-          selectBehaviourSeven(successProfilesDetails)
-        case 8 =>
-          selectBehaviourOne(successProfilesDetails)
-          selectBehaviourTwo(successProfilesDetails)
-          selectBehaviourThree(successProfilesDetails)
-          selectBehaviourFour(successProfilesDetails)
-          selectBehaviourFive(successProfilesDetails)
-          selectBehaviourSix(successProfilesDetails)
-          selectBehaviourSeven(successProfilesDetails)
-          selectBehaviourEight(successProfilesDetails)
+        case 1 => behavioursSection(successProfilesDetails, 1)
+        case 2 => behavioursSection(successProfilesDetails, 2)
+        case 3 => behavioursSection(successProfilesDetails, 3)
+        case 4 => behavioursSection(successProfilesDetails, 4)
+        case 5 => behavioursSection(successProfilesDetails, 5)
+        case 6 => behavioursSection(successProfilesDetails, 6)
+        case 7 => behavioursSection(successProfilesDetails, 7)
+        case 8 => behavioursSection(successProfilesDetails, 8)
       }
     }
   }
@@ -186,4 +150,20 @@ object BehavioursSection extends VacancyBasePage {
     waitForVisibilityOfElementById(howManyBehavioursId).click()
     selectOption(generalInput, howMany.toString)
   }
+
+  private val behaviours: Seq[SuccessProfilesDetails => Unit] = Seq(
+    selectBehaviourOne,
+    selectBehaviourTwo,
+    selectBehaviourThree,
+    selectBehaviourFour,
+    selectBehaviourFive,
+    selectBehaviourSix,
+    selectBehaviourSeven,
+    selectBehaviourEight
+  )
+
+  private def behavioursSection(successProfilesDetails: SuccessProfilesDetails, behavioursAssessed: Int): Unit =
+    behaviours.take(behavioursAssessed).foreach { f =>
+      f(successProfilesDetails)
+    }
 }

@@ -39,28 +39,25 @@ object InterviewsSection extends VacancyBasePage {
   private lazy val telephoneFourId       = s"${formId}_datafield_125066_1_1_17755"
   private lazy val videoFourId           = s"${formId}_datafield_125066_1_1_17754"
 
-  private def selectInterviewRoundsExpected(interviewsDetails: InterviewsDetails): Unit =
-    interviewsDetails.expectedRounds match {
+  def interviewsSection(newVacancyDetails: DefraApplyOnlyDetails): Unit = {
+    val interviews = newVacancyDetails.interviewsDetails
+    interviews.expectedRounds match {
       case "No interviews" => clickOnRadioButton(noInterviewsId)
       case "1"             =>
         clickOnRadioButton(oneInterviewId)
-        selectInterviewRoundOneType(interviewsDetails)
+        interviewsTypes(interviews, 1)
       case "2"             =>
         clickOnRadioButton(twoInterviewId)
-        selectInterviewRoundOneType(interviewsDetails)
-        selectInterviewRoundTwoType(interviewsDetails)
+        interviewsTypes(interviews, 2)
       case "3"             =>
         clickOnRadioButton(threeInterviewId)
-        selectInterviewRoundOneType(interviewsDetails)
-        selectInterviewRoundTwoType(interviewsDetails)
-        selectInterviewRoundThreeType(interviewsDetails)
+        interviewsTypes(interviews, 3)
       case "4"             =>
         clickOnRadioButton(fourInterviewId)
-        selectInterviewRoundOneType(interviewsDetails)
-        selectInterviewRoundTwoType(interviewsDetails)
-        selectInterviewRoundThreeType(interviewsDetails)
-        selectInterviewRoundFourType(interviewsDetails)
+        interviewsTypes(interviews, 4)
     }
+    selectAvailableOffline(interviews)
+  }
 
   private def selectInterviewRoundOneType(interviewsDetails: InterviewsDetails): Unit =
     interviewsDetails.interviewOneType match {
@@ -99,13 +96,15 @@ object InterviewsSection extends VacancyBasePage {
     else clickOnRadioButton(availableOfflineNoId)
 
   private val interviews: Seq[InterviewsDetails => Unit] = Seq(
-    selectInterviewRoundsExpected,
-    selectAvailableOffline
+    selectInterviewRoundOneType,
+    selectInterviewRoundTwoType,
+    selectInterviewRoundThreeType,
+    selectInterviewRoundFourType
   )
 
-  def interviewsSection(newVacancyDetails: DefraApplyOnlyDetails): Unit =
-    interviews.foreach { f =>
-      f(newVacancyDetails.interviewsDetails)
+  private def interviewsTypes(interviewsDetails: InterviewsDetails, interviewTypes: Int): Unit =
+    interviews.take(interviewTypes).foreach { f =>
+      f(interviewsDetails)
     }
 
 }

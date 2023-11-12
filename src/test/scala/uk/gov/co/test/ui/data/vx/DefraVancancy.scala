@@ -15,7 +15,9 @@ case class DefraApplyOnlyDetails(
   contactDetails: ContactDetails,
   vettingDetails: VettingDetails,
   interviewsDetails: InterviewsDetails,
-  successProfilesDetails: SuccessProfilesDetails
+  successProfilesDetails: SuccessProfilesDetails,
+  vacancyTestsDetails: VacancyTestsDetails,
+  moreQuestionsDetails: MoreQuestionsDetails
 )
 object DEFRA_APPLY_ONLY_DATA
     extends DefraApplyOnlyDetails(
@@ -30,7 +32,9 @@ object DEFRA_APPLY_ONLY_DATA
       VACANCY_CONTACT_DETAILS,
       VACANCY_VETTING_DETAILS,
       VACANCY_INTERVIEWS_DETAILS,
-      VACANCY_SUCCESS_PROFILES
+      VACANCY_SUCCESS_PROFILES,
+      VACANCY_HOLDER_TESTS,
+      VACANCY_ADDITIONAL_QUESTIONS
     )
 
 object VACANCY_BASIC_DETAILS
@@ -81,7 +85,7 @@ object VACANCY_LOCATIONS
       "All communities",
       true,
       "2",
-      Vector("London", "Southampton", "Leicester")
+      otherCityOrTown = Vector("London", "Southampton", "Leicester")
     )
 
 object VACANCY_CONTRACT_DETAILS
@@ -213,14 +217,136 @@ object VACANCY_STRENGTHS
     )
 
 object VACANCY_TECH_SKILLS
-extends TechSkillsDetails(
-  8,
-  Some(Skills(techSkill = "Autotest - technical skills 1", description = "Autotest - technical skills 1 description", techInterview = true, techApplication = true)),
-  Some(Skills(techSkill = "Autotest - technical skills 2", description = "Autotest - technical skills 2 description", techInterview = true, techApplication = true)),
-  Some(Skills(techSkill = "Autotest - technical skills 3", description = "Autotest - technical skills 3 description", techInterview = true, techApplication = true)),
-  Some(Skills(techSkill = "Autotest - technical skills 4", description = "Autotest - technical skills 4 description", techInterview = true, techApplication = true)),
-  Some(Skills(techSkill = "Autotest - technical skills 5", description = "Autotest - technical skills 5 description", techInterview = true, techApplication = true)),
-  Some(Skills(techSkill = "Autotest - technical skills 6", description = "Autotest - technical skills 6 description", techInterview = true, techApplication = true)),
-  Some(Skills(techSkill = "Autotest - technical skills 7", description = "Autotest - technical skills 7 description", techInterview = true, techApplication = true)),
-  Some(Skills(techSkill = "Autotest - technical skills 8", description = "Autotest - technical skills 8 description", techInterview = true, techApplication = true))
-)
+    extends TechSkillsDetails(
+      8,
+      Some(
+        Skills(
+          techSkill = "Autotest - technical skills 1",
+          description = "Autotest - technical skills 1 description",
+          techInterview = true,
+          techApplication = true
+        )
+      ),
+      Some(
+        Skills(
+          techSkill = "Autotest - technical skills 2",
+          description = "Autotest - technical skills 2 description",
+          techInterview = true,
+          techApplication = true
+        )
+      ),
+      Some(
+        Skills(
+          techSkill = "Autotest - technical skills 3",
+          description = "Autotest - technical skills 3 description",
+          techInterview = true,
+          techApplication = true
+        )
+      ),
+      Some(
+        Skills(
+          techSkill = "Autotest - technical skills 4",
+          description = "Autotest - technical skills 4 description",
+          techInterview = true,
+          techApplication = true
+        )
+      ),
+      Some(
+        Skills(
+          techSkill = "Autotest - technical skills 5",
+          description = "Autotest - technical skills 5 description",
+          techInterview = true,
+          techApplication = true
+        )
+      ),
+      Some(
+        Skills(
+          techSkill = "Autotest - technical skills 6",
+          description = "Autotest - technical skills 6 description",
+          techInterview = true,
+          techApplication = true
+        )
+      ),
+      Some(
+        Skills(
+          techSkill = "Autotest - technical skills 7",
+          description = "Autotest - technical skills 7 description",
+          techInterview = true,
+          techApplication = true
+        )
+      ),
+      Some(
+        Skills(
+          techSkill = "Autotest - technical skills 8",
+          description = "Autotest - technical skills 8 description",
+          techInterview = true,
+          techApplication = true
+        )
+      )
+    )
+
+object VACANCY_HOLDER_TESTS
+    extends VacancyTestsDetails(
+      true,
+      "Online Tests",
+      "Executive Officer",
+      testName = Vector(
+        "Civil Service Numerical Test",
+        "Civil Service Verbal Test",
+        "Civil Service Judgement Test",
+        "Civil Service Management Judgement Test",
+        "Civil Service Work Strengths Test",
+        "Casework Skills Test",
+        "Customer Service Skills Test"
+      ),
+      false,
+      "Autotest - Additional details for the recruitment team",
+      Some(VACANCY_RECRUITER_TESTS),
+      Some(VACANCY_GROUP_A_TESTS),
+      Some(VACANCY_GROUP_B_TESTS),
+      Some(VACANCY_GROUP_C_TESTS)
+    )
+
+object VACANCY_RECRUITER_TESTS
+    extends RecruiterTestsDetails(
+      "Before the tests",
+      "Auto-progress after each test",
+      true,
+      3,
+      true,
+      "Autotest - Online test instructions"
+    )
+
+object VACANCY_GROUP_A_TESTS
+    extends GroupATestsDetails(
+      "First",
+      "Three",
+      "Civil Service Numerical Test",
+      "Civil Service Verbal Test",
+      "New Civil Service Judgement Test"
+    )
+
+object VACANCY_GROUP_B_TESTS
+    extends GroupBTestsDetails(
+      "Second",
+      "Two",
+      "Civil Service Management Judgement Test",
+      "Civil Service Work Strengths Test"
+    )
+
+object VACANCY_GROUP_C_TESTS
+    extends GroupCTestsDetails(
+      "Third",
+      "Two",
+      "Casework Skills Test",
+      "Customer Service Skills Test"
+    )
+
+object VACANCY_ADDITIONAL_QUESTIONS
+    extends MoreQuestionsDetails(
+      false,
+      3,
+      "Autotest - Question 1",
+      "Autotest - Question 2",
+      "Autotest - Question 3"
+    )
