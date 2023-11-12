@@ -11,7 +11,7 @@ case class VacancyTestsDetails(
   testsRequired: Boolean,
   onlineOrOffline: String,
   testGrade: String,
-  testName: List[String],
+  testName: Map[String, List[String]],
   useRecommendedOption: Boolean,
   additionalDetails: String,
   recruiterOptions: Option[RecruiterTestsDetails] = None,
@@ -38,17 +38,8 @@ object VacancyTestsSection extends VacancyBasePage {
     if (vacancyTestsDetails.testsRequired) {
       selectOnlineOrOffline(vacancyTestsDetails)
       if (vacancyTestsDetails.onlineOrOffline == "Online Tests") {
-        selectTestGrade(vacancyTestsDetails.testGrade)
-//        vacancyTestsDetails.testGrade match {
-//          case "Administrative Assistant" =>
-//          case "Administrative Officer"   =>
-//          case "Executive Officer"        => selectOnlineTests(vacancyTestsDetails)
-//          case "Higher Executive Officer" =>
-//          case "Senior Executive Officer" =>
-//          case "Grade 7 "                 =>
-//          case "Grade 6"                  =>
-//        }
-        selectOnlineTests(vacancyTestsDetails) //option appears depending on what testGrade was selected - logic needs refactor
+        selectTestGrade(vacancyTestsDetails)
+        selectOnlineTests(vacancyTestsDetails)
         selectRecommendedOption(vacancyTestsDetails)
         recruiterTestsSection(vacancyTestsDetails)
         testOrderingSection(vacancyTestsDetails) //relies on what testGrade was selected and testNames from list - logic needs refactor
@@ -68,9 +59,9 @@ object VacancyTestsSection extends VacancyBasePage {
     waitForDropdownOption(vacancyTestsDetails.onlineOrOffline).click()
   }
 
-  private def selectTestGrade(grade: String): Unit = {
+  private def selectTestGrade(vacancyTestsDetails: VacancyTestsDetails): Unit = {
     waitForVisibilityOfElementById(testGradeId).click()
-    selectOption(generalInput, grade)
+    selectOption(generalInput, vacancyTestsDetails.testGrade)
   }
 
   def onlineTestSelection(testName: String): Unit = {
@@ -87,9 +78,10 @@ object VacancyTestsSection extends VacancyBasePage {
       selectOptionWithId(additionalDetailId, vacancyTestsDetails.additionalDetails)
     }
 
-  def selectOnlineTests(vacancyTestsDetails: VacancyTestsDetails): Unit =
-    for (test <- vacancyTestsDetails.testName)
+  def selectOnlineTests(vacancyTestsDetails: VacancyTestsDetails): Unit = {
+    for (test <- vacancyTestsDetails.testName(vacancyTestsDetails.testGrade))
       onlineTestSelection(test)
+  }
 
   private val onlineTests: Seq[VacancyTestsDetails => Unit] = Seq(
     vacancyTestsFlow

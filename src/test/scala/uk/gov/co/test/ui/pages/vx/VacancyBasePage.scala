@@ -65,4 +65,9 @@ trait VacancyBasePage extends Matchers with BasePage with BrowserDriver {
   def waitForDropdownOptionByText(option: String): WebElement =
     waitForVisibilityOfElementByPath(s".//li[@role='option' and text()='$option']")
 
+  def selectActionLocator(value: String): Unit = {
+    action().moveToElement(waitForDropdownOptionByText(value)).perform()
+    waitForDropdownOptionByText(value).click()
+  }
+
 }

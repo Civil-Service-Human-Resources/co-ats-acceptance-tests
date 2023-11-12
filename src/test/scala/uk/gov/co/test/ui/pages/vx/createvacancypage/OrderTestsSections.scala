@@ -25,112 +25,112 @@ object OrderTestsSections extends VacancyBasePage {
   private lazy val groupCFirstTestId    = s"select2-${formId}_datafield_157607_1_1-container"
   private lazy val groupCSecondTestId   = s"select2-${formId}_datafield_157622_1_1-container"
 
-  def selectGroupATestsOrder(vacancyTestsDetails: VacancyTestsDetails): Unit = {
+  private def groupAOrdering(vacancyTestsDetails: VacancyTestsDetails): Unit = {
+    selectGroupATestsOrder(vacancyTestsDetails)
+    if (vacancyTestsDetails.groupATests.map(_.order).get != "Not required") {
+      selectGroupATestsUse(vacancyTestsDetails)
+      vacancyTestsDetails.groupATests.map(_.howMany).get match {
+        case "One"   =>
+          selectGroupAFirstTest(vacancyTestsDetails)
+        case "Two"   =>
+          selectGroupAFirstTest(vacancyTestsDetails)
+          selectGroupASecondTest(vacancyTestsDetails)
+        case "Three" =>
+          if (vacancyTestsDetails.testGrade != "Grade 6") {
+            selectGroupAFirstTest(vacancyTestsDetails)
+            selectGroupASecondTest(vacancyTestsDetails)
+            selectGroupAThirdTest(vacancyTestsDetails)
+          } else {
+            selectGroupAFirstTest(vacancyTestsDetails)
+            selectGroupASecondTest(vacancyTestsDetails)
+          }
+      }
+    }
+  }
+
+  private def selectGroupATestsOrder(vacancyTestsDetails: VacancyTestsDetails): Unit = {
     scrollToElement(By.id(groupATestsSectionId))
     val order = vacancyTestsDetails.groupATests.map(_.order).get
     waitForVisibilityOfElementById(groupATestsId).click()
-    action().moveToElement(waitForDropdownOption(order)).perform()
-    waitForDropdownOption(order).click()
+    selectActionLocator(order)
   }
 
-  def selectGroupATestsUse(vacancyTestsDetails: VacancyTestsDetails): Unit = {
+  private def selectGroupATestsUse(vacancyTestsDetails: VacancyTestsDetails): Unit = {
     val use = vacancyTestsDetails.groupATests.map(_.howMany).get
     waitForVisibilityOfElementById(groupATestsUseId).click()
-    action().moveToElement(waitForDropdownOptionByText(use)).perform()
-    waitForDropdownOptionByText(use).click()
+    if (vacancyTestsDetails.testGrade == "Grade 6" && vacancyTestsDetails.groupATests.map(_.howMany).get == "Three") {
+      selectActionLocator("Two")
+    } else selectActionLocator(use)
   }
 
-  def selectGroupAFirstTest(vacancyTestsDetails: VacancyTestsDetails): Unit = {
+  private def selectGroupAFirstTest(vacancyTestsDetails: VacancyTestsDetails): Unit = {
     val first = vacancyTestsDetails.groupATests.map(_.first).get
     waitForVisibilityOfElementById(groupAFirstTestId).click()
-    action().moveToElement(waitForDropdownOptionByText(first)).perform()
-    waitForDropdownOptionByText(first).click()
+    selectActionLocator(first)
   }
 
-  def selectGroupASecondTest(vacancyTestsDetails: VacancyTestsDetails): Unit = {
+  private def selectGroupASecondTest(vacancyTestsDetails: VacancyTestsDetails): Unit = {
     val second = vacancyTestsDetails.groupATests.map(_.second).get
     waitForVisibilityOfElementById(groupASecondTestId).click()
-    action().moveToElement(waitForDropdownOptionByText(second)).perform()
-    waitForDropdownOptionByText(second).click()
+    selectActionLocator(second)
   }
 
-  def selectGroupAThirdTest(vacancyTestsDetails: VacancyTestsDetails): Unit = {
+  private def selectGroupAThirdTest(vacancyTestsDetails: VacancyTestsDetails): Unit = {
     val third = vacancyTestsDetails.groupATests.map(_.third).get
     waitForVisibilityOfElementById(groupAThirdTestId).click()
-    action().moveToElement(waitForDropdownOptionByText(third)).perform()
-    waitForDropdownOptionByText(third).click()
+    selectActionLocator(third)
   }
 
-  def selectGroupBTestsOrder(vacancyTestsDetails: VacancyTestsDetails): Unit = {
+  private def selectGroupBTestsOrder(vacancyTestsDetails: VacancyTestsDetails): Unit = {
     val order = vacancyTestsDetails.groupBTests.map(_.order).get
     waitForVisibilityOfElementById(groupBTestsId).click()
-    action().moveToElement(waitForDropdownOptionByText(order)).perform()
-    waitForDropdownOptionByText(order).click()
+    selectActionLocator(order)
   }
 
-  def selectGroupBTestsUse(vacancyTestsDetails: VacancyTestsDetails): Unit = {
+  private def selectGroupBTestsUse(vacancyTestsDetails: VacancyTestsDetails): Unit = {
     val use = vacancyTestsDetails.groupBTests.map(_.howMany).get
     waitForVisibilityOfElementById(groupBTestsUseId).click()
-    action().moveToElement(waitForDropdownOptionByText(use)).perform()
-    waitForDropdownOptionByText(use).click()
+    selectActionLocator(use)
   }
 
-  def selectGroupBFirstTest(vacancyTestsDetails: VacancyTestsDetails): Unit = {
+  private def selectGroupBFirstTest(vacancyTestsDetails: VacancyTestsDetails): Unit = {
     val first = vacancyTestsDetails.groupBTests.map(_.first).get
     waitForVisibilityOfElementById(groupBFirstTestId).click()
-    action().moveToElement(waitForDropdownOptionByText(first)).perform()
-    waitForDropdownOptionByText(first).click()
+    selectActionLocator(first)
   }
 
-  def selectGroupBSecondTest(vacancyTestsDetails: VacancyTestsDetails): Unit = {
+  private def selectGroupBSecondTest(vacancyTestsDetails: VacancyTestsDetails): Unit = {
     val second = vacancyTestsDetails.groupBTests.map(_.second).get
     waitForVisibilityOfElementById(groupBSecondTestId).click()
-    action().moveToElement(waitForDropdownOptionByText(second)).perform()
-    waitForDropdownOptionByText(second).click()
+    selectActionLocator(second)
   }
 
-  def selectGroupCTestsOrder(vacancyTestsDetails: VacancyTestsDetails): Unit = {
+  private def selectGroupCTestsOrder(vacancyTestsDetails: VacancyTestsDetails): Unit = {
     val order = vacancyTestsDetails.groupCTests.map(_.order).get
     waitForVisibilityOfElementById(groupCTestsId).click()
-    action().moveToElement(waitForDropdownOptionByText(order)).perform()
-    waitForDropdownOptionByText(order).click()
+    selectActionLocator(order)
   }
 
-  def selectGroupCTestsUse(vacancyTestsDetails: VacancyTestsDetails): Unit = {
+  private def selectGroupCTestsUse(vacancyTestsDetails: VacancyTestsDetails): Unit = {
     val use = vacancyTestsDetails.groupCTests.map(_.howMany).get
     waitForVisibilityOfElementById(groupCTestsUseId).click()
-    action().moveToElement(waitForDropdownOptionByText(use)).perform()
-    waitForDropdownOptionByText(use).click()
+    selectActionLocator(use)
   }
 
-  def selectGroupCFirstTest(vacancyTestsDetails: VacancyTestsDetails): Unit = {
+  private def selectGroupCFirstTest(vacancyTestsDetails: VacancyTestsDetails): Unit = {
     val first = vacancyTestsDetails.groupCTests.map(_.first).get
     waitForVisibilityOfElementById(groupCFirstTestId).click()
-    action().moveToElement(waitForDropdownOptionByText(first)).perform()
-    waitForDropdownOptionByText(first).click()
+    selectActionLocator(first)
   }
 
-  def selectGroupCSecondTest(vacancyTestsDetails: VacancyTestsDetails): Unit = {
+  private def selectGroupCSecondTest(vacancyTestsDetails: VacancyTestsDetails): Unit = {
     val second = vacancyTestsDetails.groupCTests.map(_.second).get
     waitForVisibilityOfElementById(groupCSecondTestId).click()
-    action().moveToElement(waitForDropdownOptionByText(second)).perform()
-    waitForDropdownOptionByText(second).click()
+    selectActionLocator(second)
   }
 
   private val testOrdering: Seq[VacancyTestsDetails => Unit] = Seq(
-    selectGroupATestsOrder,
-    selectGroupATestsUse,
-    selectGroupAFirstTest,
-    selectGroupASecondTest,
-    selectGroupAThirdTest,
-    selectGroupBTestsOrder,
-    selectGroupBTestsUse,
-    selectGroupBFirstTest,
-    selectGroupBSecondTest,
-    selectGroupCTestsOrder,
-    selectGroupCTestsUse,
-    selectGroupCFirstTest,
-    selectGroupCSecondTest
+    groupAOrdering
   )
 
   def testOrderingSection(vacancyTestsDetails: VacancyTestsDetails): Unit =
