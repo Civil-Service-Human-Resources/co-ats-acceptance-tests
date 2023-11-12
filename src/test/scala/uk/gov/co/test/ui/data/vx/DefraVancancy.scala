@@ -379,7 +379,7 @@ object VACANCY_GROUP_B_TESTS
 object VACANCY_GROUP_C_TESTS
     extends GroupCTestsDetails(
       "Third",
-      "Two",
+      "Three",
       "Customer Service Skills Test",
       "Casework Skills Test"
     )
