@@ -17,7 +17,8 @@ case class DefraApplyOnlyDetails(
   interviewsDetails: InterviewsDetails,
   successProfilesDetails: SuccessProfilesDetails,
   vacancyTestsDetails: VacancyTestsDetails,
-  moreQuestionsDetails: MoreQuestionsDetails
+  moreQuestionsDetails: MoreQuestionsDetails,
+  criteriaDetails: CriteriaDetails
 )
 object DEFRA_APPLY_ONLY_DATA
     extends DefraApplyOnlyDetails(
@@ -34,7 +35,8 @@ object DEFRA_APPLY_ONLY_DATA
       VACANCY_INTERVIEWS_DETAILS,
       VACANCY_SUCCESS_PROFILES,
       VACANCY_HOLDER_TESTS,
-      VACANCY_ADDITIONAL_QUESTIONS
+      VACANCY_ADDITIONAL_QUESTIONS,
+      VACANCY_CRITERIA
     )
 
 object VACANCY_BASIC_DETAILS
@@ -393,4 +395,23 @@ object VACANCY_ADDITIONAL_QUESTIONS
       "Autotest - Question 1",
       "Autotest - Question 2",
       "Autotest - Question 3"
+    )
+
+object VACANCY_CRITERIA
+    extends CriteriaDetails(
+      campaignID = Some("Autotest - If this vacancy is linked to a campaign, enter the campaign ID (optional)"),
+      probationIncomplete = true,
+      promotionApply = true,
+      misconductLive = true,
+      performanceReview = true,
+      attendancePoor = true,
+      nationalityRequirements = true,
+      rightToRemainUK = true,
+      licencesNotHeld = true,
+      membershipsNotHeld = true,
+      languagesSkillsNotHeld = true,
+      qualificationsHeld = true,
+      preSiftRequired = true,
+      uploadAttachment = true,
+      candidateInstructions = "Autotest - Instructions for candidate"
     )

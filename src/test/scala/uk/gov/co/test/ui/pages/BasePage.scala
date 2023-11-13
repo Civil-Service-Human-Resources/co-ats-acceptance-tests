@@ -109,8 +109,8 @@ trait BasePage extends Matchers with Page with WebBrowser with PatienceConfigura
   def randNumbers(howManyNos: Integer): String =
     Seq.fill(howManyNos)(Random.nextInt(9)).mkString
 
-  def selectOption(enterText: String, addOption: String)(implicit driver: WebDriver): Unit = {
-    val selectOption = waitForVisibilityOfElementByPath(enterText)
+  def selectOption(inputField: String, addOption: String)(implicit driver: WebDriver): Unit = {
+    val selectOption = waitForVisibilityOfElementByPath(inputField)
     selectOption.sendKeys(addOption)
     selectOption.sendKeys(Keys.ENTER)
   }
