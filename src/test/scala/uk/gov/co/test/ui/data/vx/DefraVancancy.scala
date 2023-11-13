@@ -290,14 +290,56 @@ object VACANCY_HOLDER_TESTS
       true,
       "Online Tests",
       "Executive Officer",
-      testName = Vector(
-        "Civil Service Numerical Test",
-        "Civil Service Verbal Test",
-        "Civil Service Judgement Test",
-        "Civil Service Management Judgement Test",
-        "Civil Service Work Strengths Test",
-        "Casework Skills Test",
-        "Customer Service Skills Test"
+      testName = Map(
+        "Administrative Assistant" -> List(
+          "Civil Service Numerical Test",
+          "Civil Service Verbal Test",
+          "Civil Service Judgement Test",
+          "Civil Service Work Strengths Test",
+          "Customer Service Skills Test"
+        ),
+        "Administrative Officer"   -> List(
+          "Civil Service Numerical Test",
+          "Civil Service Verbal Test",
+          "Civil Service Judgement Test",
+          "Civil Service Work Strengths Test",
+          "Casework Skills Test",
+          "Customer Service Skills Test"
+        ),
+        "Executive Officer"        -> List(
+          "Civil Service Numerical Test",
+          "Civil Service Verbal Test",
+          "Civil Service Judgement Test",
+          "Civil Service Management Judgement Test",
+          "Civil Service Work Strengths Test",
+          "Casework Skills Test",
+          "Customer Service Skills Test"
+        ),
+        "Higher Executive Officer" -> List(
+          "Civil Service Numerical Test",
+          "Civil Service Verbal Test",
+          "Civil Service Judgement Test",
+          "Civil Service Management Judgement Test",
+          "Civil Service Work Strengths Test"
+        ),
+        "Senior Executive Officer" -> List(
+          "Civil Service Numerical Test",
+          "Civil Service Verbal Test",
+          "Civil Service Judgement Test",
+          "Civil Service Management Judgement Test",
+          "Civil Service Work Strengths Test"
+        ),
+        "Grade 7 "                 -> List(
+          "Civil Service Numerical Test",
+          "Civil Service Verbal Test",
+          "Civil Service Judgement Test",
+          "Civil Service Work Strengths Test"
+        ),
+        "Grade 6"                  -> List(
+          "Civil Service Numerical Test",
+          "Civil Service Verbal Test",
+          "Civil Service Work Strengths Test"
+        )
       ),
       false,
       "Autotest - Additional details for the recruitment team",
@@ -330,21 +372,21 @@ object VACANCY_GROUP_B_TESTS
     extends GroupBTestsDetails(
       "Second",
       "Two",
-      "Civil Service Management Judgement Test",
-      "Civil Service Work Strengths Test"
+      "Civil Service Work Strengths Test",
+      "Civil Service Management Judgement Test"
     )
 
 object VACANCY_GROUP_C_TESTS
     extends GroupCTestsDetails(
       "Third",
       "Two",
-      "Casework Skills Test",
-      "Customer Service Skills Test"
+      "Customer Service Skills Test",
+      "Casework Skills Test"
     )
 
 object VACANCY_ADDITIONAL_QUESTIONS
     extends MoreQuestionsDetails(
-      false,
+      true,
       3,
       "Autotest - Question 1",
       "Autotest - Question 2",
