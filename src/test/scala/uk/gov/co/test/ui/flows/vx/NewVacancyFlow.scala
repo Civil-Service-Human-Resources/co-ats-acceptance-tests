@@ -41,5 +41,6 @@ object NewVacancyFlow extends VacancyBasePage {
     defraVacancy.foreach { f =>
       f(vacancy)
     }
+    println("Done!")
   }
 }

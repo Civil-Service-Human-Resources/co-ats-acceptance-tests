@@ -1,7 +1,6 @@
 package uk.gov.co.test.ui.pages.vx.createvacancypage
 
 import org.openqa.selenium.By
-import org.openqa.selenium.support.ui.Select
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.{applicationClosingDate, formId}
 
@@ -9,7 +8,6 @@ case class RecruiterTestsDetails(
   whenDeadline: String,
   progressionOption: String,
   sameDeadlineAllTests: Boolean,
-  deadline: Int,
   additionalInstructionsRequired: Boolean,
   additionalInstructions: String
 )
@@ -25,9 +23,6 @@ object RecruiterTestsSection extends VacancyBasePage {
   private lazy val deadlineDayId               = s"${formId}_datafield_129847_1_1--DAY"
   private lazy val deadlineMonthId             = s"${formId}_datafield_129847_1_1--MONTH"
   private lazy val deadlineYearId              = s"${formId}_datafield_129847_1_1--YEAR"
-  var _day: String                             = ""
-  var _month: String                           = ""
-  var _year: String                            = ""
 
   def validateUrl(): Unit = {
     scrollToElement(By.id(recruiterTestsSectionId))
@@ -76,32 +71,11 @@ object RecruiterTestsSection extends VacancyBasePage {
     if (sameDeadline) {
       action().moveToElement(waitForDropdownOption("Yes")).perform()
       waitForDropdownOption("Yes").click()
-      enterTestDeadline()
+      enterTestDeadline(applicationClosingDate, deadlineDayId, deadlineMonthId, deadlineYearId)
     } else {
       action().moveToElement(waitForDropdownOption("No")).perform()
       waitForDropdownOption("No").click()
     }
-  }
-
-  def splitAppClosingDate(): (String, String, String) = {
-    val date  = applicationClosingDate
-    val parts = date.split("/")
-    _day = parts(0)
-    _month = parts(1)
-    _year = parts(2)
-    (_day, _month, _year)
-  }
-
-  def enterDate(id: String, value: String): Unit = {
-    val dateValue = new Select(waitForVisibilityOfElementById(id))
-    dateValue.selectByValue(value)
-  }
-
-  def enterTestDeadline(): Unit = {
-    splitAppClosingDate()
-    enterDate(deadlineDayId, _day)
-    enterDate(deadlineMonthId, _month)
-    enterDate(deadlineYearId, _year)
   }
 
   def selectAdditionalInstructions(vacancyTestsDetails: VacancyTestsDetails): Unit = {

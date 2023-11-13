@@ -85,7 +85,7 @@ object VACANCY_LOCATIONS
       "All communities",
       true,
       "2",
-      otherCityOrTown = Vector("London", "Southampton", "Leicester")
+      otherCityOrTown = Vector("London", "Southampton")
     )
 
 object VACANCY_CONTRACT_DETAILS
@@ -354,7 +354,6 @@ object VACANCY_RECRUITER_TESTS
       "Before the tests",
       "Auto-progress after each test",
       true,
-      3,
       true,
       "Autotest - Online test instructions"
     )
@@ -365,7 +364,8 @@ object VACANCY_GROUP_A_TESTS
       "Three",
       "Civil Service Numerical Test",
       "Civil Service Verbal Test",
-      "New Civil Service Judgement Test"
+      "New Civil Service Judgement Test",
+      7
     )
 
 object VACANCY_GROUP_B_TESTS
@@ -373,7 +373,8 @@ object VACANCY_GROUP_B_TESTS
       "Second",
       "Two",
       "Civil Service Work Strengths Test",
-      "Civil Service Management Judgement Test"
+      "Civil Service Management Judgement Test",
+      5
     )
 
 object VACANCY_GROUP_C_TESTS
@@ -381,7 +382,8 @@ object VACANCY_GROUP_C_TESTS
       "Third",
       "Two",
       "Customer Service Skills Test",
-      "Casework Skills Test"
+      "Casework Skills Test",
+      3
     )
 
 object VACANCY_ADDITIONAL_QUESTIONS

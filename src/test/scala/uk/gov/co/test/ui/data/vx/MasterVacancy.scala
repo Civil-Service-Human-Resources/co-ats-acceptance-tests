@@ -36,7 +36,7 @@ object MASTER_VACANCY_DATA
       "All communities",
       true,
       "2",
-      Vector("London", "Southampton", "Leicester"), //otherCityOrTown
+      Vector("London", "Southampton"), //otherCityOrTown
       "Permanent",
       "Full-time",
       "Senior Executive Officer",

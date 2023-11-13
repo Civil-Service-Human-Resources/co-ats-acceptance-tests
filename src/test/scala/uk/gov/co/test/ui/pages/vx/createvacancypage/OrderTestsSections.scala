@@ -4,9 +4,16 @@ import org.openqa.selenium.By
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.formId
 
-case class GroupATestsDetails(order: String, howMany: String, first: String, second: String, third: String)
-case class GroupBTestsDetails(order: String, howMany: String, first: String, second: String)
-case class GroupCTestsDetails(order: String, howMany: String, first: String, second: String)
+case class GroupATestsDetails(
+  order: String,
+  howMany: String,
+  first: String,
+  second: String,
+  third: String,
+  deadline: Int
+)
+case class GroupBTestsDetails(order: String, howMany: String, first: String, second: String, deadline: Int)
+case class GroupCTestsDetails(order: String, howMany: String, first: String, second: String, deadline: Int)
 
 object OrderTestsSections extends VacancyBasePage {
 
@@ -25,6 +32,28 @@ object OrderTestsSections extends VacancyBasePage {
   private lazy val groupCFirstTestId    = s"select2-${formId}_datafield_157607_1_1-container"
   private lazy val groupCSecondTestId   = s"select2-${formId}_datafield_157622_1_1-container"
 
+  private lazy val groupAFirstCSNTDayId     = s"${formId}_datafield_129983_1_1--DAY"
+  private lazy val groupAFirstCSNTMonthId   = s"${formId}_datafield_129983_1_1--MONTH"
+  private lazy val groupAFirstCSNTYearId    = s"${formId}_datafield_129983_1_1--YEAR"
+  private lazy val groupASecondCSVTDayId    = s"${formId}_datafield_129969_1_1--DAY"
+  private lazy val groupASecondCSVTMonthId  = s"${formId}_datafield_129969_1_1--MONTH"
+  private lazy val groupASecondCSVTYearId   = s"${formId}_datafield_129969_1_1--YEAR"
+  private lazy val groupAThirdNCSJTDayId    = s"${formId}_datafield_129976_1_1--DAY"
+  private lazy val groupAThirdNCSJTMonthId  = s"${formId}_datafield_129976_1_1--MONTH"
+  private lazy val groupAThirdNCSJTYearId   = s"${formId}_datafield_129976_1_1--YEAR"
+  private lazy val groupBFirstCSWSTDayId    = s"${formId}_datafield_130199_1_1--DAY"
+  private lazy val groupBFirstCSWSTMonthId  = s"${formId}_datafield_130199_1_1--MONTH"
+  private lazy val groupBFirstCSWSTYearId   = s"${formId}_datafield_130199_1_1--YEAR"
+  private lazy val groupBSecondCSMJTDayId   = s"${formId}_datafield_130206_1_1--DAY"
+  private lazy val groupBSecondCSMJTMonthId = s"${formId}_datafield_130206_1_1--MONTH"
+  private lazy val groupBSecondCSMJTYearId  = s"${formId}_datafield_130206_1_1--YEAR"
+  private lazy val groupCFirstCSSTDayId     = s"${formId}_datafield_157611_1_1--DAY"
+  private lazy val groupCFirstCSSTMonthId   = s"${formId}_datafield_157611_1_1--MONTH"
+  private lazy val groupCFirstCSSTYearId    = s"${formId}_datafield_157611_1_1--YEAR"
+  private lazy val groupCSecondCSTDayId     = s"${formId}_datafield_157626_1_1--DAY"
+  private lazy val groupCSecondCSTMonthId   = s"${formId}_datafield_157626_1_1--MONTH"
+  private lazy val groupCSecondCSTYearId    = s"${formId}_datafield_157626_1_1--YEAR"
+
   private def groupAOrdering(vacancyTestsDetails: VacancyTestsDetails): Unit = {
     selectGroupATestsOrder(vacancyTestsDetails)
     if (vacancyTestsDetails.groupATests.map(_.order).get != "Not required") {
@@ -39,6 +68,7 @@ object OrderTestsSections extends VacancyBasePage {
             groupATestsSelection(vacancyTestsDetails, 2)
           }
       }
+      enterGroupADeadline(vacancyTestsDetails)
     }
   }
 
@@ -81,6 +111,27 @@ object OrderTestsSections extends VacancyBasePage {
     selectActionLocator(third)
   }
 
+  private def enterGroupADeadline(vacancyTestsDetails: VacancyTestsDetails): Unit =
+    if (!vacancyTestsDetails.recruiterOptions.map(_.sameDeadlineAllTests).get) {
+      val groupADeadline = groupTestsDeadlineDate(vacancyTestsDetails.groupATests.map(_.deadline).get)
+      vacancyTestsDetails.groupATests.map(_.howMany).get match {
+        case "One"   =>
+          enterTestDeadline(groupADeadline, groupAFirstCSNTDayId, groupAFirstCSNTMonthId, groupAFirstCSNTYearId)
+        case "Two"   =>
+          enterTestDeadline(groupADeadline, groupAFirstCSNTDayId, groupAFirstCSNTMonthId, groupAFirstCSNTYearId)
+          enterTestDeadline(groupADeadline, groupASecondCSVTDayId, groupASecondCSVTMonthId, groupASecondCSVTYearId)
+        case "Three" =>
+          if (vacancyTestsDetails.testGrade != "Grade 6") {
+            enterTestDeadline(groupADeadline, groupAFirstCSNTDayId, groupAFirstCSNTMonthId, groupAFirstCSNTYearId)
+            enterTestDeadline(groupADeadline, groupASecondCSVTDayId, groupASecondCSVTMonthId, groupASecondCSVTYearId)
+            enterTestDeadline(groupADeadline, groupAThirdNCSJTDayId, groupAThirdNCSJTMonthId, groupAThirdNCSJTYearId)
+          } else {
+            enterTestDeadline(groupADeadline, groupAFirstCSNTDayId, groupAFirstCSNTMonthId, groupAFirstCSNTYearId)
+            enterTestDeadline(groupADeadline, groupASecondCSVTDayId, groupASecondCSVTMonthId, groupASecondCSVTYearId)
+          }
+      }
+    }
+
   private val groupATests: Seq[VacancyTestsDetails => Unit] = Seq(
     selectGroupAFirstTest,
     selectGroupASecondTest,
@@ -105,6 +156,7 @@ object OrderTestsSections extends VacancyBasePage {
           case "One" => groupBTestsSelection(vacancyTestsDetails, 1)
           case "Two" => groupBTestsSelection(vacancyTestsDetails, 2)
         }
+        enterGroupBDeadline(vacancyTestsDetails)
       }
       groupBTestsSelection(vacancyTestsDetails, 1)
     }
@@ -145,6 +197,18 @@ object OrderTestsSections extends VacancyBasePage {
     selectActionLocator(second)
   }
 
+  private def enterGroupBDeadline(vacancyTestsDetails: VacancyTestsDetails): Unit =
+    if (!vacancyTestsDetails.recruiterOptions.map(_.sameDeadlineAllTests).get) {
+      val groupBDeadline = groupTestsDeadlineDate(vacancyTestsDetails.groupBTests.map(_.deadline).get)
+      vacancyTestsDetails.groupBTests.map(_.howMany).get match {
+        case "One" =>
+          enterTestDeadline(groupBDeadline, groupBFirstCSWSTDayId, groupBFirstCSWSTMonthId, groupBFirstCSWSTYearId)
+        case "Two" =>
+          enterTestDeadline(groupBDeadline, groupBFirstCSWSTDayId, groupBFirstCSWSTMonthId, groupBFirstCSWSTYearId)
+          enterTestDeadline(groupBDeadline, groupBSecondCSMJTDayId, groupBSecondCSMJTMonthId, groupBSecondCSMJTYearId)
+      }
+    }
+
   private val groupBTests: Seq[VacancyTestsDetails => Unit] = Seq(
     selectGroupBFirstTest,
     selectGroupBSecondTest
@@ -165,12 +229,16 @@ object OrderTestsSections extends VacancyBasePage {
         vacancyTestsDetails.testGrade == "Executive Officer"
       ) {
         vacancyTestsDetails.groupCTests.map(_.howMany).get match {
-          case "One"                                                                => groupCTestsSelection(vacancyTestsDetails, 1)
+          case "One"                                                                =>
+            groupCTestsSelection(vacancyTestsDetails, 1)
           case "Two" if vacancyTestsDetails.testGrade == "Administrative Assistant" =>
             groupCTestsSelection(vacancyTestsDetails, 1) //override on data
-          case "Two"                                                                => groupCTestsSelection(vacancyTestsDetails, 2)
-          case _                                                                    => throw new IllegalStateException("Order value needs to be valid option!")
+          case "Two"                                                                =>
+            groupCTestsSelection(vacancyTestsDetails, 2)
+          case _                                                                    =>
+            throw new IllegalStateException("Order value needs to be valid option!")
         }
+        enterGroupCDeadline(vacancyTestsDetails)
       }
     }
   }
@@ -221,6 +289,20 @@ object OrderTestsSections extends VacancyBasePage {
     waitForVisibilityOfElementById(groupCSecondTestId).click()
     selectActionLocator(second)
   }
+
+  private def enterGroupCDeadline(vacancyTestsDetails: VacancyTestsDetails): Unit =
+    if (!vacancyTestsDetails.recruiterOptions.map(_.sameDeadlineAllTests).get) {
+      val groupCDeadline = groupTestsDeadlineDate(vacancyTestsDetails.groupCTests.map(_.deadline).get)
+      vacancyTestsDetails.groupCTests.map(_.howMany).get match {
+        case "One"                                                                =>
+          enterTestDeadline(groupCDeadline, groupCFirstCSSTDayId, groupCFirstCSSTMonthId, groupCFirstCSSTYearId)
+        case "Two" if vacancyTestsDetails.testGrade == "Administrative Assistant" =>
+          enterTestDeadline(groupCDeadline, groupCFirstCSSTDayId, groupCFirstCSSTMonthId, groupCFirstCSSTYearId)
+        case "Two"                                                                =>
+          enterTestDeadline(groupCDeadline, groupCFirstCSSTDayId, groupCFirstCSSTMonthId, groupCFirstCSSTYearId)
+          enterTestDeadline(groupCDeadline, groupCSecondCSTDayId, groupCSecondCSTMonthId, groupCSecondCSTYearId)
+      }
+    }
 
   private val groupCTests: Seq[VacancyTestsDetails => Unit] = Seq(
     selectGroupCFirstTest,
