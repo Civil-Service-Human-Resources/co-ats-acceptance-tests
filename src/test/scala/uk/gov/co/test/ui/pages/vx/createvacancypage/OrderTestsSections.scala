@@ -160,21 +160,26 @@ object OrderTestsSections extends VacancyBasePage {
     if (vacancyTestsDetails.groupCTests.map(_.order).get != "Not required") {
       selectGroupCTestsUse(vacancyTestsDetails)
       if (
-        vacancyTestsDetails.testGrade == "Higher Executive Officer" ||
-        vacancyTestsDetails.testGrade == "Executive Officer" ||
-        vacancyTestsDetails.testGrade == "Senior Executive Officer"
+        vacancyTestsDetails.testGrade == "Administrative Officer" ||
+        vacancyTestsDetails.testGrade == "Administrative Assistant" ||
+        vacancyTestsDetails.testGrade == "Executive Officer"
       ) {
         vacancyTestsDetails.groupCTests.map(_.howMany).get match {
-          case "One" => groupCTestsSelection(vacancyTestsDetails, 1)
-          case "Two" => groupCTestsSelection(vacancyTestsDetails, 2)
-          case _     => throw new IllegalStateException("Order value needs to be valid option!")
+          case "One"                                                                => groupCTestsSelection(vacancyTestsDetails, 1)
+          case "Two" if vacancyTestsDetails.testGrade == "Administrative Assistant" =>
+            groupCTestsSelection(vacancyTestsDetails, 1) //override on data
+          case "Two"                                                                => groupCTestsSelection(vacancyTestsDetails, 2)
+          case _                                                                    => throw new IllegalStateException("Order value needs to be valid option!")
         }
       }
     }
   }
 
   private def selectGroupCTestsOrder(vacancyTestsDetails: VacancyTestsDetails): Unit = {
-    val order = vacancyTestsDetails.groupCTests.map(_.order).get
+    val groupAOrder = vacancyTestsDetails.groupATests.map(_.order).get
+    val groupBOrder = vacancyTestsDetails.groupBTests.map(_.order).get
+    val groupCOrder = vacancyTestsDetails.groupCTests.map(_.order).get
+    val order       = vacancyTestsDetails.groupCTests.map(_.order).get
     waitForVisibilityOfElementById(groupCTestsId).click()
     if (
       vacancyTestsDetails.testGrade == "Grade 7 " ||
@@ -182,9 +187,13 @@ object OrderTestsSections extends VacancyBasePage {
       vacancyTestsDetails.testGrade == "Senior Executive Officer" ||
       vacancyTestsDetails.testGrade == "Higher Executive Officer"
     ) {
-      selectActionLocator("Not required")
+      selectActionLocator("Not required") //override on data
     } else {
-      selectActionLocator(order)
+      if ((groupCOrder != groupAOrder) && (groupCOrder != groupBOrder)) {
+        selectActionLocator(order)
+      } else {
+        throw new IllegalStateException("Group tests need to have unique order option!")
+      }
     }
   }
 
@@ -197,7 +206,7 @@ object OrderTestsSections extends VacancyBasePage {
     ) {
       selectActionLocator(use)
     } else if (vacancyTestsDetails.testGrade == "Administrative Assistant") {
-      selectActionLocator("One")
+      selectActionLocator("One") //override on data
     }
   }
 

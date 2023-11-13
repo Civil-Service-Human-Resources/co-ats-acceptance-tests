@@ -379,14 +379,14 @@ object VACANCY_GROUP_B_TESTS
 object VACANCY_GROUP_C_TESTS
     extends GroupCTestsDetails(
       "Third",
-      "Three",
+      "Two",
       "Customer Service Skills Test",
       "Casework Skills Test"
     )
 
 object VACANCY_ADDITIONAL_QUESTIONS
     extends MoreQuestionsDetails(
-      false,
+      true,
       3,
       "Autotest - Question 1",
       "Autotest - Question 2",
