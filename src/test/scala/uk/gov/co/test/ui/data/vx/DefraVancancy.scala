@@ -18,7 +18,8 @@ case class DefraApplyOnlyDetails(
   successProfilesDetails: SuccessProfilesDetails,
   vacancyTestsDetails: VacancyTestsDetails,
   moreQuestionsDetails: MoreQuestionsDetails,
-  criteriaDetails: CriteriaDetails
+  criteriaDetails: CriteriaDetails,
+  managementDetails: ManagementDetails
 )
 object DEFRA_APPLY_ONLY_DATA
     extends DefraApplyOnlyDetails(
@@ -36,7 +37,8 @@ object DEFRA_APPLY_ONLY_DATA
       VACANCY_SUCCESS_PROFILES,
       VACANCY_HOLDER_TESTS,
       VACANCY_ADDITIONAL_QUESTIONS,
-      VACANCY_CRITERIA
+      VACANCY_CRITERIA,
+      VACANCY_MANAGEMENT
     )
 
 object VACANCY_BASIC_DETAILS
@@ -414,4 +416,11 @@ object VACANCY_CRITERIA
       preSiftRequired = true,
       uploadAttachment = true,
       candidateInstructions = "Autotest - Instructions for candidate"
+    )
+
+object VACANCY_MANAGEMENT
+    extends ManagementDetails(
+      true,
+      assignTo = Option(s"$emailVxConfig"),
+      assignTo2 = Option(s"$emailVxConfig")
     )
