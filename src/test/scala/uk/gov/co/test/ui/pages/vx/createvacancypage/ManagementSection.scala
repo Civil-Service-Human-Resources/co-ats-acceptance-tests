@@ -19,6 +19,7 @@ object ManagementSection extends VacancyBasePage {
   private lazy val assignToId            = s"select2-${formId}_datafield_101084_1_1-container"
   private lazy val assignTo2Id           = s"select2-${formId}_datafield_168380_1_1-container"
   private lazy val assignment            = s" $nameVxConfig - $emailVxConfig"
+  private lazy val grsJobStageType       = s"select2-${formId}_datafield_104968_1_1-container"
 
   def selectRemoveCSRPrinciples(managementDetails: ManagementDetails): Unit = {
     scrollToElement(By.id(managementSectionId))
@@ -26,21 +27,11 @@ object ManagementSection extends VacancyBasePage {
     else clickOnRadioButton(removePrinciplesNoId)
   }
 
-  def enterAssignTo(managementDetails: ManagementDetails): Unit = {
-    waitForVisibilityOfElementById(assignToId).click()
-    val enterOption = waitForVisibilityOfElementByPath(generalInput)
-    enterOption.sendKeys(managementDetails.assignTo.get)
-    action().moveToElement(waitForDropdownOptionByText(assignment)).perform()
-    waitForDropdownOptionByText(assignment).click()
-  }
+  def enterAssignTo(managementDetails: ManagementDetails): Unit =
+    selectOptionFromList(managementDetails.assignTo.get, assignToId, assignment)
 
-  def enterAssignTo2(managementDetails: ManagementDetails): Unit = {
-    waitForVisibilityOfElementById(assignTo2Id).click()
-    val enterOption = waitForVisibilityOfElementByPath(generalInput)
-    enterOption.sendKeys(managementDetails.assignTo2.get)
-    action().moveToElement(waitForDropdownOptionByText(assignment)).perform()
-    waitForDropdownOptionByText(assignment).click()
-  }
+  def enterAssignTo2(managementDetails: ManagementDetails): Unit =
+    selectOptionFromList(managementDetails.assignTo2.get, assignTo2Id, assignment)
 
   private val management: Seq[ManagementDetails => Unit] = Seq(
     selectRemoveCSRPrinciples,

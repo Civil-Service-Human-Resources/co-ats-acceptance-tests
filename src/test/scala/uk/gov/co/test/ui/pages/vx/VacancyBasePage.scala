@@ -104,4 +104,12 @@ trait VacancyBasePage extends Matchers with BasePage with BrowserDriver {
     groupTestDeadline
   }
 
+  def selectOptionFromList(value: String, id: String, inputPath: String): Unit = {
+    waitForVisibilityOfElementById(id).click()
+    val enterOption = waitForVisibilityOfElementByPath(generalInput)
+    enterOption.sendKeys(value)
+    action().moveToElement(waitForDropdownOptionByText(inputPath)).perform()
+    waitForDropdownOptionByText(inputPath).click()
+  }
+
 }
