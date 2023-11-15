@@ -20,7 +20,7 @@ case class DefraApplyOnlyDetails(
   moreQuestionsDetails: MoreQuestionsDetails,
   criteriaDetails: CriteriaDetails,
   managementDetails: ManagementDetails,
-  pecCheckFormsDetails: PecCheckFormsDetails
+  onlinePecCheckFormsDetails: OnlinePecCheckFormsDetails
 )
 object DEFRA_APPLY_ONLY_DATA
     extends DefraApplyOnlyDetails(
@@ -40,7 +40,7 @@ object DEFRA_APPLY_ONLY_DATA
       VACANCY_ADDITIONAL_QUESTIONS,
       VACANCY_CRITERIA,
       VACANCY_MANAGEMENT,
-      VACANCY_PEC_CHECK_FORMS
+      VACANCY_ONLINE_PEC_CHECK_FORMS
     )
 
 object VACANCY_BASIC_DETAILS
@@ -435,8 +435,8 @@ object VACANCY_MANAGEMENT
       vacancyComments = Option("Autotest - Comments on this vacancy")
     )
 
-object VACANCY_PEC_CHECK_FORMS
-    extends PecCheckFormsDetails(
+object VACANCY_ONLINE_PEC_CHECK_FORMS
+    extends OnlinePecCheckFormsDetails(
       true,
       true,
       s"$usernameVxConfig"
