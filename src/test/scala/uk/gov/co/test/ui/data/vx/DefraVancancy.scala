@@ -427,7 +427,7 @@ object VACANCY_MANAGEMENT
       "Menu",
       true,
       true,
-      true,
+      linkToProject = Option(true),
       projectName = Option("Autotest - Project name"),
       deptComplaintsProcess = Option("Autotest - Your department's complaints process"),
       vacancyComments = Option("Autotest - Comments on this vacancy")

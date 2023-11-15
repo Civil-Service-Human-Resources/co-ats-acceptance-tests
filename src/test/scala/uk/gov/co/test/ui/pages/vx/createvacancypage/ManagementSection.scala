@@ -13,7 +13,7 @@ case class ManagementDetails(
   grsPecCheckingType: String,
   grsToSift: Boolean,
   grsToAssessAndInterview: Boolean,
-  linkToProject: Boolean,
+  linkToProject: Option[Boolean] = None,
   projectName: Option[String] = None,
   deptComplaintsProcess: Option[String] = None,
   vacancyComments: Option[String] = None
@@ -91,7 +91,7 @@ object ManagementSection extends VacancyBasePage {
     else clickOnRadioButton(grsToAssessAndInterviewNoId)
 
   private def selectLinkToProject(managementDetails: ManagementDetails): Unit =
-    if (managementDetails.linkToProject) {
+    if (managementDetails.linkToProject.get) {
       clickOnRadioButton(linkToProjectYesId)
       enterText(projectNameInputId, managementDetails.projectName.get)
     } else clickOnRadioButton(linkToProjectNoId)
