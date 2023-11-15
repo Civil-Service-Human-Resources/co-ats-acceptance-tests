@@ -19,7 +19,8 @@ case class DefraApplyOnlyDetails(
   vacancyTestsDetails: VacancyTestsDetails,
   moreQuestionsDetails: MoreQuestionsDetails,
   criteriaDetails: CriteriaDetails,
-  managementDetails: ManagementDetails
+  managementDetails: ManagementDetails,
+  pecCheckFormsDetails: PecCheckFormsDetails
 )
 object DEFRA_APPLY_ONLY_DATA
     extends DefraApplyOnlyDetails(
@@ -38,7 +39,8 @@ object DEFRA_APPLY_ONLY_DATA
       VACANCY_HOLDER_TESTS,
       VACANCY_ADDITIONAL_QUESTIONS,
       VACANCY_CRITERIA,
-      VACANCY_MANAGEMENT
+      VACANCY_MANAGEMENT,
+      VACANCY_PEC_CHECK_FORMS
     )
 
 object VACANCY_BASIC_DETAILS
@@ -431,4 +433,11 @@ object VACANCY_MANAGEMENT
       projectName = Option("Autotest - Project name"),
       deptComplaintsProcess = Option("Autotest - Your department's complaints process"),
       vacancyComments = Option("Autotest - Comments on this vacancy")
+    )
+
+object VACANCY_PEC_CHECK_FORMS
+    extends PecCheckFormsDetails(
+      true,
+      true,
+      s"$usernameVxConfig"
     )
