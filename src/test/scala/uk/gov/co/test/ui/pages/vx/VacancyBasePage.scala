@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.pages.vx
 
 import org.openqa.selenium.support.ui.Select
-import org.openqa.selenium.{By, WebElement}
+import org.openqa.selenium.{By, Keys, WebElement}
 import org.scalatest.concurrent.Eventually.eventually
 import org.scalatest.matchers.should.Matchers
 import uk.gov.co.test.ui.conf.TestConfiguration
@@ -102,6 +102,20 @@ trait VacancyBasePage extends Matchers with BasePage with BrowserDriver {
     val minusDays         = formatToLocalDate.minusDays(days)
     val groupTestDeadline = minusDays.format(formatter)
     groupTestDeadline
+  }
+
+  def selectOptionFromList(value: String, id: String, inputPath: String): Unit = {
+    waitForVisibilityOfElementById(id).click()
+    val enterOption = waitForVisibilityOfElementByPath(generalInput)
+    enterOption.sendKeys(value)
+    action().moveToElement(waitForDropdownOptionByText(inputPath)).perform()
+    waitForDropdownOptionByText(inputPath).click()
+  }
+
+  def enterText(inputId: String, text: String): Unit = {
+    val enterOption = waitForVisibilityOfElementById(inputId)
+    enterOption.sendKeys(text)
+    enterOption.sendKeys(Keys.ENTER)
   }
 
 }

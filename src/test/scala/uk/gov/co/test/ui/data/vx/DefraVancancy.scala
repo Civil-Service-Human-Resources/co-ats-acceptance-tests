@@ -1,6 +1,6 @@
 package uk.gov.co.test.ui.data.vx
 
-import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.{emailVxConfig, nameVxConfig}
+import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.{emailVxConfig, nameVxConfig, usernameVxConfig}
 import uk.gov.co.test.ui.pages.vx.createvacancypage._
 
 case class DefraApplyOnlyDetails(
@@ -18,7 +18,8 @@ case class DefraApplyOnlyDetails(
   successProfilesDetails: SuccessProfilesDetails,
   vacancyTestsDetails: VacancyTestsDetails,
   moreQuestionsDetails: MoreQuestionsDetails,
-  criteriaDetails: CriteriaDetails
+  criteriaDetails: CriteriaDetails,
+  managementDetails: ManagementDetails
 )
 object DEFRA_APPLY_ONLY_DATA
     extends DefraApplyOnlyDetails(
@@ -36,7 +37,8 @@ object DEFRA_APPLY_ONLY_DATA
       VACANCY_SUCCESS_PROFILES,
       VACANCY_HOLDER_TESTS,
       VACANCY_ADDITIONAL_QUESTIONS,
-      VACANCY_CRITERIA
+      VACANCY_CRITERIA,
+      VACANCY_MANAGEMENT
     )
 
 object VACANCY_BASIC_DETAILS
@@ -414,4 +416,19 @@ object VACANCY_CRITERIA
       preSiftRequired = true,
       uploadAttachment = true,
       candidateInstructions = "Autotest - Instructions for candidate"
+    )
+
+object VACANCY_MANAGEMENT
+    extends ManagementDetails(
+      true,
+      assignTo = Option(s"$usernameVxConfig"),
+      assignTo2 = Option(s"$usernameVxConfig"),
+      "Business As Usual (BAU)",
+      "Menu",
+      true,
+      true,
+      true,
+      projectName = Option("Autotest - Project name"),
+      deptComplaintsProcess = Option("Autotest - Your department's complaints process"),
+      vacancyComments = Option("Autotest - Comments on this vacancy")
     )
