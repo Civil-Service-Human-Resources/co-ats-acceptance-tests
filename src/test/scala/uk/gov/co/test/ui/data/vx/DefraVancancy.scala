@@ -1,6 +1,6 @@
 package uk.gov.co.test.ui.data.vx
 
-import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.{emailVxConfig, nameVxConfig}
+import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.{emailVxConfig, nameVxConfig, usernameVxConfig}
 import uk.gov.co.test.ui.pages.vx.createvacancypage._
 
 case class DefraApplyOnlyDetails(
@@ -421,6 +421,14 @@ object VACANCY_CRITERIA
 object VACANCY_MANAGEMENT
     extends ManagementDetails(
       true,
-      assignTo = Option(s"$emailVxConfig"),
-      assignTo2 = Option(s"$emailVxConfig")
+      assignTo = Option(s"$usernameVxConfig"),
+      assignTo2 = Option(s"$usernameVxConfig"),
+      "Business As Usual (BAU)",
+      "Menu",
+      true,
+      true,
+      true,
+      projectName = Option("Autotest - Project name"),
+      deptComplaintsProcess = Option("Autotest - Your department's complaints process"),
+      vacancyComments = Option("Autotest - Comments on this vacancy")
     )
