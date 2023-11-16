@@ -15,6 +15,7 @@ import uk.gov.co.test.ui.pages.vx.createvacancypage.JobInfoSection.jobInformatio
 import uk.gov.co.test.ui.pages.vx.createvacancypage.LocationsSection.locationsSection
 import uk.gov.co.test.ui.pages.vx.createvacancypage.ManagementSection.managementSection
 import uk.gov.co.test.ui.pages.vx.createvacancypage.MoreQuestionsSection.additionalQuestionsSection
+import uk.gov.co.test.ui.pages.vx.createvacancypage.OnlinePecCheckFormsSection.onlinePecCheckFormsSection
 import uk.gov.co.test.ui.pages.vx.createvacancypage.PecCheckFormsSection.pecCheckFormsSection
 import uk.gov.co.test.ui.pages.vx.createvacancypage.ReserveListSection.reserveListSection
 import uk.gov.co.test.ui.pages.vx.createvacancypage.SuccessProfilesSection.successProfilesSection
@@ -39,6 +40,7 @@ object NewVacancyFlow extends VacancyBasePage {
     additionalQuestionsSection,
     criteriaSection,
     managementSection,
+    onlinePecCheckFormsSection,
     pecCheckFormsSection
   )
 

@@ -23,9 +23,9 @@ object JobInfoSection extends VacancyBasePage {
   private lazy val whichProfessionId    = s"select2-${formId}_datafield_155435_1_1-container"
   private lazy val noOfJobsId           = s"${formId}_datafield_155332_1_1"
   private lazy val typeOfRoleId         = s"select2-${formId}_datafield_155369_1_1-container"
-  private lazy val typeOfRoleInput      = s".//*[@aria-describedby='$typeOfRoleId']"
   private lazy val welshRequiredCheck   = s"${formId}_datafield_179408_1_1"
   private lazy val businessAreaDetailId = s"${formId}_datafield_155206_1_1_en-GB"
+  private lazy val typeOfRoleInput      = s".//*[@aria-describedby='$typeOfRoleId']"
 
   private def selectWelshVersion(jobInfoDetails: JobInfoDetails): Unit =
     if (jobInfoDetails.displayWelsh) checkbox(welshRequiredCheck).select()
