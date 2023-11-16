@@ -17,7 +17,7 @@ case class LocationsDetails(
   whichCommunityEncouraged: String,
   giveLocationPreference: Boolean,
   maxLocations: String,
-  otherCityOrTown: Vector[String]
+  otherCityOrTown: List[String]
 )
 
 object LocationsSection extends VacancyBasePage {
