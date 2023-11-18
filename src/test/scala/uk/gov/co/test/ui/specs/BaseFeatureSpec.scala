@@ -26,8 +26,6 @@ trait BaseFeatureSpec
 
   override protected def beforeEach(testData: TestData): Unit =
     if (testData.name.contains("Candidate")) {
-      generateRandomFirstName()
-      generateRandomLastName()
       navigateToV9Test()
       if (!v9SearchCookiesById().isEmpty) {
         v9AcceptAllCookies()

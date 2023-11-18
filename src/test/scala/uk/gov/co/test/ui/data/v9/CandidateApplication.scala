@@ -1,6 +1,6 @@
 package uk.gov.co.test.ui.data.v9
 
-import uk.gov.co.test.ui.pages.v9.SignInPage.{preferredFirstName, randomFirstName, randomLastName}
+import uk.gov.co.test.ui.pages.v9.SignInPage.{preferredFirstName, randomEmail, randomFirstName, randomLastName}
 import uk.gov.co.test.ui.pages.v9.shortform.{DiversityMonitoringDetails, EligibilityDetails, PersonalInfoDetails, ShortFormDetails}
 
 case class ApplicationDetails(
@@ -35,9 +35,9 @@ object APPLICATION_PERSONAL_INFO
       s"$randomFirstName",
       s"$randomLastName",
       preferredFirstName = Option(s"$preferredFirstName"),
-      "01000 000000",
-      secondaryNo = Option("01000 000000"),
-      s"$randomFirstName.$randomLastName@ats_example.com",
+      "01620000000",
+      secondaryNo = Option("07700000000"),
+      s"$randomEmail",
       false,
       true,
       "Autotest - Provide details of what reasonable adjustments might help you"

@@ -22,18 +22,13 @@ trait CSJobsBasePage extends Matchers with BasePage with BrowserDriver {
   var randomFirstName: String            = ""
   var randomLastName: String             = ""
   var preferredFirstName: String         = ""
+  lazy val randomEmail: String           = s"$randomFirstName.$randomLastName@ats_example.com"
 
   def randomnessName(): String = {
     val randomLastName = Iterator.continually(Random.nextPrintableChar()).filter(_.isLetter).take(10).mkString
     val autoLastName   = s"Test-$randomLastName"
     autoLastName
   }
-
-//  private def extractAppFormId(): String = {
-//    val formClass = driver.findElement(By.xpath(formIdPath))
-//    formId = formClass.getAttribute("id")
-//    formId
-//  }
 
   def generateRandomFirstName(): String = {
     val fake = new Faker()
@@ -77,6 +72,13 @@ trait CSJobsBasePage extends Matchers with BasePage with BrowserDriver {
   def navigateToV9Test(): Unit = {
     go to url
     eventually(onPage(cSSearchJobsTitle))
+    generateCandidateDetails()
+  }
+
+  def generateCandidateDetails(): Unit = {
+    generateRandomFirstName()
+    generateRandomLastName()
+    generatePreferredFirstName()
   }
 
   def changeLanguage(lang: String): Unit = {

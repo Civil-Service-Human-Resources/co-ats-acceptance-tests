@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.data.v9
 
 import uk.gov.co.test.ui.pages.v9.CandidateDetails
-import uk.gov.co.test.ui.pages.v9.SignInPage.{randomFirstName, randomLastName}
+import uk.gov.co.test.ui.pages.v9.SignInPage.{randomEmail, randomFirstName, randomLastName}
 
 case class CandidateData(candidateDetails: CandidateDetails)
 
@@ -12,7 +12,7 @@ object REGISTER_CANDIDATE
     extends CandidateDetails(
       s"$randomFirstName",
       s"$randomLastName",
-      s"$randomFirstName.$randomLastName@ats_example.com",
+      s"$randomEmail",
       "password123!",
       false,
       true

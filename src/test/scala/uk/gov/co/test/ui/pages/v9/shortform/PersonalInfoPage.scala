@@ -1,5 +1,6 @@
 package uk.gov.co.test.ui.pages.v9.shortform
 
+import org.openqa.selenium.By
 import org.scalatest.concurrent.Eventually.eventually
 import uk.gov.co.test.ui.data.v9.ApplicationDetails
 import uk.gov.co.test.ui.pages.v9.CSJobsBasePage
@@ -67,12 +68,19 @@ object PersonalInfoPage extends CSJobsBasePage {
     } else {
       waitForVisibilityOfElementById(
         emailInputId
-      ).getText shouldEqual s"$randomFirstName.$randomLastName@ats_example.com"
+      ).getText shouldEqual randomEmail
     }
 
-  private def enterPreferredTeleNo(personalInfoDetails: PersonalInfoDetails): Unit =
+  private def enterPreferredTeleNo(personalInfoDetails: PersonalInfoDetails): Unit = {
+    scrollToElement(By.id(preferredTeleNoInputId))
     if (waitForVisibilityOfElementById(preferredTeleNoInputId).getText.isEmpty)
       enterPersonalInfo(preferredTeleNoInputId, personalInfoDetails.preferredTeleNo)
+  }
+
+  private def enterSecondaryContactNo(personalInfoDetails: PersonalInfoDetails): Unit = {
+    if (waitForVisibilityOfElementById(secondaryNoInputId).getText.isEmpty)
+      enterPersonalInfo(secondaryNoInputId, personalInfoDetails.secondaryNo.get)
+  }
 
   private def selectApplyDCS(personalInfoDetails: PersonalInfoDetails): Unit =
     if (personalInfoDetails.applyDCS) radioSelect(applyDCSYesId)
@@ -88,8 +96,9 @@ object PersonalInfoPage extends CSJobsBasePage {
     enterFirstName,
     enterLastName,
     enterPreferredFirstName,
-    enterEmail,
     enterPreferredTeleNo,
+    enterSecondaryContactNo,
+    enterEmail,
     selectApplyDCS,
     selectReasonableAdjustments
   )
