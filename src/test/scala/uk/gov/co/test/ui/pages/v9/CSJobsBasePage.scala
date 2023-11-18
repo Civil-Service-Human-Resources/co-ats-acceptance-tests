@@ -19,9 +19,9 @@ trait CSJobsBasePage extends Matchers with BasePage with BrowserDriver {
   val v9AcceptAdditionalCookies: String  = "accept_all_cookies_button"
   val vXaAcceptAdditionalCookies: String = "cookies-accept-button"
   val pageContinue                       = "continue_button"
-  val randomFirstName: String            = randomNames()._1
-  var randomLastName: String             = randomNames()._2
-  var preferredFirstName: String         = preferredName()
+  var randomFirstName: String            = ""
+  var randomLastName: String             = ""
+  var preferredFirstName: String         = ""
 
   def randomnessName(): String = {
     val randomLastName = Iterator.continually(Random.nextPrintableChar()).filter(_.isLetter).take(10).mkString
@@ -35,16 +35,28 @@ trait CSJobsBasePage extends Matchers with BasePage with BrowserDriver {
 //    formId
 //  }
 
-  def randomNames(): (String, String) = {
-    val fake            = new Faker()
-    val randomFirstName = fake.name().firstName()
-    val randomLastName  = fake.name().lastName()
-    (randomFirstName, randomLastName)
+  def generateRandomFirstName(): String = {
+    val fake = new Faker()
+    randomFirstName = fake.name().firstName()
+    randomFirstName
   }
 
-  def preferredName(): String = {
-    val fake               = new Faker()
-    val preferredFirstName = fake.name().firstName()
+  def generateRandomLastName(): String = {
+    val fake = new Faker()
+    randomLastName = fake.name().lastName()
+    randomLastName
+  }
+
+//  def randomNames(): (String, String) = {
+//    val fake            = new Faker()
+//    val randomFirstName = fake.name().firstName()
+//    val randomLastName  = fake.name().lastName()
+//    (randomFirstName, randomLastName)
+//  }
+
+  def generatePreferredFirstName(): String = {
+    val fake = new Faker()
+    preferredFirstName = fake.name().firstName()
     preferredFirstName
   }
 

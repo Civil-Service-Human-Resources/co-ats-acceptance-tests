@@ -30,11 +30,11 @@ object ApplicationGuidancePage extends CSJobsBasePage {
   }
 
   def goToJobApply(): Unit = {
-    val jobPath = ".//a[text()='OGD CO(Copy)']"
-    SearchJobsPage.enterWhatAndSearch("OGD")
+    val jobPath = ".//a[text()='OGDGCCO']"
+    SearchJobsPage.enterWhatAndSearch("OGDGCCO")
     val job     = waitForVisibilityOfElementByPath(jobPath)
     job.click()
-    eventually(onPage("OGD CO(Copy) - Civil Service Jobs - GOV.UK"))
+    eventually(onPage("OGDGCCO - Civil Service Jobs - GOV.UK"))
     clickOn("login_button")
     driver.navigate().refresh()
   }

@@ -2,7 +2,6 @@ package uk.gov.co.test.ui.pages.v9.shortform
 
 import org.scalatest.concurrent.Eventually.eventually
 import uk.gov.co.test.ui.data.v9.ApplicationDetails
-import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.enterText
 import uk.gov.co.test.ui.pages.v9.CSJobsBasePage
 import uk.gov.co.test.ui.pages.v9.shortform.ApplicationGuidancePage.formId
 
@@ -33,17 +32,47 @@ object PersonalInfoPage extends CSJobsBasePage {
   private lazy val reasonableAdjustmentNoId           = s"${formId}_datafield_15904_1_1_2_label"
   private lazy val reasonableAdjustmentDetailsInputId = s"${formId}_datafield_174746_1_1"
 
+  def enterPersonalInfo(inputId: String, text: String): Unit = {
+    val enterOption = waitForVisibilityOfElementById(inputId)
+    enterOption.sendKeys(text)
+  }
+
   private def personalInfoPageCheck(): Unit =
     eventually(onPage(personalInfoTitle))
 
-  private def enterPersonalInformation(personalInfoDetails: PersonalInfoDetails): Unit = {
+  private def enterFirstName(personalInfoDetails: PersonalInfoDetails): Unit = {
     personalInfoPageCheck()
-    waitForVisibilityOfElementById(firstNameInputId).getText shouldEqual s"$randomFirstName"
-    waitForVisibilityOfElementById(lastNameInputId).getText  shouldEqual s"$randomLastName"
-    waitForVisibilityOfElementById(emailInputId).getText     shouldEqual s"$randomFirstName.$randomLastName@ats_example.com"
-    if (waitForVisibilityOfElementById(preferredTeleNoInputId).getText.isEmpty)
-      enterText(preferredTeleNoInputId, personalInfoDetails.preferredTeleNo)
+    if (waitForVisibilityOfElementById(firstNameInputId).getText.isEmpty) {
+      enterPersonalInfo(firstNameInputId, personalInfoDetails.firstName)
+    } else {
+      waitForVisibilityOfElementById(firstNameInputId).getText shouldEqual s"$randomFirstName"
+    }
   }
+
+  private def enterLastName(personalInfoDetails: PersonalInfoDetails): Unit =
+    if (waitForVisibilityOfElementById(lastNameInputId).getText.isEmpty) {
+      enterPersonalInfo(lastNameInputId, personalInfoDetails.lastName)
+    } else {
+      waitForVisibilityOfElementById(lastNameInputId).getText shouldEqual s"$randomLastName"
+    }
+
+  private def enterPreferredFirstName(personalInfoDetails: PersonalInfoDetails): Unit =
+    if (waitForVisibilityOfElementById(preferredFirstNameInputId).getText.isEmpty) {
+      enterPersonalInfo(preferredFirstNameInputId, personalInfoDetails.preferredFirstName.get)
+    }
+
+  private def enterEmail(personalInfoDetails: PersonalInfoDetails): Unit =
+    if (waitForVisibilityOfElementById(emailInputId).getText.isEmpty) {
+      enterPersonalInfo(emailInputId, personalInfoDetails.email)
+    } else {
+      waitForVisibilityOfElementById(
+        emailInputId
+      ).getText shouldEqual s"$randomFirstName.$randomLastName@ats_example.com"
+    }
+
+  private def enterPreferredTeleNo(personalInfoDetails: PersonalInfoDetails): Unit =
+    if (waitForVisibilityOfElementById(preferredTeleNoInputId).getText.isEmpty)
+      enterPersonalInfo(preferredTeleNoInputId, personalInfoDetails.preferredTeleNo)
 
   private def selectApplyDCS(personalInfoDetails: PersonalInfoDetails): Unit =
     if (personalInfoDetails.applyDCS) radioSelect(applyDCSYesId)
@@ -52,11 +81,15 @@ object PersonalInfoPage extends CSJobsBasePage {
   private def selectReasonableAdjustments(personalInfoDetails: PersonalInfoDetails): Unit =
     if (personalInfoDetails.reasonableAdjustments) {
       radioSelect(reasonableAdjustmentYesId)
-      enterText(reasonableAdjustmentDetailsInputId, personalInfoDetails.reasonableAdjustmentsDetails)
+      enterPersonalInfo(reasonableAdjustmentDetailsInputId, personalInfoDetails.reasonableAdjustmentsDetails)
     } else radioSelect(reasonableAdjustmentNoId)
 
   private val personalInfo: Seq[PersonalInfoDetails => Unit] = Seq(
-    enterPersonalInformation,
+    enterFirstName,
+    enterLastName,
+    enterPreferredFirstName,
+    enterEmail,
+    enterPreferredTeleNo,
     selectApplyDCS,
     selectReasonableAdjustments
   )
