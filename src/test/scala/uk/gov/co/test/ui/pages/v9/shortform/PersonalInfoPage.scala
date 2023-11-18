@@ -3,7 +3,7 @@ package uk.gov.co.test.ui.pages.v9.shortform
 import org.openqa.selenium.{By, Keys}
 import org.scalatest.concurrent.Eventually.eventually
 import uk.gov.co.test.ui.data.v9.ShortFormDetails
-import uk.gov.co.test.ui.pages.v9.CSJobsBasePage
+import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
 import uk.gov.co.test.ui.pages.v9.shortform.ApplicationGuidancePage.formId
 
 case class PersonalInfoDetails(
@@ -19,7 +19,7 @@ case class PersonalInfoDetails(
   redeploymentScheme: Option[Boolean] = None
 )
 
-object PersonalInfoPage extends CSJobsBasePage {
+object PersonalInfoPage extends CivilServiceJobsBasePage {
 
   private lazy val personalInfoTitle                  = "Personal information - Civil Service Jobs - GOV.UK"
   private lazy val firstNameInputId                   = s"${formId}_datafield_11625_1_1"

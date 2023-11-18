@@ -2,7 +2,7 @@ package uk.gov.co.test.ui.pages.v9
 
 import org.openqa.selenium.WebElement
 
-object SignInPage extends CSJobsBasePage {
+object SignInPage extends CivilServiceJobsBasePage {
 
   val cSJobsTitle = "Sign in - Civil Service Jobs - GOV.UK"
 

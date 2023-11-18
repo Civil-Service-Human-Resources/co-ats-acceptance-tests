@@ -1,13 +1,13 @@
 package uk.gov.co.test.ui.data.v9
 
 import uk.gov.co.test.ui.pages.v9.SignInPage.{preferredFirstName, randomEmail, randomFirstName, randomLastName}
-import uk.gov.co.test.ui.pages.v9.shortform.{AppGuidanceDetails, DiversityMonitoringDetails, EligibilityDetails, PersonalInfoDetails}
+import uk.gov.co.test.ui.pages.v9.shortform.{AppGuidanceDetails, DiversityDetails, EligibilityDetails, PersonalInfoDetails}
 
 case class ShortFormDetails(
   appGuidanceDetails: AppGuidanceDetails,
   eligibilityDetails: EligibilityDetails,
   personalInfoDetails: PersonalInfoDetails,
-  diversityMonitoringDetails: DiversityMonitoringDetails
+  diversityDetails: DiversityDetails
 )
 
 object CANDIDATE_SHORT_FORM_DATA
@@ -46,11 +46,11 @@ object SHORT_FORM_PERSONAL_INFO
     )
 
 object SHORT_FORM_DIVERSITY_MONITORING
-    extends DiversityMonitoringDetails(
-      "",
-      "",
-      "",
-      "",
+    extends DiversityDetails(
+      "No",
+      "Man",
+      "Heterosexual or straight",
+      "Prefer not to disclose",
       "",
       "",
       "",

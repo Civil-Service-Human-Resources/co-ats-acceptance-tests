@@ -1,6 +1,7 @@
 package uk.gov.co.test.ui.pages.v9
 
 import com.github.javafaker.Faker
+import org.openqa.selenium.support.ui.Select
 import org.openqa.selenium.{By, WebElement}
 import org.scalatest.concurrent.Eventually.eventually
 import org.scalatest.matchers.should.Matchers
@@ -13,7 +14,7 @@ import uk.gov.co.test.ui.pages.v9.SignInPage.signOut
 import java.util
 import scala.util.Random
 
-trait CSJobsBasePage extends Matchers with BasePage with BrowserDriver {
+trait CivilServiceJobsBasePage extends Matchers with BasePage with BrowserDriver {
 
   val url: String                        = TestConfiguration.url("v9test")
   val v9AcceptAdditionalCookies: String  = "accept_all_cookies_button"
@@ -115,4 +116,10 @@ trait CSJobsBasePage extends Matchers with BasePage with BrowserDriver {
   def extractValue(id: String): String =
     waitForVisibilityOfElementById(id).getAttribute("value")
 
+  def selectDropdownOption(id: String, value: String): Unit = {
+    scrollToElement(By.id(id))
+    waitForVisibilityOfElementById(id).click()
+    val dept = new Select(waitForVisibilityOfElementById(id))
+    dept.selectByVisibleText(value)
+  }
 }

@@ -3,13 +3,13 @@ package uk.gov.co.test.ui.pages.v9.shortform
 import org.openqa.selenium.By
 import org.scalatest.concurrent.Eventually.eventually
 import uk.gov.co.test.ui.data.v9.ShortFormDetails
-import uk.gov.co.test.ui.pages.v9.CSJobsBasePage
+import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
 
 case class AppGuidanceDetails(
   confirmAppGuidance: Boolean
 )
 
-object ApplicationGuidancePage extends CSJobsBasePage {
+object ApplicationGuidancePage extends CivilServiceJobsBasePage {
 
   private lazy val appGuidanceTitle = "Application Guidance - Civil Service Jobs - GOV.UK"
   private lazy val appDeadline      = "The deadline is 11:55PM on 22 November 2023."

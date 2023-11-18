@@ -13,7 +13,7 @@ case class CandidateDetails(
   agreeTermsAndConditions: Boolean
 )
 
-object CreateAccountPage extends CSJobsBasePage {
+object CreateAccountPage extends CivilServiceJobsBasePage {
 
   val createAccountTitle        = "Create an account - Civil Service Jobs - GOV.UK"
   val createAccountHeader       = "Create an account"

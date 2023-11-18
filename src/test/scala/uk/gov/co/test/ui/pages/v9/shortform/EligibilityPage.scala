@@ -1,10 +1,8 @@
 package uk.gov.co.test.ui.pages.v9.shortform
 
-import org.openqa.selenium.By
-import org.openqa.selenium.support.ui.Select
 import org.scalatest.concurrent.Eventually.eventually
 import uk.gov.co.test.ui.data.v9.ShortFormDetails
-import uk.gov.co.test.ui.pages.v9.CSJobsBasePage
+import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
 import uk.gov.co.test.ui.pages.v9.shortform.ApplicationGuidancePage.formId
 
 case class EligibilityDetails(
@@ -14,7 +12,7 @@ case class EligibilityDetails(
   rightToRemain: Boolean
 )
 
-object EligibilityPage extends CSJobsBasePage {
+object EligibilityPage extends CivilServiceJobsBasePage {
 
   private lazy val eligibilityTitle         = "Eligibility - Civil Service Jobs - GOV.UK"
   private lazy val currentCivilServantYesId = s"${formId}_datafield_87767_1_1_1_label"
@@ -32,15 +30,8 @@ object EligibilityPage extends CSJobsBasePage {
     eligibilityPageCheck()
     if (eligibilityDetails.currentCivilServant) {
       radioSelect(currentCivilServantYesId)
-      selectDepartment(homeDepartmentSelectId, eligibilityDetails.homeDepartment)
+      selectDropdownOption(homeDepartmentSelectId, eligibilityDetails.homeDepartment)
     } else radioSelect(currentCivilServantNoId)
-  }
-
-  def selectDepartment(id: String, value: String): Unit = {
-    scrollToElement(By.id(id))
-    waitForVisibilityOfElementById(id).click()
-    val dept = new Select(waitForVisibilityOfElementById(id))
-    dept.selectByVisibleText(value)
   }
 
   private def selectNationalityReqMet(eligibilityDetails: EligibilityDetails): Unit =
