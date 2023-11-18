@@ -26,6 +26,9 @@ trait BasePage extends Matchers with Page with WebBrowser with PatienceConfigura
         s"Expected '$pageTitle' page, but found '${webDriver.getTitle}' page."
       )
 
+  def pageElement(path: String)(implicit driver: WebDriver): WebElement =
+    driver.findElement(By.xpath(path))
+
   def waitForElementToBeClickableByPath(pathway: String)(implicit driver: WebDriver): WebElement = {
     val wait = new WebDriverWait(driver, 2, 200)
     wait.until(elementToBeClickable(By.xpath(pathway)))
@@ -78,6 +81,9 @@ trait BasePage extends Matchers with Page with WebBrowser with PatienceConfigura
     val radioButton = super.radioButton(id)
     radioButton
   }
+
+  def radioSelect(id: String)(implicit driver: WebDriver): Unit =
+    waitForVisibilityOfElementById(id).click()
 
   def clickOnRadioButton(id: String)(implicit webDriver: WebDriver): Boolean = {
     val wait   = new WebDriverWait(webDriver, 2, 200)

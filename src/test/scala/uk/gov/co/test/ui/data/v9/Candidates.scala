@@ -1,17 +1,18 @@
-package uk.gov.co.test.ui.utils
+package uk.gov.co.test.ui.data.v9
 
 import uk.gov.co.test.ui.pages.v9.CandidateDetails
-import uk.gov.co.test.ui.pages.v9.SignInPage.randomLastName
+import uk.gov.co.test.ui.pages.v9.SignInPage.{randomFirstName, randomLastName}
 
 case class CandidateData(candidateDetails: CandidateDetails)
 
 object REGISTERED_CANDIDATE
     extends CandidateDetails("Tony", "Ferguson", "tony.ferguson@example.com", "qwertygh123", true, true)
+
 object REGISTER_CANDIDATE
     extends CandidateDetails(
-      "Auto",
+      s"$randomFirstName",
       s"$randomLastName",
-      s"auto.$randomLastName@atsexample.com",
+      s"$randomFirstName.$randomLastName@ats_example.com",
       "password123!",
       false,
       true

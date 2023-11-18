@@ -1,5 +1,6 @@
 package uk.gov.co.test.ui.pages.v9
 
+import com.github.javafaker.Faker
 import org.openqa.selenium.{By, WebElement}
 import org.scalatest.concurrent.Eventually.eventually
 import org.scalatest.matchers.should.Matchers
@@ -14,9 +15,13 @@ import scala.util.Random
 
 trait CSJobsBasePage extends Matchers with BasePage with BrowserDriver {
 
-  val url: String                     = TestConfiguration.url("v9test")
-  val acceptAdditionalCookies: String = "accept_all_cookies_button"
-  val randomLastName: String          = randomnessName()
+  val url: String                        = TestConfiguration.url("v9test")
+  val v9AcceptAdditionalCookies: String  = "accept_all_cookies_button"
+  val vXaAcceptAdditionalCookies: String = "cookies-accept-button"
+  val pageContinue                       = "continue_button"
+  val randomFirstName: String            = randomNames()._1
+  var randomLastName: String             = randomNames()._2
+  var preferredFirstName: String         = preferredName()
 
   def randomnessName(): String = {
     val randomLastName = Iterator.continually(Random.nextPrintableChar()).filter(_.isLetter).take(10).mkString
@@ -24,13 +29,32 @@ trait CSJobsBasePage extends Matchers with BasePage with BrowserDriver {
     autoLastName
   }
 
+  def randomNames(): (String, String) = {
+    val fake            = new Faker()
+    val randomFirstName = fake.name().firstName()
+    val randomLastName  = fake.name().lastName()
+    (randomFirstName, randomLastName)
+  }
+
+  def preferredName(): String = {
+    val fake               = new Faker()
+    val preferredFirstName = fake.name().firstName()
+    preferredFirstName
+  }
+
   def back(): Unit = clickOn("back-link")
 
-  def acceptAllCookies(): Unit =
-    click on acceptAdditionalCookies
+  def v9AcceptAllCookies(): Unit =
+    clickOn(v9AcceptAdditionalCookies)
 
-  def searchCookiesById(): util.List[WebElement] =
-    driver.findElements(By.id(acceptAdditionalCookies))
+  def vXAcceptAllCookies(): Unit =
+    clickOn(vXaAcceptAdditionalCookies)
+
+  def v9SearchCookiesById(): util.List[WebElement] =
+    driver.findElements(By.id(v9AcceptAdditionalCookies))
+
+  def vXSearchCookiesById(): util.List[WebElement] =
+    driver.findElements(By.id(vXaAcceptAdditionalCookies))
 
   def navigateToV9Test(): Unit = {
     go to url
@@ -64,5 +88,8 @@ trait CSJobsBasePage extends Matchers with BasePage with BrowserDriver {
     signOut().click()
     eventually(pageTitle shouldEqual cSSearchJobsTitle)
   }
+
+  def goBack(): Unit =
+    clickOn("back_button")
 
 }

@@ -8,7 +8,7 @@ import org.scalatest.matchers.should.Matchers
 import org.scalatestplus.selenium.WebBrowser
 import uk.gov.co.test.ui.driver.BrowserDriver
 import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.{logoutVX, navigateToVxConfigLogin}
-import uk.gov.co.test.ui.pages.v9.SignInPage.{acceptAllCookies, navigateToV9Test, searchCookiesById, signOutProcess}
+import uk.gov.co.test.ui.pages.v9.SignInPage.{navigateToV9Test, signOutProcess, v9AcceptAllCookies, v9SearchCookiesById}
 import uk.gov.co.test.ui.utils.SingletonScreenshotReport
 import uk.gov.co.test.ui.webdriver.SingletonDriver
 
@@ -27,8 +27,8 @@ trait BaseFeatureSpec
   override protected def beforeEach(testData: TestData): Unit =
     if (testData.name.contains("Candidate")) {
       navigateToV9Test()
-      if (!searchCookiesById().isEmpty) {
-        acceptAllCookies()
+      if (!v9SearchCookiesById().isEmpty) {
+        v9AcceptAllCookies()
       }
     } else {
       navigateToVxConfigLogin()

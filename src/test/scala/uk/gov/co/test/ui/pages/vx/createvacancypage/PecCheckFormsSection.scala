@@ -75,7 +75,6 @@ object PecCheckFormsSection extends VacancyBasePage {
   def selectTypeOfRoles(typeOfCandidate: String, inputId: String): Unit = {
     val candidateInput = waitForVisibilityOfElementByPath(s".//textarea[@aria-describedby='$inputId']")
     candidateInput.sendKeys(typeOfCandidate)
-    action().moveToElement(waitForDropdownOptionByText(typeOfCandidate)).perform()
     waitForDropdownOptionByText(typeOfCandidate).click()
   }
 

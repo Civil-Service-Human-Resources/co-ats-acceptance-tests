@@ -25,4 +25,10 @@ object SearchJobsPage extends CSJobsBasePage {
     pageTitle equals cSSearchJobsTitle
     waitForVisibilityOfElementByPathLast(s".//*[@title='$signInCreateAccountText']").click()
   }
+
+  def enterWhatAndSearch(jobId: String): Unit = {
+    val whatField = waitForVisibilityOfElement(By.name("what"))
+    whatField.sendKeys(jobId)
+    clickOn("search_button")
+  }
 }

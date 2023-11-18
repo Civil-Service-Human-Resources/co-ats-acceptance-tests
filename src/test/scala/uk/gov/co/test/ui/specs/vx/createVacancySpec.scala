@@ -1,5 +1,6 @@
 package uk.gov.co.test.ui.specs.vx
 
+import uk.gov.co.test.ui.data.v9.REGISTER_CANDIDATE
 import uk.gov.co.test.ui.data.vx.{DEFRA_APPLY_ONLY_DATA, MASTER_VACANCY_DATA, RECRUITER}
 import uk.gov.co.test.ui.flows.v9.RegisterCandidateFlow
 import uk.gov.co.test.ui.flows.vx.MasterVacancyFlow.fillMasterVacancyForm
@@ -8,7 +9,6 @@ import uk.gov.co.test.ui.flows.vx.RecruiterLoginFlow.fillRecruiterDetails
 import uk.gov.co.test.ui.pages.v9.CreateAccountPage.navigateToCreateAccountPage
 import uk.gov.co.test.ui.specs.BaseFeatureSpec
 import uk.gov.co.test.ui.tags.RunInVX
-import uk.gov.co.test.ui.utils._
 
 class createVacancySpec extends BaseFeatureSpec {
   Feature("Recruiter Creates A Master Vacancy") {
