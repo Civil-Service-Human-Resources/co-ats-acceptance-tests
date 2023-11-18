@@ -22,7 +22,7 @@ trait CSJobsBasePage extends Matchers with BasePage with BrowserDriver {
   var randomFirstName: String            = ""
   var randomLastName: String             = ""
   var preferredFirstName: String         = ""
-  lazy val randomEmail: String           = s"$randomFirstName.$randomLastName@ats_example.com"
+  lazy val randomEmail: String           = s"${randomFirstName.toLowerCase}.${randomLastName.toLowerCase}@example.com"
 
   def randomnessName(): String = {
     val randomLastName = Iterator.continually(Random.nextPrintableChar()).filter(_.isLetter).take(10).mkString
@@ -111,5 +111,8 @@ trait CSJobsBasePage extends Matchers with BasePage with BrowserDriver {
 
   def goBack(): Unit =
     clickOn("back_button")
+
+  def extractValue(id: String): String =
+    waitForVisibilityOfElementById(id).getAttribute("value")
 
 }

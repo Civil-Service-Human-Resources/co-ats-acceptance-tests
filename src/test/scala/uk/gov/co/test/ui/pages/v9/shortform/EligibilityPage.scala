@@ -3,7 +3,7 @@ package uk.gov.co.test.ui.pages.v9.shortform
 import org.openqa.selenium.By
 import org.openqa.selenium.support.ui.Select
 import org.scalatest.concurrent.Eventually.eventually
-import uk.gov.co.test.ui.data.v9.ApplicationDetails
+import uk.gov.co.test.ui.data.v9.ShortFormDetails
 import uk.gov.co.test.ui.pages.v9.CSJobsBasePage
 import uk.gov.co.test.ui.pages.v9.shortform.ApplicationGuidancePage.formId
 
@@ -57,9 +57,9 @@ object EligibilityPage extends CSJobsBasePage {
     selectRightToRemain
   )
 
-  def eligibilityPage(applicationDetails: ApplicationDetails): Unit = {
+  def eligibilityPage(shortFormDetails: ShortFormDetails): Unit = {
     eligibility.foreach { f =>
-      f(applicationDetails.eligibilityDetails)
+      f(shortFormDetails.eligibilityDetails)
     }
     clickOn(pageContinue)
   }

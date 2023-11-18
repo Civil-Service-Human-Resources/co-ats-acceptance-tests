@@ -1,28 +1,29 @@
 package uk.gov.co.test.ui.data.v9
 
 import uk.gov.co.test.ui.pages.v9.SignInPage.{preferredFirstName, randomEmail, randomFirstName, randomLastName}
-import uk.gov.co.test.ui.pages.v9.shortform.{DiversityMonitoringDetails, EligibilityDetails, PersonalInfoDetails, ShortFormDetails}
+import uk.gov.co.test.ui.pages.v9.shortform.{AppGuidanceDetails, DiversityMonitoringDetails, EligibilityDetails, PersonalInfoDetails}
 
-case class ApplicationDetails(
-  shortFormDetails: ShortFormDetails,
+case class ShortFormDetails(
+  appGuidanceDetails: AppGuidanceDetails,
   eligibilityDetails: EligibilityDetails,
   personalInfoDetails: PersonalInfoDetails,
   diversityMonitoringDetails: DiversityMonitoringDetails
 )
-object CANDIDATE_APPLICATION_DATA
-    extends ApplicationDetails(
-      APPLICATION_SHORT_FORM,
-      APPLICATION_ELIGIBILITY,
-      APPLICATION_PERSONAL_INFO,
-      APPLICATION_DIVERSITY_MONITORING
+
+object CANDIDATE_SHORT_FORM_DATA
+    extends ShortFormDetails(
+      SHORT_FORM_APP_GUIDANCE,
+      SHORT_FORM_ELIGIBILITY,
+      SHORT_FORM_PERSONAL_INFO,
+      SHORT_FORM_DIVERSITY_MONITORING
     )
 
-object APPLICATION_SHORT_FORM
-    extends ShortFormDetails(
+object SHORT_FORM_APP_GUIDANCE
+    extends AppGuidanceDetails(
       true
     )
 
-object APPLICATION_ELIGIBILITY
+object SHORT_FORM_ELIGIBILITY
     extends EligibilityDetails(
       true,
       "Attorney General's Office",
@@ -30,7 +31,7 @@ object APPLICATION_ELIGIBILITY
       true
     )
 
-object APPLICATION_PERSONAL_INFO
+object SHORT_FORM_PERSONAL_INFO
     extends PersonalInfoDetails(
       s"$randomFirstName",
       s"$randomLastName",
@@ -40,10 +41,11 @@ object APPLICATION_PERSONAL_INFO
       s"$randomEmail",
       false,
       true,
-      "Autotest - Provide details of what reasonable adjustments might help you"
+      "Autotest - Provide details of what reasonable adjustments might help you",
+      redeploymentScheme = Option(false)
     )
 
-object APPLICATION_DIVERSITY_MONITORING
+object SHORT_FORM_DIVERSITY_MONITORING
     extends DiversityMonitoringDetails(
       "",
       "",

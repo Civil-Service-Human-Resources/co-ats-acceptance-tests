@@ -1,0 +1,26 @@
+package uk.gov.co.test.ui.flows.v9
+
+import uk.gov.co.test.ui.data.v9.ShortFormDetails
+import uk.gov.co.test.ui.pages.v9.CSJobsBasePage
+import uk.gov.co.test.ui.pages.v9.SearchJobsPage.goToJobApply
+import uk.gov.co.test.ui.pages.v9.shortform.ApplicationGuidancePage.appGuidancePage
+import uk.gov.co.test.ui.pages.v9.shortform.EligibilityPage.eligibilityPage
+import uk.gov.co.test.ui.pages.v9.shortform.PersonalInfoPage.personalInfoPage
+
+object ShortFormFlow extends CSJobsBasePage {
+
+  private val shortForm: Seq[ShortFormDetails => Unit] = Seq(
+    appGuidancePage,
+    eligibilityPage,
+    personalInfoPage
+//    diversityMonitoringPage
+  )
+
+  def fillShortFormDetails(shortFormDetails: ShortFormDetails): Unit = {
+    goToJobApply()
+    shortForm.foreach { f =>
+      f(shortFormDetails)
+    }
+    println("Candidate Done!")
+  }
+}

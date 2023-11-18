@@ -2,10 +2,10 @@ package uk.gov.co.test.ui.pages.v9.shortform
 
 import org.openqa.selenium.By
 import org.scalatest.concurrent.Eventually.eventually
-import uk.gov.co.test.ui.data.v9.ApplicationDetails
-import uk.gov.co.test.ui.pages.v9.{CSJobsBasePage, SearchJobsPage}
+import uk.gov.co.test.ui.data.v9.ShortFormDetails
+import uk.gov.co.test.ui.pages.v9.CSJobsBasePage
 
-case class ShortFormDetails(
+case class AppGuidanceDetails(
   confirmAppGuidance: Boolean
 )
 
@@ -17,10 +17,14 @@ object ApplicationGuidancePage extends CSJobsBasePage {
   val formIdPath                    = ".//form[@onsubmit='return submit_form()']"
   var formId: String                = ""
 
-  private def confirmApplicationGuidance(shortFormDetails: ShortFormDetails): Unit = {
+  private def confirmApplicationGuidance(appGuidanceDetails: AppGuidanceDetails): Unit = {
     eventually(onPage(appGuidanceTitle))
     if (!vXSearchCookiesById().isEmpty) vXAcceptAllCookies()
     extractAppFormId()
+    if (appGuidanceDetails.confirmAppGuidance) {
+      scrollToElement(By.id(pageContinue))
+      clickOn(pageContinue)
+    }
   }
 
   private def extractAppFormId(): String = {
@@ -29,27 +33,12 @@ object ApplicationGuidancePage extends CSJobsBasePage {
     formId
   }
 
-  def goToJobApply(): Unit = {
-    val jobPath = ".//a[text()='OGDGCCO']"
-    SearchJobsPage.enterWhatAndSearch("OGDGCCO")
-    val job     = waitForVisibilityOfElementByPath(jobPath)
-    job.click()
-    eventually(onPage("OGDGCCO - Civil Service Jobs - GOV.UK"))
-    clickOn("login_button")
-    driver.navigate().refresh()
-  }
-
-  private val appGuidance: Seq[ShortFormDetails => Unit] = Seq(
+  private val appGuidance: Seq[AppGuidanceDetails => Unit] = Seq(
     confirmApplicationGuidance
   )
 
-  def appGuidancePage(applicationDetails: ApplicationDetails): Unit = {
+  def appGuidancePage(shortFormDetails: ShortFormDetails): Unit =
     appGuidance.foreach { f =>
-      f(applicationDetails.shortFormDetails)
+      f(shortFormDetails.appGuidanceDetails)
     }
-    if (applicationDetails.shortFormDetails.confirmAppGuidance) {
-      scrollToElement(By.id(pageContinue))
-      clickOn(pageContinue)
-    }
-  }
 }

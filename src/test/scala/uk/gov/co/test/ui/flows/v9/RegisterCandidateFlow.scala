@@ -16,7 +16,7 @@ object RegisterCandidateFlow extends CSJobsBasePage {
     selectTermsAndConditions
   )
 
-  def fillCandidateDetails(user: CandidateDetails): Unit = {
+  def fillNewCandidateDetails(user: CandidateDetails): Unit = {
     fields.foreach { f =>
       f(user)
     }

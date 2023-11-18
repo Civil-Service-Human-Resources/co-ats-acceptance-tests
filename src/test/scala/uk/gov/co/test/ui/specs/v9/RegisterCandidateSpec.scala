@@ -16,7 +16,7 @@ class RegisterCandidateSpec extends BaseFeatureSpec {
       navigateToCreateAccountPage()
 
       When("The candidate enters their details for new account")
-      RegisterCandidateFlow.fillCandidateDetails(newCandidate)
+      RegisterCandidateFlow.fillNewCandidateDetails(newCandidate)
 
       Then("The candidate is able to create a new account")
       accountCreatedSuccess1() shouldEqual accountCreatedSuccessMessage1

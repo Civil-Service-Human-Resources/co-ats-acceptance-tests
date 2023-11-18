@@ -22,7 +22,7 @@ class createVacancySpec extends BaseFeatureSpec {
       fillMasterVacancyForm(masterVacancy)
       val newCandidate  = REGISTER_CANDIDATE
       navigateToCreateAccountPage()
-      RegisterCandidateFlow.fillCandidateDetails(newCandidate)
+      RegisterCandidateFlow.fillNewCandidateDetails(newCandidate)
 
       Then("the master vacancy is successfully created and posted")
     }
@@ -37,7 +37,7 @@ class createVacancySpec extends BaseFeatureSpec {
       fillNewVacancyForm(grsVacancy)
       val newCandidate = REGISTER_CANDIDATE
       navigateToCreateAccountPage()
-      RegisterCandidateFlow.fillCandidateDetails(newCandidate)
+      RegisterCandidateFlow.fillNewCandidateDetails(newCandidate)
 
       Then("The vacancy is successfully created and posted")
     }

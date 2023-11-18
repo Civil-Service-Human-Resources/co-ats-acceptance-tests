@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.pages.v9.shortform
 
 import org.scalatest.concurrent.Eventually.eventually
-import uk.gov.co.test.ui.data.v9.ApplicationDetails
+import uk.gov.co.test.ui.data.v9.ShortFormDetails
 import uk.gov.co.test.ui.pages.v9.CSJobsBasePage
 import uk.gov.co.test.ui.pages.v9.shortform.ApplicationGuidancePage.formId
 
@@ -39,9 +39,9 @@ object DiversityMonitoringPage extends CSJobsBasePage {
     enterPersonalInformation
   )
 
-  def diversityMonitoringPage(applicationDetails: ApplicationDetails): Unit = {
+  def diversityMonitoringPage(shortFormDetails: ShortFormDetails): Unit = {
     diversity.foreach { f =>
-      f(applicationDetails.diversityMonitoringDetails)
+      f(shortFormDetails.diversityMonitoringDetails)
     }
     clickOn(pageContinue)
   }

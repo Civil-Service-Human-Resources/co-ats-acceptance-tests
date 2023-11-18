@@ -1,8 +1,8 @@
 package uk.gov.co.test.ui.pages.v9.shortform
 
-import org.openqa.selenium.By
+import org.openqa.selenium.{By, Keys}
 import org.scalatest.concurrent.Eventually.eventually
-import uk.gov.co.test.ui.data.v9.ApplicationDetails
+import uk.gov.co.test.ui.data.v9.ShortFormDetails
 import uk.gov.co.test.ui.pages.v9.CSJobsBasePage
 import uk.gov.co.test.ui.pages.v9.shortform.ApplicationGuidancePage.formId
 
@@ -15,7 +15,8 @@ case class PersonalInfoDetails(
   email: String,
   applyDCS: Boolean,
   reasonableAdjustments: Boolean,
-  reasonableAdjustmentsDetails: String
+  reasonableAdjustmentsDetails: String,
+  redeploymentScheme: Option[Boolean] = None
 )
 
 object PersonalInfoPage extends CSJobsBasePage {
@@ -32,10 +33,14 @@ object PersonalInfoPage extends CSJobsBasePage {
   private lazy val reasonableAdjustmentYesId          = s"${formId}_datafield_15904_1_1_1_label"
   private lazy val reasonableAdjustmentNoId           = s"${formId}_datafield_15904_1_1_2_label"
   private lazy val reasonableAdjustmentDetailsInputId = s"${formId}_datafield_174746_1_1"
+  private lazy val redeploymentSchemeId               = s"${formId}_datafield_175270_1_1_fieldset"
+  private lazy val redeploymentSchemeYesId            = s"${formId}_datafield_175270_1_1_1_label"
+  private lazy val redeploymentSchemeNoId             = s"${formId}_datafield_175270_1_1_2_label"
 
   def enterPersonalInfo(inputId: String, text: String): Unit = {
     val enterOption = waitForVisibilityOfElementById(inputId)
     enterOption.sendKeys(text)
+    enterOption.sendKeys(Keys.TAB)
   }
 
   private def personalInfoPageCheck(): Unit =
@@ -43,44 +48,36 @@ object PersonalInfoPage extends CSJobsBasePage {
 
   private def enterFirstName(personalInfoDetails: PersonalInfoDetails): Unit = {
     personalInfoPageCheck()
-    if (waitForVisibilityOfElementById(firstNameInputId).getText.isEmpty) {
+    if (extractValue(firstNameInputId).isEmpty) {
       enterPersonalInfo(firstNameInputId, personalInfoDetails.firstName)
-    } else {
-      waitForVisibilityOfElementById(firstNameInputId).getText shouldEqual s"$randomFirstName"
-    }
+    } else extractValue(firstNameInputId) shouldEqual personalInfoDetails.firstName
   }
 
-  private def enterLastName(personalInfoDetails: PersonalInfoDetails): Unit =
-    if (waitForVisibilityOfElementById(lastNameInputId).getText.isEmpty) {
+  private def enterLastName(personalInfoDetails: PersonalInfoDetails): Unit           =
+    if (extractValue(lastNameInputId).isEmpty) {
       enterPersonalInfo(lastNameInputId, personalInfoDetails.lastName)
-    } else {
-      waitForVisibilityOfElementById(lastNameInputId).getText shouldEqual s"$randomLastName"
-    }
+    } else extractValue(lastNameInputId) shouldEqual personalInfoDetails.lastName
 
   private def enterPreferredFirstName(personalInfoDetails: PersonalInfoDetails): Unit =
-    if (waitForVisibilityOfElementById(preferredFirstNameInputId).getText.isEmpty) {
+    if (extractValue(preferredFirstNameInputId).isEmpty) {
       enterPersonalInfo(preferredFirstNameInputId, personalInfoDetails.preferredFirstName.get)
-    }
+    } else extractValue(preferredFirstNameInputId) shouldEqual personalInfoDetails.preferredFirstName
 
-  private def enterEmail(personalInfoDetails: PersonalInfoDetails): Unit =
-    if (waitForVisibilityOfElementById(emailInputId).getText.isEmpty) {
+  private def enterEmail(personalInfoDetails: PersonalInfoDetails): Unit              =
+    if (extractValue(emailInputId).isEmpty) {
       enterPersonalInfo(emailInputId, personalInfoDetails.email)
-    } else {
-      waitForVisibilityOfElementById(
-        emailInputId
-      ).getText shouldEqual randomEmail
-    }
+    } else extractValue(emailInputId) shouldEqual personalInfoDetails.email
 
   private def enterPreferredTeleNo(personalInfoDetails: PersonalInfoDetails): Unit = {
     scrollToElement(By.id(preferredTeleNoInputId))
-    if (waitForVisibilityOfElementById(preferredTeleNoInputId).getText.isEmpty)
+    if (extractValue(preferredTeleNoInputId).isEmpty) {
       enterPersonalInfo(preferredTeleNoInputId, personalInfoDetails.preferredTeleNo)
+    } else extractValue(preferredTeleNoInputId) shouldEqual personalInfoDetails.preferredTeleNo
   }
 
-  private def enterSecondaryContactNo(personalInfoDetails: PersonalInfoDetails): Unit = {
-    if (waitForVisibilityOfElementById(secondaryNoInputId).getText.isEmpty)
+  private def enterSecondaryContactNo(personalInfoDetails: PersonalInfoDetails): Unit =
+    if (extractValue(secondaryNoInputId).isEmpty)
       enterPersonalInfo(secondaryNoInputId, personalInfoDetails.secondaryNo.get)
-  }
 
   private def selectApplyDCS(personalInfoDetails: PersonalInfoDetails): Unit =
     if (personalInfoDetails.applyDCS) radioSelect(applyDCSYesId)
@@ -92,6 +89,12 @@ object PersonalInfoPage extends CSJobsBasePage {
       enterPersonalInfo(reasonableAdjustmentDetailsInputId, personalInfoDetails.reasonableAdjustmentsDetails)
     } else radioSelect(reasonableAdjustmentNoId)
 
+  private def enterRedeploymentScheme(personalInfoDetails: PersonalInfoDetails): Unit = {
+    scrollToElement(By.id(redeploymentSchemeId))
+    if (personalInfoDetails.redeploymentScheme.get) radioSelect(redeploymentSchemeYesId)
+    else radioSelect(redeploymentSchemeNoId)
+  }
+
   private val personalInfo: Seq[PersonalInfoDetails => Unit] = Seq(
     enterFirstName,
     enterLastName,
@@ -100,12 +103,13 @@ object PersonalInfoPage extends CSJobsBasePage {
     enterSecondaryContactNo,
     enterEmail,
     selectApplyDCS,
-    selectReasonableAdjustments
+    selectReasonableAdjustments,
+    enterRedeploymentScheme
   )
 
-  def personalInfoPage(applicationDetails: ApplicationDetails): Unit = {
+  def personalInfoPage(shortFormDetails: ShortFormDetails): Unit = {
     personalInfo.foreach { f =>
-      f(applicationDetails.personalInfoDetails)
+      f(shortFormDetails.personalInfoDetails)
     }
     clickOn(pageContinue)
   }

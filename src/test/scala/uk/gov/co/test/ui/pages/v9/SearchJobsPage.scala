@@ -1,6 +1,7 @@
 package uk.gov.co.test.ui.pages.v9
 
 import org.openqa.selenium.By
+import org.scalatest.concurrent.Eventually.eventually
 
 object SearchJobsPage extends CSJobsBasePage {
 
@@ -30,5 +31,15 @@ object SearchJobsPage extends CSJobsBasePage {
     val whatField = waitForVisibilityOfElement(By.name("what"))
     whatField.sendKeys(jobId)
     clickOn("search_button")
+  }
+
+  def goToJobApply(): Unit = {
+    val jobPath = ".//a[text()='OGDGCCO']"
+    SearchJobsPage.enterWhatAndSearch("OGDGCCO")
+    val job = waitForVisibilityOfElementByPath(jobPath)
+    job.click()
+    eventually(onPage("OGDGCCO - Civil Service Jobs - GOV.UK"))
+    clickOn("login_button")
+    driver.navigate().refresh()
   }
 }
