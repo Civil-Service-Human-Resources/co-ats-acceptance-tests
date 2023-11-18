@@ -29,6 +29,12 @@ trait CSJobsBasePage extends Matchers with BasePage with BrowserDriver {
     autoLastName
   }
 
+//  private def extractAppFormId(): String = {
+//    val formClass = driver.findElement(By.xpath(formIdPath))
+//    formId = formClass.getAttribute("id")
+//    formId
+//  }
+
   def randomNames(): (String, String) = {
     val fake            = new Faker()
     val randomFirstName = fake.name().firstName()
