@@ -11,9 +11,9 @@ case class DeclarationDetails(
 
 object DeclarationPage extends CivilServiceJobsBasePage {
 
-  private lazy val declarationTitle                = "Declaration - Civil Service Jobs - GOV.UK"
+  private lazy val declarationTitle   = "Declaration - Civil Service Jobs - GOV.UK"
   def declarationTermsAndConditionsId = s"${formId}_datafield_22499_1_1_804_label"
-  val shortFormSubmission                          = "submit_button"
+  val shortFormSubmission             = "submit_button"
 
   private def declarationPageCheck(): Unit =
     eventually(onPage(declarationTitle))
