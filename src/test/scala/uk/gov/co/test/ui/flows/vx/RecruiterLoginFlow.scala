@@ -1,6 +1,7 @@
 package uk.gov.co.test.ui.flows.vx
 
-import uk.gov.co.test.ui.pages.vx.{RecruiterDetails, VacancyBasePage}
+import uk.gov.co.test.ui.data.vx.RecruiterDetails
+import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 
 object RecruiterLoginFlow extends VacancyBasePage {
 

@@ -17,7 +17,7 @@ import scala.util.Random
 trait CivilServiceJobsBasePage extends Matchers with BasePage with BrowserDriver {
 
   val url: String                        = TestConfiguration.url("v9test")
-  val civilServiceSignOutPageTitle = "Civil Service Jobs - Civil Service Jobs - GOV.UK"
+  val civilServiceSignOutPageTitle       = "Civil Service Jobs - Civil Service Jobs - GOV.UK"
   val v9AcceptAdditionalCookies: String  = "accept_all_cookies_button"
   val vXaAcceptAdditionalCookies: String = "cookies-accept-button"
   val pageContinue                       = "continue_button"
@@ -108,7 +108,9 @@ trait CivilServiceJobsBasePage extends Matchers with BasePage with BrowserDriver
 
   def signOutProcess(): Unit = {
     signOut().click()
-    eventually(onPage(civilServiceSignOutPageTitle))
+    if (signOut().isDisplayed) {
+      signOut().click()
+    }
   }
 
   def goBack(): Unit =

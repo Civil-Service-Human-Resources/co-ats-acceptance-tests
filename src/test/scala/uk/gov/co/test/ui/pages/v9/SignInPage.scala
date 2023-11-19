@@ -24,6 +24,10 @@ object SignInPage extends CivilServiceJobsBasePage {
     "//*[@title='Sign out']"
   )
 
+  def editAccountDetails(): WebElement = waitForElementToBeClickableByPath(
+    "//*[@title='Edit your account details']"
+  )
+
   def createAnAccount(): WebElement = waitForElementToBeClickableByPath(
     "//*[@id='login_form']/div[2]/p[2]/a"
   )

@@ -14,8 +14,7 @@ class createVacancySpec extends BaseFeatureSpec {
   Feature("Recruiter Creates A Master Vacancy") {
     Scenario("A Recruiter Is Successful In Creating A New Templated Master Vacancy", RunInVX) {
       Given("a recruiter logs in vx config")
-      val registeredRecruiter = RECRUITER
-      fillRecruiterDetails(registeredRecruiter)
+      fillRecruiterDetails(RECRUITER)
 
       When("a recruiter creates a templated master vacancy")
       val masterVacancy = MASTER_VACANCY_DATA
@@ -29,8 +28,7 @@ class createVacancySpec extends BaseFeatureSpec {
 
     Scenario("An External Recruiter Offer Acceptance Does Not Send An Email", RunInVX) {
       Given("a recruiter logs in vx config")
-      val registeredRecruiter = RECRUITER
-      fillRecruiterDetails(registeredRecruiter)
+      fillRecruiterDetails(RECRUITER)
 
       When("a recruiter creates a grs vacancy (non-scs)")
       val grsVacancy   = DEFRA_APPLY_ONLY_DATA

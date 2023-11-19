@@ -6,17 +6,13 @@ import org.scalatest.concurrent.Eventually.eventually
 import org.scalatest.matchers.should.Matchers
 import uk.gov.co.test.ui.conf.TestConfiguration
 import uk.gov.co.test.ui.conf.TestConfiguration.readProperty
+import uk.gov.co.test.ui.data.vx.RecruiterDetails
 import uk.gov.co.test.ui.driver.BrowserDriver
 import uk.gov.co.test.ui.pages.BasePage
 import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.applicationClosingDate
 
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
-
-case class RecruiterDetails(
-  username: String,
-  password: String
-)
 
 trait VacancyBasePage extends Matchers with BasePage with BrowserDriver {
 
