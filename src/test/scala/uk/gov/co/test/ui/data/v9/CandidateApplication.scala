@@ -1,13 +1,14 @@
 package uk.gov.co.test.ui.data.v9
 
 import uk.gov.co.test.ui.pages.v9.SignInPage.{preferredFirstName, randomEmail, randomFirstName, randomLastName}
-import uk.gov.co.test.ui.pages.v9.shortform.{AppGuidanceDetails, DiversityDetails, EligibilityDetails, PersonalInfoDetails}
+import uk.gov.co.test.ui.pages.v9.shortform._
 
 case class ShortFormDetails(
   appGuidanceDetails: AppGuidanceDetails,
   eligibilityDetails: EligibilityDetails,
   personalInfoDetails: PersonalInfoDetails,
-  diversityDetails: DiversityDetails
+  diversityDetails: DiversityDetails,
+  declarationDetails: DeclarationDetails
 )
 
 object CANDIDATE_SHORT_FORM_DATA
@@ -15,7 +16,8 @@ object CANDIDATE_SHORT_FORM_DATA
       SHORT_FORM_APP_GUIDANCE,
       SHORT_FORM_ELIGIBILITY,
       SHORT_FORM_PERSONAL_INFO,
-      SHORT_FORM_DIVERSITY_MONITORING
+      SHORT_FORM_DIVERSITY_MONITORING,
+      SHORT_FORM_DECLARATION
     )
 
 object SHORT_FORM_APP_GUIDANCE
@@ -55,10 +57,13 @@ object SHORT_FORM_DIVERSITY_MONITORING
       "White",
       "English",
       "Christian",
-      "",
-      "",
-      "",
-      postcode = Option("")
+      "Technical",
+      "Self-employed/freelancer without employees",
+      "Independent or fee-paying school - no bursary",
+      postcode = Option("SK8 1BX")
+    )
 
-
+object SHORT_FORM_DECLARATION
+    extends DeclarationDetails(
+      true
     )

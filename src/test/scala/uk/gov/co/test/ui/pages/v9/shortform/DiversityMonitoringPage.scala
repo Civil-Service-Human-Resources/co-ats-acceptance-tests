@@ -4,6 +4,7 @@ import org.scalatest.concurrent.Eventually.eventually
 import uk.gov.co.test.ui.data.v9.ShortFormDetails
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
 import uk.gov.co.test.ui.pages.v9.shortform.ApplicationGuidancePage.formId
+import uk.gov.co.test.ui.pages.v9.shortform.PersonalInfoPage.enterPersonalInfo
 
 case class DiversityDetails(
   haveDisability: String,
@@ -22,62 +23,59 @@ case class DiversityDetails(
 
 object DiversityMonitoringPage extends CivilServiceJobsBasePage {
 
-  private lazy val diversityMonitoringTitle          = "Diversity monitoring - Civil Service Jobs - GOV.UK"
-  private lazy val haveDisabilityYesId               = s"${formId}_datafield_36491_1_1_729_label"
-  private lazy val haveDisabilityNoId                = s"${formId}_datafield_36491_1_1_730_label"
-  private lazy val haveDisabilityNotSayId            = s"${formId}_datafield_36491_1_1_731_label"
-  private lazy val yourGenderManId                   = s"${formId}_datafield_12784_1_1_27_label"
-  private lazy val yourGenderWomanId                 = s"${formId}_datafield_12784_1_1_28_label"
-  private lazy val yourGenderSelfDescribeId          = s"${formId}_datafield_12784_1_1_29_label"
-  private lazy val yourGenderNotSayId                = s"${formId}_datafield_12784_1_1_30_label"
-  private lazy val sexualOrientationStraightId       = s"${formId}_datafield_35296_1_1_4012_label"
-  private lazy val sexualOrientationGayId            = s"${formId}_datafield_35296_1_1_4016_label"
-  private lazy val sexualOrientationBisexualId       = s"${formId}_datafield_35296_1_1_4015_label"
-  private lazy val sexualOrientationSelfDescribeId   = s"${formId}_datafield_35296_1_1_4017_label"
-  private lazy val sexualOrientationNotSayId         = s"${formId}_datafield_35296_1_1_15391_label"
-  private lazy val currentAgeGroupId                 = s"${formId}_datafield_53438_1_1"
-  private lazy val nationalIdentityEnglishId         = s"${formId}_datafield_54157_1_1_14549_label"
-  private lazy val nationalIdentityWelshId           = s"${formId}_datafield_54157_1_1_14550_label"
-  private lazy val nationalIdentityScottishId        = s"${formId}_datafield_54157_1_1_14551_label"
-  private lazy val nationalIdentityNorthernIrishId   = s"${formId}_datafield_54157_1_1_14552_label"
-  private lazy val nationalIdentityBritishId         = s"${formId}_datafield_54157_1_1_14553_label"
-  private lazy val nationalIdentityOtherId           = s"${formId}_datafield_54157_1_1_14554_label"
-  private lazy val nationalIdentityNotSayId          = s"${formId}_datafield_54157_1_1_14555_label"
-  private lazy val ethnicGroupId                     = s"${formId}_datafield_53446_1_1"
-  private lazy val ethnicityId                       = s"${formId}_datafield_35302_1_1"
-  private lazy val religionOrBeliefId                = s"${formId}_datafield_53463_1_1"
-  private lazy val householdEarnerDidOption1Id       = s"${formId}_datafield_178072_1_1_48007_label"
-  private lazy val householdEarnerDidOption2Id       = s"${formId}_datafield_178072_1_1_48008_label"
-  private lazy val householdEarnerDidOption3Id       = s"${formId}_datafield_178072_1_1_48009_label"
-  private lazy val householdEarnerDidOption4Id       = s"${formId}_datafield_178072_1_1_48010_label"
-  private lazy val householdEarnerDidOption5Id       = s"${formId}_datafield_178072_1_1_48011_label"
-  private lazy val householdEarnerDidOption6Id       = s"${formId}_datafield_178072_1_1_48012_label"
-  private lazy val householdEarnerDidOption7Id       = s"${formId}_datafield_178072_1_1_48013_label"
-  private lazy val householdEarnerDidOption8Id       = s"${formId}_datafield_178072_1_1_48014_label"
-  private lazy val householdEarnerDidOption9Id       = s"${formId}_datafield_178072_1_1_48015_label"
-  private lazy val householdEarnerDidRetiredId       = s"${formId}_datafield_178072_1_1_48016_label"
-  private lazy val householdEarnerDidNotApplicableId = s"${formId}_datafield_178072_1_1_48017_label"
-  private lazy val householdEarnerDidDontKnowId      = s"${formId}_datafield_178072_1_1_48018_label"
-  private lazy val householdEarnerDidNotSayId        = s"${formId}_datafield_178072_1_1_48019_label"
-
-  private lazy val householdEarnerDidOption1 =
-    "Modern professional occupations such as: teacher/lecturer, nurse, physiotherapist, social worker, welfare officer, artist, musician, police officer (sergeant or above), software designer"
-  private lazy val householdEarnerDidOption2 =
-    "Clerical and intermediate occupations such as: secretary, personal assistant, clerical worker, office clerk, call centre agent, nursing auxiliary, nursery nurse"
-  private lazy val householdEarnerDidOption3 =
-    "Senior managers and administrators usually responsible for planning, organising and co-ordinating work and for finance such as: finance manager, chief executive"
-  private lazy val householdEarnerDidOption4 =
-    "Technical and craft occupations such as: motor mechanic, fitter, inspector, plumber, printer, tool maker, electrician, gardener, train driver"
-  private lazy val householdEarnerDidOption5 =
-    "Semi-routine manual and service occupations such as: postal worker, machine operative, security guard, caretaker, farm worker, catering assistant, receptionist, sales assistant"
-  private lazy val householdEarnerDidOption6 =
-    "Routine manual and service occupations such as: HGV driver, van driver, cleaner, porter, packer, sewing machinist, messenger, labourer, waiter / waitress, bar staff"
-  private lazy val householdEarnerDidOption7 =
-    "Middle or junior managers such as: office manager, retail manager, bank manager, restaurant manager, warehouse manager, publican"
-  private lazy val householdEarnerDidOption8 =
-    "Traditional professional occupations such as: accountant, solicitor, medical practitioner, scientist, civil/mechanical engineer"
-  private lazy val householdEarnerDidOption9 =
-    "Long term unemployed (claimed Jobseeker's Allowance or earlier unemployment benefit for more than a year)"
+  private lazy val diversityMonitoringTitle           = "Diversity monitoring - Civil Service Jobs - GOV.UK"
+  private lazy val haveDisabilityYesId                = s"${formId}_datafield_36491_1_1_729_label"
+  private lazy val haveDisabilityNoId                 = s"${formId}_datafield_36491_1_1_730_label"
+  private lazy val haveDisabilityNotSayId             = s"${formId}_datafield_36491_1_1_731_label"
+  private lazy val yourGenderManId                    = s"${formId}_datafield_12784_1_1_27_label"
+  private lazy val yourGenderWomanId                  = s"${formId}_datafield_12784_1_1_28_label"
+  private lazy val yourGenderSelfDescribeId           = s"${formId}_datafield_12784_1_1_29_label"
+  private lazy val yourGenderNotSayId                 = s"${formId}_datafield_12784_1_1_30_label"
+  private lazy val sexualOrientationStraightId        = s"${formId}_datafield_35296_1_1_4012_label"
+  private lazy val sexualOrientationGayId             = s"${formId}_datafield_35296_1_1_4016_label"
+  private lazy val sexualOrientationBisexualId        = s"${formId}_datafield_35296_1_1_4015_label"
+  private lazy val sexualOrientationSelfDescribeId    = s"${formId}_datafield_35296_1_1_4017_label"
+  private lazy val sexualOrientationNotSayId          = s"${formId}_datafield_35296_1_1_15391_label"
+  private lazy val currentAgeGroupId                  = s"${formId}_datafield_53438_1_1"
+  private lazy val nationalIdentityEnglishId          = s"${formId}_datafield_54157_1_1_14549_label"
+  private lazy val nationalIdentityWelshId            = s"${formId}_datafield_54157_1_1_14550_label"
+  private lazy val nationalIdentityScottishId         = s"${formId}_datafield_54157_1_1_14551_label"
+  private lazy val nationalIdentityNorthernIrishId    = s"${formId}_datafield_54157_1_1_14552_label"
+  private lazy val nationalIdentityBritishId          = s"${formId}_datafield_54157_1_1_14553_label"
+  private lazy val nationalIdentityOtherId            = s"${formId}_datafield_54157_1_1_14554_label"
+  private lazy val nationalIdentityNotSayId           = s"${formId}_datafield_54157_1_1_14555_label"
+  private lazy val ethnicGroupId                      = s"${formId}_datafield_53446_1_1"
+  private lazy val ethnicityId                        = s"${formId}_datafield_35302_1_1"
+  private lazy val religionOrBeliefId                 = s"${formId}_datafield_53463_1_1"
+  private lazy val earnerDidModernProfessionalId      = s"${formId}_datafield_178072_1_1_48007_label"
+  private lazy val earnerDidClericalId                = s"${formId}_datafield_178072_1_1_48008_label"
+  private lazy val earnerDidSeniorId                  = s"${formId}_datafield_178072_1_1_48009_label"
+  private lazy val earnerDidTechnicalId               = s"${formId}_datafield_178072_1_1_48010_label"
+  private lazy val earnerDidSemiRoutineManualId       = s"${formId}_datafield_178072_1_1_48011_label"
+  private lazy val earnerDidRoutineManualId           = s"${formId}_datafield_178072_1_1_48012_label"
+  private lazy val earnerDidJuniorId                  = s"${formId}_datafield_178072_1_1_48013_label"
+  private lazy val earnerDidTraditionalProfessionalId = s"${formId}_datafield_178072_1_1_48014_label"
+  private lazy val earnerDidLongTermUnemployedId      = s"${formId}_datafield_178072_1_1_48015_label"
+  private lazy val earnerDidRetiredId                 = s"${formId}_datafield_178072_1_1_48016_label"
+  private lazy val earnerDidNotApplicableId           = s"${formId}_datafield_178072_1_1_48017_label"
+  private lazy val earnerDidDontKnowId                = s"${formId}_datafield_178072_1_1_48018_label"
+  private lazy val earnerDidNotSayId                  = s"${formId}_datafield_178072_1_1_48019_label"
+  private lazy val earnerEmploymentEmployeeId         = s"${formId}_datafield_178075_1_1_48020_label"
+  private lazy val earnerEmploymentSelfEmployedId     = s"${formId}_datafield_178075_1_1_48021_label"
+  private lazy val earnerEmploymentFreelancerId       = s"${formId}_datafield_178075_1_1_48022_label"
+  private lazy val earnerEmploymentNotWorkingId       = s"${formId}_datafield_178075_1_1_48023_label"
+  private lazy val earnerEmploymentNotApplicableId    = s"${formId}_datafield_178075_1_1_48024_label"
+  private lazy val earnerEmploymentDontKnowId         = s"${formId}_datafield_178075_1_1_48025_label"
+  private lazy val earnerEmploymentNotSayId           = s"${formId}_datafield_178075_1_1_48026_label"
+  private lazy val schoolStateAcademicId              = s"${formId}_datafield_178114_1_1_48027_label"
+  private lazy val schoolStateNonSelectiveId          = s"${formId}_datafield_178114_1_1_48028_label"
+  private lazy val schoolStateIndependentId           = s"${formId}_datafield_178114_1_1_48029_label"
+  private lazy val schoolStateIndependentNonBursaryId = s"${formId}_datafield_178114_1_1_48030_label"
+  private lazy val schoolStateOutsideUKId             = s"${formId}_datafield_178114_1_1_48031_label"
+  private lazy val schoolStateOtherId                 = s"${formId}_datafield_178114_1_1_48032_label"
+  private lazy val schoolStateDontKnowId              = s"${formId}_datafield_178114_1_1_48033_label"
+  private lazy val schoolStateNotSayId                = s"${formId}_datafield_178114_1_1_48034_label"
+  private lazy val postcodeInputId                    = s"${formId}_datafield_165298_1_1"
 
   private def diversityMonitoringPageCheck(): Unit =
     eventually(onPage(diversityMonitoringTitle))
@@ -131,16 +129,51 @@ object DiversityMonitoringPage extends CivilServiceJobsBasePage {
 
   private def selectHouseholdEarnerDid(diversityDetails: DiversityDetails): Unit =
     diversityDetails.householdEarnerDid match {
-      case householdEarnerDidOption1 => radioSelect(householdEarnerDidOption1Id)
-      case ""                        => radioSelect(nationalIdentityWelshId)
-      case "Scottish"                => radioSelect(nationalIdentityScottishId)
-      case "Northern Irish"          => radioSelect(nationalIdentityNorthernIrishId)
-      case "British"                 => radioSelect(nationalIdentityBritishId)
-      case "Other"                   => radioSelect(nationalIdentityOtherId)
-      case "Prefer not to disclose"  => radioSelect(nationalIdentityNotSayId)
+      case "Modern Professional"      => radioSelect(earnerDidModernProfessionalId)
+      case "Clerical"                 => radioSelect(earnerDidClericalId)
+      case "Senior"                   => radioSelect(earnerDidSeniorId)
+      case "Technical"                => radioSelect(earnerDidTechnicalId)
+      case "Semi-Routine Manual"      => radioSelect(earnerDidSemiRoutineManualId)
+      case "Routine Manual"           => radioSelect(earnerDidRoutineManualId)
+      case "Junior"                   => radioSelect(earnerDidJuniorId)
+      case "Traditional Professional" => radioSelect(earnerDidTraditionalProfessionalId)
+      case "Long Term Unemployed"     => radioSelect(earnerDidLongTermUnemployedId)
+      case "Retired"                  => radioSelect(earnerDidRetiredId)
+      case "Not applicable"           => radioSelect(earnerDidNotApplicableId)
+      case "Don't know"               => radioSelect(earnerDidDontKnowId)
+      case "Prefer not to say"        => radioSelect(earnerDidNotSayId)
     }
 
-  private val diversity: Seq[DiversityDetails => Unit] = Seq(
+  private def selectHouseholdEarnerTypeOfEmployed(diversityDetails: DiversityDetails): Unit =
+    diversityDetails.employeeOrSelfEmployed match {
+      case "Employee"                                   => radioSelect(earnerEmploymentEmployeeId)
+      case "Self-employed with employees"               => radioSelect(earnerEmploymentSelfEmployedId)
+      case "Self-employed/freelancer without employees" => radioSelect(earnerEmploymentFreelancerId)
+      case "Not working"                                => radioSelect(earnerEmploymentNotWorkingId)
+      case "Not applicable"                             => radioSelect(earnerEmploymentNotApplicableId)
+      case "Don’t know"                                 => radioSelect(earnerEmploymentDontKnowId)
+      case "Prefer not to say"                          => radioSelect(earnerEmploymentNotSayId)
+    }
+
+  private def selectTypeOfSchoolAttended(diversityDetails: DiversityDetails): Unit =
+    diversityDetails.typeOfSchoolAttended match {
+      case "State-run or state-funded school - selective on academic, faith or other grounds" =>
+        radioSelect(schoolStateAcademicId)
+      case "State-run or state-funded school - non-selective"                                 => radioSelect(schoolStateNonSelectiveId)
+      case "Independent or fee-paying school - bursary"                                       => radioSelect(schoolStateIndependentId)
+      case "Independent or fee-paying school - no bursary"                                    => radioSelect(schoolStateIndependentNonBursaryId)
+      case "Attended school outside the UK"                                                   => radioSelect(schoolStateOutsideUKId)
+      case "Other"                                                                            => radioSelect(schoolStateOtherId)
+      case "Don’t know"                                                                       => radioSelect(schoolStateDontKnowId)
+      case "Prefer not to say"                                                                => radioSelect(schoolStateNotSayId)
+    }
+
+  private def enterPostcode(diversityDetails: DiversityDetails): Unit =
+    if (extractValue(postcodeInputId).isEmpty) {
+      enterPersonalInfo(postcodeInputId, diversityDetails.postcode.get)
+    } else extractValue(postcodeInputId) shouldEqual diversityDetails.postcode
+
+  private val diversity: Seq[DiversityDetails => Unit]                = Seq(
     selectConsiderToHaveDisability,
     selectYourGender,
     selectSexualOrientation,
@@ -149,7 +182,10 @@ object DiversityMonitoringPage extends CivilServiceJobsBasePage {
     selectEthnicGroup,
     selectEthnicity,
     selectReligionOrBelief,
-    selectHouseholdEarnerDid
+    selectHouseholdEarnerDid,
+    selectHouseholdEarnerTypeOfEmployed,
+    selectTypeOfSchoolAttended,
+    enterPostcode
   )
 
   def diversityMonitoringPage(shortFormDetails: ShortFormDetails): Unit = {
