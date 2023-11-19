@@ -3,43 +3,43 @@ package uk.gov.co.test.ui.data.v9
 import uk.gov.co.test.ui.pages.v9.SignInPage.{preferredFirstName, randomEmail, randomFirstName, randomLastName}
 import uk.gov.co.test.ui.pages.v9.shortform._
 
-case class ShortFormDetails(
-  appGuidanceDetails: AppGuidanceDetails,
-  eligibilityDetails: EligibilityDetails,
-  personalInfoDetails: PersonalInfoDetails,
-  diversityDetails: DiversityDetails,
-  declarationDetails: DeclarationDetails
-)
+//case class ShortFormDetails(
+//  appGuidanceDetails: AppGuidanceDetails,
+//  eligibilityDetails: EligibilityDetails,
+//  personalInfoDetails: PersonalInfoDetails,
+//  diversityDetails: DiversityDetails,
+//  declarationDetails: DeclarationDetails
+//)
 
-object CANDIDATE_SHORT_FORM_DATA
+object CANDIDATE_SHORT_FORM_DATA_2
     extends ShortFormDetails(
-      SHORT_FORM_APP_GUIDANCE,
-      SHORT_FORM_ELIGIBILITY,
-      SHORT_FORM_PERSONAL_INFO,
-      SHORT_FORM_DIVERSITY_MONITORING,
-      SHORT_FORM_DECLARATION
+      SHORT_FORM_APP_GUIDANCE_2,
+      SHORT_FORM_ELIGIBILITY_2,
+      SHORT_FORM_PERSONAL_INFO_2,
+      SHORT_FORM_DIVERSITY_MONITORING_2,
+      SHORT_FORM_DECLARATION_2
     )
 
-object SHORT_FORM_APP_GUIDANCE
+object SHORT_FORM_APP_GUIDANCE_2
     extends AppGuidanceDetails(
       true
     )
 
-object SHORT_FORM_ELIGIBILITY
+object SHORT_FORM_ELIGIBILITY_2
     extends EligibilityDetails(
-      true,
+      false,
       "Attorney General's Office",
       true,
       true
     )
 
-object SHORT_FORM_PERSONAL_INFO
+object SHORT_FORM_PERSONAL_INFO_2
     extends PersonalInfoDetails(
-      s"$randomFirstName",
-      s"$randomLastName",
+      firstName = s"$randomFirstName",
+      lastName = s"$randomLastName",
       preferredFirstName = Option(s"$preferredFirstName"),
-      "01620000000",
-      secondaryNo = Option("07700000000"),
+      "01520000000",
+      secondaryNo = Option("07770000000"),
       s"$randomEmail",
       false,
       true,
@@ -47,14 +47,14 @@ object SHORT_FORM_PERSONAL_INFO
       redeploymentScheme = Option(false)
     )
 
-object SHORT_FORM_DIVERSITY_MONITORING
+object SHORT_FORM_DIVERSITY_MONITORING_2
     extends DiversityDetails(
       "No",
       "Man",
-      "Heterosexual or straight",
       "Prefer not to disclose",
-      "English",
-      "White",
+      "35-39",
+      "Welsh",
+      "Asian / Asian British",
       ethnicity = Map(
         "White"                                       -> List(
           "English",
@@ -88,15 +88,15 @@ object SHORT_FORM_DIVERSITY_MONITORING
           "Other ethnic group"
         )
       ),
-      "Auto tester",
-      "Christian",
-      "Technical",
-      "Self-employed/freelancer without employees",
-      "Independent or fee-paying school - no bursary",
+      "Auto tester2",
+      "Muslim",
+      "Traditional Professional",
+      "Not working",
+      "Attended school outside the UK",
       postcode = Option("SK8 1BX")
     )
 
-object SHORT_FORM_DECLARATION
+object SHORT_FORM_DECLARATION_2
     extends DeclarationDetails(
       true
     )

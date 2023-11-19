@@ -19,8 +19,9 @@ object ApplicationGuidancePage extends CivilServiceJobsBasePage {
 
   private def confirmApplicationGuidance(appGuidanceDetails: AppGuidanceDetails): Unit = {
     eventually(onPage(appGuidanceTitle))
-    if (!vXSearchCookiesById().isEmpty) vXAcceptAllCookies()
-    extractAppFormId()
+    if (vXSearchCookiesById().isDisplayed) {
+      vXAcceptAllCookies()
+    }
     if (appGuidanceDetails.confirmAppGuidance) {
       scrollToElement(By.id(pageContinue))
       clickOn(pageContinue)
@@ -29,16 +30,18 @@ object ApplicationGuidancePage extends CivilServiceJobsBasePage {
 
   private def extractAppFormId(): String = {
     val formClass = driver.findElement(By.xpath(formIdPath))
-    formId = formClass.getAttribute("id")
-    formId
+    formClass.getAttribute("id")
   }
 
   private val appGuidance: Seq[AppGuidanceDetails => Unit] = Seq(
     confirmApplicationGuidance
   )
 
-  def appGuidancePage(shortFormDetails: ShortFormDetails): Unit =
+  def appGuidancePage(shortFormDetails: ShortFormDetails): Unit = {
     appGuidance.foreach { f =>
       f(shortFormDetails.appGuidanceDetails)
     }
+    formId = extractAppFormId()
+    println(formId)
+  }
 }

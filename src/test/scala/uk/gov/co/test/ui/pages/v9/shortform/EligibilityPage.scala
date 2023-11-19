@@ -1,5 +1,6 @@
 package uk.gov.co.test.ui.pages.v9.shortform
 
+import org.openqa.selenium.By
 import org.scalatest.concurrent.Eventually.eventually
 import uk.gov.co.test.ui.data.v9.ShortFormDetails
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
@@ -34,9 +35,10 @@ object EligibilityPage extends CivilServiceJobsBasePage {
     } else radioSelect(currentCivilServantNoId)
   }
 
-  private def selectNationalityReqMet(eligibilityDetails: EligibilityDetails): Unit =
+  private def selectNationalityReqMet(eligibilityDetails: EligibilityDetails): Unit = {
     if (eligibilityDetails.nationalityReqMet) radioSelect(nationalityReqMetYesId)
     else radioSelect(nationalityReqMetNoId)
+  }
 
   private def selectRightToRemain(eligibilityDetails: EligibilityDetails): Unit =
     if (eligibilityDetails.rightToRemain) radioSelect(rightToRemainYesId)

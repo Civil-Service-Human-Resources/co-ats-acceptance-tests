@@ -1,6 +1,6 @@
 package uk.gov.co.test.ui.specs.vx
 
-import uk.gov.co.test.ui.data.v9.REGISTER_CANDIDATE
+import uk.gov.co.test.ui.data.v9.REGISTER_CANDIDATE_1
 import uk.gov.co.test.ui.data.vx.{DEFRA_APPLY_ONLY_DATA, MASTER_VACANCY_DATA, RECRUITER}
 import uk.gov.co.test.ui.flows.v9.RegisterCandidateFlow
 import uk.gov.co.test.ui.flows.vx.MasterVacancyFlow.fillMasterVacancyForm
@@ -19,7 +19,7 @@ class createVacancySpec extends BaseFeatureSpec {
       When("a recruiter creates a templated master vacancy")
       val masterVacancy = MASTER_VACANCY_DATA
       fillMasterVacancyForm(masterVacancy)
-      val newCandidate  = REGISTER_CANDIDATE
+      val newCandidate  = REGISTER_CANDIDATE_1
       navigateToCreateAccountPage()
       RegisterCandidateFlow.fillNewCandidateDetails(newCandidate)
 
@@ -33,7 +33,7 @@ class createVacancySpec extends BaseFeatureSpec {
       When("a recruiter creates a grs vacancy (non-scs)")
       val grsVacancy   = DEFRA_APPLY_ONLY_DATA
       fillNewVacancyForm(grsVacancy)
-      val newCandidate = REGISTER_CANDIDATE
+      val newCandidate = REGISTER_CANDIDATE_1
       navigateToCreateAccountPage()
       RegisterCandidateFlow.fillNewCandidateDetails(newCandidate)
 

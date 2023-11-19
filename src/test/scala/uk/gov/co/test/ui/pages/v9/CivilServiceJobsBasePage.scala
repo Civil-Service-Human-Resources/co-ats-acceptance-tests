@@ -44,6 +44,10 @@ trait CivilServiceJobsBasePage extends Matchers with BasePage with BrowserDriver
     randomLastName
   }
 
+//  def constructEmailAddress(): String = {
+//    var randomEmail: String           = s"${randomFirstName.toLowerCase}.${randomLastName.toLowerCase}@example.com"
+//  }
+
 //  def randomNames(): (String, String) = {
 //    val fake            = new Faker()
 //    val randomFirstName = fake.name().firstName()
@@ -68,13 +72,13 @@ trait CivilServiceJobsBasePage extends Matchers with BasePage with BrowserDriver
   def v9SearchCookiesById(): util.List[WebElement] =
     driver.findElements(By.id(v9AcceptAdditionalCookies))
 
-  def vXSearchCookiesById(): util.List[WebElement] =
-    driver.findElements(By.id(vXaAcceptAdditionalCookies))
+  def vXSearchCookiesById(): WebElement =
+    driver.findElement(By.id(vXaAcceptAdditionalCookies))
 
   def navigateToV9Test(): Unit = {
     go to url
     eventually(onPage(civilServiceJobsPageTitle))
-    generateCandidateDetails()
+//    generateCandidateDetails()
   }
 
   def generateCandidateDetails(): Unit = {
@@ -106,12 +110,8 @@ trait CivilServiceJobsBasePage extends Matchers with BasePage with BrowserDriver
   def linkUrl(linkText: String): String =
     driver.findElement(By.linkText(linkText)).getAttribute("href")
 
-  def signOutProcess(): Unit = {
+  def signOutProcess(): Unit =
     signOut().click()
-    if (signOut().isDisplayed) {
-      signOut().click()
-    }
-  }
 
   def goBack(): Unit =
     clickOn("back_button")
