@@ -5,7 +5,7 @@ lazy val testSuite = (project in file("."))
   .settings(
     name := "co-ats-acceptance-tests",
     version := "0.1.0",
-    scalaVersion := "2.12.12",
+    scalaVersion := "2.13.12",
     scalacOptions ++= Seq("-unchecked", "-deprecation", "-feature"),
     parallelExecution in Test := false,
     libraryDependencies ++= Dependencies.test,

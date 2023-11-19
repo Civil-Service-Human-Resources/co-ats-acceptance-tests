@@ -13,7 +13,7 @@ object Dependencies {
     "net.lightbody.bmp"           % "browsermob-core" % "2.1.5"   % Test,
     "com.typesafe.scala-logging" %% "scala-logging"   % "3.9.5"   % Test,
     "ch.qos.logback"              % "logback-classic" % "1.2.10"   % Test,
-    "com.github.javafaker"       % "javafaker"       % "0.15"    % Test
+    "com.github.javafaker"        % "javafaker"       % "0.15"     % Test
   )
 
 }

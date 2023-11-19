@@ -51,11 +51,14 @@ object SHORT_FORM_DIVERSITY_MONITORING
       "Man",
       "Heterosexual or straight",
       "Prefer not to disclose",
-      "",
-      "",
-      "",
+      "English",
+      "White",
+      "English",
+      "Christian",
       "",
       "",
       "",
       postcode = Option("")
+
+
     )
