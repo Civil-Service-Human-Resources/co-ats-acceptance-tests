@@ -13,7 +13,8 @@ case class DiversityDetails(
   currentAgeGroup: String,
   nationalIdentity: String,
   ethnicGroup: String,
-  ethnicity: String,
+  ethnicity: Map[String, List[String]],
+  otherEthnicity: String,
   religionOrBelief: String,
   householdEarnerDid: String,
   employeeOrSelfEmployed: String,
@@ -76,6 +77,7 @@ object DiversityMonitoringPage extends CivilServiceJobsBasePage {
   private lazy val schoolStateDontKnowId              = s"${formId}_datafield_178114_1_1_48033_label"
   private lazy val schoolStateNotSayId                = s"${formId}_datafield_178114_1_1_48034_label"
   private lazy val postcodeInputId                    = s"${formId}_datafield_165298_1_1"
+  private lazy val otherEthnicityInputId              = s"${formId}_datafield_35261_1_1"
 
   private def diversityMonitoringPageCheck(): Unit =
     eventually(onPage(diversityMonitoringTitle))
@@ -121,8 +123,16 @@ object DiversityMonitoringPage extends CivilServiceJobsBasePage {
   private def selectEthnicGroup(diversityDetails: DiversityDetails): Unit =
     selectDropdownOption(ethnicGroupId, diversityDetails.ethnicGroup)
 
-  private def selectEthnicity(diversityDetails: DiversityDetails): Unit =
-    selectDropdownOption(ethnicityId, diversityDetails.ethnicity)
+  private def selectEthnicity(diversityDetails: DiversityDetails): Unit = {
+    val ethnic = diversityDetails.ethnicity(diversityDetails.ethnicGroup).tail.head
+    selectDropdownOption(ethnicityId, ethnic)
+    if (
+      ethnic == "Other ethnic group" || ethnic == "Any other White background" || ethnic == "Any other Mixed background" ||
+      ethnic == "Any other Asian background" || ethnic == "Any other Black background"
+    ) {
+      enterPersonalInfo(otherEthnicityInputId, diversityDetails.otherEthnicity)
+    }
+  }
 
   private def selectReligionOrBelief(diversityDetails: DiversityDetails): Unit =
     selectDropdownOption(religionOrBeliefId, diversityDetails.religionOrBelief)

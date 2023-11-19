@@ -54,8 +54,41 @@ object SHORT_FORM_DIVERSITY_MONITORING
       "Heterosexual or straight",
       "Prefer not to disclose",
       "English",
-      "White",
-      "English",
+      "Other ethnic group",
+      ethnicity = Map(
+        "White"                                       -> List(
+          "English",
+          "Welsh",
+          "Scottish",
+          "Northern Irish",
+          "Irish",
+          "Gypsy or Irish Traveller",
+          "Any other White background"
+        ),
+        "Mixed / multiple ethnic groups"              -> List(
+          "Mixed White and Asian",
+          "Mixed White and Black African",
+          "Mixed White and Black Caribbean",
+          "Any other Mixed background"
+        ),
+        "Asian / Asian British"                       -> List(
+          "Asian or Asian British - Bangladeshi",
+          "Asian or Asian British - Indian",
+          "Asian or Asian British - Pakistani",
+          "Chinese",
+          "Any other Asian background"
+        ),
+        "Black / African / Caribbean / Black British" -> List(
+          "Black or Black British - African",
+          "Black or Black British - Caribbean",
+          "Any other Black background"
+        ),
+        "Other ethnic group"                          -> List(
+          "Arab",
+          "Other ethnic group"
+        )
+      ),
+      "Auto tester",
       "Christian",
       "Technical",
       "Self-employed/freelancer without employees",
