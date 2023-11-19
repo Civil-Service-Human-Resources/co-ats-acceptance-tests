@@ -54,7 +54,7 @@ object SHORT_FORM_DIVERSITY_MONITORING
       "Heterosexual or straight",
       "Prefer not to disclose",
       "English",
-      "Other ethnic group",
+      "White",
       ethnicity = Map(
         "White"                                       -> List(
           "English",

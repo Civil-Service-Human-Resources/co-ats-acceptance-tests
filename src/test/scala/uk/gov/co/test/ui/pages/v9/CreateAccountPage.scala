@@ -64,7 +64,7 @@ object CreateAccountPage extends CivilServiceJobsBasePage {
     if (user.agreeTermsAndConditions) agreeTermsAndConditions().select()
     else println("Unable to create account without agreeing on T&Cs")
 
-  def createNewAccount(): Unit =
+  def registerNewAccount(): Unit =
     clickOn("update")
 
 }

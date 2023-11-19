@@ -2,7 +2,7 @@ package uk.gov.co.test.ui.flows.v9
 
 import uk.gov.co.test.ui.data.v9.ShortFormDetails
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
-import uk.gov.co.test.ui.pages.v9.SearchJobsPage.goToJobApply
+import uk.gov.co.test.ui.pages.v9.SearchJobsPage.jobSearchAndApplyFlow
 import uk.gov.co.test.ui.pages.v9.shortform.ApplicationGuidancePage.appGuidancePage
 import uk.gov.co.test.ui.pages.v9.shortform.DeclarationPage.{declarationPage, shortFormSubmission}
 import uk.gov.co.test.ui.pages.v9.shortform.DiversityMonitoringPage.diversityMonitoringPage
@@ -20,7 +20,7 @@ object ShortFormFlow extends CivilServiceJobsBasePage {
   )
 
   def fillShortFormDetails(shortFormDetails: ShortFormDetails): Unit = {
-    goToJobApply()
+    jobSearchAndApplyFlow("OGDGCCO", "what")
     shortForm.foreach { f =>
       f(shortFormDetails)
     }

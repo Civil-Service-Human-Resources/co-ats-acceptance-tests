@@ -1,9 +1,8 @@
 package uk.gov.co.test.ui.specs.v9
 
 import uk.gov.co.test.ui.data.v9.{CANDIDATE_SHORT_FORM_DATA, REGISTERED_CANDIDATE, REGISTER_CANDIDATE}
-import uk.gov.co.test.ui.flows.v9.ShortFormFlow.fillShortFormDetails
 import uk.gov.co.test.ui.flows.v9.RegisterCandidateFlow.fillNewCandidateDetails
-import uk.gov.co.test.ui.pages.v9.CreateAccountPage.navigateToCreateAccountPage
+import uk.gov.co.test.ui.flows.v9.ShortFormFlow.fillShortFormDetails
 import uk.gov.co.test.ui.pages.v9.SearchJobsPage.{candidateDisplayName, navigateToSignInOrCreateAccount}
 import uk.gov.co.test.ui.pages.v9.SignInPage.{candidateFullName, candidateSignIn}
 import uk.gov.co.test.ui.specs.BaseFeatureSpec
@@ -25,13 +24,10 @@ class ApplicationSpec extends BaseFeatureSpec {
 
     Scenario("A Newly Registered Candidate Applies For A Job", RunInV9) {
       Given("A candidate registers a new account")
-      val newCandidate = REGISTER_CANDIDATE
-      navigateToCreateAccountPage()
-      fillNewCandidateDetails(newCandidate)
+      fillNewCandidateDetails(REGISTER_CANDIDATE)
 
       When("The candidate completes the short form")
-      val candidateDetails = CANDIDATE_SHORT_FORM_DATA
-      fillShortFormDetails(candidateDetails)
+      fillShortFormDetails(CANDIDATE_SHORT_FORM_DATA)
 
       Then("The candidate is able to see their account")
     }

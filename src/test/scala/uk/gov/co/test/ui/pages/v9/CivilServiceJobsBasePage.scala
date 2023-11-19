@@ -8,7 +8,7 @@ import org.scalatest.matchers.should.Matchers
 import uk.gov.co.test.ui.conf.TestConfiguration
 import uk.gov.co.test.ui.driver.BrowserDriver
 import uk.gov.co.test.ui.pages.BasePage
-import uk.gov.co.test.ui.pages.v9.SearchJobsPage.cSSearchJobsTitle
+import uk.gov.co.test.ui.pages.v9.SearchJobsPage.civilServiceJobsPageTitle
 import uk.gov.co.test.ui.pages.v9.SignInPage.signOut
 
 import java.util
@@ -17,6 +17,7 @@ import scala.util.Random
 trait CivilServiceJobsBasePage extends Matchers with BasePage with BrowserDriver {
 
   val url: String                        = TestConfiguration.url("v9test")
+  val civilServiceSignOutPageTitle = "Civil Service Jobs - Civil Service Jobs - GOV.UK"
   val v9AcceptAdditionalCookies: String  = "accept_all_cookies_button"
   val vXaAcceptAdditionalCookies: String = "cookies-accept-button"
   val pageContinue                       = "continue_button"
@@ -72,7 +73,7 @@ trait CivilServiceJobsBasePage extends Matchers with BasePage with BrowserDriver
 
   def navigateToV9Test(): Unit = {
     go to url
-    eventually(onPage(cSSearchJobsTitle))
+    eventually(onPage(civilServiceJobsPageTitle))
     generateCandidateDetails()
   }
 
@@ -107,7 +108,7 @@ trait CivilServiceJobsBasePage extends Matchers with BasePage with BrowserDriver
 
   def signOutProcess(): Unit = {
     signOut().click()
-    eventually(pageTitle shouldEqual cSSearchJobsTitle)
+    eventually(onPage(civilServiceSignOutPageTitle))
   }
 
   def goBack(): Unit =

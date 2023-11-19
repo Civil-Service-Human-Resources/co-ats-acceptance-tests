@@ -1,6 +1,6 @@
 package uk.gov.co.test.ui.flows.v9
 
-import uk.gov.co.test.ui.pages.v9.CreateAccountPage.{createNewAccount, enterConfirmEmail, enterConfirmPassword, enterEmail, enterFirstName, enterLastName, enterPassword, selectEmployeeType, selectTermsAndConditions}
+import uk.gov.co.test.ui.pages.v9.CreateAccountPage.{enterConfirmEmail, enterConfirmPassword, enterEmail, enterFirstName, enterLastName, enterPassword, navigateToCreateAccountPage, registerNewAccount, selectEmployeeType, selectTermsAndConditions}
 import uk.gov.co.test.ui.pages.v9.{CandidateDetails, CivilServiceJobsBasePage}
 
 object RegisterCandidateFlow extends CivilServiceJobsBasePage {
@@ -17,9 +17,10 @@ object RegisterCandidateFlow extends CivilServiceJobsBasePage {
   )
 
   def fillNewCandidateDetails(user: CandidateDetails): Unit = {
+    navigateToCreateAccountPage()
     fields.foreach { f =>
       f(user)
     }
-    createNewAccount()
+    registerNewAccount()
   }
 }

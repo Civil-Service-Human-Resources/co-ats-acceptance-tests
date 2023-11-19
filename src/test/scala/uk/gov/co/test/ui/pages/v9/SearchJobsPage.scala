@@ -5,13 +5,12 @@ import org.scalatest.concurrent.Eventually.eventually
 
 object SearchJobsPage extends CivilServiceJobsBasePage {
 
+  val civilServiceJobsPageTitle     = "Civil Service job search - Civil Service Jobs - GOV.UK"
   val signInCreateAccountText       = "Sign in or create an account"
-  val signInCreateAccountTextWelsh  = "Mewngofnodi neu greu cyfrif"
-  val cSSearchJobsTitle             = "Civil Service job search - Civil Service Jobs - GOV.UK"
   val cSJobSearchHeader             = "Civil Service job search"
-  val cSJobSearchHeaderWelsh        = "Chwilio am swydd yn y Gwasanaeth Sifil"
   val accountCreatedSuccessMessage1 = "Success"
   val accountCreatedSuccessMessage2 = "Account created"
+  val navigateToHomeSearchPath      = ".//a[@title='Search for jobs']"
 
   def accountCreatedSuccess1(): String =
     waitForElementClickableByTag("h2").getText
@@ -23,22 +22,38 @@ object SearchJobsPage extends CivilServiceJobsBasePage {
     waitForVisibilityOfElement(By.className("logindisplayname")).getText
 
   def navigateToSignInOrCreateAccount(): Unit = {
-    pageTitle equals cSSearchJobsTitle
+    onPage(civilServiceJobsPageTitle)
     waitForVisibilityOfElementByPathLast(s".//*[@title='$signInCreateAccountText']").click()
   }
 
-  def enterWhatAndSearch(jobId: String): Unit = {
-    val whatField = waitForVisibilityOfElement(By.name("what"))
-    whatField.sendKeys(jobId)
+  def useSearchFields(searchCriteria: String, searchPathway: String): Unit = {
+    val searchField = waitForVisibilityOfElement(By.name(searchPathway))
+    searchField.sendKeys(searchCriteria)
+  }
+
+  def enterSearchCriteria(searchCriteria: String, searchPathway: String): Unit = {
+    if (searchPathway.nonEmpty) {
+      searchPathway match {
+        case "what"  => useSearchFields(searchCriteria, searchPathway)
+        case "where" => useSearchFields(searchCriteria, searchPathway)
+        case _       => throw new IllegalStateException("Valid search option needs to be either 'What' or 'Where'")
+      }
+    }
     clickOn("search_button")
   }
 
-  def goToJobApply(): Unit = {
-    val jobPath = ".//a[text()='OGDGCCO']"
-    SearchJobsPage.enterWhatAndSearch("OGDGCCO")
-    val job     = waitForVisibilityOfElementByPath(jobPath)
-    job.click()
-    eventually(onPage("OGDGCCO - Civil Service Jobs - GOV.UK"))
+  def selectJobDetails(jobTitle: String): Unit = {
+    val jobDetailsPath = s".//a[text()='$jobTitle']"
+    val title          = waitForVisibilityOfElementByPath(jobDetailsPath)
+    title.click()
+  }
+
+  def jobSearchAndApplyFlow(searchCriteria: String, searchPathway: String): Unit = {
+    waitForVisibilityOfElementByPath(navigateToHomeSearchPath).click()
+    onPage(civilServiceJobsPageTitle)
+    enterSearchCriteria(searchCriteria, searchPathway)
+    selectJobDetails(searchCriteria)
+    eventually(onPage(s"$searchCriteria - Civil Service Jobs - GOV.UK"))
     clickOn("login_button")
     driver.navigate().refresh()
   }
