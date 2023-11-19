@@ -7,6 +7,7 @@ import uk.gov.co.test.ui.pages.v9.SignInPage.createAnAccount
 case class CandidateDetails(
   firstname: String,
   lastname: String,
+  preferredFirstName: String,
   email: String,
   password: String,
   isEmployeeExistingPublicSector: Boolean,

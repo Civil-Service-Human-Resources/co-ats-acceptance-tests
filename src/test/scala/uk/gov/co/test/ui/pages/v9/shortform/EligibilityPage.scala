@@ -1,6 +1,5 @@
 package uk.gov.co.test.ui.pages.v9.shortform
 
-import org.openqa.selenium.By
 import org.scalatest.concurrent.Eventually.eventually
 import uk.gov.co.test.ui.data.v9.ShortFormDetails
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
@@ -15,14 +14,20 @@ case class EligibilityDetails(
 
 object EligibilityPage extends CivilServiceJobsBasePage {
 
-  private lazy val eligibilityTitle         = "Eligibility - Civil Service Jobs - GOV.UK"
-  private lazy val currentCivilServantYesId = s"${formId}_datafield_87767_1_1_1_label"
-  private lazy val currentCivilServantNoId  = s"${formId}_datafield_87767_1_1_2_label"
-  private lazy val homeDepartmentSelectId   = s"${formId}_datafield_177937_1_1"
-  private lazy val nationalityReqMetYesId   = s"${formId}_datafield_44636_1_1_1_label"
-  private lazy val nationalityReqMetNoId    = s"${formId}_datafield_44636_1_1_2_label"
-  private lazy val rightToRemainYesId       = s"${formId}_datafield_44639_1_1_1_label"
-  private lazy val rightToRemainNoId        = s"${formId}_datafield_44639_1_1_2_label"
+  private lazy val eligibilityTitle = "Eligibility - Civil Service Jobs - GOV.UK"
+  def currentCivilServantYesId      = s"${formId}_datafield_87767_1_1_1_label"
+  def currentCivilServantNoId       = s"${formId}_datafield_87767_1_1_2_label"
+  def homeDepartmentSelectId        = s"${formId}_datafield_177937_1_1"
+  def nationalityReqMetYesId        = s"${formId}_datafield_44636_1_1_1_label"
+  def nationalityReqMetNoId         = s"${formId}_datafield_44636_1_1_2_label"
+  def rightToRemainYesId            = s"${formId}_datafield_44639_1_1_1_label"
+  def rightToRemainNoId             = s"${formId}_datafield_44639_1_1_2_label"
+  var civilServant: String          = ""
+
+  private def isCivilServant(eligibilityDetails: EligibilityDetails): String = {
+    val value = eligibilityDetails.currentCivilServant
+    value.toString
+  }
 
   private def eligibilityPageCheck(): Unit =
     eventually(onPage(eligibilityTitle))
@@ -35,10 +40,9 @@ object EligibilityPage extends CivilServiceJobsBasePage {
     } else radioSelect(currentCivilServantNoId)
   }
 
-  private def selectNationalityReqMet(eligibilityDetails: EligibilityDetails): Unit = {
+  private def selectNationalityReqMet(eligibilityDetails: EligibilityDetails): Unit =
     if (eligibilityDetails.nationalityReqMet) radioSelect(nationalityReqMetYesId)
     else radioSelect(nationalityReqMetNoId)
-  }
 
   private def selectRightToRemain(eligibilityDetails: EligibilityDetails): Unit =
     if (eligibilityDetails.rightToRemain) radioSelect(rightToRemainYesId)
@@ -54,6 +58,7 @@ object EligibilityPage extends CivilServiceJobsBasePage {
     eligibility.foreach { f =>
       f(shortFormDetails.eligibilityDetails)
     }
+    civilServant = isCivilServant(shortFormDetails.eligibilityDetails)
     clickOn(pageContinue)
   }
 }

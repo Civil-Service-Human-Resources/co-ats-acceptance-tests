@@ -24,7 +24,7 @@ trait CivilServiceJobsBasePage extends Matchers with BasePage with BrowserDriver
   var randomFirstName: String            = ""
   var randomLastName: String             = ""
   var preferredFirstName: String         = ""
-  lazy val randomEmail: String           = s"${randomFirstName.toLowerCase}.${randomLastName.toLowerCase}@example.com"
+  var randomEmail: String                = ""
 
   def randomnessName(): String = {
     val randomLastName = Iterator.continually(Random.nextPrintableChar()).filter(_.isLetter).take(10).mkString
@@ -42,6 +42,11 @@ trait CivilServiceJobsBasePage extends Matchers with BasePage with BrowserDriver
     val fake = new Faker()
     randomLastName = fake.name().lastName()
     randomLastName
+  }
+
+  def generatedEmail(): String = {
+    randomEmail = s"${randomFirstName.toLowerCase}.${randomLastName.toLowerCase}@example.com"
+    randomEmail
   }
 
 //  def constructEmailAddress(): String = {
