@@ -7,7 +7,7 @@ import org.openqa.selenium.remote.{DesiredCapabilities, LocalFileDetector, Remot
 import org.openqa.selenium.{MutableCapabilities, WebDriver}
 
 import java.net.URL
-import scala.collection.JavaConverters._
+import scala.jdk.CollectionConverters._
 
 class BrowserFactory extends LazyLogging {
 

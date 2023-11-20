@@ -10,7 +10,7 @@ object RecruiterLoginFlow extends VacancyBasePage {
     enterPassword
   )
 
-  def fillRecruiterDetails(recruiterDetails: RecruiterDetails): Unit = {
+  def loginWithRecruiterDetails(recruiterDetails: RecruiterDetails): Unit = {
     login.foreach { f =>
       f(recruiterDetails)
     }
