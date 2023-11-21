@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.pages
 
 import org.openqa.selenium._
-import org.openqa.selenium.support.ui.ExpectedConditions.{elementToBeClickable, visibilityOfElementLocated}
+import org.openqa.selenium.support.ui.ExpectedConditions.{elementToBeClickable, presenceOfElementLocated, visibilityOfElementLocated}
 import org.openqa.selenium.support.ui.{ExpectedCondition, ExpectedConditions, WebDriverWait}
 import org.scalactic.source.Position
 import org.scalatest.concurrent.Eventually.eventually
@@ -61,8 +61,13 @@ trait BasePage extends Matchers with Page with WebBrowser with PatienceConfigura
   }
 
   def waitForVisibilityOfElement(ele: By)(implicit driver: WebDriver): WebElement = {
-    val wait = new WebDriverWait(driver, 2, 200)
+    val wait = new WebDriverWait(driver, 30, 200)
     wait.until(visibilityOfElementLocated(ele))
+  }
+
+  def waitForVisibilityOfElementTest(ele: String)(implicit driver: WebDriver): WebElement = {
+    val wait = new WebDriverWait(driver, 30, 200)
+    wait.until(presenceOfElementLocated(By.id(ele)))
   }
 
   def waitForElementToBeClickableByLink(optionName: String)(implicit driver: WebDriver): WebElement = {

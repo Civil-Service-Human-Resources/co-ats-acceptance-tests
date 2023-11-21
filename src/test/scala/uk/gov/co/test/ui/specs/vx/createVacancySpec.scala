@@ -4,6 +4,7 @@ import uk.gov.co.test.ui.data.vx.{DEFRA_APPLY_DATA, HMRC_APPLY_DATA, MASTER_VACA
 import uk.gov.co.test.ui.flows.vx.MasterVacancyFlow.fillMasterVacancyForm
 import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.fillNewVacancyForm
 import uk.gov.co.test.ui.flows.vx.RecruiterLoginFlow.loginWithRecruiterDetails
+import uk.gov.co.test.ui.pages.vx.DashboardPage.searchOn
 import uk.gov.co.test.ui.pages.vx.NewVacancyPage.confirmAndActivateVacancy
 import uk.gov.co.test.ui.specs.BaseFeatureSpec
 import uk.gov.co.test.ui.tags.RunInVX
@@ -38,9 +39,10 @@ class createVacancySpec extends BaseFeatureSpec {
 
       When("a recruiter creates a hmrc apply only vacancy")
       fillNewVacancyForm(HMRC_APPLY_DATA)
+      searchOn()
 
       Then("The hmrc apply only vacancy is successfully created and posted")
-      eventually(confirmAndActivateVacancy())
+      confirmAndActivateVacancy()
     }
   }
 }

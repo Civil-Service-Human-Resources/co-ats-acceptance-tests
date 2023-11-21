@@ -28,14 +28,14 @@ object HMRC_APPLY_DATA
 object HMRC_APPLY_BASIC_DETAILS
     extends BasicDetails(
       "HM Revenue and Customs - Apply online",
-      "GCQA: Senior Business Tester",
+      "Quality Assurance Tester",
       32
     )
 object HMRC_APPLY_JOB_INFORMATION
     extends JobInfoDetails(
       false,
       "HM Revenue and Customs",
-      "HMRC - CCG - Risk & Intelligence Services",
+      "HMRC - SOLS - Business Transformation",
       "Autotest - Business area detail",
       "Analytical",
       "Digital, Data and Technology Profession",

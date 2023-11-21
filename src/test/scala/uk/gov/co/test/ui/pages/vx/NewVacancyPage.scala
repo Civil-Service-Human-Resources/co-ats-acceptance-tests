@@ -1,5 +1,7 @@
 package uk.gov.co.test.ui.pages.vx
 
+import org.openqa.selenium.By
+import org.scalatest.concurrent.Eventually.eventually
 import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.vacancyName
 
 object NewVacancyPage extends VacancyBasePage {
@@ -7,23 +9,18 @@ object NewVacancyPage extends VacancyBasePage {
   val saveVacancyId    = "edit_opp_form_form_create"
   val isActivePath     = "//*[@id='details_form_is_active']/span"
   val editVacancy      = "//*[@class='ajax_form_edit btn btn-default btn-sm']"
+  val previewAdvert    = ".//a[@aria-label='Preview advert Details Summary']"
   val activateVacancy  = "details_form_is_active"
   val submitEditedForm = "details_form_form_submit"
-  var vacancyId        = ""
+  val addTranslationId = "details_form_title_button"
+  val vacancyTitleId   = "details_form_title"
+  val vacancyTitle     = ".//*[@class='obj_name']"
+  val alertMessagePath = ".//*[@class='cn']"
+  val alertMessage     = s"Vacancy Details Saved : $vacancyName"
 
-  private def newVacancyPageTitle(vacancyName: String): String = {
+  private def newVacancyPageTitle(): String = {
     val pageTitle = s"$vacancyName : Civil Service Jobs - GOV.UK"
     pageTitle
-  }
-
-  private def newVacancyAppId(): String = {
-    vacancyId = waitForVisibilityOfElementByPath(".//*[@class='app_id']").getText
-    vacancyId
-  }
-
-  private def newVacancyName(): String = {
-    val vacancyName = waitForVisibilityOfElementByPath(".//*[@class='obj_name']").getText
-    vacancyName
   }
 
   private def vacancyActive(): String = {
@@ -31,21 +28,29 @@ object NewVacancyPage extends VacancyBasePage {
     active
   }
 
-  private def setVacancyToActive(): Unit = {
-    newVacancyAppId()
-    println(vacancyId)
+  private def setVacancyToActive(): Unit =
     if (vacancyActive() == "Set to FALSE") {
       waitForElementClickableByPath(editVacancy).click()
-      if (waitForVisibilityOfElementById(activateVacancy).isEnabled) {
-        checkbox(activateVacancy).select()
+      if (waitForVisibilityOfElementByPath(previewAdvert).isDisplayed) {
+        val editForm = waitForVisibilityOfElementById(activateVacancy)
+        if (!editForm.isSelected) {
+          waitForVisibilityOfElementById(addTranslationId).isDisplayed
+          checkbox(activateVacancy).select()
+        }
       }
-      clickOn(submitEditedForm)
+      scrollToElement(By.id(submitEditedForm))
+      waitForVisibilityOfElementById(submitEditedForm).click()
     }
-  }
 
   def confirmAndActivateVacancy(): Unit = {
-    onPage(newVacancyPageTitle(vacancyName))
+    eventually(onPage(newVacancyPageTitle()))
     setVacancyToActive()
+    confirmFormEdit() shouldEqual alertMessage
+  }
+
+  def confirmFormEdit(): String = {
+    val alert = waitForVisibilityOfElementByPath(alertMessagePath).getText
+    alert
   }
 
 }
