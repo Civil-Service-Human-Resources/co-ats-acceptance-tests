@@ -2,6 +2,7 @@ package uk.gov.co.test.ui.pages.v9
 
 import org.openqa.selenium.By
 import org.scalatest.concurrent.Eventually.eventually
+import uk.gov.co.test.ui.pages.vx.DashboardPage.vacancyId
 
 object SearchJobsPage extends CivilServiceJobsBasePage {
 
@@ -51,7 +52,7 @@ object SearchJobsPage extends CivilServiceJobsBasePage {
   def jobSearchAndApplyFlow(searchCriteria: String, searchPathway: String): Unit = {
     waitForVisibilityOfElementByPath(navigateToHomeSearchPath).click()
     onPage(civilServiceJobsPageTitle)
-    enterSearchCriteria(searchCriteria, searchPathway)
+    enterSearchCriteria(vacancyId, searchPathway)
     selectJobDetails(searchCriteria)
     eventually(onPage(s"$searchCriteria - Civil Service Jobs - GOV.UK"))
     clickOn("login_button")

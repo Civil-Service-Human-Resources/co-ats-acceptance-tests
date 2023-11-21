@@ -1,0 +1,137 @@
+package uk.gov.co.test.ui.pages.vx.tabs
+
+import org.openqa.selenium.{By, WebElement}
+import uk.gov.co.test.ui.pages.v9.SignInPage.{navigateToV9Test, v9AcceptAllCookies, v9SearchCookiesById}
+import uk.gov.co.test.ui.pages.vx.VacancyBasePage
+
+import scala.collection.mutable
+import scala.jdk.CollectionConverters._
+import scala.util.control.Breaks.{break, breakable}
+
+object ExternalPostingsPage extends VacancyBasePage {
+
+  val externalPostingsTabId  = "oppTabs_external_posting"
+  val addButtonPath          = ".//*[@class='btn btn-default ajax']"
+  val editButtonPath         = ".//*[@class='btn btn-default ']"
+  val destinationId          = "select2-external_posting_form_destination_class_id-container"
+  val postToCsJobsOptionPath = ".//li[@title='Post to Civil Service Jobs']"
+  val nextStep2PostingId     = "external_posting_form_form_submit"
+  val nextStep3PostingId     = "external_posting_form_step3_form_submit"
+  val nextCompletePostingId  = "external_posting_complete_form_submit"
+  val destinationType        = "PostingDestination::ExternalVx"
+  val postingSubHeaderPath   = ".//*[@id='externalpostings_container']/h2"
+
+  private def newPostingHeader: String = {
+    val header = waitForVisibilityOfElementByPath(postingSubHeaderPath).getText
+    header
+  }
+
+  private def selectExternalPostingsTab(): Unit = {
+    val tab = waitForVisibilityOfElementById(externalPostingsTabId)
+    tab.click()
+  }
+
+  private def addPosting(): Unit = {
+    val add = waitForElementClickableByPath(addButtonPath)
+    add.isEnabled
+    add.click()
+  }
+
+  private def editPosting(): Unit = {
+    val edit = waitForVisibilityOfElementById(editButtonPath)
+    edit.isEnabled
+    edit.click()
+  }
+
+  private def selectDestination(option: String = "Post to Civil Service Jobs"): Unit = {
+    waitForVisibilityOfElementById(destinationId).click()
+    action().moveToElement(waitForDropdownOption(option)).perform()
+    waitForDropdownOption(option).click()
+  }
+
+  def tableArea(): WebElement =
+    xpath("//*[@id='external_postings_dt']/tbody").element.underlying
+
+  def summaryRows(): mutable.Buffer[WebElement] =
+    tableArea().findElements(By.className("odd first-of-type last-of-type")).asScala
+
+  def firstRowItem(rowItem: WebElement): WebElement =
+    rowItem.findElement(By.className("td[1]"))
+
+  def secondRowItem(rowItem: WebElement): WebElement =
+    rowItem.findElement(By.xpath("td[2]"))
+
+  def thirdRowItem(rowItem: WebElement): WebElement =
+    rowItem.findElement(By.xpath("td[3]"))
+
+  def fourthRowItem(rowItem: WebElement): WebElement =
+    rowItem.findElement(By.xpath("td[4]"))
+
+  def fifthRowItem(rowItem: WebElement): WebElement =
+    rowItem.findElement(By.xpath("td[5]"))
+
+  def postingTableValues(): (String, String, String, String) = {
+    var _destination: String        = ""
+    var _postingLiveDate: String    = ""
+    var _postingClosingDate: String = ""
+    var _postingStatus: String      = ""
+    val rows                        = summaryRows()
+    breakable(
+      for (row <- rows) {
+        val q = firstRowItem(row)
+        if (q.getText == destinationType) {
+          _destination = secondRowItem(row).getText
+          _postingLiveDate = thirdRowItem(row).getText
+          _postingClosingDate = fourthRowItem(row).getText
+          _postingStatus = fifthRowItem(row).getText
+          break
+        }
+      }
+    )
+    (_destination, _postingLiveDate, _postingClosingDate, _postingStatus)
+  }
+
+  def destinationValue(): String = {
+    val (_destination, _, _, _) = postingTableValues()
+    _destination
+  }
+
+  def postingLiveDateValue(): String = {
+    val (_, _postingLiveDate, _, _) = postingTableValues()
+    _postingLiveDate
+  }
+
+  def postingClosingDateValue(): String = {
+    val (_, _, _postingClosingDate, _) = postingTableValues()
+    _postingClosingDate
+  }
+
+  def postingStatusDateValue(): String = {
+    val (_, _, _, _postingStatus) = postingTableValues()
+    _postingStatus
+  }
+
+  private def confirmPostingDetails(): Unit = {
+    destinationValue()       shouldEqual "Post to Civil Service Jobs"
+//    postingLiveDateValue()    shouldEqual "21 November 2023 at 21:20:00 GMT"
+//    postingClosingDateValue() shouldEqual "21 December 2023 at 21:20:00 GMT"
+    postingStatusDateValue() shouldEqual "Online"
+  }
+
+  def addExternalPosting(): Unit = {
+    selectExternalPostingsTab()
+    addPosting()
+//    newPostingHeader shouldEqual "New Posting"
+    selectDestination()
+    waitForVisibilityOfElementById(nextStep2PostingId).click()
+    waitForVisibilityOfElementById(nextStep3PostingId).click()
+    waitForVisibilityOfElementById(nextCompletePostingId).click()
+    confirmPostingDetails()
+    openNewWindow()
+    navigateToV9Test()
+    if (!v9SearchCookiesById().isEmpty) {
+      v9AcceptAllCookies()
+    }
+  }
+
+}

@@ -1,10 +1,11 @@
-package uk.gov.co.test.ui.pages.vx
+package uk.gov.co.test.ui.pages.vx.tabs
 
 import org.openqa.selenium.By
 import org.scalatest.concurrent.Eventually.eventually
+import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.vacancyName
 
-object NewVacancyPage extends VacancyBasePage {
+object SummaryPage extends VacancyBasePage {
 
   val saveVacancyId    = "edit_opp_form_form_create"
   val isActivePath     = "//*[@id='details_form_is_active']/span"
@@ -40,12 +41,12 @@ object NewVacancyPage extends VacancyBasePage {
       }
       scrollToElement(By.id(submitEditedForm))
       waitForVisibilityOfElementById(submitEditedForm).click()
+      confirmFormEdit() shouldEqual alertMessage
     }
 
   def confirmAndActivateVacancy(): Unit = {
     eventually(onPage(newVacancyPageTitle()))
     setVacancyToActive()
-    confirmFormEdit() shouldEqual alertMessage
   }
 
   def confirmFormEdit(): String = {

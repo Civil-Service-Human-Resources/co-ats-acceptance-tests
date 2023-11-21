@@ -28,7 +28,7 @@ object HMRC_APPLY_DATA
 object HMRC_APPLY_BASIC_DETAILS
     extends BasicDetails(
       "HM Revenue and Customs - Apply online",
-      "Quality Assurance Tester",
+      "Delivery Manager",
       32
     )
 object HMRC_APPLY_JOB_INFORMATION

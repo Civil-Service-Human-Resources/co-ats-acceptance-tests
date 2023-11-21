@@ -1,11 +1,18 @@
 package uk.gov.co.test.ui.specs.vx
 
+import uk.gov.co.test.ui.data.v9.applicants.REGISTER_CANDIDATE_1
+import uk.gov.co.test.ui.data.v9.shortform.CANDIDATE_SHORT_FORM_DATA_1
 import uk.gov.co.test.ui.data.vx.{DEFRA_APPLY_DATA, HMRC_APPLY_DATA, MASTER_VACANCY_DATA, RECRUITER}
+import uk.gov.co.test.ui.flows.v9.RegisterCandidateFlow.fillNewCandidateDetails
+import uk.gov.co.test.ui.flows.v9.ShortFormFlow.fillShortFormDetails
 import uk.gov.co.test.ui.flows.vx.MasterVacancyFlow.fillMasterVacancyForm
 import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.fillNewVacancyForm
 import uk.gov.co.test.ui.flows.vx.RecruiterLoginFlow.loginWithRecruiterDetails
+import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.{advertDetailsFunction, applicationCentreTitle, helpWithSelectionText, withdrawApplicationFunction}
+import uk.gov.co.test.ui.pages.v9.SignInPage.onPage
 import uk.gov.co.test.ui.pages.vx.DashboardPage.searchOn
-import uk.gov.co.test.ui.pages.vx.NewVacancyPage.confirmAndActivateVacancy
+import uk.gov.co.test.ui.pages.vx.tabs.ExternalPostingsPage.addExternalPosting
+import uk.gov.co.test.ui.pages.vx.tabs.SummaryPage.confirmAndActivateVacancy
 import uk.gov.co.test.ui.specs.BaseFeatureSpec
 import uk.gov.co.test.ui.tags.RunInVX
 
@@ -43,6 +50,43 @@ class createVacancySpec extends BaseFeatureSpec {
 
       Then("The hmrc apply only vacancy is successfully created and posted")
       confirmAndActivateVacancy()
+    }
+
+    Scenario("A Recruiter Posts A Vacancy Live And Applicant Application Process (partial e2e)", RunInVX) {
+      Given("a recruiter logs in to vx config and creates vacancy")
+      loginWithRecruiterDetails(RECRUITER)
+      searchOn()
+      confirmAndActivateVacancy()
+      addExternalPosting()
+
+      When("candidate applies for the role")
+      fillNewCandidateDetails(REGISTER_CANDIDATE_1)
+      fillShortFormDetails(CANDIDATE_SHORT_FORM_DATA_1)
+
+      Then("the candidate is able to see their short form submitted")
+      eventually(onPage(applicationCentreTitle))
+      advertDetailsFunction().isDisplayed
+      withdrawApplicationFunction().isDisplayed
+      helpWithSelectionText() shouldEqual "Help with selection process"
+    }
+
+    Scenario("A Recruiter Creates an HMRC Apply Only Templated Vacancy And Application Process (e2e)", RunInVX) {
+      Given("a recruiter logs in to vx config and creates vacancy")
+      loginWithRecruiterDetails(RECRUITER)
+      fillNewVacancyForm(HMRC_APPLY_DATA)
+      searchOn()
+      confirmAndActivateVacancy()
+      addExternalPosting()
+
+      When("candidate applies for the role")
+      fillNewCandidateDetails(REGISTER_CANDIDATE_1)
+      fillShortFormDetails(CANDIDATE_SHORT_FORM_DATA_1)
+
+      Then("the candidate is able to see their short form submitted")
+      eventually(onPage(applicationCentreTitle))
+      advertDetailsFunction().isDisplayed
+      withdrawApplicationFunction().isDisplayed
+      helpWithSelectionText() shouldEqual "Help with selection process"
     }
   }
 }

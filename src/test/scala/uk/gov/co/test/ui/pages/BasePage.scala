@@ -136,4 +136,15 @@ trait BasePage extends Matchers with Page with WebBrowser with PatienceConfigura
 
   def findAll(by: By)(implicit driver: WebDriver): Any = driver.findElements(by)
 
+  def openWindows(expectedNumberOfWindows: Int)(implicit driver: WebDriver): Boolean = {
+    val wait = new WebDriverWait(driver, 20, 200)
+    wait.until(ExpectedConditions.numberOfWindowsToBe(expectedNumberOfWindows))
+  }
+
+  def openNewWindow()(implicit driver: WebDriver): Unit = {
+    openWindows(2)
+    for (window <- driver.getWindowHandles.asScala)
+      driver.switchTo.window(window)
+  }
+
 }

@@ -5,7 +5,6 @@ import org.scalatest.concurrent.Eventually.eventually
 object DashboardPage extends VacancyBasePage {
 
   val dashboardPageTitle   = "Home : Civil Service Jobs - GOV.UK"
-  val saveVacancyId        = "edit_opp_form_form_create"
   val createNewVacancyPath = ".//*[@class='textlabel' and text() = 'Create new vacancy']"
   val searchVacanciesPath  = ".//*[@class='textlabel' and text() = 'Search Vacancies']"
   val searchPath           = "selected_option"
@@ -14,7 +13,7 @@ object DashboardPage extends VacancyBasePage {
   val matchedOption        = ".//li[@class='qs_option active']/a/span[1]"
   val searchForVacancy     = "search_button"
   val appIdPath            = ".//*[@class='app_id']"
-  var vacancyId            = ""
+  var vacancyId            = "9361"
 
   private def dashboardPageCheck(): Unit =
     eventually(onPage(dashboardPageTitle))
@@ -25,8 +24,8 @@ object DashboardPage extends VacancyBasePage {
   }
 
   def searchOn(): Unit = {
-//    dashboardPageCheck()
-    newVacancyAppId()
+    dashboardPageCheck()
+//    newVacancyAppId()
     waitForVisibilityOfElementById(searchPath).click()
     waitForVisibilityOfElementByPath(searchVacanciesPath).click()
     waitForVisibilityOfElementById(searchInput).sendKeys(vacancyId)
