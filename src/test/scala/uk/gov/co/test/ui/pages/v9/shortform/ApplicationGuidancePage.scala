@@ -2,7 +2,7 @@ package uk.gov.co.test.ui.pages.v9.shortform
 
 import org.openqa.selenium.By
 import org.scalatest.concurrent.Eventually.eventually
-import uk.gov.co.test.ui.data.v9.ShortFormDetails
+import uk.gov.co.test.ui.data.v9.shortform.ShortFormDetails
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
 
 case class AppGuidanceDetails(

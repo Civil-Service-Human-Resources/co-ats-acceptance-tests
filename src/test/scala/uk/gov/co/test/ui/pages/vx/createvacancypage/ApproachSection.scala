@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.pages.vx.createvacancypage
 
 import org.openqa.selenium.By
-import uk.gov.co.test.ui.data.vx.DefraApplyOnlyDetails
+import uk.gov.co.test.ui.data.vx.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.formId
 
@@ -63,7 +63,7 @@ object ApproachSection extends VacancyBasePage {
     selectStatementRequired
   )
 
-  def approachSection(newVacancyDetails: DefraApplyOnlyDetails): Unit =
+  def approachSection(newVacancyDetails: NewVacancyDetails): Unit =
     approach.foreach { f =>
       f(newVacancyDetails.approachDetails)
     }

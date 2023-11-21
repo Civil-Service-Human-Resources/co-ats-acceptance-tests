@@ -1,6 +1,7 @@
 package uk.gov.co.test.ui.flows.vx
 
-import uk.gov.co.test.ui.data.vx.DefraApplyOnlyDetails
+import uk.gov.co.test.ui.data.vx.NewVacancyDetails
+import uk.gov.co.test.ui.pages.vx.NewVacancyPage.saveVacancyId
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 import uk.gov.co.test.ui.pages.vx.createvacancypage.AdvertSection.advertSection
 import uk.gov.co.test.ui.pages.vx.createvacancypage.ApproachSection.approachSection
@@ -23,7 +24,7 @@ import uk.gov.co.test.ui.pages.vx.createvacancypage.VacancyTestsSection.vacancyT
 
 object NewVacancyFlow extends VacancyBasePage {
 
-  private val defraVacancy: Seq[DefraApplyOnlyDetails => Unit] = Seq(
+  private val newVacancy: Seq[NewVacancyDetails => Unit] = Seq(
     basicDetailsSection,
     jobInformationSection,
     approachSection,
@@ -44,11 +45,11 @@ object NewVacancyFlow extends VacancyBasePage {
     pecCheckFormsSection
   )
 
-  def fillNewVacancyForm(vacancy: DefraApplyOnlyDetails): Unit = {
+  def fillNewVacancyForm(vacancy: NewVacancyDetails): Unit = {
     createNewVacancy()
-    defraVacancy.foreach { f =>
+    newVacancy.foreach { f =>
       f(vacancy)
     }
-    println("Done!")
+    clickOn(saveVacancyId)
   }
 }

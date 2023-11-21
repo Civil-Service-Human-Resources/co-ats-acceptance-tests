@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.pages.vx.createvacancypage
 
 import org.openqa.selenium.Keys
-import uk.gov.co.test.ui.data.vx.DefraApplyOnlyDetails
+import uk.gov.co.test.ui.data.vx.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.formId
 
@@ -112,19 +112,25 @@ object PecCheckFormsSection extends VacancyBasePage {
       else clickOnRadioButton(manualIdentityCheckNoId)
     } else clickOnRadioButton(uploadIdentityNoId)
 
-  private def selectNsvDisplayOptions(pecCheckFormsDetails: PecCheckFormsDetails): Unit =
-    pecCheckFormsDetails.nsvDisplayOptions match {
-      case "Show recruiter and candidate forms" => clickOnRadioButton(nsvShowJobAndCandidateFormsId)
-      case "Show recruiter form only"           => clickOnRadioButton(nsvShowJobFormOnlyId)
-      case _                                    => throw new IllegalStateException("Please enter valid 'NSV Display' option")
+  private def selectNsvDisplayOptions(pecCheckFormsDetails: PecCheckFormsDetails): Unit = {
+    if (!pecCheckFormsDetails.nsvChecks.forall(Set("Not Applicable").contains(_))) {
+      pecCheckFormsDetails.nsvDisplayOptions match {
+        case "Show recruiter and candidate forms" => clickOnRadioButton(nsvShowJobAndCandidateFormsId)
+        case "Show recruiter form only" => clickOnRadioButton(nsvShowJobFormOnlyId)
+        case _ => throw new IllegalStateException("Please enter valid 'NSV Display' option")
+      }
     }
+  }
 
-  private def selectHealthDisplayOptions(pecCheckFormsDetails: PecCheckFormsDetails): Unit =
-    pecCheckFormsDetails.healthDisplayOptions match {
-      case "Show recruiter and candidate forms" => clickOnRadioButton(healthShowJobAndCandidateFormsId)
-      case "Show recruiter form only"           => clickOnRadioButton(healthShowJobFormOnlyId)
-      case _                                    => throw new IllegalStateException("Please enter valid 'Health Display' option")
+  private def selectHealthDisplayOptions(pecCheckFormsDetails: PecCheckFormsDetails): Unit = {
+    if (!pecCheckFormsDetails.healthRefChecks.forall(Set("Not Applicable").contains(_))) {
+      pecCheckFormsDetails.healthDisplayOptions match {
+        case "Show recruiter and candidate forms" => clickOnRadioButton(healthShowJobAndCandidateFormsId)
+        case "Show recruiter form only" => clickOnRadioButton(healthShowJobFormOnlyId)
+        case _ => throw new IllegalStateException("Please enter valid 'Health Display' option")
+      }
     }
+  }
 
   private def selectOGDTransferProcessCheck(pecCheckFormsDetails: PecCheckFormsDetails): Unit =
     if (pecCheckFormsDetails.ogdTransferProcessCheck) clickOnRadioButton(ogdTransferProcessCheckYesId)
@@ -134,6 +140,7 @@ object PecCheckFormsSection extends VacancyBasePage {
     if (pecCheckFormsDetails.includeAdditionalCheck) {
       clickOnRadioButton(includeAdditionalCheckYesId)
       enterText(nameOfCheckInputId, pecCheckFormsDetails.nameOfCheck)
+      enterRoles(pecCheckFormsDetails.additionalCheck, additionalCheckInputId)
     } else clickOnRadioButton(includeAdditionalCheckNoId)
 
   private def pecCheckFormsFlow(pecCheckFormsDetails: PecCheckFormsDetails): Unit = {
@@ -157,7 +164,6 @@ object PecCheckFormsSection extends VacancyBasePage {
     enterRoles(pecCheckFormsDetails.selfEmploymentCheck, selfEmploymentCheckInputId)
     selectOGDTransferProcessCheck(pecCheckFormsDetails)
     selectIncludeAdditionalCheck(pecCheckFormsDetails)
-    enterRoles(pecCheckFormsDetails.additionalCheck, additionalCheckInputId)
     enterRoles(pecCheckFormsDetails.nenOnboarding, nenInputId)
     enterRoles(pecCheckFormsDetails.pnOnboarding, pnInputId)
   }
@@ -166,7 +172,7 @@ object PecCheckFormsSection extends VacancyBasePage {
     pecCheckFormsFlow
   )
 
-  def pecCheckFormsSection(newVacancyDetails: DefraApplyOnlyDetails): Unit =
+  def pecCheckFormsSection(newVacancyDetails: NewVacancyDetails): Unit =
     pecCheckForms.foreach { f =>
       f(newVacancyDetails.pecCheckFormsDetails)
     }

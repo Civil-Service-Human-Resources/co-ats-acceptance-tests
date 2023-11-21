@@ -1,4 +1,4 @@
-package uk.gov.co.test.ui.data.v9
+package uk.gov.co.test.ui.data.v9.applicants
 
 import uk.gov.co.test.ui.pages.v9.CandidateDetails
 import uk.gov.co.test.ui.pages.v9.SignInPage.{generatePreferredFirstName, generateRandomFirstName, generateRandomLastName, generatedEmail}
@@ -6,7 +6,15 @@ import uk.gov.co.test.ui.pages.v9.SignInPage.{generatePreferredFirstName, genera
 case class CandidateData(candidateDetails: CandidateDetails)
 
 object REGISTERED_CANDIDATE
-    extends CandidateDetails("Jon", "Jones", "Bones", "jon.jones@example.com", "qwertygh123", true, true)
+    extends CandidateDetails(
+      "Jon",
+      "Jones",
+      "Bones",
+      "jon.jones@example.com",
+      "qwertygh123",
+      true,
+      true
+    )
 
 object REGISTER_CANDIDATE
     extends CandidateDetails(

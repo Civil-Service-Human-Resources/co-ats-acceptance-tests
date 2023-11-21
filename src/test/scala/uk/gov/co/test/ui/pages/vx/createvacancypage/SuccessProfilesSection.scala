@@ -1,6 +1,6 @@
 package uk.gov.co.test.ui.pages.vx.createvacancypage
 
-import uk.gov.co.test.ui.data.vx.DefraApplyOnlyDetails
+import uk.gov.co.test.ui.data.vx.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 import uk.gov.co.test.ui.pages.vx.createvacancypage.AbilitiesSection.selectAbilitiesProfile
 import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.formId
@@ -57,7 +57,7 @@ object SuccessProfilesSection extends VacancyBasePage {
     whichSuccessProfiles
   )
 
-  def successProfilesSection(newVacancyDetails: DefraApplyOnlyDetails): Unit =
+  def successProfilesSection(newVacancyDetails: NewVacancyDetails): Unit =
     successProfiles.foreach { f =>
       f(newVacancyDetails.successProfilesDetails)
     }

@@ -2,7 +2,7 @@ package uk.gov.co.test.ui.pages.vx.createvacancypage
 
 import org.openqa.selenium.{By, Keys, WebElement}
 import org.scalatest.concurrent.Eventually.eventually
-import uk.gov.co.test.ui.data.vx.DefraApplyOnlyDetails
+import uk.gov.co.test.ui.data.vx.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 
 import java.time.LocalDate
@@ -22,6 +22,7 @@ object BasicDetailsSection extends VacancyBasePage {
   val extractFormClass               = "opp_form_bd"
   var formId: String                 = ""
   var applicationClosingDate: String = ""
+  var vacancyName                    = ""
 
   private def displayWelshVersion(): WebElement =
     waitForVisibilityOfElementByPath(displayWelshPath)
@@ -40,8 +41,10 @@ object BasicDetailsSection extends VacancyBasePage {
     enterTemplate.sendKeys(Keys.ENTER)
   }
 
-  private def enterVacancyTitle(basicDetails: BasicDetails): Unit =
-    title().value = basicDetails.vacancyTitle
+  private def enterVacancyTitle(basicDetails: BasicDetails): Unit = {
+    vacancyName = basicDetails.vacancyTitle
+    title().value = vacancyName
+  }
 
   private def selectClosingDate(basicDetails: BasicDetails): Unit =
     closingDate().value = appClosingDate(basicDetails.closingDate)
@@ -79,7 +82,7 @@ object BasicDetailsSection extends VacancyBasePage {
     selectClosingDate
   )
 
-  def basicDetailsSection(newVacancyDetails: DefraApplyOnlyDetails): Unit = {
+  def basicDetailsSection(newVacancyDetails: NewVacancyDetails): Unit = {
     basicInfo.foreach { f =>
       f(newVacancyDetails.basicDetails)
     }

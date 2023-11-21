@@ -3,55 +3,35 @@ package uk.gov.co.test.ui.data.vx
 import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.{emailVxConfig, nameVxConfig, usernameVxConfig}
 import uk.gov.co.test.ui.pages.vx.createvacancypage._
 
-case class DefraApplyOnlyDetails(
-  basicDetails: BasicDetails,
-  jobInfoDetails: JobInfoDetails,
-  approachDetails: ApproachDetails,
-  approvalDetails: ApprovalDetails,
-  reserveListDetails: ReserveListDetails,
-  locationsDetails: LocationsDetails,
-  contractDetails: ContractDetails,
-  advertDetails: AdvertDetails,
-  contactDetails: ContactDetails,
-  vettingDetails: VettingDetails,
-  interviewsDetails: InterviewsDetails,
-  successProfilesDetails: SuccessProfilesDetails,
-  vacancyTestsDetails: VacancyTestsDetails,
-  moreQuestionsDetails: MoreQuestionsDetails,
-  criteriaDetails: CriteriaDetails,
-  managementDetails: ManagementDetails,
-  onlinePecCheckFormsDetails: OnlinePecCheckFormsDetails,
-  pecCheckFormsDetails: PecCheckFormsDetails
-)
-object DEFRA_APPLY_ONLY_DATA
-    extends DefraApplyOnlyDetails(
-      VACANCY_BASIC_DETAILS,
-      VACANCY_JOB_INFORMATION,
-      VACANCY_APPROACH,
-      VACANCY_APPROVAL,
-      VACANCY_RESERVE_LIST,
-      VACANCY_LOCATIONS,
-      VACANCY_CONTRACT_DETAILS,
-      VACANCY_ADVERT,
-      VACANCY_CONTACT_DETAILS,
-      VACANCY_VETTING_DETAILS,
-      VACANCY_INTERVIEWS_DETAILS,
-      VACANCY_SUCCESS_PROFILES,
-      VACANCY_HOLDER_TESTS,
-      VACANCY_ADDITIONAL_QUESTIONS,
-      VACANCY_CRITERIA,
-      VACANCY_MANAGEMENT,
-      VACANCY_ONLINE_PEC_CHECK_FORMS,
-      VACANCY_PEC_CHECK_FORMS
+object DEFRA_APPLY_DATA
+    extends NewVacancyDetails(
+      DEFRA_APPLY_BASIC_DETAILS,
+      DEFRA_APPLY_JOB_INFORMATION,
+      DEFRA_APPLY_APPROACH,
+      DEFRA_APPLY_APPROVAL,
+      DEFRA_APPLY_RESERVE_LIST,
+      DEFRA_APPLY_LOCATIONS,
+      DEFRA_APPLY_CONTRACT_DETAILS,
+      DEFRA_APPLY_ADVERT,
+      DEFRA_APPLY_CONTACT_DETAILS,
+      DEFRA_APPLY_VETTING_DETAILS,
+      DEFRA_APPLY_INTERVIEWS_DETAILS,
+      DEFRA_APPLY_SUCCESS_PROFILES,
+      DEFRA_APPLY_HOLDER_TESTS,
+      DEFRA_APPLY_ADDITIONAL_QUESTIONS,
+      DEFRA_APPLY_CRITERIA,
+      DEFRA_APPLY_MANAGEMENT,
+      DEFRA_APPLY_ONLINE_PEC_CHECK_FORMS,
+      DEFRA_APPLY_PEC_CHECK_FORMS
     )
 
-object VACANCY_BASIC_DETAILS
+object DEFRA_APPLY_BASIC_DETAILS
     extends BasicDetails(
       "Department for Environment, Food and Rural Affairs - Apply online",
       "GCQA OGD DEFRA (CORE)",
       32
     )
-object VACANCY_JOB_INFORMATION
+object DEFRA_APPLY_JOB_INFORMATION
     extends JobInfoDetails(
       true,
       "Department for Environment, Food and Rural Affairs - Apply online",
@@ -61,26 +41,26 @@ object VACANCY_JOB_INFORMATION
       "Other",
       "1"
     )
-object VACANCY_APPROACH
+object DEFRA_APPLY_APPROACH
     extends ApproachDetails(
       "Internal",
       true,
       "Autotest - Eligibility statement"
     )
-object VACANCY_APPROVAL
+object DEFRA_APPLY_APPROVAL
     extends ApprovalDetails(
       true,
       "Autotest - budgetary authorisation info",
       "Autotest - Cost centre"
     )
 
-object VACANCY_RESERVE_LIST
+object DEFRA_APPLY_RESERVE_LIST
     extends ReserveListDetails(
       true,
       "6 Months"
     )
 
-object VACANCY_LOCATIONS
+object DEFRA_APPLY_LOCATIONS
     extends LocationsDetails(
       "Postcodes",
       "SK1 3BX",
@@ -96,7 +76,7 @@ object VACANCY_LOCATIONS
       otherCityOrTown = List("London", "Southampton")
     )
 
-object VACANCY_CONTRACT_DETAILS
+object DEFRA_APPLY_CONTRACT_DETAILS
     extends ContractDetails(
       "Permanent",
       "Full-time",
@@ -110,7 +90,7 @@ object VACANCY_CONTRACT_DETAILS
       18750
     )
 
-object VACANCY_ADVERT
+object DEFRA_APPLY_ADVERT
     extends AdvertDetails(
       "Autotest - Job summary",
       "Autotest - Job description",
@@ -119,7 +99,7 @@ object VACANCY_ADVERT
       "Autotest - Selection process details"
     )
 
-object VACANCY_CONTACT_DETAILS
+object DEFRA_APPLY_CONTACT_DETAILS
     extends ContactDetails(
       s"$nameVxConfig",
       s"$emailVxConfig",
@@ -129,7 +109,7 @@ object VACANCY_CONTACT_DETAILS
       s"$emailVxConfig"
     )
 
-object VACANCY_VETTING_DETAILS
+object DEFRA_APPLY_VETTING_DETAILS
     extends VettingDetails(
       true,
       "Basic",
@@ -138,7 +118,7 @@ object VACANCY_VETTING_DETAILS
       true
     )
 
-object VACANCY_INTERVIEWS_DETAILS
+object DEFRA_APPLY_INTERVIEWS_DETAILS
     extends InterviewsDetails(
       "4",
       "Telephone",
@@ -148,28 +128,28 @@ object VACANCY_INTERVIEWS_DETAILS
       true
     )
 
-object VACANCY_SUCCESS_PROFILES
+object DEFRA_APPLY_SUCCESS_PROFILES
     extends SuccessProfilesDetails(
       true,
       true,
       true,
       true,
       true,
-      Some(VACANCY_ABILITIES),
-      Some(VACANCY_BEHAVIOURS),
-      Some(VACANCY_EXPERIENCES),
-      Some(VACANCY_STRENGTHS),
-      Some(VACANCY_TECH_SKILLS)
+      Some(DEFRA_APPLY_ABILITIES),
+      Some(DEFRA_APPLY_BEHAVIOURS),
+      Some(DEFRA_APPLY_EXPERIENCES),
+      Some(DEFRA_APPLY_STRENGTHS),
+      Some(DEFRA_APPLY_TECH_SKILLS)
     )
 
-object VACANCY_ABILITIES
+object DEFRA_APPLY_ABILITIES
     extends AbilitiesDetails(
       """The following online tests can be used to assess abilities:
                            |Civil Service Numerical Test
                            |Civil Service Verbal Test""".stripMargin
     )
 
-object VACANCY_BEHAVIOURS
+object DEFRA_APPLY_BEHAVIOURS
     extends BehavioursDetails(
       """The following online tests can be used to assess behaviours:
     |Civil Service Judgement Test
@@ -187,7 +167,7 @@ object VACANCY_BEHAVIOURS
       Some(Behaviours(chosenBehaviour = "Working Together", stageApplication = true, stageInterview = true))
     )
 
-object VACANCY_EXPERIENCES
+object DEFRA_APPLY_EXPERIENCES
     extends ExperienceDetails(
       true,
       "0 - 100",
@@ -211,7 +191,7 @@ object VACANCY_EXPERIENCES
       )
     )
 
-object VACANCY_STRENGTHS
+object DEFRA_APPLY_STRENGTHS
     extends StrengthsDetails(
       8,
       "Adaptable",
@@ -224,7 +204,7 @@ object VACANCY_STRENGTHS
       "Service Focussed"
     )
 
-object VACANCY_TECH_SKILLS
+object DEFRA_APPLY_TECH_SKILLS
     extends TechSkillsDetails(
       8,
       Some(
@@ -293,7 +273,7 @@ object VACANCY_TECH_SKILLS
       )
     )
 
-object VACANCY_HOLDER_TESTS
+object DEFRA_APPLY_HOLDER_TESTS
     extends VacancyTestsDetails(
       true,
       "Online Tests",
@@ -351,13 +331,13 @@ object VACANCY_HOLDER_TESTS
       ),
       false,
       "Autotest - Additional details for the recruitment team",
-      Some(VACANCY_RECRUITER_TESTS),
-      Some(VACANCY_GROUP_A_TESTS),
-      Some(VACANCY_GROUP_B_TESTS),
-      Some(VACANCY_GROUP_C_TESTS)
+      Some(DEFRA_APPLY_RECRUITER_TESTS),
+      Some(DEFRA_APPLY_GROUP_A_TESTS),
+      Some(DEFRA_APPLY_GROUP_B_TESTS),
+      Some(DEFRA_APPLY_GROUP_C_TESTS)
     )
 
-object VACANCY_RECRUITER_TESTS
+object DEFRA_APPLY_RECRUITER_TESTS
     extends RecruiterTestsDetails(
       "Before the tests",
       "Auto-progress after each test",
@@ -366,7 +346,7 @@ object VACANCY_RECRUITER_TESTS
       "Autotest - Online test instructions"
     )
 
-object VACANCY_GROUP_A_TESTS
+object DEFRA_APPLY_GROUP_A_TESTS
     extends GroupATestsDetails(
       "First",
       "Three",
@@ -376,7 +356,7 @@ object VACANCY_GROUP_A_TESTS
       7
     )
 
-object VACANCY_GROUP_B_TESTS
+object DEFRA_APPLY_GROUP_B_TESTS
     extends GroupBTestsDetails(
       "Second",
       "Two",
@@ -385,7 +365,7 @@ object VACANCY_GROUP_B_TESTS
       5
     )
 
-object VACANCY_GROUP_C_TESTS
+object DEFRA_APPLY_GROUP_C_TESTS
     extends GroupCTestsDetails(
       "Third",
       "Two",
@@ -394,7 +374,7 @@ object VACANCY_GROUP_C_TESTS
       3
     )
 
-object VACANCY_ADDITIONAL_QUESTIONS
+object DEFRA_APPLY_ADDITIONAL_QUESTIONS
     extends MoreQuestionsDetails(
       true,
       3,
@@ -403,7 +383,7 @@ object VACANCY_ADDITIONAL_QUESTIONS
       "Autotest - Question 3"
     )
 
-object VACANCY_CRITERIA
+object DEFRA_APPLY_CRITERIA
     extends CriteriaDetails(
       campaignID = Some("Autotest - If this vacancy is linked to a campaign, enter the campaign ID (optional)"),
       probationIncomplete = true,
@@ -422,8 +402,11 @@ object VACANCY_CRITERIA
       candidateInstructions = "Autotest - Instructions for candidate"
     )
 
-object VACANCY_MANAGEMENT
+object DEFRA_APPLY_MANAGEMENT
     extends ManagementDetails(
+      true,
+      true,
+      "Other",
       true,
       assignTo = Option(s"$usernameVxConfig"),
       assignTo2 = Option(s"$usernameVxConfig"),
@@ -437,14 +420,14 @@ object VACANCY_MANAGEMENT
       vacancyComments = Option("Autotest - Comments on this vacancy")
     )
 
-object VACANCY_ONLINE_PEC_CHECK_FORMS
+object DEFRA_APPLY_ONLINE_PEC_CHECK_FORMS
     extends OnlinePecCheckFormsDetails(
       true,
       true,
       s"$usernameVxConfig"
     )
 
-object VACANCY_PEC_CHECK_FORMS
+object DEFRA_APPLY_PEC_CHECK_FORMS
     extends PecCheckFormsDetails(
       rtwCheck =
         List("Not Applicable", "Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),

@@ -1,9 +1,10 @@
 package uk.gov.co.test.ui.pages.vx.createvacancypage
 
 import org.openqa.selenium.By
-import uk.gov.co.test.ui.data.vx.DefraApplyOnlyDetails
+import uk.gov.co.test.ui.data.vx.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.formId
+import uk.gov.co.test.ui.pages.vx.createvacancypage.ExperienceSection.{languagesMandatory, licencesMandatory, membershipsMandatory, qualificationsMandatory}
 
 case class CriteriaDetails(
   campaignID: Option[String] = None,
@@ -88,20 +89,28 @@ object CriteriaSection extends VacancyBasePage {
     else clickOnRadioButton(rightToRemainUKNoId)
 
   private def selectRejectIfLicencesNotHeld(criteriaDetails: CriteriaDetails): Unit =
-    if (criteriaDetails.licencesNotHeld) clickOnRadioButton(licencesNotHeldYesId)
-    else clickOnRadioButton(licencesNotHeldNoId)
+    if (licencesMandatory.toBoolean) {
+      if (criteriaDetails.licencesNotHeld) clickOnRadioButton(licencesNotHeldYesId)
+      else clickOnRadioButton(licencesNotHeldNoId)
+    }
 
   private def selectRejectIfMembershipsNotHeld(criteriaDetails: CriteriaDetails): Unit =
-    if (criteriaDetails.membershipsNotHeld) clickOnRadioButton(membershipsNotHeldYesId)
-    else clickOnRadioButton(membershipsNotHeldNoId)
+    if (membershipsMandatory.toBoolean) {
+      if (criteriaDetails.membershipsNotHeld) clickOnRadioButton(membershipsNotHeldYesId)
+      else clickOnRadioButton(membershipsNotHeldNoId)
+    }
 
   private def selectRejectIfLanguageSkillsNotHeld(criteriaDetails: CriteriaDetails): Unit =
-    if (criteriaDetails.languagesSkillsNotHeld) clickOnRadioButton(languagesSkillsYesId)
-    else clickOnRadioButton(languagesSkillsNoId)
+    if (languagesMandatory.toBoolean) {
+      if (criteriaDetails.languagesSkillsNotHeld) clickOnRadioButton(languagesSkillsYesId)
+      else clickOnRadioButton(languagesSkillsNoId)
+    }
 
   private def selectRejectIfQualificationsNotHeld(criteriaDetails: CriteriaDetails): Unit =
-    if (criteriaDetails.qualificationsHeld) clickOnRadioButton(qualificationsHeldYesId)
-    else clickOnRadioButton(qualificationsHeldNoId)
+    if (qualificationsMandatory.toBoolean) {
+      if (criteriaDetails.qualificationsHeld) clickOnRadioButton(qualificationsHeldYesId)
+      else clickOnRadioButton(qualificationsHeldNoId)
+    }
 
   private def selectIsPreSiftRequired(criteriaDetails: CriteriaDetails): Unit =
     if (criteriaDetails.preSiftRequired) clickOnRadioButton(preSiftRequiredYesId)
@@ -130,7 +139,7 @@ object CriteriaSection extends VacancyBasePage {
     selectRequiredCandidateUploadAttachment
   )
 
-  def criteriaSection(newVacancyDetails: DefraApplyOnlyDetails): Unit =
+  def criteriaSection(newVacancyDetails: NewVacancyDetails): Unit =
     criteria.foreach { f =>
       f(newVacancyDetails.criteriaDetails)
     }

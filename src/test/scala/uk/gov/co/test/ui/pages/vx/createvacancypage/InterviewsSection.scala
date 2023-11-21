@@ -1,6 +1,6 @@
 package uk.gov.co.test.ui.pages.vx.createvacancypage
 
-import uk.gov.co.test.ui.data.vx.DefraApplyOnlyDetails
+import uk.gov.co.test.ui.data.vx.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.formId
 
@@ -39,7 +39,7 @@ object InterviewsSection extends VacancyBasePage {
   private lazy val telephoneFourId       = s"${formId}_datafield_125066_1_1_17755"
   private lazy val videoFourId           = s"${formId}_datafield_125066_1_1_17754"
 
-  def interviewsSection(newVacancyDetails: DefraApplyOnlyDetails): Unit = {
+  def interviewsSection(newVacancyDetails: NewVacancyDetails): Unit = {
     val interviews = newVacancyDetails.interviewsDetails
     interviews.expectedRounds match {
       case "No interviews" => clickOnRadioButton(noInterviewsId)

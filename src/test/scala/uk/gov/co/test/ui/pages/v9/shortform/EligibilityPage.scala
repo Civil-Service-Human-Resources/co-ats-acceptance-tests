@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.pages.v9.shortform
 
 import org.scalatest.concurrent.Eventually.eventually
-import uk.gov.co.test.ui.data.v9.ShortFormDetails
+import uk.gov.co.test.ui.data.v9.shortform.ShortFormDetails
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
 import uk.gov.co.test.ui.pages.v9.shortform.ApplicationGuidancePage.formId
 
@@ -24,17 +24,13 @@ object EligibilityPage extends CivilServiceJobsBasePage {
   def rightToRemainNoId             = s"${formId}_datafield_44639_1_1_2_label"
   var civilServant: String          = ""
 
-  private def isCivilServant(eligibilityDetails: EligibilityDetails): String = {
-    val value = eligibilityDetails.currentCivilServant
-    value.toString
-  }
-
   private def eligibilityPageCheck(): Unit =
     eventually(onPage(eligibilityTitle))
 
   private def currentCivilServantOrCSCEmployed(eligibilityDetails: EligibilityDetails): Unit = {
     eligibilityPageCheck()
-    if (eligibilityDetails.currentCivilServant) {
+    civilServant = eligibilityDetails.currentCivilServant.toString
+    if (civilServant.toBoolean) {
       radioSelect(currentCivilServantYesId)
       selectDropdownOption(homeDepartmentSelectId, eligibilityDetails.homeDepartment)
     } else radioSelect(currentCivilServantNoId)
@@ -58,7 +54,6 @@ object EligibilityPage extends CivilServiceJobsBasePage {
     eligibility.foreach { f =>
       f(shortFormDetails.eligibilityDetails)
     }
-    civilServant = isCivilServant(shortFormDetails.eligibilityDetails)
     clickOn(pageContinue)
   }
 }
