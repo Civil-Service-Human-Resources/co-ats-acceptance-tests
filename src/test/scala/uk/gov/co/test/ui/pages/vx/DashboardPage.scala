@@ -13,7 +13,7 @@ object DashboardPage extends VacancyBasePage {
   val matchedOption        = ".//li[@class='qs_option active']/a/span[1]"
   val searchForVacancy     = "search_button"
   val appIdPath            = ".//*[@class='app_id']"
-  var vacancyId            = "9361"
+  var vacancyId            = "9349"
 
   private def dashboardPageCheck(): Unit =
     eventually(onPage(dashboardPageTitle))

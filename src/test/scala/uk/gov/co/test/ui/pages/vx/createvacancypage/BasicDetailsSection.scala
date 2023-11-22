@@ -22,7 +22,7 @@ object BasicDetailsSection extends VacancyBasePage {
   val extractFormClass               = "opp_form_bd"
   var formId: String                 = ""
   var applicationClosingDate: String = ""
-  var vacancyName                    = "Lead DevOps"
+  var vacancyName                    = "OGDGCCO"
 
   private def displayWelshVersion(): WebElement =
     waitForVisibilityOfElementByPath(displayWelshPath)

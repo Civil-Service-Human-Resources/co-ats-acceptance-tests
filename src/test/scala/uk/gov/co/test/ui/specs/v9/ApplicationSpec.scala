@@ -1,6 +1,5 @@
 package uk.gov.co.test.ui.specs.v9
 
-import uk.gov.co.test.ui.data.v9._
 import uk.gov.co.test.ui.data.v9.applicants.{REGISTERED_CANDIDATE, REGISTER_CANDIDATE_1, REGISTER_CANDIDATE_2}
 import uk.gov.co.test.ui.data.v9.shortform.{CANDIDATE_SHORT_FORM_DATA_1, CANDIDATE_SHORT_FORM_DATA_2}
 import uk.gov.co.test.ui.flows.v9.RegisterCandidateFlow.fillNewCandidateDetails
