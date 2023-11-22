@@ -50,13 +50,13 @@ object ExternalPostingsPage extends VacancyBasePage {
   }
 
   def tableArea(): WebElement =
-    xpath("//*[@id='external_postings_dt']/tbody").element.underlying
+    waitForVisibilityOfElement(By.xpath(".//*[@id='external_postings_dt']/tbody"))
 
   def summaryRows(): mutable.Buffer[WebElement] =
-    tableArea().findElements(By.className("odd first-of-type last-of-type")).asScala
+    tableArea().findElements(By.xpath(".//tr[@class='odd first-of-type']")).asScala
 
   def firstRowItem(rowItem: WebElement): WebElement =
-    rowItem.findElement(By.className("td[1]"))
+    rowItem.findElement(By.xpath("td[1]"))
 
   def secondRowItem(rowItem: WebElement): WebElement =
     rowItem.findElement(By.xpath("td[2]"))
@@ -112,16 +112,21 @@ object ExternalPostingsPage extends VacancyBasePage {
   }
 
   private def confirmPostingDetails(): Unit = {
+    println(destinationValue())
+    println(postingLiveDateValue())
+    println(postingClosingDateValue())
+    println(postingStatusDateValue())
+
     destinationValue()       shouldEqual "Post to Civil Service Jobs"
-//    postingLiveDateValue()    shouldEqual "21 November 2023 at 21:20:00 GMT"
-//    postingClosingDateValue() shouldEqual "21 December 2023 at 21:20:00 GMT"
+//    postingLiveDateValue()    shouldEqual "22 November 2023 at 22:55:00 GMT"
+//    postingClosingDateValue() shouldEqual "22 December 2023 at 22:55:00 GMT"
     postingStatusDateValue() shouldEqual "Online"
   }
 
   def addExternalPosting(): Unit = {
     selectExternalPostingsTab()
     addPosting()
-//    newPostingHeader shouldEqual "New Posting"
+    //    newPostingHeader shouldEqual "New Posting"
     selectDestination()
     waitForVisibilityOfElementById(nextStep2PostingId).click()
     waitForVisibilityOfElementById(nextStep3PostingId).click()
@@ -129,9 +134,6 @@ object ExternalPostingsPage extends VacancyBasePage {
     confirmPostingDetails()
     openNewWindow()
     navigateToV9Test()
-    if (!v9SearchCookiesById().isEmpty) {
-      v9AcceptAllCookies()
-    }
+    if (!v9SearchCookiesById().isEmpty) v9AcceptAllCookies()
   }
-
 }
