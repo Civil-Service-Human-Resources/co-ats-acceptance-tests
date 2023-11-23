@@ -32,7 +32,7 @@ object BasicDetailsSection extends VacancyBasePage {
   var applicationClosingTime: String  = ""
   var convertedLiveDateTime           = ""
   var convertedClosingDateTime        = ""
-  var vacancyName                     = "HMRC Business Analyst"
+  var vacancyName                     = ""
 
   private def displayWelshVersion(): WebElement =
     waitForVisibilityOfElementByPath(displayWelshPath)

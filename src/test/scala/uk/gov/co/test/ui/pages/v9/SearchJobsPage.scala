@@ -1,17 +1,20 @@
 package uk.gov.co.test.ui.pages.v9
 
-import org.openqa.selenium.By
+import org.openqa.selenium.{By, Keys}
 import org.scalatest.concurrent.Eventually.eventually
 import uk.gov.co.test.ui.pages.vx.DashboardPage.vacancyId
+import uk.gov.co.test.ui.pages.vx.MasterVacancyPage.getOs
 
 object SearchJobsPage extends CivilServiceJobsBasePage {
 
   val civilServiceJobsPageTitle     = "Civil Service job search - Civil Service Jobs - GOV.UK"
+  val oneResultReturnedPageTitle    = s"1 Job found with job reference $vacancyId - Civil Service Jobs - GOV.UK"
   val signInCreateAccountText       = "Sign in or create an account"
   val cSJobSearchHeader             = "Civil Service job search"
   val accountCreatedSuccessMessage1 = "Success"
   val accountCreatedSuccessMessage2 = "Account created"
   val navigateToHomeSearchPath      = ".//a[@title='Search for jobs']"
+  val searchForJobsId               = "search_button"
 
   def accountCreatedSuccess1(): String =
     waitForElementClickableByTag("h2").getText
@@ -27,34 +30,47 @@ object SearchJobsPage extends CivilServiceJobsBasePage {
     waitForVisibilityOfElementByPathLast(s".//*[@title='$signInCreateAccountText']").click()
   }
 
-  def useSearchFields(searchCriteria: String, searchPathway: String): Unit = {
+  def useSearchFields(jobId: String, searchPathway: String): Unit = {
     val searchField = waitForVisibilityOfElement(By.name(searchPathway))
-    searchField.sendKeys(searchCriteria)
-  }
-
-  def enterSearchCriteria(searchCriteria: String, searchPathway: String): Unit = {
-    if (searchPathway.nonEmpty) {
-      searchPathway match {
-        case "what"  => useSearchFields(searchCriteria, searchPathway)
-        case "where" => useSearchFields(searchCriteria, searchPathway)
-        case _       => throw new IllegalStateException("Valid search option needs to be either 'What' or 'Where'")
+    if (searchField.getText.nonEmpty) {
+      if (!getOs.contains("mac")) {
+        searchField.sendKeys(Keys.CONTROL, "a")
+      } else {
+        searchField.sendKeys(Keys.COMMAND, "a")
       }
+      searchField.sendKeys(Keys.BACK_SPACE)
     }
-    clickOn("search_button")
+    searchField.sendKeys(jobId)
   }
 
-  def selectJobDetails(jobTitle: String): Unit = {
+  def waitForVacancy(jobId: String, jobTitle: String, searchPathway: String): Unit = {
     val jobDetailsPath = s".//a[text()='$jobTitle']"
-    val title          = waitForVisibilityOfElementByPath(jobDetailsPath)
+    val jobListed      = driver.findElements(By.xpath(jobDetailsPath))
+    while (jobListed.isEmpty && driver.getTitle != oneResultReturnedPageTitle) {
+      driver.navigate().refresh()
+      enterSearchCriteria(jobId, searchPathway)
+    }
+    val title          = waitForElementClickableByPath(jobDetailsPath)
     title.click()
   }
 
-  def jobSearchAndApplyFlow(searchCriteria: String, searchPathway: String): Unit = {
+  def enterSearchCriteria(jobId: String, searchPathway: String): Unit = {
+    if (searchPathway.nonEmpty) {
+      searchPathway match {
+        case "what"  => useSearchFields(jobId, searchPathway)
+        case "where" => useSearchFields(jobId, searchPathway)
+        case _       => throw new IllegalStateException("Valid search option needs to be either 'what' or 'where'")
+      }
+    }
+    clickOn(searchForJobsId)
+  }
+
+  def jobSearchAndApplyFlow(jobTitle: String, jobId: String, searchPathway: String): Unit = {
     waitForVisibilityOfElementByPath(navigateToHomeSearchPath).click()
-    onPage(civilServiceJobsPageTitle)
-    enterSearchCriteria(vacancyId, searchPathway)
-    selectJobDetails(searchCriteria)
-    eventually(onPage(s"$searchCriteria - Civil Service Jobs - GOV.UK"))
+    eventually(onPage(civilServiceJobsPageTitle))
+    enterSearchCriteria(jobId, searchPathway)
+    waitForVacancy(jobId, jobTitle, searchPathway)
+    eventually(onPage(s"$jobTitle - Civil Service Jobs - GOV.UK"))
     clickOn("login_button")
     driver.navigate().refresh()
   }

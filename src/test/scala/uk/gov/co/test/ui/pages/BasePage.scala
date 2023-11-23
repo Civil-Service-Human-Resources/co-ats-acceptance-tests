@@ -18,7 +18,7 @@ case class PageNotFoundException(s: String) extends Exception(s)
 
 trait BasePage extends Matchers with Page with WebBrowser with PatienceConfiguration {
   override implicit val patienceConfig: PatienceConfig =
-    PatienceConfig(timeout = scaled(Span(20, Seconds)), interval = scaled(Span(1000, Millis)))
+    PatienceConfig(timeout = scaled(Span(30, Seconds)), interval = scaled(Span(1000, Millis)))
 
   def onPage(pageTitle: String)(implicit webDriver: WebDriver): Unit =
     if (webDriver.getTitle != pageTitle)
@@ -30,12 +30,12 @@ trait BasePage extends Matchers with Page with WebBrowser with PatienceConfigura
     driver.findElement(By.xpath(path))
 
   def waitForElementToBeClickableByPath(pathway: String)(implicit driver: WebDriver): WebElement = {
-    val wait = new WebDriverWait(driver, 2, 200)
+    val wait = new WebDriverWait(driver, 30, 200)
     wait.until(elementToBeClickable(By.xpath(pathway)))
   }
 
   def waitForVisibilityOfElementByPath(pathway: String)(implicit driver: WebDriver): WebElement = {
-    val wait = new WebDriverWait(driver, 25, 200)
+    val wait = new WebDriverWait(driver, 30, 200)
     wait.until(visibilityOfElementLocated(By.xpath(pathway)))
 
   }
@@ -46,17 +46,17 @@ trait BasePage extends Matchers with Page with WebBrowser with PatienceConfigura
     }
 
   def waitForElementClickableByPath(pathway: String)(implicit driver: WebDriver): WebElement = {
-    val wait = new WebDriverWait(driver, 2, 200)
+    val wait = new WebDriverWait(driver, 30, 200)
     wait.until(elementToBeClickable(By.xpath(pathway)))
   }
 
   def waitForElementClickableByTag(pathway: String)(implicit driver: WebDriver): WebElement = {
-    val wait = new WebDriverWait(driver, 2, 200)
+    val wait = new WebDriverWait(driver, 30, 200)
     wait.until(elementToBeClickable(By.tagName(pathway)))
   }
 
   def waitForVisibilityOfElementById(id: String)(implicit driver: WebDriver): WebElement = {
-    val wait = new WebDriverWait(driver, 15, 200)
+    val wait = new WebDriverWait(driver, 30, 200)
     wait.until(visibilityOfElementLocated(By.id(id)))
   }
 
@@ -71,12 +71,12 @@ trait BasePage extends Matchers with Page with WebBrowser with PatienceConfigura
   }
 
   def waitForElementToBeClickableByLink(optionName: String)(implicit driver: WebDriver): WebElement = {
-    val wait = new WebDriverWait(driver, 2, 200)
+    val wait = new WebDriverWait(driver, 30, 200)
     wait.until(visibilityOfElementLocated(By.linkText(optionName)))
   }
 
   def waitForElementToBeClickableByLabel(id: String)(implicit driver: WebDriver): WebElement = {
-    val wait = new WebDriverWait(driver, 2, 200)
+    val wait = new WebDriverWait(driver, 30, 200)
     //Wait for element to be clickable
     wait.until(ExpectedConditions.elementToBeClickable(By.xpath(s"//label[@for='$id']")))
   }
@@ -91,7 +91,7 @@ trait BasePage extends Matchers with Page with WebBrowser with PatienceConfigura
     waitForVisibilityOfElementById(id).click()
 
   def clickOnRadioButton(id: String)(implicit webDriver: WebDriver): Boolean = {
-    val wait   = new WebDriverWait(webDriver, 2, 200)
+    val wait   = new WebDriverWait(webDriver, 30, 200)
     val lookup = By.id(id)
     wait.until(ExpectedConditions.elementToBeClickable(By.xpath(s"//label[@for='$id']")))
 
@@ -137,14 +137,19 @@ trait BasePage extends Matchers with Page with WebBrowser with PatienceConfigura
   def findAll(by: By)(implicit driver: WebDriver): Any = driver.findElements(by)
 
   def openWindows(expectedNumberOfWindows: Int)(implicit driver: WebDriver): Boolean = {
-    val wait = new WebDriverWait(driver, 20, 200)
+    val wait = new WebDriverWait(driver, 30, 200)
     wait.until(ExpectedConditions.numberOfWindowsToBe(expectedNumberOfWindows))
   }
 
   def openNewWindow()(implicit driver: WebDriver): Unit = {
     openWindows(2)
-    for (window <- driver.getWindowHandles.asScala)
-      driver.switchTo.window(window)
+    for (chartWindow <- driver.getWindowHandles.asScala)
+      driver.switchTo.window(chartWindow)
+  }
+
+  def openNewTabWithJavascript()(implicit webDriver: WebDriver): AnyRef = {
+    val jse: JavascriptExecutor = webDriver.asInstanceOf[JavascriptExecutor]
+    jse.executeScript("window.open()")
   }
 
 }

@@ -3,64 +3,64 @@ package uk.gov.co.test.ui.data.vx
 import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.{emailVxConfig, nameVxConfig, usernameVxConfig}
 import uk.gov.co.test.ui.pages.vx.createvacancypage._
 
-object HMRC_DATA
+object INSOLVENCY_DATA
     extends NewVacancyDetails(
-      HMRC_BASIC_DETAILS,
-      HMRC_JOB_INFORMATION,
-      HMRC_APPROACH,
-      HMRC_APPROVAL,
-      HMRC_RESERVE_LIST,
-      HMRC_LOCATIONS,
-      HMRC_CONTRACT_DETAILS,
-      HMRC_ADVERT,
-      HMRC_CONTACT_DETAILS,
-      HMRC_VETTING_DETAILS,
-      HMRC_INTERVIEWS_DETAILS,
-      HMRC_SUCCESS_PROFILES,
-      HMRC_HOLDER_TESTS,
-      HMRC_ADDITIONAL_QUESTIONS,
-      HMRC_CRITERIA,
-      HMRC_MANAGEMENT,
-      HMRC_ONLINE_PEC_CHECK_FORMS,
-      HMRC_PEC_CHECK_FORMS
+      INSOLVENCY_BASIC_DETAILS,
+      INSOLVENCY_JOB_INFORMATION,
+      INSOLVENCY_APPROACH,
+      INSOLVENCY_APPROVAL,
+      INSOLVENCY_RESERVE_LIST,
+      INSOLVENCY_LOCATIONS,
+      INSOLVENCY_CONTRACT_DETAILS,
+      INSOLVENCY_ADVERT,
+      INSOLVENCY_CONTACT_DETAILS,
+      INSOLVENCY_VETTING_DETAILS,
+      INSOLVENCY_INTERVIEWS_DETAILS,
+      INSOLVENCY_SUCCESS_PROFILES,
+      INSOLVENCY_HOLDER_TESTS,
+      INSOLVENCY_ADDITIONAL_QUESTIONS,
+      INSOLVENCY_CRITERIA,
+      INSOLVENCY_MANAGEMENT,
+      INSOLVENCY_ONLINE_PEC_CHECK_FORMS,
+      INSOLVENCY_PEC_CHECK_FORMS
     )
 
-object HMRC_BASIC_DETAILS
+object INSOLVENCY_BASIC_DETAILS
     extends BasicDetails(
-      "HM Revenue and Customs - Apply online",
-      "GCQACO - Operational Lead",
+      "Insolvency Service - Apply online",
+      "GCQACO - Quality Assurance Analyst",
       32
     )
-object HMRC_JOB_INFORMATION
+object INSOLVENCY_JOB_INFORMATION
     extends JobInfoDetails(
-      false,
-      "HM Revenue and Customs",
-      "HMRC - CCG - CEPET",
+      true,
+      "Insolvency Service",
+      "Insolvency - Official Receiver Services",
       "Autotest - Business area detail",
       "Analytical",
       "Digital, Data and Technology Profession",
       "1"
     )
-object HMRC_APPROACH
+object INSOLVENCY_APPROACH
     extends ApproachDetails(
       "External",
       false,
       "Autotest - Eligibility statement"
     )
-object HMRC_APPROVAL
+object INSOLVENCY_APPROVAL
     extends ApprovalDetails(
       true,
       "Autotest - budgetary authorisation info",
       "Autotest - Cost centre"
     )
 
-object HMRC_RESERVE_LIST
+object INSOLVENCY_RESERVE_LIST
     extends ReserveListDetails(
-      false,
-      "6 Months"
+      true,
+      "12 Months"
     )
 
-object HMRC_LOCATIONS
+object INSOLVENCY_LOCATIONS
     extends LocationsDetails(
       "Postcodes",
       "SK1 3BX",
@@ -76,7 +76,7 @@ object HMRC_LOCATIONS
       otherCityOrTown = List("London", "Southampton")
     )
 
-object HMRC_CONTRACT_DETAILS
+object INSOLVENCY_CONTRACT_DETAILS
     extends ContractDetails(
       "Permanent",
       "Full-time",
@@ -90,7 +90,7 @@ object HMRC_CONTRACT_DETAILS
       18750
     )
 
-object HMRC_ADVERT
+object INSOLVENCY_ADVERT
     extends AdvertDetails(
       "Autotest - Job summary",
       "Autotest - Job description",
@@ -99,7 +99,7 @@ object HMRC_ADVERT
       "Autotest - Selection process details"
     )
 
-object HMRC_CONTACT_DETAILS
+object INSOLVENCY_CONTACT_DETAILS
     extends ContactDetails(
       s"$nameVxConfig",
       s"$emailVxConfig",
@@ -109,16 +109,16 @@ object HMRC_CONTACT_DETAILS
       s"$emailVxConfig"
     )
 
-object HMRC_VETTING_DETAILS
+object INSOLVENCY_VETTING_DETAILS
     extends VettingDetails(
       false,
-      "Standard",
+      "Basic",
       "Disclosure barring service (DBS)",
       "None",
       false
     )
 
-object HMRC_INTERVIEWS_DETAILS
+object INSOLVENCY_INTERVIEWS_DETAILS
     extends InterviewsDetails(
       "1",
       "Video",
@@ -128,28 +128,28 @@ object HMRC_INTERVIEWS_DETAILS
       false
     )
 
-object HMRC_SUCCESS_PROFILES
+object INSOLVENCY_SUCCESS_PROFILES
     extends SuccessProfilesDetails(
       false,
       true,
       true,
       true,
       false,
-      Some(HMRC_ABILITIES),
-      Some(HMRC_BEHAVIOURS),
-      Some(HMRC_EXPERIENCES),
-      Some(HMRC_STRENGTHS),
-      Some(HMRC_TECH_SKILLS)
+      Some(INSOLVENCY_ABILITIES),
+      Some(INSOLVENCY_BEHAVIOURS),
+      Some(INSOLVENCY_EXPERIENCES),
+      Some(INSOLVENCY_STRENGTHS),
+      Some(INSOLVENCY_TECH_SKILLS)
     )
 
-object HMRC_ABILITIES
+object INSOLVENCY_ABILITIES
     extends AbilitiesDetails(
       """The following online tests can be used to assess abilities:
                            |Civil Service Numerical Test
                            |Civil Service Verbal Test""".stripMargin
     )
 
-object HMRC_BEHAVIOURS
+object INSOLVENCY_BEHAVIOURS
     extends BehavioursDetails(
       """The following online tests can be used to assess behaviours:
     |Civil Service Judgement Test
@@ -167,7 +167,7 @@ object HMRC_BEHAVIOURS
       Some(Behaviours(chosenBehaviour = "Making Effective Decisions", stageApplication = true, stageInterview = true))
     )
 
-object HMRC_EXPERIENCES
+object INSOLVENCY_EXPERIENCES
     extends ExperienceDetails(
       true,
       "0 - 100",
@@ -195,7 +195,7 @@ object HMRC_EXPERIENCES
       )
     )
 
-object HMRC_STRENGTHS
+object INSOLVENCY_STRENGTHS
     extends StrengthsDetails(
       3,
       "Problem Solver",
@@ -208,7 +208,7 @@ object HMRC_STRENGTHS
       "Team Leader"
     )
 
-object HMRC_TECH_SKILLS
+object INSOLVENCY_TECH_SKILLS
     extends TechSkillsDetails(
       8,
       Some(
@@ -277,7 +277,7 @@ object HMRC_TECH_SKILLS
       )
     )
 
-object HMRC_HOLDER_TESTS
+object INSOLVENCY_HOLDER_TESTS
     extends VacancyTestsDetails(
       false,
       "Online Tests",
@@ -335,13 +335,13 @@ object HMRC_HOLDER_TESTS
       ),
       false,
       "Autotest - Additional details for the recruitment team",
-      Some(HMRC_RECRUITER_TESTS),
-      Some(HMRC_GROUP_A_TESTS),
-      Some(HMRC_GROUP_B_TESTS),
-      Some(HMRC_GROUP_C_TESTS)
+      Some(INSOLVENCY_RECRUITER_TESTS),
+      Some(INSOLVENCY_GROUP_A_TESTS),
+      Some(INSOLVENCY_GROUP_B_TESTS),
+      Some(INSOLVENCY_GROUP_C_TESTS)
     )
 
-object HMRC_RECRUITER_TESTS
+object INSOLVENCY_RECRUITER_TESTS
     extends RecruiterTestsDetails(
       "Before the tests",
       "Auto-progress after each test",
@@ -350,7 +350,7 @@ object HMRC_RECRUITER_TESTS
       "Autotest - Online test instructions"
     )
 
-object HMRC_GROUP_A_TESTS
+object INSOLVENCY_GROUP_A_TESTS
     extends GroupATestsDetails(
       "First",
       "Three",
@@ -360,7 +360,7 @@ object HMRC_GROUP_A_TESTS
       7
     )
 
-object HMRC_GROUP_B_TESTS
+object INSOLVENCY_GROUP_B_TESTS
     extends GroupBTestsDetails(
       "Second",
       "Two",
@@ -369,7 +369,7 @@ object HMRC_GROUP_B_TESTS
       5
     )
 
-object HMRC_GROUP_C_TESTS
+object INSOLVENCY_GROUP_C_TESTS
     extends GroupCTestsDetails(
       "Third",
       "Two",
@@ -378,7 +378,7 @@ object HMRC_GROUP_C_TESTS
       3
     )
 
-object HMRC_ADDITIONAL_QUESTIONS
+object INSOLVENCY_ADDITIONAL_QUESTIONS
     extends MoreQuestionsDetails(
       true,
       3,
@@ -387,7 +387,7 @@ object HMRC_ADDITIONAL_QUESTIONS
       "Autotest - Question 3"
     )
 
-object HMRC_CRITERIA
+object INSOLVENCY_CRITERIA
     extends CriteriaDetails(
       campaignID = Some("Autotest - If this vacancy is linked to a campaign, enter the campaign ID (optional)"),
       probationIncomplete = false,
@@ -401,12 +401,12 @@ object HMRC_CRITERIA
       membershipsNotHeld = true,
       languagesSkillsNotHeld = true,
       qualificationsHeld = true,
-      preSiftRequired = false,
+      preSiftRequired = true,
       uploadAttachment = true,
       candidateInstructions = "Autotest - Instructions for candidate"
     )
 
-object HMRC_MANAGEMENT
+object INSOLVENCY_MANAGEMENT
     extends ManagementDetails(
       true,
       true,
@@ -424,14 +424,14 @@ object HMRC_MANAGEMENT
       vacancyComments = Option("Autotest - Comments on this vacancy")
     )
 
-object HMRC_ONLINE_PEC_CHECK_FORMS
+object INSOLVENCY_ONLINE_PEC_CHECK_FORMS
     extends OnlinePecCheckFormsDetails(
       true,
       true,
       s"$usernameVxConfig"
     )
 
-object HMRC_PEC_CHECK_FORMS
+object INSOLVENCY_PEC_CHECK_FORMS
     extends PecCheckFormsDetails(
       rtwCheck = List("External Candidates", "OGD Candidates", "NDPB Candidates"),
       "Before pre employment checks",
@@ -441,7 +441,7 @@ object HMRC_PEC_CHECK_FORMS
       false,
       generalInfo = List("External Candidates", "OGD Candidates", "NDPB Candidates"),
       referenceChecks = List("External Candidates", "NDPB Candidates"),
-      bankruptcyChecks = List("External Candidates", "NDPB Candidates"),
+      bankruptcyChecks = List("Not Applicable"),
       crcChecks = List("External Candidates", "OGD Candidates", "NDPB Candidates"),
       nsvChecks = List("Not Applicable"),
       "Show recruiter and candidate forms",
@@ -451,7 +451,7 @@ object HMRC_PEC_CHECK_FORMS
       overseasCheck = List("External Candidates", "NDPB Candidates"),
       pensionsCheck = List("External Candidates"),
       previousCsJobCheck = List("External Candidates", "NDPB Candidates"),
-      internalFraudCheck = List("External Candidates", "NDPB Candidates"),
+      internalFraudCheck = List("Not Applicable"),
       selfEmploymentCheck = List("External Candidates", "NDPB Candidates"),
       false,
       false,
@@ -459,5 +459,5 @@ object HMRC_PEC_CHECK_FORMS
       additionalCheck =
         List("Not Applicable", "Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
       nenOnboarding = List("External Candidates", "OGD Candidates", "NDPB Candidates"),
-      pnOnboarding = List("Not Applicable")
+      pnOnboarding = List("Internal Candidates")
     )

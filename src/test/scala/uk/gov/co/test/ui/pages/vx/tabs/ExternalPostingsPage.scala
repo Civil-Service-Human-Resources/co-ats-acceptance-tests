@@ -53,7 +53,7 @@ object ExternalPostingsPage extends VacancyBasePage {
     waitForVisibilityOfElement(By.xpath(".//*[@id='external_postings_dt']/tbody"))
 
   def summaryRows(): mutable.Buffer[WebElement] =
-    tableArea().findElements(By.xpath(".//tr[@class='odd first-of-type']")).asScala
+    tableArea().findElements(By.xpath(".//tr[@tabindex='-1'][1]")).asScala
 
   def firstRowItem(rowItem: WebElement): WebElement =
     rowItem.findElement(By.xpath("td[1]"))
@@ -112,11 +112,6 @@ object ExternalPostingsPage extends VacancyBasePage {
   }
 
   private def confirmPostingDetails(): Unit = {
-    println(destinationValue())
-    println(postingLiveDateValue())
-    println(postingClosingDateValue())
-    println(postingStatusDateValue())
-
     destinationValue()       shouldEqual "Post to Civil Service Jobs"
 //    postingLiveDateValue()    shouldEqual "22 November 2023 at 22:55:00 GMT"
 //    postingClosingDateValue() shouldEqual "22 December 2023 at 22:55:00 GMT"
@@ -132,6 +127,7 @@ object ExternalPostingsPage extends VacancyBasePage {
     waitForVisibilityOfElementById(nextStep3PostingId).click()
     waitForVisibilityOfElementById(nextCompletePostingId).click()
     confirmPostingDetails()
+    openNewTabWithJavascript()
     openNewWindow()
     navigateToV9Test()
     if (!v9SearchCookiesById().isEmpty) v9AcceptAllCookies()

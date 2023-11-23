@@ -48,3 +48,14 @@ object REGISTER_CANDIDATE_2
       false,
       true
     )
+
+object REGISTER_CANDIDATE_3
+  extends CandidateDetails(
+    firstname = generateRandomFirstName(),
+    lastname = generateRandomLastName(),
+    preferredFirstName = generatePreferredFirstName(),
+    email = generatedEmail(),
+    "password123!",
+    false,
+    true
+  )
