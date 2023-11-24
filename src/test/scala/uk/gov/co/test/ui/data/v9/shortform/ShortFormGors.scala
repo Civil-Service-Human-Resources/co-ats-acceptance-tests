@@ -3,21 +3,21 @@ package uk.gov.co.test.ui.data.v9.shortform
 import uk.gov.co.test.ui.pages.v9.SignInPage.{preferredFirstName, randomEmail, randomFirstName, randomLastName}
 import uk.gov.co.test.ui.pages.v9.shortform._
 
-object CANDIDATE_SHORT_FORM_DATA_1
+object CANDIDATE_SHORT_FORM_DATA_GORS
     extends ShortFormDetails(
-      SHORT_FORM_APP_GUIDANCE,
-      SHORT_FORM_ELIGIBILITY,
-      SHORT_FORM_PERSONAL_INFO,
-      SHORT_FORM_DIVERSITY_MONITORING,
-      SHORT_FORM_DECLARATION
+      SHORT_FORM_APP_GUIDANCE_GORS,
+      SHORT_FORM_ELIGIBILITY_GORS,
+      SHORT_FORM_PERSONAL_INFO_GORS,
+      SHORT_FORM_DIVERSITY_MONITORING_GORS,
+      SHORT_FORM_DECLARATION_GORS
     )
 
-object SHORT_FORM_APP_GUIDANCE
+object SHORT_FORM_APP_GUIDANCE_GORS
     extends AppGuidanceDetails(
       true
     )
 
-object SHORT_FORM_ELIGIBILITY
+object SHORT_FORM_ELIGIBILITY_GORS
     extends EligibilityDetails(
       true,
       "Attorney General's Office",
@@ -25,7 +25,7 @@ object SHORT_FORM_ELIGIBILITY
       true
     )
 
-object SHORT_FORM_PERSONAL_INFO
+object SHORT_FORM_PERSONAL_INFO_GORS
     extends PersonalInfoDetails(
       s"$randomFirstName",
       s"$randomLastName",
@@ -39,7 +39,7 @@ object SHORT_FORM_PERSONAL_INFO
       redeploymentScheme = Option(false)
     )
 
-object SHORT_FORM_DIVERSITY_MONITORING
+object SHORT_FORM_DIVERSITY_MONITORING_GORS
     extends DiversityDetails(
       "No",
       "Man",
@@ -88,7 +88,7 @@ object SHORT_FORM_DIVERSITY_MONITORING
       postcode = Option("SK8 1BX")
     )
 
-object SHORT_FORM_DECLARATION
+object SHORT_FORM_DECLARATION_GORS
     extends DeclarationDetails(
       true
     )

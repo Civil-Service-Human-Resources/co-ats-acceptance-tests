@@ -27,7 +27,7 @@ object REGISTER_CANDIDATE
       true
     )
 
-object REGISTER_CANDIDATE_1
+object REGISTER_CANDIDATE_HMRC
     extends CandidateDetails(
       firstname = generateRandomFirstName(),
       lastname = generateRandomLastName(),
@@ -38,7 +38,7 @@ object REGISTER_CANDIDATE_1
       true
     )
 
-object REGISTER_CANDIDATE_2
+object REGISTER_CANDIDATE_INSOLVENCY
     extends CandidateDetails(
       firstname = generateRandomFirstName(),
       lastname = generateRandomLastName(),
@@ -49,13 +49,13 @@ object REGISTER_CANDIDATE_2
       true
     )
 
-object REGISTER_CANDIDATE_3
-  extends CandidateDetails(
-    firstname = generateRandomFirstName(),
-    lastname = generateRandomLastName(),
-    preferredFirstName = generatePreferredFirstName(),
-    email = generatedEmail(),
-    "password123!",
-    false,
-    true
-  )
+object REGISTER_CANDIDATE_GORS
+    extends CandidateDetails(
+      firstname = generateRandomFirstName(),
+      lastname = generateRandomLastName(),
+      preferredFirstName = generatePreferredFirstName(),
+      email = generatedEmail(),
+      "password123!",
+      false,
+      true
+    )

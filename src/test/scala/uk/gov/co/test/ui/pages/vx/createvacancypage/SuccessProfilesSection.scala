@@ -29,6 +29,7 @@ object SuccessProfilesSection extends VacancyBasePage {
   private lazy val experienceId      = s"${formId}_datafield_154245_1_1_12687"
   private lazy val strengthsId       = s"${formId}_datafield_154245_1_1_12689"
   private lazy val technicalSkillsId = s"${formId}_datafield_154245_1_1_12688"
+  var experiences = ""
 
   private def whichSuccessProfiles(successProfilesDetails: SuccessProfilesDetails): Unit = {
     if (successProfilesDetails.abilities) {
@@ -40,6 +41,7 @@ object SuccessProfilesSection extends VacancyBasePage {
       selectBehavioursProfiles(successProfilesDetails)
     }
     if (successProfilesDetails.experience) {
+      experiences = successProfilesDetails.experience.toString
       checkbox(experienceId).select()
       experiencesRequired(successProfilesDetails)
     }

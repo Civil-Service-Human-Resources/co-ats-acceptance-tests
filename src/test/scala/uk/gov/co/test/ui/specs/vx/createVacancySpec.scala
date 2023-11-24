@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.specs.vx
 
-import uk.gov.co.test.ui.data.v9.applicants.{REGISTER_CANDIDATE_1, REGISTER_CANDIDATE_3}
-import uk.gov.co.test.ui.data.v9.shortform.{CANDIDATE_SHORT_FORM_DATA_1, CANDIDATE_SHORT_FORM_DATA_3}
+import uk.gov.co.test.ui.data.v9.applicants.{REGISTER_CANDIDATE, REGISTER_CANDIDATE_GORS, REGISTER_CANDIDATE_HMRC, REGISTER_CANDIDATE_INSOLVENCY}
+import uk.gov.co.test.ui.data.v9.shortform.{CANDIDATE_SHORT_FORM_DATA, CANDIDATE_SHORT_FORM_DATA_GORS, CANDIDATE_SHORT_FORM_DATA_HMRC, CANDIDATE_SHORT_FORM_DATA_INSOLVENCY}
 import uk.gov.co.test.ui.data.vx._
 import uk.gov.co.test.ui.flows.v9.RegisterCandidateFlow.fillNewCandidateDetails
 import uk.gov.co.test.ui.flows.v9.ShortFormFlow.fillShortFormDetails
@@ -34,7 +34,7 @@ class createVacancySpec extends BaseFeatureSpec {
       loginWithRecruiterDetails(RECRUITER)
 
       When("a recruiter creates a defra apply only vacancy")
-      fillNewVacancyForm(DEFRA_APPLY_DATA)
+      fillNewVacancyForm(DEFRA_DATA)
 
       Then("The defra apply only vacancy is successfully created and posted")
       eventually(confirmAndActivateVacancy())
@@ -62,8 +62,8 @@ class createVacancySpec extends BaseFeatureSpec {
       addExternalPosting()
 
       When("candidate applies for the role")
-      fillNewCandidateDetails(REGISTER_CANDIDATE_1)
-      fillShortFormDetails(CANDIDATE_SHORT_FORM_DATA_1)
+      fillNewCandidateDetails(REGISTER_CANDIDATE)
+      fillShortFormDetails(CANDIDATE_SHORT_FORM_DATA)
 
       Then("the candidate is able to see their short form submitted")
       eventually(onPage(applicationCentreTitle))
@@ -81,8 +81,8 @@ class createVacancySpec extends BaseFeatureSpec {
       addExternalPosting()
 
       When("candidate applies for the role")
-      fillNewCandidateDetails(REGISTER_CANDIDATE_1)
-      fillShortFormDetails(CANDIDATE_SHORT_FORM_DATA_1)
+      fillNewCandidateDetails(REGISTER_CANDIDATE_HMRC)
+      fillShortFormDetails(CANDIDATE_SHORT_FORM_DATA_HMRC)
 
       Then("the candidate is able to see their short form submitted")
       eventually(onPage(applicationCentreTitle))
@@ -100,8 +100,27 @@ class createVacancySpec extends BaseFeatureSpec {
       addExternalPosting()
 
       When("candidate applies for the role")
-      fillNewCandidateDetails(REGISTER_CANDIDATE_3)
-      fillShortFormDetails(CANDIDATE_SHORT_FORM_DATA_3)
+      fillNewCandidateDetails(REGISTER_CANDIDATE_INSOLVENCY)
+      fillShortFormDetails(CANDIDATE_SHORT_FORM_DATA_INSOLVENCY)
+
+      Then("the candidate is able to see their short form submitted")
+      eventually(onPage(applicationCentreTitle))
+      advertDetailsFunction().isDisplayed
+      withdrawApplicationFunction().isDisplayed
+      helpWithSelectionText() shouldEqual "Help with selection process"
+    }
+
+    Scenario("A Recruiter Creates an GORS Apply Only Templated Vacancy And Application Process (e2e)", RunInVX) {
+      Given("a recruiter logs in to vx config and creates vacancy")
+      loginWithRecruiterDetails(RECRUITER)
+      fillNewVacancyForm(GORS_DATA)
+      searchOn()
+      confirmAndActivateVacancy()
+      addExternalPosting()
+
+      When("candidate applies for the role")
+      fillNewCandidateDetails(REGISTER_CANDIDATE_GORS)
+      fillShortFormDetails(CANDIDATE_SHORT_FORM_DATA_GORS)
 
       Then("the candidate is able to see their short form submitted")
       eventually(onPage(applicationCentreTitle))

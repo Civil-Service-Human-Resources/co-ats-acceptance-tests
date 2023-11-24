@@ -3,35 +3,35 @@ package uk.gov.co.test.ui.data.v9.shortform
 import uk.gov.co.test.ui.pages.v9.SignInPage.{preferredFirstName, randomEmail, randomFirstName, randomLastName}
 import uk.gov.co.test.ui.pages.v9.shortform._
 
-object CANDIDATE_SHORT_FORM_DATA_3
+object CANDIDATE_SHORT_FORM_DATA
     extends ShortFormDetails(
-      SHORT_FORM_APP_GUIDANCE_3,
-      SHORT_FORM_ELIGIBILITY_3,
-      SHORT_FORM_PERSONAL_INFO_3,
-      SHORT_FORM_DIVERSITY_MONITORING_3,
-      SHORT_FORM_DECLARATION_3
+      SHORT_FORM_APP_GUIDANCE,
+      SHORT_FORM_ELIGIBILITY,
+      SHORT_FORM_PERSONAL_INFO,
+      SHORT_FORM_DIVERSITY_MONITORING,
+      SHORT_FORM_DECLARATION
     )
 
-object SHORT_FORM_APP_GUIDANCE_3
+object SHORT_FORM_APP_GUIDANCE
     extends AppGuidanceDetails(
       true
     )
 
-object SHORT_FORM_ELIGIBILITY_3
+object SHORT_FORM_ELIGIBILITY
     extends EligibilityDetails(
-      true,
+      false,
       "Attorney General's Office",
       true,
       true
     )
 
-object SHORT_FORM_PERSONAL_INFO_3
+object SHORT_FORM_PERSONAL_INFO
     extends PersonalInfoDetails(
-      s"$randomFirstName",
-      s"$randomLastName",
+      firstName = s"$randomFirstName",
+      lastName = s"$randomLastName",
       preferredFirstName = Option(s"$preferredFirstName"),
-      "01620000000",
-      secondaryNo = Option("07700000000"),
+      "01520000000",
+      secondaryNo = Option("07770000000"),
       s"$randomEmail",
       false,
       true,
@@ -39,14 +39,14 @@ object SHORT_FORM_PERSONAL_INFO_3
       redeploymentScheme = Option(false)
     )
 
-object SHORT_FORM_DIVERSITY_MONITORING_3
+object SHORT_FORM_DIVERSITY_MONITORING
     extends DiversityDetails(
       "No",
       "Man",
-      "Heterosexual or straight",
       "Prefer not to disclose",
-      "English",
-      "White",
+      "35-39",
+      "Welsh",
+      "Asian / Asian British",
       ethnicity = Map(
         "White"                                       -> List(
           "English",
@@ -80,15 +80,15 @@ object SHORT_FORM_DIVERSITY_MONITORING_3
           "Other ethnic group"
         )
       ),
-      "Auto tester",
-      "Christian",
-      "Technical",
-      "Self-employed/freelancer without employees",
-      "Independent or fee-paying school - no bursary",
+      "Auto tester2",
+      "Muslim",
+      "Traditional Professional",
+      "Not working",
+      "Attended school outside the UK",
       postcode = Option("SK8 1BX")
     )
 
-object SHORT_FORM_DECLARATION_3
+object SHORT_FORM_DECLARATION
     extends DeclarationDetails(
       true
     )

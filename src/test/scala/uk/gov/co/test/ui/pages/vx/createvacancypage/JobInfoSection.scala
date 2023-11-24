@@ -26,14 +26,20 @@ object JobInfoSection extends VacancyBasePage {
   private lazy val welshRequiredCheck   = s"${formId}_datafield_179408_1_1"
   private lazy val businessAreaDetailId = s"${formId}_datafield_155206_1_1_en-GB"
   private lazy val typeOfRoleInput      = s".//*[@aria-describedby='$typeOfRoleId']"
+  private lazy val listOptionsPath      = ".//li[@role='option']"
 
   private def selectWelshVersion(jobInfoDetails: JobInfoDetails): Unit =
     if (jobInfoDetails.displayWelsh) checkbox(welshRequiredCheck).select()
 
   private def selectBusinessArea(jobInfoDetails: JobInfoDetails): Unit = {
+    val area            = jobInfoDetails.businessArea
     scrollToElement(By.id(businessAreaId))
     waitForVisibilityOfElementById(businessAreaId).click()
-    selectOption(generalInput, jobInfoDetails.businessArea)
+    val noOfListOptions = driver.findElements(By.xpath(listOptionsPath)).size()
+    if (noOfListOptions < 3) {
+      action().moveToElement(waitForDropdownOption(area)).perform()
+      waitForDropdownOption(area).click()
+    } else selectOption(generalInput, area)
   }
 
   private def enterBusinessAreaDetail(jobInfoDetails: JobInfoDetails): Unit = {

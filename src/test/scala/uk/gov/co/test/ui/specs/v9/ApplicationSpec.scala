@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.specs.v9
 
-import uk.gov.co.test.ui.data.v9.applicants.{REGISTERED_CANDIDATE, REGISTER_CANDIDATE_1, REGISTER_CANDIDATE_2}
-import uk.gov.co.test.ui.data.v9.shortform.{CANDIDATE_SHORT_FORM_DATA_1, CANDIDATE_SHORT_FORM_DATA_2}
+import uk.gov.co.test.ui.data.v9.applicants.{REGISTERED_CANDIDATE, REGISTER_CANDIDATE, REGISTER_CANDIDATE_HMRC}
+import uk.gov.co.test.ui.data.v9.shortform.{CANDIDATE_SHORT_FORM_DATA, CANDIDATE_SHORT_FORM_DATA_HMRC}
 import uk.gov.co.test.ui.flows.v9.RegisterCandidateFlow.fillNewCandidateDetails
 import uk.gov.co.test.ui.flows.v9.ShortFormFlow.fillShortFormDetails
 import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.{advertDetailsFunction, applicationCentreTitle, helpWithSelectionText, onPage, withdrawApplicationFunction}
@@ -25,10 +25,10 @@ class ApplicationSpec extends BaseFeatureSpec {
 
     Scenario("A Newly Registered Candidate No.1 Applies For A Job", RunInV9) {
       Given("A candidate no.1 registers a new account")
-      fillNewCandidateDetails(REGISTER_CANDIDATE_1)
+      fillNewCandidateDetails(REGISTER_CANDIDATE)
 
       When("The candidate no.1 completes the short form")
-      fillShortFormDetails(CANDIDATE_SHORT_FORM_DATA_1)
+      fillShortFormDetails(CANDIDATE_SHORT_FORM_DATA)
 
       Then("The candidate no.1 is able to see their account")
       eventually(onPage(applicationCentreTitle))
@@ -39,10 +39,10 @@ class ApplicationSpec extends BaseFeatureSpec {
 
     Scenario("A Newly Registered Candidate No.2 Applies For A Job", RunInV9) {
       Given("A candidate no.2 registers a new account")
-      fillNewCandidateDetails(REGISTER_CANDIDATE_2)
+      fillNewCandidateDetails(REGISTER_CANDIDATE_HMRC)
 
       When("The candidate no.2 completes the short form")
-      fillShortFormDetails(CANDIDATE_SHORT_FORM_DATA_2)
+      fillShortFormDetails(CANDIDATE_SHORT_FORM_DATA_HMRC)
 
       Then("The candidate no.2 is able to see their account")
       eventually(onPage(applicationCentreTitle))
