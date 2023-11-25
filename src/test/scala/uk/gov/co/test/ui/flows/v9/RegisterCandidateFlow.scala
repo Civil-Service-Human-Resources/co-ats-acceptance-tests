@@ -1,7 +1,9 @@
 package uk.gov.co.test.ui.flows.v9
 
+import uk.gov.co.test.ui.conf.TestConfiguration
 import uk.gov.co.test.ui.pages.v9.CreateAccountPage.{enterConfirmEmail, enterConfirmPassword, enterEmail, enterFirstName, enterLastName, enterPassword, navigateToCreateAccountPage, registerNewAccount, selectEmployeeType, selectTermsAndConditions}
 import uk.gov.co.test.ui.pages.v9.{CandidateDetails, CivilServiceJobsBasePage}
+import uk.gov.co.test.ui.pages.vx.DashboardPage.switchToCandidatePages
 
 object RegisterCandidateFlow extends CivilServiceJobsBasePage {
 
@@ -17,6 +19,9 @@ object RegisterCandidateFlow extends CivilServiceJobsBasePage {
   )
 
   def fillNewCandidateDetails(user: CandidateDetails): Unit = {
+    if (currentUrl.startsWith(TestConfiguration.urlHost("vxconfig"))) {
+      switchToCandidatePages()
+    }
     navigateToCreateAccountPage()
     fields.foreach { f =>
       f(user)

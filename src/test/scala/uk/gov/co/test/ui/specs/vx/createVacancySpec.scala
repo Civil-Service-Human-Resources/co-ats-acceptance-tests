@@ -1,18 +1,15 @@
 package uk.gov.co.test.ui.specs.vx
 
-import uk.gov.co.test.ui.data.v9.applicants.{REGISTER_CANDIDATE, REGISTER_CANDIDATE_GORS, REGISTER_CANDIDATE_HMRC, REGISTER_CANDIDATE_INSOLVENCY}
-import uk.gov.co.test.ui.data.v9.shortform.{CANDIDATE_SHORT_FORM_DATA, CANDIDATE_SHORT_FORM_DATA_GORS, CANDIDATE_SHORT_FORM_DATA_HMRC, CANDIDATE_SHORT_FORM_DATA_INSOLVENCY}
+import uk.gov.co.test.ui.data.v9.applicants.MAIN_REGISTER_CANDIDATE
+import uk.gov.co.test.ui.data.v9.shortform.MAIN_CANDIDATE_SHORT_FORM_DATA
 import uk.gov.co.test.ui.data.vx._
 import uk.gov.co.test.ui.flows.v9.RegisterCandidateFlow.fillNewCandidateDetails
 import uk.gov.co.test.ui.flows.v9.ShortFormFlow.fillShortFormDetails
 import uk.gov.co.test.ui.flows.vx.MasterVacancyFlow.fillMasterVacancyForm
 import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.fillNewVacancyForm
 import uk.gov.co.test.ui.flows.vx.RecruiterLoginFlow.loginWithRecruiterDetails
-import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.{advertDetailsFunction, applicationCentreTitle, helpWithSelectionText, withdrawApplicationFunction}
-import uk.gov.co.test.ui.pages.v9.SignInPage.onPage
-import uk.gov.co.test.ui.pages.vx.DashboardPage.searchOn
-import uk.gov.co.test.ui.pages.vx.tabs.ExternalPostingsPage.addExternalPosting
-import uk.gov.co.test.ui.pages.vx.tabs.SummaryPage.confirmAndActivateVacancy
+import uk.gov.co.test.ui.pages.vx.DashboardPage.{activateAndPostVacancy, confirmShortFormCompletion}
+import uk.gov.co.test.ui.pages.vx.vacancytabs.SummaryPage.confirmAndActivateVacancy
 import uk.gov.co.test.ui.specs.BaseFeatureSpec
 import uk.gov.co.test.ui.tags.RunInVX
 
@@ -29,104 +26,17 @@ class createVacancySpec extends BaseFeatureSpec {
       eventually(confirmAndActivateVacancy())
     }
 
-    Scenario("A Recruiter Creates a DEFRA Apply Only Templated Vacancy", RunInVX) {
-      Given("a recruiter logs in to vx config")
-      loginWithRecruiterDetails(RECRUITER)
-
-      When("a recruiter creates a defra apply only vacancy")
-      fillNewVacancyForm(DEFRA_DATA)
-
-      Then("The defra apply only vacancy is successfully created and posted")
-      eventually(confirmAndActivateVacancy())
-    }
-
-    Scenario("A Recruiter Creates an HMRC Apply Only Templated Vacancy", RunInVX) {
-      Given("a recruiter logs in to vx config")
-      loginWithRecruiterDetails(RECRUITER)
-
-      When("a recruiter creates a hmrc apply only vacancy")
-      fillNewVacancyForm(HMRC_DATA)
-      searchOn()
-      confirmAndActivateVacancy()
-      addExternalPosting()
-
-      Then("The hmrc apply only vacancy is successfully created and posted")
-      confirmAndActivateVacancy()
-    }
-
-    Scenario("A Recruiter Posts A Vacancy Live And Applicant Application Process (partial e2e)", RunInVX) {
-      Given("a recruiter logs in to vx config and creates vacancy")
-      loginWithRecruiterDetails(RECRUITER)
-      searchOn()
-      confirmAndActivateVacancy()
-      addExternalPosting()
-
-      When("candidate applies for the role")
-      fillNewCandidateDetails(REGISTER_CANDIDATE)
-      fillShortFormDetails(CANDIDATE_SHORT_FORM_DATA)
-
-      Then("the candidate is able to see their short form submitted")
-      eventually(onPage(applicationCentreTitle))
-      advertDetailsFunction().isDisplayed
-      withdrawApplicationFunction().isDisplayed
-      helpWithSelectionText() shouldEqual "Help with selection process"
-    }
-
     Scenario("A Recruiter Creates an HMRC Apply Only Templated Vacancy And Application Process (e2e)", RunInVX) {
-      Given("a recruiter logs in to vx config and creates vacancy")
-      loginWithRecruiterDetails(RECRUITER)
-      fillNewVacancyForm(HMRC_DATA)
-      searchOn()
-      confirmAndActivateVacancy()
-      addExternalPosting()
+      Given("a recruiter logs in to vx config and creates & posts vacancy")
+      fillNewVacancyForm(MAIN_VACANCY_DATA)
+      activateAndPostVacancy()
 
-      When("candidate applies for the role")
-      fillNewCandidateDetails(REGISTER_CANDIDATE_HMRC)
-      fillShortFormDetails(CANDIDATE_SHORT_FORM_DATA_HMRC)
+      When("candidate applies & completes the short form")
+      fillNewCandidateDetails(MAIN_REGISTER_CANDIDATE)
+      fillShortFormDetails(MAIN_CANDIDATE_SHORT_FORM_DATA)
 
-      Then("the candidate is able to see their short form submitted")
-      eventually(onPage(applicationCentreTitle))
-      advertDetailsFunction().isDisplayed
-      withdrawApplicationFunction().isDisplayed
-      helpWithSelectionText() shouldEqual "Help with selection process"
-    }
-
-    Scenario("A Recruiter Creates an Insolvency Apply Only Templated Vacancy And Application Process (e2e)", RunInVX) {
-      Given("a recruiter logs in to vx config and creates vacancy")
-      loginWithRecruiterDetails(RECRUITER)
-      fillNewVacancyForm(INSOLVENCY_DATA)
-      searchOn()
-      confirmAndActivateVacancy()
-      addExternalPosting()
-
-      When("candidate applies for the role")
-      fillNewCandidateDetails(REGISTER_CANDIDATE_INSOLVENCY)
-      fillShortFormDetails(CANDIDATE_SHORT_FORM_DATA_INSOLVENCY)
-
-      Then("the candidate is able to see their short form submitted")
-      eventually(onPage(applicationCentreTitle))
-      advertDetailsFunction().isDisplayed
-      withdrawApplicationFunction().isDisplayed
-      helpWithSelectionText() shouldEqual "Help with selection process"
-    }
-
-    Scenario("A Recruiter Creates an GORS Apply Only Templated Vacancy And Application Process (e2e)", RunInVX) {
-      Given("a recruiter logs in to vx config and creates vacancy")
-      loginWithRecruiterDetails(RECRUITER)
-      fillNewVacancyForm(GORS_DATA)
-      searchOn()
-      confirmAndActivateVacancy()
-      addExternalPosting()
-
-      When("candidate applies for the role")
-      fillNewCandidateDetails(REGISTER_CANDIDATE_GORS)
-      fillShortFormDetails(CANDIDATE_SHORT_FORM_DATA_GORS)
-
-      Then("the candidate is able to see their short form submitted")
-      eventually(onPage(applicationCentreTitle))
-      advertDetailsFunction().isDisplayed
-      withdrawApplicationFunction().isDisplayed
-      helpWithSelectionText() shouldEqual "Help with selection process"
+      Then("the candidate completes the pec form and completes application")
+      confirmShortFormCompletion()
     }
   }
 }

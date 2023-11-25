@@ -9,7 +9,12 @@ import uk.gov.co.test.ui.conf.TestConfiguration.readProperty
 import uk.gov.co.test.ui.data.vx.RecruiterDetails
 import uk.gov.co.test.ui.driver.BrowserDriver
 import uk.gov.co.test.ui.pages.BasePage
+import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.{advertDetailsFunction, applicationCentreTitle, helpWithSelectionText, withdrawApplicationFunction}
+import uk.gov.co.test.ui.pages.v9.SignInPage.{navigateToV9Test, v9AcceptAllCookies, v9SearchCookiesById}
+import uk.gov.co.test.ui.pages.vx.DashboardPage.searchOn
 import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.applicationClosingDate
+import uk.gov.co.test.ui.pages.vx.vacancytabs.ExternalPostingsPage.addExternalPosting
+import uk.gov.co.test.ui.pages.vx.vacancytabs.SummaryPage.confirmAndActivateVacancy
 
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -113,6 +118,57 @@ trait VacancyBasePage extends Matchers with BasePage with BrowserDriver {
     val enterOption = waitForVisibilityOfElementById(inputId)
     enterOption.sendKeys(text)
     enterOption.sendKeys(Keys.ENTER)
+  }
+
+  def clearField(inputId: String): Unit = {
+    val candidateInput = waitForVisibilityOfElementByPath(s".//textarea[@aria-describedby='$inputId']")
+    candidateInput.sendKeys(Keys.BACK_SPACE)
+  }
+
+  def selectTypeOfRoles(typeOfCandidate: String, inputId: String): Unit = {
+    val candidateInput = waitForVisibilityOfElementByPath(s".//textarea[@aria-describedby='$inputId']")
+    candidateInput.sendKeys(typeOfCandidate)
+    waitForDropdownOptionByText(typeOfCandidate).click()
+  }
+
+  def enterRoles(check: List[String], inputId: String): Unit = {
+    clearField(inputId)
+    for (test <- check)
+      selectTypeOfRoles(test, inputId)
+  }
+
+  def addWelshTranslation(
+    addWelsh: Boolean,
+    addTranslation: String,
+    welshInput: String,
+    welsh: String,
+    update: String
+  ): Unit =
+    if (addWelsh) {
+      clickOn(addTranslation)
+      waitForVisibilityOfElementById(welshInput)
+      textField(welshInput).value = welsh
+      clickOn(update)
+    }
+
+  def activateAndPostVacancy(): Unit = {
+    searchOn()
+    confirmAndActivateVacancy()
+    addExternalPosting()
+  }
+
+  def switchToCandidatePages(): Unit = {
+    openNewTabWithJavascript()
+    openNewWindow()
+    navigateToV9Test()
+    if (!v9SearchCookiesById().isEmpty) v9AcceptAllCookies()
+  }
+
+  def confirmShortFormCompletion(): Unit = {
+    eventually(onPage(applicationCentreTitle))
+    advertDetailsFunction().isDisplayed
+    withdrawApplicationFunction().isDisplayed
+    helpWithSelectionText() shouldEqual "Help with selection process"
   }
 
 }

@@ -3,6 +3,7 @@ package uk.gov.co.test.ui.pages.vx.createvacancypage
 import org.openqa.selenium.By
 import uk.gov.co.test.ui.data.vx.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
+import uk.gov.co.test.ui.pages.vx.createvacancypage.ApproachSection.candidateApproach
 import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.formId
 
 case class ManagementDetails(
@@ -51,10 +52,17 @@ object ManagementSection extends VacancyBasePage {
   private lazy val complaintsProcessInputId       = s"${formId}_datafield_179305_1_1_en-GB"
   private lazy val vacancyCommentsInputId         = s"${formId}_datafield_100298_1_1"
 
-  private def selectGreatPlaceToWorkForVeterans(managementDetails: ManagementDetails): Unit = {
+  private def selectVeteransAndPrisonLeaversPosition(managementDetails: ManagementDetails): Unit = {
     scrollToElement(By.id(managementSectionId))
-    if (managementDetails.greatWorkForVeterans) clickOnRadioButton(greatWorkForVeteransYesId)
-    else clickOnRadioButton(greatWorkForVeteransNoId)
+    if (candidateApproach == "External") {
+      val veterans = managementDetails.greatWorkForVeterans
+      if (veterans) {
+        clickOnRadioButton(greatWorkForVeteransYesId)
+      } else {
+        clickOnRadioButton(greatWorkForVeteransNoId)
+      }
+      selectPrisonLeavers(managementDetails)
+    }
   }
 
   private def selectPrisonLeavers(managementDetails: ManagementDetails): Unit =
@@ -131,8 +139,7 @@ object ManagementSection extends VacancyBasePage {
     enterText(vacancyCommentsInputId, managementDetails.vacancyComments.get)
 
   private val management: Seq[ManagementDetails => Unit] = Seq(
-    selectGreatPlaceToWorkForVeterans,
-    selectPrisonLeavers,
+    selectVeteransAndPrisonLeaversPosition,
     selectRemoveCSRPrinciples,
     enterAssignTo,
     enterAssignTo2,

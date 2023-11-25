@@ -1,6 +1,7 @@
 package uk.gov.co.test.ui.flows.vx
 
-import uk.gov.co.test.ui.data.vx.NewVacancyDetails
+import uk.gov.co.test.ui.data.vx.{NewVacancyDetails, RECRUITER}
+import uk.gov.co.test.ui.flows.vx.RecruiterLoginFlow.loginWithRecruiterDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 import uk.gov.co.test.ui.pages.vx.createvacancypage.AdvertSection.advertSection
 import uk.gov.co.test.ui.pages.vx.createvacancypage.ApproachSection.approachSection
@@ -20,7 +21,7 @@ import uk.gov.co.test.ui.pages.vx.createvacancypage.PecCheckFormsSection.pecChec
 import uk.gov.co.test.ui.pages.vx.createvacancypage.ReserveListSection.reserveListSection
 import uk.gov.co.test.ui.pages.vx.createvacancypage.SuccessProfilesSection.successProfilesSection
 import uk.gov.co.test.ui.pages.vx.createvacancypage.VacancyTestsSection.vacancyTestsSection
-import uk.gov.co.test.ui.pages.vx.tabs.SummaryPage.saveVacancyId
+import uk.gov.co.test.ui.pages.vx.vacancytabs.SummaryPage.saveVacancyId
 
 object NewVacancyFlow extends VacancyBasePage {
 
@@ -46,6 +47,7 @@ object NewVacancyFlow extends VacancyBasePage {
   )
 
   def fillNewVacancyForm(vacancy: NewVacancyDetails): Unit = {
+    loginWithRecruiterDetails(RECRUITER)
     createNewVacancy()
     newVacancy.foreach { f =>
       f(vacancy)

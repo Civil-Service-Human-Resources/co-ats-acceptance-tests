@@ -12,6 +12,10 @@ object TestConfiguration {
     s"$host${serviceRoute(service)}"
   }
 
+  def urlHost(service: String): String = {
+    s"${environmentHost(service)}"
+  }
+
   def environmentHost(serviceName: String): String = config.getString(s"services.$serviceName.host")
   def serviceRoute(serviceName: String): String    = config.getString(s"services.$serviceName.productionRoute")
   def readProperty(property: String): String = config.getString(property)

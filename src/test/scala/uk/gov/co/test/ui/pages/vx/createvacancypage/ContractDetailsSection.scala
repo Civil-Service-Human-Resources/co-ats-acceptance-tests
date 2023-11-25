@@ -20,11 +20,11 @@ case class ContractDetails(
 
 object ContractDetailsSection extends VacancyBasePage {
 
-  private lazy val contractTypeId            = s"select2-${formId}_datafield_154977_1_1-container"
+  private lazy val contractDetailsSectionId  = s"select2-${formId}_datafield_154977_1_1-container"
   private lazy val currencyId                = s"select2-${formId}_datafield_155065_1_1-container"
   private lazy val workingPatternId          = s"select2-${formId}_datafield_154969_1_1-container"
   private lazy val jobGradeId                = s"select2-${formId}_datafield_154973_1_1-container"
-  private lazy val contractTypeInput         = s".//*[@aria-describedby='$contractTypeId']"
+  private lazy val contractTypeInput         = s".//*[@aria-describedby='$contractDetailsSectionId']"
   private lazy val workingPatternInput       = s".//*[@aria-describedby='$workingPatternId']"
   private lazy val jobGradeInput             = s".//*[@aria-describedby='$jobGradeId']"
   private lazy val equivalentGradeId         = s"${formId}_datafield_154981_1_1_en-GB"
@@ -37,7 +37,7 @@ object ContractDetailsSection extends VacancyBasePage {
   private lazy val employerContributionInput = s"${formId}_datafield_198577_1_1"
 
   private def selectContractType(contractDetails: ContractDetails): Unit = {
-    scrollToElement(By.id(contractTypeId))
+    scrollToElement(By.id(contractDetailsSectionId))
     selectOption(contractTypeInput, contractDetails.contractType)
   }
 

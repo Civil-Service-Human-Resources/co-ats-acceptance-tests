@@ -8,7 +8,8 @@ import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.formId
 case class ApproachDetails(
   approach: String,
   statementRequired: Boolean,
-  statement: String
+  eligibilityStatement: String,
+  standardStatement: String
 )
 
 object ApproachSection extends VacancyBasePage {
@@ -23,14 +24,19 @@ object ApproachSection extends VacancyBasePage {
   private lazy val externalId                     = s"${formId}_datafield_154380_1_1_11774"
   private lazy val internalYesStatementId         = s"${formId}_datafield_154388_1_1_1"
   private lazy val internalNoStatementId          = s"${formId}_datafield_154388_1_1_2"
+  var candidateApproach                           = ""
 
   private def eligibilityStatement(approachDetails: ApproachDetails): Unit = {
     val statement = waitForVisibilityOfElementById(statementId)
-    statement.sendKeys(approachDetails.statement)
+    statement.sendKeys(approachDetails.eligibilityStatement)
   }
+
+  private def standardEligibilityStatement(text: String): Boolean =
+    waitForVisibilityOfElementByPath(s".//strong[text()='$text']").isDisplayed
 
   private def selectApproach(approachDetails: ApproachDetails): Unit = {
     scrollToElement(By.id(approachId))
+    candidateApproach = approachDetails.approach
     approachDetails.approach match {
       case "Pre-release"       => clickOnRadioButton(prereleaseId)
       case "Internal"          => clickOnRadioButton(internalId)
@@ -56,6 +62,7 @@ object ApproachSection extends VacancyBasePage {
         case "Internal"          => clickOnRadioButton(internalNoStatementId)
         case "Across government" => clickOnRadioButton(acrossGovernmentNoStatementId)
       }
+      standardEligibilityStatement(approachDetails.standardStatement)
     }
 
   private val approach: Seq[ApproachDetails => Unit] = Seq(

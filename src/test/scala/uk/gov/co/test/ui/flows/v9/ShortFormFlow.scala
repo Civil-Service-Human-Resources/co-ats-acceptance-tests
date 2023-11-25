@@ -9,6 +9,7 @@ import uk.gov.co.test.ui.pages.v9.shortform.DiversityMonitoringPage.diversityMon
 import uk.gov.co.test.ui.pages.v9.shortform.EligibilityPage.eligibilityPage
 import uk.gov.co.test.ui.pages.v9.shortform.PersonalInfoPage.personalInfoPage
 import uk.gov.co.test.ui.pages.vx.DashboardPage.vacancyId
+import uk.gov.co.test.ui.pages.vx.createvacancypage.ApproachSection.candidateApproach
 import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.vacancyName
 
 object ShortFormFlow extends CivilServiceJobsBasePage {
@@ -21,11 +22,12 @@ object ShortFormFlow extends CivilServiceJobsBasePage {
     declarationPage
   )
 
-  def fillShortFormDetails(shortFormDetails: ShortFormDetails): Unit = {
-    jobSearchAndApplyFlow(vacancyName, vacancyId, "what")
-    shortForm.foreach { f =>
-      f(shortFormDetails)
-    }
-    clickOn(shortFormSubmission)
-  }
+  def fillShortFormDetails(shortFormDetails: ShortFormDetails): Unit =
+    if (candidateApproach == "External" || candidateApproach == "Pre-release") {
+      jobSearchAndApplyFlow(vacancyName, vacancyId, "what")
+      shortForm.foreach { f =>
+        f(shortFormDetails)
+      }
+      clickOn(shortFormSubmission)
+    } else println(s"Vacancy is open for '$candidateApproach' candidates!")
 }

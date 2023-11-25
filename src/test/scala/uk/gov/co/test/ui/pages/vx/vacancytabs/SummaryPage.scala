@@ -1,4 +1,4 @@
-package uk.gov.co.test.ui.pages.vx.tabs
+package uk.gov.co.test.ui.pages.vx.vacancytabs
 
 import org.openqa.selenium.By
 import org.scalatest.concurrent.Eventually.eventually

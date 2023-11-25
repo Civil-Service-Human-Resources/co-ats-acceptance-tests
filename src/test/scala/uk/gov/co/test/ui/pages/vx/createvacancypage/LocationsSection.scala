@@ -17,7 +17,7 @@ case class LocationsDetails(
   whichCommunityEncouraged: String,
   giveLocationPreference: Boolean,
   maxLocations: String,
-  otherCityOrTown: List[String]
+  otherLocations: List[String]
 )
 
 object LocationsSection extends VacancyBasePage {
@@ -120,7 +120,7 @@ object LocationsSection extends VacancyBasePage {
     if (locationsDetails.giveLocationPreference) {
       clickOnRadioButton(locationPreferenceYesId)
       chooseMaxLocations(locationsDetails.maxLocations)
-      for (cityOrTown <- locationsDetails.otherCityOrTown)
+      for (cityOrTown <- locationsDetails.otherLocations)
         selectOtherCityOrTown(cityOrTown)
     } else {
       clickOnRadioButton(locationPreferenceNoId)

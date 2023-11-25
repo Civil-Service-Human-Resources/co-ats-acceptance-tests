@@ -1,7 +1,6 @@
-package uk.gov.co.test.ui.pages.vx.tabs
+package uk.gov.co.test.ui.pages.vx.vacancytabs
 
 import org.openqa.selenium.{By, WebElement}
-import uk.gov.co.test.ui.pages.v9.SignInPage.{navigateToV9Test, v9AcceptAllCookies, v9SearchCookiesById}
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 
 import scala.collection.mutable
@@ -121,15 +120,10 @@ object ExternalPostingsPage extends VacancyBasePage {
   def addExternalPosting(): Unit = {
     selectExternalPostingsTab()
     addPosting()
-    //    newPostingHeader shouldEqual "New Posting"
     selectDestination()
     waitForVisibilityOfElementById(nextStep2PostingId).click()
     waitForVisibilityOfElementById(nextStep3PostingId).click()
     waitForVisibilityOfElementById(nextCompletePostingId).click()
     confirmPostingDetails()
-    openNewTabWithJavascript()
-    openNewWindow()
-    navigateToV9Test()
-    if (!v9SearchCookiesById().isEmpty) v9AcceptAllCookies()
   }
 }

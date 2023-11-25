@@ -83,7 +83,6 @@ trait CivilServiceJobsBasePage extends Matchers with BasePage with BrowserDriver
   def navigateToV9Test(): Unit = {
     go to url
     eventually(onPage(civilServiceJobsPageTitle))
-//    generateCandidateDetails()
   }
 
   def generateCandidateDetails(): Unit = {

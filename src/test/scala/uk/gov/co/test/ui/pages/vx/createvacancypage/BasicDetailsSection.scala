@@ -8,7 +8,13 @@ import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
-case class BasicDetails(template: String, vacancyTitle: String, closingDate: Int)
+case class BasicDetails(
+  template: String,
+  vacancyTitle: String,
+  addWelshTitle: Boolean,
+  welshTitle: String,
+  closingDate: Int
+)
 
 object BasicDetailsSection extends VacancyBasePage {
 
@@ -24,6 +30,9 @@ object BasicDetailsSection extends VacancyBasePage {
   val newVacancyPath                  = ".//a[contains(@href,'recruiter/opportunities/vacancy/create')]"
   val vacancySectionPath              = "//*[@id='lm-vacancies']/h3/a"
   val extractFormClass                = "opp_form_bd"
+  val addWelshTranslationId           = "edit_opp_form_title_button"
+  val welshTitleInput                 = "edit_opp_form_title_cy"
+  val updateWelshTitleId              = "lbledit_edit_opp_form_title-update"
   var formId: String                  = ""
   var applicationLiveDate: String     = ""
   var applicationLiveTime: String     = ""
@@ -38,12 +47,22 @@ object BasicDetailsSection extends VacancyBasePage {
     waitForVisibilityOfElementByPath(displayWelshPath)
 
   private def title(): TextField       = textField("title")
+  private def welshTitle(): TextField  = textField(welshTitleInput)
   private def closingDate(): TextField = textField(closingDateId)
 
   private def templateSelect: WebElement = waitForVisibilityOfElementByPath(selectTemplatePath)
   private def enterTemplate: WebElement  = waitForVisibilityOfElementByPath(enterTemplatePath)
   private def newVacancy: WebElement     = waitForVisibilityOfElementByPathLast(newVacancyPath)
   private def vacancySection: WebElement = waitForVisibilityOfElementByPathLast(vacancySectionPath)
+
+  def createNewVacancy(): Unit = {
+    if (newVacancy.getText == "Create New Vacancy") newVacancy.click()
+    else {
+      vacancySection.click()
+      newVacancy.click()
+    }
+    eventually(onPage(createVacancyTitle))
+  }
 
   private def selectTemplate(basicDetails: BasicDetails): Unit = {
     templateSelect.click()
@@ -54,6 +73,13 @@ object BasicDetailsSection extends VacancyBasePage {
   private def enterVacancyTitle(basicDetails: BasicDetails): Unit = {
     vacancyName = basicDetails.vacancyTitle
     title().value = vacancyName
+    addWelshTranslation(
+      basicDetails.addWelshTitle,
+      addWelshTranslationId,
+      welshTitleInput,
+      basicDetails.welshTitle,
+      updateWelshTitleId
+    )
   }
 
   private def selectClosingDate(basicDetails: BasicDetails): Unit = {
@@ -68,15 +94,6 @@ object BasicDetailsSection extends VacancyBasePage {
     appClosingTime()
     convertedLiveDateTime = s"$applicationLiveDate at $applicationLiveTime GMT"
     convertedClosingDateTime = s"$appConvertedClosingDate at $applicationClosingTime GMT"
-  }
-
-  def createNewVacancy(): Unit = {
-    if (newVacancy.getText == "Create New Vacancy") newVacancy.click()
-    else {
-      vacancySection.click()
-      newVacancy.click()
-    }
-    eventually(onPage(createVacancyTitle))
   }
 
   def appClosingDate(days: Int): String = {
