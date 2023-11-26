@@ -125,16 +125,16 @@ trait VacancyBasePage extends Matchers with BasePage with BrowserDriver {
     candidateInput.sendKeys(Keys.BACK_SPACE)
   }
 
-  def selectTypeOfRoles(typeOfCandidate: String, inputId: String): Unit = {
+  def selectTypeOfRoles(roles: String, inputId: String): Unit = {
     val candidateInput = waitForVisibilityOfElementByPath(s".//textarea[@aria-describedby='$inputId']")
-    candidateInput.sendKeys(typeOfCandidate)
-    waitForDropdownOptionByText(typeOfCandidate).click()
+    candidateInput.sendKeys(roles)
+    waitForDropdownOptionByText(roles).click()
   }
 
-  def enterRoles(check: List[String], inputId: String): Unit = {
+  def enterRoles(value: List[String], inputId: String): Unit = {
     clearField(inputId)
-    for (test <- check)
-      selectTypeOfRoles(test, inputId)
+    for (role <- value)
+      selectTypeOfRoles(role, inputId)
   }
 
   def addWelshTranslation(
@@ -142,13 +142,13 @@ trait VacancyBasePage extends Matchers with BasePage with BrowserDriver {
     addTranslation: String,
     welshInput: String,
     welsh: String,
-    update: String
+    updateId: String
   ): Unit =
     if (addWelsh) {
       clickOn(addTranslation)
       waitForVisibilityOfElementById(welshInput)
       textField(welshInput).value = welsh
-      clickOn(update)
+      clickOn(updateId)
     }
 
   def activateAndPostVacancy(): Unit = {

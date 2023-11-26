@@ -32,7 +32,7 @@ object BasicDetailsSection extends VacancyBasePage {
   val extractFormClass                = "opp_form_bd"
   val addWelshTranslationId           = "edit_opp_form_title_button"
   val welshTitleInput                 = "edit_opp_form_title_cy"
-  val updateWelshTitleId              = "lbledit_edit_opp_form_title-update"
+  val updateWelshId                        = "lbledit_edit_opp_form_title-update"
   var formId: String                  = ""
   var applicationLiveDate: String     = ""
   var applicationLiveTime: String     = ""
@@ -47,7 +47,6 @@ object BasicDetailsSection extends VacancyBasePage {
     waitForVisibilityOfElementByPath(displayWelshPath)
 
   private def title(): TextField       = textField("title")
-  private def welshTitle(): TextField  = textField(welshTitleInput)
   private def closingDate(): TextField = textField(closingDateId)
 
   private def templateSelect: WebElement = waitForVisibilityOfElementByPath(selectTemplatePath)
@@ -78,7 +77,7 @@ object BasicDetailsSection extends VacancyBasePage {
       addWelshTranslationId,
       welshTitleInput,
       basicDetails.welshTitle,
-      updateWelshTitleId
+      updateWelshId
     )
   }
 

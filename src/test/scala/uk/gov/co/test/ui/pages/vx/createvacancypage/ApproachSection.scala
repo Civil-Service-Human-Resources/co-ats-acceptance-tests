@@ -9,6 +9,8 @@ case class ApproachDetails(
   approach: String,
   statementRequired: Boolean,
   eligibilityStatement: String,
+  addWelshStatement: Boolean,
+  welshStatement: String,
   standardStatement: String
 )
 
@@ -24,11 +26,15 @@ object ApproachSection extends VacancyBasePage {
   private lazy val externalId                     = s"${formId}_datafield_154380_1_1_11774"
   private lazy val internalYesStatementId         = s"${formId}_datafield_154388_1_1_1"
   private lazy val internalNoStatementId          = s"${formId}_datafield_154388_1_1_2"
+  private lazy val addWelshTranslationId          = "clicky_154373"
+  private lazy val welshStatementInput            = "datafield_154373_1_1_cy"
+  private lazy val updateWelshId                  = "lbledit_datafield_154373_1_1-update"
   var candidateApproach                           = ""
 
   private def eligibilityStatement(approachDetails: ApproachDetails): Unit = {
     val statement = waitForVisibilityOfElementById(statementId)
     statement.sendKeys(approachDetails.eligibilityStatement)
+    enterWelshStatement(approachDetails)
   }
 
   private def standardEligibilityStatement(text: String): Boolean =
@@ -64,6 +70,15 @@ object ApproachSection extends VacancyBasePage {
       }
       standardEligibilityStatement(approachDetails.standardStatement)
     }
+
+  private def enterWelshStatement(approachDetails: ApproachDetails): Unit =
+    addWelshTranslation(
+      approachDetails.addWelshStatement,
+      addWelshTranslationId,
+      welshStatementInput,
+      approachDetails.welshStatement,
+      updateWelshId
+    )
 
   private val approach: Seq[ApproachDetails => Unit] = Seq(
     selectApproach,

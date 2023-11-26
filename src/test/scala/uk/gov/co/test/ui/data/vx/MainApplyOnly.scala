@@ -57,13 +57,15 @@ object MAIN_APPROACH
       "External",
       true,
       "Autotest - Eligibility statement",
+      true,
+      "Prawf awtomeiddio",
       "This vacancy is open to employees who already hold the substantive grade for the post and were appointed to the Civil Service on merit following a fair and open competition; or were appointed to a permanent Civil Service post through an exception in the Civil Service Commissioners’ rules."
     )
 object MAIN_APPROVAL
     extends ApprovalDetails(
       true,
       "Autotest - budgetary authorisation info",
-      "Autotest - Cost centre"
+      "Autotest - Cost centre (optional)"
     )
 
 object MAIN_RESERVE_LIST
@@ -91,8 +93,11 @@ object MAIN_LOCATIONS
 
 object MAIN_CONTRACT_DETAILS
     extends ContractDetails(
-      "Permanent",
-      "Full-time",
+      List("Permanent", "Temporary", "Loan", "Secondment", "Returner"),
+      "Autotest - Maximum characters: 255. Any text over this limit will not show on the advert.",
+      true,
+      "Prawf awtomeiddio",
+      List("Full-time", "Part-time", "Compressed Hours", "Flexible working", "Homeworking"),
       "Senior Executive Officer",
       "Grade 7",
       "GBP (£)",

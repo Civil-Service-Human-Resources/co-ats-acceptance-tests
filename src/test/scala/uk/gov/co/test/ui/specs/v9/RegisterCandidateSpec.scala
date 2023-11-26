@@ -1,6 +1,7 @@
 package uk.gov.co.test.ui.specs.v9
 
 import uk.gov.co.test.ui.data.v9.applicants.MAIN_REGISTER_CANDIDATE
+import uk.gov.co.test.ui.flows.v9.GenerateNewCandidates.createMultipleCandidates
 import uk.gov.co.test.ui.flows.v9.RegisterCandidateFlow.fillNewCandidateDetails
 import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.applicationCentrePageTitle
 import uk.gov.co.test.ui.pages.v9.SearchJobsPage.{accountCreatedSuccess1, accountCreatedSuccess2, accountCreatedSuccessMessage1, accountCreatedSuccessMessage2, candidateDisplayName}
@@ -22,6 +23,16 @@ class RegisterCandidateSpec extends BaseFeatureSpec {
 
       Then("the candidate is able to edit their account")
       onPage(applicationCentrePageTitle)
+    }
+
+    Scenario("A Candidate Creates An Account On Civil Service Jobs LOOP", RunInV9) {
+      Given("the candidate enters their details for new account")
+      createMultipleCandidates()
+
+      When("the candidate navigates to the edit account details page")
+
+      Then("the candidate is able to edit their account")
+
     }
   }
 }
