@@ -42,7 +42,9 @@ object VacancyTestsSection extends VacancyBasePage {
         selectOnlineTests(vacancyTestsDetails)
         selectRecommendedOption(vacancyTestsDetails)
         recruiterTestsSection(vacancyTestsDetails)
-        testOrderingSection(vacancyTestsDetails) //relies on what testGrade was selected and testNames from list - logic needs refactor
+        testOrderingSection(
+          vacancyTestsDetails
+        ) //relies on what testGrade was selected and testNames from list - logic needs refactor
       }
     }
   }
@@ -78,10 +80,9 @@ object VacancyTestsSection extends VacancyBasePage {
       selectOptionWithId(additionalDetailId, vacancyTestsDetails.additionalDetails)
     }
 
-  def selectOnlineTests(vacancyTestsDetails: VacancyTestsDetails): Unit = {
+  def selectOnlineTests(vacancyTestsDetails: VacancyTestsDetails): Unit =
     for (test <- vacancyTestsDetails.testName(vacancyTestsDetails.testGrade))
       onlineTestSelection(test)
-  }
 
   private val onlineTests: Seq[VacancyTestsDetails => Unit] = Seq(
     vacancyTestsFlow

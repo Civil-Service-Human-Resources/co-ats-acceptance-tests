@@ -9,13 +9,12 @@ import java.nio.file.{Files, Paths, StandardOpenOption}
 
 object GenerateNewCandidates extends CivilServiceJobsBasePage {
 
-  def createMultipleCandidates(): Unit = {
+  def createMultipleCandidates(candidatesRequired: Int): Unit = {
     val utf8: Charset = StandardCharsets.UTF_8
-    val file          = "candidates.csv"
+    val file          = "candidates.txt"
     val writer        = new PrintWriter(new File(file))
-    def data: String  = s"NAME: $randomFirstName $randomLastName EMAIL: $randomEmail PASSWORD: $candidatePassword"
 
-    for (i <- 1 to 5) {
+    for (i <- 1 to candidatesRequired) {
       generateCandidateDetails()
       navigateToCreateAccountPage()
       enterFirstNameLoop(randomFirstName)
@@ -29,6 +28,8 @@ object GenerateNewCandidates extends CivilServiceJobsBasePage {
       registerNewAccount()
       signOutProcess()
 
+      def data: String =
+        s"CANDIDATE NO.$i: NAME: $randomFirstName $randomLastName EMAIL: $randomEmail PASSWORD: $passwordCandidate"
       Files.write(Paths.get(file), s"$data\n".getBytes(utf8), StandardOpenOption.APPEND)
     }
   }

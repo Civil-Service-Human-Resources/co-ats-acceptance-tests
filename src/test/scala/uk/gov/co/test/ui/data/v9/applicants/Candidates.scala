@@ -1,18 +1,18 @@
 package uk.gov.co.test.ui.data.v9.applicants
 
 import uk.gov.co.test.ui.pages.v9.CandidateDetails
-import uk.gov.co.test.ui.pages.v9.SignInPage.{generatePreferredFirstName, generateRandomFirstName, generateRandomLastName, generatedEmail}
+import uk.gov.co.test.ui.pages.v9.SignInPage.{generatePreferredFirstName, generateRandomFirstName, generateRandomLastName, generatedEmail, passwordCandidate}
 
 case class CandidateData(candidateDetails: CandidateDetails)
 
 object REGISTERED_CANDIDATE
     extends CandidateDetails(
-      "Jon",
-      "Jones",
+      "John",
+      "Yates",
       "Bones",
-      "jon.jones@example.com",
-      "qwertygh123",
-      true,
+      "john.yates@example.com",
+      s"$passwordCandidate",
+      false,
       true
     )
 
@@ -22,7 +22,7 @@ object MAIN_REGISTER_CANDIDATE
       lastname = generateRandomLastName(),
       preferredFirstName = generatePreferredFirstName(),
       email = generatedEmail(),
-      "password123!",
+      s"$passwordCandidate",
       false,
       true
     )

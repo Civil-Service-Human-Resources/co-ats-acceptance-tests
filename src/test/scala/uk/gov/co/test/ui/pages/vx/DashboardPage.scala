@@ -26,7 +26,7 @@ object DashboardPage extends VacancyBasePage {
 
   def searchOn(): Unit = {
     waitForVisibilityOfElementByPath(".//a[@aria-label='Preview advert Details Summary']").isDisplayed
-    onPage(s"${vacancyName} : Civil Service Jobs - GOV.UK")
+    onPage(s"$vacancyName : Civil Service Jobs - GOV.UK")
     newVacancyAppId()
     waitForVisibilityOfElementById(searchPath).click()
     waitForVisibilityOfElementByPath(searchVacanciesPath).click()

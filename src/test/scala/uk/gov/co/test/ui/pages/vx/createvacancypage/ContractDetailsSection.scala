@@ -59,8 +59,6 @@ object ContractDetailsSection extends VacancyBasePage {
     }
   }
 
-
-
   private def selectWorkingPattern(contractDetails: ContractDetails): Unit = {
     scrollToElement(By.id(workingPatternId))
     enterRoles(contractDetails.workingPattern, workingPatternId)

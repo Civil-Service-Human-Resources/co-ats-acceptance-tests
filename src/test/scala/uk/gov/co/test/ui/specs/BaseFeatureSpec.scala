@@ -7,8 +7,8 @@ import org.scalatest.featurespec.AnyFeatureSpec
 import org.scalatest.matchers.should.Matchers
 import org.scalatestplus.selenium.WebBrowser
 import uk.gov.co.test.ui.driver.BrowserDriver
-import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.{logoutVX, navigateToVxConfigLogin}
-import uk.gov.co.test.ui.pages.v9.SignInPage.{navigateToV9Test, signOut, signOutProcess, v9AcceptAllCookies, v9SearchCookiesById}
+import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.navigateToVxConfigLogin
+import uk.gov.co.test.ui.pages.v9.SignInPage.{navigateToV9Test, v9AcceptAllCookies, v9SearchCookiesById}
 import uk.gov.co.test.ui.utils.SingletonScreenshotReport
 import uk.gov.co.test.ui.webdriver.SingletonDriver
 
@@ -37,15 +37,13 @@ trait BaseFeatureSpec
     }
   }
 
-  override protected def afterEach(testData: TestData): Unit = {
+  override protected def afterEach(testData: TestData): Unit =
     deleteAllCookies()
-  }
 
   override def afterAll(): Unit = {
     Runtime.getRuntime addShutdownHook new Thread {
-      override def run(): Unit = {
+      override def run(): Unit =
         Try(SingletonDriver.closeInstance())
-      }
     }
     SingletonScreenshotReport.publishReport()
   }

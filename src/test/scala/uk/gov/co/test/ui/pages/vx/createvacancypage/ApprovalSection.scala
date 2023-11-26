@@ -42,11 +42,11 @@ object ApprovalSection extends VacancyBasePage {
     uploadApprovalFile("CSJ-T&Cs.docx")
   }
 
-  def importFilesPath : String = "/src/test/resource/import/"
+  def importFilesPath: String = "/src/test/resource/import/"
 
-  private def uploadApprovalFile(fileName : String): Unit = {
-    val getCurrentDirectory = new java.io.File(".").getCanonicalPath
-    val filePath = getCurrentDirectory.concat(importFilesPath).concat(fileName)
+  private def uploadApprovalFile(fileName: String): Unit = {
+    val getCurrentDirectory     = new java.io.File(".").getCanonicalPath
+    val filePath                = getCurrentDirectory.concat(importFilesPath).concat(fileName)
     val fileElement: WebElement = id(uploadApprovalFileOneId).findElement.get.underlying
     fileElement.sendKeys(filePath)
   }

@@ -27,7 +27,7 @@ class RegisterCandidateSpec extends BaseFeatureSpec {
 
     Scenario("A Candidate Creates An Account On Civil Service Jobs LOOP", RunInV9) {
       Given("the candidate enters their details for new account")
-      createMultipleCandidates()
+      createMultipleCandidates(5)
 
       When("the candidate navigates to the edit account details page")
 

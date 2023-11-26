@@ -6,6 +6,7 @@ import org.openqa.selenium.{By, WebElement}
 import org.scalatest.concurrent.Eventually.eventually
 import org.scalatest.matchers.should.Matchers
 import uk.gov.co.test.ui.conf.TestConfiguration
+import uk.gov.co.test.ui.conf.TestConfiguration.readProperty
 import uk.gov.co.test.ui.driver.BrowserDriver
 import uk.gov.co.test.ui.pages.BasePage
 import uk.gov.co.test.ui.pages.v9.SearchJobsPage.civilServiceJobsPageTitle
@@ -17,6 +18,7 @@ import scala.util.Random
 trait CivilServiceJobsBasePage extends Matchers with BasePage with BrowserDriver {
 
   val url: String                        = TestConfiguration.url("v9test")
+  val passwordCandidate: String          = readProperty("services.v9test.admin.candidate_password")
   val civilServiceSignOutPageTitle       = "Civil Service Jobs - Civil Service Jobs - GOV.UK"
   val v9AcceptAdditionalCookies: String  = "accept_all_cookies_button"
   val vXaAcceptAdditionalCookies: String = "cookies-accept-button"
@@ -25,7 +27,6 @@ trait CivilServiceJobsBasePage extends Matchers with BasePage with BrowserDriver
   var randomLastName: String             = ""
   var preferredFirstName: String         = ""
   var randomEmail: String                = ""
-  var candidatePassword: String                = "qwertygh123!"
 
   def randomnessName(): String = {
     val randomLastName = Iterator.continually(Random.nextPrintableChar()).filter(_.isLetter).take(10).mkString
@@ -49,17 +50,6 @@ trait CivilServiceJobsBasePage extends Matchers with BasePage with BrowserDriver
     randomEmail = s"${randomFirstName.toLowerCase}.${randomLastName.toLowerCase}@example.com"
     randomEmail
   }
-
-//  def constructEmailAddress(): String = {
-//    var randomEmail: String           = s"${randomFirstName.toLowerCase}.${randomLastName.toLowerCase}@example.com"
-//  }
-
-//  def randomNames(): (String, String) = {
-//    val fake            = new Faker()
-//    val randomFirstName = fake.name().firstName()
-//    val randomLastName  = fake.name().lastName()
-//    (randomFirstName, randomLastName)
-//  }
 
   def generatePreferredFirstName(): String = {
     val fake = new Faker()

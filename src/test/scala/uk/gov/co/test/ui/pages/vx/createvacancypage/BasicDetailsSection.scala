@@ -32,7 +32,7 @@ object BasicDetailsSection extends VacancyBasePage {
   val extractFormClass                = "opp_form_bd"
   val addWelshTranslationId           = "edit_opp_form_title_button"
   val welshTitleInput                 = "edit_opp_form_title_cy"
-  val updateWelshId                        = "lbledit_edit_opp_form_title-update"
+  val updateWelshId                   = "lbledit_edit_opp_form_title-update"
   var formId: String                  = ""
   var applicationLiveDate: String     = ""
   var applicationLiveTime: String     = ""
