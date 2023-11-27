@@ -1,5 +1,0 @@
-CANDIDATE NO.1: NAME: Ciara Moore EMAIL: ciara.moore@example.com PASSWORD: password123!
-CANDIDATE NO.2: NAME: Quinten Sporer EMAIL: quinten.sporer@example.com PASSWORD: password123!
-CANDIDATE NO.3: NAME: Salvatore Beier EMAIL: salvatore.beier@example.com PASSWORD: password123!
-CANDIDATE NO.4: NAME: Allie Macejkovic EMAIL: allie.macejkovic@example.com PASSWORD: password123!
-CANDIDATE NO.5: NAME: Edwardo Towne EMAIL: edwardo.towne@example.com PASSWORD: password123!
