@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.pages.vx.createvacancypage
 
 import org.openqa.selenium.{By, WebElement}
-import uk.gov.co.test.ui.data.vx.DefraApplyOnlyDetails
+import uk.gov.co.test.ui.data.vx.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.formId
 
@@ -17,7 +17,7 @@ case class LocationsDetails(
   whichCommunityEncouraged: String,
   giveLocationPreference: Boolean,
   maxLocations: String,
-  otherCityOrTown: List[String]
+  otherLocations: List[String]
 )
 
 object LocationsSection extends VacancyBasePage {
@@ -120,7 +120,7 @@ object LocationsSection extends VacancyBasePage {
     if (locationsDetails.giveLocationPreference) {
       clickOnRadioButton(locationPreferenceYesId)
       chooseMaxLocations(locationsDetails.maxLocations)
-      for (cityOrTown <- locationsDetails.otherCityOrTown)
+      for (cityOrTown <- locationsDetails.otherLocations)
         selectOtherCityOrTown(cityOrTown)
     } else {
       clickOnRadioButton(locationPreferenceNoId)
@@ -144,7 +144,7 @@ object LocationsSection extends VacancyBasePage {
     selectLocationPreference
   )
 
-  def locationsSection(newVacancyDetails: DefraApplyOnlyDetails): Unit =
+  def locationsSection(newVacancyDetails: NewVacancyDetails): Unit =
     locations.foreach { f =>
       f(newVacancyDetails.locationsDetails)
     }

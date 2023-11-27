@@ -2,7 +2,7 @@ package uk.gov.co.test.ui.pages.v9
 
 import org.openqa.selenium.WebElement
 
-object SignInPage extends CSJobsBasePage {
+object SignInPage extends CivilServiceJobsBasePage {
 
   val cSJobsTitle = "Sign in - Civil Service Jobs - GOV.UK"
 
@@ -22,6 +22,10 @@ object SignInPage extends CSJobsBasePage {
 
   def signOut(): WebElement = waitForElementToBeClickableByPath(
     "//*[@title='Sign out']"
+  )
+
+  def editAccountDetails(): WebElement = waitForElementToBeClickableByPath(
+    "//*[@title='Edit your account details']"
   )
 
   def createAnAccount(): WebElement = waitForElementToBeClickableByPath(

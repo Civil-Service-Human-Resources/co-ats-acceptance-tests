@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.pages.vx.createvacancypage
 
 import org.openqa.selenium.By
-import uk.gov.co.test.ui.data.vx.DefraApplyOnlyDetails
+import uk.gov.co.test.ui.data.vx.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.formId
 
@@ -75,7 +75,7 @@ object MoreQuestionsSection extends VacancyBasePage {
     moreQuestionsFlow
   )
 
-  def additionalQuestionsSection(newVacancyDetails: DefraApplyOnlyDetails): Unit =
+  def additionalQuestionsSection(newVacancyDetails: NewVacancyDetails): Unit =
     questions.foreach { f =>
       f(newVacancyDetails.moreQuestionsDetails)
     }

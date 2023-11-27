@@ -6,29 +6,31 @@ import org.scalatest.concurrent.Eventually.eventually
 import org.scalatest.matchers.should.Matchers
 import uk.gov.co.test.ui.conf.TestConfiguration
 import uk.gov.co.test.ui.conf.TestConfiguration.readProperty
+import uk.gov.co.test.ui.data.vx.RecruiterDetails
 import uk.gov.co.test.ui.driver.BrowserDriver
 import uk.gov.co.test.ui.pages.BasePage
+import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.{advertDetailsFunction, applicationCentreTitle, helpWithSelectionText, withdrawApplicationFunction}
+import uk.gov.co.test.ui.pages.v9.SignInPage.{navigateToV9Test, v9AcceptAllCookies, v9SearchCookiesById}
+import uk.gov.co.test.ui.pages.vx.DashboardPage.searchOn
 import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.applicationClosingDate
+import uk.gov.co.test.ui.pages.vx.vacancytabs.ExternalPostingsPage.addExternalPosting
+import uk.gov.co.test.ui.pages.vx.vacancytabs.SummaryPage.confirmAndActivateVacancy
 
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
-case class RecruiterDetails(
-  username: String,
-  password: String
-)
-
 trait VacancyBasePage extends Matchers with BasePage with BrowserDriver {
 
-  val url: String              = TestConfiguration.url("vxconfig")
-  val vxConfigTitle            = "Oleeo vX Login : CSR"
-  val vxConfigHomePageTitle    = "Home : Civil Service Jobs - GOV.UK"
-  val nameVxConfig: String     = readProperty("services.vxconfig.admin.contact_name")
-  val emailVxConfig: String    = readProperty("services.vxconfig.admin.contact_email")
-  val usernameVxConfig: String = readProperty("services.vxconfig.admin.username")
-  val passwordVxConfig: String = readProperty("services.vxconfig.admin.password")
-  val getOs: String            = System.getProperty("os.name").toLowerCase
-  lazy val generalInput        = "//input[@class='select2-search__field']"
+  val url: String                = TestConfiguration.url("vxconfig")
+  val vxConfigTitle              = "Oleeo vX Login : CSR"
+  val vxConfigHomePageTitle      = "Home : Civil Service Jobs - GOV.UK"
+  val nameVxConfig: String       = readProperty("services.vxconfig.admin.contact_name")
+  val emailVxConfig: String      = readProperty("services.vxconfig.admin.contact_email")
+  val usernameVxConfig: String   = readProperty("services.vxconfig.admin.username")
+  val passwordVxConfig: String   = readProperty("services.vxconfig.admin.password")
+  val getOs: String              = System.getProperty("os.name").toLowerCase
+  lazy val generalInput          = "//input[@class='select2-search__field']"
+  val applicationCentrePageTitle = "Your account details - Civil Service Jobs - GOV.UK"
 
   def username(): TextField     = textField("user")
   def password(): PasswordField = pwdField("password")
@@ -116,6 +118,57 @@ trait VacancyBasePage extends Matchers with BasePage with BrowserDriver {
     val enterOption = waitForVisibilityOfElementById(inputId)
     enterOption.sendKeys(text)
     enterOption.sendKeys(Keys.ENTER)
+  }
+
+  def clearField(inputId: String): Unit = {
+    val candidateInput = waitForVisibilityOfElementByPath(s".//textarea[@aria-describedby='$inputId']")
+    candidateInput.sendKeys(Keys.BACK_SPACE)
+  }
+
+  def selectTypeOfRoles(roles: String, inputId: String): Unit = {
+    val candidateInput = waitForVisibilityOfElementByPath(s".//textarea[@aria-describedby='$inputId']")
+    candidateInput.sendKeys(roles)
+    waitForDropdownOptionByText(roles).click()
+  }
+
+  def enterRoles(value: List[String], inputId: String): Unit = {
+    clearField(inputId)
+    for (role <- value)
+      selectTypeOfRoles(role, inputId)
+  }
+
+  def addWelshTranslation(
+    addWelsh: Boolean,
+    addTranslation: String,
+    welshInput: String,
+    welsh: String,
+    updateId: String
+  ): Unit =
+    if (addWelsh) {
+      clickOn(addTranslation)
+      waitForVisibilityOfElementById(welshInput)
+      textField(welshInput).value = welsh
+      clickOn(updateId)
+    }
+
+  def activateAndPostVacancy(): Unit = {
+    searchOn()
+    confirmAndActivateVacancy()
+    addExternalPosting()
+  }
+
+  def switchToCandidatePages(): Unit = {
+    openNewTabWithJavascript()
+    openNewWindow()
+    navigateToV9Test()
+    if (!v9SearchCookiesById().isEmpty) v9AcceptAllCookies()
+  }
+
+  def confirmShortFormCompletion(): Unit = {
+    eventually(onPage(applicationCentreTitle))
+    advertDetailsFunction().isDisplayed
+    withdrawApplicationFunction().isDisplayed
+    helpWithSelectionText() shouldEqual "Help with selection process"
   }
 
 }

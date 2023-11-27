@@ -1,14 +1,17 @@
 package uk.gov.co.test.ui.pages.vx.createvacancypage
 
 import org.openqa.selenium.By
-import uk.gov.co.test.ui.data.vx.DefraApplyOnlyDetails
+import uk.gov.co.test.ui.data.vx.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.formId
 
 case class ApproachDetails(
   approach: String,
   statementRequired: Boolean,
-  statement: String
+  eligibilityStatement: String,
+  addWelshStatement: Boolean,
+  welshStatement: String,
+  standardStatement: String
 )
 
 object ApproachSection extends VacancyBasePage {
@@ -23,14 +26,23 @@ object ApproachSection extends VacancyBasePage {
   private lazy val externalId                     = s"${formId}_datafield_154380_1_1_11774"
   private lazy val internalYesStatementId         = s"${formId}_datafield_154388_1_1_1"
   private lazy val internalNoStatementId          = s"${formId}_datafield_154388_1_1_2"
+  private lazy val addWelshTranslationId          = "clicky_154373"
+  private lazy val welshStatementInput            = "datafield_154373_1_1_cy"
+  private lazy val updateWelshId                  = "lbledit_datafield_154373_1_1-update"
+  var candidateApproach                           = ""
 
   private def eligibilityStatement(approachDetails: ApproachDetails): Unit = {
     val statement = waitForVisibilityOfElementById(statementId)
-    statement.sendKeys(approachDetails.statement)
+    statement.sendKeys(approachDetails.eligibilityStatement)
+    enterWelshStatement(approachDetails)
   }
+
+  private def standardEligibilityStatement(text: String): Boolean =
+    waitForVisibilityOfElementByPath(s".//strong[text()='$text']").isDisplayed
 
   private def selectApproach(approachDetails: ApproachDetails): Unit = {
     scrollToElement(By.id(approachId))
+    candidateApproach = approachDetails.approach
     approachDetails.approach match {
       case "Pre-release"       => clickOnRadioButton(prereleaseId)
       case "Internal"          => clickOnRadioButton(internalId)
@@ -56,14 +68,24 @@ object ApproachSection extends VacancyBasePage {
         case "Internal"          => clickOnRadioButton(internalNoStatementId)
         case "Across government" => clickOnRadioButton(acrossGovernmentNoStatementId)
       }
+      standardEligibilityStatement(approachDetails.standardStatement)
     }
+
+  private def enterWelshStatement(approachDetails: ApproachDetails): Unit =
+    addWelshTranslation(
+      approachDetails.addWelshStatement,
+      addWelshTranslationId,
+      welshStatementInput,
+      approachDetails.welshStatement,
+      updateWelshId
+    )
 
   private val approach: Seq[ApproachDetails => Unit] = Seq(
     selectApproach,
     selectStatementRequired
   )
 
-  def approachSection(newVacancyDetails: DefraApplyOnlyDetails): Unit =
+  def approachSection(newVacancyDetails: NewVacancyDetails): Unit =
     approach.foreach { f =>
       f(newVacancyDetails.approachDetails)
     }

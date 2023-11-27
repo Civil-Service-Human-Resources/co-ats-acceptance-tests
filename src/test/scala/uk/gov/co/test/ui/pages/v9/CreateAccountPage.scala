@@ -7,13 +7,14 @@ import uk.gov.co.test.ui.pages.v9.SignInPage.createAnAccount
 case class CandidateDetails(
   firstname: String,
   lastname: String,
+  preferredFirstName: String,
   email: String,
   password: String,
   isEmployeeExistingPublicSector: Boolean,
   agreeTermsAndConditions: Boolean
 )
 
-object CreateAccountPage extends CSJobsBasePage {
+object CreateAccountPage extends CivilServiceJobsBasePage {
 
   val createAccountTitle        = "Create an account - Civil Service Jobs - GOV.UK"
   val createAccountHeader       = "Create an account"
@@ -64,7 +65,16 @@ object CreateAccountPage extends CSJobsBasePage {
     if (user.agreeTermsAndConditions) agreeTermsAndConditions().select()
     else println("Unable to create account without agreeing on T&Cs")
 
-  def createNewAccount(): Unit =
+  def registerNewAccount(): Unit =
     clickOn("update")
+
+  def enterFirstNameLoop(fn: String): Unit    = firstName().value = fn
+  def enterLastNameLoop(ln: String): Unit     = lastName().value = ln
+  def enterEmailLoop(e: String): Unit         = email().value = e
+  def enterConfirmEmailLoop(ce: String): Unit = confirmEmail().value = ce
+  def enterPasswordLoop(): Unit               = createPassword().value = passwordCandidate
+  def enterConfirmPasswordLoop(): Unit        = confirmPassword().value = passwordCandidate
+  def selectEmployeeTypeLoop(): Unit          = nonEmployeePublicBody()
+  def selectTermsAndConditionsLoop(): Unit    = agreeTermsAndConditions().select()
 
 }

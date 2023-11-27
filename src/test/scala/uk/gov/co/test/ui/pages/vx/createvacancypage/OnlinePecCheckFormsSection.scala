@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.pages.vx.createvacancypage
 
 import org.openqa.selenium.{By, Keys}
-import uk.gov.co.test.ui.data.vx.DefraApplyOnlyDetails
+import uk.gov.co.test.ui.data.vx.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.formId
 
@@ -49,7 +49,7 @@ object OnlinePecCheckFormsSection extends VacancyBasePage {
     enterOnlinePecFormsCheckFlow
   )
 
-  def onlinePecCheckFormsSection(newVacancyDetails: DefraApplyOnlyDetails): Unit =
+  def onlinePecCheckFormsSection(newVacancyDetails: NewVacancyDetails): Unit =
     onlinePecCheckForms.foreach { f =>
       f(newVacancyDetails.onlinePecCheckFormsDetails)
     }

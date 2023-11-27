@@ -1,27 +1,43 @@
 package uk.gov.co.test.ui.specs.v9
 
-import uk.gov.co.test.ui.flows.v9.RegisterCandidateFlow
-import uk.gov.co.test.ui.pages.v9.CreateAccountPage.navigateToCreateAccountPage
-import uk.gov.co.test.ui.pages.v9.SearchJobsPage.{accountCreatedSuccess1, accountCreatedSuccess2, accountCreatedSuccessMessage1, accountCreatedSuccessMessage2, candidateDisplayName}
-import uk.gov.co.test.ui.pages.v9.SignInPage.candidateFullName
+import uk.gov.co.test.ui.data.v9.applicants.{MAIN_REGISTER_CANDIDATE, REGISTERED_CANDIDATE}
+import uk.gov.co.test.ui.flows.v9.GenerateNewCandidates.createMultipleCandidates
+import uk.gov.co.test.ui.flows.v9.RegisterCandidateFlow.fillNewCandidateDetails
+import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.applicationCentrePageTitle
+import uk.gov.co.test.ui.pages.v9.SearchJobsPage.{accountCreatedSuccess1, accountCreatedSuccess2, accountCreatedSuccessMessage1, accountCreatedSuccessMessage2, candidateDisplayName, navigateToSignInOrCreateAccount}
+import uk.gov.co.test.ui.pages.v9.SignInPage.{candidateFullName, candidateSignIn, editAccountDetails, onPage}
 import uk.gov.co.test.ui.specs.BaseFeatureSpec
 import uk.gov.co.test.ui.tags.RunInV9
-import uk.gov.co.test.ui.utils.REGISTER_CANDIDATE
 
 class RegisterCandidateSpec extends BaseFeatureSpec {
   Feature("Register Candidate On Civil Service Jobs") {
+    Scenario("A Registered Candidate Logs In To Civil Service Jobs", RunInV9) {
+      Given("A candidate navigates to the sign in page")
+      navigateToSignInOrCreateAccount()
+
+      When("The candidate signs into their cs jobs account")
+      candidateSignIn(REGISTERED_CANDIDATE)
+
+      Then("The candidate is able to see their account")
+      candidateDisplayName() shouldEqual candidateFullName(REGISTERED_CANDIDATE)
+    }
+
     Scenario("A Candidate Creates An Account On Civil Service Jobs", RunInV9) {
-      Given("A candidate navigates to the creates an account page")
-      val newCandidate = REGISTER_CANDIDATE
-      navigateToCreateAccountPage()
+      Given("the candidate enters their details for new account")
+      fillNewCandidateDetails(MAIN_REGISTER_CANDIDATE)
 
-      When("The candidate enters their details for new account")
-      RegisterCandidateFlow.fillCandidateDetails(newCandidate)
-
-      Then("The candidate is able to create a new account")
+      When("the candidate navigates to the edit account details page")
       accountCreatedSuccess1() shouldEqual accountCreatedSuccessMessage1
       accountCreatedSuccess2() shouldEqual accountCreatedSuccessMessage2
-      candidateDisplayName()   shouldEqual candidateFullName(newCandidate)
+      candidateDisplayName()   shouldEqual candidateFullName(MAIN_REGISTER_CANDIDATE)
+      editAccountDetails().click()
+
+      Then("the candidate is able to edit their account")
+      onPage(applicationCentrePageTitle)
+    }
+
+    Scenario("Create Candidate Accounts", RunInV9) {
+      createMultipleCandidates(5)
     }
   }
 }

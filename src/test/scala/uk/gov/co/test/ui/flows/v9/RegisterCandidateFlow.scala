@@ -1,9 +1,11 @@
 package uk.gov.co.test.ui.flows.v9
 
-import uk.gov.co.test.ui.pages.v9.CreateAccountPage.{createNewAccount, enterConfirmEmail, enterConfirmPassword, enterEmail, enterFirstName, enterLastName, enterPassword, selectEmployeeType, selectTermsAndConditions}
-import uk.gov.co.test.ui.pages.v9.{CSJobsBasePage, CandidateDetails}
+import uk.gov.co.test.ui.conf.TestConfiguration
+import uk.gov.co.test.ui.pages.v9.CreateAccountPage.{enterConfirmEmail, enterConfirmPassword, enterEmail, enterFirstName, enterLastName, enterPassword, navigateToCreateAccountPage, registerNewAccount, selectEmployeeType, selectTermsAndConditions}
+import uk.gov.co.test.ui.pages.v9.{CandidateDetails, CivilServiceJobsBasePage}
+import uk.gov.co.test.ui.pages.vx.DashboardPage.switchToCandidatePages
 
-object RegisterCandidateFlow extends CSJobsBasePage {
+object RegisterCandidateFlow extends CivilServiceJobsBasePage {
 
   private val fields: Seq[CandidateDetails => Unit] = Seq(
     enterFirstName,
@@ -16,10 +18,14 @@ object RegisterCandidateFlow extends CSJobsBasePage {
     selectTermsAndConditions
   )
 
-  def fillCandidateDetails(user: CandidateDetails): Unit = {
+  def fillNewCandidateDetails(user: CandidateDetails): Unit = {
+    if (currentUrl.startsWith(TestConfiguration.urlHost("vxconfig"))) {
+      switchToCandidatePages()
+    }
+    navigateToCreateAccountPage()
     fields.foreach { f =>
       f(user)
     }
-    createNewAccount()
+    registerNewAccount()
   }
 }

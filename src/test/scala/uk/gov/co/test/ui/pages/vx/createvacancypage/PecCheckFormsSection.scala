@@ -1,7 +1,6 @@
 package uk.gov.co.test.ui.pages.vx.createvacancypage
 
-import org.openqa.selenium.Keys
-import uk.gov.co.test.ui.data.vx.DefraApplyOnlyDetails
+import uk.gov.co.test.ui.data.vx.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.formId
 
@@ -72,24 +71,6 @@ object PecCheckFormsSection extends VacancyBasePage {
   private lazy val manualIdentityCheckYesId         = s"${formId}_datafield_181577_1_1_1"
   private lazy val manualIdentityCheckNoId          = s"${formId}_datafield_181577_1_1_2"
 
-  def selectTypeOfRoles(typeOfCandidate: String, inputId: String): Unit = {
-    val candidateInput = waitForVisibilityOfElementByPath(s".//textarea[@aria-describedby='$inputId']")
-    candidateInput.sendKeys(typeOfCandidate)
-    action().moveToElement(waitForDropdownOptionByText(typeOfCandidate)).perform()
-    waitForDropdownOptionByText(typeOfCandidate).click()
-  }
-
-  def enterRoles(check: List[String], inputId: String): Unit = {
-    clearField(inputId)
-    for (test <- check)
-      selectTypeOfRoles(test, inputId)
-  }
-
-  def clearField(inputId: String): Unit = {
-    val candidateInput = waitForVisibilityOfElementByPath(s".//textarea[@aria-describedby='$inputId']")
-    candidateInput.sendKeys(Keys.BACK_SPACE)
-  }
-
   private def selectWhenCompleteRtwCheck(pecCheckFormsDetails: PecCheckFormsDetails): Unit =
     pecCheckFormsDetails.whenCompleteRtwCheck match {
       case "Before pre employment checks"              => clickOnRadioButton(beforePecChecksId)
@@ -114,17 +95,21 @@ object PecCheckFormsSection extends VacancyBasePage {
     } else clickOnRadioButton(uploadIdentityNoId)
 
   private def selectNsvDisplayOptions(pecCheckFormsDetails: PecCheckFormsDetails): Unit =
-    pecCheckFormsDetails.nsvDisplayOptions match {
-      case "Show recruiter and candidate forms" => clickOnRadioButton(nsvShowJobAndCandidateFormsId)
-      case "Show recruiter form only"           => clickOnRadioButton(nsvShowJobFormOnlyId)
-      case _                                    => throw new IllegalStateException("Please enter valid 'NSV Display' option")
+    if (!pecCheckFormsDetails.nsvChecks.forall(Set("Not Applicable").contains(_))) {
+      pecCheckFormsDetails.nsvDisplayOptions match {
+        case "Show recruiter and candidate forms" => clickOnRadioButton(nsvShowJobAndCandidateFormsId)
+        case "Show recruiter form only"           => clickOnRadioButton(nsvShowJobFormOnlyId)
+        case _                                    => throw new IllegalStateException("Please enter valid 'NSV Display' option")
+      }
     }
 
   private def selectHealthDisplayOptions(pecCheckFormsDetails: PecCheckFormsDetails): Unit =
-    pecCheckFormsDetails.healthDisplayOptions match {
-      case "Show recruiter and candidate forms" => clickOnRadioButton(healthShowJobAndCandidateFormsId)
-      case "Show recruiter form only"           => clickOnRadioButton(healthShowJobFormOnlyId)
-      case _                                    => throw new IllegalStateException("Please enter valid 'Health Display' option")
+    if (!pecCheckFormsDetails.healthRefChecks.forall(Set("Not Applicable").contains(_))) {
+      pecCheckFormsDetails.healthDisplayOptions match {
+        case "Show recruiter and candidate forms" => clickOnRadioButton(healthShowJobAndCandidateFormsId)
+        case "Show recruiter form only"           => clickOnRadioButton(healthShowJobFormOnlyId)
+        case _                                    => throw new IllegalStateException("Please enter valid 'Health Display' option")
+      }
     }
 
   private def selectOGDTransferProcessCheck(pecCheckFormsDetails: PecCheckFormsDetails): Unit =
@@ -135,6 +120,7 @@ object PecCheckFormsSection extends VacancyBasePage {
     if (pecCheckFormsDetails.includeAdditionalCheck) {
       clickOnRadioButton(includeAdditionalCheckYesId)
       enterText(nameOfCheckInputId, pecCheckFormsDetails.nameOfCheck)
+      enterRoles(pecCheckFormsDetails.additionalCheck, additionalCheckInputId)
     } else clickOnRadioButton(includeAdditionalCheckNoId)
 
   private def pecCheckFormsFlow(pecCheckFormsDetails: PecCheckFormsDetails): Unit = {
@@ -158,7 +144,6 @@ object PecCheckFormsSection extends VacancyBasePage {
     enterRoles(pecCheckFormsDetails.selfEmploymentCheck, selfEmploymentCheckInputId)
     selectOGDTransferProcessCheck(pecCheckFormsDetails)
     selectIncludeAdditionalCheck(pecCheckFormsDetails)
-    enterRoles(pecCheckFormsDetails.additionalCheck, additionalCheckInputId)
     enterRoles(pecCheckFormsDetails.nenOnboarding, nenInputId)
     enterRoles(pecCheckFormsDetails.pnOnboarding, pnInputId)
   }
@@ -167,7 +152,7 @@ object PecCheckFormsSection extends VacancyBasePage {
     pecCheckFormsFlow
   )
 
-  def pecCheckFormsSection(newVacancyDetails: DefraApplyOnlyDetails): Unit =
+  def pecCheckFormsSection(newVacancyDetails: NewVacancyDetails): Unit =
     pecCheckForms.foreach { f =>
       f(newVacancyDetails.pecCheckFormsDetails)
     }

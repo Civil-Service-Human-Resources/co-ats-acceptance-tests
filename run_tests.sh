@@ -13,7 +13,7 @@ if [ "$ENV" = "test" ]; then
 
     #sbt scalafmtCheckAll scalafmtSbtCheck
 
-     sbt -Denvironment=$ENV -Dbrowser=$BROWSER -Dsbt.color=true "testOnly uk.gov.co.test.ui.specs.*"
+     sbt -Denvironment=$ENV -Dbrowser=$BROWSER -Dsbt.color=true "testOnly uk.gov.co.test.ui.specs.v9*"
 else
      sbt -Denvironment=$ENV -Dbrowser="remote-$BROWSER" -Dsbt.color=true "testOnly uk.gov.co.test.ui.specs.*"
 fi

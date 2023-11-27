@@ -3,84 +3,79 @@ package uk.gov.co.test.ui.data.vx
 import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.{emailVxConfig, nameVxConfig, usernameVxConfig}
 import uk.gov.co.test.ui.pages.vx.createvacancypage._
 
-case class DefraApplyOnlyDetails(
-  basicDetails: BasicDetails,
-  jobInfoDetails: JobInfoDetails,
-  approachDetails: ApproachDetails,
-  approvalDetails: ApprovalDetails,
-  reserveListDetails: ReserveListDetails,
-  locationsDetails: LocationsDetails,
-  contractDetails: ContractDetails,
-  advertDetails: AdvertDetails,
-  contactDetails: ContactDetails,
-  vettingDetails: VettingDetails,
-  interviewsDetails: InterviewsDetails,
-  successProfilesDetails: SuccessProfilesDetails,
-  vacancyTestsDetails: VacancyTestsDetails,
-  moreQuestionsDetails: MoreQuestionsDetails,
-  criteriaDetails: CriteriaDetails,
-  managementDetails: ManagementDetails,
-  onlinePecCheckFormsDetails: OnlinePecCheckFormsDetails,
-  pecCheckFormsDetails: PecCheckFormsDetails
-)
-object DEFRA_APPLY_ONLY_DATA
-    extends DefraApplyOnlyDetails(
-      VACANCY_BASIC_DETAILS,
-      VACANCY_JOB_INFORMATION,
-      VACANCY_APPROACH,
-      VACANCY_APPROVAL,
-      VACANCY_RESERVE_LIST,
-      VACANCY_LOCATIONS,
-      VACANCY_CONTRACT_DETAILS,
-      VACANCY_ADVERT,
-      VACANCY_CONTACT_DETAILS,
-      VACANCY_VETTING_DETAILS,
-      VACANCY_INTERVIEWS_DETAILS,
-      VACANCY_SUCCESS_PROFILES,
-      VACANCY_HOLDER_TESTS,
-      VACANCY_ADDITIONAL_QUESTIONS,
-      VACANCY_CRITERIA,
-      VACANCY_MANAGEMENT,
-      VACANCY_ONLINE_PEC_CHECK_FORMS,
-      VACANCY_PEC_CHECK_FORMS
+object MAIN_VACANCY_DATA
+    extends NewVacancyDetails(
+      MAIN_BASIC_DETAILS,
+      MAIN_JOB_INFORMATION,
+      MAIN_APPROACH,
+      MAIN_APPROVAL,
+      MAIN_RESERVE_LIST,
+      MAIN_LOCATIONS,
+      MAIN_CONTRACT_DETAILS,
+      MAIN_ADVERT,
+      MAIN_CONTACT_DETAILS,
+      MAIN_VETTING_DETAILS,
+      MAIN_INTERVIEWS_DETAILS,
+      MAIN_SUCCESS_PROFILES,
+      MAIN_HOLDER_TESTS,
+      MAIN_ADDITIONAL_QUESTIONS,
+      MAIN_CRITERIA,
+      MAIN_MANAGEMENT,
+      MAIN_ONLINE_PEC_CHECK_FORMS,
+      MAIN_PEC_CHECK_FORMS
     )
 
-object VACANCY_BASIC_DETAILS
+object MAIN_BASIC_DETAILS
     extends BasicDetails(
       "Department for Environment, Food and Rural Affairs - Apply online",
-      "GCQA OGD DEFRA (CORE)",
+      "GCQACO - DEFRA Senior Research Analyst",
+      true,
+      "Prawf awtomeiddio",
       32
     )
-object VACANCY_JOB_INFORMATION
+object MAIN_JOB_INFORMATION
     extends JobInfoDetails(
       true,
       "Department for Environment, Food and Rural Affairs - Apply online",
       "DEFRA - COO - Commercial",
+      true,
+      "Prawf awtomeiddio",
       "Autotest - Business area detail",
-      "Analytical",
+      typeOfRole = List(
+        "Accountancy",
+        "Analytical",
+        "Audit",
+        "Corporate Finance",
+        "Engineering",
+        "Tax Profession"
+      ),
       "Other",
       "1"
     )
-object VACANCY_APPROACH
+object MAIN_APPROACH
     extends ApproachDetails(
-      "Internal",
+      "External",
       true,
-      "Autotest - Eligibility statement"
+      "Autotest - Eligibility statement",
+      true,
+      "Prawf awtomeiddio",
+      "This vacancy is open to employees who already hold the substantive grade for the post and were appointed to the Civil Service on merit following a fair and open competition; or were appointed to a permanent Civil Service post through an exception in the Civil Service Commissioners’ rules."
     )
-object VACANCY_APPROVAL
+object MAIN_APPROVAL
     extends ApprovalDetails(
       true,
       "Autotest - budgetary authorisation info",
-      "Autotest - Cost centre"
+      "Autotest - Cost centre (optional)"
     )
 
-object VACANCY_RESERVE_LIST
+object MAIN_RESERVE_LIST
     extends ReserveListDetails(
       true,
-      "6 Months"
+      "3 Months",
+      false
     )
 
-object VACANCY_LOCATIONS
+object MAIN_LOCATIONS
     extends LocationsDetails(
       "Postcodes",
       "SK1 3BX",
@@ -93,13 +88,16 @@ object VACANCY_LOCATIONS
       "All communities",
       true,
       "2",
-      otherCityOrTown = List("London", "Southampton")
+      otherLocations = List("London", "Southampton")
     )
 
-object VACANCY_CONTRACT_DETAILS
+object MAIN_CONTRACT_DETAILS
     extends ContractDetails(
-      "Permanent",
-      "Full-time",
+      List("Permanent", "Temporary", "Loan", "Secondment", "Returner"),
+      "Autotest - Maximum characters: 255. Any text over this limit will not show on the advert.",
+      true,
+      "Prawf awtomeiddio",
+      List("Full-time", "Part-time", "Compressed Hours", "Flexible working", "Homeworking"),
       "Senior Executive Officer",
       "Grade 7",
       "GBP (£)",
@@ -110,7 +108,7 @@ object VACANCY_CONTRACT_DETAILS
       18750
     )
 
-object VACANCY_ADVERT
+object MAIN_ADVERT
     extends AdvertDetails(
       "Autotest - Job summary",
       "Autotest - Job description",
@@ -119,7 +117,7 @@ object VACANCY_ADVERT
       "Autotest - Selection process details"
     )
 
-object VACANCY_CONTACT_DETAILS
+object MAIN_CONTACT_DETAILS
     extends ContactDetails(
       s"$nameVxConfig",
       s"$emailVxConfig",
@@ -129,7 +127,7 @@ object VACANCY_CONTACT_DETAILS
       s"$emailVxConfig"
     )
 
-object VACANCY_VETTING_DETAILS
+object MAIN_VETTING_DETAILS
     extends VettingDetails(
       true,
       "Basic",
@@ -138,7 +136,7 @@ object VACANCY_VETTING_DETAILS
       true
     )
 
-object VACANCY_INTERVIEWS_DETAILS
+object MAIN_INTERVIEWS_DETAILS
     extends InterviewsDetails(
       "4",
       "Telephone",
@@ -148,28 +146,28 @@ object VACANCY_INTERVIEWS_DETAILS
       true
     )
 
-object VACANCY_SUCCESS_PROFILES
+object MAIN_SUCCESS_PROFILES
     extends SuccessProfilesDetails(
       true,
       true,
       true,
       true,
       true,
-      Some(VACANCY_ABILITIES),
-      Some(VACANCY_BEHAVIOURS),
-      Some(VACANCY_EXPERIENCES),
-      Some(VACANCY_STRENGTHS),
-      Some(VACANCY_TECH_SKILLS)
+      Some(MAIN_ABILITIES),
+      Some(MAIN_BEHAVIOURS),
+      Some(MAIN_EXPERIENCES),
+      Some(MAIN_STRENGTHS),
+      Some(MAIN_TECH_SKILLS)
     )
 
-object VACANCY_ABILITIES
+object MAIN_ABILITIES
     extends AbilitiesDetails(
       """The following online tests can be used to assess abilities:
                            |Civil Service Numerical Test
                            |Civil Service Verbal Test""".stripMargin
     )
 
-object VACANCY_BEHAVIOURS
+object MAIN_BEHAVIOURS
     extends BehavioursDetails(
       """The following online tests can be used to assess behaviours:
     |Civil Service Judgement Test
@@ -187,7 +185,7 @@ object VACANCY_BEHAVIOURS
       Some(Behaviours(chosenBehaviour = "Working Together", stageApplication = true, stageInterview = true))
     )
 
-object VACANCY_EXPERIENCES
+object MAIN_EXPERIENCES
     extends ExperienceDetails(
       true,
       "0 - 100",
@@ -211,7 +209,7 @@ object VACANCY_EXPERIENCES
       )
     )
 
-object VACANCY_STRENGTHS
+object MAIN_STRENGTHS
     extends StrengthsDetails(
       8,
       "Adaptable",
@@ -224,7 +222,7 @@ object VACANCY_STRENGTHS
       "Service Focussed"
     )
 
-object VACANCY_TECH_SKILLS
+object MAIN_TECH_SKILLS
     extends TechSkillsDetails(
       8,
       Some(
@@ -293,7 +291,7 @@ object VACANCY_TECH_SKILLS
       )
     )
 
-object VACANCY_HOLDER_TESTS
+object MAIN_HOLDER_TESTS
     extends VacancyTestsDetails(
       true,
       "Online Tests",
@@ -351,13 +349,13 @@ object VACANCY_HOLDER_TESTS
       ),
       false,
       "Autotest - Additional details for the recruitment team",
-      Some(VACANCY_RECRUITER_TESTS),
-      Some(VACANCY_GROUP_A_TESTS),
-      Some(VACANCY_GROUP_B_TESTS),
-      Some(VACANCY_GROUP_C_TESTS)
+      Some(MAIN_RECRUITER_TESTS),
+      Some(MAIN_GROUP_A_TESTS),
+      Some(MAIN_GROUP_B_TESTS),
+      Some(MAIN_GROUP_C_TESTS)
     )
 
-object VACANCY_RECRUITER_TESTS
+object MAIN_RECRUITER_TESTS
     extends RecruiterTestsDetails(
       "Before the tests",
       "Auto-progress after each test",
@@ -366,7 +364,7 @@ object VACANCY_RECRUITER_TESTS
       "Autotest - Online test instructions"
     )
 
-object VACANCY_GROUP_A_TESTS
+object MAIN_GROUP_A_TESTS
     extends GroupATestsDetails(
       "First",
       "Three",
@@ -376,7 +374,7 @@ object VACANCY_GROUP_A_TESTS
       7
     )
 
-object VACANCY_GROUP_B_TESTS
+object MAIN_GROUP_B_TESTS
     extends GroupBTestsDetails(
       "Second",
       "Two",
@@ -385,7 +383,7 @@ object VACANCY_GROUP_B_TESTS
       5
     )
 
-object VACANCY_GROUP_C_TESTS
+object MAIN_GROUP_C_TESTS
     extends GroupCTestsDetails(
       "Third",
       "Two",
@@ -394,7 +392,7 @@ object VACANCY_GROUP_C_TESTS
       3
     )
 
-object VACANCY_ADDITIONAL_QUESTIONS
+object MAIN_ADDITIONAL_QUESTIONS
     extends MoreQuestionsDetails(
       true,
       3,
@@ -403,7 +401,7 @@ object VACANCY_ADDITIONAL_QUESTIONS
       "Autotest - Question 3"
     )
 
-object VACANCY_CRITERIA
+object MAIN_CRITERIA
     extends CriteriaDetails(
       campaignID = Some("Autotest - If this vacancy is linked to a campaign, enter the campaign ID (optional)"),
       probationIncomplete = true,
@@ -422,8 +420,11 @@ object VACANCY_CRITERIA
       candidateInstructions = "Autotest - Instructions for candidate"
     )
 
-object VACANCY_MANAGEMENT
+object MAIN_MANAGEMENT
     extends ManagementDetails(
+      true,
+      false,
+      "Other",
       true,
       assignTo = Option(s"$usernameVxConfig"),
       assignTo2 = Option(s"$usernameVxConfig"),
@@ -437,14 +438,14 @@ object VACANCY_MANAGEMENT
       vacancyComments = Option("Autotest - Comments on this vacancy")
     )
 
-object VACANCY_ONLINE_PEC_CHECK_FORMS
+object MAIN_ONLINE_PEC_CHECK_FORMS
     extends OnlinePecCheckFormsDetails(
       true,
       true,
       s"$usernameVxConfig"
     )
 
-object VACANCY_PEC_CHECK_FORMS
+object MAIN_PEC_CHECK_FORMS
     extends PecCheckFormsDetails(
       rtwCheck =
         List("Not Applicable", "Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
