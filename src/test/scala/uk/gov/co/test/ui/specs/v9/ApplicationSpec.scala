@@ -11,13 +11,13 @@ import uk.gov.co.test.ui.tags.RunInV9
 class ApplicationSpec extends BaseFeatureSpec {
   Feature("Candidate Login To Civil Service Jobs") {
     Scenario("A Newly Registered Candidate No.2 Applies For A Job", RunInV9) {
-      Given("A candidate no.2 registers a new account")
+      Given("A candidate registers a new account")
       fillNewCandidateDetails(MAIN_REGISTER_CANDIDATE)
 
-      When("The candidate no.2 completes the short form")
+      When("The candidate completes the short form")
       fillShortFormDetailsOnly(MAIN_CANDIDATE_SHORT_FORM_DATA)
 
-      Then("The candidate no.2 is able to see their account")
+      Then("The candidate is able to see their account")
       confirmShortFormCompletion()
     }
   }
