@@ -29,5 +29,13 @@ object ShortFormFlow extends CivilServiceJobsBasePage {
         f(shortFormDetails)
       }
       clickOn(shortFormSubmission)
-    } else println(s"Vacancy is open for '$candidateApproach' candidates!")
+    } else println(s"Vacancy is not open for '$candidateApproach' candidates!")
+
+  def fillShortFormDetailsOnly(shortFormDetails: ShortFormDetails): Unit = {
+    jobSearchAndApplyFlow(jobTitle = "OGDGCCO", jobId = "9349", "what")
+    shortForm.foreach { f =>
+      f(shortFormDetails)
+    }
+    clickOn(shortFormSubmission)
+  }
 }
