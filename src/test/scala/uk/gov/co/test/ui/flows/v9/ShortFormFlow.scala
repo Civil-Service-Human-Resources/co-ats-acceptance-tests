@@ -32,7 +32,7 @@ object ShortFormFlow extends CivilServiceJobsBasePage {
     } else println(s"Vacancy is not open for '$candidateApproach' candidates!")
 
   def fillShortFormDetailsOnly(shortFormDetails: ShortFormDetails): Unit = {
-    jobSearchAndApplyFlow(jobTitle = "OGDGCCO", jobId = "9349", "what")
+    jobSearchAndApplyFlow(jobTitle = "GCQACO - DEFRA Researcher", jobId = "9397", "what")
     shortForm.foreach { f =>
       f(shortFormDetails)
     }

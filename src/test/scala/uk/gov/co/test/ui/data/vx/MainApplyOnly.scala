@@ -28,7 +28,7 @@ object MAIN_VACANCY_DATA
 object MAIN_BASIC_DETAILS
     extends BasicDetails(
       "Department for Environment, Food and Rural Affairs - Apply online",
-      "GCQACO - DEFRA Senior Research Analyst",
+      "GCQACO - DEFRA Researcher",
       true,
       "Prawf awtomeiddio",
       32
@@ -448,45 +448,45 @@ object MAIN_ONLINE_PEC_CHECK_FORMS
 object MAIN_PEC_CHECK_FORMS
     extends PecCheckFormsDetails(
       rtwCheck =
-        List("Not Applicable", "Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+        List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
       "Before pre employment checks",
       "Right to work and criminal record check",
       true,
       "Autotest - Details of the identity documents the candidate needs to provide",
       false,
       generalInfo =
-        List("Not Applicable", "Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+        List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
       referenceChecks =
-        List("Not Applicable", "Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+        List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
       bankruptcyChecks =
-        List("Not Applicable", "Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+        List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
       crcChecks =
-        List("Not Applicable", "Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+        List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
       nsvChecks =
-        List("Not Applicable", "Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+        List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
       "Show recruiter and candidate forms",
       jobHistoryChecks =
-        List("Not Applicable", "Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+        List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
       healthRefChecks =
-        List("Not Applicable", "Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+        List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
       "Show recruiter and candidate forms",
       overseasCheck =
-        List("Not Applicable", "Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+        List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
       pensionsCheck =
-        List("Not Applicable", "Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+        List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
       previousCsJobCheck =
-        List("Not Applicable", "Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+        List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
       internalFraudCheck =
-        List("Not Applicable", "Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+        List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
       selfEmploymentCheck =
-        List("Not Applicable", "Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+        List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
       true,
       true,
       "Autotest - Name of check",
       additionalCheck =
-        List("Not Applicable", "Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+        List("Not Applicable"),
       nenOnboarding =
-        List("Not Applicable", "Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+        List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
       pnOnboarding =
-        List("Not Applicable", "Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates")
+        List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates")
     )

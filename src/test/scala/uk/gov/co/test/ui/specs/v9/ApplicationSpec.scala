@@ -10,7 +10,7 @@ import uk.gov.co.test.ui.tags.RunInV9
 
 class ApplicationSpec extends BaseFeatureSpec {
   Feature("Candidate Login To Civil Service Jobs") {
-    Scenario("A Newly Registered Candidate No.2 Applies For A Job", RunInV9) {
+    Scenario("A Newly Registered Candidate Applies For A Job", RunInV9) {
       Given("A candidate registers a new account")
       fillNewCandidateDetails(MAIN_REGISTER_CANDIDATE)
 

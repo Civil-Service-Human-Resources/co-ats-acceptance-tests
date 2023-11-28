@@ -43,10 +43,11 @@ object ContractDetailsSection extends VacancyBasePage {
   private lazy val employerContributionInput  = s"${formId}_datafield_198577_1_1"
 
   private def selectContractType(contractDetails: ContractDetails): Unit = {
+    val typeRequiresLength: Seq[String] = List("Temporary", "Fixed Term Appointment", "Loan", "Secondment")
     scrollToElement(By.id(contractDetailsSectionId))
-    val contractType = contractDetails.contractType
+    val contractType                    = contractDetails.contractType
     enterRoles(contractType, contractTypeId)
-    if (contractType.contains(List("Temporary", "Fixed Term Appointment", "Loan", "Secondment"))) {
+    if (contractType.intersect(typeRequiresLength).nonEmpty) {
       val length = waitForVisibilityOfElementById(lengthOfEmploymentInput)
       length.sendKeys(contractDetails.employmentLengthDetails)
       addWelshTranslation(

@@ -83,6 +83,12 @@ trait CivilServiceJobsBasePage extends Matchers with BasePage with BrowserDriver
     generatedEmail()
   }
 
+  def generateCandidateDetails2(i: String): Unit = {
+    randomFirstName = "A7"
+    randomLastName = s"Candidate$i"
+    randomEmail = s"${randomFirstName}.$randomLastName@example.com"
+  }
+
   def changeLanguage(lang: String): Unit = {
     val langSwitcher = driver.findElement(By.xpath(s".//a[@lang='$lang']"))
     clickOn(langSwitcher)

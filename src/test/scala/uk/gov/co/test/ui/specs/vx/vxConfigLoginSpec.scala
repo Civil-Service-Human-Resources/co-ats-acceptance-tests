@@ -18,7 +18,6 @@ class vxConfigLoginSpec extends BaseFeatureSpec {
 
       Then("The recruiter is able to see their account")
       eventually(onPage(vxConfigHomePageTitle))
-
     }
   }
 }

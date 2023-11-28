@@ -22,7 +22,11 @@ object MAIN_SHORT_FORM_ELIGIBILITY
       false,
       "Attorney General's Office",
       true,
-      true
+      true,
+      true,
+      true,
+      "Yes",
+      "Yes"
     )
 
 object MAIN_SHORT_FORM_PERSONAL_INFO
