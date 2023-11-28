@@ -5,6 +5,7 @@ import uk.gov.co.test.ui.data.v9.shortform.ShortFormDetails
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
 import uk.gov.co.test.ui.pages.v9.shortform.ApplicationGuidancePage.formId
 import uk.gov.co.test.ui.pages.v9.shortform.PersonalInfoPage.enterPersonalInfo
+import uk.gov.co.test.ui.pages.vx.createvacancypage.LocationsSection.vacanciesInNIR
 
 case class DiversityDetails(
   haveDisability: String,
@@ -19,7 +20,9 @@ case class DiversityDetails(
   householdEarnerDid: String,
   employeeOrSelfEmployed: String,
   typeOfSchoolAttended: String,
-  postcode: Option[String] = None
+  postcode: Option[String] = None,
+  applyingInNIR: Boolean,
+  communityInNIR: String
 )
 
 object DiversityMonitoringPage extends CivilServiceJobsBasePage {
@@ -78,6 +81,11 @@ object DiversityMonitoringPage extends CivilServiceJobsBasePage {
   def schoolStateNotSayId                = s"${formId}_datafield_178114_1_1_48034_label"
   def postcodeInputId                    = s"${formId}_datafield_165298_1_1"
   def otherEthnicityInputId              = s"${formId}_datafield_35261_1_1"
+  def vacancyInNIRYesId                  = s"${formId}_datafield_145466_1_1_1_label"
+  def vacancyInNIRNoId                   = s"${formId}_datafield_145466_1_1_2_label"
+  def protestantCommunityId              = s"${formId}_datafield_22678_1_1_801_label"
+  def romanCatholicCommunityId           = s"${formId}_datafield_22678_1_1_802_label"
+  def notProtestantOrRomanCatholicId     = s"${formId}_datafield_22678_1_1_803_label"
 
   private def diversityMonitoringPageCheck(): Unit =
     eventually(onPage(diversityMonitoringTitle))
@@ -178,12 +186,24 @@ object DiversityMonitoringPage extends CivilServiceJobsBasePage {
       case "Prefer not to say"                                                                => radioSelect(schoolStateNotSayId)
     }
 
-  private def enterPostcode(diversityDetails: DiversityDetails): Unit =
+  private def enterPostcode(diversityDetails: DiversityDetails): Unit       =
     if (extractValue(postcodeInputId).isEmpty) {
       enterPersonalInfo(postcodeInputId, diversityDetails.postcode.get)
     } else extractValue(postcodeInputId) shouldEqual diversityDetails.postcode
 
-  private val diversity: Seq[DiversityDetails => Unit]                = Seq(
+  private def selectApplyingInNIR(diversityDetails: DiversityDetails): Unit =
+    if (vacanciesInNIR.toBoolean) {
+      if (diversityDetails.applyingInNIR) {
+        radioSelect(vacancyInNIRYesId)
+        diversityDetails.communityInNIR match {
+          case "Protestant"                       => radioSelect(schoolStateAcademicId)
+          case "Roman Catholic"                   => radioSelect(schoolStateNonSelectiveId)
+          case "Not Protestant or Roman Catholic" => radioSelect(schoolStateIndependentId)
+        }
+      } else radioSelect(vacancyInNIRNoId)
+    }
+
+  private val diversity: Seq[DiversityDetails => Unit] = Seq(
     selectConsiderToHaveDisability,
     selectYourGender,
     selectSexualOrientation,
@@ -195,7 +215,8 @@ object DiversityMonitoringPage extends CivilServiceJobsBasePage {
     selectHouseholdEarnerDid,
     selectHouseholdEarnerTypeOfEmployed,
     selectTypeOfSchoolAttended,
-    enterPostcode
+    enterPostcode,
+    selectApplyingInNIR
   )
 
   def diversityMonitoringPage(shortFormDetails: ShortFormDetails): Unit = {

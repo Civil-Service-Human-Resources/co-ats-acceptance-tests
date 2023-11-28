@@ -27,6 +27,7 @@ trait CivilServiceJobsBasePage extends Matchers with BasePage with BrowserDriver
   var randomLastName: String             = ""
   var preferredFirstName: String         = ""
   var randomEmail: String                = ""
+  var randomJobPosition: String          = ""
 
   def randomnessName(): String = {
     val randomLastName = Iterator.continually(Random.nextPrintableChar()).filter(_.isLetter).take(10).mkString
@@ -55,6 +56,12 @@ trait CivilServiceJobsBasePage extends Matchers with BasePage with BrowserDriver
     val fake = new Faker()
     preferredFirstName = fake.name().firstName()
     preferredFirstName
+  }
+
+  def generateRandomJobPosition(): String = {
+    val fake = new Faker()
+    randomJobPosition = fake.job().position()
+    randomJobPosition
   }
 
   def back(): Unit = clickOn("back-link")
@@ -86,7 +93,7 @@ trait CivilServiceJobsBasePage extends Matchers with BasePage with BrowserDriver
   def generateCandidateDetails2(i: String): Unit = {
     randomFirstName = "A7"
     randomLastName = s"Candidate$i"
-    randomEmail = s"${randomFirstName}.$randomLastName@example.com"
+    randomEmail = s"$randomFirstName.$randomLastName@example.com"
   }
 
   def changeLanguage(lang: String): Unit = {

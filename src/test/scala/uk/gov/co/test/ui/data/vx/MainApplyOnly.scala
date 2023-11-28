@@ -1,6 +1,7 @@
 package uk.gov.co.test.ui.data.vx
 
 import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.{emailVxConfig, nameVxConfig, usernameVxConfig}
+import uk.gov.co.test.ui.pages.v9.SignInPage.generateRandomJobPosition
 import uk.gov.co.test.ui.pages.vx.createvacancypage._
 
 object MAIN_VACANCY_DATA
@@ -17,7 +18,7 @@ object MAIN_VACANCY_DATA
       MAIN_VETTING_DETAILS,
       MAIN_INTERVIEWS_DETAILS,
       MAIN_SUCCESS_PROFILES,
-      MAIN_HOLDER_TESTS,
+      MAIN_VACANCY_TESTS,
       MAIN_ADDITIONAL_QUESTIONS,
       MAIN_CRITERIA,
       MAIN_MANAGEMENT,
@@ -28,7 +29,7 @@ object MAIN_VACANCY_DATA
 object MAIN_BASIC_DETAILS
     extends BasicDetails(
       "Department for Environment, Food and Rural Affairs - Apply online",
-      "GCQACO - DEFRA Researcher",
+      s"GCQACO - " + generateRandomJobPosition(),
       true,
       "Prawf awtomeiddio",
       32
@@ -291,7 +292,7 @@ object MAIN_TECH_SKILLS
       )
     )
 
-object MAIN_HOLDER_TESTS
+object MAIN_VACANCY_TESTS
     extends VacancyTestsDetails(
       true,
       "Online Tests",
@@ -447,46 +448,30 @@ object MAIN_ONLINE_PEC_CHECK_FORMS
 
 object MAIN_PEC_CHECK_FORMS
     extends PecCheckFormsDetails(
-      rtwCheck =
-        List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      rtwCheck = List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
       "Before pre employment checks",
       "Right to work and criminal record check",
       true,
       "Autotest - Details of the identity documents the candidate needs to provide",
       false,
-      generalInfo =
-        List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
-      referenceChecks =
-        List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
-      bankruptcyChecks =
-        List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
-      crcChecks =
-        List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
-      nsvChecks =
-        List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      generalInfo = List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      referenceChecks = List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      bankruptcyChecks = List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      crcChecks = List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      nsvChecks = List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
       "Show recruiter and candidate forms",
-      jobHistoryChecks =
-        List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
-      healthRefChecks =
-        List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      jobHistoryChecks = List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      healthRefChecks = List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
       "Show recruiter and candidate forms",
-      overseasCheck =
-        List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
-      pensionsCheck =
-        List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
-      previousCsJobCheck =
-        List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
-      internalFraudCheck =
-        List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
-      selfEmploymentCheck =
-        List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      overseasCheck = List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      pensionsCheck = List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      previousCsJobCheck = List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      internalFraudCheck = List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      selfEmploymentCheck = List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
       true,
       true,
       "Autotest - Name of check",
-      additionalCheck =
-        List("Not Applicable"),
-      nenOnboarding =
-        List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
-      pnOnboarding =
-        List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates")
+      additionalCheck = List("Not Applicable"),
+      nenOnboarding = List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      pnOnboarding = List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates")
     )

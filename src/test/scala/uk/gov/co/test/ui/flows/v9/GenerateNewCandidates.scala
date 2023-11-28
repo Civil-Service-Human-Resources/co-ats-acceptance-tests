@@ -15,6 +15,9 @@ object GenerateNewCandidates extends CivilServiceJobsBasePage {
     val writer        = new PrintWriter(new File(file))
 
     for (i <- 1 to candidatesRequired) {
+      randomFirstName = "A61"
+      randomLastName = s"Candidate$i"
+      randomEmail = s"${randomFirstName.toLowerCase}.${randomLastName.toLowerCase}@example.com"
       navigateToCreateAccountPage()
       enterFirstNameLoop(randomFirstName)
       enterLastNameLoop(randomLastName)

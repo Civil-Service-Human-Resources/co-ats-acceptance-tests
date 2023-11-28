@@ -32,9 +32,11 @@ object VacancyTestsSection extends VacancyBasePage {
   private lazy val recommendedOptionsYesId = s"${formId}_datafield_129748_1_1_1"
   private lazy val recommendedOptionsNoId  = s"${formId}_datafield_129748_1_1_2"
   private lazy val additionalDetailId      = s"${formId}_datafield_129763_1_1"
+  var anyOnlineTests = ""
 
   def vacancyTestsFlow(vacancyTestsDetails: VacancyTestsDetails): Unit = {
     testsRequired(vacancyTestsDetails)
+    anyOnlineTests = vacancyTestsDetails.testsRequired.toString
     if (vacancyTestsDetails.testsRequired) {
       selectOnlineOrOffline(vacancyTestsDetails)
       if (vacancyTestsDetails.onlineOrOffline == "Online Tests") {

@@ -41,9 +41,12 @@ object LocationsSection extends VacancyBasePage {
   private lazy val locationPreferenceNoId  = s"${formId}_datafield_155799_1_1_2"
   private lazy val locationPreferenceYesId = s"${formId}_datafield_155799_1_1_1"
   private lazy val maxLocationId           = s"select2-${formId}_datafield_155818_1_1-container"
+  var vacanciesInNIR                       = ""
+  var communitiesInNIR                     = ""
 
   def selectVacancyInNIR(locationsDetails: LocationsDetails): Unit = {
     scrollToElement(By.id(northernIrelandId))
+    vacanciesInNIR = locationsDetails.vacancyInNIR.toString
     if (locationsDetails.vacancyInNIR) {
       clickOnRadioButton(northernIrelandYesId)
       selectVacancyOutsideNIR(locationsDetails)
@@ -60,12 +63,14 @@ object LocationsSection extends VacancyBasePage {
       clickOnRadioButton(outsideNIRNoId)
     }
 
-  def selectWhichCommunity(locationsDetails: LocationsDetails): Unit =
-    locationsDetails.whichCommunityEncouraged match {
+  def selectWhichCommunity(locationsDetails: LocationsDetails): Unit = {
+    communitiesInNIR = locationsDetails.whichCommunityEncouraged
+    communitiesInNIR match {
       case "Protestant"      => clickOnRadioButton(protestantId)
       case "Roman Catholic"  => clickOnRadioButton(romanCatholicId)
       case "All communities" => clickOnRadioButton(allCommunitiesId)
     }
+  }
 
   def locationType(locationType: String): Unit = {
     waitForVisibilityOfElementById(locationTypeId).click()
