@@ -22,7 +22,11 @@ object MAIN_SHORT_FORM_ELIGIBILITY
       false,
       "Attorney General's Office",
       true,
-      true
+      true,
+      true,
+      true,
+      "Yes",
+      "Yes"
     )
 
 object MAIN_SHORT_FORM_PERSONAL_INFO
@@ -36,6 +40,10 @@ object MAIN_SHORT_FORM_PERSONAL_INFO
       false,
       true,
       "Autotest - Provide details of what reasonable adjustments might help you",
+      true,
+      "Autotest - reasonable adjustments to be able to complete online tests",
+      "Yes",
+      true,
       redeploymentScheme = Option(false)
     )
 
@@ -85,7 +93,9 @@ object MAIN_SHORT_FORM_DIVERSITY_MONITORING
       "Traditional Professional",
       "Not working",
       "Attended school outside the UK",
-      postcode = Option("SK8 1BX")
+      postcode = Option("SK8 1BX"),
+      true,
+      "Protestant"
     )
 
 object MAIN_SHORT_FORM_DECLARATION

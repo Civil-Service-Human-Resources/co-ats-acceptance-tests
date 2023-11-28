@@ -51,9 +51,11 @@ object ManagementSection extends VacancyBasePage {
   private lazy val projectNameInputId             = s"${formId}_datafield_104972_1_1"
   private lazy val complaintsProcessInputId       = s"${formId}_datafield_179305_1_1_en-GB"
   private lazy val vacancyCommentsInputId         = s"${formId}_datafield_100298_1_1"
+  var greatForVeterans = ""
 
   private def selectVeteransAndPrisonLeaversPosition(managementDetails: ManagementDetails): Unit = {
     scrollToElement(By.id(managementSectionId))
+    greatForVeterans = managementDetails.greatWorkForVeterans.toString
     if (candidateApproach == "External") {
       val veterans = managementDetails.greatWorkForVeterans
       if (veterans) {

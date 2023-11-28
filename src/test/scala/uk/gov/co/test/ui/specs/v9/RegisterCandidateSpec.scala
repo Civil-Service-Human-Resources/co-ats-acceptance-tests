@@ -37,7 +37,7 @@ class RegisterCandidateSpec extends BaseFeatureSpec {
     }
 
     Scenario("Create Candidate Accounts", RunInV9) {
-      createMultipleCandidates(5)
+      createMultipleCandidates(3)
     }
   }
 }
