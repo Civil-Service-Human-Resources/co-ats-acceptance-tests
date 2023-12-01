@@ -26,9 +26,26 @@ class createVacancySpec extends BaseFeatureSpec {
       eventually(confirmAndActivateVacancy())
     }
 
-    Scenario("A Recruiter Creates A Full Flow Apply Only Templated Vacancy And Completes Application Process", RunInVX) {
+    Scenario(
+      "A Recruiter Creates A Full Flow Apply Only Templated Vacancy And Completes Application Process",
+      RunInVX
+    ) {
       Given("a recruiter logs in to vx config and creates & posts vacancy")
       fillNewVacancyForm(MAIN_VACANCY_DATA)
+      activateAndPostVacancy()
+
+      When("candidate applies & completes the short & pec forms")
+      fillNewCandidateDetails(MAIN_REGISTER_CANDIDATE)
+      fillShortFormDetails(MAIN_CANDIDATE_SHORT_FORM_DATA)
+
+      Then("the candidate is able to submit and complete the application")
+      confirmShortFormCompletion()
+    }
+
+    Scenario(
+      "A Recruiter Creates A Minimum Flow Apply Only Templated Vacancy And Completes Application Process", RunInVX) {
+      Given("a recruiter logs in to vx config and creates & posts vacancy")
+      fillNewVacancyForm(MIN_VACANCY_DATA)
       activateAndPostVacancy()
 
       When("candidate applies & completes the short & pec forms")
