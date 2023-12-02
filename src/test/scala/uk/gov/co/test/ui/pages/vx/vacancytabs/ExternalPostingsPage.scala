@@ -83,7 +83,7 @@ object ExternalPostingsPage extends VacancyBasePage {
           _postingLiveDate = thirdRowItem(row).getText
           _postingClosingDate = fourthRowItem(row).getText
           _postingStatus = fifthRowItem(row).getText
-          break
+          break()
         }
       }
     )

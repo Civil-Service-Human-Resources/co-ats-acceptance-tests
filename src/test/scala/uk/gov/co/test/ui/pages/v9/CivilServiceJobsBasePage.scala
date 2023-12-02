@@ -19,6 +19,7 @@ trait CivilServiceJobsBasePage extends Matchers with BasePage with BrowserDriver
 
   val url: String                        = TestConfiguration.url("v9test")
   val passwordCandidate: String          = readProperty("services.v9test.admin.candidate_password")
+  val getOs: String                      = System.getProperty("os.name").toLowerCase
   val civilServiceSignOutPageTitle       = "Civil Service Jobs - Civil Service Jobs - GOV.UK"
   val v9AcceptAdditionalCookies: String  = "accept_all_cookies_button"
   val vXaAcceptAdditionalCookies: String = "cookies-accept-button"

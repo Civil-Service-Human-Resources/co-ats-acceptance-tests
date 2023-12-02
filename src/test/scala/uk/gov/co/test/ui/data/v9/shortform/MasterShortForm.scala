@@ -3,21 +3,21 @@ package uk.gov.co.test.ui.data.v9.shortform
 import uk.gov.co.test.ui.pages.v9.SignInPage.{preferredFirstName, randomEmail, randomFirstName, randomLastName}
 import uk.gov.co.test.ui.pages.v9.shortform._
 
-object MAIN_CANDIDATE_SHORT_FORM_DATA
+object MASTER_SHORT_FORM_DATA
     extends ShortFormDetails(
-      MAIN_SHORT_FORM_APP_GUIDANCE,
-      MAIN_SHORT_FORM_ELIGIBILITY,
-      MAIN_SHORT_FORM_PERSONAL_INFO,
-      MAIN_SHORT_FORM_DIVERSITY_MONITORING,
-      MAIN_SHORT_FORM_DECLARATION
+      MASTER_SHORT_FORM_APP_GUIDANCE,
+      MASTER_SHORT_FORM_ELIGIBILITY,
+      MASTER_SHORT_FORM_PERSONAL_INFO,
+      MASTER_SHORT_FORM_DIVERSITY_MONITORING,
+      MASTER_SHORT_FORM_DECLARATION
     )
 
-object MAIN_SHORT_FORM_APP_GUIDANCE
+object MASTER_SHORT_FORM_APP_GUIDANCE
     extends AppGuidanceDetails(
       true
     )
 
-object MAIN_SHORT_FORM_ELIGIBILITY
+object MASTER_SHORT_FORM_ELIGIBILITY
     extends EligibilityDetails(
       false,
       "Attorney General's Office",
@@ -29,7 +29,7 @@ object MAIN_SHORT_FORM_ELIGIBILITY
       "Yes"
     )
 
-object MAIN_SHORT_FORM_PERSONAL_INFO
+object MASTER_SHORT_FORM_PERSONAL_INFO
     extends PersonalInfoDetails(
       firstName = s"$randomFirstName",
       lastName = s"$randomLastName",
@@ -47,7 +47,7 @@ object MAIN_SHORT_FORM_PERSONAL_INFO
       redeploymentScheme = Option(false)
     )
 
-object MAIN_SHORT_FORM_DIVERSITY_MONITORING
+object MASTER_SHORT_FORM_DIVERSITY_MONITORING
     extends DiversityDetails(
       "No",
       "Man",
@@ -98,7 +98,7 @@ object MAIN_SHORT_FORM_DIVERSITY_MONITORING
       "Protestant"
     )
 
-object MAIN_SHORT_FORM_DECLARATION
+object MASTER_SHORT_FORM_DECLARATION
     extends DeclarationDetails(
       true
     )

@@ -3,7 +3,6 @@ package uk.gov.co.test.ui.pages.v9
 import org.openqa.selenium.{By, Keys}
 import org.scalatest.concurrent.Eventually.eventually
 import uk.gov.co.test.ui.pages.vx.DashboardPage.vacancyId
-import uk.gov.co.test.ui.pages.vx.MasterVacancyPage.getOs
 
 object SearchJobsPage extends CivilServiceJobsBasePage {
 

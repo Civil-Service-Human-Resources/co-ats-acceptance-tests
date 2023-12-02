@@ -39,7 +39,7 @@ object ApprovalSection extends VacancyBasePage {
       clickOnRadioButton(approvalNoId)
     }
     costCentre(approvalDetails.costCentre)
-    uploadApprovalFile("CSJ-T&Cs.docx")
+    uploadApprovalFile("Test-T&Cs.pdf")
   }
 
   def importFilesPath: String = "/src/test/resource/import/"
