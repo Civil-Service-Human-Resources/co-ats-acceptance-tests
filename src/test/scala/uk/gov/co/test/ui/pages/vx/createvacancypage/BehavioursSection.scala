@@ -4,6 +4,8 @@ import org.openqa.selenium.By
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.formId
 
+import scala.collection.mutable.ListBuffer
+
 case class Behaviours(chosenBehaviour: String, stageApplication: Boolean, stageInterview: Boolean)
 
 case class BehavioursDetails(
@@ -50,6 +52,8 @@ object BehavioursSection extends VacancyBasePage {
   private lazy val interviewSixId           = s"${formId}_datafield_60408_1_1_12684"
   private lazy val interviewSevenId         = s"${formId}_datafield_60422_1_1_12684"
   private lazy val interviewEightId         = s"${formId}_datafield_60436_1_1_12684"
+  var howManyAssessed                       = ""
+  var listOfChosenBehaviours                = new ListBuffer[String]()
 
   def selectBehavioursProfiles(successProfilesDetails: SuccessProfilesDetails): Unit = {
     scrollToElement(By.id(successProfilesSectionId))
@@ -59,8 +63,9 @@ object BehavioursSection extends VacancyBasePage {
       getAssessSectionText(assessBehavioursId) shouldBe behaviour
         .map(_.assessBehaviours)
         .get
-      selectHowManyBehaviours(behaviour.map(_.howManyAssessed).get)
-      behaviour.map(_.howManyAssessed).get match {
+      val howMany = behaviour.map(_.howManyAssessed).get
+      selectHowManyBehaviours(howMany)
+      howMany match {
         case 1 => behavioursSection(successProfilesDetails, 1)
         case 2 => behavioursSection(successProfilesDetails, 2)
         case 3 => behavioursSection(successProfilesDetails, 3)
@@ -70,77 +75,94 @@ object BehavioursSection extends VacancyBasePage {
         case 7 => behavioursSection(successProfilesDetails, 7)
         case 8 => behavioursSection(successProfilesDetails, 8)
       }
+      howManyAssessed = howMany.toString
     }
   }
 
   private def selectBehaviourOne(successProfilesDetails: SuccessProfilesDetails): Unit = {
-    val behaviour = successProfilesDetails.behavioursSection
+    val behaviour       = successProfilesDetails.behavioursSection
     scrollToElement(By.id(behavioursOneId))
     waitForVisibilityOfElementById(behavioursOneId).click()
-    selectOption(generalInput, behaviour.map(_.behaviourOne.map(_.chosenBehaviour).get).get)
+    val chosenBehaviour = behaviour.map(_.behaviourOne.map(_.chosenBehaviour).get).get
+    listOfChosenBehaviours += chosenBehaviour
+    selectOption(generalInput, chosenBehaviour)
     if (behaviour.map(_.behaviourOne.map(_.stageApplication).get).get) checkbox(applicationOneId).select()
     if (behaviour.map(_.behaviourOne.map(_.stageInterview).get).get) checkbox(interviewOneId).select()
   }
 
   private def selectBehaviourTwo(successProfilesDetails: SuccessProfilesDetails): Unit = {
-    val behaviour = successProfilesDetails.behavioursSection
+    val behaviour       = successProfilesDetails.behavioursSection
     scrollToElement(By.id(behavioursTwoId))
     waitForVisibilityOfElementById(behavioursTwoId).click()
-    selectOption(generalInput, behaviour.map(_.behaviourTwo.map(_.chosenBehaviour).get).get)
+    val chosenBehaviour = behaviour.map(_.behaviourTwo.map(_.chosenBehaviour).get).get
+    listOfChosenBehaviours += chosenBehaviour
+    selectOption(generalInput, chosenBehaviour)
     if (behaviour.map(_.behaviourTwo.map(_.stageApplication).get).get) checkbox(applicationTwoId).select()
     if (behaviour.map(_.behaviourTwo.map(_.stageInterview).get).get) checkbox(interviewTwoId).select()
   }
 
   private def selectBehaviourThree(successProfilesDetails: SuccessProfilesDetails): Unit = {
-    val behaviour = successProfilesDetails.behavioursSection
+    val behaviour       = successProfilesDetails.behavioursSection
     scrollToElement(By.id(behavioursThreeId))
     waitForVisibilityOfElementById(behavioursThreeId).click()
-    selectOption(generalInput, behaviour.map(_.behaviourThree.map(_.chosenBehaviour).get).get)
+    val chosenBehaviour = behaviour.map(_.behaviourThree.map(_.chosenBehaviour).get).get
+    listOfChosenBehaviours += chosenBehaviour
+    selectOption(generalInput, chosenBehaviour)
     if (behaviour.map(_.behaviourThree.map(_.stageApplication).get).get) checkbox(applicationThreeId).select()
     if (behaviour.map(_.behaviourThree.map(_.stageInterview).get).get) checkbox(interviewThreeId).select()
   }
 
   private def selectBehaviourFour(successProfilesDetails: SuccessProfilesDetails): Unit = {
-    val behaviour = successProfilesDetails.behavioursSection
+    val behaviour       = successProfilesDetails.behavioursSection
     scrollToElement(By.id(behavioursFourId))
     waitForVisibilityOfElementById(behavioursFourId).click()
-    selectOption(generalInput, behaviour.map(_.behaviourFour.map(_.chosenBehaviour).get).get)
+    val chosenBehaviour = behaviour.map(_.behaviourFour.map(_.chosenBehaviour).get).get
+    listOfChosenBehaviours += chosenBehaviour
+    selectOption(generalInput, chosenBehaviour)
     if (behaviour.map(_.behaviourFour.map(_.stageApplication).get).get) checkbox(applicationFourId).select()
     if (behaviour.map(_.behaviourFour.map(_.stageInterview).get).get) checkbox(interviewFourId).select()
   }
 
   private def selectBehaviourFive(successProfilesDetails: SuccessProfilesDetails): Unit = {
-    val behaviour = successProfilesDetails.behavioursSection
+    val behaviour       = successProfilesDetails.behavioursSection
     scrollToElement(By.id(behavioursFiveId))
     waitForVisibilityOfElementById(behavioursFiveId).click()
-    selectOption(generalInput, behaviour.map(_.behaviourFive.map(_.chosenBehaviour).get).get)
+    val chosenBehaviour = behaviour.map(_.behaviourFive.map(_.chosenBehaviour).get).get
+    listOfChosenBehaviours += chosenBehaviour
+    selectOption(generalInput, chosenBehaviour)
     if (behaviour.map(_.behaviourFive.map(_.stageApplication).get).get) checkbox(applicationFiveId).select()
     if (behaviour.map(_.behaviourFive.map(_.stageInterview).get).get) checkbox(interviewFiveId).select()
   }
 
   private def selectBehaviourSix(successProfilesDetails: SuccessProfilesDetails): Unit = {
-    val behaviour = successProfilesDetails.behavioursSection
+    val behaviour       = successProfilesDetails.behavioursSection
     scrollToElement(By.id(behavioursSixId))
     waitForVisibilityOfElementById(behavioursSixId).click()
-    selectOption(generalInput, behaviour.map(_.behaviourSix.map(_.chosenBehaviour).get).get)
+    val chosenBehaviour = behaviour.map(_.behaviourSix.map(_.chosenBehaviour).get).get
+    listOfChosenBehaviours += chosenBehaviour
+    selectOption(generalInput, chosenBehaviour)
     if (behaviour.map(_.behaviourSix.map(_.stageApplication).get).get) checkbox(applicationSixId).select()
     if (behaviour.map(_.behaviourSix.map(_.stageInterview).get).get) checkbox(interviewSixId).select()
   }
 
   private def selectBehaviourSeven(successProfilesDetails: SuccessProfilesDetails): Unit = {
-    val behaviour = successProfilesDetails.behavioursSection
+    val behaviour       = successProfilesDetails.behavioursSection
     scrollToElement(By.id(behavioursSevenId))
     waitForVisibilityOfElementById(behavioursSevenId).click()
-    selectOption(generalInput, behaviour.map(_.behaviourSeven.map(_.chosenBehaviour).get).get)
+    val chosenBehaviour = behaviour.map(_.behaviourSeven.map(_.chosenBehaviour).get).get
+    listOfChosenBehaviours += chosenBehaviour
+    selectOption(generalInput, chosenBehaviour)
     if (behaviour.map(_.behaviourSeven.map(_.stageApplication).get).get) checkbox(applicationSevenId).select()
     if (behaviour.map(_.behaviourSeven.map(_.stageInterview).get).get) checkbox(interviewSevenId).select()
   }
 
   private def selectBehaviourEight(successProfilesDetails: SuccessProfilesDetails): Unit = {
-    val behaviour = successProfilesDetails.behavioursSection
+    val behaviour       = successProfilesDetails.behavioursSection
     scrollToElement(By.id(behavioursEightId))
     waitForVisibilityOfElementById(behavioursEightId).click()
-    selectOption(generalInput, behaviour.map(_.behaviourEight.map(_.chosenBehaviour).get).get)
+    val chosenBehaviour = behaviour.map(_.behaviourEight.map(_.chosenBehaviour).get).get
+    listOfChosenBehaviours += chosenBehaviour
+    selectOption(generalInput, chosenBehaviour)
     if (behaviour.map(_.behaviourEight.map(_.stageApplication).get).get) checkbox(applicationEightId).select()
     if (behaviour.map(_.behaviourEight.map(_.stageInterview).get).get) checkbox(interviewEightId).select()
   }

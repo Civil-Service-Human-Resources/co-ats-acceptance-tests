@@ -170,20 +170,30 @@ object MASTER_ABILITIES
 
 object MASTER_BEHAVIOURS
     extends BehavioursDetails(
-      """The following online tests can be used to assess behaviours:
-    |Civil Service Judgement Test
-    |Civil Service Management Judgement Test""".stripMargin,
+      assessBehaviours = """The following online tests can be used to assess behaviours:
+          |Civil Service Judgement Test
+          |Civil Service Management Judgement Test""".stripMargin,
       8,
-      Some(Behaviours(chosenBehaviour = "Changing and Improving", stageApplication = true, stageInterview = true)),
-      Some(
+      behaviourOne =
+        Some(Behaviours(chosenBehaviour = "Changing and Improving", stageApplication = true, stageInterview = true)),
+      behaviourTwo = Some(
         Behaviours(chosenBehaviour = "Communicating and Influencing", stageApplication = true, stageInterview = true)
       ),
-      Some(Behaviours(chosenBehaviour = "Delivering at Pace", stageApplication = true, stageInterview = true)),
-      Some(Behaviours(chosenBehaviour = "Developing Self and Others", stageApplication = true, stageInterview = true)),
-      Some(Behaviours(chosenBehaviour = "Leadership", stageApplication = true, stageInterview = true)),
-      Some(Behaviours(chosenBehaviour = "Making Effective Decisions", stageApplication = true, stageInterview = true)),
-      Some(Behaviours(chosenBehaviour = "Managing a Quality Service", stageApplication = true, stageInterview = true)),
-      Some(Behaviours(chosenBehaviour = "Working Together", stageApplication = true, stageInterview = true))
+      behaviourThree =
+        Some(Behaviours(chosenBehaviour = "Delivering at Pace", stageApplication = true, stageInterview = true)),
+      behaviourFour = Some(
+        Behaviours(chosenBehaviour = "Developing Self and Others", stageApplication = true, stageInterview = true)
+      ),
+      behaviourFive = Some(Behaviours(chosenBehaviour = "Leadership", stageApplication = true, stageInterview = true)),
+      behaviourSix = Some(
+        Behaviours(chosenBehaviour = "Making Effective Decisions", stageApplication = true, stageInterview = true)
+      ),
+      behaviourSeven = Some(
+        Behaviours(chosenBehaviour = "Managing a Quality Service", stageApplication = true, stageInterview = true)
+      ),
+      behaviourEight = Some(
+        Behaviours(chosenBehaviour = "Working Together", stageApplication = true, stageInterview = true)
+      )
     )
 
 object MASTER_EXPERIENCES
@@ -200,11 +210,14 @@ object MASTER_EXPERIENCES
       "Autotest - Enter guidance text for the candidate",
       true,
       "Autotest - Specific past experience/skills",
-      licences = Some(MandatoryRequirements(requirements = true, requirementsInfo = "Autotest - Specific licence requirements")),
+      licences =
+        Some(MandatoryRequirements(requirements = true, requirementsInfo = "Autotest - Specific licence requirements")),
       memberships = Some(
         MandatoryRequirements(requirements = true, requirementsInfo = "Autotest - Specific memberships requirements")
       ),
-      languages = Some(MandatoryRequirements(requirements = true, requirementsInfo = "Autotest - Specific language requirements")),
+      languages = Some(
+        MandatoryRequirements(requirements = true, requirementsInfo = "Autotest - Specific language requirements")
+      ),
       qualifications = Some(
         MandatoryRequirements(requirements = true, requirementsInfo = "Autotest - Specific qualification requirements")
       )

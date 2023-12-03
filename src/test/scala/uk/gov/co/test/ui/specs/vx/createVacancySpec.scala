@@ -20,12 +20,18 @@ class createVacancySpec extends BaseFeatureSpec {
       fillNewVacancyForm(MASTER_VACANCY_DATA)
       activateAndPostVacancy()
 
-      When("candidate applies & completes the short & pec forms")
+      When("candidate registers for new job application")
       fillNewCandidateDetails(MAIN_REGISTER_CANDIDATE)
-      fillShortFormDetails(MASTER_SHORT_FORM_DATA)
 
-      Then("the candidate is able to submit and complete the application")
+      And("candidate completes the short form")
+      fillShortFormDetails(MASTER_SHORT_FORM_DATA)
       confirmShortFormCompletion()
+
+      And("candidate completes the long form")
+      fillLongFormDetailsOnly(MASTER_LONG_FORM_DATA)
+
+      Then("the candidate is able to complete the application")
+
     }
 
     Scenario("A Recruiter Creates A Minimum Flow Apply Only Vacancy; Full Application Process", RunInVX) {

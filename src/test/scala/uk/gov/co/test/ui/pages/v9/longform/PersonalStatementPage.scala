@@ -30,6 +30,7 @@ object PersonalStatementPage extends CivilServiceJobsBasePage {
   private def confirmGuidanceText(): Unit = {
     val v9GuidanceText = waitForVisibilityOfElementByPath(guidanceTextPath).getText
     v9GuidanceText shouldEqual vXGuidanceText
+//    v9GuidanceText shouldEqual "Autotest - Enter guidance text for the candidate" // TODO remove
   }
 
   private val statement: Seq[StatementDetails => Unit] = Seq(
