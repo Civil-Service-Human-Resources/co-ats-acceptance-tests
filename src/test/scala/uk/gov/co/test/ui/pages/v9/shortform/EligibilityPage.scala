@@ -60,20 +60,21 @@ object EligibilityPage extends CivilServiceJobsBasePage {
     if (eligibilityDetails.rightToRemain) radioSelect(rightToRemainYesId)
     else radioSelect(rightToRemainNoId)
 
-  private def selectMembershipsRequirements(eligibilityDetails: EligibilityDetails): Unit =
-    if (membershipsMandatory.toBoolean && experiences.toBoolean) {
+  private def selectMembershipsRequirements(eligibilityDetails: EligibilityDetails): Unit = {
+    if ((membershipsMandatory == "" && experiences == "") || (membershipsMandatory.toBoolean && experiences.toBoolean)) {//TODO requires refactor
       if (eligibilityDetails.membershipsRequirements) radioSelect(membershipsRequiredYesId)
       else radioSelect(membershipsRequiredNoId)
     }
+  }
 
   private def selectLanguageRequirements(eligibilityDetails: EligibilityDetails): Unit =
-    if (languagesMandatory.toBoolean && experiences.toBoolean) {
+    if ((languagesMandatory == "" && experiences == "") || (languagesMandatory.toBoolean && experiences.toBoolean)) {
       if (eligibilityDetails.languageRequirements) radioSelect(languageRequirementsYesId)
       else radioSelect(languageRequirementsNoId)
     }
 
   private def selectQualificationsRequirements(eligibilityDetails: EligibilityDetails): Unit =
-    if (qualificationsMandatory.toBoolean && experiences.toBoolean) {
+    if ((qualificationsMandatory == "" && experiences == "") || (qualificationsMandatory.toBoolean && experiences.toBoolean)) {
       eligibilityDetails.qualificationsRequirements match {
         case "Yes"                     => radioSelect(qualificationsRequirementsYesId)
         case "No"                      => radioSelect(qualificationsRequirementsNoId)
@@ -83,7 +84,7 @@ object EligibilityPage extends CivilServiceJobsBasePage {
     }
 
   private def selectLicenceRequirements(eligibilityDetails: EligibilityDetails): Unit =
-    if (licencesMandatory.toBoolean && experiences.toBoolean) {
+    if ((licencesMandatory == "" && experiences == "") || (licencesMandatory.toBoolean && experiences.toBoolean)) {
       eligibilityDetails.licenceRequirements match {
         case "Yes"                     => radioSelect(licenceRequirementsYesId)
         case "No"                      => radioSelect(licenceRequirementsNoId)

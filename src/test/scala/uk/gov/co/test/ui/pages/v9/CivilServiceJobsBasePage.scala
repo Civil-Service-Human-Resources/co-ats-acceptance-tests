@@ -2,7 +2,7 @@ package uk.gov.co.test.ui.pages.v9
 
 import com.github.javafaker.Faker
 import org.openqa.selenium.support.ui.Select
-import org.openqa.selenium.{By, WebElement}
+import org.openqa.selenium.{By, Keys, WebElement}
 import org.scalatest.concurrent.Eventually.eventually
 import org.scalatest.matchers.should.Matchers
 import uk.gov.co.test.ui.conf.TestConfiguration
@@ -24,6 +24,7 @@ trait CivilServiceJobsBasePage extends Matchers with BasePage with BrowserDriver
   val v9AcceptAdditionalCookies: String  = "accept_all_cookies_button"
   val vXaAcceptAdditionalCookies: String = "cookies-accept-button"
   val pageContinue                       = "continue_button"
+  val continueToLongForm                 = "select_manual_form_700"
   var randomFirstName: String            = ""
   var randomLastName: String             = ""
   var preferredFirstName: String         = ""
@@ -134,5 +135,11 @@ trait CivilServiceJobsBasePage extends Matchers with BasePage with BrowserDriver
     waitForVisibilityOfElementById(id).click()
     val dept = new Select(waitForVisibilityOfElementById(id))
     dept.selectByVisibleText(value)
+  }
+
+  def enterDetails(inputId: String, text: String): Unit = {
+    val enterOption = waitForVisibilityOfElementById(inputId)
+    enterOption.sendKeys(text)
+    enterOption.sendKeys(Keys.TAB)
   }
 }

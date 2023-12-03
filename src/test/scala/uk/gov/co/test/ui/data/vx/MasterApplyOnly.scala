@@ -200,12 +200,12 @@ object MASTER_EXPERIENCES
       "Autotest - Enter guidance text for the candidate",
       true,
       "Autotest - Specific past experience/skills",
-      Some(MandatoryRequirements(requirements = true, requirementsInfo = "Autotest - Specific licence requirements")),
-      Some(
+      licences = Some(MandatoryRequirements(requirements = true, requirementsInfo = "Autotest - Specific licence requirements")),
+      memberships = Some(
         MandatoryRequirements(requirements = true, requirementsInfo = "Autotest - Specific memberships requirements")
       ),
-      Some(MandatoryRequirements(requirements = true, requirementsInfo = "Autotest - Specific language requirements")),
-      Some(
+      languages = Some(MandatoryRequirements(requirements = true, requirementsInfo = "Autotest - Specific language requirements")),
+      qualifications = Some(
         MandatoryRequirements(requirements = true, requirementsInfo = "Autotest - Specific qualification requirements")
       )
     )

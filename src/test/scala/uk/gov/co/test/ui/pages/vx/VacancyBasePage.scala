@@ -9,7 +9,6 @@ import uk.gov.co.test.ui.conf.TestConfiguration.readProperty
 import uk.gov.co.test.ui.data.vx.RecruiterDetails
 import uk.gov.co.test.ui.driver.BrowserDriver
 import uk.gov.co.test.ui.pages.BasePage
-import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.{advertDetailsFunction, applicationCentreTitle, helpWithSelectionText, withdrawApplicationFunction}
 import uk.gov.co.test.ui.pages.v9.SignInPage.{navigateToV9Test, v9AcceptAllCookies, v9SearchCookiesById}
 import uk.gov.co.test.ui.pages.vx.DashboardPage.searchOn
 import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.applicationClosingDate
@@ -162,13 +161,6 @@ trait VacancyBasePage extends Matchers with BasePage with BrowserDriver {
     openNewWindow()
     navigateToV9Test()
     if (!v9SearchCookiesById().isEmpty) v9AcceptAllCookies()
-  }
-
-  def confirmShortFormCompletion(): Unit = {
-    eventually(onPage(applicationCentreTitle))
-    advertDetailsFunction().isDisplayed
-    withdrawApplicationFunction().isDisplayed
-    helpWithSelectionText() shouldEqual "Help with selection process"
   }
 
 }

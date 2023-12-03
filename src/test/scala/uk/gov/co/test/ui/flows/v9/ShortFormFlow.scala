@@ -24,6 +24,9 @@ object ShortFormFlow extends CivilServiceJobsBasePage {
 
   def fillShortFormDetails(shortFormDetails: ShortFormDetails): Unit =
     if (candidateApproach == "External" || candidateApproach == "Pre-release") {
+      println(s"Candidate Name: $randomFirstName $randomLastName")
+      println(s"Candidate Email: $randomEmail")
+      println(s"Vacancy ID/Job Title: $vacancyId/$vacancyName")
       jobSearchAndApplyFlow(vacancyName, vacancyId, "what")
       shortForm.foreach { f =>
         f(shortFormDetails)
@@ -32,7 +35,9 @@ object ShortFormFlow extends CivilServiceJobsBasePage {
     } else println(s"Vacancy is not open for '$candidateApproach' candidates!")
 
   def fillShortFormDetailsOnly(shortFormDetails: ShortFormDetails): Unit = {
-    jobSearchAndApplyFlow(jobTitle = "GCQACO - DEFRA COO", jobId = "9399", "what")
+    vacancyName = "GCQACO - Consultant"
+    vacancyId = "9416"
+    jobSearchAndApplyFlow(vacancyName, vacancyId, "what")
     shortForm.foreach { f =>
       f(shortFormDetails)
     }

@@ -4,7 +4,7 @@ import org.scalatest.concurrent.Eventually.eventually
 import uk.gov.co.test.ui.data.v9.shortform.ShortFormDetails
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
 import uk.gov.co.test.ui.pages.v9.shortform.ApplicationGuidancePage.formId
-import uk.gov.co.test.ui.pages.v9.shortform.PersonalInfoPage.enterPersonalInfo
+import uk.gov.co.test.ui.pages.v9.shortform.PersonalInfoPage.enterDetails
 import uk.gov.co.test.ui.pages.vx.createvacancypage.LocationsSection.vacanciesInNIR
 
 case class DiversityDetails(
@@ -138,7 +138,7 @@ object DiversityMonitoringPage extends CivilServiceJobsBasePage {
       ethnic == "Other ethnic group" || ethnic == "Any other White background" || ethnic == "Any other Mixed background" ||
       ethnic == "Any other Asian background" || ethnic == "Any other Black background"
     ) {
-      enterPersonalInfo(otherEthnicityInputId, diversityDetails.otherEthnicity)
+      enterDetails(otherEthnicityInputId, diversityDetails.otherEthnicity)
     }
   }
 
@@ -188,17 +188,17 @@ object DiversityMonitoringPage extends CivilServiceJobsBasePage {
 
   private def enterPostcode(diversityDetails: DiversityDetails): Unit       =
     if (extractValue(postcodeInputId).isEmpty) {
-      enterPersonalInfo(postcodeInputId, diversityDetails.postcode.get)
+      enterDetails(postcodeInputId, diversityDetails.postcode.get)
     } else extractValue(postcodeInputId) shouldEqual diversityDetails.postcode
 
   private def selectApplyingInNIR(diversityDetails: DiversityDetails): Unit =
-    if (vacanciesInNIR.toBoolean) {
+    if (vacanciesInNIR == "" || vacanciesInNIR.toBoolean) { // TODO requires refactor
       if (diversityDetails.applyingInNIR) {
         radioSelect(vacancyInNIRYesId)
         diversityDetails.communityInNIR match {
-          case "Protestant"                       => radioSelect(schoolStateAcademicId)
-          case "Roman Catholic"                   => radioSelect(schoolStateNonSelectiveId)
-          case "Not Protestant or Roman Catholic" => radioSelect(schoolStateIndependentId)
+          case "Protestant"                       => radioSelect(protestantCommunityId)
+          case "Roman Catholic"                   => radioSelect(romanCatholicCommunityId)
+          case "Not Protestant or Roman Catholic" => radioSelect(notProtestantOrRomanCatholicId)
         }
       } else radioSelect(vacancyInNIRNoId)
     }

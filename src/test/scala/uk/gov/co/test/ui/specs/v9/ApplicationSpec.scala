@@ -4,7 +4,7 @@ import uk.gov.co.test.ui.data.v9.applicants.MAIN_REGISTER_CANDIDATE
 import uk.gov.co.test.ui.data.v9.shortform.MASTER_SHORT_FORM_DATA
 import uk.gov.co.test.ui.flows.v9.RegisterCandidateFlow.fillNewCandidateDetails
 import uk.gov.co.test.ui.flows.v9.ShortFormFlow.fillShortFormDetailsOnly
-import uk.gov.co.test.ui.pages.vx.DashboardPage.confirmShortFormCompletion
+import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.confirmShortFormCompletion
 import uk.gov.co.test.ui.specs.BaseFeatureSpec
 import uk.gov.co.test.ui.tags.RunInV9
 
