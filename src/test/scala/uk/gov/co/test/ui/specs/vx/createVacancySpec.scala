@@ -33,7 +33,7 @@ class createVacancySpec extends BaseFeatureSpec {
       fillNewVacancyForm(MIN_VACANCY_DATA)
       activateAndPostVacancy()
 
-      When("candidate applies & completes the short & pec forms")
+      When("candidate applies & completes the short, long & pec forms")
       fillNewCandidateDetails(MAIN_REGISTER_CANDIDATE)
       fillShortFormDetails(MASTER_SHORT_FORM_DATA)
 
@@ -41,16 +41,16 @@ class createVacancySpec extends BaseFeatureSpec {
       confirmShortFormCompletion()
     }
 
-    Scenario("A Candidate Completes Short Form And Long Form Application", RunInVX) {
-      Given("1 xxx")
+    Scenario("A Candidate Completes Short And Long Forms", RunInVX) {
+      Given("candidate registers and then completes the short form")
       fillNewCandidateDetails(MAIN_REGISTER_CANDIDATE)
       fillShortFormDetailsOnly(MASTER_SHORT_FORM_DATA)
       confirmShortFormCompletion()
 
-      When("2 xxx")
+      When("candidate completes the long form")
       fillLongFormDetailsOnly(MASTER_LONG_FORM_DATA)
 
-      Then("3 xxx")
+      Then("candidate is taken to the next stage of application")
 
     }
   }

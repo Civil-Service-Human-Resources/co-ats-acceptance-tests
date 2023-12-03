@@ -20,11 +20,11 @@ object MASTER_LONG_FORM_CV
       s"$valid250Characters",
       s"$valid250Characters",
       addQualifications = Option(true),
-      6,
+      5,
       firstQualification = Option(
         Qualification(
           typeOfQualification = "GCSE/O Level",
-          otherQualification = None,
+          otherQualification = Some("GCSE"),
           subject = Some("English"),
           grade = Some("8")
         )
@@ -32,7 +32,7 @@ object MASTER_LONG_FORM_CV
       secondQualification = Option(
         Qualification(
           typeOfQualification = "GCSE/O Level",
-          otherQualification = None,
+          otherQualification = Some("GCSE"),
           subject = Some("Mathematics"),
           grade = Some("9")
         )
@@ -40,7 +40,7 @@ object MASTER_LONG_FORM_CV
       thirdQualification = Option(
         Qualification(
           typeOfQualification = "A level",
-          otherQualification = None,
+          otherQualification = Some("AS"),
           subject = Some("Economics"),
           grade = Some("A")
         )
@@ -48,9 +48,9 @@ object MASTER_LONG_FORM_CV
       fourthQualification = Option(
         Qualification(
           typeOfQualification = "Degree",
-          otherQualification = None,
-          subject = None,
-          grade = Some("2:1")
+          otherQualification = Some("Econometrics"),
+          subject = Some("Economics"),
+          grade = Some("1:1")
         )
       ),
       fifthQualification = Option(
@@ -58,7 +58,8 @@ object MASTER_LONG_FORM_CV
           typeOfQualification = "Masters",
           otherQualification = Some("Algorithms"),
           subject = Some("Artificial Intelligence"),
-          grade = None
+          grade = Some("Distinction")
         )
-      )
+      ),
+      true
     )

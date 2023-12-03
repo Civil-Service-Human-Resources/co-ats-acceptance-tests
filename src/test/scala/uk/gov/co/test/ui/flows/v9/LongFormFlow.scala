@@ -2,7 +2,6 @@ package uk.gov.co.test.ui.flows.v9
 
 import uk.gov.co.test.ui.data.v9.longform.LongFormDetails
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
-import uk.gov.co.test.ui.pages.v9.SearchJobsPage.jobSearchAndApplyFlow
 import uk.gov.co.test.ui.pages.v9.longform.DiversityMonitoringPage.experienceAndSkillsPage
 import uk.gov.co.test.ui.pages.v9.longform.YourCVPage.yourCVPage
 import uk.gov.co.test.ui.pages.v9.shortform.DeclarationPage.shortFormSubmission
@@ -18,7 +17,7 @@ object LongFormFlow extends CivilServiceJobsBasePage {
     longform.foreach { f =>
       f(longFormDetails)
     }
-    clickOn(shortFormSubmission)
+//    clickOn(shortFormSubmission)
   }
 
   def fillLongFormDetailsOnly(longFormDetails: LongFormDetails): Unit = {
@@ -26,7 +25,7 @@ object LongFormFlow extends CivilServiceJobsBasePage {
     longform.foreach { f =>
       f(longFormDetails)
     }
-    clickOn(shortFormSubmission)
+//    clickOn(shortFormSubmission)
   }
 
 }

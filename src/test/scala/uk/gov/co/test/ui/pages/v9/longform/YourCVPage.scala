@@ -25,38 +25,40 @@ case class CVDetails(
   secondQualification: Option[Qualification] = None,
   thirdQualification: Option[Qualification] = None,
   fourthQualification: Option[Qualification] = None,
-  fifthQualification: Option[Qualification] = None
+  fifthQualification: Option[Qualification] = None,
+  removeDetails: Boolean
 )
 
 object YourCVPage extends CivilServiceJobsBasePage {
 
-  private lazy val qualificationTablePath = ".//*[@class='table form_section form_table_layout ']/tbody"
-  private lazy val qualificationRowsPath  = ".//tr[contains(@class, 'row form_section form_multi_section')]"
-  private lazy val addRowsPath            = ".//*[@name='add_section_instance_22369']"
-  private lazy val removeRowsPath         = ".//*[@name='remove_section_instance_22369']"
-  def yourCVTitle                         = "Your CV - Civil Service Jobs - GOV.UK"
-  def employmentHistoryDetailsInputId     = s"${formId}_datafield_99856_1_1"
-  def previousSkillsDetailsInputId        = s"${formId}_datafield_99863_1_1"
-  def typeOfQualificationOneId            = s"${formId}_datafield_53854_1_1"
-  def otherQualificationOneId             = s"${formId}_datafield_22379_1_1"
-  def subjectOneId                        = s"${formId}_datafield_22372_1_1"
-  def gradeOneId                          = s"${formId}_datafield_36911_1_1"
-  def typeOfQualificationTwoId            = s"${formId}_datafield_53854_1_2"
-  def otherQualificationTwoId             = s"${formId}_datafield_22379_1_2"
-  def subjectTwoId                        = s"${formId}_datafield_22372_1_2"
-  def gradeTwoId                          = s"${formId}_datafield_36911_1_2"
-  def typeOfQualificationThreeId          = s"${formId}_datafield_53854_1_3"
-  def otherQualificationThreeId           = s"${formId}_datafield_22379_1_3"
-  def subjectThreeId                      = s"${formId}_datafield_22372_1_3"
-  def gradeThreeId                        = s"${formId}_datafield_36911_1_3"
-  def typeOfQualificationFourId           = s"${formId}_datafield_53854_1_4"
-  def otherQualificationFourId            = s"${formId}_datafield_22379_1_4"
-  def subjectFourId                       = s"${formId}_datafield_22372_1_4"
-  def gradeFourId                         = s"${formId}_datafield_36911_1_4"
-  def typeOfQualificationFiveId           = s"${formId}_datafield_53854_1_5"
-  def otherQualificationFiveId            = s"${formId}_datafield_22379_1_5"
-  def subjectFiveId                       = s"${formId}_datafield_22372_1_5"
-  def gradeFiveId                         = s"${formId}_datafield_36911_1_5"
+  private lazy val qualificationTablePath   = ".//*[@class='table form_section form_table_layout ']/tbody"
+  private lazy val qualificationRowsPath    = ".//tr[contains(@class, 'row form_section form_multi_section')]"
+  private lazy val addRowsPath              = ".//*[@name='add_section_instance_22369']"
+  private lazy val removeRowsPath           = ".//*[@name='remove_section_instance_22369']"
+  private lazy val removedPersonalDetailsId = s"${formId}_datafield_89045_1_1_15120_label"
+  def yourCVTitle                           = "Your CV - Civil Service Jobs - GOV.UK"
+  def employmentHistoryDetailsInputId       = s"${formId}_datafield_99856_1_1"
+  def previousSkillsDetailsInputId          = s"${formId}_datafield_99863_1_1"
+  def typeOfQualificationOneId              = s"${formId}_datafield_53854_1_1"
+  def otherQualificationOneId               = s"${formId}_datafield_22379_1_1"
+  def subjectOneId                          = s"${formId}_datafield_22372_1_1"
+  def gradeOneId                            = s"${formId}_datafield_36911_1_1"
+  def typeOfQualificationTwoId              = s"${formId}_datafield_53854_1_2"
+  def otherQualificationTwoId               = s"${formId}_datafield_22379_1_2"
+  def subjectTwoId                          = s"${formId}_datafield_22372_1_2"
+  def gradeTwoId                            = s"${formId}_datafield_36911_1_2"
+  def typeOfQualificationThreeId            = s"${formId}_datafield_53854_1_3"
+  def otherQualificationThreeId             = s"${formId}_datafield_22379_1_3"
+  def subjectThreeId                        = s"${formId}_datafield_22372_1_3"
+  def gradeThreeId                          = s"${formId}_datafield_36911_1_3"
+  def typeOfQualificationFourId             = s"${formId}_datafield_53854_1_4"
+  def otherQualificationFourId              = s"${formId}_datafield_22379_1_4"
+  def subjectFourId                         = s"${formId}_datafield_22372_1_4"
+  def gradeFourId                           = s"${formId}_datafield_36911_1_4"
+  def typeOfQualificationFiveId             = s"${formId}_datafield_53854_1_5"
+  def otherQualificationFiveId              = s"${formId}_datafield_22379_1_5"
+  def subjectFiveId                         = s"${formId}_datafield_22372_1_5"
+  def gradeFiveId                           = s"${formId}_datafield_36911_1_5"
 
   private def yourCVPageCheck(): Unit =
     eventually(onPage(yourCVTitle))
@@ -177,10 +179,14 @@ object YourCVPage extends CivilServiceJobsBasePage {
       }
     }
 
+  private def removedDetails(cvDetails: CVDetails): Unit =
+    if (cvDetails.removeDetails) radioSelect(removedPersonalDetailsId)
+
   private val yourCV: Seq[CVDetails => Unit] = Seq(
     enterEmploymentHistory,
     enterPreviousSkills,
-    enterAllQualifications
+    enterAllQualifications,
+    removedDetails
   )
 
   def yourCVPage(longFormDetails: LongFormDetails): Unit = {
