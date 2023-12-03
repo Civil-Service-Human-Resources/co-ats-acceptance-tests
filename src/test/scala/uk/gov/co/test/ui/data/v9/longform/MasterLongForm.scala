@@ -1,12 +1,13 @@
 package uk.gov.co.test.ui.data.v9.longform
 
 import uk.gov.co.test.ui.data.Characters.valid250Characters
-import uk.gov.co.test.ui.pages.v9.longform.{CVDetails, ExperienceAndSkillsDetails, Qualification}
+import uk.gov.co.test.ui.pages.v9.longform.{CVDetails, ExperienceAndSkillsDetails, Qualification, StatementDetails}
 
 object MASTER_LONG_FORM_DATA
     extends LongFormDetails(
       MASTER_LONG_FORM_EXPERIENCE_SKILLS,
-      MASTER_LONG_FORM_CV
+      MASTER_LONG_FORM_CV,
+      MASTER_LONG_FORM_PERSONAL_STATEMENT
     )
 
 object MASTER_LONG_FORM_EXPERIENCE_SKILLS
@@ -61,5 +62,11 @@ object MASTER_LONG_FORM_CV
           grade = Some("Distinction")
         )
       ),
+      true
+    )
+
+object MASTER_LONG_FORM_PERSONAL_STATEMENT
+    extends StatementDetails(
+      s"$valid250Characters",
       true
     )

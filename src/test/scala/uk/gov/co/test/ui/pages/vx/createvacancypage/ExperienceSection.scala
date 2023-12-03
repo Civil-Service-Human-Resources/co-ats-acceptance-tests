@@ -64,6 +64,7 @@ object ExperienceSection extends VacancyBasePage {
   var membershipsMandatory: String                = ""
   var languagesMandatory: String                  = ""
   var qualificationsMandatory: String             = ""
+  var vXGuidanceText: String                      = ""
 
   private def provideCV(successProfilesDetails: SuccessProfilesDetails): Unit = {
     val cv = successProfilesDetails.experienceSection
@@ -127,8 +128,9 @@ object ExperienceSection extends VacancyBasePage {
 
   private def enterGuidanceText(successProfilesDetails: SuccessProfilesDetails): Unit = {
     val text         = successProfilesDetails.experienceSection
+    vXGuidanceText = text.map(_.statementGuidanceText).get
     val guidanceText = waitForVisibilityOfElementById(guidanceTextInputId)
-    guidanceText.sendKeys(text.map(_.statementGuidanceText).get)
+    guidanceText.sendKeys(vXGuidanceText)
   }
 
   private def selectPastExperiences(successProfilesDetails: SuccessProfilesDetails): Unit = {

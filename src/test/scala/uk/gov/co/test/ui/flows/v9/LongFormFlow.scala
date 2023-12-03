@@ -3,6 +3,7 @@ package uk.gov.co.test.ui.flows.v9
 import uk.gov.co.test.ui.data.v9.longform.LongFormDetails
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
 import uk.gov.co.test.ui.pages.v9.longform.DiversityMonitoringPage.experienceAndSkillsPage
+import uk.gov.co.test.ui.pages.v9.longform.PersonalStatementPage.personalStatementPage
 import uk.gov.co.test.ui.pages.v9.longform.YourCVPage.yourCVPage
 import uk.gov.co.test.ui.pages.v9.shortform.DeclarationPage.shortFormSubmission
 
@@ -10,7 +11,8 @@ object LongFormFlow extends CivilServiceJobsBasePage {
 
   private val longform: Seq[LongFormDetails => Unit] = Seq(
     experienceAndSkillsPage,
-    yourCVPage
+    yourCVPage,
+    personalStatementPage
   )
 
   def fillLongFormDetails(longFormDetails: LongFormDetails): Unit = {
