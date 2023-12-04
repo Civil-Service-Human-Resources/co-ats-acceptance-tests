@@ -60,21 +60,26 @@ object EligibilityPage extends CivilServiceJobsBasePage {
     if (eligibilityDetails.rightToRemain) radioSelect(rightToRemainYesId)
     else radioSelect(rightToRemainNoId)
 
-  private def selectMembershipsRequirements(eligibilityDetails: EligibilityDetails): Unit = {
-    if ((membershipsMandatory == "" && experiencesRequired == "") || (membershipsMandatory.toBoolean && experiencesRequired.toBoolean)) {//TODO requires refactor
+  private def selectMembershipsRequirements(eligibilityDetails: EligibilityDetails): Unit =
+    if (
+      (membershipsMandatory == "" && experiencesRequired == "") || (membershipsMandatory.toBoolean && experiencesRequired.toBoolean)
+    ) { //TODO requires refactor
       if (eligibilityDetails.membershipsRequirements) radioSelect(membershipsRequiredYesId)
       else radioSelect(membershipsRequiredNoId)
     }
-  }
 
   private def selectLanguageRequirements(eligibilityDetails: EligibilityDetails): Unit =
-    if ((languagesMandatory == "" && experiencesRequired == "") || (languagesMandatory.toBoolean && experiencesRequired.toBoolean)) {
+    if (
+      (languagesMandatory == "" && experiencesRequired == "") || (languagesMandatory.toBoolean && experiencesRequired.toBoolean)
+    ) {
       if (eligibilityDetails.languageRequirements) radioSelect(languageRequirementsYesId)
       else radioSelect(languageRequirementsNoId)
     }
 
   private def selectQualificationsRequirements(eligibilityDetails: EligibilityDetails): Unit =
-    if ((qualificationsMandatory == "" && experiencesRequired == "") || (qualificationsMandatory.toBoolean && experiencesRequired.toBoolean)) {
+    if (
+      (qualificationsMandatory == "" && experiencesRequired == "") || (qualificationsMandatory.toBoolean && experiencesRequired.toBoolean)
+    ) {
       eligibilityDetails.qualificationsRequirements match {
         case "Yes"                     => radioSelect(qualificationsRequirementsYesId)
         case "No"                      => radioSelect(qualificationsRequirementsNoId)
@@ -84,7 +89,9 @@ object EligibilityPage extends CivilServiceJobsBasePage {
     }
 
   private def selectLicenceRequirements(eligibilityDetails: EligibilityDetails): Unit =
-    if ((licencesMandatory == "" && experiencesRequired == "") || (licencesMandatory.toBoolean && experiencesRequired.toBoolean)) {
+    if (
+      (licencesMandatory == "" && experiencesRequired == "") || (licencesMandatory.toBoolean && experiencesRequired.toBoolean)
+    ) {
       eligibilityDetails.licenceRequirements match {
         case "Yes"                     => radioSelect(licenceRequirementsYesId)
         case "No"                      => radioSelect(licenceRequirementsNoId)

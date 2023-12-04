@@ -42,5 +42,6 @@ object ApplicationGuidancePage extends CivilServiceJobsBasePage {
       f(shortFormDetails.appGuidanceDetails)
     }
     formId = extractAppFormId()
-    println(s"SHORT FORM FORM ID: $formId")  }
+    println(s"SHORT FORM FORM ID: $formId")
+  }
 }
