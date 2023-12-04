@@ -5,7 +5,7 @@ import uk.gov.co.test.ui.data.vx.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.formId
 import uk.gov.co.test.ui.pages.vx.createvacancypage.ExperienceSection.{languagesMandatory, licencesMandatory, membershipsMandatory, qualificationsMandatory}
-import uk.gov.co.test.ui.pages.vx.createvacancypage.SuccessProfilesSection.experiences
+import uk.gov.co.test.ui.pages.vx.createvacancypage.SuccessProfilesSection.experiencesRequired
 
 case class CriteriaDetails(
   campaignID: Option[String] = None,
@@ -91,7 +91,7 @@ object CriteriaSection extends VacancyBasePage {
 
   private def selectRejectIfLicencesNotHeld(criteriaDetails: CriteriaDetails): Unit =
     if (licencesMandatory != "") {
-      if (licencesMandatory.toBoolean && experiences.toBoolean) {
+      if (licencesMandatory.toBoolean && experiencesRequired.toBoolean) {
         if (criteriaDetails.licencesNotHeld) clickOnRadioButton(licencesNotHeldYesId)
         else clickOnRadioButton(licencesNotHeldNoId)
       }
@@ -99,7 +99,7 @@ object CriteriaSection extends VacancyBasePage {
 
   private def selectRejectIfMembershipsNotHeld(criteriaDetails: CriteriaDetails): Unit =
     if (membershipsMandatory != "") {
-      if (membershipsMandatory.toBoolean && experiences.toBoolean) {
+      if (membershipsMandatory.toBoolean && experiencesRequired.toBoolean) {
         if (criteriaDetails.membershipsNotHeld) clickOnRadioButton(membershipsNotHeldYesId)
         else clickOnRadioButton(membershipsNotHeldNoId)
       }
@@ -107,7 +107,7 @@ object CriteriaSection extends VacancyBasePage {
 
   private def selectRejectIfLanguageSkillsNotHeld(criteriaDetails: CriteriaDetails): Unit =
     if (languagesMandatory != "") {
-      if (languagesMandatory.toBoolean && experiences.toBoolean) {
+      if (languagesMandatory.toBoolean && experiencesRequired.toBoolean) {
         if (criteriaDetails.languagesSkillsNotHeld) clickOnRadioButton(languagesSkillsYesId)
         else clickOnRadioButton(languagesSkillsNoId)
       }
@@ -115,7 +115,7 @@ object CriteriaSection extends VacancyBasePage {
 
   private def selectRejectIfQualificationsNotHeld(criteriaDetails: CriteriaDetails): Unit =
     if (qualificationsMandatory != "") {
-      if (qualificationsMandatory.toBoolean && experiences.toBoolean) {
+      if (qualificationsMandatory.toBoolean && experiencesRequired.toBoolean) {
         if (criteriaDetails.qualificationsHeld) clickOnRadioButton(qualificationsHeldYesId)
         else clickOnRadioButton(qualificationsHeldNoId)
       }

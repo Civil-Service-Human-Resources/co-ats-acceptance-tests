@@ -5,7 +5,7 @@ import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 import uk.gov.co.test.ui.pages.vx.createvacancypage.AbilitiesSection.selectAbilitiesProfile
 import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.formId
 import uk.gov.co.test.ui.pages.vx.createvacancypage.BehavioursSection.selectBehavioursProfiles
-import uk.gov.co.test.ui.pages.vx.createvacancypage.ExperienceSection.experiencesRequired
+import uk.gov.co.test.ui.pages.vx.createvacancypage.ExperienceSection.selectExperiencesRequired
 import uk.gov.co.test.ui.pages.vx.createvacancypage.StrengthsSection.selectStrengthsAssessed
 import uk.gov.co.test.ui.pages.vx.createvacancypage.TechnicalSkillsSection.selectTechnicalSkills
 
@@ -29,27 +29,35 @@ object SuccessProfilesSection extends VacancyBasePage {
   private lazy val experienceId      = s"${formId}_datafield_154245_1_1_12687"
   private lazy val strengthsId       = s"${formId}_datafield_154245_1_1_12689"
   private lazy val technicalSkillsId = s"${formId}_datafield_154245_1_1_12688"
-  var experiences                    = ""
+  var abilitiesRequired              = ""
+  var behavioursRequired             = ""
+  var experiencesRequired            = ""
+  var strengthsRequired              = ""
+  var techSkillsRequired             = ""
 
   private def whichSuccessProfiles(successProfilesDetails: SuccessProfilesDetails): Unit = {
     if (successProfilesDetails.abilities) {
+      abilitiesRequired = successProfilesDetails.abilities.toString
       checkbox(abilitiesId).select()
       selectAbilitiesProfile(successProfilesDetails)
     }
     if (successProfilesDetails.behaviours) {
+      behavioursRequired = successProfilesDetails.behaviours.toString
       checkbox(behavioursId).select()
       selectBehavioursProfiles(successProfilesDetails)
     }
     if (successProfilesDetails.experience) {
-      experiences = successProfilesDetails.experience.toString
+      experiencesRequired = successProfilesDetails.experience.toString
       checkbox(experienceId).select()
-      experiencesRequired(successProfilesDetails)
+      selectExperiencesRequired(successProfilesDetails)
     }
     if (successProfilesDetails.strengths) {
+      strengthsRequired = successProfilesDetails.strengths.toString
       checkbox(strengthsId).select()
       selectStrengthsAssessed(successProfilesDetails)
     }
     if (successProfilesDetails.technicalSkills) {
+      techSkillsRequired = successProfilesDetails.technicalSkills.toString
       checkbox(technicalSkillsId).select()
       selectTechnicalSkills(successProfilesDetails)
     }

@@ -240,7 +240,7 @@ object MASTER_TECH_SKILLS
     extends TechSkillsDetails(
       8,
       Some(
-        Skills(
+        TechSkills(
           techSkill = "Autotest - technical skills 1",
           description = "Autotest - technical skills 1 description",
           techInterview = true,
@@ -248,7 +248,7 @@ object MASTER_TECH_SKILLS
         )
       ),
       Some(
-        Skills(
+        TechSkills(
           techSkill = "Autotest - technical skills 2",
           description = "Autotest - technical skills 2 description",
           techInterview = true,
@@ -256,7 +256,7 @@ object MASTER_TECH_SKILLS
         )
       ),
       Some(
-        Skills(
+        TechSkills(
           techSkill = "Autotest - technical skills 3",
           description = "Autotest - technical skills 3 description",
           techInterview = true,
@@ -264,7 +264,7 @@ object MASTER_TECH_SKILLS
         )
       ),
       Some(
-        Skills(
+        TechSkills(
           techSkill = "Autotest - technical skills 4",
           description = "Autotest - technical skills 4 description",
           techInterview = true,
@@ -272,7 +272,7 @@ object MASTER_TECH_SKILLS
         )
       ),
       Some(
-        Skills(
+        TechSkills(
           techSkill = "Autotest - technical skills 5",
           description = "Autotest - technical skills 5 description",
           techInterview = true,
@@ -280,7 +280,7 @@ object MASTER_TECH_SKILLS
         )
       ),
       Some(
-        Skills(
+        TechSkills(
           techSkill = "Autotest - technical skills 6",
           description = "Autotest - technical skills 6 description",
           techInterview = true,
@@ -288,7 +288,7 @@ object MASTER_TECH_SKILLS
         )
       ),
       Some(
-        Skills(
+        TechSkills(
           techSkill = "Autotest - technical skills 7",
           description = "Autotest - technical skills 7 description",
           techInterview = true,
@@ -296,7 +296,7 @@ object MASTER_TECH_SKILLS
         )
       ),
       Some(
-        Skills(
+        TechSkills(
           techSkill = "Autotest - technical skills 8",
           description = "Autotest - technical skills 8 description",
           techInterview = true,

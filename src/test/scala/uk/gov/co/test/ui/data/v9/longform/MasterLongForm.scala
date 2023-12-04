@@ -8,7 +8,8 @@ object MASTER_LONG_FORM_DATA
       MASTER_LONG_FORM_EXPERIENCE_SKILLS,
       MASTER_LONG_FORM_CV,
       MASTER_LONG_FORM_PERSONAL_STATEMENT,
-      MASTER_LONG_FORM_BEHAVIOURS
+      MASTER_LONG_FORM_BEHAVIOURS,
+      MASTER_LONG_FORM_TECHNICAL_SKILLS
     )
 
 object MASTER_LONG_FORM_EXPERIENCE_SKILLS
@@ -74,6 +75,18 @@ object MASTER_LONG_FORM_PERSONAL_STATEMENT
 
 object MASTER_LONG_FORM_BEHAVIOURS
     extends BehavioursDetails(
+      s"$valid250Characters",
+      s"$valid250Characters",
+      s"$valid250Characters",
+      s"$valid250Characters",
+      s"$valid250Characters",
+      s"$valid250Characters",
+      s"$valid250Characters",
+      s"$valid250Characters"
+    )
+
+object MASTER_LONG_FORM_TECHNICAL_SKILLS
+    extends TechSkillsDetails(
       s"$valid250Characters",
       s"$valid250Characters",
       s"$valid250Characters",

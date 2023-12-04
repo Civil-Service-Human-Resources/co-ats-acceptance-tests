@@ -220,7 +220,7 @@ object ExperienceSection extends VacancyBasePage {
     selectMandatoryQualifications
   )
 
-  def experiencesRequired(successProfilesDetails: SuccessProfilesDetails): Unit =
+  def selectExperiencesRequired(successProfilesDetails: SuccessProfilesDetails): Unit =
     experiences.foreach { f =>
       f(successProfilesDetails)
     }
