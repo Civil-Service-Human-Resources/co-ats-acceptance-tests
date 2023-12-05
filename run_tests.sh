@@ -11,9 +11,9 @@ if [ "$ENV" = "test" ]; then
         DRIVER="-Dwebdriver.gecko.driver=/usr/local/bin/geckodriver"
     fi
 
-    #sbt scalafmtCheckAll scalafmtSbtCheck
+     sbt scalafmtCheckAll scalafmtSbtCheck
 
-     sbt -Denvironment=$ENV -Dbrowser=$BROWSER -Dsbt.color=true "testOnly uk.gov.co.test.ui.specs.v9*"
+     sbt -Denvironment=$ENV -Dbrowser=$BROWSER -Dsbt.color=true "testOnly uk.gov.co.test.ui.specs.*"
 else
      sbt -Denvironment=$ENV -Dbrowser="remote-$BROWSER" -Dsbt.color=true "testOnly uk.gov.co.test.ui.specs.*"
 fi

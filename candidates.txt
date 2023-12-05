@@ -1,0 +1,3 @@
+CANDIDATE NO.1: NAME: Aurelia Cremin EMAIL: aurelia.cremin@example.com PASSWORD: password123!
+CANDIDATE NO.2: NAME: Chauncey Effertz EMAIL: chauncey.effertz@example.com PASSWORD: password123!
+CANDIDATE NO.3: NAME: Kacie Torp EMAIL: kacie.torp@example.com PASSWORD: password123!

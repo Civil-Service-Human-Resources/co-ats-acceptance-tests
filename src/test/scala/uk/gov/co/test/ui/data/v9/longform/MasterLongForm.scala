@@ -1,6 +1,6 @@
 package uk.gov.co.test.ui.data.v9.longform
 
-import uk.gov.co.test.ui.data.Characters.valid250Characters
+import uk.gov.co.test.ui.data.Characters.{valid250Characters, valid500Characters}
 import uk.gov.co.test.ui.pages.v9.longform._
 import uk.gov.co.test.ui.pages.vx.createvacancypage.LocationsSection.vXOtherLocations
 
@@ -12,7 +12,9 @@ object MASTER_LONG_FORM_DATA
       MASTER_LONG_FORM_BEHAVIOURS,
       MASTER_LONG_FORM_TECHNICAL_SKILLS,
       MASTER_LONG_FORM_UPLOAD_DOCUMENTS,
-      MASTER_LONG_FORM_PREFERENCES
+      MASTER_LONG_FORM_PREFERENCES,
+      MASTER_LONG_FORM_ROLE_QUESTIONS,
+      MASTER_LONG_FORM_DECLARATION
     )
 
 object MASTER_LONG_FORM_EXPERIENCE_SKILLS
@@ -111,4 +113,16 @@ object MASTER_LONG_FORM_PREFERENCES
       secondChoiceLocation = Option(s"${vXOtherLocations.tail.head}"),
       thirdChoiceLocation = Option(s"${vXOtherLocations.last}"),
       furtherLocationPreferences = Option("Autotest - Further location preferences (optional)")
+    )
+
+object MASTER_LONG_FORM_ROLE_QUESTIONS
+    extends RoleQuestionsDetails(
+      s"$valid500Characters",
+      s"$valid500Characters",
+      s"$valid500Characters"
+    )
+
+object MASTER_LONG_FORM_DECLARATION
+    extends DeclarationDetails(
+      true
     )

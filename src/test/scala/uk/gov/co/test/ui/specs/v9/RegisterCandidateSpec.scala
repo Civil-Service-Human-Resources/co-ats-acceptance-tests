@@ -1,6 +1,7 @@
 package uk.gov.co.test.ui.specs.v9
 
-import uk.gov.co.test.ui.data.v9.applicants.{MAIN_REGISTER_CANDIDATE, REGISTERED_CANDIDATE}
+import org.scalatest.Ignore
+import uk.gov.co.test.ui.data.v9.applicants.{REGISTERED_CANDIDATE, REGISTER_CANDIDATE_ONE}
 import uk.gov.co.test.ui.flows.v9.GenerateNewCandidates.createMultipleCandidates
 import uk.gov.co.test.ui.flows.v9.RegisterCandidateFlow.fillNewCandidateDetails
 import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.applicationCentrePageTitle
@@ -24,18 +25,19 @@ class RegisterCandidateSpec extends BaseFeatureSpec {
 
     Scenario("A Candidate Creates An Account On Civil Service Jobs", RunInV9) {
       Given("the candidate enters their details for new account")
-      fillNewCandidateDetails(MAIN_REGISTER_CANDIDATE)
+      fillNewCandidateDetails(REGISTER_CANDIDATE_ONE)
 
       When("the candidate navigates to the edit account details page")
       accountCreatedSuccess1() shouldEqual accountCreatedSuccessMessage1
       accountCreatedSuccess2() shouldEqual accountCreatedSuccessMessage2
-      candidateDisplayName()   shouldEqual candidateFullName(MAIN_REGISTER_CANDIDATE)
+      candidateDisplayName()   shouldEqual candidateFullName(REGISTER_CANDIDATE_ONE)
       editAccountDetails().click()
 
       Then("the candidate is able to edit their account")
       onPage(applicationCentrePageTitle)
     }
 
+    @Ignore
     Scenario("Create Candidate Accounts", RunInV9) {
       createMultipleCandidates(3)
     }

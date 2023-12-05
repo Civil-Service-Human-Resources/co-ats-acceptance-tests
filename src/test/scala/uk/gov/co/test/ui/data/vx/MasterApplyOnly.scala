@@ -407,7 +407,7 @@ object MASTER_GROUP_C_TESTS
     )
 
 object MASTER_ADDITIONAL_QUESTIONS
-    extends MoreQuestionsDetails(
+    extends AdditionalQuestionsDetails(
       true,
       3,
       "Autotest - Question 1",

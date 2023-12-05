@@ -14,6 +14,9 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
   val applicationForVacancyTextPath = ".//*[@class='section app-heading']"
   val completionTextPath            = ".//*[@class='app-status-desc']"
   val applicationStatePath          = ".//*[@id='main-content']/div/div[1]/h3"
+  val advertDetailsButtonPath       = ".//input[@value='Advert Details']"
+  val withdrawApplicationButtonPath = ".//input[@value='Withdraw Application']"
+  val continueApplicationButtonPath = ".//input[@value='Continue application']"
 
   private def applicationCentrePageCheck(): Unit =
     eventually(onPage(applicationCentreTitle))
@@ -31,13 +34,13 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
     waitForVisibilityOfElementByPath(applicationStatePath).getText
 
   def advertDetailsFunction(): WebElement =
-    driver.findElement(By.xpath(".//input[@value='Advert Details']"))
+    driver.findElement(By.xpath(advertDetailsButtonPath))
 
   def withdrawApplicationFunction(): WebElement =
-    driver.findElement(By.xpath(".//input[@value='Withdraw Application']"))
+    driver.findElement(By.xpath(withdrawApplicationButtonPath))
 
   def continueApplicationFunction(): WebElement =
-    driver.findElement(By.xpath(".//input[@value='Continue application']"))
+    driver.findElement(By.xpath(continueApplicationButtonPath))
 
   def helpWithSelectionText(): String =
     driver.findElement(By.tagName("b")).getText
@@ -52,6 +55,15 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
     getApplicationConfirmation     should include(
       "Thank you for submitting the first section of your application.\nYou can now complete the second section, where you must provide supporting evidence.\nThe deadline is"
     )
+  }
+
+  def confirmLongFormCompletion(): Unit = {
+    applicationCentrePageCheck()
+    advertDetailsFunction().isEnabled
+    withdrawApplicationFunction().isEnabled
+    applicationForVacancyText  shouldEqual s"Application For $vacancyName"
+    getApplicationState        shouldEqual "Application status: Help with selection process"
+    getApplicationConfirmation shouldEqual "Your application has been received.\nYou have indicated that you may need assistance or an adjustment during the selection process.\nWe've noted this and will contact you if we need further information to help us support you.\nWe'll email you updates on the progress of your application or you can check the progress here in your account."
   }
 
 }

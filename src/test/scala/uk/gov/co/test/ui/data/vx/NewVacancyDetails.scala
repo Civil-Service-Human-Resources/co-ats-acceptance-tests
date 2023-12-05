@@ -16,7 +16,7 @@ case class NewVacancyDetails(
   interviewsDetails: InterviewsDetails,
   successProfilesDetails: SuccessProfilesDetails,
   vacancyTestsDetails: VacancyTestsDetails,
-  moreQuestionsDetails: MoreQuestionsDetails,
+  additionalQuestionsDetails: AdditionalQuestionsDetails,
   criteriaDetails: CriteriaDetails,
   managementDetails: ManagementDetails,
   onlinePecCheckFormsDetails: OnlinePecCheckFormsDetails,

@@ -15,7 +15,7 @@ import uk.gov.co.test.ui.pages.vx.createvacancypage.InterviewsSection.interviews
 import uk.gov.co.test.ui.pages.vx.createvacancypage.JobInfoSection.jobInformationSection
 import uk.gov.co.test.ui.pages.vx.createvacancypage.LocationsSection.locationsSection
 import uk.gov.co.test.ui.pages.vx.createvacancypage.ManagementSection.managementSection
-import uk.gov.co.test.ui.pages.vx.createvacancypage.MoreQuestionsSection.additionalQuestionsSection
+import uk.gov.co.test.ui.pages.vx.createvacancypage.AdditionalQuestionsSection.additionalQuestionsSection
 import uk.gov.co.test.ui.pages.vx.createvacancypage.OnlinePecCheckFormsSection.onlinePecCheckFormsSection
 import uk.gov.co.test.ui.pages.vx.createvacancypage.PecCheckFormsSection.pecCheckFormsSection
 import uk.gov.co.test.ui.pages.vx.createvacancypage.ReserveListSection.reserveListSection

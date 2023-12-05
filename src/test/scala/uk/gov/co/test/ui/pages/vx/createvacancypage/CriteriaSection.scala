@@ -56,7 +56,7 @@ object CriteriaSection extends VacancyBasePage {
   private lazy val uploadAttachmentNoId         = s"${formId}_datafield_61333_1_1_2"
   private lazy val candidateInstructionsInputId = s"${formId}_datafield_61355_1_1_en-GB"
   var uploadAttachmentRequired: Boolean         = true
-  var vXCandidateInstructions: String             = "Autotest - Instructions for candidate"
+  var vXCandidateInstructions: String           = "Autotest - Instructions for candidate"
 
   private def enterCampaignID(criteriaDetails: CriteriaDetails): Unit = {
     scrollToElement(By.id(campaignIDId))
