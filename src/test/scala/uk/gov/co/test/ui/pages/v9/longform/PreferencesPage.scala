@@ -17,6 +17,7 @@ case class PreferencesDetails(
 object PreferencesPage extends CivilServiceJobsBasePage {
 
   private lazy val preferencesPageTitle  = "Preferences - Civil Service Jobs - GOV.UK"
+  private lazy val errorSameLocationsSelected  = "You cannot select the same location more than once"
   private lazy val vXMaxLocationsAllowed = vXMaxLocations.toInt
 
   def firstLocationId              = s"${formId}_datafield_53467_1_1"
@@ -55,6 +56,13 @@ object PreferencesPage extends CivilServiceJobsBasePage {
     confirmAvailableLocations(availableThirdLocationsPath)
     selectDropdownOption(thirdLocationId, preferencesDetails.thirdChoiceLocation.get)
   }
+
+  private def errorTestingSameLocationsSelected(preferencesDetails: PreferencesDetails): Unit = {
+    selectDropdownOption(firstLocationId, preferencesDetails.firstChoiceLocation)
+    selectDropdownOption(secondLocationId, preferencesDetails.firstChoiceLocation)
+    waitForVisibilityOfElementById(errorSelectingLocationId).getText shouldEqual errorSameLocationsSelected
+  }
+
 
   private def enterOtherPreferredLocations(preferencesDetails: PreferencesDetails): Unit =
     enterDetails(furtherPreferredLocationsId, preferencesDetails.furtherLocationPreferences.get)
