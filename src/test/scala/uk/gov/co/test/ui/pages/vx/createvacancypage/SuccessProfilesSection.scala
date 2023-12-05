@@ -29,35 +29,35 @@ object SuccessProfilesSection extends VacancyBasePage {
   private lazy val experienceId      = s"${formId}_datafield_154245_1_1_12687"
   private lazy val strengthsId       = s"${formId}_datafield_154245_1_1_12689"
   private lazy val technicalSkillsId = s"${formId}_datafield_154245_1_1_12688"
-  var abilitiesRequired              = ""
-  var behavioursRequired             = ""
-  var experiencesRequired            = ""
-  var strengthsRequired              = ""
-  var techSkillsRequired             = ""
+  var abilitiesRequired: Boolean     = true
+  var behavioursRequired: Boolean    = true
+  var experiencesRequired: Boolean   = true
+  var strengthsRequired: Boolean     = true
+  var techSkillsRequired: Boolean    = true
 
   private def whichSuccessProfiles(successProfilesDetails: SuccessProfilesDetails): Unit = {
     if (successProfilesDetails.abilities) {
-      abilitiesRequired = successProfilesDetails.abilities.toString
+      abilitiesRequired = successProfilesDetails.abilities
       checkbox(abilitiesId).select()
       selectAbilitiesProfile(successProfilesDetails)
     }
     if (successProfilesDetails.behaviours) {
-      behavioursRequired = successProfilesDetails.behaviours.toString
+      behavioursRequired = successProfilesDetails.behaviours
       checkbox(behavioursId).select()
       selectBehavioursProfiles(successProfilesDetails)
     }
     if (successProfilesDetails.experience) {
-      experiencesRequired = successProfilesDetails.experience.toString
+      experiencesRequired = successProfilesDetails.experience
       checkbox(experienceId).select()
       selectExperiencesRequired(successProfilesDetails)
     }
     if (successProfilesDetails.strengths) {
-      strengthsRequired = successProfilesDetails.strengths.toString
+      strengthsRequired = successProfilesDetails.strengths
       checkbox(strengthsId).select()
       selectStrengthsAssessed(successProfilesDetails)
     }
     if (successProfilesDetails.technicalSkills) {
-      techSkillsRequired = successProfilesDetails.technicalSkills.toString
+      techSkillsRequired = successProfilesDetails.technicalSkills
       checkbox(technicalSkillsId).select()
       selectTechnicalSkills(successProfilesDetails)
     }

@@ -108,7 +108,7 @@ object PersonalInfoPage extends CivilServiceJobsBasePage {
     } else radioSelect(reasonableAdjustmentNoId)
 
   private def selectAreYouVeteran(personalInfoDetails: PersonalInfoDetails): Unit =
-    if (greatForVeterans == "" || greatForVeterans.toBoolean) { // TODO requires refactor
+    if (greatForVeterans) {
       personalInfoDetails.areYouAVeteran match {
         case "Yes"                    =>
           radioSelect(areYouAVeteranYesId)
@@ -121,7 +121,7 @@ object PersonalInfoPage extends CivilServiceJobsBasePage {
     }
 
   private def enterRedeploymentScheme(personalInfoDetails: PersonalInfoDetails): Unit =
-    if (civilServant == "" || civilServant.toBoolean) { // TODO requires refactor
+    if (civilServant) {
       scrollToElement(By.id(redeploymentSchemeId))
       if (personalInfoDetails.redeploymentScheme.get) radioSelect(redeploymentSchemeYesId)
       else radioSelect(redeploymentSchemeNoId)

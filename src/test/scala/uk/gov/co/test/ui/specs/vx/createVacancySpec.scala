@@ -8,8 +8,9 @@ import uk.gov.co.test.ui.flows.v9.LongFormFlow.fillLongFormDetailsOnly
 import uk.gov.co.test.ui.flows.v9.RegisterCandidateFlow.fillNewCandidateDetails
 import uk.gov.co.test.ui.flows.v9.ShortFormFlow.{fillShortFormDetails, fillShortFormDetailsOnly}
 import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.fillNewVacancyForm
+import uk.gov.co.test.ui.flows.vx.RecruiterLoginFlow.loginWithRecruiterDetails
 import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.confirmShortFormCompletion
-import uk.gov.co.test.ui.pages.vx.DashboardPage.activateAndPostVacancy
+import uk.gov.co.test.ui.pages.vx.DashboardPage.{activateAndPostVacancy, searchForActiveVacancy}
 import uk.gov.co.test.ui.specs.BaseFeatureSpec
 import uk.gov.co.test.ui.tags.RunInVX
 
@@ -58,6 +59,11 @@ class createVacancySpec extends BaseFeatureSpec {
 
       Then("candidate is taken to the next stage of application")
 
+    }
+
+    Scenario("A Recruiter Extracts Vacancy Details", RunInVX) {
+      loginWithRecruiterDetails(RECRUITER)
+      searchForActiveVacancy()
     }
   }
 }

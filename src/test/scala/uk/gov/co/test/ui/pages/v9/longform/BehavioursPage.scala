@@ -31,16 +31,6 @@ object BehavioursPage extends CivilServiceJobsBasePage {
   def managingAQualityServiceInputId     = s"${formId}_datafield_22268_1_1"
   def workingTogetherInputId             = s"${formId}_datafield_22274_1_1"
   private lazy val v9HowManyBehaviours   = ".//*[@data-type='LARGETEXT']"
-//  var listOfChosenBehaviours: mutable.Seq[String] = ListBuffer( // TODO remove once section completed
-//    "Changing and Improving",
-//    "Communicating and Influencing",
-//    "Delivering at Pace",
-//    "Developing Self and Others",
-//    "Leadership",
-//    "Making Effective Decisions",
-//    "Managing a Quality Service",
-//    "Working Together"
-//  )
 
   private def behavioursPageCheck(): Unit =
     eventually(onPage(behavioursPageTitle))
@@ -48,47 +38,46 @@ object BehavioursPage extends CivilServiceJobsBasePage {
   private def confirmBehavioursRequired(): Unit = {
     behavioursPageCheck()
     val behaviourInputs = driver.findElements(By.xpath(v9HowManyBehaviours))
-    behaviourInputs.size() shouldEqual howManyAssessed.toInt
-//    behaviourInputs.size() shouldEqual 8 // TODO remove once section completed
+    behaviourInputs.size() shouldEqual howManyAssessed
   }
 
   private def enterChangingAndImproving(behavioursDetails: BehavioursDetails): Unit =
-    if (listOfChosenBehaviours.contains("Changing and Improving")) {
+    if (listOfChosenBehaviours.isEmpty || listOfChosenBehaviours.contains("Changing and Improving")) {
       enterDetails(changingAndImprovingInputId, behavioursDetails.changingAndImprovingText)
     }
 
   private def enterCommunicatingAndInfluencing(behavioursDetails: BehavioursDetails): Unit =
-    if (listOfChosenBehaviours.contains("Communicating and Influencing")) {
+    if (listOfChosenBehaviours.isEmpty || listOfChosenBehaviours.contains("Communicating and Influencing")) {
       enterDetails(communicatingAndInfluencingInputId, behavioursDetails.communicatingAndInfluencingText)
     }
 
   private def enterDeliveringAtPace(behavioursDetails: BehavioursDetails): Unit =
-    if (listOfChosenBehaviours.contains("Delivering at Pace")) {
+    if (listOfChosenBehaviours.isEmpty || listOfChosenBehaviours.contains("Delivering at Pace")) {
       enterDetails(deliveringAtPaceInputId, behavioursDetails.deliveringAtPaceText)
     }
 
   private def enterDevelopingSelfAndOthers(behavioursDetails: BehavioursDetails): Unit =
-    if (listOfChosenBehaviours.contains("Developing Self and Others")) {
+    if (listOfChosenBehaviours.isEmpty || listOfChosenBehaviours.contains("Developing Self and Others")) {
       enterDetails(developingSelfAndOthersInputId, behavioursDetails.developingSelfAndOthersText)
     }
 
   private def enterLeadership(behavioursDetails: BehavioursDetails): Unit =
-    if (listOfChosenBehaviours.contains("Leadership")) {
+    if (listOfChosenBehaviours.isEmpty || listOfChosenBehaviours.contains("Leadership")) {
       enterDetails(leadershipInputId, behavioursDetails.leadershipText)
     }
 
   private def enterMakingEffectiveDecisions(behavioursDetails: BehavioursDetails): Unit =
-    if (listOfChosenBehaviours.contains("Making Effective Decisions")) {
+    if (listOfChosenBehaviours.isEmpty || listOfChosenBehaviours.contains("Making Effective Decisions")) {
       enterDetails(makingEffectiveDecisionsInputId, behavioursDetails.makingEffectiveDecisionsText)
     }
 
   private def enterManagingAQualityService(behavioursDetails: BehavioursDetails): Unit =
-    if (listOfChosenBehaviours.contains("Managing a Quality Service")) {
+    if (listOfChosenBehaviours.isEmpty || listOfChosenBehaviours.contains("Managing a Quality Service")) {
       enterDetails(managingAQualityServiceInputId, behavioursDetails.managingAQualityServiceText)
     }
 
   private def enterWorkingTogether(behavioursDetails: BehavioursDetails): Unit =
-    if (listOfChosenBehaviours.contains("Working Together")) {
+    if (listOfChosenBehaviours.isEmpty || listOfChosenBehaviours.contains("Working Together")) {
       enterDetails(workingTogetherInputId, behavioursDetails.workingTogetherText)
     }
 
@@ -104,7 +93,7 @@ object BehavioursPage extends CivilServiceJobsBasePage {
   )
 
   def behavioursPage(longFormDetails: LongFormDetails): Unit =
-    if (behavioursRequired.toBoolean) {
+    if (behavioursRequired) {
       confirmBehavioursRequired()
       behaviours.foreach { f =>
         f(longFormDetails.behavioursDetails)

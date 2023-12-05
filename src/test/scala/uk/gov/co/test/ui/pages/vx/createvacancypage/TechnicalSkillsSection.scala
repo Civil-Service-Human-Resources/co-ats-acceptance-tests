@@ -56,15 +56,16 @@ object TechnicalSkillsSection extends VacancyBasePage {
   private lazy val interviewSixId               = s"${formId}_datafield_65059_1_1_12684"
   private lazy val interviewSevenId             = s"${formId}_datafield_65063_1_1_12684"
   private lazy val interviewEightId             = s"${formId}_datafield_65067_1_1_12684"
-  var howManySkills                             = ""
+  var howManySkills: Int                        = 8
   var listOfTechSkills                          = new ListBuffer[String]()
   var listOfTechSkillsDescription               = new ListBuffer[String]()
 
   def selectTechnicalSkills(successProfilesDetails: SuccessProfilesDetails): Unit = {
     val techSkills = successProfilesDetails.techSkillsSection
     if (successProfilesDetails.technicalSkills) {
-      selectHowManyTechSkills(techSkills.map(_.howManySkills).get)
-      techSkills.map(_.howManySkills).get match {
+      howManySkills = techSkills.map(_.howManySkills).get
+      selectHowManyTechSkills(howManySkills)
+      howManySkills match {
         case 1 => techSkillsRequired(successProfilesDetails, 1)
         case 2 => techSkillsRequired(successProfilesDetails, 2)
         case 3 => techSkillsRequired(successProfilesDetails, 3)
@@ -74,7 +75,6 @@ object TechnicalSkillsSection extends VacancyBasePage {
         case 7 => techSkillsRequired(successProfilesDetails, 7)
         case 8 => techSkillsRequired(successProfilesDetails, 8)
       }
-      howManySkills = techSkills.map(_.howManySkills).get.toString
     }
   }
 

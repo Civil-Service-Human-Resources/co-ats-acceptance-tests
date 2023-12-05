@@ -43,26 +43,26 @@ object TechnicalSkillsPage extends CivilServiceJobsBasePage {
   def techSkillEightInputId                                            = s"${formId}_datafield_64825_1_1"
   private lazy val newListOfTechSkills: mutable.Seq[String]            = listOfTechSkills
   private lazy val newListOfTechSkillsDescription: mutable.Seq[String] = listOfTechSkillsDescription
-
-//  var listOfTechSkills: mutable.Seq[String]            = ListBuffer(
-//    "Autotest - technical skills 1",
-//    "Autotest - technical skills 2",
-//    "Autotest - technical skills 4",
-//    "Autotest - technical skills 5",
-//    "Autotest - technical skills 6",
-//    "Autotest - technical skills 7",
-//    "Autotest - technical skills 8"
-//  )
-//  var listOfTechSkillsDescription: mutable.Seq[String] = ListBuffer(
-//    "Autotest - technical skills 1 description",
-//    "Autotest - technical skills 2 description",
-//    "Autotest - technical skills 3 description",
-//    "Autotest - technical skills 4 description",
-//    "Autotest - technical skills 5 description",
-//    "Autotest - technical skills 6 description",
-//    "Autotest - technical skills 7 description",
-//    "Autotest - technical skills 8 description"
-//  )
+  val sortedListOfTechSkills: Seq[String]                              = List(
+    "Autotest - technical skills 1",
+    "Autotest - technical skills 2",
+    "Autotest - technical skills 3",
+    "Autotest - technical skills 4",
+    "Autotest - technical skills 5",
+    "Autotest - technical skills 6",
+    "Autotest - technical skills 7",
+    "Autotest - technical skills 8"
+  )
+  val sortedListOfTechSkillsDescription: Seq[String]                   = List(
+    "Autotest - technical skills 1 description",
+    "Autotest - technical skills 2 description",
+    "Autotest - technical skills 3 description",
+    "Autotest - technical skills 4 description",
+    "Autotest - technical skills 5 description",
+    "Autotest - technical skills 6 description",
+    "Autotest - technical skills 7 description",
+    "Autotest - technical skills 8 description"
+  )
 
   private def techSkillsPageCheck(): Unit =
     eventually(onPage(techSkillsPageTitle))
@@ -70,57 +70,72 @@ object TechnicalSkillsPage extends CivilServiceJobsBasePage {
   private def howManyTechSkillsRequired(): Unit = {
     techSkillsPageCheck()
     val techSkillsInputs = driver.findElements(By.xpath(v9HowManyTechSkillsFieldsPath))
-    techSkillsInputs.size() shouldEqual howManySkills.toInt
-//    techSkillsInputs.size() shouldEqual 8 // TODO remove once section completed
+    techSkillsInputs.size() shouldEqual howManySkills
   }
 
   private def enterTechSkillOne(techSkillsDetails: TechSkillsDetails): Unit = {
     val testInfoOne = waitForVisibilityOfElementById(techSkillOneHeaderId).getText
-    testInfoOne shouldEqual s"${newListOfTechSkills.head}\nDescription: ${newListOfTechSkillsDescription.head}"
+    if (newListOfTechSkills.isEmpty) {
+      testInfoOne shouldEqual s"${sortedListOfTechSkills.head}\nDescription: ${sortedListOfTechSkillsDescription.head}"
+    } else testInfoOne shouldEqual s"${newListOfTechSkills.head}\nDescription: ${newListOfTechSkillsDescription.head}"
     enterDetails(techSkillOneInputId, techSkillsDetails.techSkillOne)
   }
 
   private def enterTechSkillTwo(techSkillsDetails: TechSkillsDetails): Unit = {
     val testInfoTwo = waitForVisibilityOfElementById(techSkillTwoHeaderId).getText
-    testInfoTwo shouldEqual s"${newListOfTechSkills(1)}\nDescription: ${newListOfTechSkillsDescription(1)}"
+    if (newListOfTechSkills.isEmpty) {
+      testInfoTwo shouldEqual s"${sortedListOfTechSkills(1)}\nDescription: ${sortedListOfTechSkillsDescription(1)}"
+    } else testInfoTwo shouldEqual s"${newListOfTechSkills(1)}\nDescription: ${newListOfTechSkillsDescription(1)}"
     enterDetails(techSkillTwoInputId, techSkillsDetails.techSkillTwo)
   }
 
   private def enterTechSkillThree(techSkillsDetails: TechSkillsDetails): Unit = {
     val testInfoThree = waitForVisibilityOfElementById(techSkillThreeHeaderId).getText
-    testInfoThree shouldEqual s"${newListOfTechSkills(2)}\nDescription: ${newListOfTechSkillsDescription(2)}"
+    if (newListOfTechSkills.isEmpty) {
+      testInfoThree shouldEqual s"${sortedListOfTechSkills(2)}\nDescription: ${sortedListOfTechSkillsDescription(2)}"
+    } else testInfoThree shouldEqual s"${newListOfTechSkills(2)}\nDescription: ${newListOfTechSkillsDescription(2)}"
     enterDetails(techSkillThreeInputId, techSkillsDetails.techSkillThree)
   }
 
   private def enterTechSkillFour(techSkillsDetails: TechSkillsDetails): Unit = {
     val testInfoFour = waitForVisibilityOfElementById(techSkillFourHeaderId).getText
-    testInfoFour shouldEqual s"${newListOfTechSkills(3)}\nDescription: ${newListOfTechSkillsDescription(3)}"
+    if (newListOfTechSkills.isEmpty) {
+      testInfoFour shouldEqual s"${sortedListOfTechSkills(3)}\nDescription: ${sortedListOfTechSkillsDescription(3)}"
+    } else testInfoFour shouldEqual s"${newListOfTechSkills(3)}\nDescription: ${newListOfTechSkillsDescription(3)}"
     enterDetails(techSkillFourInputId, techSkillsDetails.techSkillFour)
   }
 
   private def enterTechSkillFive(techSkillsDetails: TechSkillsDetails): Unit = {
     val testInfoFive = waitForVisibilityOfElementById(techSkillFiveHeaderId).getText
-    testInfoFive shouldEqual s"${newListOfTechSkills(4)}\nDescription: ${newListOfTechSkillsDescription(4)}"
+    if (newListOfTechSkills.isEmpty) {
+      testInfoFive shouldEqual s"${sortedListOfTechSkills(4)}\nDescription: ${sortedListOfTechSkillsDescription(4)}"
+    } else testInfoFive shouldEqual s"${newListOfTechSkills(4)}\nDescription: ${newListOfTechSkillsDescription(4)}"
     enterDetails(techSkillFiveInputId, techSkillsDetails.techSkillFive)
   }
 
   private def enterTechSkillSix(techSkillsDetails: TechSkillsDetails): Unit = {
     val testInfoSix = waitForVisibilityOfElementById(techSkillSixHeaderId).getText
-    testInfoSix shouldEqual s"${newListOfTechSkills(5)}\nDescription: ${newListOfTechSkillsDescription(5)}"
+    if (newListOfTechSkills.isEmpty) {
+      testInfoSix shouldEqual s"${sortedListOfTechSkills(5)}\nDescription: ${sortedListOfTechSkillsDescription(5)}"
+    } else testInfoSix shouldEqual s"${newListOfTechSkills(5)}\nDescription: ${newListOfTechSkillsDescription(5)}"
     enterDetails(techSkillSixInputId, techSkillsDetails.techSkillSix)
   }
 
   //TODO Cosmetic issue requires Oleeo to fix and align with other fields
   private def enterTechSkillSeven(techSkillsDetails: TechSkillsDetails): Unit = {
     val testInfoSeven = waitForVisibilityOfElementById(techSkillSevenHeaderId).getText
-    testInfoSeven shouldEqual s"${newListOfTechSkills(6)}\nDescription:${newListOfTechSkillsDescription(6)}"
+    if (newListOfTechSkills.isEmpty) {
+      testInfoSeven shouldEqual s"${sortedListOfTechSkills(6)}\nDescription:${sortedListOfTechSkillsDescription(6)}"
+    } else testInfoSeven shouldEqual s"${newListOfTechSkills(6)}\nDescription:${newListOfTechSkillsDescription(6)}"
     enterDetails(techSkillSevenInputId, techSkillsDetails.techSkillSeven)
   }
 
   //TODO Cosmetic issue requires Oleeo to fix and align with other fields
   private def enterTechSkillEight(techSkillsDetails: TechSkillsDetails): Unit = {
     val testInfoEight = waitForVisibilityOfElementById(techSkillEightHeaderId).getText
-    testInfoEight shouldEqual s"${newListOfTechSkills(7)}\nDescription:${newListOfTechSkillsDescription(7)}"
+    if (newListOfTechSkills.isEmpty) {
+      testInfoEight shouldEqual s"${sortedListOfTechSkills(7)}\nDescription:${sortedListOfTechSkillsDescription(7)}"
+    } else testInfoEight shouldEqual s"${newListOfTechSkills(7)}\nDescription:${newListOfTechSkillsDescription(7)}"
     enterDetails(techSkillEightInputId, techSkillsDetails.techSkillEight)
   }
 
@@ -136,9 +151,9 @@ object TechnicalSkillsPage extends CivilServiceJobsBasePage {
   )
 
   def techSkillsPage(longFormDetails: LongFormDetails): Unit =
-    if (techSkillsRequired.toBoolean) {
+    if (techSkillsRequired) {
       howManyTechSkillsRequired()
-      skills.take(howManySkills.toInt).foreach { f =>
+      skills.take(howManySkills).foreach { f =>
         f(longFormDetails.techSkillsDetails)
       }
       clickOn(pageContinue)

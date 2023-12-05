@@ -55,6 +55,8 @@ object CriteriaSection extends VacancyBasePage {
   private lazy val uploadAttachmentYesId        = s"${formId}_datafield_61333_1_1_1"
   private lazy val uploadAttachmentNoId         = s"${formId}_datafield_61333_1_1_2"
   private lazy val candidateInstructionsInputId = s"${formId}_datafield_61355_1_1_en-GB"
+  var uploadAttachmentRequired: Boolean         = true
+  var vXCandidateInstructions: String             = "Autotest - Instructions for candidate"
 
   private def enterCampaignID(criteriaDetails: CriteriaDetails): Unit = {
     scrollToElement(By.id(campaignIDId))
@@ -90,46 +92,41 @@ object CriteriaSection extends VacancyBasePage {
     else clickOnRadioButton(rightToRemainUKNoId)
 
   private def selectRejectIfLicencesNotHeld(criteriaDetails: CriteriaDetails): Unit =
-    if (licencesMandatory != "") {
-      if (licencesMandatory.toBoolean && experiencesRequired.toBoolean) {
-        if (criteriaDetails.licencesNotHeld) clickOnRadioButton(licencesNotHeldYesId)
-        else clickOnRadioButton(licencesNotHeldNoId)
-      }
+    if (licencesMandatory && experiencesRequired) {
+      if (criteriaDetails.licencesNotHeld) clickOnRadioButton(licencesNotHeldYesId)
+      else clickOnRadioButton(licencesNotHeldNoId)
     }
 
   private def selectRejectIfMembershipsNotHeld(criteriaDetails: CriteriaDetails): Unit =
-    if (membershipsMandatory != "") {
-      if (membershipsMandatory.toBoolean && experiencesRequired.toBoolean) {
-        if (criteriaDetails.membershipsNotHeld) clickOnRadioButton(membershipsNotHeldYesId)
-        else clickOnRadioButton(membershipsNotHeldNoId)
-      }
+    if (membershipsMandatory && experiencesRequired) {
+      if (criteriaDetails.membershipsNotHeld) clickOnRadioButton(membershipsNotHeldYesId)
+      else clickOnRadioButton(membershipsNotHeldNoId)
     }
 
   private def selectRejectIfLanguageSkillsNotHeld(criteriaDetails: CriteriaDetails): Unit =
-    if (languagesMandatory != "") {
-      if (languagesMandatory.toBoolean && experiencesRequired.toBoolean) {
-        if (criteriaDetails.languagesSkillsNotHeld) clickOnRadioButton(languagesSkillsYesId)
-        else clickOnRadioButton(languagesSkillsNoId)
-      }
+    if (languagesMandatory && experiencesRequired) {
+      if (criteriaDetails.languagesSkillsNotHeld) clickOnRadioButton(languagesSkillsYesId)
+      else clickOnRadioButton(languagesSkillsNoId)
     }
 
   private def selectRejectIfQualificationsNotHeld(criteriaDetails: CriteriaDetails): Unit =
-    if (qualificationsMandatory != "") {
-      if (qualificationsMandatory.toBoolean && experiencesRequired.toBoolean) {
-        if (criteriaDetails.qualificationsHeld) clickOnRadioButton(qualificationsHeldYesId)
-        else clickOnRadioButton(qualificationsHeldNoId)
-      }
+    if (qualificationsMandatory && experiencesRequired) {
+      if (criteriaDetails.qualificationsHeld) clickOnRadioButton(qualificationsHeldYesId)
+      else clickOnRadioButton(qualificationsHeldNoId)
     }
 
   private def selectIsPreSiftRequired(criteriaDetails: CriteriaDetails): Unit =
     if (criteriaDetails.preSiftRequired) clickOnRadioButton(preSiftRequiredYesId)
     else clickOnRadioButton(preSiftRequiredNoId)
 
-  private def selectRequiredCandidateUploadAttachment(criteriaDetails: CriteriaDetails): Unit =
-    if (criteriaDetails.uploadAttachment) {
+  private def selectRequiredCandidateUploadAttachment(criteriaDetails: CriteriaDetails): Unit = {
+    uploadAttachmentRequired = criteriaDetails.uploadAttachment
+    vXCandidateInstructions = criteriaDetails.candidateInstructions
+    if (uploadAttachmentRequired) {
       clickOnRadioButton(uploadAttachmentYesId)
-      selectOptionWithId(candidateInstructionsInputId, criteriaDetails.candidateInstructions)
+      selectOptionWithId(candidateInstructionsInputId, vXCandidateInstructions)
     } else clickOnRadioButton(uploadAttachmentNoId)
+  }
 
   private val criteria: Seq[CriteriaDetails => Unit] = Seq(
     enterCampaignID,

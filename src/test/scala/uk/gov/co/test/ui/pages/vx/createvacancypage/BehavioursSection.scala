@@ -52,7 +52,7 @@ object BehavioursSection extends VacancyBasePage {
   private lazy val interviewSixId           = s"${formId}_datafield_60408_1_1_12684"
   private lazy val interviewSevenId         = s"${formId}_datafield_60422_1_1_12684"
   private lazy val interviewEightId         = s"${formId}_datafield_60436_1_1_12684"
-  var howManyAssessed                       = ""
+  var howManyAssessed: Int                  = 8
   var listOfChosenBehaviours                = new ListBuffer[String]()
 
   def selectBehavioursProfiles(successProfilesDetails: SuccessProfilesDetails): Unit = {
@@ -63,9 +63,9 @@ object BehavioursSection extends VacancyBasePage {
       getAssessSectionText(assessBehavioursId) shouldBe behaviour
         .map(_.assessBehaviours)
         .get
-      val howMany = behaviour.map(_.howManyAssessed).get
-      selectHowManyBehaviours(howMany)
-      howMany match {
+      howManyAssessed = behaviour.map(_.howManyAssessed).get
+      selectHowManyBehaviours(howManyAssessed)
+      howManyAssessed match {
         case 1 => behavioursSection(successProfilesDetails, 1)
         case 2 => behavioursSection(successProfilesDetails, 2)
         case 3 => behavioursSection(successProfilesDetails, 3)
@@ -75,7 +75,6 @@ object BehavioursSection extends VacancyBasePage {
         case 7 => behavioursSection(successProfilesDetails, 7)
         case 8 => behavioursSection(successProfilesDetails, 8)
       }
-      howManyAssessed = howMany.toString
     }
   }
 

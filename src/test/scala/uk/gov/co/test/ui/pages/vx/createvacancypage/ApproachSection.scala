@@ -29,7 +29,7 @@ object ApproachSection extends VacancyBasePage {
   private lazy val addWelshTranslationId          = "clicky_154373"
   private lazy val welshStatementInput            = "datafield_154373_1_1_cy"
   private lazy val updateWelshId                  = "lbledit_datafield_154373_1_1-update"
-  var candidateApproach                           = ""
+  var candidateApproach                           = "External"
 
   private def eligibilityStatement(approachDetails: ApproachDetails): Unit = {
     val statement = waitForVisibilityOfElementById(statementId)
@@ -43,7 +43,7 @@ object ApproachSection extends VacancyBasePage {
   private def selectApproach(approachDetails: ApproachDetails): Unit = {
     scrollToElement(By.id(approachId))
     candidateApproach = approachDetails.approach
-    approachDetails.approach match {
+    candidateApproach match {
       case "Pre-release"       => clickOnRadioButton(prereleaseId)
       case "Internal"          => clickOnRadioButton(internalId)
       case "Across government" => clickOnRadioButton(acrossGovernmentId)

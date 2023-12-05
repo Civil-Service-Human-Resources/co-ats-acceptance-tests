@@ -60,11 +60,11 @@ object ExperienceSection extends VacancyBasePage {
   private lazy val mandatoryQualificationsYesId   = s"${formId}_datafield_60215_1_1_1"
   private lazy val mandatoryQualificationsNoId    = s"${formId}_datafield_60215_1_1_2"
   private lazy val mandatoryQualificationsInputId = s"${formId}_datafield_60209_1_1_en-GB"
-  var licencesMandatory: String                   = ""
-  var membershipsMandatory: String                = ""
-  var languagesMandatory: String                  = ""
-  var qualificationsMandatory: String             = ""
-  var vXGuidanceText: String                      = ""
+  var vXGuidanceText: String                      = "Autotest - Enter guidance text for the candidate"
+  var licencesMandatory: Boolean                  = true
+  var membershipsMandatory: Boolean               = true
+  var languagesMandatory: Boolean                 = true
+  var qualificationsMandatory: Boolean            = true
 
   private def provideCV(successProfilesDetails: SuccessProfilesDetails): Unit = {
     val cv = successProfilesDetails.experienceSection
@@ -148,8 +148,8 @@ object ExperienceSection extends VacancyBasePage {
   }
 
   private def selectMandatoryLicences(successProfilesDetails: SuccessProfilesDetails): Unit = {
-    licencesMandatory = successProfilesDetails.experienceSection.map(_.licences.map(_.requirements).get).get.toString
-    if (licencesMandatory.toBoolean) {
+    licencesMandatory = successProfilesDetails.experienceSection.map(_.licences.map(_.requirements).get).get
+    if (licencesMandatory) {
       clickOnRadioButton(mandatoryLicencesYesId)
       enterLicenceRequirements(successProfilesDetails)
     } else clickOnRadioButton(mandatoryLicencesNoId)
@@ -162,9 +162,8 @@ object ExperienceSection extends VacancyBasePage {
   }
 
   private def selectMandatoryMemberships(successProfilesDetails: SuccessProfilesDetails): Unit = {
-    membershipsMandatory =
-      successProfilesDetails.experienceSection.map(_.memberships.map(_.requirements).get).get.toString
-    if (membershipsMandatory.toBoolean) {
+    membershipsMandatory = successProfilesDetails.experienceSection.map(_.memberships.map(_.requirements).get).get
+    if (membershipsMandatory) {
       clickOnRadioButton(mandatoryMembershipsYesId)
       enterMembershipsRequirements(successProfilesDetails)
     } else clickOnRadioButton(mandatoryMembershipsNoId)
@@ -177,8 +176,8 @@ object ExperienceSection extends VacancyBasePage {
   }
 
   private def selectMandatoryLanguages(successProfilesDetails: SuccessProfilesDetails): Unit = {
-    languagesMandatory = successProfilesDetails.experienceSection.map(_.languages.map(_.requirements).get).get.toString
-    if (languagesMandatory.toBoolean) {
+    languagesMandatory = successProfilesDetails.experienceSection.map(_.languages.map(_.requirements).get).get
+    if (languagesMandatory) {
       clickOnRadioButton(mandatoryLanguagesYesId)
       enterLanguagesRequirements(successProfilesDetails)
     } else clickOnRadioButton(mandatoryLanguagesNoId)
@@ -191,9 +190,8 @@ object ExperienceSection extends VacancyBasePage {
   }
 
   private def selectMandatoryQualifications(successProfilesDetails: SuccessProfilesDetails): Unit = {
-    qualificationsMandatory =
-      successProfilesDetails.experienceSection.map(_.qualifications.map(_.requirements).get).get.toString
-    if (qualificationsMandatory.toBoolean) {
+    qualificationsMandatory = successProfilesDetails.experienceSection.map(_.qualifications.map(_.requirements).get).get
+    if (qualificationsMandatory) {
       clickOnRadioButton(mandatoryQualificationsYesId)
       enterQualificationsRequirements(successProfilesDetails)
     } else clickOnRadioButton(mandatoryQualificationsNoId)
