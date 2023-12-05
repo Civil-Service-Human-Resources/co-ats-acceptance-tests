@@ -4,7 +4,6 @@ import org.scalatest.concurrent.Eventually.eventually
 import uk.gov.co.test.ui.data.v9.shortform.ShortFormDetails
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
 import uk.gov.co.test.ui.pages.v9.shortform.ApplicationGuidancePage.formId
-import uk.gov.co.test.ui.pages.v9.shortform.PersonalInfoPage.enterDetails
 import uk.gov.co.test.ui.pages.vx.createvacancypage.LocationsSection.vacanciesInNIR
 
 case class DiversityDetails(

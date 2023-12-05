@@ -34,7 +34,7 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
     driver.findElement(By.xpath(".//input[@value='Advert Details']"))
 
   def withdrawApplicationFunction(): WebElement =
-    driver.findElement(By.xpath(".//input[@value='Advert Details']"))
+    driver.findElement(By.xpath(".//input[@value='Withdraw Application']"))
 
   def continueApplicationFunction(): WebElement =
     driver.findElement(By.xpath(".//input[@value='Continue application']"))

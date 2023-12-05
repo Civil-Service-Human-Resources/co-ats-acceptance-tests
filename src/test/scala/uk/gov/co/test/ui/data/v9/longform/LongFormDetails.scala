@@ -8,5 +8,6 @@ case class LongFormDetails(
   statementDetails: StatementDetails,
   behavioursDetails: BehavioursDetails,
   techSkillsDetails: TechSkillsDetails,
-  uploadDocumentsDetails: UploadDocumentsDetails
+  uploadDocumentsDetails: UploadDocumentsDetails,
+  preferencesDetails: PreferencesDetails
 )

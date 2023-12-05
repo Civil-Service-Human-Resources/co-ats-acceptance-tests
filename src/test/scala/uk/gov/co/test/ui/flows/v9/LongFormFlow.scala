@@ -5,6 +5,7 @@ import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
 import uk.gov.co.test.ui.pages.v9.longform.BehavioursPage.behavioursPage
 import uk.gov.co.test.ui.pages.v9.longform.DiversityMonitoringPage.experienceAndSkillsPage
 import uk.gov.co.test.ui.pages.v9.longform.PersonalStatementPage.personalStatementPage
+import uk.gov.co.test.ui.pages.v9.longform.PreferencesPage.preferencesPage
 import uk.gov.co.test.ui.pages.v9.longform.TechnicalSkillsPage.techSkillsPage
 import uk.gov.co.test.ui.pages.v9.longform.UploadDocumentsPage.uploadDocumentsPage
 import uk.gov.co.test.ui.pages.v9.longform.YourCVPage.yourCVPage
@@ -17,7 +18,8 @@ object LongFormFlow extends CivilServiceJobsBasePage {
     personalStatementPage,
     behavioursPage,
     techSkillsPage,
-    uploadDocumentsPage
+    uploadDocumentsPage,
+    preferencesPage
   )
 
   def fillLongFormDetails(longFormDetails: LongFormDetails): Unit =

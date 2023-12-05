@@ -88,8 +88,8 @@ object MASTER_LOCATIONS
       true,
       "All communities",
       true,
-      "2",
-      otherLocations = List("London", "Southampton")
+      "3",
+      otherLocations = List("London", "Southampton", "Manchester")
     )
 
 object MASTER_CONTRACT_DETAILS

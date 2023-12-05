@@ -2,6 +2,7 @@ package uk.gov.co.test.ui.data.v9.longform
 
 import uk.gov.co.test.ui.data.Characters.valid250Characters
 import uk.gov.co.test.ui.pages.v9.longform._
+import uk.gov.co.test.ui.pages.vx.createvacancypage.LocationsSection.vXOtherLocations
 
 object MASTER_LONG_FORM_DATA
     extends LongFormDetails(
@@ -10,7 +11,8 @@ object MASTER_LONG_FORM_DATA
       MASTER_LONG_FORM_PERSONAL_STATEMENT,
       MASTER_LONG_FORM_BEHAVIOURS,
       MASTER_LONG_FORM_TECHNICAL_SKILLS,
-      MASTER_LONG_FORM_UPLOAD_DOCUMENTS
+      MASTER_LONG_FORM_UPLOAD_DOCUMENTS,
+      MASTER_LONG_FORM_PREFERENCES
     )
 
 object MASTER_LONG_FORM_EXPERIENCE_SKILLS
@@ -101,4 +103,12 @@ object MASTER_LONG_FORM_TECHNICAL_SKILLS
 object MASTER_LONG_FORM_UPLOAD_DOCUMENTS
     extends UploadDocumentsDetails(
       "Test-T&Cs.pdf"
+    )
+
+object MASTER_LONG_FORM_PREFERENCES
+    extends PreferencesDetails(
+      s"${vXOtherLocations.head}",
+      secondChoiceLocation = Option(s"${vXOtherLocations.tail.head}"),
+      thirdChoiceLocation = Option(s"${vXOtherLocations.last}"),
+      furtherLocationPreferences = Option("Autotest - Further location preferences (optional)")
     )

@@ -43,6 +43,9 @@ object LocationsSection extends VacancyBasePage {
   private lazy val maxLocationId           = s"select2-${formId}_datafield_155818_1_1-container"
   var vacanciesInNIR                       = ""
   var communitiesInNIR                     = ""
+  var vXGiveLocationPreference: Boolean    = true
+  var vXMaxLocations: String               = "3"
+  var vXOtherLocations: Seq[String]        = List("London", "Southampton", "Manchester")
 
   def selectVacancyInNIR(locationsDetails: LocationsDetails): Unit = {
     scrollToElement(By.id(northernIrelandId))
@@ -121,15 +124,19 @@ object LocationsSection extends VacancyBasePage {
   def locationOverride(overrideLocations: String): Unit =
     textField(locationOverrideInput).value = overrideLocations
 
-  def selectLocationPreference(locationsDetails: LocationsDetails): Unit =
-    if (locationsDetails.giveLocationPreference) {
+  def selectLocationPreference(locationsDetails: LocationsDetails): Unit = {
+    vXGiveLocationPreference = locationsDetails.giveLocationPreference
+    vXMaxLocations = locationsDetails.maxLocations
+    vXOtherLocations = locationsDetails.otherLocations
+    if (vXGiveLocationPreference) {
       clickOnRadioButton(locationPreferenceYesId)
-      chooseMaxLocations(locationsDetails.maxLocations)
-      for (cityOrTown <- locationsDetails.otherLocations)
+      chooseMaxLocations(vXMaxLocations)
+      for (cityOrTown <- vXOtherLocations)
         selectOtherCityOrTown(cityOrTown)
     } else {
       clickOnRadioButton(locationPreferenceNoId)
     }
+  }
 
   def selectLocationType(locationsDetails: LocationsDetails): Unit = {
     scrollToElement(By.id(locationTypeId))
