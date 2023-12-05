@@ -37,7 +37,6 @@ class RegisterCandidateSpec extends BaseFeatureSpec {
       onPage(applicationCentrePageTitle)
     }
 
-    @Ignore
     Scenario("Create Candidate Accounts", RunInV9) {
       createMultipleCandidates(3)
     }
