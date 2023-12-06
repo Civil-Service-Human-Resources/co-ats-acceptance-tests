@@ -1,6 +1,6 @@
 package uk.gov.co.test.ui.data.vx
 
-import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.{emailVxConfig, nameVxConfig, usernameVxConfig}
+import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.{contactEmailVxConfig, contactNameVxConfig}
 import uk.gov.co.test.ui.pages.v9.SignInPage.generateRandomJobPosition
 import uk.gov.co.test.ui.pages.vx.createvacancypage._
 
@@ -120,12 +120,12 @@ object MASTER_ADVERT
 
 object MASTER_CONTACT_DETAILS
     extends ContactDetails(
-      s"$nameVxConfig",
-      s"$emailVxConfig",
+      s"$contactNameVxConfig",
+      s"$contactEmailVxConfig",
       "01000 000000",
-      s"$nameVxConfig",
-      s"$emailVxConfig",
-      s"$emailVxConfig"
+      s"$contactNameVxConfig",
+      s"$contactEmailVxConfig",
+      s"$contactEmailVxConfig"
     )
 
 object MASTER_VETTING_DETAILS
@@ -440,8 +440,8 @@ object MASTER_MANAGEMENT
       false,
       "Other",
       true,
-      assignTo = Option(s"$usernameVxConfig"),
-      assignTo2 = Option(s"$usernameVxConfig"),
+      assignTo = Option(s"$contactEmailVxConfig"),
+      assignTo2 = Option(s"$contactEmailVxConfig"),
       "Business As Usual (BAU)",
       "Menu",
       true,
@@ -456,7 +456,7 @@ object MASTER_ONLINE_PEC_CHECK_FORMS
     extends OnlinePecCheckFormsDetails(
       true,
       true,
-      s"$usernameVxConfig"
+      s"$contactEmailVxConfig"
     )
 
 object MASTER_PEC_CHECK_FORMS

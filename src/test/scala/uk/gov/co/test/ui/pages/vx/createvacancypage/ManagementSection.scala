@@ -85,12 +85,12 @@ object ManagementSection extends VacancyBasePage {
 
   private def enterAssignTo(managementDetails: ManagementDetails): Unit = {
     val username = managementDetails.assignTo.get
-    selectOptionFromList(username, assignToId, s" $nameVxConfig - $username")
+    selectOptionFromList(username, assignToId, s" $contactNameVxConfig - $username")
   }
 
   private def enterAssignTo2(managementDetails: ManagementDetails): Unit = {
     val username2 = managementDetails.assignTo2.get
-    selectOptionFromList(username2, assignTo2Id, s" $nameVxConfig - $username2")
+    selectOptionFromList(username2, assignTo2Id, s" $contactNameVxConfig - $username2")
   }
 
   private def grsRecruitmentStageType(managementDetails: ManagementDetails): Unit = {

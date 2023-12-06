@@ -20,16 +20,19 @@ import java.time.format.DateTimeFormatter
 
 trait VacancyBasePage extends Matchers with BasePage with BrowserDriver {
 
-  val url: String                = TestConfiguration.url("vxconfig")
-  val vxConfigTitle              = "Oleeo vX Login : CSR"
-  val vxConfigHomePageTitle      = "Home : Civil Service Jobs - GOV.UK"
-  val nameVxConfig: String       = readProperty("services.vxconfig.admin.contact_name")
-  val emailVxConfig: String      = readProperty("services.vxconfig.admin.contact_email")
-  val usernameVxConfig: String   = readProperty("services.vxconfig.admin.username")
-  val passwordVxConfig: String   = readProperty("services.vxconfig.admin.password")
-  val getOs: String              = System.getProperty("os.name").toLowerCase
-  lazy val generalInput          = "//input[@class='select2-search__field']"
-  val applicationCentrePageTitle = "Your account details - Civil Service Jobs - GOV.UK"
+  val url: String                  = TestConfiguration.url("vxconfig")
+  val vxConfigTitle                = "Oleeo vX Login : CSR"
+  val vxConfigHomePageTitle        = "Home : Civil Service Jobs - GOV.UK"
+  val contactNameVxConfig: String  = readProperty("services.vxconfig.admin.contact_name")
+  val contactEmailVxConfig: String = readProperty("services.vxconfig.admin.contact_email")
+  val usernameVxConfig: String     = readProperty("services.vxconfig.admin.username")
+  val passwordVxConfig: String     = readProperty("services.vxconfig.admin.password")
+  val loginButtonPath: String      = "*//button[@id='login-button']"
+  val logoutButtonPath: String     = ".//a[@class='logout_button']"
+  val userProfilePath: String      = "//*[@class='user_link']"
+  val getOs: String                = System.getProperty("os.name").toLowerCase
+  lazy val generalInput            = "//input[@class='select2-search__field']"
+  val applicationCentrePageTitle   = "Your account details - Civil Service Jobs - GOV.UK"
 
   def username(): TextField     = textField("user")
   def password(): PasswordField = pwdField("password")
@@ -46,15 +49,13 @@ trait VacancyBasePage extends Matchers with BasePage with BrowserDriver {
     password().value = recruiterDetails.password
 
   def loginProcess(): Unit =
-    waitForElementToBeClickableByPath("*//button[@id='login-button']").click()
+    waitForElementToBeClickableByPath(loginButtonPath).click()
 
-  def userProfile(): WebElement = waitForElementToBeClickableByPath(
-    "//*[@class='user_link']"
-  )
+  def userProfile(): WebElement = waitForElementToBeClickableByPath(userProfilePath)
 
   def logoutVX(): Unit = {
     userProfile().click()
-    waitForElementClickableByPath(".//a[@class='logout_button']").click()
+    waitForElementClickableByPath(logoutButtonPath).click()
     eventually(onPage(vxConfigTitle))
   }
 

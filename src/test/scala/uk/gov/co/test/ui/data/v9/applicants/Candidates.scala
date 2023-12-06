@@ -28,34 +28,34 @@ object MASTER_REGISTER_CANDIDATE
     )
 
 object REGISTER_CANDIDATE_ONE
-  extends CandidateDetails(
-    firstname = generateRandomFirstName(),
-    lastname = generateRandomLastName(),
-    preferredFirstName = generatePreferredFirstName(),
-    email = generatedEmail(),
-    s"$passwordCandidate",
-    false,
-    true
-  )
+    extends CandidateDetails(
+      firstname = generateRandomFirstName(),
+      lastname = generateRandomLastName(),
+      preferredFirstName = generatePreferredFirstName(),
+      email = generatedEmail(),
+      s"$passwordCandidate",
+      false,
+      true
+    )
 
 object REGISTER_CANDIDATE_TWO
-  extends CandidateDetails(
-    firstname = generateRandomFirstName(),
-    lastname = generateRandomLastName(),
-    preferredFirstName = generatePreferredFirstName(),
-    email = generatedEmail(),
-    s"$passwordCandidate",
-    false,
-    true
-  )
+    extends CandidateDetails(
+      firstname = generateRandomFirstName(),
+      lastname = generateRandomLastName(),
+      preferredFirstName = generatePreferredFirstName(),
+      email = generatedEmail(),
+      s"$passwordCandidate",
+      false,
+      true
+    )
 
 object REGISTER_CANDIDATE_THREE
-  extends CandidateDetails(
-    firstname = generateRandomFirstName(),
-    lastname = generateRandomLastName(),
-    preferredFirstName = generatePreferredFirstName(),
-    email = generatedEmail(),
-    s"$passwordCandidate",
-    false,
-    true
-  )
+    extends CandidateDetails(
+      firstname = generateRandomFirstName(),
+      lastname = generateRandomLastName(),
+      preferredFirstName = generatePreferredFirstName(),
+      email = generatedEmail(),
+      s"$passwordCandidate",
+      false,
+      true
+    )

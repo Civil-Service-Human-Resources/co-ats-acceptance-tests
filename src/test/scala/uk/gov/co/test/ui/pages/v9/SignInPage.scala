@@ -14,7 +14,8 @@ object SignInPage extends CivilServiceJobsBasePage {
   def email(): EmailField       = emailField("ID_username")
   def password(): PasswordField = pwdField("ID_password_login_window")
 
-  def candidateFullName(user: CandidateDetails) = s"${user.firstname} ${user.lastname}"
+  def candidateFullName(user: CandidateDetails): String =
+    s"${user.firstname} ${user.lastname}"
 
   def signIn(): WebElement = waitForElementToBeClickableByPath(
     "//*[@id='login_button']"

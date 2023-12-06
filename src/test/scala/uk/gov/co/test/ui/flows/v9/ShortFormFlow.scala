@@ -3,6 +3,7 @@ package uk.gov.co.test.ui.flows.v9
 import uk.gov.co.test.ui.data.v9.shortform.ShortFormDetails
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
 import uk.gov.co.test.ui.pages.v9.SearchJobsPage.jobSearchAndApplyFlow
+import uk.gov.co.test.ui.pages.v9.SignInPage.randomEmail
 import uk.gov.co.test.ui.pages.v9.shortform.ApplicationGuidancePage.appGuidancePage
 import uk.gov.co.test.ui.pages.v9.shortform.DeclarationPage.{declarationPage, shortFormSubmission}
 import uk.gov.co.test.ui.pages.v9.shortform.DiversityMonitoringPage.diversityMonitoringPage
@@ -24,9 +25,6 @@ object ShortFormFlow extends CivilServiceJobsBasePage {
 
   def fillShortFormDetails(shortFormDetails: ShortFormDetails): Unit =
     if (candidateApproach == "External" || candidateApproach == "Pre-release") {
-      println(s"Candidate Name: $randomFirstName $randomLastName")
-      println(s"Candidate Email: $randomEmail")
-      println(s"Vacancy ID/Job Title: $vacancyId/$vacancyName")
       jobSearchAndApplyFlow(vacancyName, vacancyId, "what")
       shortForm.foreach { f =>
         f(shortFormDetails)
