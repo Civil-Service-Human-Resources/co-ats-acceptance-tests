@@ -1,2 +1,0 @@
-CANDIDATE NO.1: NAME: Alena Wisoky EMAIL: alena.wisoky@example.com PASSWORD: password123!
-CANDIDATE NO.2: NAME: Korbin Murphy EMAIL: korbin.murphy@example.com PASSWORD: password123!
