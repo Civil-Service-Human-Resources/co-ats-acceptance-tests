@@ -32,7 +32,6 @@ object LongFormFlow extends CivilServiceJobsBasePage {
       f(longFormDetails)
     }
     clickOn(longFormSubmission)
-    println("Done!")
   }
 
 }

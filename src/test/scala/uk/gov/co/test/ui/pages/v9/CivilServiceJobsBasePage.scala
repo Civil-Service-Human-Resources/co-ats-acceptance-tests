@@ -90,6 +90,10 @@ trait CivilServiceJobsBasePage extends Matchers with BasePage with BrowserDriver
     generateRandomLastName()
     generatePreferredFirstName()
     generatedEmail()
+    println(s"Check: $randomFirstName")
+    println(s"Check: $randomLastName")
+    println(s"Check: $preferredFirstName")
+    println(s"Check: $randomEmail")
   }
 
   def generateCandidateDetails2(i: String): Unit = {
