@@ -3,21 +3,21 @@ package uk.gov.co.test.ui.data.v9.shortform
 import uk.gov.co.test.ui.pages.v9.SignInPage.{preferredFirstName, randomEmail, randomFirstName, randomLastName}
 import uk.gov.co.test.ui.pages.v9.shortform._
 
-object SHORT_FORM_DATA_ONE
+object SHORT_FORM_DATA_HMRC
     extends ShortFormDetails(
-      SHORT_FORM_APP_GUIDANCE_ONE,
-      SHORT_FORM_ELIGIBILITY_ONE,
-      SHORT_FORM_PERSONAL_INFO_ONE,
-      SHORT_FORM_DIVERSITY_MONITORING_ONE,
-      SHORT_FORM_DECLARATION_ONE
+      SHORT_FORM_APP_GUIDANCE_HMRC,
+      SHORT_FORM_ELIGIBILITY_HMRC,
+      SHORT_FORM_PERSONAL_INFO_HMRC,
+      SHORT_FORM_DIVERSITY_MONITORING_HMRC,
+      SHORT_FORM_DECLARATION_HMRC
     )
 
-object SHORT_FORM_APP_GUIDANCE_ONE
+object SHORT_FORM_APP_GUIDANCE_HMRC
     extends AppGuidanceDetails(
       true
     )
 
-object SHORT_FORM_ELIGIBILITY_ONE
+object SHORT_FORM_ELIGIBILITY_HMRC
     extends EligibilityDetails(
       false,
       "Attorney General's Office",
@@ -29,7 +29,7 @@ object SHORT_FORM_ELIGIBILITY_ONE
       "Yes"
     )
 
-object SHORT_FORM_PERSONAL_INFO_ONE
+object SHORT_FORM_PERSONAL_INFO_HMRC
     extends PersonalInfoDetails(
       firstName = s"$randomFirstName",
       lastName = s"$randomLastName",
@@ -47,7 +47,7 @@ object SHORT_FORM_PERSONAL_INFO_ONE
       redeploymentScheme = Option(false)
     )
 
-object SHORT_FORM_DIVERSITY_MONITORING_ONE
+object SHORT_FORM_DIVERSITY_MONITORING_HMRC
     extends DiversityDetails(
       "No",
       "Man",
@@ -98,7 +98,7 @@ object SHORT_FORM_DIVERSITY_MONITORING_ONE
       "Protestant"
     )
 
-object SHORT_FORM_DECLARATION_ONE
+object SHORT_FORM_DECLARATION_HMRC
     extends DeclarationDetails(
       true
     )

@@ -2,12 +2,10 @@ package uk.gov.co.test.ui.pages.v9
 
 import org.openqa.selenium.{By, Keys}
 import org.scalatest.concurrent.Eventually.eventually
-import uk.gov.co.test.ui.pages.vx.DashboardPage.vacancyId
 
 object SearchJobsPage extends CivilServiceJobsBasePage {
 
   val civilServiceJobsPageTitle     = "Civil Service job search - Civil Service Jobs - GOV.UK"
-  var oneResultReturnedPageTitle    = s"1 Job found with job reference $vacancyId - Civil Service Jobs - GOV.UK"
   val signInCreateAccountText       = "Sign in or create an account"
   val cSJobSearchHeader             = "Civil Service job search"
   val accountCreatedSuccessMessage1 = "Success"
@@ -43,13 +41,14 @@ object SearchJobsPage extends CivilServiceJobsBasePage {
   }
 
   def waitForVacancy(jobId: String, jobTitle: String, searchPathway: String): Unit = {
-    val jobDetailsPath = s".//a[text()='$jobTitle']"
-    val jobListed      = driver.findElements(By.xpath(jobDetailsPath))
+    val jobDetailsPath: String     = s".//a[text()='$jobTitle']"
+    val jobListed                  = driver.findElements(By.xpath(jobDetailsPath))
+    val oneResultReturnedPageTitle = s"1 Job found with job reference $jobId - Civil Service Jobs - GOV.UK"
     while (jobListed.isEmpty && driver.getTitle != oneResultReturnedPageTitle) {
       driver.navigate().refresh()
       enterSearchCriteria(jobId, searchPathway)
     }
-    val title          = waitForElementClickableByPath(jobDetailsPath)
+    val title                      = waitForElementClickableByPath(jobDetailsPath)
     title.click()
   }
 

@@ -48,3 +48,14 @@ object REGISTER_CANDIDATE_TWO
       false,
       true
     )
+
+object REGISTER_CANDIDATE_INSOLVENCY
+  extends CandidateDetails(
+    firstname = s"$randomFirstName",
+    lastname = s"$randomLastName",
+    preferredFirstName = s"$preferredFirstName",
+    email = s"$randomEmail",
+    s"$passwordCandidate",
+    false,
+    true
+  )

@@ -33,6 +33,7 @@ trait BaseFeatureSpec
         v9AcceptAllCookies()
       }
     } else {
+      generateCandidateDetails()
       navigateToVxConfigLogin()
     }
 
