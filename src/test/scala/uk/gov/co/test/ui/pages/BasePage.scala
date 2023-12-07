@@ -146,11 +146,10 @@ trait BasePage extends Matchers with Page with WebBrowser with PatienceConfigura
     wait.until(ExpectedConditions.numberOfWindowsToBe(expectedNumberOfWindows))
   }
 
-  def openNewWindow()(implicit driver: WebDriver): Unit = {
-    openWindows(2)
+  def openNewWindow()(implicit driver: WebDriver): Unit =
+    //    openWindows(2)
     for (chartWindow <- driver.getWindowHandles.asScala)
       driver.switchTo.window(chartWindow)
-  }
 
   def openNewTabWithJavascript()(implicit webDriver: WebDriver): AnyRef = {
     val jse: JavascriptExecutor = webDriver.asInstanceOf[JavascriptExecutor]

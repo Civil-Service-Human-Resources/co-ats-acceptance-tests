@@ -10,7 +10,7 @@ import uk.gov.co.test.ui.conf.TestConfiguration.readProperty
 import uk.gov.co.test.ui.driver.BrowserDriver
 import uk.gov.co.test.ui.pages.BasePage
 import uk.gov.co.test.ui.pages.v9.SearchJobsPage.civilServiceJobsPageTitle
-import uk.gov.co.test.ui.pages.v9.SignInPage.signOut
+import uk.gov.co.test.ui.pages.v9.SignInPage.{searchForSignOut, signOut}
 
 import java.util
 import scala.util.Random
@@ -141,5 +141,14 @@ trait CivilServiceJobsBasePage extends Matchers with BasePage with BrowserDriver
     val enterOption = waitForVisibilityOfElementById(inputId)
     enterOption.sendKeys(text)
     enterOption.sendKeys(Keys.TAB)
+  }
+
+  def checkV9Logout(): Unit = {
+    if (!searchForSignOut().isEmpty) {
+      signOutProcess()
+      if (!searchForSignOut().isEmpty) {
+        signOutProcess()
+      }
+    }
   }
 }

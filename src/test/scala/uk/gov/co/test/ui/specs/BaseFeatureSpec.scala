@@ -8,7 +8,7 @@ import org.scalatest.matchers.should.Matchers
 import org.scalatestplus.selenium.WebBrowser
 import uk.gov.co.test.ui.driver.BrowserDriver
 import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.navigateToVxConfigLogin
-import uk.gov.co.test.ui.pages.v9.SignInPage.{generateCandidateDetails, navigateToV9Test, searchForSignOut, signOutProcess, v9AcceptAllCookies, v9SearchCookiesById}
+import uk.gov.co.test.ui.pages.v9.SignInPage.{checkV9Logout, generateCandidateDetails, navigateToV9Test, searchForSignOut, signOutProcess, v9AcceptAllCookies, v9SearchCookiesById}
 import uk.gov.co.test.ui.utils.SingletonScreenshotReport
 import uk.gov.co.test.ui.webdriver.SingletonDriver
 
@@ -39,12 +39,7 @@ trait BaseFeatureSpec
 
   override protected def afterEach(testData: TestData): Unit =
     if (testData.name.contains("Candidate")) {
-      if (!searchForSignOut().isEmpty) {
-        signOutProcess()
-        if (!searchForSignOut().isEmpty) {
-          signOutProcess()
-        }
-      }
+      checkV9Logout()
     }
 
   override def afterAll(): Unit = {

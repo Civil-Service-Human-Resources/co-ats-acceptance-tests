@@ -24,16 +24,16 @@ case class SuccessProfilesDetails(
 
 object SuccessProfilesSection extends VacancyBasePage {
 
-  private lazy val abilitiesId       = s"${formId}_datafield_154245_1_1_12685"
-  private lazy val behavioursId      = s"${formId}_datafield_154245_1_1_12686"
-  private lazy val experienceId      = s"${formId}_datafield_154245_1_1_12687"
-  private lazy val strengthsId       = s"${formId}_datafield_154245_1_1_12689"
-  private lazy val technicalSkillsId = s"${formId}_datafield_154245_1_1_12688"
-  var abilitiesRequired: Boolean     = true
-  var behavioursRequired: Boolean    = true
-  var experiencesRequired: Boolean   = true
-  var strengthsRequired: Boolean     = true
-  var techSkillsRequired: Boolean    = true
+  def abilitiesId                  = s"${formId}_datafield_154245_1_1_12685"
+  def behavioursId                 = s"${formId}_datafield_154245_1_1_12686"
+  def experienceId                 = s"${formId}_datafield_154245_1_1_12687"
+  def strengthsId                  = s"${formId}_datafield_154245_1_1_12689"
+  def technicalSkillsId            = s"${formId}_datafield_154245_1_1_12688"
+  var abilitiesRequired: Boolean   = true
+  var behavioursRequired: Boolean  = true
+  var experiencesRequired: Boolean = true
+  var strengthsRequired: Boolean   = true
+  var techSkillsRequired: Boolean  = true
 
   private def whichSuccessProfiles(successProfilesDetails: SuccessProfilesDetails): Unit = {
     if (successProfilesDetails.abilities) {

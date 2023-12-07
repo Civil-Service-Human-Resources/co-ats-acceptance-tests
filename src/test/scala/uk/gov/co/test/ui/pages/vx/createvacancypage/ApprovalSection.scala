@@ -13,12 +13,12 @@ case class ApprovalDetails(
 
 object ApprovalSection extends VacancyBasePage {
 
-  private lazy val budgetaryInfoId         = s"${formId}_datafield_154500_1_1"
-  private lazy val costCentreId            = s"${formId}_datafield_154493_1_1"
-  private lazy val approvalId              = s"${formId}_field_154507_1"
-  private lazy val approvalYesId           = s"${formId}_datafield_154507_1_1_1"
-  private lazy val approvalNoId            = s"${formId}_datafield_154507_1_1_2"
-  private lazy val uploadApprovalFileOneId = s"${formId}_datafield_154489_1_1"
+  def budgetaryInfoId         = s"${formId}_datafield_154500_1_1"
+  def costCentreId            = s"${formId}_datafield_154493_1_1"
+  def approvalId              = s"${formId}_field_154507_1"
+  def approvalYesId           = s"${formId}_datafield_154507_1_1_1"
+  def approvalNoId            = s"${formId}_datafield_154507_1_1_2"
+  def uploadApprovalFileOneId = s"${formId}_datafield_154489_1_1"
 
   private def budgetaryInfo(info: String): Unit = {
     val field = waitForVisibilityOfElementById(budgetaryInfoId)

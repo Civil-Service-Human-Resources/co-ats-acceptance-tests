@@ -33,7 +33,6 @@ object DiversityMonitoringPage extends CivilServiceJobsBasePage {
   def experienceAndSkillsPage(longFormDetails: LongFormDetails): Unit = {
     experienceAndSkillsPageCheck()
     formId = extractAppFormId()
-    println(s"LONG FORM FORM ID: $formId")
     experienceAndSkills.foreach { f =>
       f(longFormDetails.experienceAndSkillsDetails)
     }

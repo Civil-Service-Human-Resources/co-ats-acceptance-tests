@@ -22,17 +22,17 @@ case class VacancyTestsDetails(
 
 object VacancyTestsSection extends VacancyBasePage {
 
-  private lazy val onlineTestsSectionId    = s"${formId}_section_129661_col_0"
-  private lazy val testsRequiredYesId      = s"${formId}_datafield_129689_1_1_1"
-  private lazy val testsRequiredNoId       = s"${formId}_datafield_129689_1_1_2"
-  private lazy val onlineOrOfflineId       = s"select2-${formId}_datafield_129674_1_1-container"
-  private lazy val testGradeId             = s"select2-${formId}_datafield_129685_1_1-container"
-  private lazy val testNameInputPath       =
+  def onlineTestsSectionId    = s"${formId}_section_129661_col_0"
+  def testsRequiredYesId      = s"${formId}_datafield_129689_1_1_1"
+  def testsRequiredNoId       = s"${formId}_datafield_129689_1_1_2"
+  def onlineOrOfflineId       = s"select2-${formId}_datafield_129674_1_1-container"
+  def testGradeId             = s"select2-${formId}_datafield_129685_1_1-container"
+  def testNameInputPath       =
     s".//textarea[@aria-describedby='select2-${formId}_datafield_129734_1_1-container']"
-  private lazy val recommendedOptionsYesId = s"${formId}_datafield_129748_1_1_1"
-  private lazy val recommendedOptionsNoId  = s"${formId}_datafield_129748_1_1_2"
-  private lazy val additionalDetailId      = s"${formId}_datafield_129763_1_1"
-  var anyOnlineTests                       = ""
+  def recommendedOptionsYesId = s"${formId}_datafield_129748_1_1_1"
+  def recommendedOptionsNoId  = s"${formId}_datafield_129748_1_1_2"
+  def additionalDetailId      = s"${formId}_datafield_129763_1_1"
+  var anyOnlineTests          = ""
 
   def vacancyTestsFlow(vacancyTestsDetails: VacancyTestsDetails): Unit = {
     testsRequired(vacancyTestsDetails)

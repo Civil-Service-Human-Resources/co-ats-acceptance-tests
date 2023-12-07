@@ -15,18 +15,18 @@ case class AdvertDetails(
 
 object AdvertSection extends VacancyBasePage {
 
-  private lazy val jobSummaryId           = s"${formId}_datafield_51753_1_1_en-GB_ifr"
-  private lazy val jobDescriptionId       = s"${formId}_field_value_51761_1"
-  private lazy val personSpecsIframe      = s"${formId}_datafield_51767_1_1_en-GB_ifr"
-  private lazy val offeredBenefitsIframe  = s"${formId}_datafield_62219_1_1_en-GB_ifr"
-  private lazy val selectionProcessIframe = s"${formId}_datafield_59678_1_1_en-GB_ifr"
-  private lazy val jobSummaryPath         = s".//body[@data-id='${formId}_datafield_51753_1_1_en-GB']"
-  private lazy val jobDescriptionPath     = s".//body[@data-id='${formId}_datafield_51761_1_1_en-GB']"
-  private lazy val personSpecsPath        = s".//body[@data-id='${formId}_datafield_51767_1_1_en-GB']"
-  private lazy val offeredBenefitsPath    = s".//body[@data-id='${formId}_datafield_62219_1_1_en-GB']"
-  private lazy val selectionProcessPath   = s".//body[@data-id='${formId}_datafield_59678_1_1_en-GB']"
-  private lazy val jobSummaryIframe       = s"${formId}_datafield_51753_1_1_en-GB_ifr"
-  private lazy val jobDescriptionIframe   = s"${formId}_datafield_51761_1_1_en-GB_ifr"
+  def jobSummaryId           = s"${formId}_datafield_51753_1_1_en-GB_ifr"
+  def jobDescriptionId       = s"${formId}_field_value_51761_1"
+  def personSpecsIframe      = s"${formId}_datafield_51767_1_1_en-GB_ifr"
+  def offeredBenefitsIframe  = s"${formId}_datafield_62219_1_1_en-GB_ifr"
+  def selectionProcessIframe = s"${formId}_datafield_59678_1_1_en-GB_ifr"
+  def jobSummaryPath         = s".//body[@data-id='${formId}_datafield_51753_1_1_en-GB']"
+  def jobDescriptionPath     = s".//body[@data-id='${formId}_datafield_51761_1_1_en-GB']"
+  def personSpecsPath        = s".//body[@data-id='${formId}_datafield_51767_1_1_en-GB']"
+  def offeredBenefitsPath    = s".//body[@data-id='${formId}_datafield_62219_1_1_en-GB']"
+  def selectionProcessPath   = s".//body[@data-id='${formId}_datafield_59678_1_1_en-GB']"
+  def jobSummaryIframe       = s"${formId}_datafield_51753_1_1_en-GB_ifr"
+  def jobDescriptionIframe   = s"${formId}_datafield_51761_1_1_en-GB_ifr"
 
   def switchBack(): Unit = driver.switchTo().defaultContent()
 

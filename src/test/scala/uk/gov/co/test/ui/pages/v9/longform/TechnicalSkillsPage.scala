@@ -23,27 +23,27 @@ case class TechSkillsDetails(
 
 object TechnicalSkillsPage extends CivilServiceJobsBasePage {
 
-  private lazy val techSkillsPageTitle                                 = "Technical skills - Civil Service Jobs - GOV.UK"
-  private lazy val v9HowManyTechSkillsFieldsPath                       = ".//*[@data-type='LARGETEXT']"
-  private lazy val techSkillOneHeaderId                                = s"${formId}_label_201673_1"
-  private lazy val techSkillTwoHeaderId                                = s"${formId}_label_201679_1"
-  private lazy val techSkillThreeHeaderId                              = s"${formId}_label_201683_1"
-  private lazy val techSkillFourHeaderId                               = s"${formId}_label_201686_1"
-  private lazy val techSkillFiveHeaderId                               = s"${formId}_label_201690_1"
-  private lazy val techSkillSixHeaderId                                = s"${formId}_label_201694_1"
-  private lazy val techSkillSevenHeaderId                              = s"${formId}_label_201697_1"
-  private lazy val techSkillEightHeaderId                              = s"${formId}_label_201700_1"
-  def techSkillOneInputId                                              = s"${formId}_datafield_64783_1_1"
-  def techSkillTwoInputId                                              = s"${formId}_datafield_64789_1_1"
-  def techSkillThreeInputId                                            = s"${formId}_datafield_124457_1_1"
-  def techSkillFourInputId                                             = s"${formId}_datafield_64801_1_1"
-  def techSkillFiveInputId                                             = s"${formId}_datafield_64807_1_1"
-  def techSkillSixInputId                                              = s"${formId}_datafield_64813_1_1"
-  def techSkillSevenInputId                                            = s"${formId}_datafield_64819_1_1"
-  def techSkillEightInputId                                            = s"${formId}_datafield_64825_1_1"
-  private lazy val newListOfTechSkills: mutable.Seq[String]            = listOfTechSkills
-  private lazy val newListOfTechSkillsDescription: mutable.Seq[String] = listOfTechSkillsDescription
-  val sortedListOfTechSkills: Seq[String]                              = List(
+  private lazy val techSkillsPageTitle                    = "Technical skills - Civil Service Jobs - GOV.UK"
+  private lazy val v9HowManyTechSkillsFieldsPath          = ".//*[@data-type='LARGETEXT']"
+  def techSkillOneHeaderId                                = s"${formId}_label_201673_1"
+  def techSkillTwoHeaderId                                = s"${formId}_label_201679_1"
+  def techSkillThreeHeaderId                              = s"${formId}_label_201683_1"
+  def techSkillFourHeaderId                               = s"${formId}_label_201686_1"
+  def techSkillFiveHeaderId                               = s"${formId}_label_201690_1"
+  def techSkillSixHeaderId                                = s"${formId}_label_201694_1"
+  def techSkillSevenHeaderId                              = s"${formId}_label_201697_1"
+  def techSkillEightHeaderId                              = s"${formId}_label_201700_1"
+  def techSkillOneInputId                                 = s"${formId}_datafield_64783_1_1"
+  def techSkillTwoInputId                                 = s"${formId}_datafield_64789_1_1"
+  def techSkillThreeInputId                               = s"${formId}_datafield_124457_1_1"
+  def techSkillFourInputId                                = s"${formId}_datafield_64801_1_1"
+  def techSkillFiveInputId                                = s"${formId}_datafield_64807_1_1"
+  def techSkillSixInputId                                 = s"${formId}_datafield_64813_1_1"
+  def techSkillSevenInputId                               = s"${formId}_datafield_64819_1_1"
+  def techSkillEightInputId                               = s"${formId}_datafield_64825_1_1"
+  var newListOfTechSkills: mutable.Seq[String]            = listOfTechSkills
+  var newListOfTechSkillsDescription: mutable.Seq[String] = listOfTechSkillsDescription
+  val sortedListOfTechSkills: Seq[String]                 = List(
     "Autotest - technical skills 1",
     "Autotest - technical skills 2",
     "Autotest - technical skills 3",
@@ -53,7 +53,7 @@ object TechnicalSkillsPage extends CivilServiceJobsBasePage {
     "Autotest - technical skills 7",
     "Autotest - technical skills 8"
   )
-  val sortedListOfTechSkillsDescription: Seq[String]                   = List(
+  val sortedListOfTechSkillsDescription: Seq[String]      = List(
     "Autotest - technical skills 1 description",
     "Autotest - technical skills 2 description",
     "Autotest - technical skills 3 description",

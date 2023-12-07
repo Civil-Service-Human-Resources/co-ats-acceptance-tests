@@ -16,14 +16,14 @@ case class ContactDetails(
 
 object ContactDetailsSection extends VacancyBasePage {
 
-  private lazy val contactNameId           = s"${formId}_field_value_59444_1"
-  private lazy val contactEmailInput       = s"${formId}_datafield_59457_1_1"
-  private lazy val vacancyHolderNameId     = s"${formId}_field_value_115926_1"
-  private lazy val contactNameInput        = s"${formId}_datafield_59444_1_1"
-  private lazy val contactPhoneInput       = s"${formId}_datafield_101571_1_1"
-  private lazy val vacancyHolderNameInput  = s"${formId}_datafield_115926_1_1"
-  private lazy val vacancyHolderEmailInput = s"${formId}_datafield_115708_1_1"
-  private lazy val vacancyTeamEmailInput   = s"${formId}_datafield_59450_1_1"
+  def contactNameId           = s"${formId}_field_value_59444_1"
+  def contactEmailInput       = s"${formId}_datafield_59457_1_1"
+  def vacancyHolderNameId     = s"${formId}_field_value_115926_1"
+  def contactNameInput        = s"${formId}_datafield_59444_1_1"
+  def contactPhoneInput       = s"${formId}_datafield_101571_1_1"
+  def vacancyHolderNameInput  = s"${formId}_datafield_115926_1_1"
+  def vacancyHolderEmailInput = s"${formId}_datafield_115708_1_1"
+  def vacancyTeamEmailInput   = s"${formId}_datafield_59450_1_1"
 
   private def enterContactName(contactDetails: ContactDetails): Unit = {
     scrollToElement(By.id(contactNameId))

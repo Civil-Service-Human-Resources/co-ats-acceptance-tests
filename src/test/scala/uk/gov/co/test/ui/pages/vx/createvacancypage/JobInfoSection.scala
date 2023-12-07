@@ -21,17 +21,17 @@ object JobInfoSection extends VacancyBasePage {
 
   val createVacancyTitle = "Create New Vacancy : Civil Service Jobs - GOV.UK"
 
-  private lazy val businessAreaId            = s"select2-${formId}_datafield_155221_1_1-container"
-  private lazy val whichProfessionId         = s"select2-${formId}_datafield_155435_1_1-container"
-  private lazy val noOfJobsId                = s"${formId}_datafield_155332_1_1"
-  private lazy val typeOfRoleId              = s"select2-${formId}_datafield_155369_1_1-container"
-  private lazy val welshRequiredCheck        = s"${formId}_datafield_179408_1_1"
-  private lazy val businessAreaDetailId      = s"${formId}_datafield_155206_1_1_en-GB"
-  private lazy val typeOfRoleInput           = s".//*[@aria-describedby='$typeOfRoleId']"
-  private lazy val listOptionsPath           = ".//li[@role='option']"
-  private lazy val addWelshBusinessAreaId    = "clicky_155206"
-  private lazy val welshBusinessAreaInput    = "datafield_155206_1_1_cy"
-  private lazy val updateWelshBusinessAreaId = "lbledit_datafield_155206_1_1-update"
+  def businessAreaId              = s"select2-${formId}_datafield_155221_1_1-container"
+  def whichProfessionId           = s"select2-${formId}_datafield_155435_1_1-container"
+  def noOfJobsId                  = s"${formId}_datafield_155332_1_1"
+  def typeOfRoleId                = s"select2-${formId}_datafield_155369_1_1-container"
+  def welshRequiredCheck          = s"${formId}_datafield_179408_1_1"
+  def businessAreaDetailId        = s"${formId}_datafield_155206_1_1_en-GB"
+  def typeOfRoleInput             = s".//*[@aria-describedby='$typeOfRoleId']"
+  def listOptionsPath             = ".//li[@role='option']"
+  def addWelshBusinessAreaId()    = "clicky_155206"
+  def welshBusinessAreaInput      = "datafield_155206_1_1_cy"
+  def updateWelshBusinessAreaId() = "lbledit_datafield_155206_1_1-update"
 
   private def selectWelshVersion(jobInfoDetails: JobInfoDetails): Unit =
     if (jobInfoDetails.displayWelsh) checkbox(welshRequiredCheck).select()
@@ -52,10 +52,10 @@ object JobInfoSection extends VacancyBasePage {
     businessDetailsInput.sendKeys(jobInfoDetails.businessAreaDetail)
     addWelshTranslation(
       jobInfoDetails.addWelshBusinessArea,
-      addWelshBusinessAreaId,
+      addWelshBusinessAreaId(),
       welshBusinessAreaInput,
       jobInfoDetails.welshBusinessArea,
-      updateWelshBusinessAreaId
+      updateWelshBusinessAreaId()
     )
   }
 

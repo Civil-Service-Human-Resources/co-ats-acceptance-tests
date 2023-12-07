@@ -18,8 +18,7 @@ object PreferencesPage extends CivilServiceJobsBasePage {
 
   private lazy val preferencesPageTitle       = "Preferences - Civil Service Jobs - GOV.UK"
   private lazy val errorSameLocationsSelected = "You cannot select the same location more than once"
-  private lazy val vXMaxLocationsAllowed      = vXMaxLocations.toInt
-
+  def vXMaxLocationsAllowed: Int = vXMaxLocations.toInt
   def firstLocationId              = s"${formId}_datafield_53467_1_1"
   def secondLocationId             = s"${formId}_datafield_53470_1_1"
   def thirdLocationId              = s"${formId}_datafield_53473_1_1"

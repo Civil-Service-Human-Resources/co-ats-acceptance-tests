@@ -15,20 +15,20 @@ case class AdditionalQuestionsDetails(
 
 object AdditionalQuestionsSection extends VacancyBasePage {
 
-  private lazy val moreQuestionsSectionId   = s"${formId}_section_56149_col_0"
-  private lazy val additionalQuestionsYesId = s"${formId}_datafield_56152_1_1_1"
-  private lazy val additionalQuestionsNoId  = s"${formId}_datafield_56152_1_1_2"
-  private lazy val oneQuestionId            = s"${formId}_datafield_56156_1_1_14804"
-  private lazy val twoQuestionId            = s"${formId}_datafield_56156_1_1_14805"
-  private lazy val threeQuestionId          = s"${formId}_datafield_56156_1_1_14806"
-  private lazy val questionOneInput         = s"${formId}_datafield_56159_1_1_en-GB"
-  private lazy val questionTwoInput         = s"${formId}_datafield_56165_1_1_en-GB"
-  private lazy val questionThreeInput       = s"${formId}_datafield_56171_1_1_en-GB"
-  var vXAnyAdditionalQuestions              = true
-  var vXHowManyQuestions                    = 3
-  var vXQuestionOne                         = "Autotest - Question 1"
-  var vXQuestionTwo                         = "Autotest - Question 2"
-  var vXQuestionThree                       = "Autotest - Question 3"
+  def moreQuestionsSectionId   = s"${formId}_section_56149_col_0"
+  def additionalQuestionsYesId = s"${formId}_datafield_56152_1_1_1"
+  def additionalQuestionsNoId  = s"${formId}_datafield_56152_1_1_2"
+  def oneQuestionId            = s"${formId}_datafield_56156_1_1_14804"
+  def twoQuestionId            = s"${formId}_datafield_56156_1_1_14805"
+  def threeQuestionId          = s"${formId}_datafield_56156_1_1_14806"
+  def questionOneInput         = s"${formId}_datafield_56159_1_1_en-GB"
+  def questionTwoInput         = s"${formId}_datafield_56165_1_1_en-GB"
+  def questionThreeInput       = s"${formId}_datafield_56171_1_1_en-GB"
+  var vXAnyAdditionalQuestions = true
+  var vXHowManyQuestions       = 3
+  var vXQuestionOne            = "Autotest - Question 1"
+  var vXQuestionTwo            = "Autotest - Question 2"
+  var vXQuestionThree          = "Autotest - Question 3"
 
   private def selectMoreQuestions(additionalQuestionsDetails: AdditionalQuestionsDetails): Unit = {
     scrollToElement(By.id(moreQuestionsSectionId))

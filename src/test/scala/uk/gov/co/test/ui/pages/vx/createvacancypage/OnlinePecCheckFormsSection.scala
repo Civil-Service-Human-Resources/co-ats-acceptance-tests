@@ -13,10 +13,10 @@ case class OnlinePecCheckFormsDetails(
 
 object OnlinePecCheckFormsSection extends VacancyBasePage {
 
-  private lazy val onlinePecCheckFormsSectionId = s"${formId}_section_154278_col_0"
-  private lazy val useOnlinePecCheckFormsId     = s"select2-${formId}_datafield_154299_1_1-container"
-  private lazy val haveTeamMailboxId            = s"select2-${formId}_datafield_154310_1_1-container"
-  private lazy val pecFormsTeamEmailInputId     = s"${formId}_datafield_154303_1_1"
+  def onlinePecCheckFormsSectionId = s"${formId}_section_154278_col_0"
+  def useOnlinePecCheckFormsId     = s"select2-${formId}_datafield_154299_1_1-container"
+  def haveTeamMailboxId            = s"select2-${formId}_datafield_154310_1_1-container"
+  def pecFormsTeamEmailInputId     = s"${formId}_datafield_154303_1_1"
 
   private def enterOnlinePecFormsCheckFlow(onlinePecCheckFormsDetails: OnlinePecCheckFormsDetails): Unit = {
     scrollToElement(By.id(onlinePecCheckFormsSectionId))

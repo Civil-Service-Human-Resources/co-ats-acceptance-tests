@@ -14,15 +14,15 @@ case class RecruiterTestsDetails(
 
 object RecruiterTestsSection extends VacancyBasePage {
 
-  private lazy val recruiterTestsSectionId     = s"${formId}_section_129814_col_0"
-  private lazy val candidateDeadlineId         = s"select2-${formId}_datafield_129839_1_1-container"
-  private lazy val progressionOptionsId        = s"select2-${formId}_datafield_129854_1_1-container"
-  private lazy val sameDeadlineAllTestsId      = s"select2-${formId}_datafield_129843_1_1-container"
-  private lazy val additionalInstructionsId    = s"select2-${formId}_datafield_129828_1_1-container"
-  private lazy val additionalInstructionsInput = s"${formId}_datafield_129832_1_1_en-GB"
-  private lazy val deadlineDayId               = s"${formId}_datafield_129847_1_1--DAY"
-  private lazy val deadlineMonthId             = s"${formId}_datafield_129847_1_1--MONTH"
-  private lazy val deadlineYearId              = s"${formId}_datafield_129847_1_1--YEAR"
+  def recruiterTestsSectionId     = s"${formId}_section_129814_col_0"
+  def candidateDeadlineId         = s"select2-${formId}_datafield_129839_1_1-container"
+  def progressionOptionsId        = s"select2-${formId}_datafield_129854_1_1-container"
+  def sameDeadlineAllTestsId      = s"select2-${formId}_datafield_129843_1_1-container"
+  def additionalInstructionsId    = s"select2-${formId}_datafield_129828_1_1-container"
+  def additionalInstructionsInput = s"${formId}_datafield_129832_1_1_en-GB"
+  def deadlineDayId               = s"${formId}_datafield_129847_1_1--DAY"
+  def deadlineMonthId             = s"${formId}_datafield_129847_1_1--MONTH"
+  def deadlineYearId              = s"${formId}_datafield_129847_1_1--YEAR"
 
   def validateUrl(): Unit = {
     scrollToElement(By.id(recruiterTestsSectionId))

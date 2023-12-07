@@ -31,12 +31,12 @@ case class CVDetails(
 
 object YourCVPage extends CivilServiceJobsBasePage {
 
+  private lazy val yourCVTitle            = "Your CV - Civil Service Jobs - GOV.UK"
   private lazy val qualificationTablePath = ".//*[@class='table form_section form_table_layout ']/tbody"
   private lazy val qualificationRowsPath  = ".//tr[contains(@class, 'row form_section form_multi_section')]"
   private lazy val addRowsPath            = ".//*[@name='add_section_instance_22369']"
   private lazy val removeRowsPath         = ".//*[@name='remove_section_instance_22369']"
   def removedPersonalDetailsId            = s"${formId}_datafield_89045_1_1_15120_label"
-  def yourCVTitle                         = "Your CV - Civil Service Jobs - GOV.UK"
   def employmentHistoryDetailsInputId     = s"${formId}_datafield_99856_1_1"
   def previousSkillsDetailsInputId        = s"${formId}_datafield_99863_1_1"
   def typeOfQualificationOneId            = s"${formId}_datafield_53854_1_1"
