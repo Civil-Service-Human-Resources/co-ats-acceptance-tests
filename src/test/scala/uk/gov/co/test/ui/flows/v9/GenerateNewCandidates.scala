@@ -9,14 +9,18 @@ import java.nio.file.{Files, Paths, StandardOpenOption}
 
 object GenerateNewCandidates extends CivilServiceJobsBasePage {
 
-  def createMultipleCandidates(candidatesRequired: Int = 2): Unit = {
+  def createMultipleCandidates(candidatesRequired: Int = 1): Unit = {
     val utf8: Charset = StandardCharsets.UTF_8
     val file          = "candidates.txt"
     val writer        = new PrintWriter(new File(file))
 
     for (i <- 1 to candidatesRequired) {
-      randomFirstName = "A61"
-      randomLastName = s"Candidate$i"
+//      randomFirstName = "A61"
+//      randomLastName = s"Candidate$i"
+//      randomEmail = s"${randomFirstName.toLowerCase}.${randomLastName.toLowerCase}@example.com"
+      generateCandidateDetailsIterator(i)
+      randomFirstName = s"${generateRandomFirstName()}"
+      randomLastName = s"${generateRandomLastName()}"
       randomEmail = s"${randomFirstName.toLowerCase}.${randomLastName.toLowerCase}@example.com"
       navigateToCreateAccountPage()
       enterFirstNameLoop(randomFirstName)

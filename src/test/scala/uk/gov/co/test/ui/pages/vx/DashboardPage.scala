@@ -8,6 +8,7 @@ object DashboardPage extends VacancyBasePage {
   val dashboardPageTitle   = "Home : Civil Service Jobs - GOV.UK"
   val createNewVacancyPath = ".//*[@class='textlabel' and text() = 'Create new vacancy']"
   val searchVacanciesPath  = ".//*[@class='textlabel' and text() = 'Search Vacancies']"
+  val previewJobPath       = ".//a[@aria-label='Preview advert Details Summary']"
   val searchPath           = "selected_option"
   val searchInput          = "search_input"
   val matchingOption       = "matching_options"
@@ -25,7 +26,7 @@ object DashboardPage extends VacancyBasePage {
   }
 
   def searchOn(): Unit = {
-    waitForVisibilityOfElementByPath(".//a[@aria-label='Preview advert Details Summary']").isDisplayed
+    waitForVisibilityOfElementByPath(previewJobPath).isDisplayed
     onPage(s"$vacancyName : Civil Service Jobs - GOV.UK")
     newVacancyAppId()
     waitForVisibilityOfElementById(searchPath).click()
@@ -33,6 +34,19 @@ object DashboardPage extends VacancyBasePage {
     waitForVisibilityOfElementById(searchInput).sendKeys(vacancyId)
     matchCriteria("Exact Match")
     clickOn(searchForVacancy)
+  }
+
+  def searchForActiveVacancy(): Unit = {
+    vacancyName = "GCQACO - Consultant"
+    vacancyId = "9416"
+    dashboardPageCheck()
+    waitForVisibilityOfElementById(searchPath).click()
+    waitForVisibilityOfElementByPath(searchVacanciesPath).click()
+    waitForVisibilityOfElementById(searchInput).sendKeys(vacancyId)
+    matchCriteria("Exact Match")
+    clickOn(searchForVacancy)
+    waitForVisibilityOfElementByPath(previewJobPath).isDisplayed
+    onPage(s"$vacancyName : Civil Service Jobs - GOV.UK")
   }
 
   def matchCriteria(criteria: String): Unit =

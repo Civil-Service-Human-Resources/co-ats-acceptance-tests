@@ -8,7 +8,7 @@ import org.scalatest.matchers.should.Matchers
 import org.scalatestplus.selenium.WebBrowser
 import uk.gov.co.test.ui.driver.BrowserDriver
 import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.navigateToVxConfigLogin
-import uk.gov.co.test.ui.pages.v9.SignInPage.{navigateToV9Test, v9AcceptAllCookies, v9SearchCookiesById}
+import uk.gov.co.test.ui.pages.v9.SignInPage.{checkV9Logout, generateCandidateDetails, navigateToV9Test, searchForSignOut, signOutProcess, v9AcceptAllCookies, v9SearchCookiesById}
 import uk.gov.co.test.ui.utils.SingletonScreenshotReport
 import uk.gov.co.test.ui.webdriver.SingletonDriver
 
@@ -25,20 +25,22 @@ trait BaseFeatureSpec
     with BrowserDriver
     with Eventually {
 
-  override protected def beforeEach(testData: TestData): Unit = {
-    deleteAllCookies()
+  override protected def beforeEach(testData: TestData): Unit =
     if (testData.name.contains("Candidate")) {
+      generateCandidateDetails()
       navigateToV9Test()
       if (!v9SearchCookiesById().isEmpty) {
         v9AcceptAllCookies()
       }
     } else {
+      generateCandidateDetails()
       navigateToVxConfigLogin()
     }
-  }
 
   override protected def afterEach(testData: TestData): Unit =
-    deleteAllCookies()
+    if (testData.name.contains("Candidate")) {
+      checkV9Logout()
+    }
 
   override def afterAll(): Unit = {
     Runtime.getRuntime addShutdownHook new Thread {

@@ -25,40 +25,39 @@ case class ManagementDetails(
 
 object ManagementSection extends VacancyBasePage {
 
-  private lazy val managementSectionId            = s"${formId}_section_100276_col_0"
-  private lazy val greatWorkForVeteransYesId      = s"${formId}_datafield_138150_1_1_1"
-  private lazy val greatWorkForVeteransNoId       = s"${formId}_datafield_138150_1_1_2"
-  private lazy val prisonLeaversYesId             = s"${formId}_datafield_176958_1_1_1"
-  private lazy val prisonLeaversNoId              = s"${formId}_datafield_176958_1_1_2"
-  private lazy val prisonLeaversLevelOfSecurityId = s"${formId}_datafield_176961_1_1_47616"
-  private lazy val prisonLeaversNatureOfRoleId    = s"${formId}_datafield_176961_1_1_47617"
-  private lazy val prisonLeaversReservedPostId    = s"${formId}_datafield_176961_1_1_47615"
-  private lazy val prisonLeaversOtherId           = s"${formId}_datafield_176961_1_1_47618"
-  private lazy val removePrinciplesYesId          = s"${formId}_datafield_100287_1_1_1"
-  private lazy val removePrinciplesNoId           = s"${formId}_datafield_100287_1_1_2"
-  private lazy val assignToId                     = s"select2-${formId}_datafield_101084_1_1-container"
-  private lazy val assignTo2Id                    = s"select2-${formId}_datafield_168380_1_1-container"
-  private lazy val grsJobStageTypeId              = s"select2-${formId}_datafield_104968_1_1-container"
-  private lazy val grsPecMenuId                   = s"${formId}_datafield_118309_1_1_17450"
-  private lazy val grsPecEUExitId                 = s"${formId}_datafield_118309_1_1_17451"
-  private lazy val grsPecBauId                    = s"${formId}_datafield_118309_1_1_17449"
-  private lazy val grsToSiftYesId                 = s"${formId}_datafield_142798_1_1_1"
-  private lazy val grsToSiftNoId                  = s"${formId}_datafield_142798_1_1_2"
-  private lazy val grsToAssessAndInterviewYesId   = s"${formId}_datafield_142802_1_1_1"
-  private lazy val grsToAssessAndInterviewNoId    = s"${formId}_datafield_142802_1_1_2"
-  private lazy val linkToProjectYesId             = s"${formId}_datafield_105092_1_1_1"
-  private lazy val linkToProjectNoId              = s"${formId}_datafield_105092_1_1_2"
-  private lazy val projectNameInputId             = s"${formId}_datafield_104972_1_1"
-  private lazy val complaintsProcessInputId       = s"${formId}_datafield_179305_1_1_en-GB"
-  private lazy val vacancyCommentsInputId         = s"${formId}_datafield_100298_1_1"
-  var greatForVeterans = ""
+  def managementSectionId            = s"${formId}_section_100276_col_0"
+  def greatWorkForVeteransYesId      = s"${formId}_datafield_138150_1_1_1"
+  def greatWorkForVeteransNoId       = s"${formId}_datafield_138150_1_1_2"
+  def prisonLeaversYesId             = s"${formId}_datafield_176958_1_1_1"
+  def prisonLeaversNoId              = s"${formId}_datafield_176958_1_1_2"
+  def prisonLeaversLevelOfSecurityId = s"${formId}_datafield_176961_1_1_47616"
+  def prisonLeaversNatureOfRoleId    = s"${formId}_datafield_176961_1_1_47617"
+  def prisonLeaversReservedPostId    = s"${formId}_datafield_176961_1_1_47615"
+  def prisonLeaversOtherId           = s"${formId}_datafield_176961_1_1_47618"
+  def removePrinciplesYesId()        = s"${formId}_datafield_100287_1_1_1"
+  def removePrinciplesNoId()         = s"${formId}_datafield_100287_1_1_2"
+  def assignToId                     = s"select2-${formId}_datafield_101084_1_1-container"
+  def assignTo2Id                    = s"select2-${formId}_datafield_168380_1_1-container"
+  def grsJobStageTypeId              = s"select2-${formId}_datafield_104968_1_1-container"
+  def grsPecMenuId                   = s"${formId}_datafield_118309_1_1_17450"
+  def grsPecEUExitId                 = s"${formId}_datafield_118309_1_1_17451"
+  def grsPecBauId                    = s"${formId}_datafield_118309_1_1_17449"
+  def grsToSiftYesId                 = s"${formId}_datafield_142798_1_1_1"
+  def grsToSiftNoId                  = s"${formId}_datafield_142798_1_1_2"
+  def grsToAssessAndInterviewYesId   = s"${formId}_datafield_142802_1_1_1"
+  def grsToAssessAndInterviewNoId    = s"${formId}_datafield_142802_1_1_2"
+  def linkToProjectYesId             = s"${formId}_datafield_105092_1_1_1"
+  def linkToProjectNoId              = s"${formId}_datafield_105092_1_1_2"
+  def projectNameInputId             = s"${formId}_datafield_104972_1_1"
+  def complaintsProcessInputId       = s"${formId}_datafield_179305_1_1_en-GB"
+  def vacancyCommentsInputId         = s"${formId}_datafield_100298_1_1"
+  var greatForVeterans: Boolean      = true
 
   private def selectVeteransAndPrisonLeaversPosition(managementDetails: ManagementDetails): Unit = {
     scrollToElement(By.id(managementSectionId))
-    greatForVeterans = managementDetails.greatWorkForVeterans.toString
+    greatForVeterans = managementDetails.greatWorkForVeterans
     if (candidateApproach == "External") {
-      val veterans = managementDetails.greatWorkForVeterans
-      if (veterans) {
+      if (greatForVeterans) {
         clickOnRadioButton(greatWorkForVeteransYesId)
       } else {
         clickOnRadioButton(greatWorkForVeteransNoId)
@@ -81,17 +80,17 @@ object ManagementSection extends VacancyBasePage {
     }
 
   private def selectRemoveCSRPrinciples(managementDetails: ManagementDetails): Unit =
-    if (managementDetails.removeCSRPrinciples) clickOnRadioButton(removePrinciplesYesId)
-    else clickOnRadioButton(removePrinciplesNoId)
+    if (managementDetails.removeCSRPrinciples) clickOnRadioButton(removePrinciplesYesId())
+    else clickOnRadioButton(removePrinciplesNoId())
 
   private def enterAssignTo(managementDetails: ManagementDetails): Unit = {
     val username = managementDetails.assignTo.get
-    selectOptionFromList(username, assignToId, s" $nameVxConfig - $username")
+    selectOptionFromList(username, assignToId, s" $contactNameVxConfig - $username")
   }
 
   private def enterAssignTo2(managementDetails: ManagementDetails): Unit = {
     val username2 = managementDetails.assignTo2.get
-    selectOptionFromList(username2, assignTo2Id, s" $nameVxConfig - $username2")
+    selectOptionFromList(username2, assignTo2Id, s" $contactNameVxConfig - $username2")
   }
 
   private def grsRecruitmentStageType(managementDetails: ManagementDetails): Unit = {

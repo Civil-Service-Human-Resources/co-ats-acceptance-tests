@@ -7,17 +7,16 @@ import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.vacancyN
 
 object SummaryPage extends VacancyBasePage {
 
-  val saveVacancyId    = "edit_opp_form_form_create"
-  val isActivePath     = "//*[@id='details_form_is_active']/span"
-  val editVacancy      = "//*[@class='ajax_form_edit btn btn-default btn-sm']"
-  val previewAdvert    = ".//a[@aria-label='Preview advert Details Summary']"
-  val activateVacancy  = "details_form_is_active"
-  val submitEditedForm = "details_form_form_submit"
-  val addTranslationId = "details_form_title_button"
-  val vacancyTitleId   = "details_form_title"
-  val vacancyTitle     = ".//*[@class='obj_name']"
-  val alertMessagePath = ".//*[@class='cn']"
-  val alertMessage     = s"Vacancy Details Saved : $vacancyName"
+  val saveVacancyId                 = "edit_opp_form_form_create"
+  private lazy val isActivePath     = "//*[@id='details_form_is_active']/span"
+  private lazy val editVacancy      = "//*[@class='ajax_form_edit btn btn-default btn-sm']"
+  private lazy val previewAdvert    = ".//a[@aria-label='Preview advert Details Summary']"
+  private lazy val activateVacancy  = "details_form_is_active"
+  private lazy val submitEditedForm = "details_form_form_submit"
+  private lazy val addTranslationId = "details_form_title_button"
+  private lazy val vacancyTitleId   = "details_form_title"
+  private lazy val vacancyTitle     = ".//*[@class='obj_name']"
+  private lazy val alertMessagePath = ".//*[@class='cn']"
 
   private def newVacancyPageTitle(): String = {
     val pageTitle = s"$vacancyName : Civil Service Jobs - GOV.UK"
@@ -41,7 +40,7 @@ object SummaryPage extends VacancyBasePage {
       }
       scrollToElement(By.id(submitEditedForm))
       waitForVisibilityOfElementById(submitEditedForm).click()
-      confirmFormEdit() shouldEqual alertMessage
+      confirmFormEdit() shouldEqual s"Vacancy Details Saved : $vacancyName"
     }
 
   def confirmAndActivateVacancy(): Unit = {

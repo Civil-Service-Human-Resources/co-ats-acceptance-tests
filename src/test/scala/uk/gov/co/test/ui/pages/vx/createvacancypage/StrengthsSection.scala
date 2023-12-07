@@ -18,16 +18,16 @@ case class StrengthsDetails(
 
 object StrengthsSection extends VacancyBasePage {
 
-  private lazy val strengthsSectionId      = s"${formId}_section_52615_col_0"
-  private lazy val noOfStrengthsAssessedId = s"select2-${formId}_datafield_117504_1_1-container"
-  private lazy val strengthOneId           = s"select2-${formId}_datafield_117508_1_1-container"
-  private lazy val strengthTwoId           = s"select2-${formId}_datafield_117512_1_1-container"
-  private lazy val strengthThreeId         = s"select2-${formId}_datafield_117516_1_1-container"
-  private lazy val strengthFourId          = s"select2-${formId}_datafield_117520_1_1-container"
-  private lazy val strengthFiveId          = s"select2-${formId}_datafield_117524_1_1-container"
-  private lazy val strengthSixId           = s"select2-${formId}_datafield_117528_1_1-container"
-  private lazy val strengthSevenId         = s"select2-${formId}_datafield_117532_1_1-container"
-  private lazy val strengthEightId         = s"select2-${formId}_datafield_117536_1_1-container"
+  def strengthsSectionId      = s"${formId}_section_52615_col_0"
+  def noOfStrengthsAssessedId = s"select2-${formId}_datafield_117504_1_1-container"
+  def strengthOneId           = s"select2-${formId}_datafield_117508_1_1-container"
+  def strengthTwoId           = s"select2-${formId}_datafield_117512_1_1-container"
+  def strengthThreeId         = s"select2-${formId}_datafield_117516_1_1-container"
+  def strengthFourId          = s"select2-${formId}_datafield_117520_1_1-container"
+  def strengthFiveId          = s"select2-${formId}_datafield_117524_1_1-container"
+  def strengthSixId           = s"select2-${formId}_datafield_117528_1_1-container"
+  def strengthSevenId         = s"select2-${formId}_datafield_117532_1_1-container"
+  def strengthEightId         = s"select2-${formId}_datafield_117536_1_1-container"
 
   private def selectStrengthsRequired(successProfilesDetails: SuccessProfilesDetails): Unit = {
     val strengths = successProfilesDetails.strengthsSection

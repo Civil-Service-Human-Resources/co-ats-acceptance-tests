@@ -27,43 +27,44 @@ case class ExperienceDetails(
 
 object ExperienceSection extends VacancyBasePage {
 
-  private lazy val provideCvYesId                 = s"${formId}_datafield_59983_1_1_1"
-  private lazy val provideCvNoId                  = s"${formId}_datafield_59983_1_1_2"
-  private lazy val cvScore0to7Id                  = s"${formId}_datafield_187853_1_1_50711"
-  private lazy val cvScore0to100Id                = s"${formId}_datafield_187853_1_1_50712"
-  private lazy val jobHistoryYesId                = s"${formId}_datafield_60080_1_1_1"
-  private lazy val jobHistoryNoId                 = s"${formId}_datafield_60080_1_1_2"
-  private lazy val qualificationDetailsYesId      = s"${formId}_datafield_60086_1_1_1"
-  private lazy val qualificationDetailsNoId       = s"${formId}_datafield_60086_1_1_2"
-  private lazy val previousSkillsYesId            = s"${formId}_datafield_60090_1_1_1"
-  private lazy val previousSkillsNoId             = s"${formId}_datafield_60090_1_1_2"
-  private lazy val personalStatementYesId         = s"${formId}_datafield_59992_1_1_1"
-  private lazy val personalStatementNoId          = s"${formId}_datafield_59992_1_1_2"
-  private lazy val statementScore0to7Id           = s"${formId}_datafield_187857_1_1_50711"
-  private lazy val statementScore0to100Id         = s"${formId}_datafield_187857_1_1_50712"
-  private lazy val statementWordLimitId           = s"select2-${formId}_datafield_72066_1_1-container"
-  private lazy val guidanceTextYesId              = s"${formId}_datafield_59989_1_1_1"
-  private lazy val guidanceTextNoId               = s"${formId}_datafield_59989_1_1_2"
-  private lazy val guidanceTextInputId            = s"${formId}_datafield_60060_1_1_en-GB"
-  private lazy val pastExperiencesYesId           = s"${formId}_datafield_60105_1_1_1"
-  private lazy val pastExperiencesNoId            = s"${formId}_datafield_60105_1_1_2"
-  private lazy val pastExperiencesInputId         = s"${formId}_datafield_116298_1_1_en-GB"
-  private lazy val mandatoryLicencesYesId         = s"${formId}_datafield_60168_1_1_1"
-  private lazy val mandatoryLicencesNoId          = s"${formId}_datafield_60168_1_1_2"
-  private lazy val mandatoryLicencesInputId       = s"${formId}_datafield_60172_1_1_en-GB"
-  private lazy val mandatoryMembershipsYesId      = s"${formId}_datafield_60185_1_1_1"
-  private lazy val mandatoryMembershipsNoId       = s"${formId}_datafield_60185_1_1_2"
-  private lazy val mandatoryMembershipsInputId    = s"${formId}_datafield_60179_1_1_en-GB"
-  private lazy val mandatoryLanguagesYesId        = s"${formId}_datafield_60190_1_1_1"
-  private lazy val mandatoryLanguagesNoId         = s"${formId}_datafield_60190_1_1_2"
-  private lazy val mandatoryLanguagesInputId      = s"${formId}_datafield_60200_1_1_en-GB"
-  private lazy val mandatoryQualificationsYesId   = s"${formId}_datafield_60215_1_1_1"
-  private lazy val mandatoryQualificationsNoId    = s"${formId}_datafield_60215_1_1_2"
-  private lazy val mandatoryQualificationsInputId = s"${formId}_datafield_60209_1_1_en-GB"
-  var licencesMandatory: String                   = ""
-  var membershipsMandatory: String                = ""
-  var languagesMandatory: String                  = ""
-  var qualificationsMandatory: String             = ""
+  def provideCvYesId                   = s"${formId}_datafield_59983_1_1_1"
+  def provideCvNoId                    = s"${formId}_datafield_59983_1_1_2"
+  def cvScore0to7Id                    = s"${formId}_datafield_187853_1_1_50711"
+  def cvScore0to100Id                  = s"${formId}_datafield_187853_1_1_50712"
+  def jobHistoryYesId                  = s"${formId}_datafield_60080_1_1_1"
+  def jobHistoryNoId                   = s"${formId}_datafield_60080_1_1_2"
+  def qualificationDetailsYesId        = s"${formId}_datafield_60086_1_1_1"
+  def qualificationDetailsNoId         = s"${formId}_datafield_60086_1_1_2"
+  def previousSkillsYesId              = s"${formId}_datafield_60090_1_1_1"
+  def previousSkillsNoId               = s"${formId}_datafield_60090_1_1_2"
+  def personalStatementYesId           = s"${formId}_datafield_59992_1_1_1"
+  def personalStatementNoId            = s"${formId}_datafield_59992_1_1_2"
+  def statementScore0to7Id             = s"${formId}_datafield_187857_1_1_50711"
+  def statementScore0to100Id           = s"${formId}_datafield_187857_1_1_50712"
+  def statementWordLimitId             = s"select2-${formId}_datafield_72066_1_1-container"
+  def guidanceTextYesId                = s"${formId}_datafield_59989_1_1_1"
+  def guidanceTextNoId                 = s"${formId}_datafield_59989_1_1_2"
+  def guidanceTextInputId              = s"${formId}_datafield_60060_1_1_en-GB"
+  def pastExperiencesYesId             = s"${formId}_datafield_60105_1_1_1"
+  def pastExperiencesNoId              = s"${formId}_datafield_60105_1_1_2"
+  def pastExperiencesInputId           = s"${formId}_datafield_116298_1_1_en-GB"
+  def mandatoryLicencesYesId           = s"${formId}_datafield_60168_1_1_1"
+  def mandatoryLicencesNoId            = s"${formId}_datafield_60168_1_1_2"
+  def mandatoryLicencesInputId         = s"${formId}_datafield_60172_1_1_en-GB"
+  def mandatoryMembershipsYesId        = s"${formId}_datafield_60185_1_1_1"
+  def mandatoryMembershipsNoId         = s"${formId}_datafield_60185_1_1_2"
+  def mandatoryMembershipsInputId      = s"${formId}_datafield_60179_1_1_en-GB"
+  def mandatoryLanguagesYesId          = s"${formId}_datafield_60190_1_1_1"
+  def mandatoryLanguagesNoId           = s"${formId}_datafield_60190_1_1_2"
+  def mandatoryLanguagesInputId        = s"${formId}_datafield_60200_1_1_en-GB"
+  def mandatoryQualificationsYesId     = s"${formId}_datafield_60215_1_1_1"
+  def mandatoryQualificationsNoId      = s"${formId}_datafield_60215_1_1_2"
+  def mandatoryQualificationsInputId   = s"${formId}_datafield_60209_1_1_en-GB"
+  var vXGuidanceText: String           = "Autotest - Enter guidance text for the candidate"
+  var licencesMandatory: Boolean       = true
+  var membershipsMandatory: Boolean    = true
+  var languagesMandatory: Boolean      = true
+  var qualificationsMandatory: Boolean = true
 
   private def provideCV(successProfilesDetails: SuccessProfilesDetails): Unit = {
     val cv = successProfilesDetails.experienceSection
@@ -127,8 +128,9 @@ object ExperienceSection extends VacancyBasePage {
 
   private def enterGuidanceText(successProfilesDetails: SuccessProfilesDetails): Unit = {
     val text         = successProfilesDetails.experienceSection
+    vXGuidanceText = text.map(_.statementGuidanceText).get
     val guidanceText = waitForVisibilityOfElementById(guidanceTextInputId)
-    guidanceText.sendKeys(text.map(_.statementGuidanceText).get)
+    guidanceText.sendKeys(vXGuidanceText)
   }
 
   private def selectPastExperiences(successProfilesDetails: SuccessProfilesDetails): Unit = {
@@ -146,8 +148,8 @@ object ExperienceSection extends VacancyBasePage {
   }
 
   private def selectMandatoryLicences(successProfilesDetails: SuccessProfilesDetails): Unit = {
-    licencesMandatory = successProfilesDetails.experienceSection.map(_.licences.map(_.requirements).get).get.toString
-    if (licencesMandatory.toBoolean) {
+    licencesMandatory = successProfilesDetails.experienceSection.map(_.licences.map(_.requirements).get).get
+    if (licencesMandatory) {
       clickOnRadioButton(mandatoryLicencesYesId)
       enterLicenceRequirements(successProfilesDetails)
     } else clickOnRadioButton(mandatoryLicencesNoId)
@@ -160,9 +162,8 @@ object ExperienceSection extends VacancyBasePage {
   }
 
   private def selectMandatoryMemberships(successProfilesDetails: SuccessProfilesDetails): Unit = {
-    membershipsMandatory =
-      successProfilesDetails.experienceSection.map(_.memberships.map(_.requirements).get).get.toString
-    if (membershipsMandatory.toBoolean) {
+    membershipsMandatory = successProfilesDetails.experienceSection.map(_.memberships.map(_.requirements).get).get
+    if (membershipsMandatory) {
       clickOnRadioButton(mandatoryMembershipsYesId)
       enterMembershipsRequirements(successProfilesDetails)
     } else clickOnRadioButton(mandatoryMembershipsNoId)
@@ -175,8 +176,8 @@ object ExperienceSection extends VacancyBasePage {
   }
 
   private def selectMandatoryLanguages(successProfilesDetails: SuccessProfilesDetails): Unit = {
-    languagesMandatory = successProfilesDetails.experienceSection.map(_.languages.map(_.requirements).get).get.toString
-    if (languagesMandatory.toBoolean) {
+    languagesMandatory = successProfilesDetails.experienceSection.map(_.languages.map(_.requirements).get).get
+    if (languagesMandatory) {
       clickOnRadioButton(mandatoryLanguagesYesId)
       enterLanguagesRequirements(successProfilesDetails)
     } else clickOnRadioButton(mandatoryLanguagesNoId)
@@ -189,9 +190,8 @@ object ExperienceSection extends VacancyBasePage {
   }
 
   private def selectMandatoryQualifications(successProfilesDetails: SuccessProfilesDetails): Unit = {
-    qualificationsMandatory =
-      successProfilesDetails.experienceSection.map(_.qualifications.map(_.requirements).get).get.toString
-    if (qualificationsMandatory.toBoolean) {
+    qualificationsMandatory = successProfilesDetails.experienceSection.map(_.qualifications.map(_.requirements).get).get
+    if (qualificationsMandatory) {
       clickOnRadioButton(mandatoryQualificationsYesId)
       enterQualificationsRequirements(successProfilesDetails)
     } else clickOnRadioButton(mandatoryQualificationsNoId)
@@ -218,7 +218,7 @@ object ExperienceSection extends VacancyBasePage {
     selectMandatoryQualifications
   )
 
-  def experiencesRequired(successProfilesDetails: SuccessProfilesDetails): Unit =
+  def selectExperiencesRequired(successProfilesDetails: SuccessProfilesDetails): Unit =
     experiences.foreach { f =>
       f(successProfilesDetails)
     }

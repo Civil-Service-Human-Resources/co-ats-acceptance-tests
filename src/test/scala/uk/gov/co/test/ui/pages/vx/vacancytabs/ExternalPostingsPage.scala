@@ -9,16 +9,16 @@ import scala.util.control.Breaks.{break, breakable}
 
 object ExternalPostingsPage extends VacancyBasePage {
 
-  val externalPostingsTabId  = "oppTabs_external_posting"
-  val addButtonPath          = ".//*[@class='btn btn-default ajax']"
-  val editButtonPath         = ".//*[@class='btn btn-default ']"
-  val destinationId          = "select2-external_posting_form_destination_class_id-container"
-  val postToCsJobsOptionPath = ".//li[@title='Post to Civil Service Jobs']"
-  val nextStep2PostingId     = "external_posting_form_form_submit"
-  val nextStep3PostingId     = "external_posting_form_step3_form_submit"
-  val nextCompletePostingId  = "external_posting_complete_form_submit"
-  val destinationType        = "PostingDestination::ExternalVx"
-  val postingSubHeaderPath   = ".//*[@id='externalpostings_container']/h2"
+  private lazy val externalPostingsTabId  = "oppTabs_external_posting"
+  private lazy val addButtonPath          = ".//*[@class='btn btn-default ajax']"
+  private lazy val editButtonPath         = ".//*[@class='btn btn-default ']"
+  private lazy val destinationId          = "select2-external_posting_form_destination_class_id-container"
+  private lazy val postToCsJobsOptionPath = ".//li[@title='Post to Civil Service Jobs']"
+  private lazy val nextStep2PostingId     = "external_posting_form_form_submit"
+  private lazy val nextStep3PostingId     = "external_posting_form_step3_form_submit"
+  private lazy val nextCompletePostingId  = "external_posting_complete_form_submit"
+  private lazy val destinationType        = "PostingDestination::ExternalVx"
+  private lazy val postingSubHeaderPath   = ".//*[@id='externalpostings_container']/h2"
 
   private def newPostingHeader: String = {
     val header = waitForVisibilityOfElementByPath(postingSubHeaderPath).getText
@@ -83,7 +83,7 @@ object ExternalPostingsPage extends VacancyBasePage {
           _postingLiveDate = thirdRowItem(row).getText
           _postingClosingDate = fourthRowItem(row).getText
           _postingStatus = fifthRowItem(row).getText
-          break
+          break()
         }
       }
     )

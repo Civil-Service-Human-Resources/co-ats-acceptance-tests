@@ -1,6 +1,8 @@
 package uk.gov.co.test.ui.pages.v9
 
-import org.openqa.selenium.WebElement
+import org.openqa.selenium.{By, WebElement}
+
+import java.util
 
 object SignInPage extends CivilServiceJobsBasePage {
 
@@ -14,7 +16,8 @@ object SignInPage extends CivilServiceJobsBasePage {
   def email(): EmailField       = emailField("ID_username")
   def password(): PasswordField = pwdField("ID_password_login_window")
 
-  def candidateFullName(user: CandidateDetails) = s"${user.firstname} ${user.lastname}"
+  def candidateFullName(user: CandidateDetails): String =
+    s"${user.firstname} ${user.lastname}"
 
   def signIn(): WebElement = waitForElementToBeClickableByPath(
     "//*[@id='login_button']"
@@ -23,6 +26,8 @@ object SignInPage extends CivilServiceJobsBasePage {
   def signOut(): WebElement = waitForElementToBeClickableByPath(
     "//*[@title='Sign out']"
   )
+
+  def searchForSignOut(): util.List[WebElement] = driver.findElements(By.xpath("//*[@title='Sign out']"))
 
   def editAccountDetails(): WebElement = waitForElementToBeClickableByPath(
     "//*[@title='Edit your account details']"

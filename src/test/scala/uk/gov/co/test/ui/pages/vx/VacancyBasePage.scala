@@ -9,7 +9,6 @@ import uk.gov.co.test.ui.conf.TestConfiguration.readProperty
 import uk.gov.co.test.ui.data.vx.RecruiterDetails
 import uk.gov.co.test.ui.driver.BrowserDriver
 import uk.gov.co.test.ui.pages.BasePage
-import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.{advertDetailsFunction, applicationCentreTitle, helpWithSelectionText, withdrawApplicationFunction}
 import uk.gov.co.test.ui.pages.v9.SignInPage.{navigateToV9Test, v9AcceptAllCookies, v9SearchCookiesById}
 import uk.gov.co.test.ui.pages.vx.DashboardPage.searchOn
 import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.applicationClosingDate
@@ -18,20 +17,26 @@ import uk.gov.co.test.ui.pages.vx.vacancytabs.SummaryPage.confirmAndActivateVaca
 
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
+import java.util
 
 trait VacancyBasePage extends Matchers with BasePage with BrowserDriver {
 
-  val url: String                = TestConfiguration.url("vxconfig")
-  val vxConfigTitle              = "Oleeo vX Login : CSR"
-  val vxConfigHomePageTitle      = "Home : Civil Service Jobs - GOV.UK"
-  val nameVxConfig: String       = readProperty("services.vxconfig.admin.contact_name")
-  val emailVxConfig: String      = readProperty("services.vxconfig.admin.contact_email")
-  val usernameVxConfig: String   = readProperty("services.vxconfig.admin.username")
-  val passwordVxConfig: String   = readProperty("services.vxconfig.admin.password")
-  val getOs: String              = System.getProperty("os.name").toLowerCase
-  lazy val generalInput          = "//input[@class='select2-search__field']"
-  val applicationCentrePageTitle = "Your account details - Civil Service Jobs - GOV.UK"
+  val url: String                              = TestConfiguration.url("vxconfig")
+  val vxConfigTitle                            = "Oleeo vX Login : CSR"
+  val vxConfigHomePageTitle                    = "Home : Civil Service Jobs - GOV.UK"
+  val contactNameVxConfig: String              = readProperty("services.vxconfig.admin.contact_name")
+  val contactEmailVxConfig: String             = readProperty("services.vxconfig.admin.contact_email")
+  val usernameVxConfig: String                 = readProperty("services.vxconfig.admin.username")
+  val passwordVxConfig: String                 = readProperty("services.vxconfig.admin.password")
+  val getOs: String                            = System.getProperty("os.name").toLowerCase
+  val loginButtonPath: String                  = "*//button[@id='login-button']"
+  val logoutButtonPath: String                 = ".//a[@class='logout_button']"
+  val userProfilePath: String                  = "//*[@class='user_link']"
+  lazy val generalInput                        = "//input[@class='select2-search__field']"
+  val applicationCentrePageTitle               = "Your account details - Civil Service Jobs - GOV.UK"
 
+
+  def findUsernameField: util.List[WebElement] = driver.findElements(By.id("user"))
   def username(): TextField     = textField("user")
   def password(): PasswordField = pwdField("password")
 
@@ -47,15 +52,13 @@ trait VacancyBasePage extends Matchers with BasePage with BrowserDriver {
     password().value = recruiterDetails.password
 
   def loginProcess(): Unit =
-    waitForElementToBeClickableByPath("*//button[@id='login-button']").click()
+    waitForElementToBeClickableByPath(loginButtonPath).click()
 
-  def userProfile(): WebElement = waitForElementToBeClickableByPath(
-    "//*[@class='user_link']"
-  )
+  def userProfile(): WebElement = waitForElementToBeClickableByPath(userProfilePath)
 
   def logoutVX(): Unit = {
     userProfile().click()
-    waitForElementClickableByPath(".//a[@class='logout_button']").click()
+    waitForElementClickableByPath(logoutButtonPath).click()
     eventually(onPage(vxConfigTitle))
   }
 
@@ -162,13 +165,6 @@ trait VacancyBasePage extends Matchers with BasePage with BrowserDriver {
     openNewWindow()
     navigateToV9Test()
     if (!v9SearchCookiesById().isEmpty) v9AcceptAllCookies()
-  }
-
-  def confirmShortFormCompletion(): Unit = {
-    eventually(onPage(applicationCentreTitle))
-    advertDetailsFunction().isDisplayed
-    withdrawApplicationFunction().isDisplayed
-    helpWithSelectionText() shouldEqual "Help with selection process"
   }
 
 }

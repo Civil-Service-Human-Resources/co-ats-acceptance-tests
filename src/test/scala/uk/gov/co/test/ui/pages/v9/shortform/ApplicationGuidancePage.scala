@@ -28,7 +28,7 @@ object ApplicationGuidancePage extends CivilServiceJobsBasePage {
     }
   }
 
-  private def extractAppFormId(): String = {
+  def extractAppFormId(): String = {
     val formClass = driver.findElement(By.xpath(formIdPath))
     formClass.getAttribute("id")
   }

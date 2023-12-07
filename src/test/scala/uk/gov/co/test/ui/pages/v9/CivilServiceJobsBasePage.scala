@@ -2,7 +2,7 @@ package uk.gov.co.test.ui.pages.v9
 
 import com.github.javafaker.Faker
 import org.openqa.selenium.support.ui.Select
-import org.openqa.selenium.{By, WebElement}
+import org.openqa.selenium.{By, Keys, WebElement}
 import org.scalatest.concurrent.Eventually.eventually
 import org.scalatest.matchers.should.Matchers
 import uk.gov.co.test.ui.conf.TestConfiguration
@@ -10,7 +10,7 @@ import uk.gov.co.test.ui.conf.TestConfiguration.readProperty
 import uk.gov.co.test.ui.driver.BrowserDriver
 import uk.gov.co.test.ui.pages.BasePage
 import uk.gov.co.test.ui.pages.v9.SearchJobsPage.civilServiceJobsPageTitle
-import uk.gov.co.test.ui.pages.v9.SignInPage.signOut
+import uk.gov.co.test.ui.pages.v9.SignInPage.{searchForSignOut, signOut}
 
 import java.util
 import scala.util.Random
@@ -19,10 +19,12 @@ trait CivilServiceJobsBasePage extends Matchers with BasePage with BrowserDriver
 
   val url: String                        = TestConfiguration.url("v9test")
   val passwordCandidate: String          = readProperty("services.v9test.admin.candidate_password")
+  val getOs: String                      = System.getProperty("os.name").toLowerCase
   val civilServiceSignOutPageTitle       = "Civil Service Jobs - Civil Service Jobs - GOV.UK"
   val v9AcceptAdditionalCookies: String  = "accept_all_cookies_button"
   val vXaAcceptAdditionalCookies: String = "cookies-accept-button"
   val pageContinue                       = "continue_button"
+  val continueToLongForm                 = "select_manual_form_700"
   var randomFirstName: String            = ""
   var randomLastName: String             = ""
   var preferredFirstName: String         = ""
@@ -90,7 +92,7 @@ trait CivilServiceJobsBasePage extends Matchers with BasePage with BrowserDriver
     generatedEmail()
   }
 
-  def generateCandidateDetails2(i: String): Unit = {
+  def generateCandidateDetailsIterator(i: Int): Unit = {
     randomFirstName = "A7"
     randomLastName = s"Candidate$i"
     randomEmail = s"$randomFirstName.$randomLastName@example.com"
@@ -133,5 +135,20 @@ trait CivilServiceJobsBasePage extends Matchers with BasePage with BrowserDriver
     waitForVisibilityOfElementById(id).click()
     val dept = new Select(waitForVisibilityOfElementById(id))
     dept.selectByVisibleText(value)
+  }
+
+  def enterDetails(inputId: String, text: String): Unit = {
+    val enterOption = waitForVisibilityOfElementById(inputId)
+    enterOption.sendKeys(text)
+    enterOption.sendKeys(Keys.TAB)
+  }
+
+  def checkV9Logout(): Unit = {
+    if (!searchForSignOut().isEmpty) {
+      signOutProcess()
+      if (!searchForSignOut().isEmpty) {
+        signOutProcess()
+      }
+    }
   }
 }

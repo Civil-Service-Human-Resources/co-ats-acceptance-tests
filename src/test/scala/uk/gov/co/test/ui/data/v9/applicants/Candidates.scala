@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.data.v9.applicants
 
 import uk.gov.co.test.ui.pages.v9.CandidateDetails
-import uk.gov.co.test.ui.pages.v9.SignInPage.{generatePreferredFirstName, generateRandomFirstName, generateRandomLastName, generatedEmail, passwordCandidate}
+import uk.gov.co.test.ui.pages.v9.SignInPage.{passwordCandidate, preferredFirstName, randomEmail, randomFirstName, randomLastName}
 
 case class CandidateData(candidateDetails: CandidateDetails)
 
@@ -16,13 +16,46 @@ object REGISTERED_CANDIDATE
       true
     )
 
-object MAIN_REGISTER_CANDIDATE
+object MASTER_REGISTER_CANDIDATE
     extends CandidateDetails(
-      firstname = generateRandomFirstName(),
-      lastname = generateRandomLastName(),
-      preferredFirstName = generatePreferredFirstName(),
-      email = generatedEmail(),
+      firstname = s"$randomFirstName",
+      lastname = s"$randomLastName",
+      preferredFirstName = s"$preferredFirstName",
+      email = s"$randomEmail",
       s"$passwordCandidate",
       false,
       true
     )
+
+object REGISTER_CANDIDATE_ONE
+    extends CandidateDetails(
+      firstname = s"$randomFirstName",
+      lastname = s"$randomLastName",
+      preferredFirstName = s"$preferredFirstName",
+      email = s"$randomEmail",
+      s"$passwordCandidate",
+      false,
+      true
+    )
+
+object REGISTER_CANDIDATE_TWO
+    extends CandidateDetails(
+      firstname = s"$randomFirstName",
+      lastname = s"$randomLastName",
+      preferredFirstName = s"$preferredFirstName",
+      email = s"$randomEmail",
+      s"$passwordCandidate",
+      false,
+      true
+    )
+
+object REGISTER_CANDIDATE_INSOLVENCY
+  extends CandidateDetails(
+    firstname = s"$randomFirstName",
+    lastname = s"$randomLastName",
+    preferredFirstName = s"$preferredFirstName",
+    email = s"$randomEmail",
+    s"$passwordCandidate",
+    false,
+    true
+  )

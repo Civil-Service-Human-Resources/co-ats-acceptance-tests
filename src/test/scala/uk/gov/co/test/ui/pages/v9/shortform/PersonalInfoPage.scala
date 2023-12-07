@@ -1,6 +1,6 @@
 package uk.gov.co.test.ui.pages.v9.shortform
 
-import org.openqa.selenium.{By, Keys}
+import org.openqa.selenium.By
 import org.scalatest.concurrent.Eventually.eventually
 import uk.gov.co.test.ui.data.v9.shortform.ShortFormDetails
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
@@ -52,47 +52,41 @@ object PersonalInfoPage extends CivilServiceJobsBasePage {
   def veteranInitiativeYesId               = s"${formId}_datafield_138179_1_1_1_label"
   def veteranInitiativeNoId                = s"${formId}_datafield_138179_1_1_2_label"
 
-  def enterPersonalInfo(inputId: String, text: String): Unit = {
-    val enterOption = waitForVisibilityOfElementById(inputId)
-    enterOption.sendKeys(text)
-    enterOption.sendKeys(Keys.TAB)
-  }
-
   private def personalInfoPageCheck(): Unit =
     eventually(onPage(personalInfoTitle))
 
   private def enterFirstName(personalInfoDetails: PersonalInfoDetails): Unit = {
     personalInfoPageCheck()
     if (extractValue(firstNameInputId).isEmpty) {
-      enterPersonalInfo(firstNameInputId, personalInfoDetails.firstName)
+      enterDetails(firstNameInputId, personalInfoDetails.firstName)
     } else extractValue(firstNameInputId) shouldEqual personalInfoDetails.firstName
   }
 
   private def enterLastName(personalInfoDetails: PersonalInfoDetails): Unit           =
     if (extractValue(lastNameInputId).isEmpty) {
-      enterPersonalInfo(lastNameInputId, personalInfoDetails.lastName)
+      enterDetails(lastNameInputId, personalInfoDetails.lastName)
     } else extractValue(lastNameInputId) shouldEqual personalInfoDetails.lastName
 
   private def enterPreferredFirstName(personalInfoDetails: PersonalInfoDetails): Unit =
     if (extractValue(preferredFirstNameInputId).isEmpty) {
-      enterPersonalInfo(preferredFirstNameInputId, personalInfoDetails.preferredFirstName.get)
+      enterDetails(preferredFirstNameInputId, personalInfoDetails.preferredFirstName.get)
     } else extractValue(preferredFirstNameInputId) shouldEqual personalInfoDetails.preferredFirstName
 
   private def enterEmail(personalInfoDetails: PersonalInfoDetails): Unit              =
     if (extractValue(emailInputId).isEmpty) {
-      enterPersonalInfo(emailInputId, personalInfoDetails.email)
+      enterDetails(emailInputId, personalInfoDetails.email)
     } else extractValue(emailInputId) shouldEqual personalInfoDetails.email
 
   private def enterPreferredTeleNo(personalInfoDetails: PersonalInfoDetails): Unit = {
     scrollToElement(By.id(preferredTeleNoInputId))
     if (extractValue(preferredTeleNoInputId).isEmpty) {
-      enterPersonalInfo(preferredTeleNoInputId, personalInfoDetails.preferredTeleNo)
+      enterDetails(preferredTeleNoInputId, personalInfoDetails.preferredTeleNo)
     } else extractValue(preferredTeleNoInputId) shouldEqual personalInfoDetails.preferredTeleNo
   }
 
   private def enterSecondaryContactNo(personalInfoDetails: PersonalInfoDetails): Unit =
     if (extractValue(secondaryNoInputId).isEmpty)
-      enterPersonalInfo(secondaryNoInputId, personalInfoDetails.secondaryNo.get)
+      enterDetails(secondaryNoInputId, personalInfoDetails.secondaryNo.get)
 
   private def selectApplyDCS(personalInfoDetails: PersonalInfoDetails): Unit =
     if (personalInfoDetails.applyDCS) radioSelect(applyDCSYesId)
@@ -101,11 +95,11 @@ object PersonalInfoPage extends CivilServiceJobsBasePage {
   private def selectReasonableAdjustments(personalInfoDetails: PersonalInfoDetails): Unit =
     if (personalInfoDetails.reasonableAdjustments) {
       radioSelect(reasonableAdjustmentYesId)
-      enterPersonalInfo(reasonableAdjustmentDetailsInputId, personalInfoDetails.reasonableAdjustmentsDetails)
-      if (anyOnlineTests.toBoolean) {
+      enterDetails(reasonableAdjustmentDetailsInputId, personalInfoDetails.reasonableAdjustmentsDetails)
+      if (anyOnlineTests == "" || anyOnlineTests.toBoolean) { // TODO requires refactor
         if (personalInfoDetails.reasonableAdjustmentsForTests) {
           radioSelect(reasonableAdjustmentsForTestsYesId)
-          enterPersonalInfo(
+          enterDetails(
             reasonableAdjustmentsForTestsInputId,
             personalInfoDetails.reasonableAdjustmentsForTestsDetails
           )
@@ -114,7 +108,7 @@ object PersonalInfoPage extends CivilServiceJobsBasePage {
     } else radioSelect(reasonableAdjustmentNoId)
 
   private def selectAreYouVeteran(personalInfoDetails: PersonalInfoDetails): Unit =
-    if (greatForVeterans.toBoolean) {
+    if (greatForVeterans) {
       personalInfoDetails.areYouAVeteran match {
         case "Yes"                    =>
           radioSelect(areYouAVeteranYesId)
@@ -127,7 +121,7 @@ object PersonalInfoPage extends CivilServiceJobsBasePage {
     }
 
   private def enterRedeploymentScheme(personalInfoDetails: PersonalInfoDetails): Unit =
-    if (civilServant.toBoolean) {
+    if (civilServant) {
       scrollToElement(By.id(redeploymentSchemeId))
       if (personalInfoDetails.redeploymentScheme.get) radioSelect(redeploymentSchemeYesId)
       else radioSelect(redeploymentSchemeNoId)

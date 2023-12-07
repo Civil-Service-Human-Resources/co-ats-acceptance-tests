@@ -22,27 +22,30 @@ case class LocationsDetails(
 
 object LocationsSection extends VacancyBasePage {
 
-  private lazy val cityOrTownInput         = s".//*[@aria-describedby='select2-${formId}_datafield_155622_1_1-container']"
-  private lazy val otherCityOrTownInput    =
+  def cityOrTownInput                   = s".//*[@aria-describedby='select2-${formId}_datafield_155622_1_1-container']"
+  def otherCityOrTownInput              =
     s".//textarea[@aria-describedby='select2-${formId}_datafield_155836_1_1-container']"
-  private lazy val locationTypeId          = s"select2-${formId}_datafield_155639_1_1-container"
-  private lazy val overseasId              = s"select2-${formId}_datafield_155904_1_1-container"
-  private lazy val regionInput             = s".//*[@aria-describedby='select2-${formId}_datafield_155584_1_1-container']"
-  private lazy val postcodeId              = s"${formId}_datafield_155601_1_1"
-  private lazy val northernIrelandId       = s"${formId}_datafield_155854_1_1_fieldset"
-  private lazy val northernIrelandYesId    = s"${formId}_datafield_155854_1_1_1"
-  private lazy val northernIrelandNoId     = s"${formId}_datafield_155854_1_1_2"
-  private lazy val outsideNIRYesId         = s"${formId}_datafield_155922_1_1_1"
-  private lazy val outsideNIRNoId          = s"${formId}_datafield_155922_1_1_1"
-  private lazy val protestantId            = s"${formId}_datafield_155869_1_1_15462"
-  private lazy val romanCatholicId         = s"${formId}_datafield_155869_1_1_15463"
-  private lazy val allCommunitiesId        = s"${formId}_datafield_155869_1_1_17360"
-  private lazy val locationOverrideInput   = s"${formId}_datafield_155654_1_1_en-GB"
-  private lazy val locationPreferenceNoId  = s"${formId}_datafield_155799_1_1_2"
-  private lazy val locationPreferenceYesId = s"${formId}_datafield_155799_1_1_1"
-  private lazy val maxLocationId           = s"select2-${formId}_datafield_155818_1_1-container"
-  var vacanciesInNIR                       = ""
-  var communitiesInNIR                     = ""
+  def locationTypeId                    = s"select2-${formId}_datafield_155639_1_1-container"
+  def overseasId                        = s"select2-${formId}_datafield_155904_1_1-container"
+  def regionInput                       = s".//*[@aria-describedby='select2-${formId}_datafield_155584_1_1-container']"
+  def postcodeId                        = s"${formId}_datafield_155601_1_1"
+  def northernIrelandId                 = s"${formId}_datafield_155854_1_1_fieldset"
+  def northernIrelandYesId              = s"${formId}_datafield_155854_1_1_1"
+  def northernIrelandNoId               = s"${formId}_datafield_155854_1_1_2"
+  def outsideNIRYesId                   = s"${formId}_datafield_155922_1_1_1"
+  def outsideNIRNoId                    = s"${formId}_datafield_155922_1_1_1"
+  def protestantId                      = s"${formId}_datafield_155869_1_1_15462"
+  def romanCatholicId                   = s"${formId}_datafield_155869_1_1_15463"
+  def allCommunitiesId                  = s"${formId}_datafield_155869_1_1_17360"
+  def locationOverrideInput             = s"${formId}_datafield_155654_1_1_en-GB"
+  def locationPreferenceNoId            = s"${formId}_datafield_155799_1_1_2"
+  def locationPreferenceYesId           = s"${formId}_datafield_155799_1_1_1"
+  def maxLocationId                     = s"select2-${formId}_datafield_155818_1_1-container"
+  var vacanciesInNIR                    = ""
+  var communitiesInNIR                  = ""
+  var vXGiveLocationPreference: Boolean = true
+  var vXMaxLocations: String            = "3"
+  var vXOtherLocations: Seq[String]     = List("London", "Southampton", "Manchester")
 
   def selectVacancyInNIR(locationsDetails: LocationsDetails): Unit = {
     scrollToElement(By.id(northernIrelandId))
@@ -121,15 +124,19 @@ object LocationsSection extends VacancyBasePage {
   def locationOverride(overrideLocations: String): Unit =
     textField(locationOverrideInput).value = overrideLocations
 
-  def selectLocationPreference(locationsDetails: LocationsDetails): Unit =
-    if (locationsDetails.giveLocationPreference) {
+  def selectLocationPreference(locationsDetails: LocationsDetails): Unit = {
+    vXGiveLocationPreference = locationsDetails.giveLocationPreference
+    vXMaxLocations = locationsDetails.maxLocations
+    vXOtherLocations = locationsDetails.otherLocations
+    if (vXGiveLocationPreference) {
       clickOnRadioButton(locationPreferenceYesId)
-      chooseMaxLocations(locationsDetails.maxLocations)
-      for (cityOrTown <- locationsDetails.otherLocations)
+      chooseMaxLocations(vXMaxLocations)
+      for (cityOrTown <- vXOtherLocations)
         selectOtherCityOrTown(cityOrTown)
     } else {
       clickOnRadioButton(locationPreferenceNoId)
     }
+  }
 
   def selectLocationType(locationsDetails: LocationsDetails): Unit = {
     scrollToElement(By.id(locationTypeId))

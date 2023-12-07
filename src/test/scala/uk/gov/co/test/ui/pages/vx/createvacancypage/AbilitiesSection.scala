@@ -8,8 +8,8 @@ case class AbilitiesDetails(assessAbilities: String)
 
 object AbilitiesSection extends VacancyBasePage {
 
-  private lazy val abilitiesSectionId = s"${formId}_section_76647_col_0"
-  private lazy val assessAbilitiesId  = s"${formId}_label_130464_1"
+  def abilitiesSectionId = s"${formId}_section_76647_col_0"
+  def assessAbilitiesId  = s"${formId}_label_130464_1"
 
   def selectAbilitiesProfile(successProfilesDetails: SuccessProfilesDetails): Unit =
     if (successProfilesDetails.abilities) {
