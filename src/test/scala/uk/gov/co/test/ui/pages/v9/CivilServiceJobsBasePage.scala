@@ -93,9 +93,9 @@ trait CivilServiceJobsBasePage extends Matchers with BasePage with BrowserDriver
   }
 
   def generateCandidateDetailsIterator(i: Int): Unit = {
-    randomFirstName = "A7"
+    randomFirstName = s"Autotest$i"
     randomLastName = s"Candidate$i"
-    randomEmail = s"$randomFirstName.$randomLastName@example.com"
+    randomEmail = s"${randomFirstName.toLowerCase}.${randomLastName.toLowerCase}@example.com"
   }
 
   def changeLanguage(lang: String): Unit = {

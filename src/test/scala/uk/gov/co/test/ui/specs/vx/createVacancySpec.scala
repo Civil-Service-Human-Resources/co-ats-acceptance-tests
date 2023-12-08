@@ -15,9 +15,9 @@ import uk.gov.co.test.ui.specs.BaseFeatureSpec
 import uk.gov.co.test.ui.tags.RunInVX
 
 class createVacancySpec extends BaseFeatureSpec {
-  Feature("Recruiter Creates A Master Vacancy") {
-    Scenario("VX-A Recruiter Creates A Master Flow Apply Only Vacancy; Master Application Process", RunInVX) {
-      Given("a recruiter logs in to vx config and creates & posts vacancy")
+  Feature("Recruiter Creates A Master Vacancy; Candidate Completes Short & Long Forms") {
+    Scenario("VX: Recruiter Creates A Master Vacancy; Candidate Completes A Master Application Process", RunInVX) {
+      Given("a recruiter creates & posts a new vacancy")
       fillNewVacancyForm(MASTER_VACANCY_DATA)
       activateAndPostVacancy()
 
@@ -31,30 +31,30 @@ class createVacancySpec extends BaseFeatureSpec {
       And("candidate completes the long form")
       fillLongFormDetails(MASTER_LONG_FORM_DATA)
 
-      Then("the candidate is able to complete the application")
+      Then("the candidate is able to confirm short & long forms are completed")
       confirmLongFormCompletion()
     }
 
-    Scenario("VX-A Recruiter Creates A Insolvency Apply Only Vacancy; Full Application Process", RunInVX) {
-      Given("a recruiter logs in to vx config and creates & posts vacancy")
+    Scenario("VX: A Recruiter Creates A Insolvency Apply Only Vacancy; Full Application Process", RunInVX) {
+      Given("a recruiter creates & posts an insolvency apply only vacancy")
       fillNewVacancyForm(INSOLVENCY_VACANCY_DATA)
       activateAndPostVacancy()
 
       When("candidate registers for new job application")
       fillNewCandidateDetails(REGISTER_CANDIDATE_INSOLVENCY)
 
-      And("candidate completes the short form")
+      And("candidate completes the insolvency short form")
       fillShortFormDetails(SHORT_FORM_DATA_INSOLVENCY)
       confirmShortFormCompletion()
 
-      And("candidate completes the long form")
+      And("candidate completes the insolvency long form")
       fillLongFormDetails(LONG_FORM_DATA_INSOLVENCY)
 
-      Then("the candidate is able to complete the application")
+      Then("the candidate is able to confirm insolvency short & long forms are completed")
       confirmLongFormCompletion()
     }
 
-    Scenario("VX - A Recruiter Extracts Vacancy Details", RunInVX) {
+    Scenario("VX: A Recruiter Extracts Vacancy Details", RunInVX) {
       loginWithRecruiterDetails(RECRUITER)
       searchForActiveVacancy()
     }

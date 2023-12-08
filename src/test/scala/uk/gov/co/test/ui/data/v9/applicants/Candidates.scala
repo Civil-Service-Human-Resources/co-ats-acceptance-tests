@@ -16,6 +16,17 @@ object REGISTERED_CANDIDATE
       true
     )
 
+object REGISTER_CANDIDATE
+  extends CandidateDetails(
+    firstname = s"$randomFirstName",
+    lastname = s"$randomLastName",
+    preferredFirstName = s"$preferredFirstName",
+    email = s"$randomEmail",
+    s"$passwordCandidate",
+    false,
+    true
+  )
+
 object MASTER_REGISTER_CANDIDATE
     extends CandidateDetails(
       firstname = s"$randomFirstName",
@@ -27,7 +38,7 @@ object MASTER_REGISTER_CANDIDATE
       true
     )
 
-object REGISTER_CANDIDATE_ONE
+object REGISTER_CANDIDATE_HMRC
     extends CandidateDetails(
       firstname = s"$randomFirstName",
       lastname = s"$randomLastName",
@@ -38,16 +49,6 @@ object REGISTER_CANDIDATE_ONE
       true
     )
 
-object REGISTER_CANDIDATE_TWO
-    extends CandidateDetails(
-      firstname = s"$randomFirstName",
-      lastname = s"$randomLastName",
-      preferredFirstName = s"$preferredFirstName",
-      email = s"$randomEmail",
-      s"$passwordCandidate",
-      false,
-      true
-    )
 
 object REGISTER_CANDIDATE_INSOLVENCY
   extends CandidateDetails(
