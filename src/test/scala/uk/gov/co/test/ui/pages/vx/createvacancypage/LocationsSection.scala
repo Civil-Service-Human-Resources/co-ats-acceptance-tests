@@ -4,6 +4,7 @@ import org.openqa.selenium.{By, WebElement}
 import uk.gov.co.test.ui.data.vx.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.formId
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXCommunitiesInNIR, vXGiveLocationPreference, vXMaxLocations, vXOtherLocations, vXVacanciesInNIR}
 
 case class LocationsDetails(
   locationType: String,
@@ -22,35 +23,30 @@ case class LocationsDetails(
 
 object LocationsSection extends VacancyBasePage {
 
-  def cityOrTownInput                   = s".//*[@aria-describedby='select2-${formId}_datafield_155622_1_1-container']"
-  def otherCityOrTownInput              =
+  def cityOrTownInput         = s".//*[@aria-describedby='select2-${formId}_datafield_155622_1_1-container']"
+  def otherCityOrTownInput    =
     s".//textarea[@aria-describedby='select2-${formId}_datafield_155836_1_1-container']"
-  def locationTypeId                    = s"select2-${formId}_datafield_155639_1_1-container"
-  def overseasId                        = s"select2-${formId}_datafield_155904_1_1-container"
-  def regionInput                       = s".//*[@aria-describedby='select2-${formId}_datafield_155584_1_1-container']"
-  def postcodeId                        = s"${formId}_datafield_155601_1_1"
-  def northernIrelandId                 = s"${formId}_datafield_155854_1_1_fieldset"
-  def northernIrelandYesId              = s"${formId}_datafield_155854_1_1_1"
-  def northernIrelandNoId               = s"${formId}_datafield_155854_1_1_2"
-  def outsideNIRYesId                   = s"${formId}_datafield_155922_1_1_1"
-  def outsideNIRNoId                    = s"${formId}_datafield_155922_1_1_1"
-  def protestantId                      = s"${formId}_datafield_155869_1_1_15462"
-  def romanCatholicId                   = s"${formId}_datafield_155869_1_1_15463"
-  def allCommunitiesId                  = s"${formId}_datafield_155869_1_1_17360"
-  def locationOverrideInput             = s"${formId}_datafield_155654_1_1_en-GB"
-  def locationPreferenceNoId            = s"${formId}_datafield_155799_1_1_2"
-  def locationPreferenceYesId           = s"${formId}_datafield_155799_1_1_1"
-  def maxLocationId                     = s"select2-${formId}_datafield_155818_1_1-container"
-  var vacanciesInNIR                    = ""
-  var communitiesInNIR                  = ""
-  var vXGiveLocationPreference: Boolean = true
-  var vXMaxLocations: String            = "3"
-  var vXOtherLocations: Seq[String]     = List("London", "Southampton", "Manchester")
+  def locationTypeId          = s"select2-${formId}_datafield_155639_1_1-container"
+  def overseasId              = s"select2-${formId}_datafield_155904_1_1-container"
+  def regionInput             = s".//*[@aria-describedby='select2-${formId}_datafield_155584_1_1-container']"
+  def postcodeId              = s"${formId}_datafield_155601_1_1"
+  def northernIrelandId       = s"${formId}_datafield_155854_1_1_fieldset"
+  def northernIrelandYesId    = s"${formId}_datafield_155854_1_1_1"
+  def northernIrelandNoId     = s"${formId}_datafield_155854_1_1_2"
+  def outsideNIRYesId         = s"${formId}_datafield_155922_1_1_1"
+  def outsideNIRNoId          = s"${formId}_datafield_155922_1_1_1"
+  def protestantId            = s"${formId}_datafield_155869_1_1_15462"
+  def romanCatholicId         = s"${formId}_datafield_155869_1_1_15463"
+  def allCommunitiesId        = s"${formId}_datafield_155869_1_1_17360"
+  def locationOverrideInput   = s"${formId}_datafield_155654_1_1_en-GB"
+  def locationPreferenceNoId  = s"${formId}_datafield_155799_1_1_2"
+  def locationPreferenceYesId = s"${formId}_datafield_155799_1_1_1"
+  def maxLocationId           = s"select2-${formId}_datafield_155818_1_1-container"
 
   def selectVacancyInNIR(locationsDetails: LocationsDetails): Unit = {
     scrollToElement(By.id(northernIrelandId))
-    vacanciesInNIR = locationsDetails.vacancyInNIR.toString
-    if (locationsDetails.vacancyInNIR) {
+    vXVacanciesInNIR = locationsDetails.vacancyInNIR
+    if (vXVacanciesInNIR) {
       clickOnRadioButton(northernIrelandYesId)
       selectVacancyOutsideNIR(locationsDetails)
       selectWhichCommunity(locationsDetails)
@@ -67,8 +63,8 @@ object LocationsSection extends VacancyBasePage {
     }
 
   def selectWhichCommunity(locationsDetails: LocationsDetails): Unit = {
-    communitiesInNIR = locationsDetails.whichCommunityEncouraged
-    communitiesInNIR match {
+    vXCommunitiesInNIR = locationsDetails.whichCommunityEncouraged
+    vXCommunitiesInNIR match {
       case "Protestant"      => clickOnRadioButton(protestantId)
       case "Roman Catholic"  => clickOnRadioButton(romanCatholicId)
       case "All communities" => clickOnRadioButton(allCommunitiesId)

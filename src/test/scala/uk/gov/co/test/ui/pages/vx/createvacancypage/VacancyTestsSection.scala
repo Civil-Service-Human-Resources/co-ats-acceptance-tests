@@ -1,6 +1,7 @@
 package uk.gov.co.test.ui.pages.vx.createvacancypage
 
 import org.openqa.selenium.{By, Keys}
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.vXAnyOnlineTests
 import uk.gov.co.test.ui.data.vx.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.formId
@@ -32,12 +33,10 @@ object VacancyTestsSection extends VacancyBasePage {
   def recommendedOptionsYesId = s"${formId}_datafield_129748_1_1_1"
   def recommendedOptionsNoId  = s"${formId}_datafield_129748_1_1_2"
   def additionalDetailId      = s"${formId}_datafield_129763_1_1"
-  var anyOnlineTests          = ""
 
   def vacancyTestsFlow(vacancyTestsDetails: VacancyTestsDetails): Unit = {
     testsRequired(vacancyTestsDetails)
-    anyOnlineTests = vacancyTestsDetails.testsRequired.toString
-    if (vacancyTestsDetails.testsRequired) {
+    if (vXAnyOnlineTests) {
       selectOnlineOrOffline(vacancyTestsDetails)
       if (vacancyTestsDetails.onlineOrOffline == "Online Tests") {
         selectTestGrade(vacancyTestsDetails)
@@ -53,7 +52,8 @@ object VacancyTestsSection extends VacancyBasePage {
 
   def testsRequired(vacancyTestsDetails: VacancyTestsDetails): Unit = {
     scrollToElement(By.id(onlineTestsSectionId))
-    if (vacancyTestsDetails.testsRequired) clickOnRadioButton(testsRequiredYesId)
+    vXAnyOnlineTests = vacancyTestsDetails.testsRequired
+    if (vXAnyOnlineTests) clickOnRadioButton(testsRequiredYesId)
     else clickOnRadioButton(testsRequiredNoId)
   }
 

@@ -3,8 +3,8 @@ package uk.gov.co.test.ui.pages.vx.createvacancypage
 import org.openqa.selenium.By
 import uk.gov.co.test.ui.data.vx.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
-import uk.gov.co.test.ui.pages.vx.createvacancypage.ApproachSection.candidateApproach
 import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.formId
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{candidateApproach, vXGreatForVeterans, vXGrsVacancy}
 
 case class ManagementDetails(
   greatWorkForVeterans: Boolean,
@@ -13,6 +13,7 @@ case class ManagementDetails(
   removeCSRPrinciples: Boolean,
   assignTo: Option[String] = None,
   assignTo2: Option[String] = None,
+  grsVacancy: Boolean,
   grsJobStageType: String,
   grsPecCheckingType: String,
   grsToSift: Boolean,
@@ -51,13 +52,12 @@ object ManagementSection extends VacancyBasePage {
   def projectNameInputId             = s"${formId}_datafield_104972_1_1"
   def complaintsProcessInputId       = s"${formId}_datafield_179305_1_1_en-GB"
   def vacancyCommentsInputId         = s"${formId}_datafield_100298_1_1"
-  var greatForVeterans: Boolean      = true
 
   private def selectVeteransAndPrisonLeaversPosition(managementDetails: ManagementDetails): Unit = {
     scrollToElement(By.id(managementSectionId))
-    greatForVeterans = managementDetails.greatWorkForVeterans
+    vXGreatForVeterans = managementDetails.greatWorkForVeterans
     if (candidateApproach == "External") {
-      if (greatForVeterans) {
+      if (vXGreatForVeterans) {
         clickOnRadioButton(greatWorkForVeteransYesId)
       } else {
         clickOnRadioButton(greatWorkForVeteransNoId)
@@ -91,6 +91,16 @@ object ManagementSection extends VacancyBasePage {
   private def enterAssignTo2(managementDetails: ManagementDetails): Unit = {
     val username2 = managementDetails.assignTo2.get
     selectOptionFromList(username2, assignTo2Id, s" $contactNameVxConfig - $username2")
+  }
+
+  private def grsQuestions(managementDetails: ManagementDetails): Unit = {
+    vXGrsVacancy = managementDetails.grsVacancy
+    if (vXGrsVacancy) {
+      grsRecruitmentStageType(managementDetails)
+      selectGrsPecCheckingType(managementDetails)
+      selectGrsToSift(managementDetails)
+      selectGrsToAssessAndInterview(managementDetails)
+    }
   }
 
   private def grsRecruitmentStageType(managementDetails: ManagementDetails): Unit = {
@@ -144,10 +154,7 @@ object ManagementSection extends VacancyBasePage {
     selectRemoveCSRPrinciples,
     enterAssignTo,
     enterAssignTo2,
-    grsRecruitmentStageType,
-    selectGrsPecCheckingType,
-    selectGrsToSift,
-    selectGrsToAssessAndInterview,
+    grsQuestions,
     selectLinkToProject,
     enterComplaintsProcess,
     enterVacancyComments

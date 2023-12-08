@@ -5,8 +5,7 @@ import org.scalatest.concurrent.Eventually.eventually
 import uk.gov.co.test.ui.data.v9.longform.LongFormDetails
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
 import uk.gov.co.test.ui.pages.v9.shortform.ApplicationGuidancePage.formId
-import uk.gov.co.test.ui.pages.vx.createvacancypage.BehavioursSection.{howManyAssessed, listOfChosenBehaviours}
-import uk.gov.co.test.ui.pages.vx.createvacancypage.SuccessProfilesSection.behavioursRequired
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXBehavioursRequired, vXHowManyAssessed, vXListOfChosenBehaviours}
 
 case class BehavioursDetails(
   changingAndImprovingText: String,
@@ -38,46 +37,46 @@ object BehavioursPage extends CivilServiceJobsBasePage {
   private def confirmBehavioursRequired(): Unit = {
     behavioursPageCheck()
     val behaviourInputs = driver.findElements(By.xpath(v9HowManyBehaviours))
-    behaviourInputs.size() shouldEqual howManyAssessed
+    behaviourInputs.size() shouldEqual vXHowManyAssessed
   }
 
   private def enterChangingAndImproving(behavioursDetails: BehavioursDetails): Unit =
-    if (listOfChosenBehaviours.isEmpty || listOfChosenBehaviours.contains("Changing and Improving")) {
+    if (vXListOfChosenBehaviours.isEmpty || vXListOfChosenBehaviours.contains("Changing and Improving")) {
       enterDetails(changingAndImprovingInputId, behavioursDetails.changingAndImprovingText)
     }
 
   private def enterCommunicatingAndInfluencing(behavioursDetails: BehavioursDetails): Unit =
-    if (listOfChosenBehaviours.isEmpty || listOfChosenBehaviours.contains("Communicating and Influencing")) {
+    if (vXListOfChosenBehaviours.isEmpty || vXListOfChosenBehaviours.contains("Communicating and Influencing")) {
       enterDetails(communicatingAndInfluencingInputId, behavioursDetails.communicatingAndInfluencingText)
     }
 
   private def enterDeliveringAtPace(behavioursDetails: BehavioursDetails): Unit =
-    if (listOfChosenBehaviours.isEmpty || listOfChosenBehaviours.contains("Delivering at Pace")) {
+    if (vXListOfChosenBehaviours.isEmpty || vXListOfChosenBehaviours.contains("Delivering at Pace")) {
       enterDetails(deliveringAtPaceInputId, behavioursDetails.deliveringAtPaceText)
     }
 
   private def enterDevelopingSelfAndOthers(behavioursDetails: BehavioursDetails): Unit =
-    if (listOfChosenBehaviours.isEmpty || listOfChosenBehaviours.contains("Developing Self and Others")) {
+    if (vXListOfChosenBehaviours.isEmpty || vXListOfChosenBehaviours.contains("Developing Self and Others")) {
       enterDetails(developingSelfAndOthersInputId, behavioursDetails.developingSelfAndOthersText)
     }
 
   private def enterLeadership(behavioursDetails: BehavioursDetails): Unit =
-    if (listOfChosenBehaviours.isEmpty || listOfChosenBehaviours.contains("Leadership")) {
+    if (vXListOfChosenBehaviours.isEmpty || vXListOfChosenBehaviours.contains("Leadership")) {
       enterDetails(leadershipInputId, behavioursDetails.leadershipText)
     }
 
   private def enterMakingEffectiveDecisions(behavioursDetails: BehavioursDetails): Unit =
-    if (listOfChosenBehaviours.isEmpty || listOfChosenBehaviours.contains("Making Effective Decisions")) {
+    if (vXListOfChosenBehaviours.isEmpty || vXListOfChosenBehaviours.contains("Making Effective Decisions")) {
       enterDetails(makingEffectiveDecisionsInputId, behavioursDetails.makingEffectiveDecisionsText)
     }
 
   private def enterManagingAQualityService(behavioursDetails: BehavioursDetails): Unit =
-    if (listOfChosenBehaviours.isEmpty || listOfChosenBehaviours.contains("Managing a Quality Service")) {
+    if (vXListOfChosenBehaviours.isEmpty || vXListOfChosenBehaviours.contains("Managing a Quality Service")) {
       enterDetails(managingAQualityServiceInputId, behavioursDetails.managingAQualityServiceText)
     }
 
   private def enterWorkingTogether(behavioursDetails: BehavioursDetails): Unit =
-    if (listOfChosenBehaviours.isEmpty || listOfChosenBehaviours.contains("Working Together")) {
+    if (vXListOfChosenBehaviours.isEmpty || vXListOfChosenBehaviours.contains("Working Together")) {
       enterDetails(workingTogetherInputId, behavioursDetails.workingTogetherText)
     }
 
@@ -93,7 +92,7 @@ object BehavioursPage extends CivilServiceJobsBasePage {
   )
 
   def behavioursPage(longFormDetails: LongFormDetails): Unit =
-    if (behavioursRequired) {
+    if (vXBehavioursRequired) {
       confirmBehavioursRequired()
       behaviours.foreach { f =>
         f(longFormDetails.behavioursDetails)

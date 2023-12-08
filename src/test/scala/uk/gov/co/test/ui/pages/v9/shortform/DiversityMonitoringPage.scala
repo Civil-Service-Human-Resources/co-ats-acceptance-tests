@@ -4,7 +4,7 @@ import org.scalatest.concurrent.Eventually.eventually
 import uk.gov.co.test.ui.data.v9.shortform.ShortFormDetails
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
 import uk.gov.co.test.ui.pages.v9.shortform.ApplicationGuidancePage.formId
-import uk.gov.co.test.ui.pages.vx.createvacancypage.LocationsSection.vacanciesInNIR
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.vXVacanciesInNIR
 
 case class DiversityDetails(
   haveDisability: String,
@@ -191,7 +191,7 @@ object DiversityMonitoringPage extends CivilServiceJobsBasePage {
     } else extractValue(postcodeInputId) shouldEqual diversityDetails.postcode
 
   private def selectApplyingInNIR(diversityDetails: DiversityDetails): Unit =
-    if (vacanciesInNIR == "" || vacanciesInNIR.toBoolean) { // TODO requires refactor
+    if (vXVacanciesInNIR) {
       if (diversityDetails.applyingInNIR) {
         radioSelect(vacancyInNIRYesId)
         diversityDetails.communityInNIR match {

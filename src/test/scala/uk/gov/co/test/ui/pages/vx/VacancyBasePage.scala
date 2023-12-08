@@ -11,7 +11,7 @@ import uk.gov.co.test.ui.driver.BrowserDriver
 import uk.gov.co.test.ui.pages.BasePage
 import uk.gov.co.test.ui.pages.v9.SignInPage.{navigateToV9Test, v9AcceptAllCookies, v9SearchCookiesById}
 import uk.gov.co.test.ui.pages.vx.DashboardPage.searchOn
-import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.applicationClosingDate
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.vXApplicationClosingDate
 import uk.gov.co.test.ui.pages.vx.vacancytabs.ExternalPostingsPage.addExternalPosting
 import uk.gov.co.test.ui.pages.vx.vacancytabs.SummaryPage.confirmAndActivateVacancy
 
@@ -21,24 +21,23 @@ import java.util
 
 trait VacancyBasePage extends Matchers with BasePage with BrowserDriver {
 
-  val url: String                              = TestConfiguration.url("vxconfig")
-  val vxConfigTitle                            = "Oleeo vX Login : CSR"
-  val vxConfigHomePageTitle                    = "Home : Civil Service Jobs - GOV.UK"
-  val contactNameVxConfig: String              = readProperty("services.vxconfig.admin.contact_name")
-  val contactEmailVxConfig: String             = readProperty("services.vxconfig.admin.contact_email")
-  val usernameVxConfig: String                 = readProperty("services.vxconfig.admin.username")
-  val passwordVxConfig: String                 = readProperty("services.vxconfig.admin.password")
-  val getOs: String                            = System.getProperty("os.name").toLowerCase
-  val loginButtonPath: String                  = "*//button[@id='login-button']"
-  val logoutButtonPath: String                 = ".//a[@class='logout_button']"
-  val userProfilePath: String                  = "//*[@class='user_link']"
-  lazy val generalInput                        = "//input[@class='select2-search__field']"
-  val applicationCentrePageTitle               = "Your account details - Civil Service Jobs - GOV.UK"
-
+  val url: String                  = TestConfiguration.url("vxconfig")
+  val vxConfigTitle                = "Oleeo vX Login : CSR"
+  val vxConfigHomePageTitle        = "Home : Civil Service Jobs - GOV.UK"
+  val contactNameVxConfig: String  = readProperty("services.vxconfig.admin.contact_name")
+  val contactEmailVxConfig: String = readProperty("services.vxconfig.admin.contact_email")
+  val usernameVxConfig: String     = readProperty("services.vxconfig.admin.username")
+  val passwordVxConfig: String     = readProperty("services.vxconfig.admin.password")
+  val getOs: String                = System.getProperty("os.name").toLowerCase
+  val loginButtonPath: String      = "*//button[@id='login-button']"
+  val logoutButtonPath: String     = ".//a[@class='logout_button']"
+  val userProfilePath: String      = "//*[@class='user_link']"
+  lazy val generalInput            = "//input[@class='select2-search__field']"
+  val applicationCentrePageTitle   = "Your account details - Civil Service Jobs - GOV.UK"
 
   def findUsernameField: util.List[WebElement] = driver.findElements(By.id("user"))
-  def username(): TextField     = textField("user")
-  def password(): PasswordField = pwdField("password")
+  def username(): TextField                    = textField("user")
+  def password(): PasswordField                = pwdField("password")
 
   def navigateToVxConfigLogin(): Unit = {
     go to url
@@ -103,7 +102,7 @@ trait VacancyBasePage extends Matchers with BasePage with BrowserDriver {
 
   def groupTestsDeadlineDate(days: Int): String = {
     val formatter         = DateTimeFormatter.ofPattern("dd/MM/yyyy")
-    val formatToLocalDate = LocalDate.parse(applicationClosingDate, formatter)
+    val formatToLocalDate = LocalDate.parse(vXApplicationClosingDate, formatter)
     val minusDays         = formatToLocalDate.minusDays(days)
     val groupTestDeadline = minusDays.format(formatter)
     groupTestDeadline

@@ -29,7 +29,7 @@ object INSOLVENCY_VACANCY_DATA
 object INSOLVENCY_BASIC_DETAILS
     extends BasicDetails(
       "Insolvency Service - Apply online",
-      s"GCQACO - " + generateRandomJobPosition(),
+      s"AUTOCO - " + generateRandomJobPosition(),
       true,
       "Prawf awtomeiddio",
       32
@@ -442,6 +442,7 @@ object INSOLVENCY_MANAGEMENT
       true,
       assignTo = Option(s"$contactEmailVxConfig"),
       assignTo2 = Option(s"$contactEmailVxConfig"),
+      true,
       "Business As Usual (BAU)",
       "Menu",
       true,

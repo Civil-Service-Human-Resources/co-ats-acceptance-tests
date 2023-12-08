@@ -4,6 +4,7 @@ import org.openqa.selenium.By
 import uk.gov.co.test.ui.data.vx.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.formId
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXAnyAdditionalQuestions, vXHowManyQuestions, vXQuestionOne, vXQuestionThree, vXQuestionTwo}
 
 case class AdditionalQuestionsDetails(
   anyAdditionalQuestions: Boolean,
@@ -24,11 +25,6 @@ object AdditionalQuestionsSection extends VacancyBasePage {
   def questionOneInput         = s"${formId}_datafield_56159_1_1_en-GB"
   def questionTwoInput         = s"${formId}_datafield_56165_1_1_en-GB"
   def questionThreeInput       = s"${formId}_datafield_56171_1_1_en-GB"
-  var vXAnyAdditionalQuestions = true
-  var vXHowManyQuestions       = 3
-  var vXQuestionOne            = "Autotest - Question 1"
-  var vXQuestionTwo            = "Autotest - Question 2"
-  var vXQuestionThree          = "Autotest - Question 3"
 
   private def selectMoreQuestions(additionalQuestionsDetails: AdditionalQuestionsDetails): Unit = {
     scrollToElement(By.id(moreQuestionsSectionId))

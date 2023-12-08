@@ -4,6 +4,7 @@ import org.openqa.selenium.By
 import uk.gov.co.test.ui.data.vx.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.formId
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.candidateApproach
 
 case class ApproachDetails(
   approach: String,
@@ -29,7 +30,6 @@ object ApproachSection extends VacancyBasePage {
   def addWelshTranslationId()        = "clicky_154373"
   def welshStatementInput            = "datafield_154373_1_1_cy"
   def updateWelshId()                = "lbledit_datafield_154373_1_1-update"
-  var candidateApproach              = "External"
 
   private def eligibilityStatement(approachDetails: ApproachDetails): Unit = {
     val statement = waitForVisibilityOfElementById(statementId)

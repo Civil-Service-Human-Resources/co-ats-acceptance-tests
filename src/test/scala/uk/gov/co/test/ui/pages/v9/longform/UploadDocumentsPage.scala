@@ -5,7 +5,7 @@ import org.scalatest.concurrent.Eventually.eventually
 import uk.gov.co.test.ui.data.v9.longform.LongFormDetails
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
 import uk.gov.co.test.ui.pages.v9.shortform.ApplicationGuidancePage.formId
-import uk.gov.co.test.ui.pages.vx.createvacancypage.CriteriaSection.{uploadAttachmentRequired, vXCandidateInstructions}
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXUploadAttachmentRequired, vXCandidateInstructions}
 
 case class UploadDocumentsDetails(
   documentLocation: String
@@ -40,7 +40,7 @@ object UploadDocumentsPage extends CivilServiceJobsBasePage {
   )
 
   def uploadDocumentsPage(longFormDetails: LongFormDetails): Unit =
-    if (uploadAttachmentRequired) {
+    if (vXUploadAttachmentRequired) {
       confirmInstructions()
       document.foreach { f =>
         f(longFormDetails.uploadDocumentsDetails)

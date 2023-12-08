@@ -2,7 +2,7 @@ package uk.gov.co.test.ui.data.v9.longform
 
 import uk.gov.co.test.ui.data.Characters.{valid250Characters, valid500Characters}
 import uk.gov.co.test.ui.pages.v9.longform._
-import uk.gov.co.test.ui.pages.vx.createvacancypage.LocationsSection.vXOtherLocations
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.vXOtherLocations
 
 object LONG_FORM_DATA_INSOLVENCY
     extends LongFormDetails(

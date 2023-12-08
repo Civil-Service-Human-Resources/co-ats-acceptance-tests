@@ -16,7 +16,7 @@ import uk.gov.co.test.ui.tags.RunInVX
 
 class createVacancySpec extends BaseFeatureSpec {
   Feature("Recruiter Creates A Master Vacancy") {
-    Scenario("A Recruiter Creates A Master Flow Apply Only Vacancy; Master Application Process", RunInVX) {
+    Scenario("VX-A Recruiter Creates A Master Flow Apply Only Vacancy; Master Application Process", RunInVX) {
       Given("a recruiter logs in to vx config and creates & posts vacancy")
       fillNewVacancyForm(MASTER_VACANCY_DATA)
       activateAndPostVacancy()
@@ -35,7 +35,7 @@ class createVacancySpec extends BaseFeatureSpec {
       confirmLongFormCompletion()
     }
 
-    Scenario("A Recruiter Creates A Insolvency Apply Only Vacancy; Full Application Process", RunInVX) {
+    Scenario("VX-A Recruiter Creates A Insolvency Apply Only Vacancy; Full Application Process", RunInVX) {
       Given("a recruiter logs in to vx config and creates & posts vacancy")
       fillNewVacancyForm(INSOLVENCY_VACANCY_DATA)
       activateAndPostVacancy()
@@ -54,7 +54,7 @@ class createVacancySpec extends BaseFeatureSpec {
       confirmLongFormCompletion()
     }
 
-    Scenario("A Recruiter Extracts Vacancy Details", RunInVX) {
+    Scenario("VX - A Recruiter Extracts Vacancy Details", RunInVX) {
       loginWithRecruiterDetails(RECRUITER)
       searchForActiveVacancy()
     }

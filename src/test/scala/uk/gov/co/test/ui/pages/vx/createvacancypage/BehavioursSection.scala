@@ -3,8 +3,7 @@ package uk.gov.co.test.ui.pages.vx.createvacancypage
 import org.openqa.selenium.By
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.formId
-
-import scala.collection.mutable.ListBuffer
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXHowManyAssessed, vXListOfChosenBehaviours}
 
 case class Behaviours(chosenBehaviour: String, stageApplication: Boolean, stageInterview: Boolean)
 
@@ -52,8 +51,6 @@ object BehavioursSection extends VacancyBasePage {
   def interviewSixId           = s"${formId}_datafield_60408_1_1_12684"
   def interviewSevenId         = s"${formId}_datafield_60422_1_1_12684"
   def interviewEightId         = s"${formId}_datafield_60436_1_1_12684"
-  var howManyAssessed: Int     = 8
-  var listOfChosenBehaviours   = new ListBuffer[String]()
 
   def selectBehavioursProfiles(successProfilesDetails: SuccessProfilesDetails): Unit = {
     scrollToElement(By.id(successProfilesSectionId))
@@ -63,9 +60,9 @@ object BehavioursSection extends VacancyBasePage {
       getAssessSectionText(assessBehavioursId) shouldBe behaviour
         .map(_.assessBehaviours)
         .get
-      howManyAssessed = behaviour.map(_.howManyAssessed).get
-      selectHowManyBehaviours(howManyAssessed)
-      howManyAssessed match {
+      vXHowManyAssessed = behaviour.map(_.howManyAssessed).get
+      selectHowManyBehaviours(vXHowManyAssessed)
+      vXHowManyAssessed match {
         case 1 => behavioursSection(successProfilesDetails, 1)
         case 2 => behavioursSection(successProfilesDetails, 2)
         case 3 => behavioursSection(successProfilesDetails, 3)
@@ -83,7 +80,7 @@ object BehavioursSection extends VacancyBasePage {
     scrollToElement(By.id(behavioursOneId))
     waitForVisibilityOfElementById(behavioursOneId).click()
     val chosenBehaviour = behaviour.map(_.behaviourOne.map(_.chosenBehaviour).get).get
-    listOfChosenBehaviours += chosenBehaviour
+    vXListOfChosenBehaviours += chosenBehaviour
     selectOption(generalInput, chosenBehaviour)
     if (behaviour.map(_.behaviourOne.map(_.stageApplication).get).get) checkbox(applicationOneId).select()
     if (behaviour.map(_.behaviourOne.map(_.stageInterview).get).get) checkbox(interviewOneId).select()
@@ -94,7 +91,7 @@ object BehavioursSection extends VacancyBasePage {
     scrollToElement(By.id(behavioursTwoId))
     waitForVisibilityOfElementById(behavioursTwoId).click()
     val chosenBehaviour = behaviour.map(_.behaviourTwo.map(_.chosenBehaviour).get).get
-    listOfChosenBehaviours += chosenBehaviour
+    vXListOfChosenBehaviours += chosenBehaviour
     selectOption(generalInput, chosenBehaviour)
     if (behaviour.map(_.behaviourTwo.map(_.stageApplication).get).get) checkbox(applicationTwoId).select()
     if (behaviour.map(_.behaviourTwo.map(_.stageInterview).get).get) checkbox(interviewTwoId).select()
@@ -105,7 +102,7 @@ object BehavioursSection extends VacancyBasePage {
     scrollToElement(By.id(behavioursThreeId))
     waitForVisibilityOfElementById(behavioursThreeId).click()
     val chosenBehaviour = behaviour.map(_.behaviourThree.map(_.chosenBehaviour).get).get
-    listOfChosenBehaviours += chosenBehaviour
+    vXListOfChosenBehaviours += chosenBehaviour
     selectOption(generalInput, chosenBehaviour)
     if (behaviour.map(_.behaviourThree.map(_.stageApplication).get).get) checkbox(applicationThreeId).select()
     if (behaviour.map(_.behaviourThree.map(_.stageInterview).get).get) checkbox(interviewThreeId).select()
@@ -116,7 +113,7 @@ object BehavioursSection extends VacancyBasePage {
     scrollToElement(By.id(behavioursFourId))
     waitForVisibilityOfElementById(behavioursFourId).click()
     val chosenBehaviour = behaviour.map(_.behaviourFour.map(_.chosenBehaviour).get).get
-    listOfChosenBehaviours += chosenBehaviour
+    vXListOfChosenBehaviours += chosenBehaviour
     selectOption(generalInput, chosenBehaviour)
     if (behaviour.map(_.behaviourFour.map(_.stageApplication).get).get) checkbox(applicationFourId).select()
     if (behaviour.map(_.behaviourFour.map(_.stageInterview).get).get) checkbox(interviewFourId).select()
@@ -127,7 +124,7 @@ object BehavioursSection extends VacancyBasePage {
     scrollToElement(By.id(behavioursFiveId))
     waitForVisibilityOfElementById(behavioursFiveId).click()
     val chosenBehaviour = behaviour.map(_.behaviourFive.map(_.chosenBehaviour).get).get
-    listOfChosenBehaviours += chosenBehaviour
+    vXListOfChosenBehaviours += chosenBehaviour
     selectOption(generalInput, chosenBehaviour)
     if (behaviour.map(_.behaviourFive.map(_.stageApplication).get).get) checkbox(applicationFiveId).select()
     if (behaviour.map(_.behaviourFive.map(_.stageInterview).get).get) checkbox(interviewFiveId).select()
@@ -138,7 +135,7 @@ object BehavioursSection extends VacancyBasePage {
     scrollToElement(By.id(behavioursSixId))
     waitForVisibilityOfElementById(behavioursSixId).click()
     val chosenBehaviour = behaviour.map(_.behaviourSix.map(_.chosenBehaviour).get).get
-    listOfChosenBehaviours += chosenBehaviour
+    vXListOfChosenBehaviours += chosenBehaviour
     selectOption(generalInput, chosenBehaviour)
     if (behaviour.map(_.behaviourSix.map(_.stageApplication).get).get) checkbox(applicationSixId).select()
     if (behaviour.map(_.behaviourSix.map(_.stageInterview).get).get) checkbox(interviewSixId).select()
@@ -149,7 +146,7 @@ object BehavioursSection extends VacancyBasePage {
     scrollToElement(By.id(behavioursSevenId))
     waitForVisibilityOfElementById(behavioursSevenId).click()
     val chosenBehaviour = behaviour.map(_.behaviourSeven.map(_.chosenBehaviour).get).get
-    listOfChosenBehaviours += chosenBehaviour
+    vXListOfChosenBehaviours += chosenBehaviour
     selectOption(generalInput, chosenBehaviour)
     if (behaviour.map(_.behaviourSeven.map(_.stageApplication).get).get) checkbox(applicationSevenId).select()
     if (behaviour.map(_.behaviourSeven.map(_.stageInterview).get).get) checkbox(interviewSevenId).select()
@@ -160,7 +157,7 @@ object BehavioursSection extends VacancyBasePage {
     scrollToElement(By.id(behavioursEightId))
     waitForVisibilityOfElementById(behavioursEightId).click()
     val chosenBehaviour = behaviour.map(_.behaviourEight.map(_.chosenBehaviour).get).get
-    listOfChosenBehaviours += chosenBehaviour
+    vXListOfChosenBehaviours += chosenBehaviour
     selectOption(generalInput, chosenBehaviour)
     if (behaviour.map(_.behaviourEight.map(_.stageApplication).get).get) checkbox(applicationEightId).select()
     if (behaviour.map(_.behaviourEight.map(_.stageInterview).get).get) checkbox(interviewEightId).select()

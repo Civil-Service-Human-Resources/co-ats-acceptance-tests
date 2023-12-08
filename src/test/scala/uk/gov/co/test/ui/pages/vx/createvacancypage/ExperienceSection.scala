@@ -1,6 +1,7 @@
 package uk.gov.co.test.ui.pages.vx.createvacancypage
 
 import org.openqa.selenium.By
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXLanguagesMandatory, vXLicencesMandatory, vXMembershipsMandatory, vXQualificationsMandatory, vXGuidanceText, vXStatementWordLimit}
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.formId
 
@@ -27,44 +28,39 @@ case class ExperienceDetails(
 
 object ExperienceSection extends VacancyBasePage {
 
-  def provideCvYesId                   = s"${formId}_datafield_59983_1_1_1"
-  def provideCvNoId                    = s"${formId}_datafield_59983_1_1_2"
-  def cvScore0to7Id                    = s"${formId}_datafield_187853_1_1_50711"
-  def cvScore0to100Id                  = s"${formId}_datafield_187853_1_1_50712"
-  def jobHistoryYesId                  = s"${formId}_datafield_60080_1_1_1"
-  def jobHistoryNoId                   = s"${formId}_datafield_60080_1_1_2"
-  def qualificationDetailsYesId        = s"${formId}_datafield_60086_1_1_1"
-  def qualificationDetailsNoId         = s"${formId}_datafield_60086_1_1_2"
-  def previousSkillsYesId              = s"${formId}_datafield_60090_1_1_1"
-  def previousSkillsNoId               = s"${formId}_datafield_60090_1_1_2"
-  def personalStatementYesId           = s"${formId}_datafield_59992_1_1_1"
-  def personalStatementNoId            = s"${formId}_datafield_59992_1_1_2"
-  def statementScore0to7Id             = s"${formId}_datafield_187857_1_1_50711"
-  def statementScore0to100Id           = s"${formId}_datafield_187857_1_1_50712"
-  def statementWordLimitId             = s"select2-${formId}_datafield_72066_1_1-container"
-  def guidanceTextYesId                = s"${formId}_datafield_59989_1_1_1"
-  def guidanceTextNoId                 = s"${formId}_datafield_59989_1_1_2"
-  def guidanceTextInputId              = s"${formId}_datafield_60060_1_1_en-GB"
-  def pastExperiencesYesId             = s"${formId}_datafield_60105_1_1_1"
-  def pastExperiencesNoId              = s"${formId}_datafield_60105_1_1_2"
-  def pastExperiencesInputId           = s"${formId}_datafield_116298_1_1_en-GB"
-  def mandatoryLicencesYesId           = s"${formId}_datafield_60168_1_1_1"
-  def mandatoryLicencesNoId            = s"${formId}_datafield_60168_1_1_2"
-  def mandatoryLicencesInputId         = s"${formId}_datafield_60172_1_1_en-GB"
-  def mandatoryMembershipsYesId        = s"${formId}_datafield_60185_1_1_1"
-  def mandatoryMembershipsNoId         = s"${formId}_datafield_60185_1_1_2"
-  def mandatoryMembershipsInputId      = s"${formId}_datafield_60179_1_1_en-GB"
-  def mandatoryLanguagesYesId          = s"${formId}_datafield_60190_1_1_1"
-  def mandatoryLanguagesNoId           = s"${formId}_datafield_60190_1_1_2"
-  def mandatoryLanguagesInputId        = s"${formId}_datafield_60200_1_1_en-GB"
-  def mandatoryQualificationsYesId     = s"${formId}_datafield_60215_1_1_1"
-  def mandatoryQualificationsNoId      = s"${formId}_datafield_60215_1_1_2"
-  def mandatoryQualificationsInputId   = s"${formId}_datafield_60209_1_1_en-GB"
-  var vXGuidanceText: String           = "Autotest - Enter guidance text for the candidate"
-  var licencesMandatory: Boolean       = true
-  var membershipsMandatory: Boolean    = true
-  var languagesMandatory: Boolean      = true
-  var qualificationsMandatory: Boolean = true
+  def provideCvYesId                 = s"${formId}_datafield_59983_1_1_1"
+  def provideCvNoId                  = s"${formId}_datafield_59983_1_1_2"
+  def cvScore0to7Id                  = s"${formId}_datafield_187853_1_1_50711"
+  def cvScore0to100Id                = s"${formId}_datafield_187853_1_1_50712"
+  def jobHistoryYesId                = s"${formId}_datafield_60080_1_1_1"
+  def jobHistoryNoId                 = s"${formId}_datafield_60080_1_1_2"
+  def qualificationDetailsYesId      = s"${formId}_datafield_60086_1_1_1"
+  def qualificationDetailsNoId       = s"${formId}_datafield_60086_1_1_2"
+  def previousSkillsYesId            = s"${formId}_datafield_60090_1_1_1"
+  def previousSkillsNoId             = s"${formId}_datafield_60090_1_1_2"
+  def personalStatementYesId         = s"${formId}_datafield_59992_1_1_1"
+  def personalStatementNoId          = s"${formId}_datafield_59992_1_1_2"
+  def statementScore0to7Id           = s"${formId}_datafield_187857_1_1_50711"
+  def statementScore0to100Id         = s"${formId}_datafield_187857_1_1_50712"
+  def statementWordLimitId           = s"select2-${formId}_datafield_72066_1_1-container"
+  def guidanceTextYesId              = s"${formId}_datafield_59989_1_1_1"
+  def guidanceTextNoId               = s"${formId}_datafield_59989_1_1_2"
+  def guidanceTextInputId            = s"${formId}_datafield_60060_1_1_en-GB"
+  def pastExperiencesYesId           = s"${formId}_datafield_60105_1_1_1"
+  def pastExperiencesNoId            = s"${formId}_datafield_60105_1_1_2"
+  def pastExperiencesInputId         = s"${formId}_datafield_116298_1_1_en-GB"
+  def mandatoryLicencesYesId         = s"${formId}_datafield_60168_1_1_1"
+  def mandatoryLicencesNoId          = s"${formId}_datafield_60168_1_1_2"
+  def mandatoryLicencesInputId       = s"${formId}_datafield_60172_1_1_en-GB"
+  def mandatoryMembershipsYesId      = s"${formId}_datafield_60185_1_1_1"
+  def mandatoryMembershipsNoId       = s"${formId}_datafield_60185_1_1_2"
+  def mandatoryMembershipsInputId    = s"${formId}_datafield_60179_1_1_en-GB"
+  def mandatoryLanguagesYesId        = s"${formId}_datafield_60190_1_1_1"
+  def mandatoryLanguagesNoId         = s"${formId}_datafield_60190_1_1_2"
+  def mandatoryLanguagesInputId      = s"${formId}_datafield_60200_1_1_en-GB"
+  def mandatoryQualificationsYesId   = s"${formId}_datafield_60215_1_1_1"
+  def mandatoryQualificationsNoId    = s"${formId}_datafield_60215_1_1_2"
+  def mandatoryQualificationsInputId = s"${formId}_datafield_60209_1_1_en-GB"
 
   private def provideCV(successProfilesDetails: SuccessProfilesDetails): Unit = {
     val cv = successProfilesDetails.experienceSection
@@ -111,7 +107,8 @@ object ExperienceSection extends VacancyBasePage {
   }
 
   private def selectStatementWordLimit(successProfilesDetails: SuccessProfilesDetails): Unit = {
-    val limit = successProfilesDetails.experienceSection.map(_.statementWordLimit).get.toString
+    vXStatementWordLimit = successProfilesDetails.experienceSection.map(_.statementWordLimit).get
+    val limit = vXStatementWordLimit.toString
     scrollToElement(By.id(statementWordLimitId))
     waitForVisibilityOfElementById(statementWordLimitId).click()
     action().moveToElement(waitForDropdownOption(limit)).perform()
@@ -148,8 +145,8 @@ object ExperienceSection extends VacancyBasePage {
   }
 
   private def selectMandatoryLicences(successProfilesDetails: SuccessProfilesDetails): Unit = {
-    licencesMandatory = successProfilesDetails.experienceSection.map(_.licences.map(_.requirements).get).get
-    if (licencesMandatory) {
+    vXLicencesMandatory = successProfilesDetails.experienceSection.map(_.licences.map(_.requirements).get).get
+    if (vXLicencesMandatory) {
       clickOnRadioButton(mandatoryLicencesYesId)
       enterLicenceRequirements(successProfilesDetails)
     } else clickOnRadioButton(mandatoryLicencesNoId)
@@ -162,8 +159,8 @@ object ExperienceSection extends VacancyBasePage {
   }
 
   private def selectMandatoryMemberships(successProfilesDetails: SuccessProfilesDetails): Unit = {
-    membershipsMandatory = successProfilesDetails.experienceSection.map(_.memberships.map(_.requirements).get).get
-    if (membershipsMandatory) {
+    vXMembershipsMandatory = successProfilesDetails.experienceSection.map(_.memberships.map(_.requirements).get).get
+    if (vXMembershipsMandatory) {
       clickOnRadioButton(mandatoryMembershipsYesId)
       enterMembershipsRequirements(successProfilesDetails)
     } else clickOnRadioButton(mandatoryMembershipsNoId)
@@ -176,8 +173,8 @@ object ExperienceSection extends VacancyBasePage {
   }
 
   private def selectMandatoryLanguages(successProfilesDetails: SuccessProfilesDetails): Unit = {
-    languagesMandatory = successProfilesDetails.experienceSection.map(_.languages.map(_.requirements).get).get
-    if (languagesMandatory) {
+    vXLanguagesMandatory = successProfilesDetails.experienceSection.map(_.languages.map(_.requirements).get).get
+    if (vXLanguagesMandatory) {
       clickOnRadioButton(mandatoryLanguagesYesId)
       enterLanguagesRequirements(successProfilesDetails)
     } else clickOnRadioButton(mandatoryLanguagesNoId)
@@ -190,8 +187,8 @@ object ExperienceSection extends VacancyBasePage {
   }
 
   private def selectMandatoryQualifications(successProfilesDetails: SuccessProfilesDetails): Unit = {
-    qualificationsMandatory = successProfilesDetails.experienceSection.map(_.qualifications.map(_.requirements).get).get
-    if (qualificationsMandatory) {
+    vXQualificationsMandatory = successProfilesDetails.experienceSection.map(_.qualifications.map(_.requirements).get).get
+    if (vXQualificationsMandatory) {
       clickOnRadioButton(mandatoryQualificationsYesId)
       enterQualificationsRequirements(successProfilesDetails)
     } else clickOnRadioButton(mandatoryQualificationsNoId)

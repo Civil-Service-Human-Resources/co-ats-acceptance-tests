@@ -5,9 +5,7 @@ import org.scalatest.concurrent.Eventually.eventually
 import uk.gov.co.test.ui.data.v9.shortform.ShortFormDetails
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
 import uk.gov.co.test.ui.pages.v9.shortform.ApplicationGuidancePage.formId
-import uk.gov.co.test.ui.pages.v9.shortform.EligibilityPage.civilServant
-import uk.gov.co.test.ui.pages.vx.createvacancypage.ManagementSection.greatForVeterans
-import uk.gov.co.test.ui.pages.vx.createvacancypage.VacancyTestsSection.anyOnlineTests
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXAnyOnlineTests, civilServant, vXGreatForVeterans}
 
 case class PersonalInfoDetails(
   firstName: String,
@@ -96,7 +94,7 @@ object PersonalInfoPage extends CivilServiceJobsBasePage {
     if (personalInfoDetails.reasonableAdjustments) {
       radioSelect(reasonableAdjustmentYesId)
       enterDetails(reasonableAdjustmentDetailsInputId, personalInfoDetails.reasonableAdjustmentsDetails)
-      if (anyOnlineTests == "" || anyOnlineTests.toBoolean) { // TODO requires refactor
+      if (vXAnyOnlineTests) {
         if (personalInfoDetails.reasonableAdjustmentsForTests) {
           radioSelect(reasonableAdjustmentsForTestsYesId)
           enterDetails(
@@ -108,7 +106,7 @@ object PersonalInfoPage extends CivilServiceJobsBasePage {
     } else radioSelect(reasonableAdjustmentNoId)
 
   private def selectAreYouVeteran(personalInfoDetails: PersonalInfoDetails): Unit =
-    if (greatForVeterans) {
+    if (vXGreatForVeterans) {
       personalInfoDetails.areYouAVeteran match {
         case "Yes"                    =>
           radioSelect(areYouAVeteranYesId)

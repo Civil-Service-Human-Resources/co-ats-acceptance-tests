@@ -2,7 +2,8 @@ package uk.gov.co.test.ui.pages.vx.createvacancypage
 
 import org.openqa.selenium.By
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
-import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.{applicationClosingDate, formId}
+import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.formId
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.vXApplicationClosingDate
 
 case class RecruiterTestsDetails(
   whenDeadline: String,
@@ -71,7 +72,7 @@ object RecruiterTestsSection extends VacancyBasePage {
     if (sameDeadline) {
       action().moveToElement(waitForDropdownOption("Yes")).perform()
       waitForDropdownOption("Yes").click()
-      enterTestDeadline(applicationClosingDate, deadlineDayId, deadlineMonthId, deadlineYearId)
+      enterTestDeadline(vXApplicationClosingDate, deadlineDayId, deadlineMonthId, deadlineYearId)
     } else {
       action().moveToElement(waitForDropdownOption("No")).perform()
       waitForDropdownOption("No").click()

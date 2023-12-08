@@ -2,7 +2,7 @@ package uk.gov.co.test.ui.pages.v9
 
 import org.openqa.selenium.{By, WebElement}
 import org.scalatest.concurrent.Eventually.eventually
-import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.vacancyName
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.vacancyName
 
 object ApplicationCentrePage extends CivilServiceJobsBasePage {
 
@@ -57,7 +57,7 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
     )
   }
 
-  def confirmLongFormCompletion(): Unit = {
+  def confirmLongFormCompletion(): Unit = { //TODO check last text doesn't match with confirmLongFormPECCompletion()
     applicationCentrePageCheck()
     advertDetailsFunction().isEnabled
     withdrawApplicationFunction().isEnabled
@@ -66,4 +66,12 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
     getApplicationConfirmation shouldEqual "Your application has been received.\nYou have indicated that you may need assistance or an adjustment during the selection process.\nWe've noted this and will contact you if we need further information to help us support you.\nWe'll email you updates on the progress of your application or you can check the progress here in your account."
   }
 
+  def confirmLongFormPECCompletion(): Unit = { //TODO check last text confirmLongFormCompletion()
+    applicationCentrePageCheck()
+    advertDetailsFunction().isEnabled
+    withdrawApplicationFunction().isEnabled
+    applicationForVacancyText  shouldEqual s"Application For $vacancyName"
+    getApplicationState        shouldEqual "Application status: Help with selection process"
+    getApplicationConfirmation shouldEqual "Your application has been received.\nYou've indicated that you may need assistance or an adjustment during the selection process.\nWe've noted this and will contact you if we need further information to help us support you.\nWe'll email you updates on the progress of your application or you can check the progress here in your account."
+  }
 }

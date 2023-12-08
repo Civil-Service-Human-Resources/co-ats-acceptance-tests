@@ -11,7 +11,7 @@ import uk.gov.co.test.ui.tags.RunInV9
 
 class RegisterCandidateSpec extends BaseFeatureSpec {
   Feature("Register Candidate On Civil Service Jobs") {
-    Scenario("A Registered Candidate Logs In To Civil Service Jobs", RunInV9) {
+    Scenario("V9 - A Registered Candidate Logs In To Civil Service Jobs", RunInV9) {
       Given("A candidate navigates to the sign in page")
       navigateToSignInOrCreateAccount()
 
@@ -22,7 +22,7 @@ class RegisterCandidateSpec extends BaseFeatureSpec {
       candidateDisplayName() shouldEqual candidateFullName(REGISTERED_CANDIDATE)
     }
 
-    Scenario("A Candidate Creates An Account On Civil Service Jobs", RunInV9) {
+    Scenario("V9 - A Candidate Creates An Account On Civil Service Jobs", RunInV9) {
       Given("the candidate enters their details for new account")
       fillNewCandidateDetails(REGISTER_CANDIDATE_TWO)
 
@@ -36,7 +36,7 @@ class RegisterCandidateSpec extends BaseFeatureSpec {
       onPage(applicationCentrePageTitle)
     }
 
-    Scenario("Create Candidate Accounts", RunInV9) {
+    Scenario("V9 - Create Candidate Accounts", RunInV9) {
       createMultipleCandidates(1)
     }
   }

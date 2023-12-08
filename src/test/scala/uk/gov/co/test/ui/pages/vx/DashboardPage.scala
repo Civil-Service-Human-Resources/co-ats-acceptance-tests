@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.pages.vx
 
 import org.scalatest.concurrent.Eventually.eventually
-import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.vacancyName
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vacancyId, vacancyName}
 
 object DashboardPage extends VacancyBasePage {
 
@@ -15,7 +15,6 @@ object DashboardPage extends VacancyBasePage {
   val matchedOption        = ".//li[@class='qs_option active']/a/span[1]"
   val searchForVacancy     = "search_button"
   val appIdPath            = ".//*[@class='app_id']"
-  var vacancyId            = ""
 
   private def dashboardPageCheck(): Unit =
     eventually(onPage(dashboardPageTitle))
@@ -37,8 +36,6 @@ object DashboardPage extends VacancyBasePage {
   }
 
   def searchForActiveVacancy(): Unit = {
-    vacancyName = "GCQACO - Consultant"
-    vacancyId = "9416"
     dashboardPageCheck()
     waitForVisibilityOfElementById(searchPath).click()
     waitForVisibilityOfElementByPath(searchVacanciesPath).click()

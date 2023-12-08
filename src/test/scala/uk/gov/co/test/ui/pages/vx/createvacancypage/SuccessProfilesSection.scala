@@ -8,6 +8,7 @@ import uk.gov.co.test.ui.pages.vx.createvacancypage.BehavioursSection.selectBeha
 import uk.gov.co.test.ui.pages.vx.createvacancypage.ExperienceSection.selectExperiencesRequired
 import uk.gov.co.test.ui.pages.vx.createvacancypage.StrengthsSection.selectStrengthsAssessed
 import uk.gov.co.test.ui.pages.vx.createvacancypage.TechnicalSkillsSection.selectTechnicalSkills
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXAbilitiesRequired, vXBehavioursRequired, vXExperiencesRequired, vXStrengthsRequired, vXTechSkillsRequired}
 
 case class SuccessProfilesDetails(
   abilities: Boolean,
@@ -24,40 +25,35 @@ case class SuccessProfilesDetails(
 
 object SuccessProfilesSection extends VacancyBasePage {
 
-  def abilitiesId                  = s"${formId}_datafield_154245_1_1_12685"
-  def behavioursId                 = s"${formId}_datafield_154245_1_1_12686"
-  def experienceId                 = s"${formId}_datafield_154245_1_1_12687"
-  def strengthsId                  = s"${formId}_datafield_154245_1_1_12689"
-  def technicalSkillsId            = s"${formId}_datafield_154245_1_1_12688"
-  var abilitiesRequired: Boolean   = true
-  var behavioursRequired: Boolean  = true
-  var experiencesRequired: Boolean = true
-  var strengthsRequired: Boolean   = true
-  var techSkillsRequired: Boolean  = true
+  def abilitiesId       = s"${formId}_datafield_154245_1_1_12685"
+  def behavioursId      = s"${formId}_datafield_154245_1_1_12686"
+  def experienceId      = s"${formId}_datafield_154245_1_1_12687"
+  def strengthsId       = s"${formId}_datafield_154245_1_1_12689"
+  def technicalSkillsId = s"${formId}_datafield_154245_1_1_12688"
 
   private def whichSuccessProfiles(successProfilesDetails: SuccessProfilesDetails): Unit = {
     if (successProfilesDetails.abilities) {
-      abilitiesRequired = successProfilesDetails.abilities
+      vXAbilitiesRequired = successProfilesDetails.abilities
       checkbox(abilitiesId).select()
       selectAbilitiesProfile(successProfilesDetails)
     }
     if (successProfilesDetails.behaviours) {
-      behavioursRequired = successProfilesDetails.behaviours
+      vXBehavioursRequired = successProfilesDetails.behaviours
       checkbox(behavioursId).select()
       selectBehavioursProfiles(successProfilesDetails)
     }
     if (successProfilesDetails.experience) {
-      experiencesRequired = successProfilesDetails.experience
+      vXExperiencesRequired = successProfilesDetails.experience
       checkbox(experienceId).select()
       selectExperiencesRequired(successProfilesDetails)
     }
     if (successProfilesDetails.strengths) {
-      strengthsRequired = successProfilesDetails.strengths
+      vXStrengthsRequired = successProfilesDetails.strengths
       checkbox(strengthsId).select()
       selectStrengthsAssessed(successProfilesDetails)
     }
     if (successProfilesDetails.technicalSkills) {
-      techSkillsRequired = successProfilesDetails.technicalSkills
+      vXTechSkillsRequired = successProfilesDetails.technicalSkills
       checkbox(technicalSkillsId).select()
       selectTechnicalSkills(successProfilesDetails)
     }

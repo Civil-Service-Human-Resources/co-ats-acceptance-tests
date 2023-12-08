@@ -1,10 +1,9 @@
 package uk.gov.co.test.ui.pages.vx.createvacancypage
 
 import org.openqa.selenium.By
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXHowManySkills, vXListOfApplicationStage, vXListOfTechSkills, vXListOfTechSkillsDescription, vXNoOfApplicationStage}
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.formId
-
-import scala.collection.mutable.ListBuffer
 
 case class TechSkills(techSkill: String, description: String, techApplication: Boolean, techInterview: Boolean)
 
@@ -56,16 +55,14 @@ object TechnicalSkillsSection extends VacancyBasePage {
   def interviewSixId               = s"${formId}_datafield_65059_1_1_12684"
   def interviewSevenId             = s"${formId}_datafield_65063_1_1_12684"
   def interviewEightId             = s"${formId}_datafield_65067_1_1_12684"
-  var howManySkills: Int           = 8
-  var listOfTechSkills             = new ListBuffer[String]()
-  var listOfTechSkillsDescription  = new ListBuffer[String]()
 
   def selectTechnicalSkills(successProfilesDetails: SuccessProfilesDetails): Unit = {
     val techSkills = successProfilesDetails.techSkillsSection
     if (successProfilesDetails.technicalSkills) {
-      howManySkills = techSkills.map(_.howManySkills).get
-      selectHowManyTechSkills(howManySkills)
-      howManySkills match {
+      vXListOfApplicationStage.clear()
+      vXHowManySkills = techSkills.map(_.howManySkills).get
+      selectHowManyTechSkills(vXHowManySkills)
+      vXHowManySkills match {
         case 1 => techSkillsRequired(successProfilesDetails, 1)
         case 2 => techSkillsRequired(successProfilesDetails, 2)
         case 3 => techSkillsRequired(successProfilesDetails, 3)
@@ -75,6 +72,7 @@ object TechnicalSkillsSection extends VacancyBasePage {
         case 7 => techSkillsRequired(successProfilesDetails, 7)
         case 8 => techSkillsRequired(successProfilesDetails, 8)
       }
+      vXNoOfApplicationStage = vXListOfApplicationStage.groupBy(identity).view.mapValues(_.size)(true)
     }
   }
 
@@ -89,11 +87,13 @@ object TechnicalSkillsSection extends VacancyBasePage {
     waitForVisibilityOfElementById(techSkillsOneId)
     val skill            = techSkills.map(_.techSkillsOne.map(_.techSkill).get).get
     val skillDescription = techSkills.map(_.techSkillsOne.map(_.description).get).get
-    listOfTechSkills += skill
-    listOfTechSkillsDescription += skillDescription
+    val applicationStage = techSkills.map(_.techSkillsOne.map(_.techApplication).get).get
+    vXListOfTechSkills += skill
+    vXListOfTechSkillsDescription += skillDescription
+    vXListOfApplicationStage += applicationStage
     selectOptionWithId(techSkillsOneId, skill)
     selectOptionWithId(techSkillsOneDescriptionId, skillDescription)
-    if (techSkills.map(_.techSkillsOne.map(_.techApplication).get).get) checkbox(applicationOneId).select()
+    if (applicationStage) checkbox(applicationOneId).select()
     if (techSkills.map(_.techSkillsOne.map(_.techInterview).get).get) checkbox(interviewOneId).select()
   }
 
@@ -101,11 +101,13 @@ object TechnicalSkillsSection extends VacancyBasePage {
     val techSkills       = successProfilesDetails.techSkillsSection
     val skill            = techSkills.map(_.techSkillsTwo.map(_.techSkill).get).get
     val skillDescription = techSkills.map(_.techSkillsTwo.map(_.description).get).get
-    listOfTechSkills += skill
-    listOfTechSkillsDescription += skillDescription
+    val applicationStage = techSkills.map(_.techSkillsTwo.map(_.techApplication).get).get
+    vXListOfTechSkills += skill
+    vXListOfTechSkillsDescription += skillDescription
+    vXListOfApplicationStage += applicationStage
     selectOptionWithId(techSkillsTwoId, skill)
     selectOptionWithId(techSkillsTwoDescriptionId, skillDescription)
-    if (techSkills.map(_.techSkillsTwo.map(_.techApplication).get).get) checkbox(applicationTwoId).select()
+    if (applicationStage) checkbox(applicationTwoId).select()
     if (techSkills.map(_.techSkillsTwo.map(_.techInterview).get).get) checkbox(interviewTwoId).select()
   }
 
@@ -113,11 +115,13 @@ object TechnicalSkillsSection extends VacancyBasePage {
     val techSkills       = successProfilesDetails.techSkillsSection
     val skill            = techSkills.map(_.techSkillsThree.map(_.techSkill).get).get
     val skillDescription = techSkills.map(_.techSkillsThree.map(_.description).get).get
-    listOfTechSkills += skill
-    listOfTechSkillsDescription += skillDescription
+    val applicationStage = techSkills.map(_.techSkillsThree.map(_.techApplication).get).get
+    vXListOfTechSkills += skill
+    vXListOfTechSkillsDescription += skillDescription
+    vXListOfApplicationStage += applicationStage
     selectOptionWithId(techSkillsThreeId, skill)
     selectOptionWithId(techSkillsThreeDescriptionId, skillDescription)
-    if (techSkills.map(_.techSkillsThree.map(_.techApplication).get).get) checkbox(applicationThreeId).select()
+    if (applicationStage) checkbox(applicationThreeId).select()
     if (techSkills.map(_.techSkillsThree.map(_.techInterview).get).get) checkbox(interviewThreeId).select()
   }
 
@@ -125,11 +129,13 @@ object TechnicalSkillsSection extends VacancyBasePage {
     val techSkills       = successProfilesDetails.techSkillsSection
     val skill            = techSkills.map(_.techSkillsFour.map(_.techSkill).get).get
     val skillDescription = techSkills.map(_.techSkillsFour.map(_.description).get).get
-    listOfTechSkills += skill
-    listOfTechSkillsDescription += skillDescription
+    val applicationStage = techSkills.map(_.techSkillsFour.map(_.techApplication).get).get
+    vXListOfTechSkills += skill
+    vXListOfTechSkillsDescription += skillDescription
+    vXListOfApplicationStage += applicationStage
     selectOptionWithId(techSkillsFourId, skill)
     selectOptionWithId(techSkillsFourDescriptionId, skillDescription)
-    if (techSkills.map(_.techSkillsFour.map(_.techApplication).get).get) checkbox(applicationFourId).select()
+    if (applicationStage) checkbox(applicationFourId).select()
     if (techSkills.map(_.techSkillsFour.map(_.techInterview).get).get) checkbox(interviewFourId).select()
   }
 
@@ -137,11 +143,13 @@ object TechnicalSkillsSection extends VacancyBasePage {
     val techSkills       = successProfilesDetails.techSkillsSection
     val skill            = techSkills.map(_.techSkillsFive.map(_.techSkill).get).get
     val skillDescription = techSkills.map(_.techSkillsFive.map(_.description).get).get
-    listOfTechSkills += skill
-    listOfTechSkillsDescription += skillDescription
+    val applicationStage = techSkills.map(_.techSkillsFive.map(_.techApplication).get).get
+    vXListOfTechSkills += skill
+    vXListOfTechSkillsDescription += skillDescription
+    vXListOfApplicationStage += applicationStage
     selectOptionWithId(techSkillsFiveId, skill)
     selectOptionWithId(techSkillsFiveDescriptionId, skillDescription)
-    if (techSkills.map(_.techSkillsFive.map(_.techApplication).get).get) checkbox(applicationFiveId).select()
+    if (applicationStage) checkbox(applicationFiveId).select()
     if (techSkills.map(_.techSkillsFive.map(_.techInterview).get).get) checkbox(interviewFiveId).select()
   }
 
@@ -149,11 +157,13 @@ object TechnicalSkillsSection extends VacancyBasePage {
     val techSkills       = successProfilesDetails.techSkillsSection
     val skill            = techSkills.map(_.techSkillsSix.map(_.techSkill).get).get
     val skillDescription = techSkills.map(_.techSkillsSix.map(_.description).get).get
-    listOfTechSkills += skill
-    listOfTechSkillsDescription += skillDescription
+    val applicationStage = techSkills.map(_.techSkillsSix.map(_.techApplication).get).get
+    vXListOfTechSkills += skill
+    vXListOfTechSkillsDescription += skillDescription
+    vXListOfApplicationStage += applicationStage
     selectOptionWithId(techSkillsSixId, skill)
     selectOptionWithId(techSkillsSixDescriptionId, skillDescription)
-    if (techSkills.map(_.techSkillsSix.map(_.techApplication).get).get) checkbox(applicationSixId).select()
+    if (applicationStage) checkbox(applicationSixId).select()
     if (techSkills.map(_.techSkillsSix.map(_.techInterview).get).get) checkbox(interviewSixId).select()
   }
 
@@ -161,11 +171,13 @@ object TechnicalSkillsSection extends VacancyBasePage {
     val techSkills       = successProfilesDetails.techSkillsSection
     val skill            = techSkills.map(_.techSkillsSeven.map(_.techSkill).get).get
     val skillDescription = techSkills.map(_.techSkillsSeven.map(_.description).get).get
-    listOfTechSkills += skill
-    listOfTechSkillsDescription += skillDescription
+    val applicationStage = techSkills.map(_.techSkillsSeven.map(_.techApplication).get).get
+    vXListOfTechSkills += skill
+    vXListOfTechSkillsDescription += skillDescription
+    vXListOfApplicationStage += applicationStage
     selectOptionWithId(techSkillsSevenId, skill)
     selectOptionWithId(techSkillsSevenDescriptionId, skillDescription)
-    if (techSkills.map(_.techSkillsSeven.map(_.techApplication).get).get) checkbox(applicationSevenId).select()
+    if (applicationStage) checkbox(applicationSevenId).select()
     if (techSkills.map(_.techSkillsSeven.map(_.techInterview).get).get) checkbox(interviewSevenId).select()
   }
 
@@ -173,11 +185,13 @@ object TechnicalSkillsSection extends VacancyBasePage {
     val techSkills       = successProfilesDetails.techSkillsSection
     val skill            = techSkills.map(_.techSkillsEight.map(_.techSkill).get).get
     val skillDescription = techSkills.map(_.techSkillsEight.map(_.description).get).get
-    listOfTechSkills += skill
-    listOfTechSkillsDescription += skillDescription
+    val applicationStage = techSkills.map(_.techSkillsEight.map(_.techApplication).get).get
+    vXListOfTechSkills += skill
+    vXListOfTechSkillsDescription += skillDescription
+    vXListOfApplicationStage += applicationStage
     selectOptionWithId(techSkillsEightId, skill)
     selectOptionWithId(techSkillsEightDescriptionId, skillDescription)
-    if (techSkills.map(_.techSkillsEight.map(_.techApplication).get).get) checkbox(applicationEightId).select()
+    if (applicationStage) checkbox(applicationEightId).select()
     if (techSkills.map(_.techSkillsEight.map(_.techInterview).get).get) checkbox(interviewEightId).select()
   }
 

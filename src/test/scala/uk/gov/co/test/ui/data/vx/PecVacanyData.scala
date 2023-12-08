@@ -4,112 +4,107 @@ import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.{contactEmailVxConfig, contactN
 import uk.gov.co.test.ui.pages.v9.SignInPage.generateRandomJobPosition
 import uk.gov.co.test.ui.pages.vx.createvacancypage._
 
-object MASTER_VACANCY_DATA
+object PEC_VACANCY_DATA
     extends NewVacancyDetails(
-      MASTER_BASIC_DETAILS,
-      MASTER_JOB_INFORMATION,
-      MASTER_APPROACH,
-      MASTER_APPROVAL,
-      MASTER_RESERVE_LIST,
-      MASTER_LOCATIONS,
-      MASTER_CONTRACT_DETAILS,
-      MASTER_ADVERT,
-      MASTER_CONTACT_DETAILS,
-      MASTER_VETTING_DETAILS,
-      MASTER_INTERVIEWS_DETAILS,
-      MASTER_SUCCESS_PROFILES,
-      MASTER_VACANCY_TESTS,
-      MASTER_ADDITIONAL_QUESTIONS,
-      MASTER_CRITERIA,
-      MASTER_MANAGEMENT,
-      MASTER_ONLINE_PEC_CHECK_FORMS,
-      MASTER_PEC_CHECK_FORMS
+      PEC_BASIC_DETAILS,
+      PEC_JOB_INFORMATION,
+      PEC_APPROACH,
+      PEC_APPROVAL,
+      PEC_RESERVE_LIST,
+      PEC_LOCATIONS,
+      PEC_CONTRACT_DETAILS,
+      PEC_ADVERT,
+      PEC_CONTACT_DETAILS,
+      PEC_VETTING_DETAILS,
+      PEC_INTERVIEWS_DETAILS,
+      PEC_SUCCESS_PROFILES,
+      PEC_VACANCY_TESTS,
+      PEC_ADDITIONAL_QUESTIONS,
+      PEC_CRITERIA,
+      PEC_MANAGEMENT,
+      PEC_ONLINE_PEC_CHECK_FORMS,
+      PEC_PEC_CHECK_FORMS
     )
 
-object MASTER_BASIC_DETAILS
+object PEC_BASIC_DETAILS
     extends BasicDetails(
-      "Insolvency Service - Apply online",
-      s"AUTOCO - " + generateRandomJobPosition(),
+      "Crown Prosecution Service - Apply online",
+      s"AUTOA8PEC - " + generateRandomJobPosition(),
       true,
       "Prawf awtomeiddio",
       32
     )
-object MASTER_JOB_INFORMATION
+object PEC_JOB_INFORMATION
     extends JobInfoDetails(
       true,
-      "Insolvency Service",
-      "Insolvency - Information and Technology Directorate",
+      "Crown Prosecution Service",
+      "Other",
       true,
       "Prawf awtomeiddio",
-      "Autotest - Business area detail",
+      "",
       typeOfRole = List(
-        "Accountancy",
-        "Analytical",
-        "Audit",
-        "Corporate Finance",
-        "Engineering",
-        "Tax Profession"
+        "Accountancy"
       ),
       "Other",
-      "3"
+      "1"
     )
-object MASTER_APPROACH
+object PEC_APPROACH
     extends ApproachDetails(
       "External",
-      true,
+      false,
       "Autotest - Eligibility statement",
-      true,
+      false,
       "Prawf awtomeiddio",
       "This vacancy is open to employees who already hold the substantive grade for the post and were appointed to the Civil Service on merit following a fair and open competition; or were appointed to a permanent Civil Service post through an exception in the Civil Service Commissioners’ rules."
     )
-object MASTER_APPROVAL
+object PEC_APPROVAL
     extends ApprovalDetails(
       true,
       "Autotest - budgetary authorisation info",
-      "Autotest - Cost centre (optional)"
+      ""
     )
 
-object MASTER_RESERVE_LIST
+object PEC_RESERVE_LIST
     extends ReserveListDetails(
-      true,
+      false,
       "12 Months",
       false
     )
 
-object MASTER_LOCATIONS
+object PEC_LOCATIONS
     extends LocationsDetails(
-      "Postcodes",
+      "Towns",
       "M1 4RJ",
-      "Manchester",
+      "Cardiff",
       "North West",
       "Germany",
-      "Newcastle, Liverpool, Cardiff",
-      true,
+      "",
+      false,
       true,
       "All communities",
-      true,
+      false,
       "3",
       otherLocations = List("London", "Southampton", "Manchester")
     )
 
-object MASTER_CONTRACT_DETAILS
+object PEC_CONTRACT_DETAILS
     extends ContractDetails(
-      List("Permanent", "Temporary", "Loan", "Secondment", "Returner"),
+      List("Permanent"),
       "Autotest - Maximum characters: 255. Any text over this limit will not show on the advert.",
       true,
       "Prawf awtomeiddio",
-      List("Full-time", "Part-time", "Compressed Hours", "Flexible working", "Homeworking"),
-      "Senior Executive Officer",
-      "Grade 7",
+      List("Full-time"),
+      "Administrative Officer",
+      "",
       "GBP (£)",
-      75000,
-      95000,
-      "Can agree on the higher bracket",
-      true,
+      25000,
+      10000,
+      "",
+      false,
       18750
     )
 
-object MASTER_ADVERT
+object PEC_ADVERT
     extends AdvertDetails(
       "Autotest - Job summary",
       "Autotest - Job description",
@@ -118,7 +113,7 @@ object MASTER_ADVERT
       "Autotest - Selection process details"
     )
 
-object MASTER_CONTACT_DETAILS
+object PEC_CONTACT_DETAILS
     extends ContactDetails(
       s"$contactNameVxConfig",
       s"$contactEmailVxConfig",
@@ -128,56 +123,56 @@ object MASTER_CONTACT_DETAILS
       s"$contactEmailVxConfig"
     )
 
-object MASTER_VETTING_DETAILS
+object PEC_VETTING_DETAILS
     extends VettingDetails(
       true,
-      "Basic",
+      "Standard",
       "Disclosure barring service (DBS)",
-      "Security check",
-      true
+      "None",
+      false
     )
 
-object MASTER_INTERVIEWS_DETAILS
+object PEC_INTERVIEWS_DETAILS
     extends InterviewsDetails(
-      "4",
-      "Telephone",
-      "Assessment",
+      "1",
       "Video",
+      "Assessment",
+      "Telephone",
       "Interview",
-      true
+      false
     )
 
-object MASTER_SUCCESS_PROFILES
+object PEC_SUCCESS_PROFILES
     extends SuccessProfilesDetails(
       true,
       true,
       true,
       true,
       true,
-      Some(MASTER_ABILITIES),
-      Some(MASTER_BEHAVIOURS),
-      Some(MASTER_EXPERIENCES),
-      Some(MASTER_STRENGTHS),
-      Some(MASTER_TECH_SKILLS)
+      Some(PEC_ABILITIES),
+      Some(PEC_BEHAVIOURS),
+      Some(PEC_EXPERIENCES),
+      Some(PEC_STRENGTHS),
+      Some(PEC_TECH_SKILLS)
     )
 
-object MASTER_ABILITIES
+object PEC_ABILITIES
     extends AbilitiesDetails(
       """The following online tests can be used to assess abilities:
                            |Civil Service Numerical Test
                            |Civil Service Verbal Test""".stripMargin
     )
 
-object MASTER_BEHAVIOURS
+object PEC_BEHAVIOURS
     extends BehavioursDetails(
       assessBehaviours = """The following online tests can be used to assess behaviours:
           |Civil Service Judgement Test
           |Civil Service Management Judgement Test""".stripMargin,
       8,
       behaviourOne =
-        Some(Behaviours(chosenBehaviour = "Changing and Improving", stageApplication = true, stageInterview = true)),
+        Some(Behaviours(chosenBehaviour = "Changing and Improving", stageApplication = true, stageInterview = false)),
       behaviourTwo = Some(
-        Behaviours(chosenBehaviour = "Communicating and Influencing", stageApplication = true, stageInterview = true)
+        Behaviours(chosenBehaviour = "Communicating and Influencing", stageApplication = true, stageInterview = false)
       ),
       behaviourThree =
         Some(Behaviours(chosenBehaviour = "Delivering at Pace", stageApplication = true, stageInterview = true)),
@@ -186,7 +181,7 @@ object MASTER_BEHAVIOURS
       ),
       behaviourFive = Some(Behaviours(chosenBehaviour = "Leadership", stageApplication = true, stageInterview = true)),
       behaviourSix = Some(
-        Behaviours(chosenBehaviour = "Making Effective Decisions", stageApplication = true, stageInterview = true)
+        Behaviours(chosenBehaviour = "Making Effective Decisions", stageApplication = true, stageInterview = false)
       ),
       behaviourSeven = Some(
         Behaviours(chosenBehaviour = "Managing a Quality Service", stageApplication = true, stageInterview = true)
@@ -196,16 +191,16 @@ object MASTER_BEHAVIOURS
       )
     )
 
-object MASTER_EXPERIENCES
+object PEC_EXPERIENCES
     extends ExperienceDetails(
       true,
-      "0 - 100",
+      "0 - 7",
       true,
       true,
       true,
       true,
       "0 - 7",
-      250,
+      750,
       true,
       "Autotest - Enter guidance text for the candidate",
       true,
@@ -223,20 +218,20 @@ object MASTER_EXPERIENCES
       )
     )
 
-object MASTER_STRENGTHS
+object PEC_STRENGTHS
     extends StrengthsDetails(
       8,
       "Adaptable",
       "Analytical",
-      "Improver",
-      "Relationship Builder",
+      "Authentic",
+      "Catalyst",
       "Challenger",
       "Change Agent",
-      "Team Leader",
-      "Service Focussed"
+      "Confident",
+      "Focussed"
     )
 
-object MASTER_TECH_SKILLS
+object PEC_TECH_SKILLS
     extends TechSkillsDetails(
       8,
       Some(
@@ -252,7 +247,7 @@ object MASTER_TECH_SKILLS
           techSkill = "Autotest - technical skills 2",
           description = "Autotest - technical skills 2 description",
           techInterview = true,
-          techApplication = true
+          techApplication = false
         )
       ),
       Some(
@@ -260,7 +255,7 @@ object MASTER_TECH_SKILLS
           techSkill = "Autotest - technical skills 3",
           description = "Autotest - technical skills 3 description",
           techInterview = true,
-          techApplication = true
+          techApplication = false
         )
       ),
       Some(
@@ -268,7 +263,7 @@ object MASTER_TECH_SKILLS
           techSkill = "Autotest - technical skills 4",
           description = "Autotest - technical skills 4 description",
           techInterview = true,
-          techApplication = true
+          techApplication = false
         )
       ),
       Some(
@@ -276,7 +271,7 @@ object MASTER_TECH_SKILLS
           techSkill = "Autotest - technical skills 5",
           description = "Autotest - technical skills 5 description",
           techInterview = true,
-          techApplication = true
+          techApplication = false
         )
       ),
       Some(
@@ -284,7 +279,7 @@ object MASTER_TECH_SKILLS
           techSkill = "Autotest - technical skills 6",
           description = "Autotest - technical skills 6 description",
           techInterview = true,
-          techApplication = true
+          techApplication = false
         )
       ),
       Some(
@@ -292,7 +287,7 @@ object MASTER_TECH_SKILLS
           techSkill = "Autotest - technical skills 7",
           description = "Autotest - technical skills 7 description",
           techInterview = true,
-          techApplication = true
+          techApplication = false
         )
       ),
       Some(
@@ -300,14 +295,14 @@ object MASTER_TECH_SKILLS
           techSkill = "Autotest - technical skills 8",
           description = "Autotest - technical skills 8 description",
           techInterview = true,
-          techApplication = true
+          techApplication = false
         )
       )
     )
 
-object MASTER_VACANCY_TESTS
+object PEC_VACANCY_TESTS
     extends VacancyTestsDetails(
-      true,
+      false,
       "Online Tests",
       "Executive Officer",
       testName = Map(
@@ -363,13 +358,13 @@ object MASTER_VACANCY_TESTS
       ),
       false,
       "Autotest - Additional details for the recruitment team",
-      Some(MASTER_RECRUITER_TESTS),
-      Some(MASTER_GROUP_A_TESTS),
-      Some(MASTER_GROUP_B_TESTS),
-      Some(MASTER_GROUP_C_TESTS)
+      Some(PEC_RECRUITER_TESTS),
+      Some(PEC_GROUP_A_TESTS),
+      Some(PEC_GROUP_B_TESTS),
+      Some(PEC_GROUP_C_TESTS)
     )
 
-object MASTER_RECRUITER_TESTS
+object PEC_RECRUITER_TESTS
     extends RecruiterTestsDetails(
       "Before the tests",
       "Auto-progress after each test",
@@ -378,7 +373,7 @@ object MASTER_RECRUITER_TESTS
       "Autotest - Online test instructions"
     )
 
-object MASTER_GROUP_A_TESTS
+object PEC_GROUP_A_TESTS
     extends GroupATestsDetails(
       "First",
       "Three",
@@ -388,7 +383,7 @@ object MASTER_GROUP_A_TESTS
       7
     )
 
-object MASTER_GROUP_B_TESTS
+object PEC_GROUP_B_TESTS
     extends GroupBTestsDetails(
       "Second",
       "Two",
@@ -397,7 +392,7 @@ object MASTER_GROUP_B_TESTS
       5
     )
 
-object MASTER_GROUP_C_TESTS
+object PEC_GROUP_C_TESTS
     extends GroupCTestsDetails(
       "Third",
       "Two",
@@ -406,63 +401,64 @@ object MASTER_GROUP_C_TESTS
       3
     )
 
-object MASTER_ADDITIONAL_QUESTIONS
+object PEC_ADDITIONAL_QUESTIONS
     extends AdditionalQuestionsDetails(
-      true,
+      false,
       3,
       "Autotest - Question 1",
       "Autotest - Question 2",
       "Autotest - Question 3"
     )
 
-object MASTER_CRITERIA
+object PEC_CRITERIA
     extends CriteriaDetails(
       campaignID = Some("Autotest - If this vacancy is linked to a campaign, enter the campaign ID (optional)"),
-      probationIncomplete = true,
-      promotionApply = true,
-      misconductLive = true,
-      performanceReview = true,
-      attendancePoor = true,
+      probationIncomplete = false,
+      promotionApply = false,
+      misconductLive = false,
+      performanceReview = false,
+      attendancePoor = false,
       nationalityRequirements = true,
-      rightToRemainUK = true,
-      licencesNotHeld = true,
-      membershipsNotHeld = true,
-      languagesSkillsNotHeld = true,
-      qualificationsHeld = true,
-      preSiftRequired = true,
-      uploadAttachment = true,
+      rightToRemainUK = false,
+      licencesNotHeld = false,
+      membershipsNotHeld = false,
+      languagesSkillsNotHeld = false,
+      qualificationsHeld = false,
+      preSiftRequired = false,
+      uploadAttachment = false,
       candidateInstructions = "Autotest - Instructions for candidate"
     )
 
-object MASTER_MANAGEMENT
+object PEC_MANAGEMENT
     extends ManagementDetails(
       true,
-      false,
-      "Other",
       true,
+      "Other",
+      false,
       assignTo = Option(s"$contactEmailVxConfig"),
       assignTo2 = Option(s"$contactEmailVxConfig"),
-      true,
+      false,
       "Business As Usual (BAU)",
       "Menu",
       true,
       true,
-      linkToProject = Option(true),
-      projectName = Option("Autotest - Project name"),
+      linkToProject = Option(false),
+      projectName = Option(""),
       deptComplaintsProcess = Option("Autotest - Your department's complaints process"),
       vacancyComments = Option("Autotest - Comments on this vacancy")
     )
 
-object MASTER_ONLINE_PEC_CHECK_FORMS
+object PEC_ONLINE_PEC_CHECK_FORMS
     extends OnlinePecCheckFormsDetails(
       true,
-      true,
+      false,
       s"$contactEmailVxConfig"
     )
 
-object MASTER_PEC_CHECK_FORMS
+object PEC_PEC_CHECK_FORMS
     extends PecCheckFormsDetails(
-      rtwCheck = List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      rtwCheck =
+        List("Not Applicable", "Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
       "Before pre employment checks",
       "Right to work and criminal record check",
       true,
@@ -482,10 +478,10 @@ object MASTER_PEC_CHECK_FORMS
       previousCsJobCheck = List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
       internalFraudCheck = List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
       selfEmploymentCheck = List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
-      true,
+      false,
       true,
       "Autotest - Name of check",
-      additionalCheck = List("Not Applicable"),
-      nenOnboarding = List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
-      pnOnboarding = List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates")
+      additionalCheck = List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      nenOnboarding = List("Not Applicable"),
+      pnOnboarding = List("Not Applicable")
     )

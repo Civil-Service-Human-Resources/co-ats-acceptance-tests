@@ -12,7 +12,7 @@ import uk.gov.co.test.ui.tags.RunInV9
 
 class ApplicationSpec extends BaseFeatureSpec {
   Feature("Candidate Login To Civil Service Jobs") {
-    Scenario("A Candidate Completes Short And Long Forms", RunInV9) {
+    Scenario("V9 - A Candidate Completes Short And Long Forms", RunInV9) {
       Given("candidate registers and then completes the short form")
       fillNewCandidateDetails(REGISTER_CANDIDATE_ONE)
       fillShortFormDetailsOnly(SHORT_FORM_DATA_HMRC)

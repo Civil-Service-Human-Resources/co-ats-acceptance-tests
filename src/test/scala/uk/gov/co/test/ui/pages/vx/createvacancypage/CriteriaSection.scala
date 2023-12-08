@@ -4,8 +4,7 @@ import org.openqa.selenium.By
 import uk.gov.co.test.ui.data.vx.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.formId
-import uk.gov.co.test.ui.pages.vx.createvacancypage.ExperienceSection.{languagesMandatory, licencesMandatory, membershipsMandatory, qualificationsMandatory}
-import uk.gov.co.test.ui.pages.vx.createvacancypage.SuccessProfilesSection.experiencesRequired
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXExperiencesRequired, vXLanguagesMandatory, vXLicencesMandatory, vXMembershipsMandatory, vXQualificationsMandatory, vXUploadAttachmentRequired, vXAttendancePoor, vXCandidateInstructions, vXMisconductLive, vXNationalityRequirements, vXPerformanceReview, vXProbationIncomplete, vXPromotionApply, vXRightToRemainUK}
 
 case class CriteriaDetails(
   campaignID: Option[String] = None,
@@ -27,90 +26,102 @@ case class CriteriaDetails(
 
 object CriteriaSection extends VacancyBasePage {
 
-  def campaignIDId                      = s"${formId}_datafield_74351_1_1"
-  def probationCompleteYesId            = s"${formId}_datafield_61145_1_1_1"
-  def probationCompleteNoId             = s"${formId}_datafield_61145_1_1_2"
-  def promotionApplyYesId               = s"${formId}_datafield_61177_1_1_1"
-  def promotionApplyNoId                = s"${formId}_datafield_61177_1_1_2"
-  def misconductLiveYesId               = s"${formId}_datafield_61149_1_1_1"
-  def misconductLiveNoId                = s"${formId}_datafield_61149_1_1_2"
-  def performancePoorYesId              = s"${formId}_datafield_61185_1_1_1"
-  def performancePoorNoId               = s"${formId}_datafield_61185_1_1_2"
-  def attendancePoorYesId               = s"${formId}_datafield_61181_1_1_1"
-  def attendancePoorNoId                = s"${formId}_datafield_61181_1_1_2"
-  def nationalityRequirementsYesId      = s"${formId}_datafield_61153_1_1_1"
-  def nationalityRequirementsNoId       = s"${formId}_datafield_61153_1_1_2"
-  def rightToRemainUKYesId              = s"${formId}_datafield_61193_1_1_1"
-  def rightToRemainUKNoId               = s"${formId}_datafield_61193_1_1_2"
-  def licencesNotHeldYesId              = s"${formId}_datafield_61161_1_1_1"
-  def licencesNotHeldNoId               = s"${formId}_datafield_61161_1_1_2"
-  def membershipsNotHeldYesId           = s"${formId}_datafield_61165_1_1_1"
-  def membershipsNotHeldNoId            = s"${formId}_datafield_61165_1_1_2"
-  def languagesSkillsYesId              = s"${formId}_datafield_61169_1_1_1"
-  def languagesSkillsNoId               = s"${formId}_datafield_61169_1_1_2"
-  def qualificationsHeldYesId           = s"${formId}_datafield_61157_1_1_1"
-  def qualificationsHeldNoId            = s"${formId}_datafield_61157_1_1_2"
-  def preSiftRequiredYesId              = s"${formId}_datafield_62541_1_1_1"
-  def preSiftRequiredNoId               = s"${formId}_datafield_62541_1_1_2"
-  def uploadAttachmentYesId             = s"${formId}_datafield_61333_1_1_1"
-  def uploadAttachmentNoId              = s"${formId}_datafield_61333_1_1_2"
-  def candidateInstructionsInputId      = s"${formId}_datafield_61355_1_1_en-GB"
-  var uploadAttachmentRequired: Boolean = true
-  var vXCandidateInstructions: String   = "Autotest - Instructions for candidate"
+  def campaignIDId                 = s"${formId}_datafield_74351_1_1"
+  def probationCompleteYesId       = s"${formId}_datafield_61145_1_1_1"
+  def probationCompleteNoId        = s"${formId}_datafield_61145_1_1_2"
+  def promotionApplyYesId          = s"${formId}_datafield_61177_1_1_1"
+  def promotionApplyNoId           = s"${formId}_datafield_61177_1_1_2"
+  def misconductLiveYesId          = s"${formId}_datafield_61149_1_1_1"
+  def misconductLiveNoId           = s"${formId}_datafield_61149_1_1_2"
+  def performancePoorYesId         = s"${formId}_datafield_61185_1_1_1"
+  def performancePoorNoId          = s"${formId}_datafield_61185_1_1_2"
+  def attendancePoorYesId          = s"${formId}_datafield_61181_1_1_1"
+  def attendancePoorNoId           = s"${formId}_datafield_61181_1_1_2"
+  def nationalityRequirementsYesId = s"${formId}_datafield_61153_1_1_1"
+  def nationalityRequirementsNoId  = s"${formId}_datafield_61153_1_1_2"
+  def rightToRemainUKYesId         = s"${formId}_datafield_61193_1_1_1"
+  def rightToRemainUKNoId          = s"${formId}_datafield_61193_1_1_2"
+  def licencesNotHeldYesId         = s"${formId}_datafield_61161_1_1_1"
+  def licencesNotHeldNoId          = s"${formId}_datafield_61161_1_1_2"
+  def membershipsNotHeldYesId      = s"${formId}_datafield_61165_1_1_1"
+  def membershipsNotHeldNoId       = s"${formId}_datafield_61165_1_1_2"
+  def languagesSkillsYesId         = s"${formId}_datafield_61169_1_1_1"
+  def languagesSkillsNoId          = s"${formId}_datafield_61169_1_1_2"
+  def qualificationsHeldYesId      = s"${formId}_datafield_61157_1_1_1"
+  def qualificationsHeldNoId       = s"${formId}_datafield_61157_1_1_2"
+  def preSiftRequiredYesId         = s"${formId}_datafield_62541_1_1_1"
+  def preSiftRequiredNoId          = s"${formId}_datafield_62541_1_1_2"
+  def uploadAttachmentYesId        = s"${formId}_datafield_61333_1_1_1"
+  def uploadAttachmentNoId         = s"${formId}_datafield_61333_1_1_2"
+  def candidateInstructionsInputId = s"${formId}_datafield_61355_1_1_en-GB"
 
   private def enterCampaignID(criteriaDetails: CriteriaDetails): Unit = {
     scrollToElement(By.id(campaignIDId))
     selectOptionWithId(campaignIDId, criteriaDetails.campaignID.get)
   }
 
-  private def selectRejectIfProbationIncomplete(criteriaDetails: CriteriaDetails): Unit =
-    if (criteriaDetails.probationIncomplete) clickOnRadioButton(probationCompleteYesId)
+  private def selectRejectIfProbationIncomplete(criteriaDetails: CriteriaDetails): Unit = {
+    vXProbationIncomplete = criteriaDetails.probationIncomplete
+    if (vXProbationIncomplete) clickOnRadioButton(probationCompleteYesId)
     else clickOnRadioButton(probationCompleteNoId)
+  }
 
-  private def selectRejectIfApplyingOnPromotion(criteriaDetails: CriteriaDetails): Unit =
-    if (criteriaDetails.promotionApply) clickOnRadioButton(promotionApplyYesId)
+  private def selectRejectIfApplyingOnPromotion(criteriaDetails: CriteriaDetails): Unit = {
+    vXPromotionApply = criteriaDetails.promotionApply
+    if (vXPromotionApply) clickOnRadioButton(promotionApplyYesId)
     else clickOnRadioButton(promotionApplyNoId)
+  }
 
-  private def selectRejectIfMisconductIsLive(criteriaDetails: CriteriaDetails): Unit =
-    if (criteriaDetails.misconductLive) clickOnRadioButton(misconductLiveYesId)
+  private def selectRejectIfMisconductIsLive(criteriaDetails: CriteriaDetails): Unit = {
+    vXMisconductLive = criteriaDetails.misconductLive
+    if (vXMisconductLive) clickOnRadioButton(misconductLiveYesId)
     else clickOnRadioButton(misconductLiveNoId)
+  }
 
-  private def selectRejectIfPerformanceReview(criteriaDetails: CriteriaDetails): Unit =
-    if (criteriaDetails.performanceReview) clickOnRadioButton(performancePoorYesId)
+  private def selectRejectIfPerformanceReview(criteriaDetails: CriteriaDetails): Unit = {
+    vXPerformanceReview = criteriaDetails.performanceReview
+    if (vXPerformanceReview) clickOnRadioButton(performancePoorYesId)
     else clickOnRadioButton(performancePoorNoId)
+  }
 
-  private def selectRejectIfAttendancePoor(criteriaDetails: CriteriaDetails): Unit =
-    if (criteriaDetails.attendancePoor) clickOnRadioButton(attendancePoorYesId)
+  private def selectRejectIfAttendancePoor(criteriaDetails: CriteriaDetails): Unit = {
+    vXAttendancePoor = criteriaDetails.attendancePoor
+    if (vXAttendancePoor) clickOnRadioButton(attendancePoorYesId)
     else clickOnRadioButton(attendancePoorNoId)
+  }
 
-  private def selectRejectIfNoMeetNationality(criteriaDetails: CriteriaDetails): Unit =
-    if (criteriaDetails.nationalityRequirements) clickOnRadioButton(nationalityRequirementsYesId)
+  private def selectRejectIfNoMeetNationality(criteriaDetails: CriteriaDetails): Unit = {
+    vXNationalityRequirements = criteriaDetails.nationalityRequirements
+    if (vXNationalityRequirements) clickOnRadioButton(nationalityRequirementsYesId)
     else clickOnRadioButton(nationalityRequirementsNoId)
+  }
 
-  private def selectRejectIfNoRightToRemain(criteriaDetails: CriteriaDetails): Unit =
-    if (criteriaDetails.rightToRemainUK) clickOnRadioButton(rightToRemainUKYesId)
+  private def selectRejectIfNoRightToRemain(criteriaDetails: CriteriaDetails): Unit = {
+    vXRightToRemainUK = criteriaDetails.rightToRemainUK
+    if (vXRightToRemainUK) clickOnRadioButton(rightToRemainUKYesId)
     else clickOnRadioButton(rightToRemainUKNoId)
+  }
 
   private def selectRejectIfLicencesNotHeld(criteriaDetails: CriteriaDetails): Unit =
-    if (licencesMandatory && experiencesRequired) {
+    if (vXLicencesMandatory && vXExperiencesRequired) {
       if (criteriaDetails.licencesNotHeld) clickOnRadioButton(licencesNotHeldYesId)
       else clickOnRadioButton(licencesNotHeldNoId)
     }
 
   private def selectRejectIfMembershipsNotHeld(criteriaDetails: CriteriaDetails): Unit =
-    if (membershipsMandatory && experiencesRequired) {
+    if (vXMembershipsMandatory && vXExperiencesRequired) {
       if (criteriaDetails.membershipsNotHeld) clickOnRadioButton(membershipsNotHeldYesId)
       else clickOnRadioButton(membershipsNotHeldNoId)
     }
 
   private def selectRejectIfLanguageSkillsNotHeld(criteriaDetails: CriteriaDetails): Unit =
-    if (languagesMandatory && experiencesRequired) {
+    if (vXLanguagesMandatory && vXExperiencesRequired) {
       if (criteriaDetails.languagesSkillsNotHeld) clickOnRadioButton(languagesSkillsYesId)
       else clickOnRadioButton(languagesSkillsNoId)
     }
 
   private def selectRejectIfQualificationsNotHeld(criteriaDetails: CriteriaDetails): Unit =
-    if (qualificationsMandatory && experiencesRequired) {
+    if (vXQualificationsMandatory && vXExperiencesRequired) {
       if (criteriaDetails.qualificationsHeld) clickOnRadioButton(qualificationsHeldYesId)
       else clickOnRadioButton(qualificationsHeldNoId)
     }
@@ -120,9 +131,9 @@ object CriteriaSection extends VacancyBasePage {
     else clickOnRadioButton(preSiftRequiredNoId)
 
   private def selectRequiredCandidateUploadAttachment(criteriaDetails: CriteriaDetails): Unit = {
-    uploadAttachmentRequired = criteriaDetails.uploadAttachment
+    vXUploadAttachmentRequired = criteriaDetails.uploadAttachment
     vXCandidateInstructions = criteriaDetails.candidateInstructions
-    if (uploadAttachmentRequired) {
+    if (vXUploadAttachmentRequired) {
       clickOnRadioButton(uploadAttachmentYesId)
       selectOptionWithId(candidateInstructionsInputId, vXCandidateInstructions)
     } else clickOnRadioButton(uploadAttachmentNoId)
