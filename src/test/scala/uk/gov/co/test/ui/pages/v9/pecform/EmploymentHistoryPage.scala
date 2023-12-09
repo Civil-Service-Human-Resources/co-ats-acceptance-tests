@@ -80,9 +80,6 @@ object EmploymentHistoryPage extends CivilServiceJobsBasePage {
 
   private def enterDate(date: String, dayId: String, monthId: String, yearId: String): Unit = {
     val (day, month, year) = splitDate(date)
-//    dateField(dayId).value = day
-//    dateField(monthId).value = month
-//    dateField(yearId).value = year
     enterDate(dayId, day)
     enterDate(monthId, month)
     enterDate(yearId, year)
