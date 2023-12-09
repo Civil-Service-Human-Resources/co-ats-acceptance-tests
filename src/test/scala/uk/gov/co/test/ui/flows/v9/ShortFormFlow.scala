@@ -5,7 +5,7 @@ import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{candidateApproach, vacanc
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
 import uk.gov.co.test.ui.pages.v9.SearchJobsPage.jobSearchAndApplyFlow
 import uk.gov.co.test.ui.pages.v9.shortform.ApplicationGuidancePage.appGuidancePage
-import uk.gov.co.test.ui.pages.v9.shortform.DeclarationPage.{declarationPage, shortFormSubmission}
+import uk.gov.co.test.ui.pages.v9.shortform.DeclarationPage.declarationPage
 import uk.gov.co.test.ui.pages.v9.shortform.DiversityMonitoringPage.diversityMonitoringPage
 import uk.gov.co.test.ui.pages.v9.shortform.EligibilityPage.eligibilityPage
 import uk.gov.co.test.ui.pages.v9.shortform.PersonalInfoPage.personalInfoPage
@@ -26,7 +26,7 @@ object ShortFormFlow extends CivilServiceJobsBasePage {
       shortForm.foreach { f =>
         f(shortFormDetails)
       }
-      clickOn(shortFormSubmission)
+      clickOn(submitForm)
     } else println(s"Vacancy is not open for '$candidateApproach' candidates!")
 
   def fillShortFormDetailsOnly(shortFormDetails: ShortFormDetails): Unit = {
@@ -34,6 +34,6 @@ object ShortFormFlow extends CivilServiceJobsBasePage {
     shortForm.foreach { f =>
       f(shortFormDetails)
     }
-    clickOn(shortFormSubmission)
+    clickOn(submitForm)
   }
 }

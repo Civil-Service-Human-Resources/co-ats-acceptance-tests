@@ -17,8 +17,10 @@ object ApplicationsPage extends CivilServiceJobsBasePage {
   private def applicationsPageCheck(): Unit =
     eventually(onPage(applicationsPageTitle))
 
-  def navigateToApplicationsPage(): Unit =
+  def navigateToApplicationsPage(): Unit = {
     waitForVisibilityOfElementByPath(applicationLinkPath).click()
+    applicationsPageCheck()
+  }
 
   def tableArea(): WebElement =
     waitForVisibilityOfElement(By.xpath(applicationTableAreaPath))
@@ -51,15 +53,15 @@ object ApplicationsPage extends CivilServiceJobsBasePage {
     rowItem.findElement(By.xpath("td[8]//a[@class='subject']"))
 
   def applicationsValues(): (String, String, String, String, String, String, String, WebElement) = {
-    var _reference: String     = ""
-    var _applicationId: String = ""
-    var _title: String         = ""
-    var _status: String        = ""
-    var _department: String    = ""
-    var _closingDate: String   = ""
-    var _lastUpdate: String    = ""
-    var _action: WebElement    = null
-    val rows                   = summaryRows()
+    var _reference: String        = ""
+    var _applicationId: String    = ""
+    var _title: String            = ""
+    var _status: String           = ""
+    var _department: String       = ""
+    var _closingDate: String      = ""
+    var _lastUpdate: String       = ""
+    var _reviewUpdate: WebElement = null
+    val rows                      = summaryRows()
     breakable(
       for (row <- rows) {
         val q = referenceRowItem(row)
@@ -71,12 +73,12 @@ object ApplicationsPage extends CivilServiceJobsBasePage {
           _department = departmentRowItem(row).getText
           _closingDate = closingDateRowItem(row).getText
           _lastUpdate = lastUpdateRowItem(row).getText
-          _action = actionRowItem(row)
+          _reviewUpdate = actionRowItem(row)
           break()
         }
       }
     )
-    (_reference, _applicationId, _title, _status, _department, _closingDate, _lastUpdate, _action)
+    (_reference, _applicationId, _title, _status, _department, _closingDate, _lastUpdate, _reviewUpdate)
   }
 
   def referenceValue(): String = {
@@ -114,22 +116,14 @@ object ApplicationsPage extends CivilServiceJobsBasePage {
     _lastUpdate
   }
 
-  def actionValue(): WebElement = {
-    val (_, _, _, _, _, _, _, _action) = applicationsValues()
-    _action
+  def reviewUpdateValue(): WebElement = {
+    val (_, _, _, _, _, _, _, _reviewUpdate) = applicationsValues()
+    _reviewUpdate
   }
 
   def extractApplicationId(): Unit = {
     navigateToApplicationsPage()
     applicationId = applicationIdValue()
-//    applicationId = referenceValue()
-//    println(referenceValue())
-//    println(titleValue())
-//    println(statusValue())
-//    println(departmentValue())
-//    println(closingDateValue())
-//    println(lastUpdateValue())
-//    println(actionValue().getAttribute("href"))
   }
 
 }

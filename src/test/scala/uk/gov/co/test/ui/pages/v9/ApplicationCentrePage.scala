@@ -2,8 +2,10 @@ package uk.gov.co.test.ui.pages.v9
 
 import org.openqa.selenium.{By, WebElement}
 import org.scalatest.concurrent.Eventually.eventually
+import uk.gov.co.test.ui.conf.TestConfiguration
 import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{v9AdjustmentsForTests, v9ReasonableAdjustments, vXAnyOnlineTests, vacancyName}
-import uk.gov.co.test.ui.pages.vx.DashboardPage.contactEmailVxConfig
+import uk.gov.co.test.ui.pages.v9.ApplicationsPage.reviewUpdateValue
+import uk.gov.co.test.ui.pages.vx.DashboardPage.{contactEmailVxConfig, switchToCandidateApplication}
 
 object ApplicationCentrePage extends CivilServiceJobsBasePage {
 
@@ -18,8 +20,11 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
   val advertDetailsButtonPath       = ".//input[@value='Advert Details']"
   val withdrawApplicationButtonPath = ".//input[@value='Withdraw Application']"
   val continueApplicationButtonPath = ".//input[@value='Continue application']"
+  val offerDecisionButtonPath       = ".//input[@value='Offer Decision']"
+  val feedbackButtonPath            = ".//input[@value='Feedback']"
   val startTestButtonPath           = ".//input[@value='Start Test']"
   val resumeTestButtonPath          = ".//input[@value='Resume Test']"
+  val pecStartButtonPath          = ".//input[@value='Begin pre-employment checks']"
   val applicationLinkPath           = ".//a[@title='Applications']"
 
   private def applicationCentrePageCheck(): Unit =
@@ -46,11 +51,20 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
   def continueApplicationFunction(): WebElement =
     waitForVisibilityOfElementByPath(continueApplicationButtonPath)
 
+  def feedbackFunction(): WebElement =
+    waitForVisibilityOfElementByPath(feedbackButtonPath)
+
+  def offerDecisionFunction(): WebElement =
+    waitForVisibilityOfElementByPath(offerDecisionButtonPath)
+
   def startTestFunction(): WebElement =
     waitForVisibilityOfElementByPath(startTestButtonPath)
 
   def resumeTestFunction(): WebElement =
     waitForVisibilityOfElementByPath(resumeTestButtonPath)
+
+  def pecStartFunction(): WebElement =
+    waitForVisibilityOfElementByPath(pecStartButtonPath)
 
   def helpWithSelectionText(): String =
     driver.findElement(By.tagName("b")).getText
@@ -115,7 +129,35 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
     }
   }
 
-  def navigateToApplicationsPage(): Unit = {
+  def confirmProvisionalOffer(): Unit = {
+    applicationCentrePageCheck()
+    advertDetailsFunction().isEnabled
+    withdrawApplicationFunction().isEnabled
+    feedbackFunction().isEnabled
+    applicationForVacancyText  shouldEqual s"Application For $vacancyName"
+    getApplicationState        shouldEqual "Application status: Provisional offer"
+    getApplicationConfirmation shouldEqual "Congratulations, we'd like to make you a provisional job offer.\nPlease click \"Offer Decision\" to accept this offer.\nWe'll then conduct some pre-employment checks before we consider making you a formal job offer.\nPlease do not resign from your current employment until you‘ve been made a formal offer.\nYou can see any feedback that's been given by clicking the \"Feedback\" button.\nIf you're no longer interested in this job please withdraw your application."
+  }
+
+  def navigateToApplicationsPage(): Unit =
     waitForVisibilityOfElementByPath(applicationLinkPath).click()
+
+  def candidateAcceptsOffer(): Unit = {
+    switchToCandidateApplication()
+    driver.navigate().to(TestConfiguration.urlHost("vxconfig") + "/vx/lang-en-GB/candidate/application")
+    reviewUpdateValue().click()
+    confirmProvisionalOffer()
+    offerDecisionFunction().click()
+  }
+
+  def confirmOfferAccepted(): Unit = {
+    applicationCentrePageCheck()
+    advertDetailsFunction().isEnabled
+    withdrawApplicationFunction().isEnabled
+    feedbackFunction().isEnabled
+    pecStartFunction().isEnabled
+    applicationForVacancyText shouldEqual s"Application For $vacancyName"
+    getApplicationState shouldEqual "Application status: Offer accepted"
+    getApplicationConfirmation shouldEqual "We're delighted that you have accepted our job offer.\nAs part of the onboarding process we require additional information."
   }
 }

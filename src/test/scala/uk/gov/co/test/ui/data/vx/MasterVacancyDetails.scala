@@ -78,6 +78,13 @@ object MasterVacancyDetails extends VacancyBasePage {
   //vx vacancy tests section
   var vXAnyOnlineTests = true
 
+  //candidate details
+  var randomFirstName: String    = ""
+  var randomLastName: String     = ""
+  var preferredFirstName: String = ""
+  var randomEmail: String        = ""
+  var randomJobPosition: String  = ""
+
   //v9 short form technical skills
   val sortedListOfTechSkills: Seq[String]            = List(
     "Autotest - technical skills 1",
@@ -101,13 +108,14 @@ object MasterVacancyDetails extends VacancyBasePage {
   )
 
   //v9 short form eligibility page
-  var civilServant: Boolean = true
+  var civilServant: Boolean  = true
+  var homeDepartment: String = "Attorney General's Office"
 
   //v9 short form personal info page
   var v9ReasonableAdjustments = true
   var v9AdjustmentsForTests   = true
 
   //v9 applications page
-  var applicationId: String = ""
+  var applicationId: String = "0"
 
 }

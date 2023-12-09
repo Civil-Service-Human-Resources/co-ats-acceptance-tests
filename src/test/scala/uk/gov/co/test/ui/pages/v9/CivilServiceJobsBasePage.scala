@@ -7,6 +7,7 @@ import org.scalatest.concurrent.Eventually.eventually
 import org.scalatest.matchers.should.Matchers
 import uk.gov.co.test.ui.conf.TestConfiguration
 import uk.gov.co.test.ui.conf.TestConfiguration.readProperty
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{preferredFirstName, randomEmail, randomFirstName, randomJobPosition, randomLastName}
 import uk.gov.co.test.ui.driver.BrowserDriver
 import uk.gov.co.test.ui.pages.BasePage
 import uk.gov.co.test.ui.pages.v9.SearchJobsPage.civilServiceJobsPageTitle
@@ -25,11 +26,7 @@ trait CivilServiceJobsBasePage extends Matchers with BasePage with BrowserDriver
   val vXaAcceptAdditionalCookies: String = "cookies-accept-button"
   val pageContinue                       = "continue_button"
   val continueToLongForm                 = "select_manual_form_700"
-  var randomFirstName: String            = ""
-  var randomLastName: String             = ""
-  var preferredFirstName: String         = ""
-  var randomEmail: String                = ""
-  var randomJobPosition: String          = ""
+  val submitForm                         = "submit_button"
 
   def randomnessName(): String = {
     val randomLastName = Iterator.continually(Random.nextPrintableChar()).filter(_.isLetter).take(10).mkString
@@ -137,6 +134,13 @@ trait CivilServiceJobsBasePage extends Matchers with BasePage with BrowserDriver
     dept.selectByVisibleText(value)
   }
 
+  def selectDropdownOptionByPath(path: String, value: String): Unit = {
+    scrollToElement(By.xpath(path))
+    waitForVisibilityOfElementByPath(path).click()
+    val dept = new Select(waitForVisibilityOfElementByPath(path))
+    dept.selectByVisibleText(value)
+  }
+
   def enterDetails(inputId: String, text: String): Unit = {
     val enterOption = waitForVisibilityOfElementById(inputId)
     enterOption.sendKeys(text)
@@ -150,4 +154,18 @@ trait CivilServiceJobsBasePage extends Matchers with BasePage with BrowserDriver
         signOutProcess()
       }
     }
+
+  def splitDate(givenDate: String): (String, String, String) = {
+    val date   = givenDate
+    val parts  = date.split("/")
+    val _day   = parts(0).replaceFirst("^0*", "")
+    val _month = parts(1).replaceFirst("^0*", "")
+    val _year  = parts(2)
+    (_day, _month, _year)
+  }
+
+  def enterDate(id: String, value: String): Unit = {
+    val dateValue = new Select(waitForVisibilityOfElementById(id))
+    dateValue.selectByValue(value)
+  }
 }

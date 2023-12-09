@@ -168,10 +168,13 @@ trait VacancyBasePage extends Matchers with BasePage with BrowserDriver {
   }
 
   def switchToVXConfig(): Unit = {
-    openNewTabWithJavascript()
-    openNewWindow()
+    openAndSaveWindows()
     navigateToVxConfigLogin()
     loginWithRecruiterDetails(RECRUITER)
+  }
+
+  def switchToCandidateApplication(): Unit = {
+    switchBackToWindow(secondWindowHandle)
   }
 
 }

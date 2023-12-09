@@ -4,7 +4,7 @@ import org.scalatest.concurrent.Eventually.eventually
 import uk.gov.co.test.ui.data.v9.shortform.ShortFormDetails
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
 import uk.gov.co.test.ui.pages.v9.shortform.ApplicationGuidancePage.formId
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{civilServant, vXExperiencesRequired, vXLanguagesMandatory, vXLicencesMandatory, vXMembershipsMandatory, vXQualificationsMandatory, vXNationalityRequirements, vXRightToRemainUK}
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{civilServant, homeDepartment, vXExperiencesRequired, vXLanguagesMandatory, vXLicencesMandatory, vXMembershipsMandatory, vXNationalityRequirements, vXQualificationsMandatory, vXRightToRemainUK}
 
 case class EligibilityDetails(
   currentCivilServant: Boolean,
@@ -46,7 +46,8 @@ object EligibilityPage extends CivilServiceJobsBasePage {
     civilServant = eligibilityDetails.currentCivilServant
     if (civilServant) {
       radioSelect(currentCivilServantYesId)
-      selectDropdownOption(homeDepartmentSelectId, eligibilityDetails.homeDepartment)
+      homeDepartment = eligibilityDetails.homeDepartment
+      selectDropdownOption(homeDepartmentSelectId, homeDepartment)
     } else radioSelect(currentCivilServantNoId)
   }
 

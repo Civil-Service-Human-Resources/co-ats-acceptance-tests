@@ -1,6 +1,6 @@
 package uk.gov.co.test.ui.data.v9.shortform
 
-import uk.gov.co.test.ui.pages.v9.SignInPage.{preferredFirstName, randomEmail, randomFirstName, randomLastName}
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{preferredFirstName, randomEmail, randomFirstName, randomLastName}
 import uk.gov.co.test.ui.pages.v9.shortform._
 
 object SHORT_FORM_DATA_HMRC

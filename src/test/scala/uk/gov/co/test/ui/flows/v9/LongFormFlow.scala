@@ -27,7 +27,7 @@ object LongFormFlow extends CivilServiceJobsBasePage {
   )
 
   def fillLongFormDetails(longFormDetails: LongFormDetails): Unit = {
-    clickOn("submit_form")
+    clickOn(submitForm)
     longform.foreach { f =>
       f(longFormDetails)
     }

@@ -17,6 +17,10 @@ import scala.util.Random
 case class PageNotFoundException(s: String) extends Exception(s)
 
 trait BasePage extends Matchers with Page with WebBrowser with PatienceConfiguration {
+
+  var firstWindowHandle: String  = ""
+  var secondWindowHandle: String = ""
+
   override implicit val patienceConfig: PatienceConfig =
     PatienceConfig(timeout = scaled(Span(30, Seconds)), interval = scaled(Span(1000, Millis)))
 
@@ -148,12 +152,23 @@ trait BasePage extends Matchers with Page with WebBrowser with PatienceConfigura
 
   def openNewWindow()(implicit driver: WebDriver): Unit =
     //    openWindows(2)
-    for (chartWindow <- driver.getWindowHandles.asScala)
+    for (chartWindow <- driver.getWindowHandles.asScala) {
       driver.switchTo.window(chartWindow)
+      secondWindowHandle = chartWindow
+    }
 
-  def openNewTabWithJavascript()(implicit webDriver: WebDriver): AnyRef = {
-    val jse: JavascriptExecutor = webDriver.asInstanceOf[JavascriptExecutor]
+  def openNewTabWithJavascript()(implicit driver: WebDriver): AnyRef = {
+    val jse: JavascriptExecutor = driver.asInstanceOf[JavascriptExecutor]
     jse.executeScript("window.open()")
   }
+
+  def openAndSaveWindows()(implicit driver: WebDriver): Unit = {
+    firstWindowHandle = driver.getWindowHandle
+    openNewTabWithJavascript()
+    openNewWindow()
+  }
+
+  def switchBackToWindow(windowName: String)(implicit driver: WebDriver): WebDriver =
+    driver.switchTo().window(windowName)
 
 }
