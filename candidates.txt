@@ -1,1 +1,0 @@
-CANDIDATE NO.1: NAME: Erwin Nienow EMAIL: erwin.nienow@example.com PASSWORD: password123!

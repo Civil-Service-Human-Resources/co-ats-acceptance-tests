@@ -6,17 +6,17 @@ import scala.collection.mutable.ListBuffer
 
 object MasterVacancyDetails extends VacancyBasePage {
 
-  //additionalQuestions section
+  //vx vacancy additionalQuestions section
   var vXAnyAdditionalQuestions = true
   var vXHowManyQuestions       = 3
   var vXQuestionOne            = "Autotest - Question 1"
   var vXQuestionTwo            = "Autotest - Question 2"
   var vXQuestionThree          = "Autotest - Question 3"
 
-  //approach section
+  //vx vacancy approach section
   var candidateApproach = "External"
 
-  //basicDetails section
+  //vx vacancy basicDetails section
   var vacancyName                       = "GCQACO - Consultant"
   var vacancyId                         = "9416"
   var vXApplicationLiveDate: String     = ""
@@ -27,11 +27,11 @@ object MasterVacancyDetails extends VacancyBasePage {
   var vXConvertedLiveDateTime           = ""
   var vXConvertedClosingDateTime        = ""
 
-  //behaviours section
+  //vx vacancy behaviours section
   var vXHowManyAssessed: Int   = 8
   var vXListOfChosenBehaviours = new ListBuffer[String]()
 
-  //criteria section
+  //vx vacancy criteria section
   var vXCandidateInstructions: String     = "Autotest - Instructions for candidate"
   var vXUploadAttachmentRequired: Boolean = true
   var vXProbationIncomplete: Boolean      = true
@@ -42,7 +42,7 @@ object MasterVacancyDetails extends VacancyBasePage {
   var vXNationalityRequirements: Boolean  = true
   var vXRightToRemainUK: Boolean          = true
 
-  //experience section
+  //vx vacancy experience section
   var vXGuidanceText: String             = "Autotest - Enter guidance text for the candidate"
   var vXStatementWordLimit: Int          = 250
   var vXLicencesMandatory: Boolean       = true
@@ -50,35 +50,35 @@ object MasterVacancyDetails extends VacancyBasePage {
   var vXLanguagesMandatory: Boolean      = true
   var vXQualificationsMandatory: Boolean = true
 
-  //location section
+  //vx vacancy location section
   var vXVacanciesInNIR                  = true
   var vXCommunitiesInNIR                = ""
   var vXGiveLocationPreference: Boolean = true
   var vXMaxLocations: String            = "3"
   var vXOtherLocations: Seq[String]     = List("London", "Southampton", "Manchester")
 
-  //management section
+  //vx vacancy management section
   var vXGreatForVeterans: Boolean = true
   var vXGrsVacancy: Boolean       = true
 
-  //success profiles section
+  //vx vacancy success profiles section
   var vXAbilitiesRequired: Boolean   = true
   var vXBehavioursRequired: Boolean  = true
   var vXExperiencesRequired: Boolean = true
   var vXStrengthsRequired: Boolean   = true
   var vXTechSkillsRequired: Boolean  = true
 
-  //technical skills section
+  //vx vacancy technical skills section
   var vXHowManySkills: Int          = 8
   var vXListOfTechSkills            = new ListBuffer[String]()
   var vXListOfTechSkillsDescription = new ListBuffer[String]()
   var vXListOfApplicationStage      = new ListBuffer[Boolean]()
   var vXNoOfApplicationStage: Int   = 8
 
-  //vacancy tests section
+  //vx vacancy tests section
   var vXAnyOnlineTests = true
 
-  //short form technical skills
+  //v9 short form technical skills
   val sortedListOfTechSkills: Seq[String]            = List(
     "Autotest - technical skills 1",
     "Autotest - technical skills 2",
@@ -100,7 +100,14 @@ object MasterVacancyDetails extends VacancyBasePage {
     "Autotest - technical skills 8 description"
   )
 
-  //short form eligibility page
+  //v9 short form eligibility page
   var civilServant: Boolean = true
+
+  //v9 short form personal info page
+  var v9ReasonableAdjustments = true
+  var v9AdjustmentsForTests   = true
+
+  //v9 applications page
+  var applicationId: String = ""
 
 }

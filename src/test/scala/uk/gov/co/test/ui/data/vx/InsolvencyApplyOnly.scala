@@ -51,7 +51,7 @@ object INSOLVENCY_JOB_INFORMATION
         "Tax Profession"
       ),
       "Other",
-      "3"
+      "5"
     )
 object INSOLVENCY_APPROACH
     extends ApproachDetails(
@@ -71,7 +71,7 @@ object INSOLVENCY_APPROVAL
 
 object INSOLVENCY_RESERVE_LIST
     extends ReserveListDetails(
-      true,
+      false,
       "12 Months",
       false
     )
@@ -84,28 +84,28 @@ object INSOLVENCY_LOCATIONS
       "North West",
       "Germany",
       "Newcastle, Liverpool, Cardiff",
-      true,
+      false,
       true,
       "All communities",
-      true,
+      false,
       "3",
       otherLocations = List("London", "Southampton", "Manchester")
     )
 
 object INSOLVENCY_CONTRACT_DETAILS
     extends ContractDetails(
-      List("Permanent", "Temporary", "Loan", "Secondment", "Returner"),
+      List("Permanent"),
       "Autotest - Maximum characters: 255. Any text over this limit will not show on the advert.",
       true,
       "Prawf awtomeiddio",
-      List("Full-time", "Part-time", "Compressed Hours", "Flexible working", "Homeworking"),
-      "Senior Executive Officer",
+      List("Full-time"),
+      "Executive Officer",
       "Grade 7",
       "GBP (£)",
-      75000,
+      25000,
       95000,
       "Can agree on the higher bracket",
-      true,
+      false,
       18750
     )
 
@@ -131,29 +131,29 @@ object INSOLVENCY_CONTACT_DETAILS
 object INSOLVENCY_VETTING_DETAILS
     extends VettingDetails(
       true,
-      "Basic",
+      "Standard",
       "Disclosure barring service (DBS)",
-      "Security check",
-      true
+      "None",
+      false
     )
 
 object INSOLVENCY_INTERVIEWS_DETAILS
     extends InterviewsDetails(
-      "4",
-      "Telephone",
-      "Assessment",
+      "No interviews",
       "Video",
+      "Assessment",
+      "Telephone",
       "Interview",
-      true
+      false
     )
 
 object INSOLVENCY_SUCCESS_PROFILES
     extends SuccessProfilesDetails(
-      true,
-      true,
-      true,
-      true,
-      true,
+      false,
+      false,
+      false,
+      false,
+      false,
       Some(INSOLVENCY_ABILITIES),
       Some(INSOLVENCY_BEHAVIOURS),
       Some(INSOLVENCY_EXPERIENCES),
@@ -175,9 +175,9 @@ object INSOLVENCY_BEHAVIOURS
           |Civil Service Management Judgement Test""".stripMargin,
       8,
       behaviourOne =
-        Some(Behaviours(chosenBehaviour = "Changing and Improving", stageApplication = true, stageInterview = true)),
+        Some(Behaviours(chosenBehaviour = "Changing and Improving", stageApplication = true, stageInterview = false)),
       behaviourTwo = Some(
-        Behaviours(chosenBehaviour = "Communicating and Influencing", stageApplication = true, stageInterview = true)
+        Behaviours(chosenBehaviour = "Communicating and Influencing", stageApplication = true, stageInterview = false)
       ),
       behaviourThree =
         Some(Behaviours(chosenBehaviour = "Delivering at Pace", stageApplication = true, stageInterview = true)),
@@ -186,7 +186,7 @@ object INSOLVENCY_BEHAVIOURS
       ),
       behaviourFive = Some(Behaviours(chosenBehaviour = "Leadership", stageApplication = true, stageInterview = true)),
       behaviourSix = Some(
-        Behaviours(chosenBehaviour = "Making Effective Decisions", stageApplication = true, stageInterview = true)
+        Behaviours(chosenBehaviour = "Making Effective Decisions", stageApplication = true, stageInterview = false)
       ),
       behaviourSeven = Some(
         Behaviours(chosenBehaviour = "Managing a Quality Service", stageApplication = true, stageInterview = true)
@@ -199,13 +199,13 @@ object INSOLVENCY_BEHAVIOURS
 object INSOLVENCY_EXPERIENCES
     extends ExperienceDetails(
       true,
-      "0 - 100",
+      "0 - 7",
       true,
       true,
       true,
       true,
       "0 - 7",
-      250,
+      500,
       true,
       "Autotest - Enter guidance text for the candidate",
       true,
@@ -243,7 +243,7 @@ object INSOLVENCY_TECH_SKILLS
         TechSkills(
           techSkill = "Autotest - technical skills 1",
           description = "Autotest - technical skills 1 description",
-          techInterview = true,
+          techInterview = false,
           techApplication = true
         )
       ),
@@ -251,7 +251,7 @@ object INSOLVENCY_TECH_SKILLS
         TechSkills(
           techSkill = "Autotest - technical skills 2",
           description = "Autotest - technical skills 2 description",
-          techInterview = true,
+          techInterview = false,
           techApplication = true
         )
       ),
@@ -259,7 +259,7 @@ object INSOLVENCY_TECH_SKILLS
         TechSkills(
           techSkill = "Autotest - technical skills 3",
           description = "Autotest - technical skills 3 description",
-          techInterview = true,
+          techInterview = false,
           techApplication = true
         )
       ),
@@ -267,7 +267,7 @@ object INSOLVENCY_TECH_SKILLS
         TechSkills(
           techSkill = "Autotest - technical skills 4",
           description = "Autotest - technical skills 4 description",
-          techInterview = true,
+          techInterview = false,
           techApplication = true
         )
       ),
@@ -275,7 +275,7 @@ object INSOLVENCY_TECH_SKILLS
         TechSkills(
           techSkill = "Autotest - technical skills 5",
           description = "Autotest - technical skills 5 description",
-          techInterview = true,
+          techInterview = false,
           techApplication = true
         )
       ),
@@ -283,7 +283,7 @@ object INSOLVENCY_TECH_SKILLS
         TechSkills(
           techSkill = "Autotest - technical skills 6",
           description = "Autotest - technical skills 6 description",
-          techInterview = true,
+          techInterview = false,
           techApplication = true
         )
       ),
@@ -291,7 +291,7 @@ object INSOLVENCY_TECH_SKILLS
         TechSkills(
           techSkill = "Autotest - technical skills 7",
           description = "Autotest - technical skills 7 description",
-          techInterview = true,
+          techInterview = false,
           techApplication = true
         )
       ),
@@ -299,7 +299,7 @@ object INSOLVENCY_TECH_SKILLS
         TechSkills(
           techSkill = "Autotest - technical skills 8",
           description = "Autotest - technical skills 8 description",
-          techInterview = true,
+          techInterview = false,
           techApplication = true
         )
       )
@@ -307,7 +307,7 @@ object INSOLVENCY_TECH_SKILLS
 
 object INSOLVENCY_VACANCY_TESTS
     extends VacancyTestsDetails(
-      true,
+      false,
       "Online Tests",
       "Executive Officer",
       testName = Map(
@@ -408,7 +408,7 @@ object INSOLVENCY_GROUP_C_TESTS
 
 object INSOLVENCY_ADDITIONAL_QUESTIONS
     extends AdditionalQuestionsDetails(
-      true,
+      false,
       3,
       "Autotest - Question 1",
       "Autotest - Question 2",
@@ -418,36 +418,36 @@ object INSOLVENCY_ADDITIONAL_QUESTIONS
 object INSOLVENCY_CRITERIA
     extends CriteriaDetails(
       campaignID = Some("Autotest - If this vacancy is linked to a campaign, enter the campaign ID (optional)"),
-      probationIncomplete = true,
-      promotionApply = true,
-      misconductLive = true,
-      performanceReview = true,
-      attendancePoor = true,
+      probationIncomplete = false,
+      promotionApply = false,
+      misconductLive = false,
+      performanceReview = false,
+      attendancePoor = false,
       nationalityRequirements = true,
-      rightToRemainUK = true,
-      licencesNotHeld = true,
-      membershipsNotHeld = true,
-      languagesSkillsNotHeld = true,
-      qualificationsHeld = true,
-      preSiftRequired = true,
-      uploadAttachment = true,
+      rightToRemainUK = false,
+      licencesNotHeld = false,
+      membershipsNotHeld = false,
+      languagesSkillsNotHeld = false,
+      qualificationsHeld = false,
+      preSiftRequired = false,
+      uploadAttachment = false,
       candidateInstructions = "Autotest - Instructions for candidate"
     )
 
 object INSOLVENCY_MANAGEMENT
     extends ManagementDetails(
-      true,
+      false,
       false,
       "Other",
-      true,
+      false,
       assignTo = Option(s"$contactEmailVxConfig"),
       assignTo2 = Option(s"$contactEmailVxConfig"),
       true,
       "Business As Usual (BAU)",
       "Menu",
-      true,
-      true,
-      linkToProject = Option(true),
+      false,
+      false,
+      linkToProject = Option(false),
       projectName = Option("Autotest - Project name"),
       deptComplaintsProcess = Option("Autotest - Your department's complaints process"),
       vacancyComments = Option("Autotest - Comments on this vacancy")
@@ -456,36 +456,36 @@ object INSOLVENCY_MANAGEMENT
 object INSOLVENCY_ONLINE_PEC_CHECK_FORMS
     extends OnlinePecCheckFormsDetails(
       true,
-      true,
+      false,
       s"$contactEmailVxConfig"
     )
 
 object INSOLVENCY_PEC_CHECK_FORMS
     extends PecCheckFormsDetails(
-      rtwCheck = List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      rtwCheck = List("Not Applicable"),
       "Before pre employment checks",
-      "Right to work and criminal record check",
-      true,
+      "No digital checks",
+      false,
       "Autotest - Details of the identity documents the candidate needs to provide",
       false,
-      generalInfo = List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
-      referenceChecks = List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
-      bankruptcyChecks = List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
-      crcChecks = List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
-      nsvChecks = List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      generalInfo = List("Not Applicable"),
+      referenceChecks = List("External Candidates", "NDPB Candidates"),
+      bankruptcyChecks = List("Not Applicable"),
+      crcChecks = List("Not Applicable"),
+      nsvChecks = List("Not Applicable"),
       "Show recruiter and candidate forms",
-      jobHistoryChecks = List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
-      healthRefChecks = List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      jobHistoryChecks = List("External Candidates", "NDPB Candidates"),
+      healthRefChecks = List("Not Applicable"),
       "Show recruiter and candidate forms",
-      overseasCheck = List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
-      pensionsCheck = List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
-      previousCsJobCheck = List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
-      internalFraudCheck = List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
-      selfEmploymentCheck = List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
-      true,
-      true,
+      overseasCheck = List("Not Applicable"),
+      pensionsCheck = List("Not Applicable"),
+      previousCsJobCheck = List("Not Applicable"),
+      internalFraudCheck = List("Not Applicable"),
+      selfEmploymentCheck = List("Not Applicable"),
+      false,
+      false,
       "Autotest - Name of check",
-      additionalCheck = List("Not Applicable"),
-      nenOnboarding = List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
-      pnOnboarding = List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates")
+      additionalCheck = List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      nenOnboarding = List("Not Applicable"),
+      pnOnboarding = List("Not Applicable")
     )

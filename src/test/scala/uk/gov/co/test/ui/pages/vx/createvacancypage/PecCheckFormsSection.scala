@@ -71,12 +71,18 @@ object PecCheckFormsSection extends VacancyBasePage {
   def manualIdentityCheckYesId         = s"${formId}_datafield_181577_1_1_1"
   def manualIdentityCheckNoId          = s"${formId}_datafield_181577_1_1_2"
 
-  private def selectWhenCompleteRtwCheck(pecCheckFormsDetails: PecCheckFormsDetails): Unit =
-    pecCheckFormsDetails.whenCompleteRtwCheck match {
-      case "Before pre employment checks"              => clickOnRadioButton(beforePecChecksId)
-      case "At the same time as pre employment checks" => clickOnRadioButton(sameTimeAsPecChecksId)
-      case _                                           => throw new IllegalStateException("Please enter valid 'RTW Check' completion option")
+  private def selectWhenCompleteRtwCheck(pecCheckFormsDetails: PecCheckFormsDetails): Unit = {
+    val rtwList = pecCheckFormsDetails.rtwCheck
+    if (rtwList.contains("Not Applicable")) {
+      if (rtwList.size >= 2) {
+        pecCheckFormsDetails.whenCompleteRtwCheck match {
+          case "Before pre employment checks"              => clickOnRadioButton(beforePecChecksId)
+          case "At the same time as pre employment checks" => clickOnRadioButton(sameTimeAsPecChecksId)
+          case _                                           => throw new IllegalStateException("Please enter valid 'RTW Check' completion option")
+        }
+      }
     }
+  }
 
   private def selectWhichIdentityChecks(pecCheckFormsDetails: PecCheckFormsDetails): Unit =
     pecCheckFormsDetails.whichIdentityChecks match {

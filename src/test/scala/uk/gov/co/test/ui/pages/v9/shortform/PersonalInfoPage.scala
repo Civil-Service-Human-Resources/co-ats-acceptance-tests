@@ -3,9 +3,9 @@ package uk.gov.co.test.ui.pages.v9.shortform
 import org.openqa.selenium.By
 import org.scalatest.concurrent.Eventually.eventually
 import uk.gov.co.test.ui.data.v9.shortform.ShortFormDetails
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{civilServant, v9AdjustmentsForTests, v9ReasonableAdjustments, vXAnyOnlineTests, vXGreatForVeterans}
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
 import uk.gov.co.test.ui.pages.v9.shortform.ApplicationGuidancePage.formId
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXAnyOnlineTests, civilServant, vXGreatForVeterans}
 
 case class PersonalInfoDetails(
   firstName: String,
@@ -90,20 +90,25 @@ object PersonalInfoPage extends CivilServiceJobsBasePage {
     if (personalInfoDetails.applyDCS) radioSelect(applyDCSYesId)
     else radioSelect(applyDCSNoId)
 
-  private def selectReasonableAdjustments(personalInfoDetails: PersonalInfoDetails): Unit =
-    if (personalInfoDetails.reasonableAdjustments) {
+  private def selectReasonableAdjustments(personalInfoDetails: PersonalInfoDetails): Unit = {
+    v9ReasonableAdjustments = personalInfoDetails.reasonableAdjustments
+    if (v9ReasonableAdjustments) {
       radioSelect(reasonableAdjustmentYesId)
       enterDetails(reasonableAdjustmentDetailsInputId, personalInfoDetails.reasonableAdjustmentsDetails)
-      if (vXAnyOnlineTests) {
-        if (personalInfoDetails.reasonableAdjustmentsForTests) {
-          radioSelect(reasonableAdjustmentsForTestsYesId)
-          enterDetails(
-            reasonableAdjustmentsForTestsInputId,
-            personalInfoDetails.reasonableAdjustmentsForTestsDetails
-          )
-        } else radioSelect(reasonableAdjustmentsForTestsNoId)
-      }
     } else radioSelect(reasonableAdjustmentNoId)
+  }
+
+  private def selectReasonableAdjustmentsForTests(personalInfoDetails: PersonalInfoDetails): Unit =
+    if (vXAnyOnlineTests) {
+      v9AdjustmentsForTests = personalInfoDetails.reasonableAdjustmentsForTests
+      if (v9AdjustmentsForTests) {
+        radioSelect(reasonableAdjustmentsForTestsYesId)
+        enterDetails(
+          reasonableAdjustmentsForTestsInputId,
+          personalInfoDetails.reasonableAdjustmentsForTestsDetails
+        )
+      } else radioSelect(reasonableAdjustmentsForTestsNoId)
+    }
 
   private def selectAreYouVeteran(personalInfoDetails: PersonalInfoDetails): Unit =
     if (vXGreatForVeterans) {
@@ -134,6 +139,7 @@ object PersonalInfoPage extends CivilServiceJobsBasePage {
     enterEmail,
     selectApplyDCS,
     selectReasonableAdjustments,
+    selectReasonableAdjustmentsForTests,
     enterRedeploymentScheme,
     selectAreYouVeteran
   )

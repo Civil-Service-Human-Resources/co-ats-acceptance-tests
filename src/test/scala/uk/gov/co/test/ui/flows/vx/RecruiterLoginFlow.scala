@@ -18,9 +18,6 @@ object RecruiterLoginFlow extends VacancyBasePage {
       }
     } else if (currentUrl.startsWith(TestConfiguration.urlHost("vxconfig")) && findUsernameField.isEmpty) {
       enterPassword(recruiterDetails)
-    } else {
-      navigateToVxConfigLogin()
-      loginWithRecruiterDetails(recruiterDetails)
     }
     loginProcess()
   }

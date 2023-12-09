@@ -9,9 +9,12 @@ import uk.gov.co.test.ui.flows.v9.RegisterCandidateFlow.fillNewCandidateDetails
 import uk.gov.co.test.ui.flows.v9.ShortFormFlow.fillShortFormDetails
 import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.fillNewVacancyForm
 import uk.gov.co.test.ui.flows.vx.RecruiterLoginFlow.loginWithRecruiterDetails
-import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.{confirmLongFormCompletion, confirmShortFormCompletion}
+import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.{confirmLongFormCompletion, confirmShortFormCompletion, confirmShortFormCompletionNoLongForm}
+import uk.gov.co.test.ui.pages.v9.ApplicationsPage.extractApplicationId
+import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.searchVacancy
 import uk.gov.co.test.ui.pages.vx.DashboardPage.{activateAndPostVacancy, searchForActiveVacancy}
 import uk.gov.co.test.ui.specs.BaseFeatureSpec
+import uk.gov.co.test.ui.specs.TestData.pec2TestData
 import uk.gov.co.test.ui.tags.RunInVX
 
 class createVacancySpec extends BaseFeatureSpec {
@@ -52,6 +55,24 @@ class createVacancySpec extends BaseFeatureSpec {
 
       Then("the candidate is able to confirm insolvency short & long forms are completed")
       confirmLongFormCompletion()
+    }
+
+    Scenario("V9: A Recruiter Creates A Insolvency Apply Only Vacancy; Limited Application Process", RunInVX) {
+      Given("candidate registers for new job application")
+      pec2TestData()
+      fillNewCandidateDetails(REGISTER_CANDIDATE_INSOLVENCY)
+
+      When("candidate completes the gors short form")
+      fillShortFormDetails(SHORT_FORM_DATA_INSOLVENCY)
+      confirmShortFormCompletionNoLongForm()
+      extractApplicationId()
+
+      And("candidate completes the insolvency pec form")
+      searchVacancy()
+      println("So far done!")
+
+      Then("the candidate is able to confirm insolvency short & long forms are completed")
+
     }
 
     Scenario("VX: A Recruiter Extracts Vacancy Details", RunInVX) {

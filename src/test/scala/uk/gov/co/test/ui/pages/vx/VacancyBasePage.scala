@@ -6,12 +6,13 @@ import org.scalatest.concurrent.Eventually.eventually
 import org.scalatest.matchers.should.Matchers
 import uk.gov.co.test.ui.conf.TestConfiguration
 import uk.gov.co.test.ui.conf.TestConfiguration.readProperty
-import uk.gov.co.test.ui.data.vx.RecruiterDetails
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.vXApplicationClosingDate
+import uk.gov.co.test.ui.data.vx.{RECRUITER, RecruiterDetails}
 import uk.gov.co.test.ui.driver.BrowserDriver
+import uk.gov.co.test.ui.flows.vx.RecruiterLoginFlow.loginWithRecruiterDetails
 import uk.gov.co.test.ui.pages.BasePage
 import uk.gov.co.test.ui.pages.v9.SignInPage.{navigateToV9Test, v9AcceptAllCookies, v9SearchCookiesById}
 import uk.gov.co.test.ui.pages.vx.DashboardPage.searchOn
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.vXApplicationClosingDate
 import uk.gov.co.test.ui.pages.vx.vacancytabs.ExternalPostingsPage.addExternalPosting
 import uk.gov.co.test.ui.pages.vx.vacancytabs.SummaryPage.confirmAndActivateVacancy
 
@@ -164,6 +165,13 @@ trait VacancyBasePage extends Matchers with BasePage with BrowserDriver {
     openNewWindow()
     navigateToV9Test()
     if (!v9SearchCookiesById().isEmpty) v9AcceptAllCookies()
+  }
+
+  def switchToVXConfig(): Unit = {
+    openNewTabWithJavascript()
+    openNewWindow()
+    navigateToVxConfigLogin()
+    loginWithRecruiterDetails(RECRUITER)
   }
 
 }
