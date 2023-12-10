@@ -29,6 +29,7 @@ trait VacancyBasePage extends Matchers with BasePage with BrowserDriver {
   val contactEmailVxConfig: String = readProperty("services.vxconfig.admin.contact_email")
   val usernameVxConfig: String     = readProperty("services.vxconfig.admin.username")
   val passwordVxConfig: String     = readProperty("services.vxconfig.admin.password")
+  val v9RefereeEmail: String       = readProperty("services.v9test.admin.referee_email")
   val getOs: String                = System.getProperty("os.name").toLowerCase
   val loginButtonPath: String      = "*//button[@id='login-button']"
   val logoutButtonPath: String     = ".//a[@class='logout_button']"
@@ -173,8 +174,7 @@ trait VacancyBasePage extends Matchers with BasePage with BrowserDriver {
     loginWithRecruiterDetails(RECRUITER)
   }
 
-  def switchToCandidateApplication(): Unit = {
+  def switchToCandidateApplication(): Unit =
     switchBackToWindow(secondWindowHandle)
-  }
 
 }
