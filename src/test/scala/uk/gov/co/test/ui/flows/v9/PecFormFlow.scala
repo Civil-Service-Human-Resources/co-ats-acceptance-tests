@@ -3,7 +3,7 @@ package uk.gov.co.test.ui.flows.v9
 import uk.gov.co.test.ui.data.v9.pecform.PecFormDetails
 import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.pecStartFunction
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
-import uk.gov.co.test.ui.pages.v9.pecform.DeclarationPage.declarationPage
+import uk.gov.co.test.ui.pages.v9.pecform.DeclarationPage.{declarationPage, pecFormSubmission}
 import uk.gov.co.test.ui.pages.v9.pecform.EmploymentHistoryPage.employmentHistoryPage
 import uk.gov.co.test.ui.pages.v9.pecform.VerifyingHistoryPage.verifyingHistoryPage
 import uk.gov.co.test.ui.pages.v9.pecform.YourDetailsPage.yourDetailsPage
@@ -21,7 +21,7 @@ object PecFormFlow extends CivilServiceJobsBasePage {
     pecForm.foreach { f =>
       f(pecFormDetails)
     }
-    clickOn(submitForm)
+    clickOn(pecFormSubmission)
   }
 
   def fillPecFormDetailsOnly(pecFormDetails: PecFormDetails): Unit = {
@@ -29,6 +29,6 @@ object PecFormFlow extends CivilServiceJobsBasePage {
     pecForm.foreach { f =>
       f(pecFormDetails)
     }
-    clickOn(submitForm)
+    clickOn(pecFormSubmission)
   }
 }

@@ -160,4 +160,14 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
     getApplicationState shouldEqual "Application status: Offer accepted"
     getApplicationConfirmation shouldEqual "We're delighted that you have accepted our job offer.\nAs part of the onboarding process we require additional information."
   }
+
+  def confirmPecSubmission(): Unit = {
+    applicationCentrePageCheck()
+    advertDetailsFunction().isEnabled
+    feedbackFunction().isEnabled
+    withdrawApplicationFunction().isEnabled
+    applicationForVacancyText shouldEqual s"Application For $vacancyName"
+    getApplicationState shouldEqual "Application status: Pre-employment checks"
+    getApplicationConfirmation shouldEqual "Great news, you've accepted your provisional offer and your pre-employment checks are underway.\nWe are still checking:\nyour employment history, including any gaps\nwhether you have any convictions\n\n\nWe will send an email notification to you once all pre-employment checks are complete."
+  }
 }

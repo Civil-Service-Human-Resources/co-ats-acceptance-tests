@@ -11,7 +11,7 @@ import uk.gov.co.test.ui.flows.v9.RegisterCandidateFlow.fillNewCandidateDetails
 import uk.gov.co.test.ui.flows.v9.ShortFormFlow.fillShortFormDetails
 import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.fillNewVacancyForm
 import uk.gov.co.test.ui.flows.vx.RecruiterLoginFlow.loginWithRecruiterDetails
-import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.{candidateAcceptsOffer, confirmLongFormCompletion, confirmOfferAccepted, confirmShortFormCompletion, confirmShortFormCompletionNoLongForm}
+import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.{candidateAcceptsOffer, confirmLongFormCompletion, confirmOfferAccepted, confirmPecSubmission, confirmShortFormCompletion, confirmShortFormCompletionNoLongForm}
 import uk.gov.co.test.ui.pages.v9.ApplicationsPage.extractApplicationId
 import uk.gov.co.test.ui.pages.v9.ProvisionalOfferPage.offerDecisionFlow
 import uk.gov.co.test.ui.pages.v9.shortform.EligibilityDetails
@@ -78,10 +78,10 @@ class createVacancySpec extends BaseFeatureSpec {
       offerDecisionFlow("Accept")
       confirmOfferAccepted()
       fillPecFormDetailsOnly(MASTER_PEC_FORM_DATA)
-      println("So far done!")
 
       Then("the candidate is able to confirm insolvency short & long forms are completed")
-
+      confirmPecSubmission()
+      println("So far done!")
     }
 
     Scenario("VX: A Recruiter Extracts Vacancy Details", RunInVX) {
