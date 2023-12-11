@@ -3,7 +3,7 @@ package uk.gov.co.test.ui.pages.vx.createvacancypage
 import org.openqa.selenium.By
 import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXLanguagesMandatory, vXLicencesMandatory, vXMembershipsMandatory, vXQualificationsMandatory, vXGuidanceText, vXStatementWordLimit}
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
-import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.formId
+import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.vacancyFormId
 
 case class MandatoryRequirements(requirements: Boolean, requirementsInfo: String)
 
@@ -28,39 +28,39 @@ case class ExperienceDetails(
 
 object ExperienceSection extends VacancyBasePage {
 
-  def provideCvYesId                 = s"${formId}_datafield_59983_1_1_1"
-  def provideCvNoId                  = s"${formId}_datafield_59983_1_1_2"
-  def cvScore0to7Id                  = s"${formId}_datafield_187853_1_1_50711"
-  def cvScore0to100Id                = s"${formId}_datafield_187853_1_1_50712"
-  def jobHistoryYesId                = s"${formId}_datafield_60080_1_1_1"
-  def jobHistoryNoId                 = s"${formId}_datafield_60080_1_1_2"
-  def qualificationDetailsYesId      = s"${formId}_datafield_60086_1_1_1"
-  def qualificationDetailsNoId       = s"${formId}_datafield_60086_1_1_2"
-  def previousSkillsYesId            = s"${formId}_datafield_60090_1_1_1"
-  def previousSkillsNoId             = s"${formId}_datafield_60090_1_1_2"
-  def personalStatementYesId         = s"${formId}_datafield_59992_1_1_1"
-  def personalStatementNoId          = s"${formId}_datafield_59992_1_1_2"
-  def statementScore0to7Id           = s"${formId}_datafield_187857_1_1_50711"
-  def statementScore0to100Id         = s"${formId}_datafield_187857_1_1_50712"
-  def statementWordLimitId           = s"select2-${formId}_datafield_72066_1_1-container"
-  def guidanceTextYesId              = s"${formId}_datafield_59989_1_1_1"
-  def guidanceTextNoId               = s"${formId}_datafield_59989_1_1_2"
-  def guidanceTextInputId            = s"${formId}_datafield_60060_1_1_en-GB"
-  def pastExperiencesYesId           = s"${formId}_datafield_60105_1_1_1"
-  def pastExperiencesNoId            = s"${formId}_datafield_60105_1_1_2"
-  def pastExperiencesInputId         = s"${formId}_datafield_116298_1_1_en-GB"
-  def mandatoryLicencesYesId         = s"${formId}_datafield_60168_1_1_1"
-  def mandatoryLicencesNoId          = s"${formId}_datafield_60168_1_1_2"
-  def mandatoryLicencesInputId       = s"${formId}_datafield_60172_1_1_en-GB"
-  def mandatoryMembershipsYesId      = s"${formId}_datafield_60185_1_1_1"
-  def mandatoryMembershipsNoId       = s"${formId}_datafield_60185_1_1_2"
-  def mandatoryMembershipsInputId    = s"${formId}_datafield_60179_1_1_en-GB"
-  def mandatoryLanguagesYesId        = s"${formId}_datafield_60190_1_1_1"
-  def mandatoryLanguagesNoId         = s"${formId}_datafield_60190_1_1_2"
-  def mandatoryLanguagesInputId      = s"${formId}_datafield_60200_1_1_en-GB"
-  def mandatoryQualificationsYesId   = s"${formId}_datafield_60215_1_1_1"
-  def mandatoryQualificationsNoId    = s"${formId}_datafield_60215_1_1_2"
-  def mandatoryQualificationsInputId = s"${formId}_datafield_60209_1_1_en-GB"
+  def provideCvYesId                 = s"${vacancyFormId}_datafield_59983_1_1_1"
+  def provideCvNoId                  = s"${vacancyFormId}_datafield_59983_1_1_2"
+  def cvScore0to7Id                  = s"${vacancyFormId}_datafield_187853_1_1_50711"
+  def cvScore0to100Id                = s"${vacancyFormId}_datafield_187853_1_1_50712"
+  def jobHistoryYesId                = s"${vacancyFormId}_datafield_60080_1_1_1"
+  def jobHistoryNoId                 = s"${vacancyFormId}_datafield_60080_1_1_2"
+  def qualificationDetailsYesId      = s"${vacancyFormId}_datafield_60086_1_1_1"
+  def qualificationDetailsNoId       = s"${vacancyFormId}_datafield_60086_1_1_2"
+  def previousSkillsYesId            = s"${vacancyFormId}_datafield_60090_1_1_1"
+  def previousSkillsNoId             = s"${vacancyFormId}_datafield_60090_1_1_2"
+  def personalStatementYesId         = s"${vacancyFormId}_datafield_59992_1_1_1"
+  def personalStatementNoId          = s"${vacancyFormId}_datafield_59992_1_1_2"
+  def statementScore0to7Id           = s"${vacancyFormId}_datafield_187857_1_1_50711"
+  def statementScore0to100Id         = s"${vacancyFormId}_datafield_187857_1_1_50712"
+  def statementWordLimitId           = s"select2-${vacancyFormId}_datafield_72066_1_1-container"
+  def guidanceTextYesId              = s"${vacancyFormId}_datafield_59989_1_1_1"
+  def guidanceTextNoId               = s"${vacancyFormId}_datafield_59989_1_1_2"
+  def guidanceTextInputId            = s"${vacancyFormId}_datafield_60060_1_1_en-GB"
+  def pastExperiencesYesId           = s"${vacancyFormId}_datafield_60105_1_1_1"
+  def pastExperiencesNoId            = s"${vacancyFormId}_datafield_60105_1_1_2"
+  def pastExperiencesInputId         = s"${vacancyFormId}_datafield_116298_1_1_en-GB"
+  def mandatoryLicencesYesId         = s"${vacancyFormId}_datafield_60168_1_1_1"
+  def mandatoryLicencesNoId          = s"${vacancyFormId}_datafield_60168_1_1_2"
+  def mandatoryLicencesInputId       = s"${vacancyFormId}_datafield_60172_1_1_en-GB"
+  def mandatoryMembershipsYesId      = s"${vacancyFormId}_datafield_60185_1_1_1"
+  def mandatoryMembershipsNoId       = s"${vacancyFormId}_datafield_60185_1_1_2"
+  def mandatoryMembershipsInputId    = s"${vacancyFormId}_datafield_60179_1_1_en-GB"
+  def mandatoryLanguagesYesId        = s"${vacancyFormId}_datafield_60190_1_1_1"
+  def mandatoryLanguagesNoId         = s"${vacancyFormId}_datafield_60190_1_1_2"
+  def mandatoryLanguagesInputId      = s"${vacancyFormId}_datafield_60200_1_1_en-GB"
+  def mandatoryQualificationsYesId   = s"${vacancyFormId}_datafield_60215_1_1_1"
+  def mandatoryQualificationsNoId    = s"${vacancyFormId}_datafield_60215_1_1_2"
+  def mandatoryQualificationsInputId = s"${vacancyFormId}_datafield_60209_1_1_en-GB"
 
   private def provideCV(successProfilesDetails: SuccessProfilesDetails): Unit = {
     val cv = successProfilesDetails.experienceSection

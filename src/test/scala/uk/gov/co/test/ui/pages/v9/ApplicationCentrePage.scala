@@ -5,7 +5,7 @@ import org.scalatest.concurrent.Eventually.eventually
 import uk.gov.co.test.ui.conf.TestConfiguration
 import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{v9AdjustmentsForTests, v9ReasonableAdjustments, vXAnyOnlineTests, vacancyName}
 import uk.gov.co.test.ui.pages.v9.ApplicationsPage.reviewUpdateValue
-import uk.gov.co.test.ui.pages.vx.DashboardPage.{contactEmailVxConfig, switchToCandidateApplication}
+import uk.gov.co.test.ui.pages.vx.DashboardPage.contactEmailVxConfig
 
 object ApplicationCentrePage extends CivilServiceJobsBasePage {
 
@@ -24,8 +24,9 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
   val feedbackButtonPath            = ".//input[@value='Feedback']"
   val startTestButtonPath           = ".//input[@value='Start Test']"
   val resumeTestButtonPath          = ".//input[@value='Resume Test']"
-  val pecStartButtonPath          = ".//input[@value='Begin pre-employment checks']"
+  val pecStartButtonPath            = ".//input[@value='Begin pre-employment checks']"
   val applicationLinkPath           = ".//a[@title='Applications']"
+  val continueApplicationName       = "submit_form"
 
   private def applicationCentrePageCheck(): Unit =
     eventually(onPage(applicationCentreTitle))
@@ -143,7 +144,7 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
     waitForVisibilityOfElementByPath(applicationLinkPath).click()
 
   def candidateAcceptsOffer(): Unit = {
-    switchToCandidateApplication()
+    switchToSecondWindow()
     driver.navigate().to(TestConfiguration.urlHost("vxconfig") + "/vx/lang-en-GB/candidate/application")
     reviewUpdateValue().click()
     confirmProvisionalOffer()
@@ -156,8 +157,8 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
     withdrawApplicationFunction().isEnabled
     feedbackFunction().isEnabled
     pecStartFunction().isEnabled
-    applicationForVacancyText shouldEqual s"Application For $vacancyName"
-    getApplicationState shouldEqual "Application status: Offer accepted"
+    applicationForVacancyText  shouldEqual s"Application For $vacancyName"
+    getApplicationState        shouldEqual "Application status: Offer accepted"
     getApplicationConfirmation shouldEqual "We're delighted that you have accepted our job offer.\nAs part of the onboarding process we require additional information."
   }
 
@@ -166,8 +167,8 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
     advertDetailsFunction().isEnabled
     feedbackFunction().isEnabled
     withdrawApplicationFunction().isEnabled
-    applicationForVacancyText shouldEqual s"Application For $vacancyName"
-    getApplicationState shouldEqual "Application status: Pre-employment checks"
+    applicationForVacancyText  shouldEqual s"Application For $vacancyName"
+    getApplicationState        shouldEqual "Application status: Pre-employment checks"
     getApplicationConfirmation shouldEqual "Great news, you've accepted your provisional offer and your pre-employment checks are underway.\nWe are still checking:\nyour employment history, including any gaps\nwhether you have any convictions\n\n\nWe will send an email notification to you once all pre-employment checks are complete."
   }
 }

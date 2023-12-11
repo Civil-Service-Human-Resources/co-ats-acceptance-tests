@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.pages
 
 import org.openqa.selenium._
-import org.openqa.selenium.support.ui.ExpectedConditions.{elementToBeClickable, presenceOfElementLocated, visibilityOfElementLocated}
+import org.openqa.selenium.support.ui.ExpectedConditions.{elementToBeClickable, visibilityOfElementLocated}
 import org.openqa.selenium.support.ui.{ExpectedCondition, ExpectedConditions, WebDriverWait}
 import org.scalactic.source.Position
 import org.scalatest.concurrent.Eventually.eventually
@@ -69,14 +69,16 @@ trait BasePage extends Matchers with Page with WebBrowser with PatienceConfigura
     wait.until(visibilityOfElementLocated(By.id(id)))
   }
 
+  "#collapse_panel > span.main_status.summary-collapse"
+
   def waitForVisibilityOfElement(ele: By)(implicit driver: WebDriver): WebElement = {
     val wait = new WebDriverWait(driver, 30, 200)
     wait.until(visibilityOfElementLocated(ele))
   }
 
-  def waitForVisibilityOfElementTest(ele: String)(implicit driver: WebDriver): WebElement = {
+  def waitForVisibilityOfElementCss(ele: String)(implicit driver: WebDriver): WebElement = {
     val wait = new WebDriverWait(driver, 30, 200)
-    wait.until(presenceOfElementLocated(By.id(ele)))
+    wait.until(visibilityOfElementLocated(By.cssSelector(ele)))
   }
 
   def waitForElementToBeClickableByLink(optionName: String)(implicit driver: WebDriver): WebElement = {
@@ -150,12 +152,13 @@ trait BasePage extends Matchers with Page with WebBrowser with PatienceConfigura
     wait.until(ExpectedConditions.numberOfWindowsToBe(expectedNumberOfWindows))
   }
 
-  def openNewWindow()(implicit driver: WebDriver): Unit =
+  def openNewWindow()(implicit driver: WebDriver): Unit = {
     //    openWindows(2)
     for (chartWindow <- driver.getWindowHandles.asScala) {
       driver.switchTo.window(chartWindow)
-      secondWindowHandle = chartWindow
     }
+    println(driver.getWindowHandles)
+  }
 
   def openNewTabWithJavascript()(implicit driver: WebDriver): AnyRef = {
     val jse: JavascriptExecutor = driver.asInstanceOf[JavascriptExecutor]
@@ -163,12 +166,24 @@ trait BasePage extends Matchers with Page with WebBrowser with PatienceConfigura
   }
 
   def openAndSaveWindows()(implicit driver: WebDriver): Unit = {
-    firstWindowHandle = driver.getWindowHandle
     openNewTabWithJavascript()
     openNewWindow()
   }
 
   def switchBackToWindow(windowName: String)(implicit driver: WebDriver): WebDriver =
     driver.switchTo().window(windowName)
+
+  def switchToFirstWindow()(implicit driver: WebDriver): Unit = {
+    switchBackToWindow(firstWindowHandle)
+    refreshPage()
+  }
+
+  def switchToSecondWindow()(implicit driver: WebDriver): Unit = {
+    switchBackToWindow(secondWindowHandle)
+    refreshPage()
+  }
+
+  def refreshPage()(implicit driver: WebDriver): Unit =
+    driver.navigate().refresh()
 
 }

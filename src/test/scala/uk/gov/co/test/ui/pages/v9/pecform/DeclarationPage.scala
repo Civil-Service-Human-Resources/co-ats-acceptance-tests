@@ -3,7 +3,7 @@ package uk.gov.co.test.ui.pages.v9.pecform
 import org.scalatest.concurrent.Eventually.eventually
 import uk.gov.co.test.ui.data.v9.pecform.PecFormDetails
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
-import uk.gov.co.test.ui.pages.v9.shortform.ApplicationGuidancePage.formId
+import uk.gov.co.test.ui.pages.v9.pecform.YourDetailsPage.pecFormId
 
 case class DeclarationDetails(
   acceptLongFormTAndCs: Boolean
@@ -12,7 +12,7 @@ case class DeclarationDetails(
 object DeclarationPage extends CivilServiceJobsBasePage {
 
   private lazy val declarationTitle   = "Declaration - Civil Service Jobs - GOV.UK"
-  def declarationTermsAndConditionsId = s"${formId}_datafield_22499_1_1_804_label"
+  def declarationTermsAndConditionsId = s"${pecFormId}_datafield_22499_1_1_804_label"
   val submitButtonPath                = ".//input[@value='Submit']"
   val pecFormSubmission               = "submit_button"
 

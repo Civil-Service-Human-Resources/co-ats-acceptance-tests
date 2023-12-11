@@ -2,7 +2,7 @@ package uk.gov.co.test.ui.pages.vx.createvacancypage
 
 import org.openqa.selenium.By
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
-import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.formId
+import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.vacancyFormId
 import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXHowManyAssessed, vXListOfChosenBehaviours}
 
 case class Behaviours(chosenBehaviour: String, stageApplication: Boolean, stageInterview: Boolean)
@@ -22,35 +22,35 @@ case class BehavioursDetails(
 
 object BehavioursSection extends VacancyBasePage {
 
-  def behavioursId             = s"${formId}_datafield_154245_1_1_12686"
-  def behavioursSectionId      = s"${formId}_section_60310_col_0"
-  def howManyBehavioursId      = s"select2-${formId}_datafield_60326_1_1-container"
-  def successProfilesSectionId = s"${formId}_section_154224_col_0"
-  def assessBehavioursId       = s"${formId}_label_130493_1"
-  def behavioursOneId          = s"select2-${formId}_datafield_60342_1_1-container"
-  def behavioursTwoId          = s"select2-${formId}_datafield_60356_1_1-container"
-  def behavioursThreeId        = s"select2-${formId}_datafield_60370_1_1-container"
-  def behavioursFourId         = s"select2-${formId}_datafield_60384_1_1-container"
-  def behavioursFiveId         = s"select2-${formId}_datafield_60398_1_1-container"
-  def behavioursSixId          = s"select2-${formId}_datafield_60412_1_1-container"
-  def behavioursSevenId        = s"select2-${formId}_datafield_60426_1_1-container"
-  def behavioursEightId        = s"select2-${formId}_datafield_60440_1_1-container"
-  def applicationOneId         = s"${formId}_datafield_60338_1_1_12683"
-  def applicationTwoId         = s"${formId}_datafield_60352_1_1_12683"
-  def applicationThreeId       = s"${formId}_datafield_60366_1_1_12683"
-  def applicationFourId        = s"${formId}_datafield_60380_1_1_12683"
-  def applicationFiveId        = s"${formId}_datafield_60394_1_1_12683"
-  def applicationSixId         = s"${formId}_datafield_60408_1_1_12683"
-  def applicationSevenId       = s"${formId}_datafield_60422_1_1_12683"
-  def applicationEightId       = s"${formId}_datafield_60436_1_1_12683"
-  def interviewOneId           = s"${formId}_datafield_60338_1_1_12684"
-  def interviewTwoId           = s"${formId}_datafield_60352_1_1_12684"
-  def interviewThreeId         = s"${formId}_datafield_60366_1_1_12684"
-  def interviewFourId          = s"${formId}_datafield_60380_1_1_12684"
-  def interviewFiveId          = s"${formId}_datafield_60394_1_1_12684"
-  def interviewSixId           = s"${formId}_datafield_60408_1_1_12684"
-  def interviewSevenId         = s"${formId}_datafield_60422_1_1_12684"
-  def interviewEightId         = s"${formId}_datafield_60436_1_1_12684"
+  def behavioursId             = s"${vacancyFormId}_datafield_154245_1_1_12686"
+  def behavioursSectionId      = s"${vacancyFormId}_section_60310_col_0"
+  def howManyBehavioursId      = s"select2-${vacancyFormId}_datafield_60326_1_1-container"
+  def successProfilesSectionId = s"${vacancyFormId}_section_154224_col_0"
+  def assessBehavioursId       = s"${vacancyFormId}_label_130493_1"
+  def behavioursOneId          = s"select2-${vacancyFormId}_datafield_60342_1_1-container"
+  def behavioursTwoId          = s"select2-${vacancyFormId}_datafield_60356_1_1-container"
+  def behavioursThreeId        = s"select2-${vacancyFormId}_datafield_60370_1_1-container"
+  def behavioursFourId         = s"select2-${vacancyFormId}_datafield_60384_1_1-container"
+  def behavioursFiveId         = s"select2-${vacancyFormId}_datafield_60398_1_1-container"
+  def behavioursSixId          = s"select2-${vacancyFormId}_datafield_60412_1_1-container"
+  def behavioursSevenId        = s"select2-${vacancyFormId}_datafield_60426_1_1-container"
+  def behavioursEightId        = s"select2-${vacancyFormId}_datafield_60440_1_1-container"
+  def applicationOneId         = s"${vacancyFormId}_datafield_60338_1_1_12683"
+  def applicationTwoId         = s"${vacancyFormId}_datafield_60352_1_1_12683"
+  def applicationThreeId       = s"${vacancyFormId}_datafield_60366_1_1_12683"
+  def applicationFourId        = s"${vacancyFormId}_datafield_60380_1_1_12683"
+  def applicationFiveId        = s"${vacancyFormId}_datafield_60394_1_1_12683"
+  def applicationSixId         = s"${vacancyFormId}_datafield_60408_1_1_12683"
+  def applicationSevenId       = s"${vacancyFormId}_datafield_60422_1_1_12683"
+  def applicationEightId       = s"${vacancyFormId}_datafield_60436_1_1_12683"
+  def interviewOneId           = s"${vacancyFormId}_datafield_60338_1_1_12684"
+  def interviewTwoId           = s"${vacancyFormId}_datafield_60352_1_1_12684"
+  def interviewThreeId         = s"${vacancyFormId}_datafield_60366_1_1_12684"
+  def interviewFourId          = s"${vacancyFormId}_datafield_60380_1_1_12684"
+  def interviewFiveId          = s"${vacancyFormId}_datafield_60394_1_1_12684"
+  def interviewSixId           = s"${vacancyFormId}_datafield_60408_1_1_12684"
+  def interviewSevenId         = s"${vacancyFormId}_datafield_60422_1_1_12684"
+  def interviewEightId         = s"${vacancyFormId}_datafield_60436_1_1_12684"
 
   def selectBehavioursProfiles(successProfilesDetails: SuccessProfilesDetails): Unit = {
     scrollToElement(By.id(successProfilesSectionId))

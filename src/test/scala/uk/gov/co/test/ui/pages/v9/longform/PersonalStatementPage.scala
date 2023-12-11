@@ -4,7 +4,7 @@ import org.scalatest.concurrent.Eventually.eventually
 import uk.gov.co.test.ui.data.v9.longform.LongFormDetails
 import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXGuidanceText, vXStatementWordLimit}
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
-import uk.gov.co.test.ui.pages.v9.shortform.ApplicationGuidancePage.formId
+import uk.gov.co.test.ui.pages.v9.longform.DiversityMonitoringPage.longFormId
 
 case class StatementDetails(
   personalStatement: String,
@@ -14,11 +14,11 @@ case class StatementDetails(
 object PersonalStatementPage extends CivilServiceJobsBasePage {
 
   private lazy val personalStatementPageTitle = "Personal statement - Civil Service Jobs - GOV.UK"
-  def personalStatement250InputId             = s"${formId}_datafield_72097_1_1"
-  def personalStatement500InputId             = s"${formId}_datafield_72117_1_1"
-  def personalStatement750InputId             = s"${formId}_datafield_72158_1_1"
-  def personalDetailsRemovedId                = s"${formId}_datafield_89060_1_1_15120_label"
-  def guidanceTextPath                        = s".//*[@id='${formId}_label_75927_1']/p[5]/strong"
+  def personalStatement250InputId             = s"${longFormId}_datafield_72097_1_1"
+  def personalStatement500InputId             = s"${longFormId}_datafield_72117_1_1"
+  def personalStatement750InputId             = s"${longFormId}_datafield_72158_1_1"
+  def personalDetailsRemovedId                = s"${longFormId}_datafield_89060_1_1_15120_label"
+  def guidanceTextPath                        = s".//*[@id='${longFormId}_label_75927_1']/p[5]/strong"
 
   private def personalStatementPageCheck(): Unit =
     eventually(onPage(personalStatementPageTitle))

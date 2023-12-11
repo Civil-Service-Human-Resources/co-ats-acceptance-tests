@@ -3,7 +3,7 @@ package uk.gov.co.test.ui.pages.vx.createvacancypage
 import org.openqa.selenium.By
 import uk.gov.co.test.ui.data.vx.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
-import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.formId
+import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.vacancyFormId
 import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXAnyAdditionalQuestions, vXHowManyQuestions, vXQuestionOne, vXQuestionThree, vXQuestionTwo}
 
 case class AdditionalQuestionsDetails(
@@ -16,15 +16,15 @@ case class AdditionalQuestionsDetails(
 
 object AdditionalQuestionsSection extends VacancyBasePage {
 
-  def moreQuestionsSectionId   = s"${formId}_section_56149_col_0"
-  def additionalQuestionsYesId = s"${formId}_datafield_56152_1_1_1"
-  def additionalQuestionsNoId  = s"${formId}_datafield_56152_1_1_2"
-  def oneQuestionId            = s"${formId}_datafield_56156_1_1_14804"
-  def twoQuestionId            = s"${formId}_datafield_56156_1_1_14805"
-  def threeQuestionId          = s"${formId}_datafield_56156_1_1_14806"
-  def questionOneInput         = s"${formId}_datafield_56159_1_1_en-GB"
-  def questionTwoInput         = s"${formId}_datafield_56165_1_1_en-GB"
-  def questionThreeInput       = s"${formId}_datafield_56171_1_1_en-GB"
+  def moreQuestionsSectionId   = s"${vacancyFormId}_section_56149_col_0"
+  def additionalQuestionsYesId = s"${vacancyFormId}_datafield_56152_1_1_1"
+  def additionalQuestionsNoId  = s"${vacancyFormId}_datafield_56152_1_1_2"
+  def oneQuestionId            = s"${vacancyFormId}_datafield_56156_1_1_14804"
+  def twoQuestionId            = s"${vacancyFormId}_datafield_56156_1_1_14805"
+  def threeQuestionId          = s"${vacancyFormId}_datafield_56156_1_1_14806"
+  def questionOneInput         = s"${vacancyFormId}_datafield_56159_1_1_en-GB"
+  def questionTwoInput         = s"${vacancyFormId}_datafield_56165_1_1_en-GB"
+  def questionThreeInput       = s"${vacancyFormId}_datafield_56171_1_1_en-GB"
 
   private def selectMoreQuestions(additionalQuestionsDetails: AdditionalQuestionsDetails): Unit = {
     scrollToElement(By.id(moreQuestionsSectionId))

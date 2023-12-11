@@ -3,7 +3,7 @@ package uk.gov.co.test.ui.pages.vx.createvacancypage
 import uk.gov.co.test.ui.data.vx.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 import uk.gov.co.test.ui.pages.vx.createvacancypage.AbilitiesSection.selectAbilitiesProfile
-import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.formId
+import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.vacancyFormId
 import uk.gov.co.test.ui.pages.vx.createvacancypage.BehavioursSection.selectBehavioursProfiles
 import uk.gov.co.test.ui.pages.vx.createvacancypage.ExperienceSection.selectExperiencesRequired
 import uk.gov.co.test.ui.pages.vx.createvacancypage.StrengthsSection.selectStrengthsAssessed
@@ -25,11 +25,11 @@ case class SuccessProfilesDetails(
 
 object SuccessProfilesSection extends VacancyBasePage {
 
-  def abilitiesId       = s"${formId}_datafield_154245_1_1_12685"
-  def behavioursId      = s"${formId}_datafield_154245_1_1_12686"
-  def experienceId      = s"${formId}_datafield_154245_1_1_12687"
-  def strengthsId       = s"${formId}_datafield_154245_1_1_12689"
-  def technicalSkillsId = s"${formId}_datafield_154245_1_1_12688"
+  def abilitiesId       = s"${vacancyFormId}_datafield_154245_1_1_12685"
+  def behavioursId      = s"${vacancyFormId}_datafield_154245_1_1_12686"
+  def experienceId      = s"${vacancyFormId}_datafield_154245_1_1_12687"
+  def strengthsId       = s"${vacancyFormId}_datafield_154245_1_1_12689"
+  def technicalSkillsId = s"${vacancyFormId}_datafield_154245_1_1_12688"
 
   private def whichSuccessProfiles(successProfilesDetails: SuccessProfilesDetails): Unit = {
     if (successProfilesDetails.abilities) {

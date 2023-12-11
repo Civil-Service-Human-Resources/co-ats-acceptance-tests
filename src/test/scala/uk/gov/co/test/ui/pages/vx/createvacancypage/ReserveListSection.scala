@@ -3,7 +3,7 @@ package uk.gov.co.test.ui.pages.vx.createvacancypage
 import org.openqa.selenium.By
 import uk.gov.co.test.ui.data.vx.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
-import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.formId
+import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.vacancyFormId
 
 case class ReserveListDetails(
   reserveList: Boolean,
@@ -13,12 +13,12 @@ case class ReserveListDetails(
 
 object ReserveListSection extends VacancyBasePage {
 
-  def reserveListId         = s"${formId}_field_154633_1"
-  def reserveListYesId      = s"${formId}_datafield_154633_1_1_1"
-  def reserveListNoId       = s"${formId}_datafield_154633_1_1_2"
-  def reserveListLengthId   = s"select2-${formId}_datafield_154637_1_1-container"
-  def approvalToExtendYesId = s"${formId}_datafield_177141_1_1_1"
-  def approvalToExtendNoId  = s"${formId}_datafield_177141_1_1_2"
+  def reserveListId         = s"${vacancyFormId}_field_154633_1"
+  def reserveListYesId      = s"${vacancyFormId}_datafield_154633_1_1_1"
+  def reserveListNoId       = s"${vacancyFormId}_datafield_154633_1_1_2"
+  def reserveListLengthId   = s"select2-${vacancyFormId}_datafield_154637_1_1-container"
+  def approvalToExtendYesId = s"${vacancyFormId}_datafield_177141_1_1_1"
+  def approvalToExtendNoId  = s"${vacancyFormId}_datafield_177141_1_1_2"
 
   def selectReserveList(reserveListDetails: ReserveListDetails): Unit = {
     scrollToElement(By.id(reserveListId))

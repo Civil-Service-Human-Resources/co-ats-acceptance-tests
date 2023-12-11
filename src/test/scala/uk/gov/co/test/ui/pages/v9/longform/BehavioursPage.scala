@@ -3,9 +3,9 @@ package uk.gov.co.test.ui.pages.v9.longform
 import org.openqa.selenium.By
 import org.scalatest.concurrent.Eventually.eventually
 import uk.gov.co.test.ui.data.v9.longform.LongFormDetails
-import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
-import uk.gov.co.test.ui.pages.v9.shortform.ApplicationGuidancePage.formId
 import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXBehavioursRequired, vXHowManyAssessed, vXListOfChosenBehaviours}
+import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
+import uk.gov.co.test.ui.pages.v9.longform.DiversityMonitoringPage.longFormId
 
 case class BehavioursDetails(
   changingAndImprovingText: String,
@@ -21,14 +21,14 @@ case class BehavioursDetails(
 object BehavioursPage extends CivilServiceJobsBasePage {
 
   private lazy val behavioursPageTitle   = "Behaviours - Civil Service Jobs - GOV.UK"
-  def changingAndImprovingInputId        = s"${formId}_datafield_22232_1_1"
-  def communicatingAndInfluencingInputId = s"${formId}_datafield_22238_1_1"
-  def deliveringAtPaceInputId            = s"${formId}_datafield_22244_1_1"
-  def developingSelfAndOthersInputId     = s"${formId}_datafield_22250_1_1"
-  def leadershipInputId                  = s"${formId}_datafield_22256_1_1"
-  def makingEffectiveDecisionsInputId    = s"${formId}_datafield_22262_1_1"
-  def managingAQualityServiceInputId     = s"${formId}_datafield_22268_1_1"
-  def workingTogetherInputId             = s"${formId}_datafield_22274_1_1"
+  def changingAndImprovingInputId        = s"${longFormId}_datafield_22232_1_1"
+  def communicatingAndInfluencingInputId = s"${longFormId}_datafield_22238_1_1"
+  def deliveringAtPaceInputId            = s"${longFormId}_datafield_22244_1_1"
+  def developingSelfAndOthersInputId     = s"${longFormId}_datafield_22250_1_1"
+  def leadershipInputId                  = s"${longFormId}_datafield_22256_1_1"
+  def makingEffectiveDecisionsInputId    = s"${longFormId}_datafield_22262_1_1"
+  def managingAQualityServiceInputId     = s"${longFormId}_datafield_22268_1_1"
+  def workingTogetherInputId             = s"${longFormId}_datafield_22274_1_1"
   private lazy val v9HowManyBehaviours   = ".//*[@data-type='LARGETEXT']"
 
   private def behavioursPageCheck(): Unit =

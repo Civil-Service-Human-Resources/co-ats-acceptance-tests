@@ -23,7 +23,7 @@ object TestData extends BaseFeatureSpec {
     vXNoOfApplicationStage = 1
   }
 
-  def pec2TestData(): Unit = {
+  def setPecTestData(): Unit = {
     vacancyName = "AUTOCO - System Architect"
     vacancyId = "9533"
     vXAnyAdditionalQuestions = false

@@ -3,7 +3,7 @@ package uk.gov.co.test.ui.pages.vx.createvacancypage
 import org.openqa.selenium.By
 import uk.gov.co.test.ui.data.vx.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
-import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.formId
+import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.vacancyFormId
 
 case class ContractDetails(
   contractType: List[String],
@@ -23,24 +23,24 @@ case class ContractDetails(
 
 object ContractDetailsSection extends VacancyBasePage {
 
-  def contractDetailsSectionId     = s"${formId}_section_154771_col_0"
-  def currencyId                   = s"select2-${formId}_datafield_155065_1_1-container"
-  def workingPatternId             = s"select2-${formId}_datafield_154969_1_1-container"
-  def jobGradeId                   = s"select2-${formId}_datafield_154973_1_1-container"
-  def contractTypeId               = s"select2-${formId}_datafield_154977_1_1-container"
-  def lengthOfEmploymentInput      = s"${formId}_datafield_154962_1_1_en-GB"
+  def contractDetailsSectionId     = s"${vacancyFormId}_section_154771_col_0"
+  def currencyId                   = s"select2-${vacancyFormId}_datafield_155065_1_1-container"
+  def workingPatternId             = s"select2-${vacancyFormId}_datafield_154969_1_1-container"
+  def jobGradeId                   = s"select2-${vacancyFormId}_datafield_154973_1_1-container"
+  def contractTypeId               = s"select2-${vacancyFormId}_datafield_154977_1_1-container"
+  def lengthOfEmploymentInput      = s"${vacancyFormId}_datafield_154962_1_1_en-GB"
   def addWelshEmploymentLengthId() = "clicky_154962"
   def welshEmploymentLengthInput   = "datafield_154962_1_1_cy"
   def updateWelshLengthId()        = "lbledit_datafield_154962_1_1-update"
   def jobGradeInput                = s".//*[@aria-describedby='$jobGradeId']"
-  def equivalentGradeId            = s"${formId}_datafield_154981_1_1_en-GB"
-  def minimumSalaryId              = s"${formId}_datafield_155044_1_1"
-  def maximumSalaryId              = s"${formId}_datafield_155051_1_1"
-  def moreDetailsId                = s"${formId}_datafield_155058_1_1_en-GB"
-  def civilServiceId               = s"${formId}_field_value_198564_1"
-  def civilServicePensionYesId     = s"${formId}_datafield_198564_1_1_1"
-  def civilServicePensionNoId      = s"${formId}_datafield_198564_1_1_2"
-  def employerContributionInput    = s"${formId}_datafield_198577_1_1"
+  def equivalentGradeId            = s"${vacancyFormId}_datafield_154981_1_1_en-GB"
+  def minimumSalaryId              = s"${vacancyFormId}_datafield_155044_1_1"
+  def maximumSalaryId              = s"${vacancyFormId}_datafield_155051_1_1"
+  def moreDetailsId                = s"${vacancyFormId}_datafield_155058_1_1_en-GB"
+  def civilServiceId               = s"${vacancyFormId}_field_value_198564_1"
+  def civilServicePensionYesId     = s"${vacancyFormId}_datafield_198564_1_1_1"
+  def civilServicePensionNoId      = s"${vacancyFormId}_datafield_198564_1_1_2"
+  def employerContributionInput    = s"${vacancyFormId}_datafield_198577_1_1"
 
   private def selectContractType(contractDetails: ContractDetails): Unit = {
     val typeRequiresLength: Seq[String] = List("Temporary", "Fixed Term Appointment", "Loan", "Secondment")

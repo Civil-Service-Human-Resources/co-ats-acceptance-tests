@@ -4,7 +4,7 @@ import org.openqa.selenium.{By, WebElement}
 import org.scalatest.concurrent.Eventually.eventually
 import uk.gov.co.test.ui.data.v9.longform.LongFormDetails
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
-import uk.gov.co.test.ui.pages.v9.shortform.ApplicationGuidancePage.formId
+import uk.gov.co.test.ui.pages.v9.longform.DiversityMonitoringPage.longFormId
 
 import scala.collection.mutable
 import scala.jdk.CollectionConverters._
@@ -36,29 +36,29 @@ object YourCVPage extends CivilServiceJobsBasePage {
   private lazy val qualificationRowsPath  = ".//tr[contains(@class, 'row form_section form_multi_section')]"
   private lazy val addRowsPath            = ".//*[@name='add_section_instance_22369']"
   private lazy val removeRowsPath         = ".//*[@name='remove_section_instance_22369']"
-  def removedPersonalDetailsId            = s"${formId}_datafield_89045_1_1_15120_label"
-  def employmentHistoryDetailsInputId     = s"${formId}_datafield_99856_1_1"
-  def previousSkillsDetailsInputId        = s"${formId}_datafield_99863_1_1"
-  def typeOfQualificationOneId            = s"${formId}_datafield_53854_1_1"
-  def otherQualificationOneId             = s"${formId}_datafield_22379_1_1"
-  def subjectOneId                        = s"${formId}_datafield_22372_1_1"
-  def gradeOneId                          = s"${formId}_datafield_36911_1_1"
-  def typeOfQualificationTwoId            = s"${formId}_datafield_53854_1_2"
-  def otherQualificationTwoId             = s"${formId}_datafield_22379_1_2"
-  def subjectTwoId                        = s"${formId}_datafield_22372_1_2"
-  def gradeTwoId                          = s"${formId}_datafield_36911_1_2"
-  def typeOfQualificationThreeId          = s"${formId}_datafield_53854_1_3"
-  def otherQualificationThreeId           = s"${formId}_datafield_22379_1_3"
-  def subjectThreeId                      = s"${formId}_datafield_22372_1_3"
-  def gradeThreeId                        = s"${formId}_datafield_36911_1_3"
-  def typeOfQualificationFourId           = s"${formId}_datafield_53854_1_4"
-  def otherQualificationFourId            = s"${formId}_datafield_22379_1_4"
-  def subjectFourId                       = s"${formId}_datafield_22372_1_4"
-  def gradeFourId                         = s"${formId}_datafield_36911_1_4"
-  def typeOfQualificationFiveId           = s"${formId}_datafield_53854_1_5"
-  def otherQualificationFiveId            = s"${formId}_datafield_22379_1_5"
-  def subjectFiveId                       = s"${formId}_datafield_22372_1_5"
-  def gradeFiveId                         = s"${formId}_datafield_36911_1_5"
+  def removedPersonalDetailsId            = s"${longFormId}_datafield_89045_1_1_15120_label"
+  def employmentHistoryDetailsInputId     = s"${longFormId}_datafield_99856_1_1"
+  def previousSkillsDetailsInputId        = s"${longFormId}_datafield_99863_1_1"
+  def typeOfQualificationOneId            = s"${longFormId}_datafield_53854_1_1"
+  def otherQualificationOneId             = s"${longFormId}_datafield_22379_1_1"
+  def subjectOneId                        = s"${longFormId}_datafield_22372_1_1"
+  def gradeOneId                          = s"${longFormId}_datafield_36911_1_1"
+  def typeOfQualificationTwoId            = s"${longFormId}_datafield_53854_1_2"
+  def otherQualificationTwoId             = s"${longFormId}_datafield_22379_1_2"
+  def subjectTwoId                        = s"${longFormId}_datafield_22372_1_2"
+  def gradeTwoId                          = s"${longFormId}_datafield_36911_1_2"
+  def typeOfQualificationThreeId          = s"${longFormId}_datafield_53854_1_3"
+  def otherQualificationThreeId           = s"${longFormId}_datafield_22379_1_3"
+  def subjectThreeId                      = s"${longFormId}_datafield_22372_1_3"
+  def gradeThreeId                        = s"${longFormId}_datafield_36911_1_3"
+  def typeOfQualificationFourId           = s"${longFormId}_datafield_53854_1_4"
+  def otherQualificationFourId            = s"${longFormId}_datafield_22379_1_4"
+  def subjectFourId                       = s"${longFormId}_datafield_22372_1_4"
+  def gradeFourId                         = s"${longFormId}_datafield_36911_1_4"
+  def typeOfQualificationFiveId           = s"${longFormId}_datafield_53854_1_5"
+  def otherQualificationFiveId            = s"${longFormId}_datafield_22379_1_5"
+  def subjectFiveId                       = s"${longFormId}_datafield_22372_1_5"
+  def gradeFiveId                         = s"${longFormId}_datafield_36911_1_5"
 
   private def yourCVPageCheck(): Unit =
     eventually(onPage(yourCVTitle))

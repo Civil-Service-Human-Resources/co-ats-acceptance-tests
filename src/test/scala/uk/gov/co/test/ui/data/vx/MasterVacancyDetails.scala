@@ -118,4 +118,16 @@ object MasterVacancyDetails extends VacancyBasePage {
   //v9 applications page
   var applicationId: String = "0"
 
+  //v9 pec form employment history
+  var v9EmployedWithin3Years   = true
+  var v9FirstEmployerName      = ""
+  var v9FirstEmployerFromDate  = ""
+  var v9FirstEmployerToDate    = ""
+  var v9SecondEmployerName     = ""
+  var v9SecondEmployerFromDate = ""
+  var v9SecondEmployerToDate   = ""
+  var v9ThirdEmployerName      = ""
+  var v9ThirdEmployerFromDate  = ""
+  var v9ThirdEmployerToDate    = ""
+
 }

@@ -3,7 +3,7 @@ package uk.gov.co.test.ui.pages.vx.createvacancypage
 import org.openqa.selenium.{By, WebElement}
 import uk.gov.co.test.ui.data.vx.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
-import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.formId
+import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.vacancyFormId
 
 case class ApprovalDetails(
   approval: Boolean,
@@ -13,12 +13,12 @@ case class ApprovalDetails(
 
 object ApprovalSection extends VacancyBasePage {
 
-  def budgetaryInfoId         = s"${formId}_datafield_154500_1_1"
-  def costCentreId            = s"${formId}_datafield_154493_1_1"
-  def approvalId              = s"${formId}_field_154507_1"
-  def approvalYesId           = s"${formId}_datafield_154507_1_1_1"
-  def approvalNoId            = s"${formId}_datafield_154507_1_1_2"
-  def uploadApprovalFileOneId = s"${formId}_datafield_154489_1_1"
+  def budgetaryInfoId         = s"${vacancyFormId}_datafield_154500_1_1"
+  def costCentreId            = s"${vacancyFormId}_datafield_154493_1_1"
+  def approvalId              = s"${vacancyFormId}_field_154507_1"
+  def approvalYesId           = s"${vacancyFormId}_datafield_154507_1_1_1"
+  def approvalNoId            = s"${vacancyFormId}_datafield_154507_1_1_2"
+  def uploadApprovalFileOneId = s"${vacancyFormId}_datafield_154489_1_1"
 
   private def budgetaryInfo(info: String): Unit = {
     val field = waitForVisibilityOfElementById(budgetaryInfoId)

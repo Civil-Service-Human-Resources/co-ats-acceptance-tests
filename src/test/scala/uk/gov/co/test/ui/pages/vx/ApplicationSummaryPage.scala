@@ -7,21 +7,28 @@ import uk.gov.co.test.ui.specs.TestData.eventually
 
 object ApplicationSummaryPage extends VacancyBasePage {
 
-  val dashboardPageTitle               = "Home : Civil Service Jobs - GOV.UK"
-  val applicationSummaryPageTitle      = "Application Summary : Civil Service Jobs - GOV.UK"
-  val searchApplicationPath            = ".//*[@class='textlabel' and text() = 'Search Applications']"
-  val searchPath                       = "selected_option"
-  val searchInput                      = "search_input"
-  val matchingOption                   = "matching_options"
-  val searchForId                      = "search_button"
-  val appIdPath                        = ".//*[@class='app_id']"
-  val completeSiftButtonPath           = "process_rule_but_18"
-  val progressButtonPath               = "process_rule_but_657"
-  val provisionalOfferOnlineButtonPath = "process_rule_but_3176"
-  val siftEvaluationTabPath            = ".//span[@class='main-label' and text() = 'Sift evaluation']"
-  val commentsTabPath                  = ".//span[@class='main-label' and text() = 'Comments']"
-  def outcomeId                        = s"select2-${appSummaryFormId}_datafield_66487_1_1-container"
-  var appSummaryFormId                 = ""
+  val dashboardPageTitle          = "Home : Civil Service Jobs - GOV.UK"
+  val applicationSummaryPageTitle = "Application Summary : Civil Service Jobs - GOV.UK"
+  val searchApplicationPath       = ".//*[@class='textlabel' and text() = 'Search Applications']"
+  val searchPath                  = "selected_option"
+  val searchInput                 = "search_input"
+  val matchingOption              = "matching_options"
+  val searchForId                 = "search_button"
+  val appIdPath                   = ".//*[@class='app_id']"
+  val completeSiftBarId           = "process_rule_but_18"
+  val progressBarId               = "process_rule_but_657"
+  val provisionalOfferOnlineBarId = "process_rule_but_3176"
+  val employmentHistoryBarId      = "process_rule_but_744"
+  val conditionalOfferBarId       = "process_rule_but_1024"
+  val withdrawApplicationBarId    = "process_rule_but_570"
+  val updateApplicantBarId        = "process_rule_but_2008"
+  val emailVacancyHolderBarId     = "process_rule_but_2032"
+  val crcBarId                    = "process_rule_but_776"
+  val siftEvaluationTabPath       = ".//span[@class='main-label' and text() = 'Sift evaluation']"
+  val commentsTabPath             = ".//span[@class='main-label' and text() = 'Comments']"
+  val vacancyAppliedDatePath = ".//*[@id='collapse_panel']/span[2]"
+  var appSummaryFormId       = ""
+  def outcomeId              = s"select2-${appSummaryFormId}_datafield_66487_1_1-container"
 
   private def dashboardPageCheck(): Unit =
     eventually(onPage(dashboardPageTitle))
@@ -55,12 +62,12 @@ object ApplicationSummaryPage extends VacancyBasePage {
   }
 
   def progressApplicationToOffer(): Unit = {
-    waitForVisibilityOfElementById(completeSiftButtonPath).click()
+    waitForVisibilityOfElementById(completeSiftBarId).click()
     waitForVisibilityOfElementByPath(siftEvaluationTabPath).isEnabled
     extractTabFormId()
     selectOutcome("Progress")
     clickOn("submit_button")
-    waitForVisibilityOfElementById(progressButtonPath).click()
-    waitForVisibilityOfElementById(provisionalOfferOnlineButtonPath).click()
+    waitForVisibilityOfElementById(progressBarId).click()
+    waitForVisibilityOfElementById(provisionalOfferOnlineBarId).click()
   }
 }

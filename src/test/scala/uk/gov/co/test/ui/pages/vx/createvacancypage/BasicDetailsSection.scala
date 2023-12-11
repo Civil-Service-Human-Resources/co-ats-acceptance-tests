@@ -2,9 +2,9 @@ package uk.gov.co.test.ui.pages.vx.createvacancypage
 
 import org.openqa.selenium.{By, Keys, WebElement}
 import org.scalatest.concurrent.Eventually.eventually
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXAppConvertedClosingDate, vXApplicationClosingDate, vXApplicationClosingTime, vXApplicationLiveDate, vXApplicationLiveTime, vXConvertedClosingDateTime, vXConvertedLiveDateTime, vacancyName}
 import uk.gov.co.test.ui.data.vx.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXAppConvertedClosingDate, vXApplicationClosingDate, vXApplicationClosingTime, vXApplicationLiveDate, vXApplicationLiveTime, vXConvertedClosingDateTime, vXConvertedLiveDateTime, vacancyName}
 
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -34,7 +34,7 @@ object BasicDetailsSection extends VacancyBasePage {
   val addWelshTranslationId = "edit_opp_form_title_button"
   val welshTitleInput       = "edit_opp_form_title_cy"
   val updateWelshId         = "lbledit_edit_opp_form_title-update"
-  var formId: String        = ""
+  var vacancyFormId: String = ""
 
   private def displayWelshVersion(): WebElement =
     waitForVisibilityOfElementByPath(displayWelshPath)
@@ -127,8 +127,8 @@ object BasicDetailsSection extends VacancyBasePage {
   private def extractFormId(): String = {
     waitForTemplateLoad()
     val formClass = driver.findElement(By.className(extractFormClass))
-    formId = formClass.getAttribute("id")
-    formId
+    vacancyFormId = formClass.getAttribute("id")
+    vacancyFormId
   }
 
   private def waitForTemplateLoad(): Unit =

@@ -3,7 +3,7 @@ package uk.gov.co.test.ui.pages.v9.shortform
 import org.scalatest.concurrent.Eventually.eventually
 import uk.gov.co.test.ui.data.v9.shortform.ShortFormDetails
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
-import uk.gov.co.test.ui.pages.v9.shortform.ApplicationGuidancePage.formId
+import uk.gov.co.test.ui.pages.v9.shortform.ApplicationGuidancePage.shortFormId
 import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{civilServant, homeDepartment, vXExperiencesRequired, vXLanguagesMandatory, vXLicencesMandatory, vXMembershipsMandatory, vXNationalityRequirements, vXQualificationsMandatory, vXRightToRemainUK}
 
 case class EligibilityDetails(
@@ -20,23 +20,23 @@ case class EligibilityDetails(
 object EligibilityPage extends CivilServiceJobsBasePage {
 
   private lazy val eligibilityTitle       = "Eligibility - Civil Service Jobs - GOV.UK"
-  def currentCivilServantYesId            = s"${formId}_datafield_87767_1_1_1_label"
-  def currentCivilServantNoId             = s"${formId}_datafield_87767_1_1_2_label"
-  def homeDepartmentSelectId              = s"${formId}_datafield_177937_1_1"
-  def nationalityReqMetYesId              = s"${formId}_datafield_44636_1_1_1_label"
-  def nationalityReqMetNoId               = s"${formId}_datafield_44636_1_1_2_label"
-  def rightToRemainYesId                  = s"${formId}_datafield_44639_1_1_1_label"
-  def rightToRemainNoId                   = s"${formId}_datafield_44639_1_1_2_label"
-  def membershipsRequiredYesId            = s"${formId}_datafield_97606_1_1_1_label"
-  def membershipsRequiredNoId             = s"${formId}_datafield_97606_1_1_2_label"
-  def languageRequirementsYesId           = s"${formId}_datafield_26892_1_1_1_label"
-  def languageRequirementsNoId            = s"${formId}_datafield_26892_1_1_2_label"
-  def qualificationsRequirementsYesId     = s"${formId}_datafield_22331_1_1_798_label"
-  def qualificationsRequirementsNoId      = s"${formId}_datafield_22331_1_1_799_label"
-  def qualificationsRequirementsSimilarId = s"${formId}_datafield_22331_1_1_800_label"
-  def licenceRequirementsYesId            = s"${formId}_datafield_26731_1_1_798_label"
-  def licenceRequirementsNoId             = s"${formId}_datafield_26731_1_1_799_label"
-  def licenceRequirementsSimilarId        = s"${formId}_datafield_26731_1_1_800_label"
+  def currentCivilServantYesId            = s"${shortFormId}_datafield_87767_1_1_1_label"
+  def currentCivilServantNoId             = s"${shortFormId}_datafield_87767_1_1_2_label"
+  def homeDepartmentSelectId              = s"${shortFormId}_datafield_177937_1_1"
+  def nationalityReqMetYesId              = s"${shortFormId}_datafield_44636_1_1_1_label"
+  def nationalityReqMetNoId               = s"${shortFormId}_datafield_44636_1_1_2_label"
+  def rightToRemainYesId                  = s"${shortFormId}_datafield_44639_1_1_1_label"
+  def rightToRemainNoId                   = s"${shortFormId}_datafield_44639_1_1_2_label"
+  def membershipsRequiredYesId            = s"${shortFormId}_datafield_97606_1_1_1_label"
+  def membershipsRequiredNoId             = s"${shortFormId}_datafield_97606_1_1_2_label"
+  def languageRequirementsYesId           = s"${shortFormId}_datafield_26892_1_1_1_label"
+  def languageRequirementsNoId            = s"${shortFormId}_datafield_26892_1_1_2_label"
+  def qualificationsRequirementsYesId     = s"${shortFormId}_datafield_22331_1_1_798_label"
+  def qualificationsRequirementsNoId      = s"${shortFormId}_datafield_22331_1_1_799_label"
+  def qualificationsRequirementsSimilarId = s"${shortFormId}_datafield_22331_1_1_800_label"
+  def licenceRequirementsYesId            = s"${shortFormId}_datafield_26731_1_1_798_label"
+  def licenceRequirementsNoId             = s"${shortFormId}_datafield_26731_1_1_799_label"
+  def licenceRequirementsSimilarId        = s"${shortFormId}_datafield_26731_1_1_800_label"
 
   private def eligibilityPageCheck(): Unit =
     eventually(onPage(eligibilityTitle))

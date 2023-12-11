@@ -4,26 +4,26 @@ import uk.gov.co.test.ui.data.Characters.{valid250Characters, valid500Characters
 import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.vXOtherLocations
 import uk.gov.co.test.ui.pages.v9.longform._
 
-object LONG_FORM_DATA_INSOLVENCY
+object LONG_FORM_DATA_PEC
     extends LongFormDetails(
-      LONG_FORM_EXPERIENCE_SKILLS_INSOLVENCY,
-      LONG_FORM_CV_INSOLVENCY,
-      LONG_FORM_PERSONAL_STATEMENT_INSOLVENCY,
-      LONG_FORM_BEHAVIOURS_INSOLVENCY,
-      LONG_FORM_TECHNICAL_SKILLS_INSOLVENCY,
-      LONG_FORM_UPLOAD_DOCUMENTS_INSOLVENCY,
-      LONG_FORM_PREFERENCES_INSOLVENCY,
-      LONG_FORM_ROLE_QUESTIONS_INSOLVENCY,
-      LONG_FORM_DECLARATION_INSOLVENCY
+      LONG_FORM_EXPERIENCE_SKILLS_PEC,
+      LONG_FORM_CV_PEC,
+      LONG_FORM_PERSONAL_STATEMENT_PEC,
+      LONG_FORM_BEHAVIOURS_PEC,
+      LONG_FORM_TECHNICAL_SKILLS_PEC,
+      LONG_FORM_UPLOAD_DOCUMENTS_PEC,
+      LONG_FORM_PREFERENCES_PEC,
+      LONG_FORM_ROLE_QUESTIONS_PEC,
+      LONG_FORM_DECLARATION_PEC
     )
 
-object LONG_FORM_EXPERIENCE_SKILLS_INSOLVENCY
+object LONG_FORM_EXPERIENCE_SKILLS_PEC
     extends ExperienceAndSkillsDetails(
       true,
       s"$valid250Characters"
     )
 
-object LONG_FORM_CV_INSOLVENCY
+object LONG_FORM_CV_PEC
     extends CVDetails(
       s"$valid250Characters",
       s"$valid250Characters",
@@ -72,13 +72,13 @@ object LONG_FORM_CV_INSOLVENCY
       true
     )
 
-object LONG_FORM_PERSONAL_STATEMENT_INSOLVENCY
+object LONG_FORM_PERSONAL_STATEMENT_PEC
     extends StatementDetails(
       s"$valid250Characters",
       true
     )
 
-object LONG_FORM_BEHAVIOURS_INSOLVENCY
+object LONG_FORM_BEHAVIOURS_PEC
     extends BehavioursDetails(
       s"$valid250Characters",
       s"$valid250Characters",
@@ -90,7 +90,7 @@ object LONG_FORM_BEHAVIOURS_INSOLVENCY
       s"$valid250Characters"
     )
 
-object LONG_FORM_TECHNICAL_SKILLS_INSOLVENCY
+object LONG_FORM_TECHNICAL_SKILLS_PEC
     extends TechSkillsDetails(
       s"$valid250Characters",
       s"$valid250Characters",
@@ -102,12 +102,12 @@ object LONG_FORM_TECHNICAL_SKILLS_INSOLVENCY
       s"$valid250Characters"
     )
 
-object LONG_FORM_UPLOAD_DOCUMENTS_INSOLVENCY
+object LONG_FORM_UPLOAD_DOCUMENTS_PEC
     extends UploadDocumentsDetails(
       "Test-T&Cs.pdf"
     )
 
-object LONG_FORM_PREFERENCES_INSOLVENCY
+object LONG_FORM_PREFERENCES_PEC
     extends PreferencesDetails(
       s"${vXOtherLocations.head}",
       secondChoiceLocation = Option(s"${vXOtherLocations.tail.head}"),
@@ -115,14 +115,14 @@ object LONG_FORM_PREFERENCES_INSOLVENCY
       furtherLocationPreferences = Option("Autotest - Further location preferences (optional)")
     )
 
-object LONG_FORM_ROLE_QUESTIONS_INSOLVENCY
+object LONG_FORM_ROLE_QUESTIONS_PEC
     extends RoleQuestionsDetails(
       s"$valid500Characters",
       s"$valid500Characters",
       s"$valid500Characters"
     )
 
-object LONG_FORM_DECLARATION_INSOLVENCY
+object LONG_FORM_DECLARATION_PEC
     extends DeclarationDetails(
       true
     )

@@ -5,7 +5,7 @@ import org.scalatest.concurrent.Eventually.eventually
 import uk.gov.co.test.ui.data.v9.shortform.ShortFormDetails
 import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{civilServant, v9AdjustmentsForTests, v9ReasonableAdjustments, vXAnyOnlineTests, vXGreatForVeterans}
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
-import uk.gov.co.test.ui.pages.v9.shortform.ApplicationGuidancePage.formId
+import uk.gov.co.test.ui.pages.v9.shortform.ApplicationGuidancePage.shortFormId
 
 case class PersonalInfoDetails(
   firstName: String,
@@ -27,28 +27,28 @@ case class PersonalInfoDetails(
 object PersonalInfoPage extends CivilServiceJobsBasePage {
 
   def personalInfoTitle                    = "Personal information - Civil Service Jobs - GOV.UK"
-  def firstNameInputId                     = s"${formId}_datafield_11625_1_1"
-  def lastNameInputId                      = s"${formId}_datafield_11628_1_1"
-  def preferredFirstNameInputId            = s"${formId}_datafield_21495_1_1"
-  def preferredTeleNoInputId               = s"${formId}_datafield_11643_1_1"
-  def secondaryNoInputId                   = s"${formId}_datafield_11657_1_1"
-  def emailInputId                         = s"${formId}_datafield_11631_1_1"
-  def applyDCSYesId                        = s"${formId}_datafield_98109_1_1_1_label"
-  def applyDCSNoId                         = s"${formId}_datafield_98109_1_1_2_label"
-  def reasonableAdjustmentYesId            = s"${formId}_datafield_15904_1_1_1_label"
-  def reasonableAdjustmentNoId             = s"${formId}_datafield_15904_1_1_2_label"
-  def reasonableAdjustmentDetailsInputId   = s"${formId}_datafield_174746_1_1"
-  def redeploymentSchemeId                 = s"${formId}_datafield_175270_1_1_fieldset"
-  def redeploymentSchemeYesId              = s"${formId}_datafield_175270_1_1_1_label"
-  def redeploymentSchemeNoId               = s"${formId}_datafield_175270_1_1_2_label"
-  def reasonableAdjustmentsForTestsYesId   = s"${formId}_datafield_110850_1_1_1_label"
-  def reasonableAdjustmentsForTestsNoId    = s"${formId}_datafield_110850_1_1_2_label"
-  def reasonableAdjustmentsForTestsInputId = s"${formId}_datafield_174773_1_1"
-  def areYouAVeteranYesId                  = s"${formId}_datafield_138183_1_1_729_label"
-  def areYouAVeteranNoId                   = s"${formId}_datafield_138183_1_1_730_label"
-  def areYouAVeteranNoNotSayId             = s"${formId}_datafield_138183_1_1_731_label"
-  def veteranInitiativeYesId               = s"${formId}_datafield_138179_1_1_1_label"
-  def veteranInitiativeNoId                = s"${formId}_datafield_138179_1_1_2_label"
+  def firstNameInputId                     = s"${shortFormId}_datafield_11625_1_1"
+  def lastNameInputId                      = s"${shortFormId}_datafield_11628_1_1"
+  def preferredFirstNameInputId            = s"${shortFormId}_datafield_21495_1_1"
+  def preferredTeleNoInputId               = s"${shortFormId}_datafield_11643_1_1"
+  def secondaryNoInputId                   = s"${shortFormId}_datafield_11657_1_1"
+  def emailInputId                         = s"${shortFormId}_datafield_11631_1_1"
+  def applyDCSYesId                        = s"${shortFormId}_datafield_98109_1_1_1_label"
+  def applyDCSNoId                         = s"${shortFormId}_datafield_98109_1_1_2_label"
+  def reasonableAdjustmentYesId            = s"${shortFormId}_datafield_15904_1_1_1_label"
+  def reasonableAdjustmentNoId             = s"${shortFormId}_datafield_15904_1_1_2_label"
+  def reasonableAdjustmentDetailsInputId   = s"${shortFormId}_datafield_174746_1_1"
+  def redeploymentSchemeId                 = s"${shortFormId}_datafield_175270_1_1_fieldset"
+  def redeploymentSchemeYesId              = s"${shortFormId}_datafield_175270_1_1_1_label"
+  def redeploymentSchemeNoId               = s"${shortFormId}_datafield_175270_1_1_2_label"
+  def reasonableAdjustmentsForTestsYesId   = s"${shortFormId}_datafield_110850_1_1_1_label"
+  def reasonableAdjustmentsForTestsNoId    = s"${shortFormId}_datafield_110850_1_1_2_label"
+  def reasonableAdjustmentsForTestsInputId = s"${shortFormId}_datafield_174773_1_1"
+  def areYouAVeteranYesId                  = s"${shortFormId}_datafield_138183_1_1_729_label"
+  def areYouAVeteranNoId                   = s"${shortFormId}_datafield_138183_1_1_730_label"
+  def areYouAVeteranNoNotSayId             = s"${shortFormId}_datafield_138183_1_1_731_label"
+  def veteranInitiativeYesId               = s"${shortFormId}_datafield_138179_1_1_1_label"
+  def veteranInitiativeNoId                = s"${shortFormId}_datafield_138179_1_1_2_label"
 
   private def personalInfoPageCheck(): Unit =
     eventually(onPage(personalInfoTitle))

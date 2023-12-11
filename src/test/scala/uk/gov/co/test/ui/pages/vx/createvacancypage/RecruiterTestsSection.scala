@@ -2,7 +2,7 @@ package uk.gov.co.test.ui.pages.vx.createvacancypage
 
 import org.openqa.selenium.By
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
-import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.formId
+import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.vacancyFormId
 import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.vXApplicationClosingDate
 
 case class RecruiterTestsDetails(
@@ -15,15 +15,15 @@ case class RecruiterTestsDetails(
 
 object RecruiterTestsSection extends VacancyBasePage {
 
-  def recruiterTestsSectionId     = s"${formId}_section_129814_col_0"
-  def candidateDeadlineId         = s"select2-${formId}_datafield_129839_1_1-container"
-  def progressionOptionsId        = s"select2-${formId}_datafield_129854_1_1-container"
-  def sameDeadlineAllTestsId      = s"select2-${formId}_datafield_129843_1_1-container"
-  def additionalInstructionsId    = s"select2-${formId}_datafield_129828_1_1-container"
-  def additionalInstructionsInput = s"${formId}_datafield_129832_1_1_en-GB"
-  def deadlineDayId               = s"${formId}_datafield_129847_1_1--DAY"
-  def deadlineMonthId             = s"${formId}_datafield_129847_1_1--MONTH"
-  def deadlineYearId              = s"${formId}_datafield_129847_1_1--YEAR"
+  def recruiterTestsSectionId     = s"${vacancyFormId}_section_129814_col_0"
+  def candidateDeadlineId         = s"select2-${vacancyFormId}_datafield_129839_1_1-container"
+  def progressionOptionsId        = s"select2-${vacancyFormId}_datafield_129854_1_1-container"
+  def sameDeadlineAllTestsId      = s"select2-${vacancyFormId}_datafield_129843_1_1-container"
+  def additionalInstructionsId    = s"select2-${vacancyFormId}_datafield_129828_1_1-container"
+  def additionalInstructionsInput = s"${vacancyFormId}_datafield_129832_1_1_en-GB"
+  def deadlineDayId               = s"${vacancyFormId}_datafield_129847_1_1--DAY"
+  def deadlineMonthId             = s"${vacancyFormId}_datafield_129847_1_1--MONTH"
+  def deadlineYearId              = s"${vacancyFormId}_datafield_129847_1_1--YEAR"
 
   def validateUrl(): Unit = {
     scrollToElement(By.id(recruiterTestsSectionId))

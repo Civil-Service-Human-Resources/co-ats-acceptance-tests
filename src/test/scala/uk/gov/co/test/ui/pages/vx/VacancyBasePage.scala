@@ -13,6 +13,8 @@ import uk.gov.co.test.ui.flows.vx.RecruiterLoginFlow.loginWithRecruiterDetails
 import uk.gov.co.test.ui.pages.BasePage
 import uk.gov.co.test.ui.pages.v9.SignInPage.{navigateToV9Test, v9AcceptAllCookies, v9SearchCookiesById}
 import uk.gov.co.test.ui.pages.vx.DashboardPage.searchOn
+import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.vacancyFormId
+import uk.gov.co.test.ui.pages.vx.vacancytabs.EmploymentHistoryTab.{employerNameId, everBeenEmployedId, extractTabFormId}
 import uk.gov.co.test.ui.pages.vx.vacancytabs.ExternalPostingsPage.addExternalPosting
 import uk.gov.co.test.ui.pages.vx.vacancytabs.SummaryPage.confirmAndActivateVacancy
 
@@ -36,6 +38,7 @@ trait VacancyBasePage extends Matchers with BasePage with BrowserDriver {
   val userProfilePath: String      = "//*[@class='user_link']"
   lazy val generalInput            = "//input[@class='select2-search__field']"
   val applicationCentrePageTitle   = "Your account details - Civil Service Jobs - GOV.UK"
+  val vacancyStatusPath            = ".//*[@id='collapse_panel']/span[1]"
 
   def findUsernameField: util.List[WebElement] = driver.findElements(By.id("user"))
   def username(): TextField                    = textField("user")
@@ -174,7 +177,16 @@ trait VacancyBasePage extends Matchers with BasePage with BrowserDriver {
     loginWithRecruiterDetails(RECRUITER)
   }
 
-  def switchToCandidateApplication(): Unit =
-    switchBackToWindow(secondWindowHandle)
+  def checkVacancyStatus(expectedStatus: String): Unit = {
+    val status = waitForVisibilityOfElementByPath(vacancyStatusPath)
+    status.isDisplayed
+    status.getText shouldEqual s"Status$expectedStatus"
+  }
+
+  def moveVacancyOnViaTopBar(barId: String, tabPath: String): Unit = {
+    clickOn(barId)
+    waitForVisibilityOfElementByPath(tabPath).isSelected
+    extractTabFormId()
+  }
 
 }

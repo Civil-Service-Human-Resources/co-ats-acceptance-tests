@@ -2,7 +2,7 @@ package uk.gov.co.test.ui.pages.vx.createvacancypage
 
 import uk.gov.co.test.ui.data.vx.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
-import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.formId
+import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.vacancyFormId
 
 case class InterviewsDetails(
   expectedRounds: String,
@@ -15,29 +15,29 @@ case class InterviewsDetails(
 
 object InterviewsSection extends VacancyBasePage {
 
-  def noInterviewsId        = s"${formId}_datafield_91703_1_1_15327"
-  def oneInterviewId        = s"${formId}_datafield_91703_1_1_15328"
-  def twoInterviewId        = s"${formId}_datafield_91703_1_1_15329"
-  def threeInterviewId      = s"${formId}_datafield_91703_1_1_15330"
-  def fourInterviewId       = s"${formId}_datafield_91703_1_1_15331"
-  def availableOfflineYesId = s"${formId}_datafield_125052_1_1_1"
-  def availableOfflineNoId  = s"${formId}_datafield_125052_1_1_2"
-  def assessmentOneId       = s"${formId}_datafield_125056_1_1_17756"
-  def interviewOneId        = s"${formId}_datafield_125056_1_1_17753"
-  def telephoneOneId        = s"${formId}_datafield_125056_1_1_17755"
-  def videoOneId            = s"${formId}_datafield_125056_1_1_17754"
-  def assessmentTwoId       = s"${formId}_datafield_125060_1_1_17756"
-  def interviewTwoId        = s"${formId}_datafield_125060_1_1_17753"
-  def telephoneTwoId        = s"${formId}_datafield_125060_1_1_17755"
-  def videoTwoId            = s"${formId}_datafield_125060_1_1_17754"
-  def assessmentThreeId     = s"${formId}_datafield_125063_1_1_17756"
-  def interviewThreeId      = s"${formId}_datafield_125063_1_1_17753"
-  def telephoneThreeId      = s"${formId}_datafield_125063_1_1_17755"
-  def videoThreeId          = s"${formId}_datafield_125063_1_1_17754"
-  def assessmentFourId      = s"${formId}_datafield_125066_1_1_17756"
-  def interviewFourId       = s"${formId}_datafield_125066_1_1_17753"
-  def telephoneFourId       = s"${formId}_datafield_125066_1_1_17755"
-  def videoFourId           = s"${formId}_datafield_125066_1_1_17754"
+  def noInterviewsId        = s"${vacancyFormId}_datafield_91703_1_1_15327"
+  def oneInterviewId        = s"${vacancyFormId}_datafield_91703_1_1_15328"
+  def twoInterviewId        = s"${vacancyFormId}_datafield_91703_1_1_15329"
+  def threeInterviewId      = s"${vacancyFormId}_datafield_91703_1_1_15330"
+  def fourInterviewId       = s"${vacancyFormId}_datafield_91703_1_1_15331"
+  def availableOfflineYesId = s"${vacancyFormId}_datafield_125052_1_1_1"
+  def availableOfflineNoId  = s"${vacancyFormId}_datafield_125052_1_1_2"
+  def assessmentOneId       = s"${vacancyFormId}_datafield_125056_1_1_17756"
+  def interviewOneId        = s"${vacancyFormId}_datafield_125056_1_1_17753"
+  def telephoneOneId        = s"${vacancyFormId}_datafield_125056_1_1_17755"
+  def videoOneId            = s"${vacancyFormId}_datafield_125056_1_1_17754"
+  def assessmentTwoId       = s"${vacancyFormId}_datafield_125060_1_1_17756"
+  def interviewTwoId        = s"${vacancyFormId}_datafield_125060_1_1_17753"
+  def telephoneTwoId        = s"${vacancyFormId}_datafield_125060_1_1_17755"
+  def videoTwoId            = s"${vacancyFormId}_datafield_125060_1_1_17754"
+  def assessmentThreeId     = s"${vacancyFormId}_datafield_125063_1_1_17756"
+  def interviewThreeId      = s"${vacancyFormId}_datafield_125063_1_1_17753"
+  def telephoneThreeId      = s"${vacancyFormId}_datafield_125063_1_1_17755"
+  def videoThreeId          = s"${vacancyFormId}_datafield_125063_1_1_17754"
+  def assessmentFourId      = s"${vacancyFormId}_datafield_125066_1_1_17756"
+  def interviewFourId       = s"${vacancyFormId}_datafield_125066_1_1_17753"
+  def telephoneFourId       = s"${vacancyFormId}_datafield_125066_1_1_17755"
+  def videoFourId           = s"${vacancyFormId}_datafield_125066_1_1_17754"
 
   def interviewsSection(newVacancyDetails: NewVacancyDetails): Unit = {
     val interviews = newVacancyDetails.interviewsDetails

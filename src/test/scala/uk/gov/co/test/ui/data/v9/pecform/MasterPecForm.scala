@@ -20,12 +20,12 @@ object MASTER_PEC_FORM_YOUR_DETAILS
       "01/01/1980",
       "Man",
       "Single",
-      "10 Autotest street",
-      addressLineTwo = Option("Testville"),
-      "Test",
-      "Test",
+      "1001 Autotest street",
+      addressLineTwo = Option("Cheadle"),
+      "Manchester",
+      "Cheshire",
       "United Kingdom",
-      "LE91BX",
+      "SK91BX",
       "00110000001"
     )
 

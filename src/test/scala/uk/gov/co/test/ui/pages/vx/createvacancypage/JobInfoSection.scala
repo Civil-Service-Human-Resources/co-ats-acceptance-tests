@@ -3,7 +3,7 @@ package uk.gov.co.test.ui.pages.vx.createvacancypage
 import org.openqa.selenium.By
 import uk.gov.co.test.ui.data.vx.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
-import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.formId
+import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.vacancyFormId
 
 case class JobInfoDetails(
   displayWelsh: Boolean,
@@ -21,12 +21,12 @@ object JobInfoSection extends VacancyBasePage {
 
   val createVacancyTitle = "Create New Vacancy : Civil Service Jobs - GOV.UK"
 
-  def businessAreaId              = s"select2-${formId}_datafield_155221_1_1-container"
-  def whichProfessionId           = s"select2-${formId}_datafield_155435_1_1-container"
-  def noOfJobsId                  = s"${formId}_datafield_155332_1_1"
-  def typeOfRoleId                = s"select2-${formId}_datafield_155369_1_1-container"
-  def welshRequiredCheck          = s"${formId}_datafield_179408_1_1"
-  def businessAreaDetailId        = s"${formId}_datafield_155206_1_1_en-GB"
+  def businessAreaId              = s"select2-${vacancyFormId}_datafield_155221_1_1-container"
+  def whichProfessionId           = s"select2-${vacancyFormId}_datafield_155435_1_1-container"
+  def noOfJobsId                  = s"${vacancyFormId}_datafield_155332_1_1"
+  def typeOfRoleId                = s"select2-${vacancyFormId}_datafield_155369_1_1-container"
+  def welshRequiredCheck          = s"${vacancyFormId}_datafield_179408_1_1"
+  def businessAreaDetailId        = s"${vacancyFormId}_datafield_155206_1_1_en-GB"
   def typeOfRoleInput             = s".//*[@aria-describedby='$typeOfRoleId']"
   def listOptionsPath             = ".//li[@role='option']"
   def addWelshBusinessAreaId()    = "clicky_155206"

@@ -3,7 +3,7 @@ package uk.gov.co.test.ui.pages.vx.createvacancypage
 import org.openqa.selenium.By
 import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXHowManySkills, vXListOfApplicationStage, vXListOfTechSkills, vXListOfTechSkillsDescription, vXNoOfApplicationStage}
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
-import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.formId
+import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.vacancyFormId
 
 case class TechSkills(techSkill: String, description: String, techApplication: Boolean, techInterview: Boolean)
 
@@ -21,40 +21,40 @@ case class TechSkillsDetails(
 
 object TechnicalSkillsSection extends VacancyBasePage {
 
-  def techSkillsSectionId          = s"${formId}_section_60768_col_0"
-  def howManyTechSkillsId          = s"select2-${formId}_datafield_60774_1_1-container"
-  def techSkillsOneId              = s"${formId}_datafield_60779_1_1_en-GB"
-  def techSkillsTwoId              = s"${formId}_datafield_60791_1_1_en-GB"
-  def techSkillsThreeId            = s"${formId}_datafield_60803_1_1_en-GB"
-  def techSkillsFourId             = s"${formId}_datafield_60815_1_1_en-GB"
-  def techSkillsFiveId             = s"${formId}_datafield_60827_1_1_en-GB"
-  def techSkillsSixId              = s"${formId}_datafield_60839_1_1_en-GB"
-  def techSkillsSevenId            = s"${formId}_datafield_60874_1_1_en-GB"
-  def techSkillsEightId            = s"${formId}_datafield_60886_1_1_en-GB"
-  def techSkillsOneDescriptionId   = s"${formId}_datafield_60785_1_1_en-GB"
-  def techSkillsTwoDescriptionId   = s"${formId}_datafield_60797_1_1_en-GB"
-  def techSkillsThreeDescriptionId = s"${formId}_datafield_60809_1_1_en-GB"
-  def techSkillsFourDescriptionId  = s"${formId}_datafield_60821_1_1_en-GB"
-  def techSkillsFiveDescriptionId  = s"${formId}_datafield_60833_1_1_en-GB"
-  def techSkillsSixDescriptionId   = s"${formId}_datafield_60845_1_1_en-GB"
-  def techSkillsSevenDescriptionId = s"${formId}_datafield_60880_1_1_en-GB"
-  def techSkillsEightDescriptionId = s"${formId}_datafield_60892_1_1_en-GB"
-  def applicationOneId             = s"${formId}_datafield_65039_1_1_12683"
-  def applicationTwoId             = s"${formId}_datafield_65043_1_1_12683"
-  def applicationThreeId           = s"${formId}_datafield_65047_1_1_12683"
-  def applicationFourId            = s"${formId}_datafield_65051_1_1_12683"
-  def applicationFiveId            = s"${formId}_datafield_65055_1_1_12683"
-  def applicationSixId             = s"${formId}_datafield_65059_1_1_12683"
-  def applicationSevenId           = s"${formId}_datafield_65063_1_1_12683"
-  def applicationEightId           = s"${formId}_datafield_65067_1_1_12683"
-  def interviewOneId               = s"${formId}_datafield_65039_1_1_12683"
-  def interviewTwoId               = s"${formId}_datafield_65043_1_1_12684"
-  def interviewThreeId             = s"${formId}_datafield_65047_1_1_12684"
-  def interviewFourId              = s"${formId}_datafield_65051_1_1_12684"
-  def interviewFiveId              = s"${formId}_datafield_65055_1_1_12684"
-  def interviewSixId               = s"${formId}_datafield_65059_1_1_12684"
-  def interviewSevenId             = s"${formId}_datafield_65063_1_1_12684"
-  def interviewEightId             = s"${formId}_datafield_65067_1_1_12684"
+  def techSkillsSectionId          = s"${vacancyFormId}_section_60768_col_0"
+  def howManyTechSkillsId          = s"select2-${vacancyFormId}_datafield_60774_1_1-container"
+  def techSkillsOneId              = s"${vacancyFormId}_datafield_60779_1_1_en-GB"
+  def techSkillsTwoId              = s"${vacancyFormId}_datafield_60791_1_1_en-GB"
+  def techSkillsThreeId            = s"${vacancyFormId}_datafield_60803_1_1_en-GB"
+  def techSkillsFourId             = s"${vacancyFormId}_datafield_60815_1_1_en-GB"
+  def techSkillsFiveId             = s"${vacancyFormId}_datafield_60827_1_1_en-GB"
+  def techSkillsSixId              = s"${vacancyFormId}_datafield_60839_1_1_en-GB"
+  def techSkillsSevenId            = s"${vacancyFormId}_datafield_60874_1_1_en-GB"
+  def techSkillsEightId            = s"${vacancyFormId}_datafield_60886_1_1_en-GB"
+  def techSkillsOneDescriptionId   = s"${vacancyFormId}_datafield_60785_1_1_en-GB"
+  def techSkillsTwoDescriptionId   = s"${vacancyFormId}_datafield_60797_1_1_en-GB"
+  def techSkillsThreeDescriptionId = s"${vacancyFormId}_datafield_60809_1_1_en-GB"
+  def techSkillsFourDescriptionId  = s"${vacancyFormId}_datafield_60821_1_1_en-GB"
+  def techSkillsFiveDescriptionId  = s"${vacancyFormId}_datafield_60833_1_1_en-GB"
+  def techSkillsSixDescriptionId   = s"${vacancyFormId}_datafield_60845_1_1_en-GB"
+  def techSkillsSevenDescriptionId = s"${vacancyFormId}_datafield_60880_1_1_en-GB"
+  def techSkillsEightDescriptionId = s"${vacancyFormId}_datafield_60892_1_1_en-GB"
+  def applicationOneId             = s"${vacancyFormId}_datafield_65039_1_1_12683"
+  def applicationTwoId             = s"${vacancyFormId}_datafield_65043_1_1_12683"
+  def applicationThreeId           = s"${vacancyFormId}_datafield_65047_1_1_12683"
+  def applicationFourId            = s"${vacancyFormId}_datafield_65051_1_1_12683"
+  def applicationFiveId            = s"${vacancyFormId}_datafield_65055_1_1_12683"
+  def applicationSixId             = s"${vacancyFormId}_datafield_65059_1_1_12683"
+  def applicationSevenId           = s"${vacancyFormId}_datafield_65063_1_1_12683"
+  def applicationEightId           = s"${vacancyFormId}_datafield_65067_1_1_12683"
+  def interviewOneId               = s"${vacancyFormId}_datafield_65039_1_1_12683"
+  def interviewTwoId               = s"${vacancyFormId}_datafield_65043_1_1_12684"
+  def interviewThreeId             = s"${vacancyFormId}_datafield_65047_1_1_12684"
+  def interviewFourId              = s"${vacancyFormId}_datafield_65051_1_1_12684"
+  def interviewFiveId              = s"${vacancyFormId}_datafield_65055_1_1_12684"
+  def interviewSixId               = s"${vacancyFormId}_datafield_65059_1_1_12684"
+  def interviewSevenId             = s"${vacancyFormId}_datafield_65063_1_1_12684"
+  def interviewEightId             = s"${vacancyFormId}_datafield_65067_1_1_12684"
 
   def selectTechnicalSkills(successProfilesDetails: SuccessProfilesDetails): Unit = {
     val techSkills = successProfilesDetails.techSkillsSection

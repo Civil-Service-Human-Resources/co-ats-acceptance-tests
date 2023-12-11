@@ -4,7 +4,7 @@ import org.openqa.selenium.By
 import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXAttendancePoor, vXCandidateInstructions, vXExperiencesRequired, vXLanguagesMandatory, vXLicencesMandatory, vXMembershipsMandatory, vXMisconductLive, vXNationalityRequirements, vXPerformanceReview, vXProbationIncomplete, vXPromotionApply, vXQualificationsMandatory, vXRightToRemainUK, vXUploadAttachmentRequired}
 import uk.gov.co.test.ui.data.vx.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
-import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.formId
+import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.vacancyFormId
 
 case class CriteriaDetails(
   campaignID: Option[String] = None,
@@ -26,34 +26,34 @@ case class CriteriaDetails(
 
 object CriteriaSection extends VacancyBasePage {
 
-  def campaignIDId                 = s"${formId}_datafield_74351_1_1"
-  def probationCompleteYesId       = s"${formId}_datafield_61145_1_1_1"
-  def probationCompleteNoId        = s"${formId}_datafield_61145_1_1_2"
-  def promotionApplyYesId          = s"${formId}_datafield_61177_1_1_1"
-  def promotionApplyNoId           = s"${formId}_datafield_61177_1_1_2"
-  def misconductLiveYesId          = s"${formId}_datafield_61149_1_1_1"
-  def misconductLiveNoId           = s"${formId}_datafield_61149_1_1_2"
-  def performancePoorYesId         = s"${formId}_datafield_61185_1_1_1"
-  def performancePoorNoId          = s"${formId}_datafield_61185_1_1_2"
-  def attendancePoorYesId          = s"${formId}_datafield_61181_1_1_1"
-  def attendancePoorNoId           = s"${formId}_datafield_61181_1_1_2"
-  def nationalityRequirementsYesId = s"${formId}_datafield_61153_1_1_1"
-  def nationalityRequirementsNoId  = s"${formId}_datafield_61153_1_1_2"
-  def rightToRemainUKYesId         = s"${formId}_datafield_61193_1_1_1"
-  def rightToRemainUKNoId          = s"${formId}_datafield_61193_1_1_2"
-  def licencesNotHeldYesId         = s"${formId}_datafield_61161_1_1_1"
-  def licencesNotHeldNoId          = s"${formId}_datafield_61161_1_1_2"
-  def membershipsNotHeldYesId      = s"${formId}_datafield_61165_1_1_1"
-  def membershipsNotHeldNoId       = s"${formId}_datafield_61165_1_1_2"
-  def languagesSkillsYesId         = s"${formId}_datafield_61169_1_1_1"
-  def languagesSkillsNoId          = s"${formId}_datafield_61169_1_1_2"
-  def qualificationsHeldYesId      = s"${formId}_datafield_61157_1_1_1"
-  def qualificationsHeldNoId       = s"${formId}_datafield_61157_1_1_2"
-  def preSiftRequiredYesId         = s"${formId}_datafield_62541_1_1_1"
-  def preSiftRequiredNoId          = s"${formId}_datafield_62541_1_1_2"
-  def uploadAttachmentYesId        = s"${formId}_datafield_61333_1_1_1"
-  def uploadAttachmentNoId         = s"${formId}_datafield_61333_1_1_2"
-  def candidateInstructionsInputId = s"${formId}_datafield_61355_1_1_en-GB"
+  def campaignIDId                 = s"${vacancyFormId}_datafield_74351_1_1"
+  def probationCompleteYesId       = s"${vacancyFormId}_datafield_61145_1_1_1"
+  def probationCompleteNoId        = s"${vacancyFormId}_datafield_61145_1_1_2"
+  def promotionApplyYesId          = s"${vacancyFormId}_datafield_61177_1_1_1"
+  def promotionApplyNoId           = s"${vacancyFormId}_datafield_61177_1_1_2"
+  def misconductLiveYesId          = s"${vacancyFormId}_datafield_61149_1_1_1"
+  def misconductLiveNoId           = s"${vacancyFormId}_datafield_61149_1_1_2"
+  def performancePoorYesId         = s"${vacancyFormId}_datafield_61185_1_1_1"
+  def performancePoorNoId          = s"${vacancyFormId}_datafield_61185_1_1_2"
+  def attendancePoorYesId          = s"${vacancyFormId}_datafield_61181_1_1_1"
+  def attendancePoorNoId           = s"${vacancyFormId}_datafield_61181_1_1_2"
+  def nationalityRequirementsYesId = s"${vacancyFormId}_datafield_61153_1_1_1"
+  def nationalityRequirementsNoId  = s"${vacancyFormId}_datafield_61153_1_1_2"
+  def rightToRemainUKYesId         = s"${vacancyFormId}_datafield_61193_1_1_1"
+  def rightToRemainUKNoId          = s"${vacancyFormId}_datafield_61193_1_1_2"
+  def licencesNotHeldYesId         = s"${vacancyFormId}_datafield_61161_1_1_1"
+  def licencesNotHeldNoId          = s"${vacancyFormId}_datafield_61161_1_1_2"
+  def membershipsNotHeldYesId      = s"${vacancyFormId}_datafield_61165_1_1_1"
+  def membershipsNotHeldNoId       = s"${vacancyFormId}_datafield_61165_1_1_2"
+  def languagesSkillsYesId         = s"${vacancyFormId}_datafield_61169_1_1_1"
+  def languagesSkillsNoId          = s"${vacancyFormId}_datafield_61169_1_1_2"
+  def qualificationsHeldYesId      = s"${vacancyFormId}_datafield_61157_1_1_1"
+  def qualificationsHeldNoId       = s"${vacancyFormId}_datafield_61157_1_1_2"
+  def preSiftRequiredYesId         = s"${vacancyFormId}_datafield_62541_1_1_1"
+  def preSiftRequiredNoId          = s"${vacancyFormId}_datafield_62541_1_1_2"
+  def uploadAttachmentYesId        = s"${vacancyFormId}_datafield_61333_1_1_1"
+  def uploadAttachmentNoId         = s"${vacancyFormId}_datafield_61333_1_1_2"
+  def candidateInstructionsInputId = s"${vacancyFormId}_datafield_61355_1_1_en-GB"
 
   private def enterCampaignID(criteriaDetails: CriteriaDetails): Unit = {
     scrollToElement(By.id(campaignIDId))

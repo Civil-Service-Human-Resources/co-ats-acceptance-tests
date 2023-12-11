@@ -2,23 +2,17 @@ package uk.gov.co.test.ui.specs.vx
 
 import uk.gov.co.test.ui.data.v9.applicants.{MASTER_REGISTER_CANDIDATE, REGISTER_CANDIDATE_INSOLVENCY}
 import uk.gov.co.test.ui.data.v9.longform.{LONG_FORM_DATA_INSOLVENCY, MASTER_LONG_FORM_DATA}
-import uk.gov.co.test.ui.data.v9.pecform.MASTER_PEC_FORM_DATA
 import uk.gov.co.test.ui.data.v9.shortform.{MASTER_SHORT_FORM_DATA, SHORT_FORM_DATA_INSOLVENCY}
 import uk.gov.co.test.ui.data.vx._
+import uk.gov.co.test.ui.flows.e2e.PecFlow.completePecFlow
 import uk.gov.co.test.ui.flows.v9.LongFormFlow.fillLongFormDetails
-import uk.gov.co.test.ui.flows.v9.PecFormFlow.fillPecFormDetailsOnly
 import uk.gov.co.test.ui.flows.v9.RegisterCandidateFlow.fillNewCandidateDetails
 import uk.gov.co.test.ui.flows.v9.ShortFormFlow.fillShortFormDetails
 import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.fillNewVacancyForm
 import uk.gov.co.test.ui.flows.vx.RecruiterLoginFlow.loginWithRecruiterDetails
-import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.{candidateAcceptsOffer, confirmLongFormCompletion, confirmOfferAccepted, confirmPecSubmission, confirmShortFormCompletion, confirmShortFormCompletionNoLongForm}
-import uk.gov.co.test.ui.pages.v9.ApplicationsPage.extractApplicationId
-import uk.gov.co.test.ui.pages.v9.ProvisionalOfferPage.offerDecisionFlow
-import uk.gov.co.test.ui.pages.v9.shortform.EligibilityDetails
-import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.{navigateToApplicationSummary, progressApplicationToOffer}
-import uk.gov.co.test.ui.pages.vx.DashboardPage.{activateAndPostVacancy, searchForActiveVacancy, switchToCandidateApplication}
+import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.{confirmLongFormCompletion, confirmShortFormCompletion}
+import uk.gov.co.test.ui.pages.vx.DashboardPage.{activateAndPostVacancy, searchForActiveVacancy}
 import uk.gov.co.test.ui.specs.BaseFeatureSpec
-import uk.gov.co.test.ui.specs.TestData.pec2TestData
 import uk.gov.co.test.ui.tags.RunInVX
 
 class createVacancySpec extends BaseFeatureSpec {
@@ -63,24 +57,25 @@ class createVacancySpec extends BaseFeatureSpec {
 
     Scenario("V9: A Recruiter Creates A Insolvency Apply Only Vacancy; Limited Application Process", RunInVX) {
       Given("candidate registers for new job application")
-      pec2TestData()
-      fillNewCandidateDetails(REGISTER_CANDIDATE_INSOLVENCY)
+//      setPecTestData()
+      //      fillNewCandidateDetails(REGISTER_CANDIDATE_PEC)
 
       When("candidate completes the gors short form")
-      fillShortFormDetails(SHORT_FORM_DATA_INSOLVENCY)
-      confirmShortFormCompletionNoLongForm()
-      extractApplicationId()
-
-      And("candidate completes the insolvency pec form")
-      navigateToApplicationSummary()
-      progressApplicationToOffer()
-      candidateAcceptsOffer()
-      offerDecisionFlow("Accept")
-      confirmOfferAccepted()
-      fillPecFormDetailsOnly(MASTER_PEC_FORM_DATA)
+//      fillShortFormDetails(SHORT_FORM_DATA_PEC)
+//      confirmShortFormCompletionNoLongForm()
+//      extractApplicationId()
+//      navigateToApplicationSummary()
+//      progressApplicationToOffer()
+//      candidateAcceptsOffer()
+//      offerDecisionFlow("Accept")
+//      confirmOfferAccepted()
+//      fillPecFormDetailsOnly(MASTER_PEC_FORM_DATA)
+//      confirmPecSubmission()
+//      navigateToApplicationSummary()
+//      completeVXEmploymentHistory()
 
       Then("the candidate is able to confirm insolvency short & long forms are completed")
-      confirmPecSubmission()
+      completePecFlow()
       println("So far done!")
     }
 

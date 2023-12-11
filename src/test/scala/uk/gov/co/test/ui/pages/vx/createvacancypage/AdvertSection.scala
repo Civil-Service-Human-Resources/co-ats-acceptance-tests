@@ -3,7 +3,7 @@ package uk.gov.co.test.ui.pages.vx.createvacancypage
 import org.openqa.selenium.By
 import uk.gov.co.test.ui.data.vx.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
-import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.formId
+import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.vacancyFormId
 
 case class AdvertDetails(
   jobSummary: String,
@@ -15,18 +15,18 @@ case class AdvertDetails(
 
 object AdvertSection extends VacancyBasePage {
 
-  def jobSummaryId           = s"${formId}_datafield_51753_1_1_en-GB_ifr"
-  def jobDescriptionId       = s"${formId}_field_value_51761_1"
-  def personSpecsIframe      = s"${formId}_datafield_51767_1_1_en-GB_ifr"
-  def offeredBenefitsIframe  = s"${formId}_datafield_62219_1_1_en-GB_ifr"
-  def selectionProcessIframe = s"${formId}_datafield_59678_1_1_en-GB_ifr"
-  def jobSummaryPath         = s".//body[@data-id='${formId}_datafield_51753_1_1_en-GB']"
-  def jobDescriptionPath     = s".//body[@data-id='${formId}_datafield_51761_1_1_en-GB']"
-  def personSpecsPath        = s".//body[@data-id='${formId}_datafield_51767_1_1_en-GB']"
-  def offeredBenefitsPath    = s".//body[@data-id='${formId}_datafield_62219_1_1_en-GB']"
-  def selectionProcessPath   = s".//body[@data-id='${formId}_datafield_59678_1_1_en-GB']"
-  def jobSummaryIframe       = s"${formId}_datafield_51753_1_1_en-GB_ifr"
-  def jobDescriptionIframe   = s"${formId}_datafield_51761_1_1_en-GB_ifr"
+  def jobSummaryId           = s"${vacancyFormId}_datafield_51753_1_1_en-GB_ifr"
+  def jobDescriptionId       = s"${vacancyFormId}_field_value_51761_1"
+  def personSpecsIframe      = s"${vacancyFormId}_datafield_51767_1_1_en-GB_ifr"
+  def offeredBenefitsIframe  = s"${vacancyFormId}_datafield_62219_1_1_en-GB_ifr"
+  def selectionProcessIframe = s"${vacancyFormId}_datafield_59678_1_1_en-GB_ifr"
+  def jobSummaryPath         = s".//body[@data-id='${vacancyFormId}_datafield_51753_1_1_en-GB']"
+  def jobDescriptionPath     = s".//body[@data-id='${vacancyFormId}_datafield_51761_1_1_en-GB']"
+  def personSpecsPath        = s".//body[@data-id='${vacancyFormId}_datafield_51767_1_1_en-GB']"
+  def offeredBenefitsPath    = s".//body[@data-id='${vacancyFormId}_datafield_62219_1_1_en-GB']"
+  def selectionProcessPath   = s".//body[@data-id='${vacancyFormId}_datafield_59678_1_1_en-GB']"
+  def jobSummaryIframe       = s"${vacancyFormId}_datafield_51753_1_1_en-GB_ifr"
+  def jobDescriptionIframe   = s"${vacancyFormId}_datafield_51761_1_1_en-GB_ifr"
 
   def switchBack(): Unit = driver.switchTo().defaultContent()
 

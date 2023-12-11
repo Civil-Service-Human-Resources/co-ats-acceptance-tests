@@ -2,6 +2,7 @@ package uk.gov.co.test.ui.pages.v9.pecform
 
 import org.scalatest.concurrent.Eventually.eventually
 import uk.gov.co.test.ui.data.v9.pecform.PecFormDetails
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{v9EmployedWithin3Years, v9FirstEmployerFromDate, v9FirstEmployerName, v9FirstEmployerToDate, v9SecondEmployerFromDate, v9SecondEmployerName, v9SecondEmployerToDate, v9ThirdEmployerFromDate, v9ThirdEmployerName, v9ThirdEmployerToDate}
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
 import uk.gov.co.test.ui.pages.v9.pecform.YourDetailsPage.pecFormId
 
@@ -50,32 +51,43 @@ object EmploymentHistoryPage extends CivilServiceJobsBasePage {
   private def employmentHistoryPageCheck(): Unit =
     eventually(onPage(employmentHistoryPageTitle))
 
-  private def selectEmployedWithin3Years(employmentHistoryDetails: EmploymentHistoryDetails): Unit =
-    if (employmentHistoryDetails.employedWithin3Years) {
+  private def selectEmployedWithin3Years(employmentHistoryDetails: EmploymentHistoryDetails): Unit = {
+    v9EmployedWithin3Years = employmentHistoryDetails.employedWithin3Years
+    if (v9EmployedWithin3Years) {
       radioSelect(employedWithin3YearsYesId)
       enterFirstEmployerDetails(employmentHistoryDetails)
       enterSecondEmployerDetails(employmentHistoryDetails)
       enterThirdEmployerDetails(employmentHistoryDetails)
     } else radioSelect(employedWithin3YearsNoId)
+  }
 
   private def enterFirstEmployerDetails(employmentHistoryDetails: EmploymentHistoryDetails): Unit = {
-    enterDetails(firstEmployerNameId, employmentHistoryDetails.firstEmployerName)
-    enterDate(employmentHistoryDetails.firstEmployerFromDate, firstFromDayId, firstFromMonthId, firstFromYearId)
-    enterDate(employmentHistoryDetails.firstEmployerToDate, firstToDayId, firstToMonthId, firstToYearId)
+    v9FirstEmployerName = employmentHistoryDetails.firstEmployerName
+    v9FirstEmployerFromDate = employmentHistoryDetails.firstEmployerFromDate
+    v9FirstEmployerToDate = employmentHistoryDetails.firstEmployerToDate
+    enterDetails(firstEmployerNameId, v9FirstEmployerName)
+    enterDate(v9FirstEmployerFromDate, firstFromDayId, firstFromMonthId, firstFromYearId)
+    enterDate(v9FirstEmployerToDate, firstToDayId, firstToMonthId, firstToYearId)
   }
 
   private def enterSecondEmployerDetails(employmentHistoryDetails: EmploymentHistoryDetails): Unit = {
+    v9SecondEmployerName = employmentHistoryDetails.secondEmployerName
+    v9SecondEmployerFromDate = employmentHistoryDetails.secondEmployerFromDate
+    v9SecondEmployerToDate = employmentHistoryDetails.secondEmployerToDate
     waitForVisibilityOfElementByPath(addAnotherEmployerId).click()
-    enterDetails(secondEmployerNameId, employmentHistoryDetails.secondEmployerName)
-    enterDate(employmentHistoryDetails.secondEmployerFromDate, secondFromDayId, secondFromMonthId, secondFromYearId)
-    enterDate(employmentHistoryDetails.secondEmployerToDate, secondToDayId, secondToMonthId, secondToYearId)
+    enterDetails(secondEmployerNameId, v9SecondEmployerName)
+    enterDate(v9SecondEmployerFromDate, secondFromDayId, secondFromMonthId, secondFromYearId)
+    enterDate(v9SecondEmployerToDate, secondToDayId, secondToMonthId, secondToYearId)
   }
 
   private def enterThirdEmployerDetails(employmentHistoryDetails: EmploymentHistoryDetails): Unit = {
+    v9ThirdEmployerName = employmentHistoryDetails.thirdEmployerName
+    v9ThirdEmployerFromDate = employmentHistoryDetails.thirdEmployerFromDate
+    v9ThirdEmployerToDate = employmentHistoryDetails.thirdEmployerToDate
     waitForVisibilityOfElementByPath(addAnotherEmployerId).click()
-    enterDetails(thirdEmployerNameId, employmentHistoryDetails.thirdEmployerName)
-    enterDate(employmentHistoryDetails.thirdEmployerFromDate, thirdFromDayId, thirdFromMonthId, thirdFromYearId)
-    enterDate(employmentHistoryDetails.thirdEmployerToDate, thirdToDayId, thirdToMonthId, thirdToYearId)
+    enterDetails(thirdEmployerNameId, v9ThirdEmployerName)
+    enterDate(v9ThirdEmployerFromDate, thirdFromDayId, thirdFromMonthId, thirdFromYearId)
+    enterDate(v9ThirdEmployerToDate, thirdToDayId, thirdToMonthId, thirdToYearId)
   }
 
   private def enterDate(date: String, dayId: String, monthId: String, yearId: String): Unit = {

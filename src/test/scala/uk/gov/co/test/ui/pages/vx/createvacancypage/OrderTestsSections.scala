@@ -2,7 +2,7 @@ package uk.gov.co.test.ui.pages.vx.createvacancypage
 
 import org.openqa.selenium.By
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
-import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.formId
+import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.vacancyFormId
 
 case class GroupATestsDetails(
   order: String,
@@ -17,42 +17,42 @@ case class GroupCTestsDetails(order: String, howMany: String, first: String, sec
 
 object OrderTestsSections extends VacancyBasePage {
 
-  def groupATestsSectionId = s"${formId}_section_129927_col_0"
-  def groupATestsId        = s"select2-${formId}_datafield_137655_1_1-container"
-  def groupATestsUseId     = s"select2-${formId}_datafield_129941_1_1-container"
-  def groupAFirstTestId    = s"select2-${formId}_datafield_129945_1_1-container"
-  def groupASecondTestId   = s"select2-${formId}_datafield_129949_1_1-container"
-  def groupAThirdTestId    = s"select2-${formId}_datafield_129953_1_1-container"
-  def groupBTestsId        = s"select2-${formId}_datafield_130234_1_1-container"
-  def groupBTestsUseId     = s"select2-${formId}_datafield_137501_1_1-container"
-  def groupBFirstTestId    = s"select2-${formId}_datafield_130187_1_1-container"
-  def groupBSecondTestId   = s"select2-${formId}_datafield_130191_1_1-container"
-  def groupCTestsId        = s"select2-${formId}_datafield_157866_1_1-container"
-  def groupCTestsUseId     = s"select2-${formId}_datafield_157870_1_1-container"
-  def groupCFirstTestId    = s"select2-${formId}_datafield_157607_1_1-container"
-  def groupCSecondTestId   = s"select2-${formId}_datafield_157622_1_1-container"
+  def groupATestsSectionId = s"${vacancyFormId}_section_129927_col_0"
+  def groupATestsId        = s"select2-${vacancyFormId}_datafield_137655_1_1-container"
+  def groupATestsUseId     = s"select2-${vacancyFormId}_datafield_129941_1_1-container"
+  def groupAFirstTestId    = s"select2-${vacancyFormId}_datafield_129945_1_1-container"
+  def groupASecondTestId   = s"select2-${vacancyFormId}_datafield_129949_1_1-container"
+  def groupAThirdTestId    = s"select2-${vacancyFormId}_datafield_129953_1_1-container"
+  def groupBTestsId        = s"select2-${vacancyFormId}_datafield_130234_1_1-container"
+  def groupBTestsUseId     = s"select2-${vacancyFormId}_datafield_137501_1_1-container"
+  def groupBFirstTestId    = s"select2-${vacancyFormId}_datafield_130187_1_1-container"
+  def groupBSecondTestId   = s"select2-${vacancyFormId}_datafield_130191_1_1-container"
+  def groupCTestsId        = s"select2-${vacancyFormId}_datafield_157866_1_1-container"
+  def groupCTestsUseId     = s"select2-${vacancyFormId}_datafield_157870_1_1-container"
+  def groupCFirstTestId    = s"select2-${vacancyFormId}_datafield_157607_1_1-container"
+  def groupCSecondTestId   = s"select2-${vacancyFormId}_datafield_157622_1_1-container"
 
-  def groupAFirstCSNTDayId     = s"${formId}_datafield_129983_1_1--DAY"
-  def groupAFirstCSNTMonthId   = s"${formId}_datafield_129983_1_1--MONTH"
-  def groupAFirstCSNTYearId    = s"${formId}_datafield_129983_1_1--YEAR"
-  def groupASecondCSVTDayId    = s"${formId}_datafield_129969_1_1--DAY"
-  def groupASecondCSVTMonthId  = s"${formId}_datafield_129969_1_1--MONTH"
-  def groupASecondCSVTYearId   = s"${formId}_datafield_129969_1_1--YEAR"
-  def groupAThirdNCSJTDayId    = s"${formId}_datafield_129976_1_1--DAY"
-  def groupAThirdNCSJTMonthId  = s"${formId}_datafield_129976_1_1--MONTH"
-  def groupAThirdNCSJTYearId   = s"${formId}_datafield_129976_1_1--YEAR"
-  def groupBFirstCSWSTDayId    = s"${formId}_datafield_130199_1_1--DAY"
-  def groupBFirstCSWSTMonthId  = s"${formId}_datafield_130199_1_1--MONTH"
-  def groupBFirstCSWSTYearId   = s"${formId}_datafield_130199_1_1--YEAR"
-  def groupBSecondCSMJTDayId   = s"${formId}_datafield_130206_1_1--DAY"
-  def groupBSecondCSMJTMonthId = s"${formId}_datafield_130206_1_1--MONTH"
-  def groupBSecondCSMJTYearId  = s"${formId}_datafield_130206_1_1--YEAR"
-  def groupCFirstCSSTDayId     = s"${formId}_datafield_157611_1_1--DAY"
-  def groupCFirstCSSTMonthId   = s"${formId}_datafield_157611_1_1--MONTH"
-  def groupCFirstCSSTYearId    = s"${formId}_datafield_157611_1_1--YEAR"
-  def groupCSecondCSTDayId     = s"${formId}_datafield_157626_1_1--DAY"
-  def groupCSecondCSTMonthId   = s"${formId}_datafield_157626_1_1--MONTH"
-  def groupCSecondCSTYearId    = s"${formId}_datafield_157626_1_1--YEAR"
+  def groupAFirstCSNTDayId     = s"${vacancyFormId}_datafield_129983_1_1--DAY"
+  def groupAFirstCSNTMonthId   = s"${vacancyFormId}_datafield_129983_1_1--MONTH"
+  def groupAFirstCSNTYearId    = s"${vacancyFormId}_datafield_129983_1_1--YEAR"
+  def groupASecondCSVTDayId    = s"${vacancyFormId}_datafield_129969_1_1--DAY"
+  def groupASecondCSVTMonthId  = s"${vacancyFormId}_datafield_129969_1_1--MONTH"
+  def groupASecondCSVTYearId   = s"${vacancyFormId}_datafield_129969_1_1--YEAR"
+  def groupAThirdNCSJTDayId    = s"${vacancyFormId}_datafield_129976_1_1--DAY"
+  def groupAThirdNCSJTMonthId  = s"${vacancyFormId}_datafield_129976_1_1--MONTH"
+  def groupAThirdNCSJTYearId   = s"${vacancyFormId}_datafield_129976_1_1--YEAR"
+  def groupBFirstCSWSTDayId    = s"${vacancyFormId}_datafield_130199_1_1--DAY"
+  def groupBFirstCSWSTMonthId  = s"${vacancyFormId}_datafield_130199_1_1--MONTH"
+  def groupBFirstCSWSTYearId   = s"${vacancyFormId}_datafield_130199_1_1--YEAR"
+  def groupBSecondCSMJTDayId   = s"${vacancyFormId}_datafield_130206_1_1--DAY"
+  def groupBSecondCSMJTMonthId = s"${vacancyFormId}_datafield_130206_1_1--MONTH"
+  def groupBSecondCSMJTYearId  = s"${vacancyFormId}_datafield_130206_1_1--YEAR"
+  def groupCFirstCSSTDayId     = s"${vacancyFormId}_datafield_157611_1_1--DAY"
+  def groupCFirstCSSTMonthId   = s"${vacancyFormId}_datafield_157611_1_1--MONTH"
+  def groupCFirstCSSTYearId    = s"${vacancyFormId}_datafield_157611_1_1--YEAR"
+  def groupCSecondCSTDayId     = s"${vacancyFormId}_datafield_157626_1_1--DAY"
+  def groupCSecondCSTMonthId   = s"${vacancyFormId}_datafield_157626_1_1--MONTH"
+  def groupCSecondCSTYearId    = s"${vacancyFormId}_datafield_157626_1_1--YEAR"
 
   private def groupAOrdering(vacancyTestsDetails: VacancyTestsDetails): Unit = {
     selectGroupATestsOrder(vacancyTestsDetails)

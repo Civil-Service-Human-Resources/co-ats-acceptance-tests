@@ -3,9 +3,9 @@ package uk.gov.co.test.ui.pages.v9.longform
 import org.openqa.selenium.By
 import org.scalatest.concurrent.Eventually.eventually
 import uk.gov.co.test.ui.data.v9.longform.LongFormDetails
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{sortedListOfTechSkills, sortedListOfTechSkillsDescription, vXHowManySkills, vXListOfTechSkills, vXListOfTechSkillsDescription, vXNoOfApplicationStage, vXTechSkillsRequired}
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{sortedListOfTechSkills, sortedListOfTechSkillsDescription, vXListOfTechSkills, vXListOfTechSkillsDescription, vXNoOfApplicationStage, vXTechSkillsRequired}
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
-import uk.gov.co.test.ui.pages.v9.shortform.ApplicationGuidancePage.formId
+import uk.gov.co.test.ui.pages.v9.longform.DiversityMonitoringPage.longFormId
 
 case class TechSkillsDetails(
   techSkillOne: String,
@@ -22,22 +22,22 @@ object TechnicalSkillsPage extends CivilServiceJobsBasePage {
 
   private lazy val techSkillsPageTitle           = "Technical skills - Civil Service Jobs - GOV.UK"
   private lazy val v9HowManyTechSkillsFieldsPath = ".//*[@data-type='LARGETEXT']"
-  def techSkillOneHeaderId                       = s"${formId}_label_201673_1"
-  def techSkillTwoHeaderId                       = s"${formId}_label_201679_1"
-  def techSkillThreeHeaderId                     = s"${formId}_label_201683_1"
-  def techSkillFourHeaderId                      = s"${formId}_label_201686_1"
-  def techSkillFiveHeaderId                      = s"${formId}_label_201690_1"
-  def techSkillSixHeaderId                       = s"${formId}_label_201694_1"
-  def techSkillSevenHeaderId                     = s"${formId}_label_201697_1"
-  def techSkillEightHeaderId                     = s"${formId}_label_201700_1"
-  def techSkillOneInputId                        = s"${formId}_datafield_64783_1_1"
-  def techSkillTwoInputId                        = s"${formId}_datafield_64789_1_1"
-  def techSkillThreeInputId                      = s"${formId}_datafield_124457_1_1"
-  def techSkillFourInputId                       = s"${formId}_datafield_64801_1_1"
-  def techSkillFiveInputId                       = s"${formId}_datafield_64807_1_1"
-  def techSkillSixInputId                        = s"${formId}_datafield_64813_1_1"
-  def techSkillSevenInputId                      = s"${formId}_datafield_64819_1_1"
-  def techSkillEightInputId                      = s"${formId}_datafield_64825_1_1"
+  def techSkillOneHeaderId                       = s"${longFormId}_label_201673_1"
+  def techSkillTwoHeaderId                       = s"${longFormId}_label_201679_1"
+  def techSkillThreeHeaderId                     = s"${longFormId}_label_201683_1"
+  def techSkillFourHeaderId                      = s"${longFormId}_label_201686_1"
+  def techSkillFiveHeaderId                      = s"${longFormId}_label_201690_1"
+  def techSkillSixHeaderId                       = s"${longFormId}_label_201694_1"
+  def techSkillSevenHeaderId                     = s"${longFormId}_label_201697_1"
+  def techSkillEightHeaderId                     = s"${longFormId}_label_201700_1"
+  def techSkillOneInputId                        = s"${longFormId}_datafield_64783_1_1"
+  def techSkillTwoInputId                        = s"${longFormId}_datafield_64789_1_1"
+  def techSkillThreeInputId                      = s"${longFormId}_datafield_124457_1_1"
+  def techSkillFourInputId                       = s"${longFormId}_datafield_64801_1_1"
+  def techSkillFiveInputId                       = s"${longFormId}_datafield_64807_1_1"
+  def techSkillSixInputId                        = s"${longFormId}_datafield_64813_1_1"
+  def techSkillSevenInputId                      = s"${longFormId}_datafield_64819_1_1"
+  def techSkillEightInputId                      = s"${longFormId}_datafield_64825_1_1"
 
   private def techSkillsPageCheck(): Unit =
     eventually(onPage(techSkillsPageTitle))
