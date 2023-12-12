@@ -72,7 +72,7 @@ object RecruiterTestsSection extends VacancyBasePage {
     if (sameDeadline) {
       action().moveToElement(waitForDropdownOption("Yes")).perform()
       waitForDropdownOption("Yes").click()
-      enterTestDeadline(vXApplicationClosingDate, deadlineDayId, deadlineMonthId, deadlineYearId)
+      enterDateFields(vXApplicationClosingDate, deadlineDayId, deadlineMonthId, deadlineYearId)
     } else {
       action().moveToElement(waitForDropdownOption("No")).perform()
       waitForDropdownOption("No").click()

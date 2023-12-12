@@ -13,8 +13,7 @@ import uk.gov.co.test.ui.flows.vx.RecruiterLoginFlow.loginWithRecruiterDetails
 import uk.gov.co.test.ui.pages.BasePage
 import uk.gov.co.test.ui.pages.v9.SignInPage.{navigateToV9Test, v9AcceptAllCookies, v9SearchCookiesById}
 import uk.gov.co.test.ui.pages.vx.DashboardPage.searchOn
-import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.vacancyFormId
-import uk.gov.co.test.ui.pages.vx.vacancytabs.EmploymentHistoryTab.{employerNameId, everBeenEmployedId, extractTabFormId}
+import uk.gov.co.test.ui.pages.vx.vacancytabs.EmploymentHistoryTab.extractTabFormId
 import uk.gov.co.test.ui.pages.vx.vacancytabs.ExternalPostingsPage.addExternalPosting
 import uk.gov.co.test.ui.pages.vx.vacancytabs.SummaryPage.confirmAndActivateVacancy
 
@@ -39,6 +38,7 @@ trait VacancyBasePage extends Matchers with BasePage with BrowserDriver {
   lazy val generalInput            = "//input[@class='select2-search__field']"
   val applicationCentrePageTitle   = "Your account details - Civil Service Jobs - GOV.UK"
   val vacancyStatusPath            = ".//*[@id='collapse_panel']/span[1]"
+  val submitForm                   = "submit_button"
 
   def findUsernameField: util.List[WebElement] = driver.findElements(By.id("user"))
   def username(): TextField                    = textField("user")
@@ -98,11 +98,11 @@ trait VacancyBasePage extends Matchers with BasePage with BrowserDriver {
     dateValue.selectByValue(value)
   }
 
-  def enterTestDeadline(deadline: String, dayId: String, monthId: String, yearId: String): Unit = {
-    val (day, month, year) = splitDate(deadline)
-    enterDate(dayId, day)
-    enterDate(monthId, month)
-    enterDate(yearId, year)
+  def enterDateFields(date: String, dayId: String, monthId: String, yearId: String): Unit = {
+    val (_day, _month, _year) = splitDate(date)
+    enterDate(dayId, _day)
+    enterDate(monthId, _month)
+    enterDate(yearId, _year)
   }
 
   def groupTestsDeadlineDate(days: Int): String = {

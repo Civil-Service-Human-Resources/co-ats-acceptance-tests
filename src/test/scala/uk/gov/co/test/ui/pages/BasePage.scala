@@ -154,9 +154,8 @@ trait BasePage extends Matchers with Page with WebBrowser with PatienceConfigura
 
   def openNewWindow()(implicit driver: WebDriver): Unit = {
     //    openWindows(2)
-    for (chartWindow <- driver.getWindowHandles.asScala) {
+    for (chartWindow <- driver.getWindowHandles.asScala)
       driver.switchTo.window(chartWindow)
-    }
     println(driver.getWindowHandles)
   }
 
@@ -185,5 +184,4 @@ trait BasePage extends Matchers with Page with WebBrowser with PatienceConfigura
 
   def refreshPage()(implicit driver: WebDriver): Unit =
     driver.navigate().refresh()
-
 }

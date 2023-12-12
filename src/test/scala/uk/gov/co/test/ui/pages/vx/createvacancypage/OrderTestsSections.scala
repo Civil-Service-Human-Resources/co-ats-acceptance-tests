@@ -116,18 +116,18 @@ object OrderTestsSections extends VacancyBasePage {
       val groupADeadline = groupTestsDeadlineDate(vacancyTestsDetails.groupATests.map(_.deadline).get)
       vacancyTestsDetails.groupATests.map(_.howMany).get match {
         case "One"   =>
-          enterTestDeadline(groupADeadline, groupAFirstCSNTDayId, groupAFirstCSNTMonthId, groupAFirstCSNTYearId)
+          enterDateFields(groupADeadline, groupAFirstCSNTDayId, groupAFirstCSNTMonthId, groupAFirstCSNTYearId)
         case "Two"   =>
-          enterTestDeadline(groupADeadline, groupAFirstCSNTDayId, groupAFirstCSNTMonthId, groupAFirstCSNTYearId)
-          enterTestDeadline(groupADeadline, groupASecondCSVTDayId, groupASecondCSVTMonthId, groupASecondCSVTYearId)
+          enterDateFields(groupADeadline, groupAFirstCSNTDayId, groupAFirstCSNTMonthId, groupAFirstCSNTYearId)
+          enterDateFields(groupADeadline, groupASecondCSVTDayId, groupASecondCSVTMonthId, groupASecondCSVTYearId)
         case "Three" =>
           if (vacancyTestsDetails.testGrade != "Grade 6") {
-            enterTestDeadline(groupADeadline, groupAFirstCSNTDayId, groupAFirstCSNTMonthId, groupAFirstCSNTYearId)
-            enterTestDeadline(groupADeadline, groupASecondCSVTDayId, groupASecondCSVTMonthId, groupASecondCSVTYearId)
-            enterTestDeadline(groupADeadline, groupAThirdNCSJTDayId, groupAThirdNCSJTMonthId, groupAThirdNCSJTYearId)
+            enterDateFields(groupADeadline, groupAFirstCSNTDayId, groupAFirstCSNTMonthId, groupAFirstCSNTYearId)
+            enterDateFields(groupADeadline, groupASecondCSVTDayId, groupASecondCSVTMonthId, groupASecondCSVTYearId)
+            enterDateFields(groupADeadline, groupAThirdNCSJTDayId, groupAThirdNCSJTMonthId, groupAThirdNCSJTYearId)
           } else {
-            enterTestDeadline(groupADeadline, groupAFirstCSNTDayId, groupAFirstCSNTMonthId, groupAFirstCSNTYearId)
-            enterTestDeadline(groupADeadline, groupASecondCSVTDayId, groupASecondCSVTMonthId, groupASecondCSVTYearId)
+            enterDateFields(groupADeadline, groupAFirstCSNTDayId, groupAFirstCSNTMonthId, groupAFirstCSNTYearId)
+            enterDateFields(groupADeadline, groupASecondCSVTDayId, groupASecondCSVTMonthId, groupASecondCSVTYearId)
           }
       }
     }
@@ -202,10 +202,10 @@ object OrderTestsSections extends VacancyBasePage {
       val groupBDeadline = groupTestsDeadlineDate(vacancyTestsDetails.groupBTests.map(_.deadline).get)
       vacancyTestsDetails.groupBTests.map(_.howMany).get match {
         case "One" =>
-          enterTestDeadline(groupBDeadline, groupBFirstCSWSTDayId, groupBFirstCSWSTMonthId, groupBFirstCSWSTYearId)
+          enterDateFields(groupBDeadline, groupBFirstCSWSTDayId, groupBFirstCSWSTMonthId, groupBFirstCSWSTYearId)
         case "Two" =>
-          enterTestDeadline(groupBDeadline, groupBFirstCSWSTDayId, groupBFirstCSWSTMonthId, groupBFirstCSWSTYearId)
-          enterTestDeadline(groupBDeadline, groupBSecondCSMJTDayId, groupBSecondCSMJTMonthId, groupBSecondCSMJTYearId)
+          enterDateFields(groupBDeadline, groupBFirstCSWSTDayId, groupBFirstCSWSTMonthId, groupBFirstCSWSTYearId)
+          enterDateFields(groupBDeadline, groupBSecondCSMJTDayId, groupBSecondCSMJTMonthId, groupBSecondCSMJTYearId)
       }
     }
 
@@ -295,12 +295,12 @@ object OrderTestsSections extends VacancyBasePage {
       val groupCDeadline = groupTestsDeadlineDate(vacancyTestsDetails.groupCTests.map(_.deadline).get)
       vacancyTestsDetails.groupCTests.map(_.howMany).get match {
         case "One"                                                                =>
-          enterTestDeadline(groupCDeadline, groupCFirstCSSTDayId, groupCFirstCSSTMonthId, groupCFirstCSSTYearId)
+          enterDateFields(groupCDeadline, groupCFirstCSSTDayId, groupCFirstCSSTMonthId, groupCFirstCSSTYearId)
         case "Two" if vacancyTestsDetails.testGrade == "Administrative Assistant" =>
-          enterTestDeadline(groupCDeadline, groupCFirstCSSTDayId, groupCFirstCSSTMonthId, groupCFirstCSSTYearId)
+          enterDateFields(groupCDeadline, groupCFirstCSSTDayId, groupCFirstCSSTMonthId, groupCFirstCSSTYearId)
         case "Two"                                                                =>
-          enterTestDeadline(groupCDeadline, groupCFirstCSSTDayId, groupCFirstCSSTMonthId, groupCFirstCSSTYearId)
-          enterTestDeadline(groupCDeadline, groupCSecondCSTDayId, groupCSecondCSTMonthId, groupCSecondCSTYearId)
+          enterDateFields(groupCDeadline, groupCFirstCSSTDayId, groupCFirstCSSTMonthId, groupCFirstCSSTYearId)
+          enterDateFields(groupCDeadline, groupCSecondCSTDayId, groupCSecondCSTMonthId, groupCSecondCSTYearId)
       }
     }
 

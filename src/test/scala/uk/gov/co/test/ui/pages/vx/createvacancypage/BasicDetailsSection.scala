@@ -97,14 +97,14 @@ object BasicDetailsSection extends VacancyBasePage {
   }
 
   def covertLiveDate(): String = {
-    val formatter  = DateTimeFormatter.ofPattern("dd MMMM yyyy")
+    val formatter  = DateTimeFormatter.ofPattern("d MMMM yyyy")
     val dateFormat = LocalDate.now()
     vXApplicationLiveDate = dateFormat.format(formatter)
     vXApplicationLiveDate
   }
 
   def covertClosingDate(days: Int): String = {
-    val formatter  = DateTimeFormatter.ofPattern("dd MMMM yyyy")
+    val formatter  = DateTimeFormatter.ofPattern("d MMMM yyyy")
     val dateFormat = LocalDate.now().plusDays(days)
     vXAppConvertedClosingDate = dateFormat.format(formatter)
     vXAppConvertedClosingDate
