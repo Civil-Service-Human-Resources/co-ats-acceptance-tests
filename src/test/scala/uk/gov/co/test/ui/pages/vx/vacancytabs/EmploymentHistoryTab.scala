@@ -95,12 +95,10 @@ object EmploymentHistoryTab extends VacancyBasePage {
 //    )
   }
 
-  private def employmentHistoryFlow(historyDetails: HistoryDetails): Unit =
+  private def selectDirectHmrcPayeAccess(historyDetails: HistoryDetails): Unit =
     if (historyDetails.directHmrcPayeAccess) {
       clickOnRadioButton(directHmrcPayeAccessYesId)
       enterDateHistoryCheckStarted(historyDetails)
-      uploadEehcEvidence(historyDetails)
-      selectFurtherInfoRequired(historyDetails)
     } else {
       clickOnRadioButton(directHmrcPayeAccessNoId)
       selectSentCheckForGrs(historyDetails)
@@ -196,33 +194,24 @@ object EmploymentHistoryTab extends VacancyBasePage {
     vacancyFormId
   }
 
-  private def uploadEehcEvidence(historyDetails: HistoryDetails): Unit = {
-    val getCurrentDirectory     = new java.io.File(".").getCanonicalPath
-    val filePath                = getCurrentDirectory.concat(importFilesPath).concat(historyDetails.eehcEvidence)
-    val fileElement: WebElement = id(uploadEehcEvidenceId).findElement.get.underlying
-    fileElement.sendKeys(filePath)
-  }
+  private def uploadEehcEvidence(historyDetails: HistoryDetails): Unit =
+    if (historyDetails.sentCheckForGrs || historyDetails.directHmrcPayeAccess) {
+      val getCurrentDirectory     = new java.io.File(".").getCanonicalPath
+      val filePath                = getCurrentDirectory.concat(importFilesPath).concat(historyDetails.eehcEvidence)
+      val fileElement: WebElement = id(uploadEehcEvidenceId).findElement.get.underlying
+      fileElement.sendKeys(filePath)
+      selectFurtherInfoRequired(historyDetails)
+    }
 
-  private def selectFurtherInfoRequired(historyDetails: HistoryDetails): Unit = {
+  private def selectFurtherInfoRequired(historyDetails: HistoryDetails): Unit =
     if (historyDetails.requireInfoToComplete) {
       clickOnRadioButton(furtherInfoRequiredYesId)
       waitForVisibilityOfElementByPath(
         automatedRefereeContactTextPath
       ).getText shouldEqual "Candidate referees will be contacted automatically if they’ve consented, if you select that references are required and this is the first time you are requesting them. To re-request references check consent has been provided and use the Issue/Reissue reference buttons after this form is submitted"
       requireFurtherReferences(historyDetails)
-    } else {
-      clickOnRadioButton(furtherInfoRequiredNoId)
-      val outcome = historyDetails.checkOutcome
-      outcome match {
-        case "Passed"                   =>
-          clickOnRadioButton(historyCheckPassedId)
-        case "Refer to risk assessment" =>
-          clickOnRadioButton(referToRiskAssessmentId)
-          enterText(riskAssessmentCommentsInputId, historyDetails.riskAssessmentComments)
-      }
-    }
-    enterText(internalNotesInputId, historyDetails.internalNotes)
-  }
+      selectHistoryCheckOutcome(historyDetails)
+    } else clickOnRadioButton(furtherInfoRequiredNoId)
 
   private def requireFurtherReferences(historyDetails: HistoryDetails): Unit =
     if (historyDetails.requireFurtherReferences) clickOnRadioButton(furtherReferencesRequiredYesId)
@@ -235,7 +224,25 @@ object EmploymentHistoryTab extends VacancyBasePage {
     } else {
       clickOnRadioButton(historySearchOutcomeNoId)
       enterDateAdditionalInfoRequested(historyDetails)
+      selectAdditionalInfoReceived(historyDetails)
     }
+
+  private def selectCheckOutcome(historyDetails: HistoryDetails): Unit =
+    if (
+      historyDetails.historyCheckOutcome || !historyDetails.requireInfoToComplete || historyDetails.receivedGrsHistoryCheck
+    ) {
+      val outcome = historyDetails.checkOutcome
+      outcome match {
+        case "Passed"                   =>
+          clickOnRadioButton(historyCheckPassedId)
+        case "Refer to risk assessment" =>
+          clickOnRadioButton(referToRiskAssessmentId)
+          enterText(riskAssessmentCommentsInputId, historyDetails.riskAssessmentComments)
+      }
+    }
+
+  private def enterInternalNotes(historyDetails: HistoryDetails): Unit =
+    enterText(internalNotesInputId, historyDetails.internalNotes)
 
   private def selectAdditionalInfoReceived(historyDetails: HistoryDetails): Unit =
     if (historyDetails.receivedGrsHistoryCheck) {
@@ -247,7 +254,10 @@ object EmploymentHistoryTab extends VacancyBasePage {
     }
 
   private val history: Seq[HistoryDetails => Unit] = Seq(
-    employmentHistoryFlow
+    selectDirectHmrcPayeAccess,
+    uploadEehcEvidence,
+    selectCheckOutcome,
+    enterInternalNotes
   )
 
   def EmploymentHistoryVXFlow(applicationSummaryDetails: ApplicationSummaryDetails): Unit = {
