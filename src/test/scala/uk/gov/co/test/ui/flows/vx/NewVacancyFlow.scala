@@ -21,7 +21,7 @@ import uk.gov.co.test.ui.pages.vx.createvacancypage.PecCheckFormsSection.pecChec
 import uk.gov.co.test.ui.pages.vx.createvacancypage.ReserveListSection.reserveListSection
 import uk.gov.co.test.ui.pages.vx.createvacancypage.SuccessProfilesSection.successProfilesSection
 import uk.gov.co.test.ui.pages.vx.createvacancypage.VacancyTestsSection.vacancyTestsSection
-import uk.gov.co.test.ui.pages.vx.vacancytabs.SummaryPage.saveVacancyId
+import uk.gov.co.test.ui.pages.vx.vacancytabs.SummaryTab.saveVacancyId
 
 object NewVacancyFlow extends VacancyBasePage {
 

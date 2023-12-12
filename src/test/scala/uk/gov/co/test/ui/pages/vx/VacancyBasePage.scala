@@ -14,8 +14,8 @@ import uk.gov.co.test.ui.pages.BasePage
 import uk.gov.co.test.ui.pages.v9.SignInPage.{navigateToV9Test, v9AcceptAllCookies, v9SearchCookiesById}
 import uk.gov.co.test.ui.pages.vx.DashboardPage.searchOn
 import uk.gov.co.test.ui.pages.vx.vacancytabs.EmploymentHistoryTab.extractTabFormId
-import uk.gov.co.test.ui.pages.vx.vacancytabs.ExternalPostingsPage.addExternalPosting
-import uk.gov.co.test.ui.pages.vx.vacancytabs.SummaryPage.confirmAndActivateVacancy
+import uk.gov.co.test.ui.pages.vx.vacancytabs.ExternalPostingsTab.addExternalPosting
+import uk.gov.co.test.ui.pages.vx.vacancytabs.SummaryTab.confirmAndActivateVacancy
 
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
