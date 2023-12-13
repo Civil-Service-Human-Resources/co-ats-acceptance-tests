@@ -1,6 +1,6 @@
 package uk.gov.co.test.ui.pages.vx.vacancytabs
 
-import org.openqa.selenium.WebElement
+import org.openqa.selenium.{By, WebElement}
 import uk.gov.co.test.ui.data.vx.ApplicationSummaryDetails
 import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{v9EmployedWithin3Years, v9FirstEmployerFromDate, v9FirstEmployerName}
 import uk.gov.co.test.ui.pages.v9.longform.UploadDocumentsPage.importFilesPath
@@ -17,7 +17,7 @@ case class HistoryDetails(
   eehcEvidence: String,
   requireInfoToComplete: Boolean,
   requireFurtherReferences: Boolean,
-  sentCheckForGrs: Boolean,
+  sentCheckToGrs: Boolean,
   dateCheckSentToGrs: LocalDate,
   receivedGrsHistoryCheck: Boolean,
   dateReceivedHistoryCheck: LocalDate,
@@ -34,6 +34,7 @@ case class HistoryDetails(
 object EmploymentHistoryTab extends VacancyBasePage {
 
   private lazy val employmentHistoryTabPath = ".//span[@class='main-label' and text() = 'Employment history form']"
+  def directHmrcPayeSectionId               = s"${vacancyFormId}_field_77927_1"
   def everBeenEmployedId                    = s"${vacancyFormId}_label_146612_1"
   def employerOneNameId                     = s"${vacancyFormId}_label_146618_1"
   def employerOneDateFromId                 = s"${vacancyFormId}_label_146621_1"
@@ -49,8 +50,8 @@ object EmploymentHistoryTab extends VacancyBasePage {
   def uploadEehcEvidenceId                  = s"${vacancyFormId}_datafield_77939_1_1"
   def furtherInfoRequiredYesId              = s"${vacancyFormId}_datafield_179445_1_1_1"
   def furtherInfoRequiredNoId               = s"${vacancyFormId}_datafield_179445_1_1_2"
-  def receivedHistoryCheckYesId             = s"${vacancyFormId}_datafield_97387_1_1"
-  def receivedHistoryCheckNoId              = s"${vacancyFormId}_datafield_97387_1_2"
+  def receivedHistoryCheckYesId             = s"${vacancyFormId}_datafield_97387_1_1_1"
+  def receivedHistoryCheckNoId              = s"${vacancyFormId}_datafield_97387_1_1_2"
   def historyCheckPassedId                  = s"${vacancyFormId}_datafield_79523_1_1_15197"
   def referToRiskAssessmentId               = s"${vacancyFormId}_datafield_79523_1_1_15285"
   def riskAssessmentCommentsInputId         = s"${vacancyFormId}_datafield_179579_1_1"
@@ -78,7 +79,7 @@ object EmploymentHistoryTab extends VacancyBasePage {
   def additionalInfoReceivedYearId          = s"${vacancyFormId}_datafield_179548_1_1--YEAR"
   def furtherReferencesRequiredYesId        = s"${vacancyFormId}_datafield_179495_1_1_1"
   def furtherReferencesRequiredNoId         = s"${vacancyFormId}_datafield_179495_1_1_2"
-  def automatedRefereeContactTextPath       = s".//*[@id='${vacancyFormId}_label_98302_1']/strong/span/text()"
+  def automatedRefereeContactTextId         = s"${vacancyFormId}_label_98302_1"
 
   def completeVXEmploymentHistory(): Unit = {
     checkVacancyStatus("Pre Employment Checks")
@@ -95,17 +96,20 @@ object EmploymentHistoryTab extends VacancyBasePage {
 //    )
   }
 
-  private def selectDirectHmrcPayeAccess(historyDetails: HistoryDetails): Unit =
+  private def selectDirectHmrcPayeAccess(historyDetails: HistoryDetails): Unit = {
+    scrollToElement(By.id(directHmrcPayeSectionId))
     if (historyDetails.directHmrcPayeAccess) {
       clickOnRadioButton(directHmrcPayeAccessYesId)
       enterDateHistoryCheckStarted(historyDetails)
+      uploadEehcEvidence(historyDetails)
     } else {
       clickOnRadioButton(directHmrcPayeAccessNoId)
       selectSentCheckForGrs(historyDetails)
     }
+  }
 
   private def selectSentCheckForGrs(historyDetails: HistoryDetails): Unit =
-    if (historyDetails.sentCheckForGrs) {
+    if (historyDetails.sentCheckToGrs) {
       clickOnRadioButton(sentCheckForGrsYesId)
       enterDateCheckSentToGrs(historyDetails)
       selectReceivedHistoryCheck(historyDetails)
@@ -115,9 +119,8 @@ object EmploymentHistoryTab extends VacancyBasePage {
     if (historyDetails.receivedGrsHistoryCheck) {
       clickOnRadioButton(receivedHistoryCheckYesId)
       enterDateCheckReceivedFromGrs(historyDetails)
-      //eehc upload
-    } else clickOnRadioButton(receivedHistoryCheckNoId)
-  //internal notes
+      uploadEehcEvidence(historyDetails)
+    } else radioClick(receivedHistoryCheckNoId)
 
   def formattedDate(atDate: LocalDate): String = {
     val formatter     = DateTimeFormatter.ofPattern("dd/MM/yyyy")
@@ -195,7 +198,7 @@ object EmploymentHistoryTab extends VacancyBasePage {
   }
 
   private def uploadEehcEvidence(historyDetails: HistoryDetails): Unit =
-    if (historyDetails.sentCheckForGrs || historyDetails.directHmrcPayeAccess) {
+    if (historyDetails.sentCheckToGrs || historyDetails.directHmrcPayeAccess) {
       val getCurrentDirectory     = new java.io.File(".").getCanonicalPath
       val filePath                = getCurrentDirectory.concat(importFilesPath).concat(historyDetails.eehcEvidence)
       val fileElement: WebElement = id(uploadEehcEvidenceId).findElement.get.underlying
@@ -206,21 +209,28 @@ object EmploymentHistoryTab extends VacancyBasePage {
   private def selectFurtherInfoRequired(historyDetails: HistoryDetails): Unit =
     if (historyDetails.requireInfoToComplete) {
       clickOnRadioButton(furtherInfoRequiredYesId)
-      waitForVisibilityOfElementByPath(
-        automatedRefereeContactTextPath
+      waitForVisibilityOfElementById(
+        automatedRefereeContactTextId
       ).getText shouldEqual "Candidate referees will be contacted automatically if they’ve consented, if you select that references are required and this is the first time you are requesting them. To re-request references check consent has been provided and use the Issue/Reissue reference buttons after this form is submitted"
       requireFurtherReferences(historyDetails)
       selectHistoryCheckOutcome(historyDetails)
-    } else clickOnRadioButton(furtherInfoRequiredNoId)
+    } else {
+      clickOnRadioButton(furtherInfoRequiredNoId)
+      selectCheckOutcome(historyDetails)
+    }
 
   private def requireFurtherReferences(historyDetails: HistoryDetails): Unit =
-    if (historyDetails.requireFurtherReferences) clickOnRadioButton(furtherReferencesRequiredYesId)
-    else clickOnRadioButton(furtherReferencesRequiredNoId)
+    if (historyDetails.requireFurtherReferences) {
+      clickOnRadioButton(furtherReferencesRequiredYesId)
+    } else {
+      clickOnRadioButton(furtherReferencesRequiredNoId)
+    }
 
   private def selectHistoryCheckOutcome(historyDetails: HistoryDetails): Unit =
     if (historyDetails.historyCheckOutcome) {
       clickOnRadioButton(historySearchOutcomeYesId)
       enterDateCheckCompleted(historyDetails)
+      selectCheckOutcome(historyDetails)
     } else {
       clickOnRadioButton(historySearchOutcomeNoId)
       enterDateAdditionalInfoRequested(historyDetails)
@@ -245,18 +255,17 @@ object EmploymentHistoryTab extends VacancyBasePage {
     enterText(internalNotesInputId, historyDetails.internalNotes)
 
   private def selectAdditionalInfoReceived(historyDetails: HistoryDetails): Unit =
-    if (historyDetails.receivedGrsHistoryCheck) {
-      clickOnRadioButton(receivedHistoryCheckYesId)
+    if (historyDetails.historyCheckOutcome) {
+      clickOnRadioButton(additionalInfoReceivedYesId)
       enterDateAdditionalInfoReceived(historyDetails)
+      selectCheckOutcome(historyDetails)
     } else {
-      clickOnRadioButton(receivedHistoryCheckNoId)
+      clickOnRadioButton(additionalInfoReceivedNoId)
       enterDateBF(historyDetails)
     }
 
   private val history: Seq[HistoryDetails => Unit] = Seq(
     selectDirectHmrcPayeAccess,
-    uploadEehcEvidence,
-    selectCheckOutcome,
     enterInternalNotes
   )
 

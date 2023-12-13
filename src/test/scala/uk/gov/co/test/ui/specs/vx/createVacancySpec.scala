@@ -65,7 +65,7 @@ class createVacancySpec extends BaseFeatureSpec {
       completePecFlow()
 
       Then("the candidate is able to confirm insolvency short & long forms are completed")
-      println("So far done!")
+      println("WIP...")
     }
 
     Scenario("VX: A Recruiter Extracts Vacancy Details", RunInVX) {

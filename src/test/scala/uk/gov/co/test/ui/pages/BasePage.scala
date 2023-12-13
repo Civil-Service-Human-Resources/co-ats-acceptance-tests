@@ -102,7 +102,7 @@ trait BasePage extends Matchers with Page with WebBrowser with PatienceConfigura
     waitForVisibilityOfElementById(id).click()
 
   def clickOnRadioButton(id: String)(implicit webDriver: WebDriver): Boolean = {
-    val wait   = new WebDriverWait(webDriver, 30, 200)
+    val wait   = new WebDriverWait(webDriver, 10, 200)
     val lookup = By.id(id)
     wait.until(ExpectedConditions.elementToBeClickable(By.xpath(s"//label[@for='$id']")))
 
@@ -114,6 +114,10 @@ trait BasePage extends Matchers with Page with WebBrowser with PatienceConfigura
         rval
       }
     })
+  }
+
+  def radioClick(id: String)(implicit driver: WebDriver): Unit = {
+    driver.findElement(By.xpath(s".//*[@id='$id']")).click()
   }
 
   def uuid4: String = UUID.randomUUID.toString

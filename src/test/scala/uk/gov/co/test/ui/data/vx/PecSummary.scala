@@ -15,21 +15,21 @@ object PEC_SUMMARY_DATA
 
 object PEC_EMPLOYMENT_HISTORY
     extends HistoryDetails(
-      true,
+      false,
       historyCheckStarted = LocalDate.now(),
       "Test-T&Cs.pdf",
+      true,
+      true,
+      true,
+      dateCheckSentToGrs = LocalDate.now().minusYears(1),
+      true,
+      dateReceivedHistoryCheck = LocalDate.now().minusDays(1),
       false,
-      true,
-      true,
-      LocalDate.now().minusDays(2),
-      false,
-      LocalDate.now().minusDays(1),
-      true,
       "Passed",
-      LocalDate.now(),
-      LocalDate.now().minusDays(2),
-      LocalDate.now(),
+      dateCheckCompleted = LocalDate.now(),
+      dateInfoRequested = LocalDate.now().minusDays(2),
+      dateInfoReceived = LocalDate.now(),
       "Autotest - mandatory risk assessment comments",
-      LocalDate.now(),
-      "Autotest - internal notes (optional)"
+      dateBF = LocalDate.now(),
+      internalNotes = "Autotest - internal notes (optional)"
     )
