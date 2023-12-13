@@ -12,23 +12,23 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
 case class HistoryDetails(
-                           directHmrcPayeAccess: Boolean,
-                           historyCheckStarted: LocalDate,
-                           eehcEvidence: String,
-                           requireInfoToComplete: Boolean,
-                           requireFurtherReferences: Boolean,
-                           sentCheckToGrs: Boolean,
-                           dateCheckSentToGrs: LocalDate,
-                           receivedGrsHistoryCheck: Boolean,
-                           dateHistoryCheckReceived: LocalDate,
-                           historyCheckOutcome: Boolean,
-                           checkOutcome: String,
-                           dateCheckCompleted: LocalDate,
-                           dateInfoRequested: LocalDate,
-                           dateInfoReceived: LocalDate,
-                           riskAssessmentComments: String,
-                           dateBF: LocalDate,
-                           internalNotes: String
+  directHmrcPayeAccess: Boolean,
+  historyCheckStarted: LocalDate,
+  eehcEvidence: String,
+  requireInfoToComplete: Boolean,
+  requireFurtherReferences: Boolean,
+  sentCheckToGrs: Boolean,
+  dateCheckSentToGrs: LocalDate,
+  receivedGrsHistoryCheck: Boolean,
+  dateHistoryCheckReceived: LocalDate,
+  historyCheckOutcome: Boolean,
+  checkOutcome: String,
+  dateCheckCompleted: LocalDate,
+  dateInfoRequested: LocalDate,
+  dateInfoReceived: LocalDate,
+  riskAssessmentComments: String,
+  dateBF: LocalDate,
+  internalNotes: String
 )
 
 object EmploymentHistoryTab extends VacancyBasePage {
