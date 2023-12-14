@@ -49,6 +49,7 @@ object ContractDetailsSection extends VacancyBasePage {
     enterRoles(contractType, contractTypeId)
     if (contractType.intersect(typeRequiresLength).nonEmpty) {
       val length = waitForVisibilityOfElementById(lengthOfEmploymentInput)
+      length.clear()
       length.sendKeys(contractDetails.employmentLengthDetails)
       addWelshTranslation(
         contractDetails.addWelshEmploymentLength,
@@ -67,7 +68,7 @@ object ContractDetailsSection extends VacancyBasePage {
 
   private def selectJobGrade(contractDetails: ContractDetails): Unit = {
     scrollToElement(By.id(jobGradeId))
-    selectOption(jobGradeInput, contractDetails.jobGrade)
+    selectOptionFromList(jobGradeInput, contractDetails.jobGrade)
   }
   private def enterEquivalentGrade(contractDetails: ContractDetails): Unit = {
     val equivalentGrade = textField(equivalentGradeId)

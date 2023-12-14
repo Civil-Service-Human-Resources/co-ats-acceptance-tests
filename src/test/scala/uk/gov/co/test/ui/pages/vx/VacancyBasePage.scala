@@ -116,6 +116,7 @@ trait VacancyBasePage extends Matchers with BasePage with BrowserDriver {
   def selectOptionFromList(value: String, id: String, inputPath: String): Unit = {
     waitForVisibilityOfElementById(id).click()
     val enterOption = waitForVisibilityOfElementByPath(generalInput)
+    enterOption.clear()
     enterOption.sendKeys(value)
     action().moveToElement(waitForDropdownOptionByText(inputPath)).perform()
     waitForDropdownOptionByText(inputPath).click()
@@ -123,6 +124,7 @@ trait VacancyBasePage extends Matchers with BasePage with BrowserDriver {
 
   def enterText(inputId: String, text: String): Unit = {
     val enterOption = waitForVisibilityOfElementById(inputId)
+    enterOption.clear()
     enterOption.sendKeys(text)
     enterOption.sendKeys(Keys.ENTER)
   }
@@ -153,8 +155,8 @@ trait VacancyBasePage extends Matchers with BasePage with BrowserDriver {
   ): Unit =
     if (addWelsh) {
       clickOn(addTranslation)
-      waitForVisibilityOfElementById(welshInput)
-      textField(welshInput).value = welsh
+      val field = waitForVisibilityOfElementById(welshInput)
+      field.sendKeys(welsh)
       clickOn(updateId)
     }
 

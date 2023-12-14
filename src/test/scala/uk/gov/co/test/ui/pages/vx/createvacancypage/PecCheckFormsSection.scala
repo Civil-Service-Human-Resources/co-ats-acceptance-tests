@@ -1,5 +1,6 @@
 package uk.gov.co.test.ui.pages.vx.createvacancypage
 
+import org.openqa.selenium.By
 import uk.gov.co.test.ui.data.vx.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.vacancyFormId
@@ -30,7 +31,9 @@ case class PecCheckFormsDetails(
   nameOfCheck: String,
   additionalCheck: List[String],
   nenOnboarding: List[String],
-  pnOnboarding: List[String]
+  nenHrEmail: String,
+  pnOnboarding: List[String],
+  pnHrEmail: String
 )
 
 object PecCheckFormsSection extends VacancyBasePage {
@@ -70,6 +73,8 @@ object PecCheckFormsSection extends VacancyBasePage {
   def detailsIdentityDocsId            = s"${vacancyFormId}_datafield_159299_1_1_en-GB"
   def manualIdentityCheckYesId         = s"${vacancyFormId}_datafield_181577_1_1_1"
   def manualIdentityCheckNoId          = s"${vacancyFormId}_datafield_181577_1_1_2"
+  def nenHrEmailId                     = s"${vacancyFormId}_datafield_141090_1_1"
+  def pnHrEmailId                      = s"${vacancyFormId}_datafield_141267_1_1"
 
   private def selectWhenCompleteRtwCheck(pecCheckFormsDetails: PecCheckFormsDetails): Unit = {
     val rtwList = pecCheckFormsDetails.rtwCheck
@@ -118,6 +123,13 @@ object PecCheckFormsSection extends VacancyBasePage {
       }
     }
 
+  private def enterHrEmail(hrEmailId: String, hrEmail: String): Unit =
+    if (!driver.findElements(By.id(hrEmailId)).isEmpty) {
+      val hrEmailField = waitForVisibilityOfElementById(hrEmailId)
+      hrEmailField.clear()
+      hrEmailField.sendKeys(hrEmail)
+    }
+
   private def selectOGDTransferProcessCheck(pecCheckFormsDetails: PecCheckFormsDetails): Unit =
     if (pecCheckFormsDetails.ogdTransferProcessCheck) clickOnRadioButton(ogdTransferProcessCheckYesId)
     else clickOnRadioButton(ogdTransferProcessCheckNoId)
@@ -151,7 +163,9 @@ object PecCheckFormsSection extends VacancyBasePage {
     selectOGDTransferProcessCheck(pecCheckFormsDetails)
     selectIncludeAdditionalCheck(pecCheckFormsDetails)
     enterRoles(pecCheckFormsDetails.nenOnboarding, nenInputId)
+    enterHrEmail(nenHrEmailId, pecCheckFormsDetails.nenHrEmail)
     enterRoles(pecCheckFormsDetails.pnOnboarding, pnInputId)
+    enterHrEmail(pnHrEmailId, pecCheckFormsDetails.pnHrEmail)
   }
 
   private val pecCheckForms: Seq[PecCheckFormsDetails => Unit] = Seq(

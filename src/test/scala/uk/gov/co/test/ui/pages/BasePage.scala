@@ -9,7 +9,9 @@ import org.scalatest.concurrent.PatienceConfiguration
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.time.{Millis, Seconds, Span}
 import org.scalatestplus.selenium.{Page, WebBrowser}
+import uk.gov.co.test.ui.pages.vx.DashboardPage.getOs
 
+import java.util
 import java.util.UUID
 import scala.jdk.CollectionConverters._
 import scala.util.Random
@@ -116,9 +118,8 @@ trait BasePage extends Matchers with Page with WebBrowser with PatienceConfigura
     })
   }
 
-  def radioClick(id: String)(implicit driver: WebDriver): Unit = {
+  def radioClick(id: String)(implicit driver: WebDriver): Unit =
     driver.findElement(By.xpath(s".//*[@id='$id']")).click()
-  }
 
   def uuid4: String = UUID.randomUUID.toString
 
@@ -137,12 +138,20 @@ trait BasePage extends Matchers with Page with WebBrowser with PatienceConfigura
 
   def selectOption(inputField: String, addOption: String)(implicit driver: WebDriver): Unit = {
     val selectOption = waitForVisibilityOfElementByPath(inputField)
+    selectOption.clear()
+    selectOption.sendKeys(addOption)
+    selectOption.sendKeys(Keys.ENTER)
+  }
+
+  def selectOptionFromList(inputField: String, addOption: String)(implicit driver: WebDriver): Unit = {
+    val selectOption = waitForVisibilityOfElementByPath(inputField)
     selectOption.sendKeys(addOption)
     selectOption.sendKeys(Keys.ENTER)
   }
 
   def selectOptionWithId(id: String, enterText: String)(implicit driver: WebDriver): Unit = {
     val selectOption = waitForVisibilityOfElementById(id)
+    selectOption.clear()
     selectOption.sendKeys(enterText)
     selectOption.sendKeys(Keys.ENTER)
   }
@@ -188,4 +197,8 @@ trait BasePage extends Matchers with Page with WebBrowser with PatienceConfigura
 
   def refreshPage()(implicit driver: WebDriver): Unit =
     driver.navigate().refresh()
+
+  def searchFunction(eleId: String)(implicit driver: WebDriver): util.List[WebElement] = {
+    driver.findElements(By.id(eleId))
+  }
 }

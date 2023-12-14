@@ -1,19 +1,21 @@
 package uk.gov.co.test.ui.data.vx
 
-import uk.gov.co.test.ui.pages.vx.vacancytabs.HistoryDetails
+import uk.gov.co.test.ui.pages.vx.vacancytabs.{HistoryDetails, PreSiftDetails}
 
 import java.time.LocalDate
 
 case class ApplicationSummaryDetails(
-  historyDetails: HistoryDetails
+  historyDetails: HistoryDetails,
+  preSiftDetails: PreSiftDetails
 )
 
-object PEC_SUMMARY_DATA
+object APPLICATION_SUMMARY_DATA
     extends ApplicationSummaryDetails(
-      PEC_EMPLOYMENT_HISTORY
+      APPLICATION_EMPLOYMENT_HISTORY,
+      APPLICATION_PRE_SIFT_EVALUATION
     )
 
-object PEC_EMPLOYMENT_HISTORY
+object APPLICATION_EMPLOYMENT_HISTORY
     extends HistoryDetails(
       false,
       historyCheckStarted = LocalDate.now(),
@@ -32,4 +34,16 @@ object PEC_EMPLOYMENT_HISTORY
       "Autotest - mandatory risk assessment comments",
       dateBF = LocalDate.now(),
       internalNotes = "Autotest - internal notes (optional)"
+    )
+
+object APPLICATION_PRE_SIFT_EVALUATION
+    extends PreSiftDetails(
+      "A",
+      "Autotest - CV assessment comments",
+      "B",
+      "Autotest - Personal statement comments",
+      "C",
+      "Autotest - Pre-sift comments",
+      "Progress",
+      "Autotest - Overall comments"
     )

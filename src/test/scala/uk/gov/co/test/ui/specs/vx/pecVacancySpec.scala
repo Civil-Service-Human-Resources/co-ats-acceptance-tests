@@ -5,7 +5,7 @@ import uk.gov.co.test.ui.data.v9.longform.PEC_LONG_FORM_DATA
 import uk.gov.co.test.ui.data.v9.shortform.PEC_SHORT_FORM_DATA
 import uk.gov.co.test.ui.flows.v9.LongFormFlow.fillLongFormDetails
 import uk.gov.co.test.ui.flows.v9.RegisterCandidateFlow.fillNewCandidateDetails
-import uk.gov.co.test.ui.flows.v9.ShortFormFlow.fillShortFormDetailsOnly
+import uk.gov.co.test.ui.flows.v9.ShortFormFlow.fillShortFormDetails
 import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.{confirmLongFormPECCompletion, confirmShortFormCompletion}
 import uk.gov.co.test.ui.specs.BaseFeatureSpec
 import uk.gov.co.test.ui.specs.TestData.pecTestData
@@ -34,7 +34,7 @@ class pecVacancySpec extends BaseFeatureSpec {
       fillNewCandidateDetails(REGISTER_CANDIDATE_PEC)
 
       When("candidate completes the short form")
-      fillShortFormDetailsOnly(PEC_SHORT_FORM_DATA)
+      fillShortFormDetails(PEC_SHORT_FORM_DATA)
       confirmShortFormCompletion()
 
       And("candidate completes the long form")

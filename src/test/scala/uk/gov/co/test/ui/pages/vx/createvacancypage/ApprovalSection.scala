@@ -22,11 +22,13 @@ object ApprovalSection extends VacancyBasePage {
 
   private def budgetaryInfo(info: String): Unit = {
     val field = waitForVisibilityOfElementById(budgetaryInfoId)
+    field.clear()
     field.sendKeys(info)
   }
 
   private def costCentre(centre: String): Unit = {
     val field = waitForVisibilityOfElementById(costCentreId)
+    field.clear()
     field.sendKeys(centre)
   }
 

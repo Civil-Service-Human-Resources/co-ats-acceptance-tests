@@ -17,8 +17,8 @@ object MasterVacancyDetails extends VacancyBasePage {
   var candidateApproach = "External"
 
   //vx vacancy basicDetails section
-  var vacancyName                       = "GCQACO - Consultant"
-  var vacancyId                         = "9416"
+  var vacancyName                       = "HMRC Heritage Lead"
+  var vacancyId                         = "9546"
   var vXApplicationLiveDate: String     = ""
   var vXApplicationLiveTime: String     = ""
   var vXApplicationClosingDate: String  = ""
@@ -76,7 +76,7 @@ object MasterVacancyDetails extends VacancyBasePage {
   var vXNoOfApplicationStage: Int   = 8
 
   //vx vacancy tests section
-  var vXAnyOnlineTests = true
+  var vXAnyOnlineTests = false
 
   //candidate details
   var randomFirstName: String    = ""

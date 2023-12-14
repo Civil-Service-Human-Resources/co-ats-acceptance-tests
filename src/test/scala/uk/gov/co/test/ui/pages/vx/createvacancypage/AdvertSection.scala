@@ -34,6 +34,7 @@ object AdvertSection extends VacancyBasePage {
     scrollToElement(By.id(jobSummaryId))
     val switchFrame = driver.switchTo().frame(jobSummaryIframe)
     val summaryArea = switchFrame.findElement(By.xpath(jobSummaryPath))
+    summaryArea.clear()
     summaryArea.sendKeys(advertDetails.jobSummary)
     switchBack()
   }
@@ -42,6 +43,7 @@ object AdvertSection extends VacancyBasePage {
     scrollToElement(By.id(jobDescriptionId))
     val switchFrame = driver.switchTo().frame(jobDescriptionIframe)
     val summaryArea = switchFrame.findElement(By.xpath(jobDescriptionPath))
+    summaryArea.clear()
     summaryArea.sendKeys(advertDetails.jobDescription)
     switchBack()
   }
@@ -50,6 +52,7 @@ object AdvertSection extends VacancyBasePage {
     scrollToElement(By.id(personSpecsIframe))
     val switchFrame = driver.switchTo().frame(personSpecsIframe)
     val summaryArea = switchFrame.findElement(By.xpath(personSpecsPath))
+    summaryArea.clear()
     summaryArea.sendKeys(advertDetails.personSpecification)
     switchBack()
   }
@@ -59,6 +62,7 @@ object AdvertSection extends VacancyBasePage {
     val switchFrame = driver.switchTo().frame(offeredBenefitsIframe)
     val summaryArea = switchFrame.findElement(By.xpath(offeredBenefitsPath))
     if (!summaryArea.getText.contains("Learning")) {
+      summaryArea.clear()
       summaryArea.sendKeys(advertDetails.offeredBenefits)
     }
     switchBack()
@@ -68,6 +72,7 @@ object AdvertSection extends VacancyBasePage {
     scrollToElement(By.id(selectionProcessIframe))
     val switchFrame = driver.switchTo().frame(selectionProcessIframe)
     val summaryArea = switchFrame.findElement(By.xpath(selectionProcessPath))
+    summaryArea.clear()
     summaryArea.sendKeys(advertDetails.selectionProcess)
     switchBack()
   }

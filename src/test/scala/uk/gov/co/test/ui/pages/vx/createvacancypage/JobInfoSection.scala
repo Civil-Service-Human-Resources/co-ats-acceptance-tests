@@ -49,6 +49,7 @@ object JobInfoSection extends VacancyBasePage {
 
   private def enterBusinessAreaDetail(jobInfoDetails: JobInfoDetails): Unit = {
     val businessDetailsInput = waitForVisibilityOfElementById(businessAreaDetailId)
+    businessDetailsInput.clear()
     businessDetailsInput.sendKeys(jobInfoDetails.businessAreaDetail)
     addWelshTranslation(
       jobInfoDetails.addWelshBusinessArea,

@@ -5,7 +5,7 @@ import uk.gov.co.test.ui.data.v9.longform.LONG_FORM_DATA_HMRC
 import uk.gov.co.test.ui.data.v9.shortform.SHORT_FORM_DATA_HMRC
 import uk.gov.co.test.ui.flows.v9.LongFormFlow.fillLongFormDetails
 import uk.gov.co.test.ui.flows.v9.RegisterCandidateFlow.fillNewCandidateDetails
-import uk.gov.co.test.ui.flows.v9.ShortFormFlow.fillShortFormDetailsOnly
+import uk.gov.co.test.ui.flows.v9.ShortFormFlow.fillShortFormDetails
 import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.{confirmLongFormCompletion, confirmShortFormCompletion}
 import uk.gov.co.test.ui.specs.BaseFeatureSpec
 import uk.gov.co.test.ui.tags.RunInV9
@@ -17,7 +17,9 @@ class ApplicationSpec extends BaseFeatureSpec {
       fillNewCandidateDetails(REGISTER_CANDIDATE_HMRC)
 
       When("candidate completes the short form")
-      fillShortFormDetailsOnly(SHORT_FORM_DATA_HMRC)
+      val vacancyName = "GCQACO - Consultant"
+      val vacancyId   = "9416"
+      fillShortFormDetails(SHORT_FORM_DATA_HMRC, Some(vacancyName), Some(vacancyId))
       confirmShortFormCompletion()
 
       And("candidate completes the long form")

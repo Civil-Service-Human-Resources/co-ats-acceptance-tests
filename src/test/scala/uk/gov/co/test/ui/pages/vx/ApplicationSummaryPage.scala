@@ -15,6 +15,7 @@ object ApplicationSummaryPage extends VacancyBasePage {
   val matchingOption              = "matching_options"
   val searchForId                 = "search_button"
   val appIdPath                   = ".//*[@class='app_id']"
+  val preSiftEvaluationFormBarId  = "process_rule_but_468"
   val completeSiftBarId           = "process_rule_but_18"
   val progressBarId               = "process_rule_but_657"
   val provisionalOfferOnlineBarId = "process_rule_but_3176"
@@ -23,12 +24,17 @@ object ApplicationSummaryPage extends VacancyBasePage {
   val withdrawApplicationBarId    = "process_rule_but_570"
   val updateApplicantBarId        = "process_rule_but_2008"
   val emailVacancyHolderBarId     = "process_rule_but_2032"
+  val progressBarAfterPreSiftId   = "process_rule_but_155"
+  val rejectBarAfterPreSiftId     = "process_rule_but_154"
+  val withdrawBarAfterPreSiftId   = "process_rule_but_509"
   val crcBarId                    = "process_rule_but_776"
+  val allBarItemsId               = "process_rules_bar"
+  val preSiftActionButtonsPath    = ".//*[@aria-label='Action Buttons']"
   val siftEvaluationTabPath       = ".//span[@class='main-label' and text() = 'Sift evaluation']"
   val commentsTabPath             = ".//span[@class='main-label' and text() = 'Comments']"
-  val vacancyAppliedDatePath = ".//*[@id='collapse_panel']/span[2]"
-  var appSummaryFormId       = ""
-  def outcomeId              = s"select2-${appSummaryFormId}_datafield_66487_1_1-container"
+  val vacancyAppliedDatePath      = ".//*[@id='collapse_panel']/span[2]"
+  var appSummaryFormId            = ""
+  def outcomeId                   = s"select2-${appSummaryFormId}_datafield_66487_1_1-container"
 
   private def dashboardPageCheck(): Unit =
     eventually(onPage(dashboardPageTitle))
@@ -69,5 +75,20 @@ object ApplicationSummaryPage extends VacancyBasePage {
     clickOn("submit_button")
     waitForVisibilityOfElementById(progressBarId).click()
     waitForVisibilityOfElementById(provisionalOfferOnlineBarId).click()
+  }
+
+  def preSiftCompletion(): Unit = {
+    Thread.sleep(10000)
+    waitForVisibilityOfElementByPath(vacancyStatusPath).getText shouldEqual s"StatusPre-sift complete"
+    processBarItems(List(progressBarAfterPreSiftId, rejectBarAfterPreSiftId, withdrawBarAfterPreSiftId))
+    waitForVisibilityOfElementById(progressBarAfterPreSiftId).click()
+    waitForVisibilityOfElementById(completeSiftBarId)
+    checkVacancyStatus("Sift application")
+  }
+
+  def processBarItems(processItems: List[String]): Unit = {
+    waitForVisibilityOfElementById(allBarItemsId)
+    for (barElement <- processItems)
+      driver.findElement(By.id(barElement)).isDisplayed
   }
 }

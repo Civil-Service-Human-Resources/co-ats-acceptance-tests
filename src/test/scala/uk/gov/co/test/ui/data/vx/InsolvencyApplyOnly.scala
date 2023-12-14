@@ -487,5 +487,7 @@ object INSOLVENCY_PEC_CHECK_FORMS
       "Autotest - Name of check",
       additionalCheck = List("Not Applicable"),
       nenOnboarding = List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
-      pnOnboarding = List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates")
+      s"$contactEmailVxConfig",
+      pnOnboarding = List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      s"$contactEmailVxConfig"
     )

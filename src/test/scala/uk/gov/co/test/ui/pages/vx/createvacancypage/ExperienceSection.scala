@@ -127,6 +127,7 @@ object ExperienceSection extends VacancyBasePage {
     val text         = successProfilesDetails.experienceSection
     vXGuidanceText = text.map(_.statementGuidanceText).get
     val guidanceText = waitForVisibilityOfElementById(guidanceTextInputId)
+    guidanceText.clear()
     guidanceText.sendKeys(vXGuidanceText)
   }
 
@@ -141,6 +142,7 @@ object ExperienceSection extends VacancyBasePage {
   private def enterPastExperience(successProfilesDetails: SuccessProfilesDetails): Unit = {
     val pastExperienceText = successProfilesDetails.experienceSection.map(_.pastExperienceText).get
     val pastExperience     = waitForVisibilityOfElementById(pastExperiencesInputId)
+    pastExperience.clear()
     pastExperience.sendKeys(pastExperienceText)
   }
 
@@ -155,6 +157,7 @@ object ExperienceSection extends VacancyBasePage {
   private def enterLicenceRequirements(successProfilesDetails: SuccessProfilesDetails): Unit = {
     val requirementInfo = successProfilesDetails.experienceSection.map(_.licences.map(_.requirementsInfo).get).get
     val requirement     = waitForVisibilityOfElementById(mandatoryLicencesInputId)
+    requirement.clear()
     requirement.sendKeys(requirementInfo)
   }
 
@@ -169,6 +172,7 @@ object ExperienceSection extends VacancyBasePage {
   private def enterMembershipsRequirements(successProfilesDetails: SuccessProfilesDetails): Unit = {
     val requirementInfo = successProfilesDetails.experienceSection.map(_.memberships.map(_.requirementsInfo).get).get
     val requirement     = waitForVisibilityOfElementById(mandatoryMembershipsInputId)
+    requirement.clear()
     requirement.sendKeys(requirementInfo)
   }
 
@@ -183,6 +187,7 @@ object ExperienceSection extends VacancyBasePage {
   private def enterLanguagesRequirements(successProfilesDetails: SuccessProfilesDetails): Unit = {
     val requirementInfo = successProfilesDetails.experienceSection.map(_.languages.map(_.requirementsInfo).get).get
     val requirement     = waitForVisibilityOfElementById(mandatoryLanguagesInputId)
+    requirement.clear()
     requirement.sendKeys(requirementInfo)
   }
 
@@ -197,6 +202,7 @@ object ExperienceSection extends VacancyBasePage {
   private def enterQualificationsRequirements(successProfilesDetails: SuccessProfilesDetails): Unit = {
     val requirementInfo = successProfilesDetails.experienceSection.map(_.qualifications.map(_.requirementsInfo).get).get
     val requirement     = waitForVisibilityOfElementById(mandatoryQualificationsInputId)
+    requirement.clear()
     requirement.sendKeys(requirementInfo)
   }
 

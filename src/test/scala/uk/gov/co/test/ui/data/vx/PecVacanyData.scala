@@ -483,5 +483,7 @@ object PEC_PEC_CHECK_FORMS
       "Autotest - Name of check",
       additionalCheck = List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
       nenOnboarding = List("Not Applicable"),
-      pnOnboarding = List("Not Applicable")
+      s"$contactEmailVxConfig",
+      pnOnboarding = List("Not Applicable"),
+      s"$contactEmailVxConfig"
     )
