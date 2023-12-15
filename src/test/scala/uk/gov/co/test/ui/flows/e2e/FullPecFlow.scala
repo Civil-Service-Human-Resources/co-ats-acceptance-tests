@@ -14,6 +14,7 @@ import uk.gov.co.test.ui.pages.v9.ProvisionalOfferPage.offerDecisionFlow
 import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.{navigateToApplicationSummary, progressApplicationToOffer}
 import uk.gov.co.test.ui.pages.vx.vacancytabs.EmploymentHistoryTab.{EmploymentHistoryVXFlow, completeVXEmploymentHistory}
 import uk.gov.co.test.ui.pages.vx.vacancytabs.PreSiftEvaluationTab.PreSiftEvaluationFlow
+import uk.gov.co.test.ui.pages.vx.vacancytabs.SiftEvaluationTab.SiftEvaluationFlow
 
 object FullPecFlow extends CivilServiceJobsBasePage {
 
@@ -23,6 +24,7 @@ object FullPecFlow extends CivilServiceJobsBasePage {
     extractApplicationId(),
     navigateToApplicationSummary(),
     PreSiftEvaluationFlow(APPLICATION_SUMMARY_DATA),
+    SiftEvaluationFlow(APPLICATION_SUMMARY_DATA),
     progressApplicationToOffer(),
     candidateAcceptsOffer(),
     offerDecisionFlow("Accept"),

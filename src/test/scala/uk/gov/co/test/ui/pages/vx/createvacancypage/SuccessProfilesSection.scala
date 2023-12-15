@@ -8,7 +8,7 @@ import uk.gov.co.test.ui.pages.vx.createvacancypage.BehavioursSection.selectBeha
 import uk.gov.co.test.ui.pages.vx.createvacancypage.ExperienceSection.selectExperiencesRequired
 import uk.gov.co.test.ui.pages.vx.createvacancypage.StrengthsSection.selectStrengthsAssessed
 import uk.gov.co.test.ui.pages.vx.createvacancypage.TechnicalSkillsSection.selectTechnicalSkills
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXAbilitiesRequired, vXBehavioursRequired, vXExperiencesRequired, vXStrengthsRequired, vXTechSkillsRequired}
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXAbilitiesRequired, vXBehavioursRequired, vXExperiencesRequired, vXListOfTechSkills, vXStrengthsRequired, vXTechSkillsRequired}
 
 case class SuccessProfilesDetails(
   abilities: Boolean,

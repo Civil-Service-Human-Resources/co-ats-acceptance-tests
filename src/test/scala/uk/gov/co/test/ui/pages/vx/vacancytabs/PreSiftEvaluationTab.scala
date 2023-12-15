@@ -62,7 +62,7 @@ object PreSiftEvaluationTab extends VacancyBasePage {
     enterText(outcomeOverallCommentsId, preSiftDetails.outcomeOverallComments)
   }
 
-  private val evaluation: Seq[PreSiftDetails => Unit] = Seq(
+  private val preSift: Seq[PreSiftDetails => Unit] = Seq(
     completeCvAssessment,
     completePersonalStatement,
     completePreSiftAssessment,
@@ -71,7 +71,7 @@ object PreSiftEvaluationTab extends VacancyBasePage {
 
   def PreSiftEvaluationFlow(applicationSummaryDetails: ApplicationSummaryDetails): Unit = {
     completePreSiftEvaluationForm()
-    evaluation.foreach { f =>
+    preSift.foreach { f =>
       f(applicationSummaryDetails.preSiftDetails)
     }
     waitForVisibilityOfElementById(

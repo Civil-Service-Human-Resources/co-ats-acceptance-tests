@@ -26,7 +26,7 @@ object ApplicationSummaryPage extends VacancyBasePage {
   val emailVacancyHolderBarId     = "process_rule_but_2032"
   val progressBarAfterPreSiftId   = "process_rule_but_155"
   val rejectBarAfterPreSiftId     = "process_rule_but_154"
-  val withdrawBarAfterPreSiftId   = "process_rule_but_509"
+  val withdrawBarId               = "process_rule_but_509"
   val crcBarId                    = "process_rule_but_776"
   val allBarItemsId               = "process_rules_bar"
   val preSiftActionButtonsPath    = ".//*[@aria-label='Action Buttons']"
@@ -68,27 +68,33 @@ object ApplicationSummaryPage extends VacancyBasePage {
   }
 
   def progressApplicationToOffer(): Unit = {
-    waitForVisibilityOfElementById(completeSiftBarId).click()
-    waitForVisibilityOfElementByPath(siftEvaluationTabPath).isEnabled
-    extractTabFormId()
-    selectOutcome("Progress")
-    clickOn("submit_button")
     waitForVisibilityOfElementById(progressBarId).click()
     waitForVisibilityOfElementById(provisionalOfferOnlineBarId).click()
+  }
+
+  def siftCompletion(): Unit = {
+    val completeSift = waitForVisibilityOfElementById(completeSiftBarId)
+    availableBarItems(List(progressBarAfterPreSiftId, withdrawBarId))
+    checkVacancyStatus("Sift application")
+    completeSift.click()
+    waitForVisibilityOfElementByPath(siftEvaluationTabPath).isEnabled
+    extractTabFormId()
+//    selectOutcome("Progress")
+//    clickOn("submit_button")
   }
 
   def preSiftCompletion(): Unit = {
     Thread.sleep(10000)
     waitForVisibilityOfElementByPath(vacancyStatusPath).getText shouldEqual s"StatusPre-sift complete"
-    processBarItems(List(progressBarAfterPreSiftId, rejectBarAfterPreSiftId, withdrawBarAfterPreSiftId))
+    availableBarItems(List(progressBarAfterPreSiftId, rejectBarAfterPreSiftId, withdrawBarId))
     waitForVisibilityOfElementById(progressBarAfterPreSiftId).click()
-    waitForVisibilityOfElementById(completeSiftBarId)
-    checkVacancyStatus("Sift application")
   }
 
-  def processBarItems(processItems: List[String]): Unit = {
-    waitForVisibilityOfElementById(allBarItemsId)
-    for (barElement <- processItems)
-      driver.findElement(By.id(barElement)).isDisplayed
+  def availableBarItems(expectedBarItems: List[String]): Unit = {
+    val actualBarItems = waitForVisibilityOfElementById(allBarItemsId).findElements(By.tagName("li"))
+    if (actualBarItems.size() == expectedBarItems.size) {
+      for (barItem <- expectedBarItems)
+        driver.findElement(By.id(barItem)).isDisplayed
+    }
   }
 }

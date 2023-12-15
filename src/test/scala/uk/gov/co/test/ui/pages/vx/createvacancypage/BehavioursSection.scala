@@ -3,7 +3,7 @@ package uk.gov.co.test.ui.pages.vx.createvacancypage
 import org.openqa.selenium.By
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.vacancyFormId
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXHowManyAssessed, vXListOfChosenBehaviours}
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXHowManyBehaviours, vXListOfChosenBehaviours}
 
 case class Behaviours(chosenBehaviour: String, stageApplication: Boolean, stageInterview: Boolean)
 
@@ -60,9 +60,9 @@ object BehavioursSection extends VacancyBasePage {
       getAssessSectionText(assessBehavioursId) shouldBe behaviour
         .map(_.assessBehaviours)
         .get
-      vXHowManyAssessed = behaviour.map(_.howManyAssessed).get
-      selectHowManyBehaviours(vXHowManyAssessed)
-      vXHowManyAssessed match {
+      vXHowManyBehaviours = behaviour.map(_.howManyAssessed).get
+      selectHowManyBehaviours(vXHowManyBehaviours)
+      vXHowManyBehaviours match {
         case 1 => behavioursSection(successProfilesDetails, 1)
         case 2 => behavioursSection(successProfilesDetails, 2)
         case 3 => behavioursSection(successProfilesDetails, 3)
@@ -80,6 +80,7 @@ object BehavioursSection extends VacancyBasePage {
     scrollToElement(By.id(behavioursOneId))
     waitForVisibilityOfElementById(behavioursOneId).click()
     val chosenBehaviour = behaviour.map(_.behaviourOne.map(_.chosenBehaviour).get).get
+    vXListOfChosenBehaviours.clear()
     vXListOfChosenBehaviours += chosenBehaviour
     selectOption(generalInput, chosenBehaviour)
     if (behaviour.map(_.behaviourOne.map(_.stageApplication).get).get) checkbox(applicationOneId).select()

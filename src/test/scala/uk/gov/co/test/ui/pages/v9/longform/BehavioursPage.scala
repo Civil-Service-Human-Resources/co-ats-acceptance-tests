@@ -3,7 +3,7 @@ package uk.gov.co.test.ui.pages.v9.longform
 import org.openqa.selenium.By
 import org.scalatest.concurrent.Eventually.eventually
 import uk.gov.co.test.ui.data.v9.longform.LongFormDetails
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXBehavioursRequired, vXHowManyAssessed, vXListOfChosenBehaviours}
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXBehavioursRequired, vXHowManyBehaviours, vXListOfChosenBehaviours}
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
 import uk.gov.co.test.ui.pages.v9.longform.DiversityMonitoringPage.longFormId
 
@@ -37,7 +37,7 @@ object BehavioursPage extends CivilServiceJobsBasePage {
   private def confirmBehavioursRequired(): Unit = {
     behavioursPageCheck()
     val behaviourInputs = driver.findElements(By.xpath(v9HowManyBehaviours))
-    behaviourInputs.size() shouldEqual vXHowManyAssessed
+    behaviourInputs.size() shouldEqual vXHowManyBehaviours
   }
 
   private def enterChangingAndImproving(behavioursDetails: BehavioursDetails): Unit =

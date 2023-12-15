@@ -28,8 +28,18 @@ object MasterVacancyDetails extends VacancyBasePage {
   var vXConvertedClosingDateTime        = ""
 
   //vx vacancy behaviours section
-  var vXHowManyAssessed: Int   = 8
-  var vXListOfChosenBehaviours = new ListBuffer[String]()
+  var vXHowManyBehaviours: Int                     = 8
+//  var vXListOfChosenBehaviours = new ListBuffer[String]()
+  var vXListOfChosenBehaviours: ListBuffer[String] = ListBuffer(
+    "Changing and Improving",
+    "Communicating and Influencing",
+    "Delivering at Pace",
+    "Developing Self and Others",
+    "Leadership",
+    "Making Effective Decisions",
+    "Managing a Quality Service",
+    "Working Together"
+  )
 
   //vx vacancy criteria section
   var vXCandidateInstructions: String     = "Autotest - Instructions for candidate"
@@ -69,11 +79,30 @@ object MasterVacancyDetails extends VacancyBasePage {
   var vXTechSkillsRequired: Boolean  = true
 
   //vx vacancy technical skills section
-  var vXHowManySkills: Int          = 8
-  var vXListOfTechSkills            = new ListBuffer[String]()
-  var vXListOfTechSkillsDescription = new ListBuffer[String]()
-  var vXListOfApplicationStage      = new ListBuffer[Boolean]()
-  var vXNoOfApplicationStage: Int   = 8
+  var vXHowManySkills: Int                              = 8
+//  var vXListOfTechSkills            = new ListBuffer[String]()
+  var vXListOfTechSkills: ListBuffer[String]            = ListBuffer(
+    "Autotest - technical skills 1",
+    "Autotest - technical skills 2",
+    "Autotest - technical skills 3",
+    "Autotest - technical skills 4",
+    "Autotest - technical skills 5",
+    "Autotest - technical skills 6",
+    "Autotest - technical skills 7",
+    "Autotest - technical skills 8"
+  )
+  var vXListOfTechSkillsDescription: ListBuffer[String] = ListBuffer(
+    "Autotest - technical skills 1 description",
+    "Autotest - technical skills 2 description",
+    "Autotest - technical skills 3 description",
+    "Autotest - technical skills 4 description",
+    "Autotest - technical skills 5 description",
+    "Autotest - technical skills 6 description",
+    "Autotest - technical skills 7 description",
+    "Autotest - technical skills 8 description"
+  )
+  var vXListOfApplicationStage                          = new ListBuffer[Boolean]()
+  var vXNoOfApplicationStage: Int                       = 8
 
   //vx vacancy tests section
   var vXAnyOnlineTests = false
