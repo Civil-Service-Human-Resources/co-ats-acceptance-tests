@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.pages.vx.vacancytabs
 
 import uk.gov.co.test.ui.data.vx.ApplicationSummaryDetails
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXBehavioursRequired, vXHowManyBehaviours, vXHowManySkills, vXListOfChosenBehaviours, vXListOfTechSkills, vXTechSkillsRequired}
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXBehavioursRequired, vXBehavioursTotalScore, vXHowManyBehaviours, vXHowManySkills, vXListOfChosenBehaviours, vXListOfTechSkills, vXTechSkillsRequired}
 import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.{availableBarItems, completeSiftBarId, withdrawBarId}
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.vacancyFormId
@@ -81,7 +81,7 @@ object SiftEvaluationTab extends VacancyBasePage {
     enterText(commentsId, comment)
   }
 
-  private def moveSiftEvaluationForm(siftDetails: SiftDetails): Unit = {
+  private def moveSiftEvaluationForm(): Unit = {
     checkVacancyStatus("Sift application")
     moveVacancyOnViaTopBar(completeSiftBarId, siftEvaluationTabPath)
     availableBarItems(List(completeSiftBarId, withdrawBarId))
@@ -99,9 +99,12 @@ object SiftEvaluationTab extends VacancyBasePage {
       behaviourOneCommentsId,
       siftDetails.behaviourOne.map(_.comment).get
     )
+    vXBehavioursTotalScore.clear()
+    vXBehavioursTotalScore ++ siftDetails.behaviourOne.map(_.score)
+    println(vXBehavioursTotalScore)
   }
 
-  private def enterBehaviourTwoOutcome(siftDetails: SiftDetails): Unit =
+  private def enterBehaviourTwoOutcome(siftDetails: SiftDetails): Unit = {
     enterOutcome(
       behaviourTwoTitleId,
       vXListOfChosenBehaviours(1),
@@ -110,8 +113,11 @@ object SiftEvaluationTab extends VacancyBasePage {
       behaviourTwoCommentsId,
       siftDetails.behaviourTwo.map(_.comment).get
     )
+    vXBehavioursTotalScore ++ siftDetails.behaviourTwo.map(_.score)
+    println(vXBehavioursTotalScore)
+  }
 
-  private def enterBehaviourThreeOutcome(siftDetails: SiftDetails): Unit =
+  private def enterBehaviourThreeOutcome(siftDetails: SiftDetails): Unit = {
     enterOutcome(
       behaviourThreeTitleId,
       vXListOfChosenBehaviours(2),
@@ -120,8 +126,11 @@ object SiftEvaluationTab extends VacancyBasePage {
       behaviourThreeCommentsId,
       siftDetails.behaviourThree.map(_.comment).get
     )
+    vXBehavioursTotalScore ++ siftDetails.behaviourThree.map(_.score)
+    println(vXBehavioursTotalScore)
+  }
 
-  private def enterBehaviourFourOutcome(siftDetails: SiftDetails): Unit =
+  private def enterBehaviourFourOutcome(siftDetails: SiftDetails): Unit = {
     enterOutcome(
       behaviourFourTitleId,
       vXListOfChosenBehaviours(3),
@@ -130,8 +139,11 @@ object SiftEvaluationTab extends VacancyBasePage {
       behaviourFourCommentsId,
       siftDetails.behaviourFour.map(_.comment).get
     )
+    vXBehavioursTotalScore ++ siftDetails.behaviourFour.map(_.score)
+    println(vXBehavioursTotalScore)
+  }
 
-  private def enterBehaviourFiveOutcome(siftDetails: SiftDetails): Unit =
+  private def enterBehaviourFiveOutcome(siftDetails: SiftDetails): Unit = {
     enterOutcome(
       behaviourFiveTitleId,
       vXListOfChosenBehaviours(4),
@@ -140,8 +152,11 @@ object SiftEvaluationTab extends VacancyBasePage {
       behaviourFiveCommentsId,
       siftDetails.behaviourFive.map(_.comment).get
     )
+    vXBehavioursTotalScore ++ siftDetails.behaviourFive.map(_.score)
+    println(vXBehavioursTotalScore)
+  }
 
-  private def enterBehaviourSixOutcome(siftDetails: SiftDetails): Unit =
+  private def enterBehaviourSixOutcome(siftDetails: SiftDetails): Unit = {
     enterOutcome(
       behaviourSixTitleId,
       vXListOfChosenBehaviours(5),
@@ -150,8 +165,11 @@ object SiftEvaluationTab extends VacancyBasePage {
       behaviourSixCommentsId,
       siftDetails.behaviourSix.map(_.comment).get
     )
+    vXBehavioursTotalScore ++== siftDetails.behaviourSix.map(_.score)
+    println(vXBehavioursTotalScore)
+  }
 
-  private def enterBehaviourSevenOutcome(siftDetails: SiftDetails): Unit =
+  private def enterBehaviourSevenOutcome(siftDetails: SiftDetails): Unit = {
     enterOutcome(
       behaviourSevenTitleId,
       vXListOfChosenBehaviours(6),
@@ -160,8 +178,11 @@ object SiftEvaluationTab extends VacancyBasePage {
       behaviourSevenCommentsId,
       siftDetails.behaviourSeven.map(_.comment).get
     )
+    vXBehavioursTotalScore ++ siftDetails.behaviourSeven.map(_.score)
+    println(vXBehavioursTotalScore)
+  }
 
-  private def enterBehaviourEightOutcome(siftDetails: SiftDetails): Unit =
+  private def enterBehaviourEightOutcome(siftDetails: SiftDetails): Unit = {
     enterOutcome(
       behaviourEightTitleId,
       vXListOfChosenBehaviours(7),
@@ -170,6 +191,13 @@ object SiftEvaluationTab extends VacancyBasePage {
       behaviourEightCommentsId,
       siftDetails.behaviourEight.map(_.comment).get
     )
+    vXBehavioursTotalScore ++ siftDetails.behaviourEight.map(_.score)
+    println(vXBehavioursTotalScore)
+  }
+
+//  private def totalScoreForBehaviour(siftDetails: SiftDetails): Int = {
+//    val totalScore = siftDetails.
+//  }
 
   private val behaviourOutcome: Seq[SiftDetails => Unit] = Seq(
     enterBehaviourOneOutcome,
@@ -182,12 +210,14 @@ object SiftEvaluationTab extends VacancyBasePage {
     enterBehaviourEightOutcome
   )
 
-  private def behavioursOutcome(siftDetails: SiftDetails): Unit =
+  private def behavioursOutcome(siftDetails: SiftDetails): Unit = {
     if (vXBehavioursRequired) {
       behaviourOutcome.take(vXHowManyBehaviours).foreach { f =>
         f(siftDetails)
       }
+      waitForVisibilityOfElementById(behaviourTotalScoreId).getText.toInt shouldEqual vXBehavioursTotalScore
     }
+  }
 
   private def enterTechSkillOneOutcome(siftDetails: SiftDetails): Unit = {
     waitForVisibilityOfElementById(techSkillsHeaderId).getText       shouldEqual "Technical skills"
@@ -214,12 +244,12 @@ object SiftEvaluationTab extends VacancyBasePage {
     }
 
   private val sift: Seq[SiftDetails => Unit] = Seq(
-    moveSiftEvaluationForm,
     behavioursOutcome,
     techSkillOutcome
   )
 
   def SiftEvaluationFlow(applicationSummaryDetails: ApplicationSummaryDetails): Unit = {
+    moveSiftEvaluationForm()
     sift.foreach { f =>
       f(applicationSummaryDetails.siftDetails)
     }

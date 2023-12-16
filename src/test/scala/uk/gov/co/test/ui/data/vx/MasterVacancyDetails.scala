@@ -30,6 +30,7 @@ object MasterVacancyDetails extends VacancyBasePage {
   //vx vacancy behaviours section
   var vXHowManyBehaviours: Int                     = 8
 //  var vXListOfChosenBehaviours = new ListBuffer[String]()
+  var vXBehavioursTotalScore: ListBuffer[Int]      = ListBuffer(48)
   var vXListOfChosenBehaviours: ListBuffer[String] = ListBuffer(
     "Changing and Improving",
     "Communicating and Influencing",
