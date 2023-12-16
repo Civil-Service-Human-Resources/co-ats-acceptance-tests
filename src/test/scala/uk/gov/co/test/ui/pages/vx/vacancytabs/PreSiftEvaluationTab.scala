@@ -1,5 +1,6 @@
 package uk.gov.co.test.ui.pages.vx.vacancytabs
 
+import org.openqa.selenium.By
 import uk.gov.co.test.ui.data.vx.ApplicationSummaryDetails
 import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.{preSiftCompletion, preSiftEvaluationFormBarId}
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
@@ -42,6 +43,7 @@ object PreSiftEvaluationTab extends VacancyBasePage {
   }
 
   private def completePersonalStatement(preSiftDetails: PreSiftDetails): Unit = {
+    scrollToElement(By.id(personalStatementScoreId))
     waitForVisibilityOfElementById(personalStatementScoreId).click()
     action().moveToElement(waitForDropdownOption(preSiftDetails.personalStatementScore)).perform()
     waitForDropdownOption(preSiftDetails.personalStatementScore).click()
@@ -56,6 +58,7 @@ object PreSiftEvaluationTab extends VacancyBasePage {
   }
 
   private def completeOutcome(preSiftDetails: PreSiftDetails): Unit = {
+    scrollToElement(By.id(outcomeRecommendationId))
     waitForVisibilityOfElementById(outcomeRecommendationId).click()
     action().moveToElement(waitForDropdownOption(preSiftDetails.outcomeRecommendation)).perform()
     waitForDropdownOption(preSiftDetails.outcomeRecommendation).click()
