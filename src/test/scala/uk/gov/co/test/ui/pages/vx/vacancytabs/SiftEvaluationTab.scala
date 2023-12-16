@@ -252,6 +252,7 @@ object SiftEvaluationTab extends VacancyBasePage {
       techSkillOneCommentsId,
       siftDetails.techSkillOne.map(_.comment).get
     )
+    vXTechSkillsTotalScore.clear()
     vXTechSkillsTotalScore += siftDetails.techSkillOne.map(_.score).get
   }
 
@@ -267,8 +268,87 @@ object SiftEvaluationTab extends VacancyBasePage {
     vXTechSkillsTotalScore += siftDetails.techSkillTwo.map(_.score).get
   }
 
+  private def enterTechSkillThreeOutcome(siftDetails: SiftDetails): Unit = {
+    enterOutcome(
+      techSkillThreeTitleId,
+      vXListOfTechSkills(2),
+      techSkillThreeScoreId,
+      siftDetails.techSkillThree.map(_.score).get,
+      techSkillThreeCommentsId,
+      siftDetails.techSkillThree.map(_.comment).get
+    )
+    vXTechSkillsTotalScore += siftDetails.techSkillThree.map(_.score).get
+  }
+
+  private def enterTechSkillFourOutcome(siftDetails: SiftDetails): Unit = {
+    enterOutcome(
+      techSkillFourTitleId,
+      vXListOfTechSkills(3),
+      techSkillFourScoreId,
+      siftDetails.techSkillFour.map(_.score).get,
+      techSkillFourCommentsId,
+      siftDetails.techSkillFour.map(_.comment).get
+    )
+    vXTechSkillsTotalScore += siftDetails.techSkillFour.map(_.score).get
+  }
+
+  private def enterTechSkillFiveOutcome(siftDetails: SiftDetails): Unit = {
+    enterOutcome(
+      techSkillFiveTitleId,
+      vXListOfTechSkills(4),
+      techSkillFiveScoreId,
+      siftDetails.techSkillFive.map(_.score).get,
+      techSkillFiveCommentsId,
+      siftDetails.techSkillFive.map(_.comment).get
+    )
+    vXTechSkillsTotalScore += siftDetails.techSkillFive.map(_.score).get
+  }
+
+  private def enterTechSkillSixOutcome(siftDetails: SiftDetails): Unit = {
+    enterOutcome(
+      techSkillSixTitleId,
+      vXListOfTechSkills(5),
+      techSkillSixScoreId,
+      siftDetails.techSkillSix.map(_.score).get,
+      techSkillSixCommentsId,
+      siftDetails.techSkillSix.map(_.comment).get
+    )
+    vXTechSkillsTotalScore += siftDetails.techSkillSix.map(_.score).get
+  }
+
+  private def enterTechSkillSevenOutcome(siftDetails: SiftDetails): Unit = {
+    enterOutcome(
+      techSkillSevenTitleId,
+      vXListOfTechSkills(6),
+      techSkillSevenScoreId,
+      siftDetails.techSkillSeven.map(_.score).get,
+      techSkillSevenCommentsId,
+      siftDetails.techSkillSeven.map(_.comment).get
+    )
+    vXTechSkillsTotalScore += siftDetails.techSkillSeven.map(_.score).get
+  }
+
+  private def enterTechSkillEightOutcome(siftDetails: SiftDetails): Unit = {
+    enterOutcome(
+      techSkillEightTitleId,
+      vXListOfTechSkills(7),
+      techSkillEightScoreId,
+      siftDetails.techSkillEight.map(_.score).get,
+      techSkillEightCommentsId,
+      siftDetails.techSkillEight.map(_.comment).get
+    )
+    vXTechSkillsTotalScore += siftDetails.techSkillEight.map(_.score).get
+  }
+
   private val skillOutcome: Seq[SiftDetails => Unit] = Seq(
-    enterTechSkillOneOutcome
+    enterTechSkillOneOutcome,
+    enterTechSkillTwoOutcome,
+    enterTechSkillThreeOutcome,
+    enterTechSkillFourOutcome,
+    enterTechSkillFiveOutcome,
+    enterTechSkillSixOutcome,
+    enterTechSkillSevenOutcome,
+    enterTechSkillEightOutcome
   )
 
   private def techSkillOutcome(siftDetails: SiftDetails): Unit =
