@@ -9,6 +9,7 @@ import uk.gov.co.test.ui.conf.TestConfiguration.readProperty
 import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.vXApplicationClosingDate
 import uk.gov.co.test.ui.data.vx.{RECRUITER, RecruiterDetails}
 import uk.gov.co.test.ui.driver.BrowserDriver
+import uk.gov.co.test.ui.flows.v9.RegisterCandidateFlow.checkV9LogoutState
 import uk.gov.co.test.ui.flows.vx.RecruiterLoginFlow.loginWithRecruiterDetails
 import uk.gov.co.test.ui.pages.BasePage
 import uk.gov.co.test.ui.pages.v9.SignInPage.{navigateToV9Test, v9AcceptAllCookies, v9SearchCookiesById}
@@ -166,16 +167,30 @@ trait VacancyBasePage extends Matchers with BasePage with BrowserDriver {
     addExternalPosting()
   }
 
-  def switchToCandidatePages(): Unit = {
-    openNewTabWithJavascript()
-    switchToNewWindow()
-    navigateToV9Test()
-    if (!v9SearchCookiesById().isEmpty) v9AcceptAllCookies()
-  }
+//  def switchToCandidatePages(): Unit = {
+//    if (openWindows(2)) {
+//      if (driver.getWindowHandle == secondWindowHandle) {
+//        driver.switchTo().window(firstWindowHandle)
+//      } else if (driver.getWindowHandle == firstWindowHandle) {
+//        driver.switchTo().window(secondWindowHandle)
+//      }
+//      driver.navigate().refresh()
+//    }
+//    switchToV9Test()
+//    navigateToV9Test()
+//    if (!v9SearchCookiesById().isEmpty) v9AcceptAllCookies()
+//  }
 
   def switchToVXConfig(): Unit = {
-    openAndSaveWindows()
+    switchToAnotherWindow()
     loginWithRecruiterDetails(RECRUITER)
+  }
+
+  def switchToV9Test(): Unit = {
+    switchToAnotherWindow()
+//    navigateToV9Test()
+//    if (!v9SearchCookiesById().isEmpty) v9AcceptAllCookies()
+//    checkV9LogoutState()
   }
 
   def checkVacancyStatus(expectedStatus: String): Unit = {

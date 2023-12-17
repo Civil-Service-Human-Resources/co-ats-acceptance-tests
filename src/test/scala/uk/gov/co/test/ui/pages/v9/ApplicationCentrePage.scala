@@ -5,7 +5,7 @@ import org.scalatest.concurrent.Eventually.eventually
 import uk.gov.co.test.ui.conf.TestConfiguration
 import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{v9AdjustmentsForTests, v9ReasonableAdjustments, vXAnyOnlineTests, vacancyName}
 import uk.gov.co.test.ui.pages.v9.ApplicationsPage.reviewUpdateValue
-import uk.gov.co.test.ui.pages.vx.DashboardPage.contactEmailVxConfig
+import uk.gov.co.test.ui.pages.vx.DashboardPage.{contactEmailVxConfig, switchToV9Test}
 
 object ApplicationCentrePage extends CivilServiceJobsBasePage {
 
@@ -144,8 +144,7 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
     waitForVisibilityOfElementByPath(applicationLinkPath).click()
 
   def candidateAcceptsOffer(): Unit = {
-//    switchToSecondWindow()
-    switchToFirstWindow()
+    switchToV9Test()
     driver.navigate().to(TestConfiguration.urlHost("vxconfig") + "/vx/lang-en-GB/candidate/application")
     reviewUpdateValue().click()
     confirmProvisionalOffer()

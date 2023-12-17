@@ -24,7 +24,7 @@ object TestData extends BaseFeatureSpec {
   }
 
   def setPecTestData(): Unit = {
-    vacancyName = "AUTOCO - System Architect"
+    vacancyName = "System Architect"
     vacancyId = "9533"
     vXAnyAdditionalQuestions = false
     vXUploadAttachmentRequired = false

@@ -35,7 +35,7 @@ object CreateAccountPage extends CivilServiceJobsBasePage {
   def recapClick(): Checkbox              = checkbox("recaptcha-checkbox-border")
 
   def navigateToCreateAccountPage(): Unit = {
-    checkV9Logout()
+    checkV9LogoutState()
     navigateToSignInOrCreateAccount()
     clickOn(createAnAccount())
     eventually(onPage(createAccountTitle))

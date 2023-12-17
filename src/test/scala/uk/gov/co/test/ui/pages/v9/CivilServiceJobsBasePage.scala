@@ -148,7 +148,7 @@ trait CivilServiceJobsBasePage extends Matchers with BasePage with BrowserDriver
     enterOption.sendKeys(Keys.TAB)
   }
 
-  def checkV9Logout(): Unit =
+  def checkV9LogoutState(): Unit =
     if (!searchForSignOut().isEmpty) {
       signOutProcess()
       if (!searchForSignOut().isEmpty) {

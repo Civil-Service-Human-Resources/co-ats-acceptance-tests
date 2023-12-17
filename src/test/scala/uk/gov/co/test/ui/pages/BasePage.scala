@@ -165,7 +165,27 @@ trait BasePage extends Matchers with Page with WebBrowser with PatienceConfigura
     wait.until(ExpectedConditions.numberOfWindowsToBe(expectedNumberOfWindows))
   }
 
-  def switchToNewWindow()(implicit driver: WebDriver): Unit = {
+  def switchToAnotherWindow()(implicit driver: WebDriver): Unit =
+    if (driver.getWindowHandles.size() == 2) {
+      if (driver.getWindowHandle.contains(secondWindowHandle)) {
+        println(s"1. Is ${driver.getWindowHandle} equal to $secondWindowHandle?")
+        driver.switchTo().window(firstWindowHandle)
+      } else if (driver.getWindowHandle.contains(firstWindowHandle)) {
+        println(s"2. Is ${driver.getWindowHandle} equal to $firstWindowHandle?")
+        driver.switchTo().window(secondWindowHandle)
+      }
+      driver.navigate().refresh()
+    } else {
+      openAndMoveToNewWindow()
+    }
+
+  def openNewTabWithJavascript()(implicit driver: WebDriver): AnyRef = {
+    val jse: JavascriptExecutor = driver.asInstanceOf[JavascriptExecutor]
+    jse.executeScript("window.open()")
+  }
+
+  def openAndMoveToNewWindow()(implicit driver: WebDriver): Unit = {
+    openNewTabWithJavascript()
     for (chartWindow <- driver.getWindowHandles.asScala)
       driver.switchTo.window(chartWindow)
 
@@ -173,16 +193,7 @@ trait BasePage extends Matchers with Page with WebBrowser with PatienceConfigura
       firstWindowHandle = currentWindows.asScala.head
       secondWindowHandle = currentWindows.asScala.tail.head
     }
-  }
-
-  def openNewTabWithJavascript()(implicit driver: WebDriver): AnyRef = {
-    val jse: JavascriptExecutor = driver.asInstanceOf[JavascriptExecutor]
-    jse.executeScript("window.open()")
-  }
-
-  def openAndSaveWindows()(implicit driver: WebDriver): Unit = {
-    openNewTabWithJavascript()
-    switchToNewWindow()
+    println(s"3. currentWindows: $currentWindows 1st: $firstWindowHandle 2nd: $secondWindowHandle?")
   }
 
   def switchBackToWindow(windowName: String)(implicit driver: WebDriver): WebDriver =

@@ -440,6 +440,5 @@ object SiftEvaluationTab extends VacancyBasePage {
       f(applicationSummaryDetails.siftDetails)
     }
     clickOn(submitForm)
-//    preSiftCompletion()
   }
 }

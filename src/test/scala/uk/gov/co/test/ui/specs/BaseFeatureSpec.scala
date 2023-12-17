@@ -9,7 +9,7 @@ import org.scalatestplus.selenium.WebBrowser
 import uk.gov.co.test.ui.data.vx.RECRUITER
 import uk.gov.co.test.ui.driver.BrowserDriver
 import uk.gov.co.test.ui.flows.vx.RecruiterLoginFlow.loginWithRecruiterDetails
-import uk.gov.co.test.ui.pages.v9.SignInPage.{checkV9Logout, generateCandidateDetails, navigateToV9Test, v9AcceptAllCookies, v9SearchCookiesById}
+import uk.gov.co.test.ui.pages.v9.SignInPage.{checkV9LogoutState, generateCandidateDetails, navigateToV9Test, v9AcceptAllCookies, v9SearchCookiesById}
 import uk.gov.co.test.ui.utils.SingletonScreenshotReport
 import uk.gov.co.test.ui.webdriver.SingletonDriver
 
@@ -40,7 +40,7 @@ trait BaseFeatureSpec
 
   override protected def afterEach(testData: TestData): Unit =
     if (testData.name.contains("Candidate")) {
-      checkV9Logout()
+      checkV9LogoutState()
     }
 
   override def afterAll(): Unit = {
