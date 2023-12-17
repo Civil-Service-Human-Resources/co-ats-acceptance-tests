@@ -28,7 +28,12 @@ case class SiftDetails(
   techSkillFive: Option[Outcome] = None,
   techSkillSix: Option[Outcome] = None,
   techSkillSeven: Option[Outcome] = None,
-  techSkillEight: Option[Outcome] = None
+  techSkillEight: Option[Outcome] = None,
+  cvAssessment: Option[Outcome] = None,
+  personalStatement: Option[Outcome] = None,
+  overallScoreComments: String,
+  finalOutcome: String,
+  declarationStatement: String
 )
 
 object SiftEvaluationTab extends VacancyBasePage {
@@ -36,6 +41,8 @@ object SiftEvaluationTab extends VacancyBasePage {
   private lazy val siftEvaluationTabPath      = ".//span[@class='main-label' and text() = 'Sift evaluation']"
   var vXBehavioursTotalScore: ListBuffer[Int] = ListBuffer()
   var vXTechSkillsTotalScore: ListBuffer[Int] = ListBuffer()
+  var vXCVAssessmentScore: Int                = 7
+  var vXPersonalStatementScore: Int           = 7
   def siftEvaluationHeaderId                  = s"${vacancyFormId}_label_153018_1"
   def behaviourAssessmentHeaderId             = s"${vacancyFormId}_label_65762_1"
   def behaviourScoringGuideId                 = s"${vacancyFormId}_label_153583_1"
@@ -63,33 +70,46 @@ object SiftEvaluationTab extends VacancyBasePage {
   def behaviourEightTitleId                   = s"${vacancyFormId}_label_66009_1"
   def behaviourEightScoreId                   = s"select2-${vacancyFormId}_datafield_65902_1_1-container"
   def behaviourEightCommentsId                = s"${vacancyFormId}_datafield_65867_1_1"
-  def behaviourTotalScoreId                   = s"${vacancyFormId}_datafield_65906_1_1"
+  def behaviourTotalScoreId                   = s"${vacancyFormId}_field_65906_1"
   def techSkillsHeaderId                      = s"${vacancyFormId}_label_66915_1"
   def techSkillsScoringGuideId                = s"${vacancyFormId}_label_153588_1"
   def techSkillOneTitleId                     = s"${vacancyFormId}_label_66597_1"
   def techSkillOneScoreId                     = s"select2-${vacancyFormId}_datafield_66573_1_1-container"
   def techSkillOneCommentsId                  = s"${vacancyFormId}_datafield_66525_1_1"
-  def techSkillTwoTitleId = s"${vacancyFormId}_label_66600_1"
-  def techSkillTwoScoreId = s"select2-${vacancyFormId}_datafield_66576_1_1-container"
-  def techSkillTwoCommentsId = s"${vacancyFormId}_datafield_66531_1_1"
-  def techSkillThreeTitleId = s"${vacancyFormId}_label_66603_1"
-  def techSkillThreeScoreId = s"select2-${vacancyFormId}_datafield_66579_1_1-container"
-  def techSkillThreeCommentsId = s"${vacancyFormId}_datafield_66537_1_1"
-  def techSkillFourTitleId = s"${vacancyFormId}_label_66606_1"
-  def techSkillFourScoreId = s"select2-${vacancyFormId}_datafield_66582_1_1-container"
-  def techSkillFourCommentsId = s"${vacancyFormId}_datafield_66543_1_1"
-  def techSkillFiveTitleId = s"${vacancyFormId}_label_66609_1"
-  def techSkillFiveScoreId = s"select2-${vacancyFormId}_datafield_66585_1_1-container"
-  def techSkillFiveCommentsId = s"${vacancyFormId}_datafield_66549_1_1"
-  def techSkillSixTitleId = s"${vacancyFormId}_label_66612_1"
-  def techSkillSixScoreId = s"select2-${vacancyFormId}_datafield_66588_1_1-container"
-  def techSkillSixCommentsId = s"${vacancyFormId}_datafield_66555_1_1"
-  def techSkillSevenTitleId = s"${vacancyFormId}_label_66615_1"
-  def techSkillSevenScoreId = s"select2-${vacancyFormId}_datafield_66591_1_1-container"
-  def techSkillSevenCommentsId = s"${vacancyFormId}_datafield_66561_1_1"
-  def techSkillEightTitleId = s"${vacancyFormId}_label_66618_1"
-  def techSkillEightScoreId = s"select2-${vacancyFormId}_datafield_66594_1_1-container"
-  def techSkillEightCommentsId = s"${vacancyFormId}_datafield_66567_1_1"
+  def techSkillTwoTitleId                     = s"${vacancyFormId}_label_66600_1"
+  def techSkillTwoScoreId                     = s"select2-${vacancyFormId}_datafield_66576_1_1-container"
+  def techSkillTwoCommentsId                  = s"${vacancyFormId}_datafield_66531_1_1"
+  def techSkillThreeTitleId                   = s"${vacancyFormId}_label_66603_1"
+  def techSkillThreeScoreId                   = s"select2-${vacancyFormId}_datafield_66579_1_1-container"
+  def techSkillThreeCommentsId                = s"${vacancyFormId}_datafield_66537_1_1"
+  def techSkillFourTitleId                    = s"${vacancyFormId}_label_66606_1"
+  def techSkillFourScoreId                    = s"select2-${vacancyFormId}_datafield_66582_1_1-container"
+  def techSkillFourCommentsId                 = s"${vacancyFormId}_datafield_66543_1_1"
+  def techSkillFiveTitleId                    = s"${vacancyFormId}_label_66609_1"
+  def techSkillFiveScoreId                    = s"select2-${vacancyFormId}_datafield_66585_1_1-container"
+  def techSkillFiveCommentsId                 = s"${vacancyFormId}_datafield_66549_1_1"
+  def techSkillSixTitleId                     = s"${vacancyFormId}_label_66612_1"
+  def techSkillSixScoreId                     = s"select2-${vacancyFormId}_datafield_66588_1_1-container"
+  def techSkillSixCommentsId                  = s"${vacancyFormId}_datafield_66555_1_1"
+  def techSkillSevenTitleId                   = s"${vacancyFormId}_label_66615_1"
+  def techSkillSevenScoreId                   = s"select2-${vacancyFormId}_datafield_66591_1_1-container"
+  def techSkillSevenCommentsId                = s"${vacancyFormId}_datafield_66561_1_1"
+  def techSkillEightTitleId                   = s"${vacancyFormId}_label_66618_1"
+  def techSkillEightScoreId                   = s"select2-${vacancyFormId}_datafield_66594_1_1-container"
+  def techSkillEightCommentsId                = s"${vacancyFormId}_datafield_66567_1_1"
+  def techSkillTotalScoreId                   = s"${vacancyFormId}_field_66891_1"
+  def cvAssessmentTitleId                     = s"${vacancyFormId}_label_66191_1"
+  def cvAssessmentScoreId                     = s"select2-${vacancyFormId}_datafield_109033_1_1-container"
+  def cvAssessmentCommentsId                  = s"${vacancyFormId}_datafield_66204_1_1"
+  def personalStatementTitleId                = s"${vacancyFormId}_label_66211_1"
+  def personalStatementScoreId                = s"select2-${vacancyFormId}_datafield_187935_1_1-container"
+  def personalStatementCommentsId             = s"${vacancyFormId}_datafield_66223_1_1"
+  def overallScoreTitleId                     = s"${vacancyFormId}_label_66230_1"
+  def overallScoreId                          = s"${vacancyFormId}_field_66238_1"
+  def overallCommentsId                       = s"${vacancyFormId}_datafield_66491_1_1"
+  def outcomeTitleId                          = s"${vacancyFormId}_label_66483_1"
+  def outcomeId                               = s"select2-${vacancyFormId}_datafield_66487_1_1-container"
+  def declarationStatementId                  = s"${vacancyFormId}_label_66498_1"
 
   def enterOutcome(
     titleId: String,
@@ -115,7 +135,7 @@ object SiftEvaluationTab extends VacancyBasePage {
 
   private def enterBehaviourOneOutcome(siftDetails: SiftDetails): Unit = {
     waitForVisibilityOfElementById(behaviourAssessmentHeaderId).getText shouldEqual "Behaviour assessment"
-//     waitForVisibilityOfElementById(behaviourScoringGuideId).getText     shouldEqual siftDetails.scoringGuide
+    waitForVisibilityOfElementById(behaviourScoringGuideId).getText     shouldEqual siftDetails.scoringGuide
     enterOutcome(
       behaviourOneTitleId,
       vXListOfChosenBehaviours.head,
@@ -214,10 +234,9 @@ object SiftEvaluationTab extends VacancyBasePage {
     vXBehavioursTotalScore += siftDetails.behaviourEight.map(_.score).get
   }
 
-  private def totalScoreForBehaviour(): Int = {
+  private def totalScore(runningScore: ListBuffer[Int]): Int = {
     var score = 0
-    vXBehavioursTotalScore.foreach(score += _)
-    println(score)
+    runningScore.foreach(score += _)
     score
   }
 
@@ -237,13 +256,16 @@ object SiftEvaluationTab extends VacancyBasePage {
       behaviourOutcome.take(vXHowManyBehaviours).foreach { f =>
         f(siftDetails)
       }
-      waitForVisibilityOfElementById(behaviourTotalScoreId).getText.toInt shouldEqual totalScoreForBehaviour()
+      println(s"behaviour score = ${totalScore(vXBehavioursTotalScore)}")
+      waitForVisibilityOfElementById(
+        behaviourTotalScoreId
+      ).getText shouldEqual s"Behaviour total score\n  ${totalScore(vXBehavioursTotalScore)}"
     }
 
   private def enterTechSkillOneOutcome(siftDetails: SiftDetails): Unit = {
     scrollToElement(By.id(techSkillsHeaderId))
-    waitForVisibilityOfElementById(techSkillsHeaderId).getText shouldEqual "Technical skills"
-//    waitForVisibilityOfElementById(techSkillsScoringGuideId).getText shouldEqual siftDetails.scoringGuide
+    waitForVisibilityOfElementById(techSkillsHeaderId).getText       shouldEqual "Technical skills"
+    waitForVisibilityOfElementById(techSkillsScoringGuideId).getText shouldEqual siftDetails.scoringGuide
     enterOutcome(
       techSkillOneTitleId,
       vXListOfTechSkills.head,
@@ -356,11 +378,63 @@ object SiftEvaluationTab extends VacancyBasePage {
       skillOutcome.take(vXHowManySkills).foreach { f =>
         f(siftDetails)
       }
+      println(s"tech skill score = ${totalScore(vXTechSkillsTotalScore)}")
+      waitForVisibilityOfElementById(
+        techSkillTotalScoreId
+      ).getText shouldEqual s"Technical skill total score\n  ${totalScore(vXTechSkillsTotalScore)}"
     }
+
+  private def enterCVAssessmentOutcome(siftDetails: SiftDetails): Unit = {
+    enterOutcome(
+      cvAssessmentTitleId,
+      "CV assessment",
+      cvAssessmentScoreId,
+      siftDetails.cvAssessment.map(_.score).get,
+      cvAssessmentCommentsId,
+      siftDetails.cvAssessment.map(_.comment).get
+    )
+    vXCVAssessmentScore = siftDetails.cvAssessment.map(_.score).get
+    println(s"cv assessment score = $vXCVAssessmentScore")
+  }
+
+  private def enterPersonalStatementOutcome(siftDetails: SiftDetails): Unit = {
+    enterOutcome(
+      personalStatementTitleId,
+      "Personal statement",
+      personalStatementScoreId,
+      siftDetails.personalStatement.map(_.score).get,
+      personalStatementCommentsId,
+      siftDetails.personalStatement.map(_.comment).get
+    )
+    vXPersonalStatementScore = siftDetails.personalStatement.map(_.score).get
+    println(s"personal statement score = $vXPersonalStatementScore")
+  }
+
+  private def enterOverallScore(siftDetails: SiftDetails): Unit = {
+    waitForVisibilityOfElementById(overallScoreTitleId).getText shouldEqual "Overall score"
+    enterText(overallCommentsId, siftDetails.overallScoreComments)
+    val overallScore = totalScore(vXBehavioursTotalScore) + totalScore(
+      vXTechSkillsTotalScore
+    ) + vXCVAssessmentScore + vXPersonalStatementScore
+    println(s"overall score = $overallScore")
+    waitForVisibilityOfElementById(overallScoreId).getText shouldEqual s"Overall score\n  $overallScore"
+  }
+
+  private def enterOutcome(siftDetails: SiftDetails): Unit = {
+    waitForVisibilityOfElementById(outcomeTitleId).getText         shouldEqual "Outcome"
+    waitForVisibilityOfElementById(outcomeId).click()
+    action().moveToElement(waitForDropdownOption(siftDetails.finalOutcome)).perform()
+    waitForDropdownOption(siftDetails.finalOutcome).click()
+    waitForVisibilityOfElementById(declarationStatementId).getText shouldEqual siftDetails.declarationStatement
+  }
 
   private val sift: Seq[SiftDetails => Unit] = Seq(
     behavioursOutcome,
-    techSkillOutcome
+    techSkillOutcome,
+    enterCVAssessmentOutcome,
+    enterPersonalStatementOutcome,
+    enterOverallScore,
+    enterOutcome
   )
 
   def SiftEvaluationFlow(applicationSummaryDetails: ApplicationSummaryDetails): Unit = {

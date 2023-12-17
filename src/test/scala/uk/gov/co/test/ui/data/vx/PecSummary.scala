@@ -52,7 +52,7 @@ object APPLICATION_PRE_SIFT_EVALUATION
 
 object APPLICATION_SIFT_EVALUATION
     extends SiftDetails(
-      "Not demonstrated -No positive evidence and/or substantial negative evidence demonstrated\nMinimal demonstration -Limited positive evidence and/or mainly negative evidence demonstrated\nModerate demonstration -Moderate positive evidence but some negative evidence demonstrated\nAcceptable demonstration - Adequate positive evidence and any negative evidence would not cause concern\nGood demonstration - Substantial positive evidence of the competency or behaviour\nStrong demonstration - Substantial positive evidence; includes some evidence of exceeding expectations at this level\nOutstanding demonstration - The evidence provided wholly exceeds expectation at this level",
+      "Scoring guide:\nNot demonstrated -No positive evidence and/or substantial negative evidence demonstrated\nMinimal demonstration -Limited positive evidence and/or mainly negative evidence demonstrated\nModerate demonstration -Moderate positive evidence but some negative evidence demonstrated\nAcceptable demonstration - Adequate positive evidence and any negative evidence would not cause concern\nGood demonstration - Substantial positive evidence of the competency or behaviour\nStrong demonstration - Substantial positive evidence; includes some evidence of exceeding expectations at this level\nOutstanding demonstration - The evidence provided wholly exceeds expectation at this level",
       behaviourOne = Some(Outcome(6, "Autotest - Changing and Improving - behaviour one comments")),
       behaviourTwo = Some(Outcome(7, "Autotest - Communicating and Influencing - behaviour two comments")),
       behaviourThree = Some(Outcome(5, "Autotest - Delivering at Pace - behaviour three comments")),
@@ -68,5 +68,10 @@ object APPLICATION_SIFT_EVALUATION
       techSkillFive = Some(Outcome(6, "Autotest - Tech Skill Five - tech skill five comments")),
       techSkillSix = Some(Outcome(7, "Autotest - Tech Skill Six - tech skill six comments")),
       techSkillSeven = Some(Outcome(6, "Autotest - Tech Skill Seven - tech skill seven comments")),
-      techSkillEight = Some(Outcome(7, "Autotest - Tech Skill Eight - tech skill eight comments"))
+      techSkillEight = Some(Outcome(7, "Autotest - Tech Skill Eight - tech skill eight comments")),
+      cvAssessment = Some(Outcome(7, "Autotest - cv assessment comments")),
+      personalStatement = Some(Outcome(7, "Autotest - personal statement comments")),
+      "Autotest - overall comments",
+      "Progress",
+      "Declaration\n\nBy submitting this form you are agreeing to and accepting that you have no conflict of interest with this applicant and the evaluation reflects the views of all the selection panel members."
     )
