@@ -52,7 +52,14 @@ object APPLICATION_PRE_SIFT_EVALUATION
 
 object APPLICATION_SIFT_EVALUATION
     extends SiftDetails(
-      "Scoring guide:\nNot demonstrated -No positive evidence and/or substantial negative evidence demonstrated\nMinimal demonstration -Limited positive evidence and/or mainly negative evidence demonstrated\nModerate demonstration -Moderate positive evidence but some negative evidence demonstrated\nAcceptable demonstration - Adequate positive evidence and any negative evidence would not cause concern\nGood demonstration - Substantial positive evidence of the competency or behaviour\nStrong demonstration - Substantial positive evidence; includes some evidence of exceeding expectations at this level\nOutstanding demonstration - The evidence provided wholly exceeds expectation at this level",
+      """Scoring guide:
+        |Not demonstrated -No positive evidence and/or substantial negative evidence demonstrated
+        |Minimal demonstration -Limited positive evidence and/or mainly negative evidence demonstrated
+        |Moderate demonstration -Moderate positive evidence but some negative evidence demonstrated
+        |Acceptable demonstration - Adequate positive evidence and any negative evidence would not cause concern
+        |Good demonstration - Substantial positive evidence of the competency or behaviour
+        |Strong demonstration - Substantial positive evidence; includes some evidence of exceeding expectations at this level
+        |Outstanding demonstration - The evidence provided wholly exceeds expectation at this level""".stripMargin,
       behaviourOne = Some(Outcome(6, "Autotest - Changing and Improving - behaviour one comments")),
       behaviourTwo = Some(Outcome(7, "Autotest - Communicating and Influencing - behaviour two comments")),
       behaviourThree = Some(Outcome(5, "Autotest - Delivering at Pace - behaviour three comments")),

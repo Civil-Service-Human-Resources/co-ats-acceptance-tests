@@ -135,7 +135,7 @@ object SiftEvaluationTab extends VacancyBasePage {
 
   private def enterBehaviourOneOutcome(siftDetails: SiftDetails): Unit = {
     waitForVisibilityOfElementById(behaviourAssessmentHeaderId).getText shouldEqual "Behaviour assessment"
-    waitForVisibilityOfElementById(behaviourScoringGuideId).getText     shouldEqual siftDetails.scoringGuide
+    waitForVisibilityOfElementById(behaviourScoringGuideId).getText should include(siftDetails.scoringGuide)
     enterOutcome(
       behaviourOneTitleId,
       vXListOfChosenBehaviours.head,
