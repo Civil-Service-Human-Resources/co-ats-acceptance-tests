@@ -9,28 +9,28 @@ import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.vacancyF
 
 import scala.collection.mutable.ListBuffer
 
-case class Outcome(score: Int, comment: String)
+case class Outcome(score: Int, comment: Option[String] = None)
 
 case class SiftDetails(
   scoringGuide: String,
-  behaviourOne: Option[Outcome] = None,
-  behaviourTwo: Option[Outcome] = None,
-  behaviourThree: Option[Outcome] = None,
-  behaviourFour: Option[Outcome] = None,
-  behaviourFive: Option[Outcome] = None,
-  behaviourSix: Option[Outcome] = None,
-  behaviourSeven: Option[Outcome] = None,
-  behaviourEight: Option[Outcome] = None,
-  techSkillOne: Option[Outcome] = None,
-  techSkillTwo: Option[Outcome] = None,
-  techSkillThree: Option[Outcome] = None,
-  techSkillFour: Option[Outcome] = None,
-  techSkillFive: Option[Outcome] = None,
-  techSkillSix: Option[Outcome] = None,
-  techSkillSeven: Option[Outcome] = None,
-  techSkillEight: Option[Outcome] = None,
-  cvAssessment: Option[Outcome] = None,
-  personalStatement: Option[Outcome] = None,
+  behaviourOne: Outcome,
+  behaviourTwo: Outcome,
+  behaviourThree: Outcome,
+  behaviourFour: Outcome,
+  behaviourFive: Outcome,
+  behaviourSix: Outcome,
+  behaviourSeven: Outcome,
+  behaviourEight: Outcome,
+  techSkillOne: Outcome,
+  techSkillTwo: Outcome,
+  techSkillThree: Outcome,
+  techSkillFour: Outcome,
+  techSkillFive: Outcome,
+  techSkillSix: Outcome,
+  techSkillSeven: Outcome,
+  techSkillEight: Outcome,
+  cvAssessment: Outcome,
+  personalStatement: Outcome,
   overallScoreComments: String,
   finalOutcome: String,
   declarationStatement: String
@@ -117,13 +117,15 @@ object SiftEvaluationTab extends VacancyBasePage {
     scoreId: String,
     score: Int,
     commentsId: String,
-    comment: String
+    comment: Option[String] = None
   ): Unit = {
     waitForVisibilityOfElementById(titleId).getText shouldEqual expectedTitle
     waitForVisibilityOfElementById(scoreId).click()
     action().moveToElement(waitForDropdownOption(score.toString)).perform()
     waitForDropdownOption(score.toString).click()
-    enterText(commentsId, comment)
+    if (comment.isDefined) {
+      enterText(commentsId, comment.get)
+    }
   }
 
   private def moveSiftEvaluationForm(): Unit = {
@@ -135,17 +137,17 @@ object SiftEvaluationTab extends VacancyBasePage {
 
   private def enterBehaviourOneOutcome(siftDetails: SiftDetails): Unit = {
     waitForVisibilityOfElementById(behaviourAssessmentHeaderId).getText shouldEqual "Behaviour assessment"
-    waitForVisibilityOfElementById(behaviourScoringGuideId).getText should include(siftDetails.scoringGuide)
+    waitForVisibilityOfElementById(behaviourScoringGuideId).getText          should include(siftDetails.scoringGuide)
     enterOutcome(
       behaviourOneTitleId,
       vXListOfChosenBehaviours.head,
       behaviourOneScoreId,
-      siftDetails.behaviourOne.map(_.score).get,
+      siftDetails.behaviourOne.score,
       behaviourOneCommentsId,
-      siftDetails.behaviourOne.map(_.comment).get
+      siftDetails.behaviourOne.comment
     )
     vXBehavioursTotalScore.clear()
-    vXBehavioursTotalScore += siftDetails.behaviourOne.map(_.score).get
+    vXBehavioursTotalScore += siftDetails.behaviourOne.score
   }
 
   private def enterBehaviourTwoOutcome(siftDetails: SiftDetails): Unit = {
@@ -153,11 +155,11 @@ object SiftEvaluationTab extends VacancyBasePage {
       behaviourTwoTitleId,
       vXListOfChosenBehaviours(1),
       behaviourTwoScoreId,
-      siftDetails.behaviourTwo.map(_.score).get,
+      siftDetails.behaviourTwo.score,
       behaviourTwoCommentsId,
-      siftDetails.behaviourTwo.map(_.comment).get
+      siftDetails.behaviourTwo.comment
     )
-    vXBehavioursTotalScore += siftDetails.behaviourTwo.map(_.score).get
+    vXBehavioursTotalScore += siftDetails.behaviourTwo.score
   }
 
   private def enterBehaviourThreeOutcome(siftDetails: SiftDetails): Unit = {
@@ -165,11 +167,11 @@ object SiftEvaluationTab extends VacancyBasePage {
       behaviourThreeTitleId,
       vXListOfChosenBehaviours(2),
       behaviourThreeScoreId,
-      siftDetails.behaviourThree.map(_.score).get,
+      siftDetails.behaviourThree.score,
       behaviourThreeCommentsId,
-      siftDetails.behaviourThree.map(_.comment).get
+      siftDetails.behaviourThree.comment
     )
-    vXBehavioursTotalScore += siftDetails.behaviourThree.map(_.score).get
+    vXBehavioursTotalScore += siftDetails.behaviourThree.score
   }
 
   private def enterBehaviourFourOutcome(siftDetails: SiftDetails): Unit = {
@@ -178,11 +180,11 @@ object SiftEvaluationTab extends VacancyBasePage {
       behaviourFourTitleId,
       vXListOfChosenBehaviours(3),
       behaviourFourScoreId,
-      siftDetails.behaviourFour.map(_.score).get,
+      siftDetails.behaviourFour.score,
       behaviourFourCommentsId,
-      siftDetails.behaviourFour.map(_.comment).get
+      siftDetails.behaviourFour.comment
     )
-    vXBehavioursTotalScore += siftDetails.behaviourFour.map(_.score).get
+    vXBehavioursTotalScore += siftDetails.behaviourFour.score
   }
 
   private def enterBehaviourFiveOutcome(siftDetails: SiftDetails): Unit = {
@@ -190,11 +192,11 @@ object SiftEvaluationTab extends VacancyBasePage {
       behaviourFiveTitleId,
       vXListOfChosenBehaviours(4),
       behaviourFiveScoreId,
-      siftDetails.behaviourFive.map(_.score).get,
+      siftDetails.behaviourFive.score,
       behaviourFiveCommentsId,
-      siftDetails.behaviourFive.map(_.comment).get
+      siftDetails.behaviourFive.comment
     )
-    vXBehavioursTotalScore += siftDetails.behaviourFive.map(_.score).get
+    vXBehavioursTotalScore += siftDetails.behaviourFive.score
   }
 
   private def enterBehaviourSixOutcome(siftDetails: SiftDetails): Unit = {
@@ -203,11 +205,11 @@ object SiftEvaluationTab extends VacancyBasePage {
       behaviourSixTitleId,
       vXListOfChosenBehaviours(5),
       behaviourSixScoreId,
-      siftDetails.behaviourSix.map(_.score).get,
+      siftDetails.behaviourSix.score,
       behaviourSixCommentsId,
-      siftDetails.behaviourSix.map(_.comment).get
+      siftDetails.behaviourSix.comment
     )
-    vXBehavioursTotalScore += siftDetails.behaviourSix.map(_.score).get
+    vXBehavioursTotalScore += siftDetails.behaviourSix.score
   }
 
   private def enterBehaviourSevenOutcome(siftDetails: SiftDetails): Unit = {
@@ -215,11 +217,11 @@ object SiftEvaluationTab extends VacancyBasePage {
       behaviourSevenTitleId,
       vXListOfChosenBehaviours(6),
       behaviourSevenScoreId,
-      siftDetails.behaviourSeven.map(_.score).get,
+      siftDetails.behaviourSeven.score,
       behaviourSevenCommentsId,
-      siftDetails.behaviourSeven.map(_.comment).get
+      siftDetails.behaviourSeven.comment
     )
-    vXBehavioursTotalScore += siftDetails.behaviourSeven.map(_.score).get
+    vXBehavioursTotalScore += siftDetails.behaviourSeven.score
   }
 
   private def enterBehaviourEightOutcome(siftDetails: SiftDetails): Unit = {
@@ -227,11 +229,11 @@ object SiftEvaluationTab extends VacancyBasePage {
       behaviourEightTitleId,
       vXListOfChosenBehaviours(7),
       behaviourEightScoreId,
-      siftDetails.behaviourEight.map(_.score).get,
+      siftDetails.behaviourEight.score,
       behaviourEightCommentsId,
-      siftDetails.behaviourEight.map(_.comment).get
+      siftDetails.behaviourEight.comment
     )
-    vXBehavioursTotalScore += siftDetails.behaviourEight.map(_.score).get
+    vXBehavioursTotalScore += siftDetails.behaviourEight.score
   }
 
   private def totalScore(runningScore: ListBuffer[Int]): Int = {
@@ -264,18 +266,18 @@ object SiftEvaluationTab extends VacancyBasePage {
 
   private def enterTechSkillOneOutcome(siftDetails: SiftDetails): Unit = {
     scrollToElement(By.id(techSkillsHeaderId))
-    waitForVisibilityOfElementById(techSkillsHeaderId).getText       shouldEqual "Technical skills"
-    waitForVisibilityOfElementById(techSkillsScoringGuideId).getText shouldEqual siftDetails.scoringGuide
+    waitForVisibilityOfElementById(techSkillsHeaderId).getText  shouldEqual "Technical skills"
+    waitForVisibilityOfElementById(techSkillsScoringGuideId).getText should include(siftDetails.scoringGuide)
     enterOutcome(
       techSkillOneTitleId,
       vXListOfTechSkills.head,
       techSkillOneScoreId,
-      siftDetails.techSkillOne.map(_.score).get,
+      siftDetails.techSkillOne.score,
       techSkillOneCommentsId,
-      siftDetails.techSkillOne.map(_.comment).get
+      siftDetails.techSkillOne.comment
     )
     vXTechSkillsTotalScore.clear()
-    vXTechSkillsTotalScore += siftDetails.techSkillOne.map(_.score).get
+    vXTechSkillsTotalScore += siftDetails.techSkillOne.score
   }
 
   private def enterTechSkillTwoOutcome(siftDetails: SiftDetails): Unit = {
@@ -283,11 +285,11 @@ object SiftEvaluationTab extends VacancyBasePage {
       techSkillTwoTitleId,
       vXListOfTechSkills(1),
       techSkillTwoScoreId,
-      siftDetails.techSkillTwo.map(_.score).get,
+      siftDetails.techSkillTwo.score,
       techSkillTwoCommentsId,
-      siftDetails.techSkillTwo.map(_.comment).get
+      siftDetails.techSkillTwo.comment
     )
-    vXTechSkillsTotalScore += siftDetails.techSkillTwo.map(_.score).get
+    vXTechSkillsTotalScore += siftDetails.techSkillTwo.score
   }
 
   private def enterTechSkillThreeOutcome(siftDetails: SiftDetails): Unit = {
@@ -295,11 +297,11 @@ object SiftEvaluationTab extends VacancyBasePage {
       techSkillThreeTitleId,
       vXListOfTechSkills(2),
       techSkillThreeScoreId,
-      siftDetails.techSkillThree.map(_.score).get,
+      siftDetails.techSkillThree.score,
       techSkillThreeCommentsId,
-      siftDetails.techSkillThree.map(_.comment).get
+      siftDetails.techSkillThree.comment
     )
-    vXTechSkillsTotalScore += siftDetails.techSkillThree.map(_.score).get
+    vXTechSkillsTotalScore += siftDetails.techSkillThree.score
   }
 
   private def enterTechSkillFourOutcome(siftDetails: SiftDetails): Unit = {
@@ -307,11 +309,11 @@ object SiftEvaluationTab extends VacancyBasePage {
       techSkillFourTitleId,
       vXListOfTechSkills(3),
       techSkillFourScoreId,
-      siftDetails.techSkillFour.map(_.score).get,
+      siftDetails.techSkillFour.score,
       techSkillFourCommentsId,
-      siftDetails.techSkillFour.map(_.comment).get
+      siftDetails.techSkillFour.comment
     )
-    vXTechSkillsTotalScore += siftDetails.techSkillFour.map(_.score).get
+    vXTechSkillsTotalScore += siftDetails.techSkillFour.score
   }
 
   private def enterTechSkillFiveOutcome(siftDetails: SiftDetails): Unit = {
@@ -319,11 +321,11 @@ object SiftEvaluationTab extends VacancyBasePage {
       techSkillFiveTitleId,
       vXListOfTechSkills(4),
       techSkillFiveScoreId,
-      siftDetails.techSkillFive.map(_.score).get,
+      siftDetails.techSkillFive.score,
       techSkillFiveCommentsId,
-      siftDetails.techSkillFive.map(_.comment).get
+      siftDetails.techSkillFive.comment
     )
-    vXTechSkillsTotalScore += siftDetails.techSkillFive.map(_.score).get
+    vXTechSkillsTotalScore += siftDetails.techSkillFive.score
   }
 
   private def enterTechSkillSixOutcome(siftDetails: SiftDetails): Unit = {
@@ -331,11 +333,11 @@ object SiftEvaluationTab extends VacancyBasePage {
       techSkillSixTitleId,
       vXListOfTechSkills(5),
       techSkillSixScoreId,
-      siftDetails.techSkillSix.map(_.score).get,
+      siftDetails.techSkillSix.score,
       techSkillSixCommentsId,
-      siftDetails.techSkillSix.map(_.comment).get
+      siftDetails.techSkillSix.comment
     )
-    vXTechSkillsTotalScore += siftDetails.techSkillSix.map(_.score).get
+    vXTechSkillsTotalScore += siftDetails.techSkillSix.score
   }
 
   private def enterTechSkillSevenOutcome(siftDetails: SiftDetails): Unit = {
@@ -343,11 +345,11 @@ object SiftEvaluationTab extends VacancyBasePage {
       techSkillSevenTitleId,
       vXListOfTechSkills(6),
       techSkillSevenScoreId,
-      siftDetails.techSkillSeven.map(_.score).get,
+      siftDetails.techSkillSeven.score,
       techSkillSevenCommentsId,
-      siftDetails.techSkillSeven.map(_.comment).get
+      siftDetails.techSkillSeven.comment
     )
-    vXTechSkillsTotalScore += siftDetails.techSkillSeven.map(_.score).get
+    vXTechSkillsTotalScore += siftDetails.techSkillSeven.score
   }
 
   private def enterTechSkillEightOutcome(siftDetails: SiftDetails): Unit = {
@@ -355,11 +357,11 @@ object SiftEvaluationTab extends VacancyBasePage {
       techSkillEightTitleId,
       vXListOfTechSkills(7),
       techSkillEightScoreId,
-      siftDetails.techSkillEight.map(_.score).get,
+      siftDetails.techSkillEight.score,
       techSkillEightCommentsId,
-      siftDetails.techSkillEight.map(_.comment).get
+      siftDetails.techSkillEight.comment
     )
-    vXTechSkillsTotalScore += siftDetails.techSkillEight.map(_.score).get
+    vXTechSkillsTotalScore += siftDetails.techSkillEight.score
   }
 
   private val skillOutcome: Seq[SiftDetails => Unit] = Seq(
@@ -389,11 +391,11 @@ object SiftEvaluationTab extends VacancyBasePage {
       cvAssessmentTitleId,
       "CV assessment",
       cvAssessmentScoreId,
-      siftDetails.cvAssessment.map(_.score).get,
+      siftDetails.cvAssessment.score,
       cvAssessmentCommentsId,
-      siftDetails.cvAssessment.map(_.comment).get
+      siftDetails.cvAssessment.comment
     )
-    vXCVAssessmentScore = siftDetails.cvAssessment.map(_.score).get
+    vXCVAssessmentScore = siftDetails.cvAssessment.score
     println(s"cv assessment score = $vXCVAssessmentScore")
   }
 
@@ -402,11 +404,11 @@ object SiftEvaluationTab extends VacancyBasePage {
       personalStatementTitleId,
       "Personal statement",
       personalStatementScoreId,
-      siftDetails.personalStatement.map(_.score).get,
+      siftDetails.personalStatement.score,
       personalStatementCommentsId,
-      siftDetails.personalStatement.map(_.comment).get
+      siftDetails.personalStatement.comment
     )
-    vXPersonalStatementScore = siftDetails.personalStatement.map(_.score).get
+    vXPersonalStatementScore = siftDetails.personalStatement.score
     println(s"personal statement score = $vXPersonalStatementScore")
   }
 
