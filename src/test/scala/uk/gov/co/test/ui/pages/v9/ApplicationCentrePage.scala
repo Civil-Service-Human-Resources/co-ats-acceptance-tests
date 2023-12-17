@@ -144,7 +144,8 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
     waitForVisibilityOfElementByPath(applicationLinkPath).click()
 
   def candidateAcceptsOffer(): Unit = {
-    switchToSecondWindow()
+//    switchToSecondWindow()
+    switchToFirstWindow()
     driver.navigate().to(TestConfiguration.urlHost("vxconfig") + "/vx/lang-en-GB/candidate/application")
     reviewUpdateValue().click()
     confirmProvisionalOffer()

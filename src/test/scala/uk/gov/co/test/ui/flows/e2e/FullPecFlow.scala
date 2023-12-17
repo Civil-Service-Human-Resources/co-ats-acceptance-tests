@@ -25,6 +25,7 @@ object FullPecFlow extends CivilServiceJobsBasePage {
     navigateToApplicationSummary(),
     PreSiftEvaluationFlow(APPLICATION_SUMMARY_DATA),
     SiftEvaluationFlow(APPLICATION_SUMMARY_DATA),
+    //TODO more flows here before progressing to offer!
     progressApplicationToOffer(),
     candidateAcceptsOffer(),
     offerDecisionFlow("Accept"),

@@ -55,7 +55,7 @@ trait VacancyBasePage extends Matchers with BasePage with BrowserDriver {
   def enterPassword(recruiterDetails: RecruiterDetails): Unit =
     password().value = recruiterDetails.password
 
-  def loginProcess(): Unit =
+  def vxLogin(): Unit =
     waitForElementToBeClickableByPath(loginButtonPath).click()
 
   def userProfile(): WebElement = waitForElementToBeClickableByPath(userProfilePath)
@@ -168,14 +168,13 @@ trait VacancyBasePage extends Matchers with BasePage with BrowserDriver {
 
   def switchToCandidatePages(): Unit = {
     openNewTabWithJavascript()
-    openNewWindow()
+    switchToNewWindow()
     navigateToV9Test()
     if (!v9SearchCookiesById().isEmpty) v9AcceptAllCookies()
   }
 
   def switchToVXConfig(): Unit = {
     openAndSaveWindows()
-    navigateToVxConfigLogin()
     loginWithRecruiterDetails(RECRUITER)
   }
 

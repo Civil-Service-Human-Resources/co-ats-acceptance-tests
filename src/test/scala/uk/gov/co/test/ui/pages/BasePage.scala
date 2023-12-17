@@ -9,7 +9,6 @@ import org.scalatest.concurrent.PatienceConfiguration
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.time.{Millis, Seconds, Span}
 import org.scalatestplus.selenium.{Page, WebBrowser}
-import uk.gov.co.test.ui.pages.vx.DashboardPage.getOs
 
 import java.util
 import java.util.UUID
@@ -20,8 +19,9 @@ case class PageNotFoundException(s: String) extends Exception(s)
 
 trait BasePage extends Matchers with Page with WebBrowser with PatienceConfiguration {
 
-  var firstWindowHandle: String  = ""
-  var secondWindowHandle: String = ""
+  def currentWindows()(implicit driver: WebDriver): util.Set[String] = driver.getWindowHandles
+  var firstWindowHandle: String                                      = ""
+  var secondWindowHandle: String                                     = ""
 
   override implicit val patienceConfig: PatienceConfig =
     PatienceConfig(timeout = scaled(Span(30, Seconds)), interval = scaled(Span(1000, Millis)))
@@ -161,15 +161,18 @@ trait BasePage extends Matchers with Page with WebBrowser with PatienceConfigura
   def findAll(by: By)(implicit driver: WebDriver): Any = driver.findElements(by)
 
   def openWindows(expectedNumberOfWindows: Int)(implicit driver: WebDriver): Boolean = {
-    val wait = new WebDriverWait(driver, 30, 200)
+    val wait = new WebDriverWait(driver, 10, 200)
     wait.until(ExpectedConditions.numberOfWindowsToBe(expectedNumberOfWindows))
   }
 
-  def openNewWindow()(implicit driver: WebDriver): Unit = {
-    //    openWindows(2)
+  def switchToNewWindow()(implicit driver: WebDriver): Unit = {
     for (chartWindow <- driver.getWindowHandles.asScala)
       driver.switchTo.window(chartWindow)
-    println(driver.getWindowHandles)
+
+    if (openWindows(2)) {
+      firstWindowHandle = currentWindows.asScala.head
+      secondWindowHandle = currentWindows.asScala.tail.head
+    }
   }
 
   def openNewTabWithJavascript()(implicit driver: WebDriver): AnyRef = {
@@ -179,7 +182,7 @@ trait BasePage extends Matchers with Page with WebBrowser with PatienceConfigura
 
   def openAndSaveWindows()(implicit driver: WebDriver): Unit = {
     openNewTabWithJavascript()
-    openNewWindow()
+    switchToNewWindow()
   }
 
   def switchBackToWindow(windowName: String)(implicit driver: WebDriver): WebDriver =
@@ -198,7 +201,6 @@ trait BasePage extends Matchers with Page with WebBrowser with PatienceConfigura
   def refreshPage()(implicit driver: WebDriver): Unit =
     driver.navigate().refresh()
 
-  def searchFunction(eleId: String)(implicit driver: WebDriver): util.List[WebElement] = {
+  def searchFunction(eleId: String)(implicit driver: WebDriver): util.List[WebElement] =
     driver.findElements(By.id(eleId))
-  }
 }

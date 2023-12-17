@@ -258,7 +258,6 @@ object SiftEvaluationTab extends VacancyBasePage {
       behaviourOutcome.take(vXHowManyBehaviours).foreach { f =>
         f(siftDetails)
       }
-      println(s"behaviour score = ${totalScore(vXBehavioursTotalScore)}")
       waitForVisibilityOfElementById(
         behaviourTotalScoreId
       ).getText shouldEqual s"Behaviour total score\n  ${totalScore(vXBehavioursTotalScore)}"
@@ -380,7 +379,6 @@ object SiftEvaluationTab extends VacancyBasePage {
       skillOutcome.take(vXHowManySkills).foreach { f =>
         f(siftDetails)
       }
-      println(s"tech skill score = ${totalScore(vXTechSkillsTotalScore)}")
       waitForVisibilityOfElementById(
         techSkillTotalScoreId
       ).getText shouldEqual s"Technical skill total score\n  ${totalScore(vXTechSkillsTotalScore)}"
@@ -396,7 +394,6 @@ object SiftEvaluationTab extends VacancyBasePage {
       siftDetails.cvAssessment.comment
     )
     vXCVAssessmentScore = siftDetails.cvAssessment.score
-    println(s"cv assessment score = $vXCVAssessmentScore")
   }
 
   private def enterPersonalStatementOutcome(siftDetails: SiftDetails): Unit = {
@@ -409,7 +406,6 @@ object SiftEvaluationTab extends VacancyBasePage {
       siftDetails.personalStatement.comment
     )
     vXPersonalStatementScore = siftDetails.personalStatement.score
-    println(s"personal statement score = $vXPersonalStatementScore")
   }
 
   private def enterOverallScore(siftDetails: SiftDetails): Unit = {
@@ -418,7 +414,6 @@ object SiftEvaluationTab extends VacancyBasePage {
     val overallScore = totalScore(vXBehavioursTotalScore) + totalScore(
       vXTechSkillsTotalScore
     ) + vXCVAssessmentScore + vXPersonalStatementScore
-    println(s"overall score = $overallScore")
     waitForVisibilityOfElementById(overallScoreId).getText shouldEqual s"Overall score\n  $overallScore"
   }
 

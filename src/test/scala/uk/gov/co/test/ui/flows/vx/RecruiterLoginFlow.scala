@@ -12,6 +12,7 @@ object RecruiterLoginFlow extends VacancyBasePage {
   )
 
   def loginWithRecruiterDetails(recruiterDetails: RecruiterDetails): Unit = {
+    navigateToVxConfigLogin()
     if (currentUrl.startsWith(TestConfiguration.urlHost("vxconfig")) && !findUsernameField.isEmpty) {
       login.foreach { f =>
         f(recruiterDetails)
@@ -19,6 +20,6 @@ object RecruiterLoginFlow extends VacancyBasePage {
     } else if (currentUrl.startsWith(TestConfiguration.urlHost("vxconfig")) && findUsernameField.isEmpty) {
       enterPassword(recruiterDetails)
     }
-    loginProcess()
+    vxLogin()
   }
 }

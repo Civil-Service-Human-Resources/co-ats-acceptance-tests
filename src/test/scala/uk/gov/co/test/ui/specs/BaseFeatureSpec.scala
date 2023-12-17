@@ -6,8 +6,9 @@ import org.scalatest.concurrent.Eventually
 import org.scalatest.featurespec.AnyFeatureSpec
 import org.scalatest.matchers.should.Matchers
 import org.scalatestplus.selenium.WebBrowser
+import uk.gov.co.test.ui.data.vx.RECRUITER
 import uk.gov.co.test.ui.driver.BrowserDriver
-import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.navigateToVxConfigLogin
+import uk.gov.co.test.ui.flows.vx.RecruiterLoginFlow.loginWithRecruiterDetails
 import uk.gov.co.test.ui.pages.v9.SignInPage.{checkV9Logout, generateCandidateDetails, navigateToV9Test, v9AcceptAllCookies, v9SearchCookiesById}
 import uk.gov.co.test.ui.utils.SingletonScreenshotReport
 import uk.gov.co.test.ui.webdriver.SingletonDriver
@@ -34,7 +35,7 @@ trait BaseFeatureSpec
       }
     } else if (testData.name.contains("VX")) {
       generateCandidateDetails()
-      navigateToVxConfigLogin()
+      loginWithRecruiterDetails(RECRUITER)
     } else throw new IllegalStateException("Change test name in order to start up correct system")
 
   override protected def afterEach(testData: TestData): Unit =
