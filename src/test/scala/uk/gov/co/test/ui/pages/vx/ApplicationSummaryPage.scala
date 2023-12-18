@@ -35,6 +35,7 @@ object ApplicationSummaryPage extends VacancyBasePage {
   val vacancyAppliedDatePath      = ".//*[@id='collapse_panel']/span[2]"
   var appSummaryFormId            = ""
   def outcomeId                   = s"select2-${appSummaryFormId}_datafield_66487_1_1-container"
+  val messageIcon                 = ".//*[@class='msg_icon']"
 
   private def dashboardPageCheck(): Unit =
     eventually(onPage(dashboardPageTitle))
@@ -83,11 +84,25 @@ object ApplicationSummaryPage extends VacancyBasePage {
 //    clickOn("submit_button")
   }
 
+  def checkForNewStatusUpdate(previousUpdate: String): Unit =
+    while (waitForVisibilityOfElementByPath(vacancyStatusPath).getText.endsWith(previousUpdate))
+      println("Checking for status update")
+
   def preSiftCompletion(): Unit = {
-    Thread.sleep(10000)
-    waitForVisibilityOfElementByPath(vacancyStatusPath).getText shouldEqual s"StatusPre-sift complete"
+    checkForNewStatusUpdate("Pre-sift actions required")
+    checkVacancyStatus("Pre-sift complete")
+    waitForVisibilityOfElementByPath(vacancyStatusPath).getText should endWith(s"Pre-sift complete")
     availableBarItems(List(progressBarAfterPreSiftId, rejectBarAfterPreSiftId, withdrawBarId))
     waitForVisibilityOfElementById(progressBarAfterPreSiftId).click()
+  }
+
+  def siftEvaluation(): Unit = {
+    checkForNewStatusUpdate("Sift application")
+    waitForVisibilityOfElementByPath(vacancyStatusPath).getText should endWith(
+      "Sift Evaluation – Feedback Captured (Not Issued)"
+    )
+    availableBarItems(List(progressBarAfterPreSiftId, withdrawBarId))
+    waitForVisibilityOfElementById(progressBarId).click()
   }
 
   def availableBarItems(expectedBarItems: List[String]): Unit = {

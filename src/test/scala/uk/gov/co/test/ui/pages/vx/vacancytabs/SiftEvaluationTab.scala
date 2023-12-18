@@ -3,7 +3,7 @@ package uk.gov.co.test.ui.pages.vx.vacancytabs
 import org.openqa.selenium.By
 import uk.gov.co.test.ui.data.vx.ApplicationSummaryDetails
 import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXBehavioursRequired, vXHowManyBehaviours, vXHowManySkills, vXListOfChosenBehaviours, vXListOfTechSkills, vXTechSkillsRequired}
-import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.{availableBarItems, completeSiftBarId, withdrawBarId}
+import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.{availableBarItems, completeSiftBarId, siftEvaluation, withdrawBarId}
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.vacancyFormId
 
@@ -440,5 +440,7 @@ object SiftEvaluationTab extends VacancyBasePage {
       f(applicationSummaryDetails.siftDetails)
     }
     clickOn(submitForm)
+    siftEvaluation()
+    println("DOne")
   }
 }

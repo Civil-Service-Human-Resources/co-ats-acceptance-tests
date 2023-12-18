@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.pages
 
-import org.openqa.selenium._
-import org.openqa.selenium.support.ui.ExpectedConditions.{elementToBeClickable, visibilityOfElementLocated}
+import org.openqa.selenium.{By, _}
+import org.openqa.selenium.support.ui.ExpectedConditions.{attributeToBe, elementToBeClickable, visibilityOfElementLocated}
 import org.openqa.selenium.support.ui.{ExpectedCondition, ExpectedConditions, WebDriverWait}
 import org.scalactic.source.Position
 import org.scalatest.concurrent.Eventually.eventually
@@ -43,8 +43,12 @@ trait BasePage extends Matchers with Page with WebBrowser with PatienceConfigura
   def waitForVisibilityOfElementByPath(pathway: String)(implicit driver: WebDriver): WebElement = {
     val wait = new WebDriverWait(driver, 30, 200)
     wait.until(visibilityOfElementLocated(By.xpath(pathway)))
-
   }
+
+//  def confirmDataSavedEnabled()(implicit driver: WebDriver): Boolean = {
+//    val save = driver.findElements(By.xpath(".//*[@class='msg_icon']"))
+//    save.asScala.exists(_.isDisplayed)
+//  }
 
   def waitForVisibilityOfElementByPathLast(pathway: String)(implicit webDriver: WebDriver): WebElement =
     eventually {
@@ -71,7 +75,10 @@ trait BasePage extends Matchers with Page with WebBrowser with PatienceConfigura
     wait.until(visibilityOfElementLocated(By.id(id)))
   }
 
-  "#collapse_panel > span.main_status.summary-collapse"
+  def waitForVisibilityOfElementAlertByPath()(implicit driver: WebDriver): Alert = {
+    val wait = new WebDriverWait(driver, 30, 200)
+    wait.until(ExpectedConditions.alertIsPresent())
+  }
 
   def waitForVisibilityOfElement(ele: By)(implicit driver: WebDriver): WebElement = {
     val wait = new WebDriverWait(driver, 30, 200)
