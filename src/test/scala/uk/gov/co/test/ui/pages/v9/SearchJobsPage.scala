@@ -1,6 +1,7 @@
 package uk.gov.co.test.ui.pages.v9
 
-import org.openqa.selenium.{By, Keys}
+import org.openqa.selenium.support.ui.WebDriverWait
+import org.openqa.selenium.{By, Keys, WebDriver}
 import org.scalatest.concurrent.Eventually.eventually
 
 object SearchJobsPage extends CivilServiceJobsBasePage {
@@ -40,13 +41,26 @@ object SearchJobsPage extends CivilServiceJobsBasePage {
     searchField.sendKeys(jobId)
   }
 
-  def waitForVacancy(jobId: String, jobTitle: String, searchPathway: String): Unit = {
+//  def waitForVacancy(jobId: String, jobTitle: String, searchPathway: String): Unit = {
+//    val jobDetailsPath: String     = s".//a[text()='$jobTitle']"
+//    val jobListed                  = driver.findElements(By.xpath(jobDetailsPath))
+//    val oneResultReturnedPageTitle = s"1 Job found with job reference $jobId - Civil Service Jobs - GOV.UK"
+//    while (jobListed.isEmpty && driver.getTitle != oneResultReturnedPageTitle) {
+//      driver.navigate().refresh()
+//      enterSearchCriteria(jobId, searchPathway)
+//    }
+//    val title                      = waitForElementClickableByPath(jobDetailsPath)
+//    title.click()
+//  }
+
+  def checkForNewVacancy(jobId: String, jobTitle: String, searchPathway: String): Unit = {
     val jobDetailsPath: String     = s".//a[text()='$jobTitle']"
-    val jobListed                  = driver.findElements(By.xpath(jobDetailsPath))
     val oneResultReturnedPageTitle = s"1 Job found with job reference $jobId - Civil Service Jobs - GOV.UK"
-    while (jobListed.isEmpty && driver.getTitle != oneResultReturnedPageTitle) {
+    val wait                       = new WebDriverWait(driver, 210, 3000)
+    wait.until { (d: WebDriver) =>
       driver.navigate().refresh()
       enterSearchCriteria(jobId, searchPathway)
+      d.getTitle.equals(oneResultReturnedPageTitle)
     }
     val title                      = waitForElementClickableByPath(jobDetailsPath)
     title.click()
@@ -67,7 +81,8 @@ object SearchJobsPage extends CivilServiceJobsBasePage {
     waitForVisibilityOfElementByPath(navigateToHomeSearchPath).click()
     eventually(onPage(civilServiceJobsPageTitle))
     enterSearchCriteria(jobId, searchPathway)
-    waitForVacancy(jobId, jobTitle, searchPathway)
+//    waitForVacancy(jobId, jobTitle, searchPathway)
+    checkForNewVacancy(jobId, jobTitle, searchPathway)
     eventually(onPage(s"$jobTitle - Civil Service Jobs - GOV.UK"))
     clickOn("login_button")
     driver.navigate().refresh()

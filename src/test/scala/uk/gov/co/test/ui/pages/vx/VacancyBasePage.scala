@@ -188,9 +188,9 @@ trait VacancyBasePage extends Matchers with BasePage with BrowserDriver {
 
   def switchToV9Test(): Unit = {
     switchToAnotherWindow()
-//    navigateToV9Test()
-//    if (!v9SearchCookiesById().isEmpty) v9AcceptAllCookies()
-//    checkV9LogoutState()
+    navigateToV9Test()
+    if (!v9SearchCookiesById().isEmpty) v9AcceptAllCookies()
+    checkV9LogoutState()
   }
 
   def checkVacancyStatus(expectedStatus: String): Unit = {

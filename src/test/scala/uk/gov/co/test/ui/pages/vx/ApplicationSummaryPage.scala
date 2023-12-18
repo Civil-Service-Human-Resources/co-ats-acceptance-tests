@@ -22,12 +22,15 @@ object ApplicationSummaryPage extends VacancyBasePage {
   val employmentHistoryBarId      = "process_rule_but_744"
   val conditionalOfferBarId       = "process_rule_but_1024"
   val withdrawApplicationBarId    = "process_rule_but_570"
+  val withdrawApplicationAtInterviewOneBarId    = "process_rule_but_511"
   val updateApplicantBarId        = "process_rule_but_2008"
   val emailVacancyHolderBarId     = "process_rule_but_2032"
   val progressBarAfterPreSiftId   = "process_rule_but_155"
   val rejectBarAfterPreSiftId     = "process_rule_but_154"
   val withdrawBarId               = "process_rule_but_509"
   val crcBarId                    = "process_rule_but_776"
+  val inviteToInterviewOneBarId                    = "process_rule_but_162"
+  val inviteToInterviewOneOfflineBarId                    = "process_rule_but_488"
   val allBarItemsId               = "process_rules_bar"
   val preSiftActionButtonsPath    = ".//*[@aria-label='Action Buttons']"
   val siftEvaluationTabPath       = ".//span[@class='main-label' and text() = 'Sift evaluation']"
@@ -84,25 +87,26 @@ object ApplicationSummaryPage extends VacancyBasePage {
 //    clickOn("submit_button")
   }
 
-  def checkForNewStatusUpdate(previousUpdate: String): Unit =
-    while (waitForVisibilityOfElementByPath(vacancyStatusPath).getText.endsWith(previousUpdate))
-      println("Checking for status update")
+//  def checkForNewStatusUpdate(previousUpdate: String): Unit =
+//    while (waitForVisibilityOfStatusElementByPath(vacancyStatusPath).getText.endsWith(previousUpdate))
+//      println("Checking for status update")
 
   def preSiftCompletion(): Unit = {
-    checkForNewStatusUpdate("Pre-sift actions required")
-    checkVacancyStatus("Pre-sift complete")
-    waitForVisibilityOfElementByPath(vacancyStatusPath).getText should endWith(s"Pre-sift complete")
+    checkForNewStatus(vacancyStatusPath, "Pre-sift complete")
     availableBarItems(List(progressBarAfterPreSiftId, rejectBarAfterPreSiftId, withdrawBarId))
     waitForVisibilityOfElementById(progressBarAfterPreSiftId).click()
   }
 
   def siftEvaluation(): Unit = {
-    checkForNewStatusUpdate("Sift application")
-    waitForVisibilityOfElementByPath(vacancyStatusPath).getText should endWith(
-      "Sift Evaluation – Feedback Captured (Not Issued)"
-    )
-    availableBarItems(List(progressBarAfterPreSiftId, withdrawBarId))
+    checkForNewStatus(vacancyStatusPath, "Sift Evaluation – Feedback Captured (Not Issued)")
+    availableBarItems(List(progressBarId, withdrawBarId))
     waitForVisibilityOfElementById(progressBarId).click()
+  }
+
+  def interviewStageOneOnline(): Unit = {
+    checkForNewStatus(vacancyStatusPath, "Selected for Interview 1")
+    availableBarItems(List(inviteToInterviewOneBarId, inviteToInterviewOneOfflineBarId, withdrawApplicationAtInterviewOneBarId))
+    waitForVisibilityOfElementById(inviteToInterviewOneBarId).click()
   }
 
   def availableBarItems(expectedBarItems: List[String]): Unit = {
