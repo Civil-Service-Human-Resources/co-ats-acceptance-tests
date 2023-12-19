@@ -2,7 +2,7 @@ package uk.gov.co.test.ui.flows.e2e
 
 import uk.gov.co.test.ui.data.v9.pecform.MASTER_PEC_FORM_DATA
 import uk.gov.co.test.ui.data.v9.shortform.SHORT_FORM_DATA_PEC
-import uk.gov.co.test.ui.data.vx.APPLICATION_SUMMARY_DATA
+import uk.gov.co.test.ui.data.vx.APPLICATION_DATA
 import uk.gov.co.test.ui.flows.v9.PecFormFlow.fillPecFormDetailsOnly
 import uk.gov.co.test.ui.flows.v9.ShortFormFlow.fillShortFormDetails
 import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.{candidateAcceptsOffer, confirmOfferAccepted, confirmPecSubmission, confirmShortFormCompletionNoLongForm}
@@ -27,7 +27,7 @@ object PecFlow extends CivilServiceJobsBasePage {
     confirmPecSubmission(),
     navigateToApplicationSummary(),
     completeVXEmploymentHistory(),
-    EmploymentHistoryVXFlow(APPLICATION_SUMMARY_DATA)
+    EmploymentHistoryVXFlow(APPLICATION_DATA)
   )
 
   def completePecFlow(): Unit =

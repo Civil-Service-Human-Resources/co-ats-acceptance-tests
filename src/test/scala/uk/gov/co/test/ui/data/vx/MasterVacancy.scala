@@ -307,7 +307,7 @@ object MASTER_TECH_SKILLS
 
 object MASTER_VACANCY_TESTS
     extends VacancyTestsDetails(
-      true,
+      false, //only part on master vacancy set to false!
       "Online Tests",
       "Executive Officer",
       testName = Map(

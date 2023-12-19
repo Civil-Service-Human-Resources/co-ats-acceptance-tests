@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.pages.vx.vacancytabs
 
 import org.openqa.selenium.{By, WebElement}
-import uk.gov.co.test.ui.data.vx.ApplicationSummaryDetails
+import uk.gov.co.test.ui.data.vx.ApplicationDetails
 import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{v9EmployedWithin3Years, v9FirstEmployerFromDate, v9FirstEmployerName}
 import uk.gov.co.test.ui.pages.v9.longform.UploadDocumentsPage.importFilesPath
 import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.employmentHistoryBarId
@@ -269,10 +269,10 @@ object EmploymentHistoryTab extends VacancyBasePage {
     enterInternalNotes
   )
 
-  def EmploymentHistoryVXFlow(applicationSummaryDetails: ApplicationSummaryDetails): Unit = {
+  def EmploymentHistoryVXFlow(applicationDetails: ApplicationDetails): Unit = {
     completeVXEmploymentHistory()
     history.foreach { f =>
-      f(applicationSummaryDetails.historyDetails)
+      f(applicationDetails.historyDetails)
     }
     clickOn(submitForm)
   }

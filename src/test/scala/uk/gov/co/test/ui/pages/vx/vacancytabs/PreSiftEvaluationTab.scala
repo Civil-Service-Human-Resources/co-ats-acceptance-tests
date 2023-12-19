@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.pages.vx.vacancytabs
 
 import org.openqa.selenium.By
-import uk.gov.co.test.ui.data.vx.ApplicationSummaryDetails
+import uk.gov.co.test.ui.data.vx.ApplicationDetails
 import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.{preSiftCompletion, preSiftEvaluationFormBarId}
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.vacancyFormId
@@ -72,10 +72,10 @@ object PreSiftEvaluationTab extends VacancyBasePage {
     completeOutcome
   )
 
-  def PreSiftEvaluationFlow(applicationSummaryDetails: ApplicationSummaryDetails): Unit = {
+  def PreSiftEvaluationFlow(applicationDetails: ApplicationDetails): Unit = {
     completePreSiftEvaluationForm()
     preSift.foreach { f =>
-      f(applicationSummaryDetails.preSiftDetails)
+      f(applicationDetails.preSiftDetails)
     }
     waitForVisibilityOfElementById(
       declarationId

@@ -1,10 +1,10 @@
 package uk.gov.co.test.ui.pages.vx.createvacancypage
 
 import org.openqa.selenium.{By, Keys, WebElement}
-import org.scalatest.concurrent.Eventually.eventually
 import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXAppConvertedClosingDate, vXApplicationClosingDate, vXApplicationClosingTime, vXApplicationLiveDate, vXApplicationLiveTime, vXConvertedClosingDateTime, vXConvertedLiveDateTime, vacancyName}
 import uk.gov.co.test.ui.data.vx.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
+import uk.gov.co.test.ui.specs.TestData.eventually
 
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -19,8 +19,10 @@ case class BasicDetails(
 
 object BasicDetailsSection extends VacancyBasePage {
 
-  val createVacancyTitle    = "Create New Vacancy : Civil Service Jobs - GOV.UK"
   val displayWelshPath      = ".//input[@name='datafield_179408_1_1']"
+  val createVacancyTitle    = "Create New Vacancy : Civil Service Jobs - GOV.UK"
+  val newVacancyPath        = ".//a[contains(@href,'recruiter/opportunities/vacancy/create')]"
+  val vacancySectionPath    = "//*[@id='lm-vacancies']/h3/a"
   val closingDateId         = "edit_opp_form_pcd"
   val liveHourPath          = ".//select[@id='edit_opp_form_pld_hh']//option[@selected='selected']"
   val closingHourPath       = ".//select[@id='edit_opp_form_pcd_hh']//option[@selected='selected']"
@@ -34,6 +36,18 @@ object BasicDetailsSection extends VacancyBasePage {
   val updateWelshId         = "lbledit_edit_opp_form_title-update"
   var vacancyFormId: String = ""
 
+  def newVacancy: WebElement     = waitForVisibilityOfElementByPathLast(newVacancyPath)
+  def vacancySection: WebElement = waitForVisibilityOfElementByPathLast(vacancySectionPath)
+
+  def createNewVacancy(): Unit = {
+    if (newVacancy.getText == "Create New Vacancy") newVacancy.click()
+    else {
+      vacancySection.click()
+      newVacancy.click()
+    }
+    eventually(onPage(createVacancyTitle))
+  }
+
   private def displayWelshVersion(): WebElement =
     waitForVisibilityOfElementByPath(displayWelshPath)
 
@@ -42,7 +56,6 @@ object BasicDetailsSection extends VacancyBasePage {
 
   private def templateSelect: WebElement = waitForVisibilityOfElementByPath(selectTemplatePath)
   private def enterTemplate: WebElement  = waitForVisibilityOfElementByPath(enterTemplatePath)
-
 
   private def selectTemplate(basicDetails: BasicDetails): Unit = {
     templateSelect.click()

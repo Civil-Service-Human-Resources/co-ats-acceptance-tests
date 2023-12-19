@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.pages.vx.vacancytabs
 
 import org.openqa.selenium.By
-import uk.gov.co.test.ui.data.vx.ApplicationSummaryDetails
+import uk.gov.co.test.ui.data.vx.ApplicationDetails
 import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXBehavioursRequired, vXHowManyBehaviours, vXHowManySkills, vXListOfChosenBehaviours, vXListOfTechSkills, vXTechSkillsRequired}
 import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.{availableBarItems, completeSiftBarId, siftEvaluation, withdrawBarId}
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
@@ -434,13 +434,12 @@ object SiftEvaluationTab extends VacancyBasePage {
     enterOutcome
   )
 
-  def SiftEvaluationFlow(applicationSummaryDetails: ApplicationSummaryDetails): Unit = {
+  def SiftEvaluationFlow(applicationDetails: ApplicationDetails): Unit = {
     moveSiftEvaluationForm()
     sift.foreach { f =>
-      f(applicationSummaryDetails.siftDetails)
+      f(applicationDetails.siftDetails)
     }
     clickOn(submitForm)
     siftEvaluation()
-    println("DOne")
   }
 }

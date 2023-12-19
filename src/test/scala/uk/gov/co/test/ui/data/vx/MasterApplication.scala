@@ -1,20 +1,25 @@
 package uk.gov.co.test.ui.data.vx
 
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{randomFirstName, randomLastName, vacancyId}
+import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.contactEmailVxConfig
+import uk.gov.co.test.ui.pages.vx.InterviewScheduleDetails
 import uk.gov.co.test.ui.pages.vx.vacancytabs.{HistoryDetails, Outcome, PreSiftDetails, SiftDetails}
 
 import java.time.LocalDate
 
-case class ApplicationSummaryDetails(
+case class ApplicationDetails(
   historyDetails: HistoryDetails,
   preSiftDetails: PreSiftDetails,
-  siftDetails: SiftDetails
+  siftDetails: SiftDetails,
+  interviewScheduleDetails: InterviewScheduleDetails
 )
 
-object APPLICATION_SUMMARY_DATA
-    extends ApplicationSummaryDetails(
+object APPLICATION_DATA
+    extends ApplicationDetails(
       APPLICATION_EMPLOYMENT_HISTORY,
       APPLICATION_PRE_SIFT_EVALUATION,
-      APPLICATION_SIFT_EVALUATION
+      APPLICATION_SIFT_EVALUATION,
+      APPLICATION_INTERVIEW_SCHEDULE
     )
 
 object APPLICATION_EMPLOYMENT_HISTORY
@@ -81,4 +86,33 @@ object APPLICATION_SIFT_EVALUATION
       "Autotest - overall comments",
       "Progress",
       "Declaration\n\nBy submitting this form you are agreeing to and accepting that you have no conflict of interest with this applicant and the evaluation reflects the views of all the selection panel members."
+    )
+
+object APPLICATION_INTERVIEW_SCHEDULE
+    extends InterviewScheduleDetails(
+      false,
+      Some("Copy From Template"),
+      "",
+      "",
+      s"$vacancyId - Interview 1 for $randomFirstName $randomLastName",
+      true,
+      s"$vacancyId - Prawf awtomeiddio $randomFirstName $randomLastName",
+      1,
+      "Interview 1",
+      false,
+      s"$contactEmailVxConfig",
+      "Autotest - Internal notes. Please leave blank if not applicable.",
+      true,
+      "Prawf awtomeiddio",
+      "Autotest - Instructions for candidate. (Candidates will see this text. E.g. interview structure, presentation details, documents to bring, etc.)",
+      true,
+      "Prawf awtomeiddio",
+      "HMRC Government Offices Great George Street",
+      false,
+      24,
+      "Use System Default",
+      "24 Hours",
+      "Interview 1 - Invited",
+      "Interview 1 - scheduled",
+      false
     )
