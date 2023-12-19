@@ -7,7 +7,7 @@ import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.vacancyF
 case class InterviewOneDetails(
 )
 
-object ScheduleOfflineInterviewPage extends VacancyBasePage {
+object ScheduleOnlineInterviewPage extends VacancyBasePage {
 
   private lazy val offlineInterviewPageTitle =
     "Generate Communication : Schedule offline interview : Civil Service Jobs - GOV.UK"

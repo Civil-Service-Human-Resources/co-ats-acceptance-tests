@@ -24,30 +24,49 @@ import java.util
 
 trait VacancyBasePage extends Matchers with BasePage with BrowserDriver {
 
-  val url: String                  = TestConfiguration.url("vxconfig")
-  val vxConfigTitle                = "Oleeo vX Login : CSR"
-  val vxConfigHomePageTitle        = "Home : Civil Service Jobs - GOV.UK"
-  val contactNameVxConfig: String  = readProperty("services.vxconfig.admin.contact_name")
+  val url: String = TestConfiguration.url("vxconfig")
+  val vxConfigTitle = "Oleeo vX Login : CSR"
+  val vxConfigHomePageTitle = "Home : Civil Service Jobs - GOV.UK"
+
+  def newVacancy: WebElement = waitForVisibilityOfElementByPathLast(newVacancyPath)
+
+  def vacancySection: WebElement = waitForVisibilityOfElementByPathLast(vacancySectionPath)
+
+  val newVacancyPath = ".//a[contains(@href,'recruiter/opportunities/vacancy/create')]"
+  val vacancySectionPath = "//*[@id='lm-vacancies']/h3/a"
+  val contactNameVxConfig: String = readProperty("services.vxconfig.admin.contact_name")
   val contactEmailVxConfig: String = readProperty("services.vxconfig.admin.contact_email")
-  val usernameVxConfig: String     = readProperty("services.vxconfig.admin.username")
-  val passwordVxConfig: String     = readProperty("services.vxconfig.admin.password")
-  val v9RefereeEmail: String       = readProperty("services.v9test.admin.referee_email")
-  val getOs: String                = System.getProperty("os.name").toLowerCase
-  val loginButtonPath: String      = "*//button[@id='login-button']"
-  val logoutButtonPath: String     = ".//a[@class='logout_button']"
-  val userProfilePath: String      = "//*[@class='user_link']"
-  lazy val generalInput            = "//input[@class='select2-search__field']"
-  val applicationCentrePageTitle   = "Your account details - Civil Service Jobs - GOV.UK"
-  val vacancyStatusPath            = ".//*[@id='collapse_panel']/span[1]"
-  val submitForm                   = "submit_button"
+  val usernameVxConfig: String = readProperty("services.vxconfig.admin.username")
+  val passwordVxConfig: String = readProperty("services.vxconfig.admin.password")
+  val v9RefereeEmail: String = readProperty("services.v9test.admin.referee_email")
+  val getOs: String = System.getProperty("os.name").toLowerCase
+  val loginButtonPath: String = "*//button[@id='login-button']"
+  val logoutButtonPath: String = ".//a[@class='logout_button']"
+  val userProfilePath: String = "//*[@class='user_link']"
+  lazy val generalInput = "//input[@class='select2-search__field']"
+  val applicationCentrePageTitle = "Your account details - Civil Service Jobs - GOV.UK"
+  val vacancyStatusPath = ".//*[@id='collapse_panel']/span[1]"
+  val submitForm = "submit_button"
+
 
   def findUsernameField: util.List[WebElement] = driver.findElements(By.id("user"))
-  def username(): TextField                    = textField("user")
-  def password(): PasswordField                = pwdField("password")
+
+  def username(): TextField = textField("user")
+
+  def password(): PasswordField = pwdField("password")
 
   def navigateToVxConfigLogin(): Unit = {
     go to url
     eventually(onPage(vxConfigTitle))
+  }
+
+  def createNewVacancy(): Unit = {
+    if (newVacancy.getText == "Create New Vacancy") newVacancy.click()
+    else {
+      vacancySection.click()
+      newVacancy.click()
+    }
+    eventually(onPage(createVacancyTitle))
   }
 
   def enterUsername(recruiterDetails: RecruiterDetails): Unit =
@@ -69,7 +88,7 @@ trait VacancyBasePage extends Matchers with BasePage with BrowserDriver {
 
   def getAssessSectionText(sectionTextId: String): String = {
     scrollToElement(By.id(sectionTextId))
-    val assessment     = waitForVisibilityOfElementById(sectionTextId)
+    val assessment = waitForVisibilityOfElementById(sectionTextId)
     val onlineTestText = assessment.getText
     onlineTestText
   }
@@ -86,11 +105,11 @@ trait VacancyBasePage extends Matchers with BasePage with BrowserDriver {
   }
 
   def splitDate(closingDate: String): (String, String, String) = {
-    val date   = closingDate
-    val parts  = date.split("/")
-    val _day   = parts(0).replaceFirst("^0*", "")
+    val date = closingDate
+    val parts = date.split("/")
+    val _day = parts(0).replaceFirst("^0*", "")
     val _month = parts(1).replaceFirst("^0*", "")
-    val _year  = parts(2)
+    val _year = parts(2)
     (_day, _month, _year)
   }
 
@@ -107,9 +126,9 @@ trait VacancyBasePage extends Matchers with BasePage with BrowserDriver {
   }
 
   def groupTestsDeadlineDate(days: Int): String = {
-    val formatter         = DateTimeFormatter.ofPattern("dd/MM/yyyy")
+    val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
     val formatToLocalDate = LocalDate.parse(vXApplicationClosingDate, formatter)
-    val minusDays         = formatToLocalDate.minusDays(days)
+    val minusDays = formatToLocalDate.minusDays(days)
     val groupTestDeadline = minusDays.format(formatter)
     groupTestDeadline
   }
@@ -148,12 +167,12 @@ trait VacancyBasePage extends Matchers with BasePage with BrowserDriver {
   }
 
   def addWelshTranslation(
-    addWelsh: Boolean,
-    addTranslation: String,
-    welshInput: String,
-    welsh: String,
-    updateId: String
-  ): Unit =
+                           addWelsh: Boolean,
+                           addTranslation: String,
+                           welshInput: String,
+                           welsh: String,
+                           updateId: String
+                         ): Unit =
     if (addWelsh) {
       clickOn(addTranslation)
       val field = waitForVisibilityOfElementById(welshInput)
@@ -167,19 +186,19 @@ trait VacancyBasePage extends Matchers with BasePage with BrowserDriver {
     addExternalPosting()
   }
 
-//  def switchToCandidatePages(): Unit = {
-//    if (openWindows(2)) {
-//      if (driver.getWindowHandle == secondWindowHandle) {
-//        driver.switchTo().window(firstWindowHandle)
-//      } else if (driver.getWindowHandle == firstWindowHandle) {
-//        driver.switchTo().window(secondWindowHandle)
-//      }
-//      driver.navigate().refresh()
-//    }
-//    switchToV9Test()
-//    navigateToV9Test()
-//    if (!v9SearchCookiesById().isEmpty) v9AcceptAllCookies()
-//  }
+  //  def switchToCandidatePages(): Unit = {
+  //    if (openWindows(2)) {
+  //      if (driver.getWindowHandle == secondWindowHandle) {
+  //        driver.switchTo().window(firstWindowHandle)
+  //      } else if (driver.getWindowHandle == firstWindowHandle) {
+  //        driver.switchTo().window(secondWindowHandle)
+  //      }
+  //      driver.navigate().refresh()
+  //    }
+  //    switchToV9Test()
+  //    navigateToV9Test()
+  //    if (!v9SearchCookiesById().isEmpty) v9AcceptAllCookies()
+  //  }
 
   def switchToVXConfig(): Unit = {
     switchToAnotherWindow()

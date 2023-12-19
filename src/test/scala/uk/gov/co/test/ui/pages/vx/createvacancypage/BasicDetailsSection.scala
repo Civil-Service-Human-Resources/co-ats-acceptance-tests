@@ -28,8 +28,6 @@ object BasicDetailsSection extends VacancyBasePage {
   val closingMinutePath     = ".//select[@id='edit_opp_form_pcd_mm']//option[@selected='selected']"
   val selectTemplatePath    = "//*[@id='select2-edit_opp_form_template_id-container']"
   val enterTemplatePath     = ".//input[@class='select2-search__field']"
-  val newVacancyPath        = ".//a[contains(@href,'recruiter/opportunities/vacancy/create')]"
-  val vacancySectionPath    = "//*[@id='lm-vacancies']/h3/a"
   val extractFormClass      = "opp_form_bd"
   val addWelshTranslationId = "edit_opp_form_title_button"
   val welshTitleInput       = "edit_opp_form_title_cy"
@@ -44,17 +42,7 @@ object BasicDetailsSection extends VacancyBasePage {
 
   private def templateSelect: WebElement = waitForVisibilityOfElementByPath(selectTemplatePath)
   private def enterTemplate: WebElement  = waitForVisibilityOfElementByPath(enterTemplatePath)
-  private def newVacancy: WebElement     = waitForVisibilityOfElementByPathLast(newVacancyPath)
-  private def vacancySection: WebElement = waitForVisibilityOfElementByPathLast(vacancySectionPath)
 
-  def createNewVacancy(): Unit = {
-    if (newVacancy.getText == "Create New Vacancy") newVacancy.click()
-    else {
-      vacancySection.click()
-      newVacancy.click()
-    }
-    eventually(onPage(createVacancyTitle))
-  }
 
   private def selectTemplate(basicDetails: BasicDetails): Unit = {
     templateSelect.click()
