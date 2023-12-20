@@ -111,7 +111,7 @@ object InterviewSchedulePage extends VacancyBasePage {
   private def enterInterviewTitle(interviewScheduleDetails: InterviewScheduleDetails): Unit = {
     val schedule = interviewScheduleDetails
     vXInterviewScheduleTitle = schedule.interviewTitle
-    enterText(interviewTitleId, vXInterviewScheduleTitle)
+    enterValue(interviewTitleId, vXInterviewScheduleTitle)
     addWelshTranslation(
       schedule.addWelshTitle,
       welshInterviewTitleId,
@@ -196,7 +196,7 @@ object InterviewSchedulePage extends VacancyBasePage {
 
   private def enterMinAlterationNotice(interviewScheduleDetails: InterviewScheduleDetails): Unit = {
     val schedule = interviewScheduleDetails
-    enterText(minAlterationNoticeId, schedule.minAlterationNotice.toString)
+    enterValue(minAlterationNoticeId, schedule.minAlterationNotice.toString)
   }
 
   private def selectTimezone(interviewScheduleDetails: InterviewScheduleDetails): Unit = {

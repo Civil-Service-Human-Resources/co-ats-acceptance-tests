@@ -39,7 +39,7 @@ object PreSiftEvaluationTab extends VacancyBasePage {
     waitForVisibilityOfElementById(cvAssessmentScoreId).click()
     action().moveToElement(waitForDropdownOption(preSiftDetails.cvAssessmentScore)).perform()
     waitForDropdownOption(preSiftDetails.cvAssessmentScore).click()
-    enterText(cvAssessmentCommentsId, preSiftDetails.cvAssessmentComments)
+    enterValue(cvAssessmentCommentsId, preSiftDetails.cvAssessmentComments)
   }
 
   private def completePersonalStatement(preSiftDetails: PreSiftDetails): Unit = {
@@ -47,14 +47,14 @@ object PreSiftEvaluationTab extends VacancyBasePage {
     waitForVisibilityOfElementById(personalStatementScoreId).click()
     action().moveToElement(waitForDropdownOption(preSiftDetails.personalStatementScore)).perform()
     waitForDropdownOption(preSiftDetails.personalStatementScore).click()
-    enterText(personalStatementCommentsId, preSiftDetails.personalStatementComments)
+    enterValue(personalStatementCommentsId, preSiftDetails.personalStatementComments)
   }
 
   private def completePreSiftAssessment(preSiftDetails: PreSiftDetails): Unit = {
     waitForVisibilityOfElementById(preSiftAssessmentScoreId).click()
     action().moveToElement(waitForDropdownOption(preSiftDetails.preSiftAssessmentScore)).perform()
     waitForDropdownOption(preSiftDetails.preSiftAssessmentScore).click()
-    enterText(preSiftAssessmentCommentsId, preSiftDetails.preSiftAssessmentComments)
+    enterValue(preSiftAssessmentCommentsId, preSiftDetails.preSiftAssessmentComments)
   }
 
   private def completeOutcome(preSiftDetails: PreSiftDetails): Unit = {
@@ -62,7 +62,7 @@ object PreSiftEvaluationTab extends VacancyBasePage {
     waitForVisibilityOfElementById(outcomeRecommendationId).click()
     action().moveToElement(waitForDropdownOption(preSiftDetails.outcomeRecommendation)).perform()
     waitForDropdownOption(preSiftDetails.outcomeRecommendation).click()
-    enterText(outcomeOverallCommentsId, preSiftDetails.outcomeOverallComments)
+    enterValue(outcomeOverallCommentsId, preSiftDetails.outcomeOverallComments)
   }
 
   private val preSift: Seq[PreSiftDetails => Unit] = Seq(

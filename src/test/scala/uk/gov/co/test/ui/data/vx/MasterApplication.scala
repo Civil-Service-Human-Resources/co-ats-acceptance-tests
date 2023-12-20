@@ -121,4 +121,13 @@ object APPLICATION_INTERVIEW_SCHEDULE
 
 object APPLICATION_CALENDER_SCHEDULE
     extends CalenderScheduleDetails(
+      "09:00",
+      60,
+      1,
+      true,
+      2,
+      60,
+      "HMRC George Street - Room 1",
+      sendInterviewerICal = Some(false),
+      None
     )

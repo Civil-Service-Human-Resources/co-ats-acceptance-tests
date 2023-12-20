@@ -124,12 +124,12 @@ object SiftEvaluationTab extends VacancyBasePage {
     action().moveToElement(waitForDropdownOption(score.toString)).perform()
     waitForDropdownOption(score.toString).click()
     if (comment.isDefined) {
-      enterText(commentsId, comment.get)
+      enterValue(commentsId, comment.get)
     }
   }
 
   private def moveSiftEvaluationForm(): Unit = {
-    checkVacancyStatus("Sift application")
+    checkForNewStatus(vacancyStatusPath, "Sift application")
     moveVacancyOnViaTopBar(completeSiftBarId, siftEvaluationTabPath)
     availableBarItems(List(completeSiftBarId, withdrawBarId))
     waitForVisibilityOfElementById(siftEvaluationHeaderId).getText should endWith("Sift Evaluation")
@@ -410,7 +410,7 @@ object SiftEvaluationTab extends VacancyBasePage {
 
   private def enterOverallScore(siftDetails: SiftDetails): Unit = {
     waitForVisibilityOfElementById(overallScoreTitleId).getText shouldEqual "Overall score"
-    enterText(overallCommentsId, siftDetails.overallScoreComments)
+    enterValue(overallCommentsId, siftDetails.overallScoreComments)
     val overallScore = totalScore(vXBehavioursTotalScore) + totalScore(
       vXTechSkillsTotalScore
     ) + vXCVAssessmentScore + vXPersonalStatementScore

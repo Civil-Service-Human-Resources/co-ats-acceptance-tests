@@ -247,12 +247,12 @@ object EmploymentHistoryTab extends VacancyBasePage {
           clickOnRadioButton(historyCheckPassedId)
         case "Refer to risk assessment" =>
           clickOnRadioButton(referToRiskAssessmentId)
-          enterText(riskAssessmentCommentsInputId, historyDetails.riskAssessmentComments)
+          enterValue(riskAssessmentCommentsInputId, historyDetails.riskAssessmentComments)
       }
     }
 
   private def enterInternalNotes(historyDetails: HistoryDetails): Unit =
-    enterText(internalNotesInputId, historyDetails.internalNotes)
+    enterValue(internalNotesInputId, historyDetails.internalNotes)
 
   private def selectAdditionalInfoReceived(historyDetails: HistoryDetails): Unit =
     if (historyDetails.historyCheckOutcome) {

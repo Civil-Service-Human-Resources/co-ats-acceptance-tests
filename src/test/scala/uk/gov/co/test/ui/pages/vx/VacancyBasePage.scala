@@ -125,7 +125,7 @@ trait VacancyBasePage extends Matchers with BasePage with BrowserDriver {
     waitForDropdownOptionByText(listValues).click()
   }
 
-  def enterText(inputId: String, text: String): Unit = {
+  def enterValue(inputId: String, text: String): Unit = {
     val enterOption = waitForVisibilityOfElementById(inputId)
     enterOption.clear()
     enterOption.sendKeys(text)
@@ -215,5 +215,18 @@ trait VacancyBasePage extends Matchers with BasePage with BrowserDriver {
     waitForVisibilityOfElementById(selectId).click()
     action().moveToElement(waitForDropdownOption(selectOption)).perform()
     waitForDropdownOption(selectOption).click()
+  }
+
+  def splitTime(givenTime: String): (String, String) = {
+    val time  = givenTime
+    val parts = time.split(":")
+    val _hour = parts(0)
+    val _min  = parts(1)
+    (_hour, _min)
+  }
+
+  def enterTime(id: String, value: String): Unit = {
+    val timeValue = new Select(waitForVisibilityOfElementById(id))
+    timeValue.selectByVisibleText(value)
   }
 }

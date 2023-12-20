@@ -100,7 +100,7 @@ object PecCheckFormsSection extends VacancyBasePage {
   private def selectUploadIdentityDocs(pecCheckFormsDetails: PecCheckFormsDetails): Unit =
     if (pecCheckFormsDetails.uploadIdentityDocs) {
       clickOnRadioButton(uploadIdentityYesId)
-      enterText(detailsIdentityDocsId, pecCheckFormsDetails.detailsOfIdentityDocs)
+      enterValue(detailsIdentityDocsId, pecCheckFormsDetails.detailsOfIdentityDocs)
       if (pecCheckFormsDetails.manualIdentityDocCheck) clickOnRadioButton(manualIdentityCheckYesId)
       else clickOnRadioButton(manualIdentityCheckNoId)
     } else clickOnRadioButton(uploadIdentityNoId)
@@ -137,7 +137,7 @@ object PecCheckFormsSection extends VacancyBasePage {
   private def selectIncludeAdditionalCheck(pecCheckFormsDetails: PecCheckFormsDetails): Unit =
     if (pecCheckFormsDetails.includeAdditionalCheck) {
       clickOnRadioButton(includeAdditionalCheckYesId)
-      enterText(nameOfCheckInputId, pecCheckFormsDetails.nameOfCheck)
+      enterValue(nameOfCheckInputId, pecCheckFormsDetails.nameOfCheck)
       enterRoles(pecCheckFormsDetails.additionalCheck, additionalCheckInputId)
     } else clickOnRadioButton(includeAdditionalCheckNoId)
 
