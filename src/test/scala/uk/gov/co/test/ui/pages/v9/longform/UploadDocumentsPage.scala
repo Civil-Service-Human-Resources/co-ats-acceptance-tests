@@ -3,9 +3,9 @@ package uk.gov.co.test.ui.pages.v9.longform
 import org.openqa.selenium.WebElement
 import org.scalatest.concurrent.Eventually.eventually
 import uk.gov.co.test.ui.data.v9.longform.LongFormDetails
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXCandidateInstructions, vXUploadAttachmentRequired}
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
-import uk.gov.co.test.ui.pages.v9.shortform.ApplicationGuidancePage.formId
-import uk.gov.co.test.ui.pages.vx.createvacancypage.CriteriaSection.{uploadAttachmentRequired, vXCandidateInstructions}
+import uk.gov.co.test.ui.pages.v9.longform.DiversityMonitoringPage.longFormId
 
 case class UploadDocumentsDetails(
   documentLocation: String
@@ -14,7 +14,7 @@ case class UploadDocumentsDetails(
 object UploadDocumentsPage extends CivilServiceJobsBasePage {
 
   def uploadDocumentsPageTitle = "Upload documents - Civil Service Jobs - GOV.UK"
-  def uploadDocumentsId        = s"${formId}_datafield_22309_1_1"
+  def uploadDocumentsId        = s"${longFormId}_datafield_22309_1_1"
   def instructionsTextPath     = ".//*[@class='hform_lbl_text']"
 
   private def uploadDocumentsPageCheck(): Unit =
@@ -40,7 +40,7 @@ object UploadDocumentsPage extends CivilServiceJobsBasePage {
   )
 
   def uploadDocumentsPage(longFormDetails: LongFormDetails): Unit =
-    if (uploadAttachmentRequired) {
+    if (vXUploadAttachmentRequired) {
       confirmInstructions()
       document.foreach { f =>
         f(longFormDetails.uploadDocumentsDetails)

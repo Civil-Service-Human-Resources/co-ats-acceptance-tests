@@ -2,9 +2,9 @@ package uk.gov.co.test.ui.pages.v9.longform
 
 import org.scalatest.concurrent.Eventually.eventually
 import uk.gov.co.test.ui.data.v9.longform.LongFormDetails
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXAnyAdditionalQuestions, vXHowManyQuestions, vXQuestionOne, vXQuestionThree, vXQuestionTwo}
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
-import uk.gov.co.test.ui.pages.v9.shortform.ApplicationGuidancePage.formId
-import uk.gov.co.test.ui.pages.vx.createvacancypage.AdditionalQuestionsSection.{vXAnyAdditionalQuestions, vXHowManyQuestions, vXQuestionOne, vXQuestionThree, vXQuestionTwo}
+import uk.gov.co.test.ui.pages.v9.longform.DiversityMonitoringPage.longFormId
 
 case class RoleQuestionsDetails(
   roleSpecificAnswerOne: String,
@@ -15,12 +15,12 @@ case class RoleQuestionsDetails(
 object RoleSpecificQuestionsPage extends CivilServiceJobsBasePage {
 
   private lazy val roleSpecificQuestionPageTitle = "Role specific questions - Civil Service Jobs - GOV.UK"
-  def v9QuestionOnePath                          = s".//*[@id='${formId}_field_que_82664_1']/span[1]"
-  def v9QuestionTwoPath                          = s".//*[@id='${formId}_field_que_82671_1']/span[1]"
-  def v9QuestionThreePath                        = s".//*[@id='${formId}_field_que_82678_1']/span[1]"
-  def answerOneInputId                           = s"${formId}_datafield_82664_1_1"
-  def answerTwoInputId                           = s"${formId}_datafield_82671_1_1"
-  def answerThreeInputId                         = s"${formId}_datafield_82678_1_1"
+  def v9QuestionOnePath                          = s".//*[@id='${longFormId}_field_que_82664_1']/span[1]"
+  def v9QuestionTwoPath                          = s".//*[@id='${longFormId}_field_que_82671_1']/span[1]"
+  def v9QuestionThreePath                        = s".//*[@id='${longFormId}_field_que_82678_1']/span[1]"
+  def answerOneInputId                           = s"${longFormId}_datafield_82664_1_1"
+  def answerTwoInputId                           = s"${longFormId}_datafield_82671_1_1"
+  def answerThreeInputId                         = s"${longFormId}_datafield_82678_1_1"
 
   private def roleQuestionsPageCheck(): Unit =
     eventually(onPage(roleSpecificQuestionPageTitle))

@@ -164,15 +164,15 @@ object INSOLVENCY_SUCCESS_PROFILES
 object INSOLVENCY_ABILITIES
     extends AbilitiesDetails(
       """The following online tests can be used to assess abilities:
-                           |Civil Service Numerical Test
-                           |Civil Service Verbal Test""".stripMargin
+      |Civil Service Numerical Test
+      |Civil Service Verbal Test""".stripMargin
     )
 
 object INSOLVENCY_BEHAVIOURS
     extends BehavioursDetails(
       assessBehaviours = """The following online tests can be used to assess behaviours:
-          |Civil Service Judgement Test
-          |Civil Service Management Judgement Test""".stripMargin,
+                         |Civil Service Judgement Test
+                         |Civil Service Management Judgement Test""".stripMargin,
       8,
       behaviourOne =
         Some(Behaviours(chosenBehaviour = "Changing and Improving", stageApplication = true, stageInterview = true)),
@@ -442,6 +442,7 @@ object INSOLVENCY_MANAGEMENT
       true,
       assignTo = Option(s"$contactEmailVxConfig"),
       assignTo2 = Option(s"$contactEmailVxConfig"),
+      true,
       "Business As Usual (BAU)",
       "Menu",
       true,
@@ -486,5 +487,7 @@ object INSOLVENCY_PEC_CHECK_FORMS
       "Autotest - Name of check",
       additionalCheck = List("Not Applicable"),
       nenOnboarding = List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
-      pnOnboarding = List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates")
+      s"$contactEmailVxConfig",
+      pnOnboarding = List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      s"$contactEmailVxConfig"
     )

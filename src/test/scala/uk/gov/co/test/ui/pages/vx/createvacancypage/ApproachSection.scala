@@ -3,7 +3,8 @@ package uk.gov.co.test.ui.pages.vx.createvacancypage
 import org.openqa.selenium.By
 import uk.gov.co.test.ui.data.vx.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
-import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.formId
+import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.vacancyFormId
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.candidateApproach
 
 case class ApproachDetails(
   approach: String,
@@ -16,20 +17,19 @@ case class ApproachDetails(
 
 object ApproachSection extends VacancyBasePage {
 
-  def approachId                     = s"${formId}_field_154380_1"
-  def statementId                    = s"${formId}_datafield_154373_1_1_en-GB"
-  def prereleaseId                   = s"${formId}_datafield_154380_1_1_12648"
-  def internalId                     = s"${formId}_datafield_154380_1_1_11773"
-  def acrossGovernmentId             = s"${formId}_datafield_154380_1_1_12649"
-  def acrossGovernmentYesStatementId = s"${formId}_datafield_154384_1_1_1"
-  def acrossGovernmentNoStatementId  = s"${formId}_datafield_154384_1_1_2"
-  def externalId                     = s"${formId}_datafield_154380_1_1_11774"
-  def internalYesStatementId         = s"${formId}_datafield_154388_1_1_1"
-  def internalNoStatementId          = s"${formId}_datafield_154388_1_1_2"
+  def approachId                     = s"${vacancyFormId}_field_154380_1"
+  def statementId                    = s"${vacancyFormId}_datafield_154373_1_1_en-GB"
+  def prereleaseId                   = s"${vacancyFormId}_datafield_154380_1_1_12648"
+  def internalId                     = s"${vacancyFormId}_datafield_154380_1_1_11773"
+  def acrossGovernmentId             = s"${vacancyFormId}_datafield_154380_1_1_12649"
+  def acrossGovernmentYesStatementId = s"${vacancyFormId}_datafield_154384_1_1_1"
+  def acrossGovernmentNoStatementId  = s"${vacancyFormId}_datafield_154384_1_1_2"
+  def externalId                     = s"${vacancyFormId}_datafield_154380_1_1_11774"
+  def internalYesStatementId         = s"${vacancyFormId}_datafield_154388_1_1_1"
+  def internalNoStatementId          = s"${vacancyFormId}_datafield_154388_1_1_2"
   def addWelshTranslationId()        = "clicky_154373"
   def welshStatementInput            = "datafield_154373_1_1_cy"
   def updateWelshId()                = "lbledit_datafield_154373_1_1-update"
-  var candidateApproach              = "External"
 
   private def eligibilityStatement(approachDetails: ApproachDetails): Unit = {
     val statement = waitForVisibilityOfElementById(statementId)

@@ -2,7 +2,7 @@ package uk.gov.co.test.ui.pages.vx.createvacancypage
 
 import org.openqa.selenium.By
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
-import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.formId
+import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.vacancyFormId
 
 case class StrengthsDetails(
   strengthsAssessed: Int,
@@ -18,16 +18,16 @@ case class StrengthsDetails(
 
 object StrengthsSection extends VacancyBasePage {
 
-  def strengthsSectionId      = s"${formId}_section_52615_col_0"
-  def noOfStrengthsAssessedId = s"select2-${formId}_datafield_117504_1_1-container"
-  def strengthOneId           = s"select2-${formId}_datafield_117508_1_1-container"
-  def strengthTwoId           = s"select2-${formId}_datafield_117512_1_1-container"
-  def strengthThreeId         = s"select2-${formId}_datafield_117516_1_1-container"
-  def strengthFourId          = s"select2-${formId}_datafield_117520_1_1-container"
-  def strengthFiveId          = s"select2-${formId}_datafield_117524_1_1-container"
-  def strengthSixId           = s"select2-${formId}_datafield_117528_1_1-container"
-  def strengthSevenId         = s"select2-${formId}_datafield_117532_1_1-container"
-  def strengthEightId         = s"select2-${formId}_datafield_117536_1_1-container"
+  def strengthsSectionId      = s"${vacancyFormId}_section_52615_col_0"
+  def noOfStrengthsAssessedId = s"select2-${vacancyFormId}_datafield_117504_1_1-container"
+  def strengthOneId           = s"select2-${vacancyFormId}_datafield_117508_1_1-container"
+  def strengthTwoId           = s"select2-${vacancyFormId}_datafield_117512_1_1-container"
+  def strengthThreeId         = s"select2-${vacancyFormId}_datafield_117516_1_1-container"
+  def strengthFourId          = s"select2-${vacancyFormId}_datafield_117520_1_1-container"
+  def strengthFiveId          = s"select2-${vacancyFormId}_datafield_117524_1_1-container"
+  def strengthSixId           = s"select2-${vacancyFormId}_datafield_117528_1_1-container"
+  def strengthSevenId         = s"select2-${vacancyFormId}_datafield_117532_1_1-container"
+  def strengthEightId         = s"select2-${vacancyFormId}_datafield_117536_1_1-container"
 
   private def selectStrengthsRequired(successProfilesDetails: SuccessProfilesDetails): Unit = {
     val strengths = successProfilesDetails.strengthsSection

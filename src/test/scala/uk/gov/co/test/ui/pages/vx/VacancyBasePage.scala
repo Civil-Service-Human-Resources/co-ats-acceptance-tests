@@ -6,14 +6,18 @@ import org.scalatest.concurrent.Eventually.eventually
 import org.scalatest.matchers.should.Matchers
 import uk.gov.co.test.ui.conf.TestConfiguration
 import uk.gov.co.test.ui.conf.TestConfiguration.readProperty
-import uk.gov.co.test.ui.data.vx.RecruiterDetails
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.vXApplicationClosingDate
+import uk.gov.co.test.ui.data.vx.{RECRUITER, RecruiterDetails}
 import uk.gov.co.test.ui.driver.BrowserDriver
+import uk.gov.co.test.ui.flows.v9.RegisterCandidateFlow.checkV9LogoutState
+import uk.gov.co.test.ui.flows.vx.RecruiterLoginFlow.loginWithRecruiterDetails
 import uk.gov.co.test.ui.pages.BasePage
 import uk.gov.co.test.ui.pages.v9.SignInPage.{navigateToV9Test, v9AcceptAllCookies, v9SearchCookiesById}
 import uk.gov.co.test.ui.pages.vx.DashboardPage.searchOn
-import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.applicationClosingDate
-import uk.gov.co.test.ui.pages.vx.vacancytabs.ExternalPostingsPage.addExternalPosting
-import uk.gov.co.test.ui.pages.vx.vacancytabs.SummaryPage.confirmAndActivateVacancy
+import uk.gov.co.test.ui.pages.vx.createvacancypage.AdvertSection.switchBack
+import uk.gov.co.test.ui.pages.vx.vacancytabs.EmploymentHistoryTab.extractTabFormId
+import uk.gov.co.test.ui.pages.vx.vacancytabs.ExternalPostingsTab.addExternalPosting
+import uk.gov.co.test.ui.pages.vx.vacancytabs.SummaryTab.confirmAndActivateVacancy
 
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -21,24 +25,27 @@ import java.util
 
 trait VacancyBasePage extends Matchers with BasePage with BrowserDriver {
 
-  val url: String                              = TestConfiguration.url("vxconfig")
-  val vxConfigTitle                            = "Oleeo vX Login : CSR"
-  val vxConfigHomePageTitle                    = "Home : Civil Service Jobs - GOV.UK"
-  val contactNameVxConfig: String              = readProperty("services.vxconfig.admin.contact_name")
-  val contactEmailVxConfig: String             = readProperty("services.vxconfig.admin.contact_email")
-  val usernameVxConfig: String                 = readProperty("services.vxconfig.admin.username")
-  val passwordVxConfig: String                 = readProperty("services.vxconfig.admin.password")
-  val getOs: String                            = System.getProperty("os.name").toLowerCase
-  val loginButtonPath: String                  = "*//button[@id='login-button']"
-  val logoutButtonPath: String                 = ".//a[@class='logout_button']"
-  val userProfilePath: String                  = "//*[@class='user_link']"
-  lazy val generalInput                        = "//input[@class='select2-search__field']"
-  val applicationCentrePageTitle               = "Your account details - Civil Service Jobs - GOV.UK"
+  val url: String           = TestConfiguration.url("vxconfig")
+  val vxConfigTitle         = "Oleeo vX Login : CSR"
+  val vxConfigHomePageTitle = "Home : Civil Service Jobs - GOV.UK"
 
+  val contactNameVxConfig: String  = readProperty("services.vxconfig.admin.contact_name")
+  val contactEmailVxConfig: String = readProperty("services.vxconfig.admin.contact_email")
+  val usernameVxConfig: String     = readProperty("services.vxconfig.admin.username")
+  val passwordVxConfig: String     = readProperty("services.vxconfig.admin.password")
+  val v9RefereeEmail: String       = readProperty("services.v9test.admin.referee_email")
+  val getOs: String                = System.getProperty("os.name").toLowerCase
+  val loginButtonPath: String      = "*//button[@id='login-button']"
+  val logoutButtonPath: String     = ".//a[@class='logout_button']"
+  val userProfilePath: String      = "//*[@class='user_link']"
+  lazy val generalInput            = "//input[@class='select2-search__field']"
+  val applicationCentrePageTitle   = "Your account details - Civil Service Jobs - GOV.UK"
+  val vacancyStatusPath            = ".//*[@id='collapse_panel']/span[1]"
+  val submitForm                   = "submit_button"
 
   def findUsernameField: util.List[WebElement] = driver.findElements(By.id("user"))
-  def username(): TextField     = textField("user")
-  def password(): PasswordField = pwdField("password")
+  def username(): TextField                    = textField("user")
+  def password(): PasswordField                = pwdField("password")
 
   def navigateToVxConfigLogin(): Unit = {
     go to url
@@ -51,7 +58,7 @@ trait VacancyBasePage extends Matchers with BasePage with BrowserDriver {
   def enterPassword(recruiterDetails: RecruiterDetails): Unit =
     password().value = recruiterDetails.password
 
-  def loginProcess(): Unit =
+  def vxLogin(): Unit =
     waitForElementToBeClickableByPath(loginButtonPath).click()
 
   def userProfile(): WebElement = waitForElementToBeClickableByPath(userProfilePath)
@@ -94,31 +101,33 @@ trait VacancyBasePage extends Matchers with BasePage with BrowserDriver {
     dateValue.selectByValue(value)
   }
 
-  def enterTestDeadline(deadline: String, dayId: String, monthId: String, yearId: String): Unit = {
-    val (day, month, year) = splitDate(deadline)
-    enterDate(dayId, day)
-    enterDate(monthId, month)
-    enterDate(yearId, year)
+  def enterDateFields(date: String, dayId: String, monthId: String, yearId: String): Unit = {
+    val (_day, _month, _year) = splitDate(date)
+    enterDate(dayId, _day)
+    enterDate(monthId, _month)
+    enterDate(yearId, _year)
   }
 
   def groupTestsDeadlineDate(days: Int): String = {
     val formatter         = DateTimeFormatter.ofPattern("dd/MM/yyyy")
-    val formatToLocalDate = LocalDate.parse(applicationClosingDate, formatter)
+    val formatToLocalDate = LocalDate.parse(vXApplicationClosingDate, formatter)
     val minusDays         = formatToLocalDate.minusDays(days)
     val groupTestDeadline = minusDays.format(formatter)
     groupTestDeadline
   }
 
-  def selectOptionFromList(value: String, id: String, inputPath: String): Unit = {
+  def selectOptionFromList(value: String, id: String, listValues: String): Unit = {
     waitForVisibilityOfElementById(id).click()
     val enterOption = waitForVisibilityOfElementByPath(generalInput)
+    enterOption.clear()
     enterOption.sendKeys(value)
-    action().moveToElement(waitForDropdownOptionByText(inputPath)).perform()
-    waitForDropdownOptionByText(inputPath).click()
+    action().moveToElement(waitForDropdownOptionByText(listValues)).perform()
+    waitForDropdownOptionByText(listValues).click()
   }
 
   def enterText(inputId: String, text: String): Unit = {
     val enterOption = waitForVisibilityOfElementById(inputId)
+    enterOption.clear()
     enterOption.sendKeys(text)
     enterOption.sendKeys(Keys.ENTER)
   }
@@ -149,8 +158,26 @@ trait VacancyBasePage extends Matchers with BasePage with BrowserDriver {
   ): Unit =
     if (addWelsh) {
       clickOn(addTranslation)
-      waitForVisibilityOfElementById(welshInput)
-      textField(welshInput).value = welsh
+      val field = waitForVisibilityOfElementById(welshInput)
+      field.sendKeys(welsh)
+      clickOn(updateId)
+    }
+
+  def addWelshTranslationIFrame(
+    addWelsh: Boolean,
+    addTranslation: String,
+    welshInputIFrame: String,
+    welshInput: String,
+    welsh: String,
+    updateId: String
+  ): Unit =
+    if (addWelsh) {
+      clickOn(addTranslation)
+      val switchFrame = driver.switchTo().frame(welshInputIFrame)
+      val area        = switchFrame.findElement(By.id(welshInput))
+      area.clear()
+      area.sendKeys(welsh)
+      switchBack()
       clickOn(updateId)
     }
 
@@ -160,11 +187,33 @@ trait VacancyBasePage extends Matchers with BasePage with BrowserDriver {
     addExternalPosting()
   }
 
-  def switchToCandidatePages(): Unit = {
-    openNewTabWithJavascript()
-    openNewWindow()
-    navigateToV9Test()
-    if (!v9SearchCookiesById().isEmpty) v9AcceptAllCookies()
+  def switchToVXConfig(): Unit = {
+    switchToAnotherWindow()
+    loginWithRecruiterDetails(RECRUITER)
   }
 
+  def switchToV9Test(): Unit = {
+    switchToAnotherWindow()
+    navigateToV9Test()
+    if (!v9SearchCookiesById().isEmpty) v9AcceptAllCookies()
+    checkV9LogoutState()
+  }
+
+  def checkVacancyStatus(expectedStatus: String): Unit = {
+    val status = waitForVisibilityOfElementByPath(vacancyStatusPath)
+    status.isDisplayed
+    status.getText shouldEqual s"Status$expectedStatus"
+  }
+
+  def moveVacancyOnViaTopBar(barId: String, tabPath: String): Unit = {
+    clickOn(barId)
+    waitForVisibilityOfElementByPath(tabPath).isSelected
+    extractTabFormId()
+  }
+
+  def selectDropdownOption(selectId: String, selectOption: String): Unit = {
+    waitForVisibilityOfElementById(selectId).click()
+    action().moveToElement(waitForDropdownOption(selectOption)).perform()
+    waitForDropdownOption(selectOption).click()
+  }
 }

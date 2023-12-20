@@ -1,4 +1,4 @@
-package uk.gov.co.test.ui.specs.vx
+package uk.gov.co.test.ui.specs.smoketests
 
 import uk.gov.co.test.ui.data.vx.RECRUITER
 import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.vxConfigHomePageTitle

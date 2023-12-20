@@ -1,9 +1,10 @@
 package uk.gov.co.test.ui.pages.vx.createvacancypage
 
 import org.openqa.selenium.{By, Keys}
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.vXAnyOnlineTests
 import uk.gov.co.test.ui.data.vx.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
-import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.formId
+import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.vacancyFormId
 import uk.gov.co.test.ui.pages.vx.createvacancypage.OrderTestsSections.testOrderingSection
 import uk.gov.co.test.ui.pages.vx.createvacancypage.RecruiterTestsSection.recruiterTestsSection
 
@@ -22,22 +23,20 @@ case class VacancyTestsDetails(
 
 object VacancyTestsSection extends VacancyBasePage {
 
-  def onlineTestsSectionId    = s"${formId}_section_129661_col_0"
-  def testsRequiredYesId      = s"${formId}_datafield_129689_1_1_1"
-  def testsRequiredNoId       = s"${formId}_datafield_129689_1_1_2"
-  def onlineOrOfflineId       = s"select2-${formId}_datafield_129674_1_1-container"
-  def testGradeId             = s"select2-${formId}_datafield_129685_1_1-container"
+  def onlineTestsSectionId    = s"${vacancyFormId}_section_129661_col_0"
+  def testsRequiredYesId      = s"${vacancyFormId}_datafield_129689_1_1_1"
+  def testsRequiredNoId       = s"${vacancyFormId}_datafield_129689_1_1_2"
+  def onlineOrOfflineId       = s"select2-${vacancyFormId}_datafield_129674_1_1-container"
+  def testGradeId             = s"select2-${vacancyFormId}_datafield_129685_1_1-container"
   def testNameInputPath       =
-    s".//textarea[@aria-describedby='select2-${formId}_datafield_129734_1_1-container']"
-  def recommendedOptionsYesId = s"${formId}_datafield_129748_1_1_1"
-  def recommendedOptionsNoId  = s"${formId}_datafield_129748_1_1_2"
-  def additionalDetailId      = s"${formId}_datafield_129763_1_1"
-  var anyOnlineTests          = ""
+    s".//textarea[@aria-describedby='select2-${vacancyFormId}_datafield_129734_1_1-container']"
+  def recommendedOptionsYesId = s"${vacancyFormId}_datafield_129748_1_1_1"
+  def recommendedOptionsNoId  = s"${vacancyFormId}_datafield_129748_1_1_2"
+  def additionalDetailId      = s"${vacancyFormId}_datafield_129763_1_1"
 
   def vacancyTestsFlow(vacancyTestsDetails: VacancyTestsDetails): Unit = {
     testsRequired(vacancyTestsDetails)
-    anyOnlineTests = vacancyTestsDetails.testsRequired.toString
-    if (vacancyTestsDetails.testsRequired) {
+    if (vXAnyOnlineTests) {
       selectOnlineOrOffline(vacancyTestsDetails)
       if (vacancyTestsDetails.onlineOrOffline == "Online Tests") {
         selectTestGrade(vacancyTestsDetails)
@@ -53,7 +52,8 @@ object VacancyTestsSection extends VacancyBasePage {
 
   def testsRequired(vacancyTestsDetails: VacancyTestsDetails): Unit = {
     scrollToElement(By.id(onlineTestsSectionId))
-    if (vacancyTestsDetails.testsRequired) clickOnRadioButton(testsRequiredYesId)
+    vXAnyOnlineTests = vacancyTestsDetails.testsRequired
+    if (vXAnyOnlineTests) clickOnRadioButton(testsRequiredYesId)
     else clickOnRadioButton(testsRequiredNoId)
   }
 

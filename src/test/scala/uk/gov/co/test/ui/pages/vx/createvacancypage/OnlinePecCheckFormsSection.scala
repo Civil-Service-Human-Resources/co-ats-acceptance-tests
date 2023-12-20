@@ -3,7 +3,7 @@ package uk.gov.co.test.ui.pages.vx.createvacancypage
 import org.openqa.selenium.{By, Keys}
 import uk.gov.co.test.ui.data.vx.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
-import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.formId
+import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.vacancyFormId
 
 case class OnlinePecCheckFormsDetails(
   useOnlinePecCheckForms: Boolean,
@@ -13,10 +13,10 @@ case class OnlinePecCheckFormsDetails(
 
 object OnlinePecCheckFormsSection extends VacancyBasePage {
 
-  def onlinePecCheckFormsSectionId = s"${formId}_section_154278_col_0"
-  def useOnlinePecCheckFormsId     = s"select2-${formId}_datafield_154299_1_1-container"
-  def haveTeamMailboxId            = s"select2-${formId}_datafield_154310_1_1-container"
-  def pecFormsTeamEmailInputId     = s"${formId}_datafield_154303_1_1"
+  def onlinePecCheckFormsSectionId = s"${vacancyFormId}_section_154278_col_0"
+  def useOnlinePecCheckFormsId     = s"select2-${vacancyFormId}_datafield_154299_1_1-container"
+  def haveTeamMailboxId            = s"select2-${vacancyFormId}_datafield_154310_1_1-container"
+  def pecFormsTeamEmailInputId     = s"${vacancyFormId}_datafield_154303_1_1"
 
   private def enterOnlinePecFormsCheckFlow(onlinePecCheckFormsDetails: OnlinePecCheckFormsDetails): Unit = {
     scrollToElement(By.id(onlinePecCheckFormsSectionId))

@@ -1,6 +1,6 @@
-package uk.gov.co.test.ui.specs.v9
+package uk.gov.co.test.ui.specs.smoketests
 
-import uk.gov.co.test.ui.data.v9.applicants.{REGISTERED_CANDIDATE, REGISTER_CANDIDATE_TWO}
+import uk.gov.co.test.ui.data.v9.applicants.{REGISTERED_CANDIDATE, REGISTER_CANDIDATE}
 import uk.gov.co.test.ui.flows.v9.GenerateNewCandidates.createMultipleCandidates
 import uk.gov.co.test.ui.flows.v9.RegisterCandidateFlow.fillNewCandidateDetails
 import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.applicationCentrePageTitle
@@ -10,9 +10,9 @@ import uk.gov.co.test.ui.specs.BaseFeatureSpec
 import uk.gov.co.test.ui.tags.RunInV9
 
 class RegisterCandidateSpec extends BaseFeatureSpec {
-  Feature("Register Candidate On Civil Service Jobs") {
-    Scenario("A Registered Candidate Logs In To Civil Service Jobs", RunInV9) {
-      Given("A candidate navigates to the sign in page")
+  Feature("Registration Of Candidates On Civil Service Jobs") {
+    Scenario("V9: A Registered Candidate Logs In To Civil Service Jobs", RunInV9) {
+      Given("A registered candidate navigates to the sign in page")
       navigateToSignInOrCreateAccount()
 
       When("The candidate signs into their cs jobs account")
@@ -22,21 +22,21 @@ class RegisterCandidateSpec extends BaseFeatureSpec {
       candidateDisplayName() shouldEqual candidateFullName(REGISTERED_CANDIDATE)
     }
 
-    Scenario("A Candidate Creates An Account On Civil Service Jobs", RunInV9) {
-      Given("the candidate enters their details for new account")
-      fillNewCandidateDetails(REGISTER_CANDIDATE_TWO)
+    Scenario("V9: A Candidate Creates An Account On Civil Service Jobs", RunInV9) {
+      Given("candidate newly registers their details")
+      fillNewCandidateDetails(REGISTER_CANDIDATE)
 
-      When("the candidate navigates to the edit account details page")
+      When("candidate confirms the account has been created")
       accountCreatedSuccess1() shouldEqual accountCreatedSuccessMessage1
       accountCreatedSuccess2() shouldEqual accountCreatedSuccessMessage2
-      candidateDisplayName()   shouldEqual candidateFullName(REGISTER_CANDIDATE_TWO)
-      editAccountDetails().click()
+      candidateDisplayName()   shouldEqual candidateFullName(REGISTER_CANDIDATE)
 
-      Then("the candidate is able to edit their account")
+      Then("the candidate navigates to the edit account details page")
+      editAccountDetails().click()
       onPage(applicationCentrePageTitle)
     }
 
-    Scenario("Create Candidate Accounts", RunInV9) {
+    Scenario("V9: Create Multiple Candidate Accounts", RunInV9) {
       createMultipleCandidates(1)
     }
   }

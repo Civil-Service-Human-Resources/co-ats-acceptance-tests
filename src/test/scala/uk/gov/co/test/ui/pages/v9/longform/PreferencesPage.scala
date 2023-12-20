@@ -3,9 +3,9 @@ package uk.gov.co.test.ui.pages.v9.longform
 import org.openqa.selenium.By
 import org.scalatest.concurrent.Eventually.eventually
 import uk.gov.co.test.ui.data.v9.longform.LongFormDetails
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXGiveLocationPreference, vXMaxLocations, vXOtherLocations}
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
-import uk.gov.co.test.ui.pages.v9.shortform.ApplicationGuidancePage.formId
-import uk.gov.co.test.ui.pages.vx.createvacancypage.LocationsSection.{vXGiveLocationPreference, vXMaxLocations, vXOtherLocations}
+import uk.gov.co.test.ui.pages.v9.longform.DiversityMonitoringPage.longFormId
 
 case class PreferencesDetails(
   firstChoiceLocation: String,
@@ -18,15 +18,15 @@ object PreferencesPage extends CivilServiceJobsBasePage {
 
   private lazy val preferencesPageTitle       = "Preferences - Civil Service Jobs - GOV.UK"
   private lazy val errorSameLocationsSelected = "You cannot select the same location more than once"
-  def vXMaxLocationsAllowed: Int = vXMaxLocations.toInt
-  def firstLocationId              = s"${formId}_datafield_53467_1_1"
-  def secondLocationId             = s"${formId}_datafield_53470_1_1"
-  def thirdLocationId              = s"${formId}_datafield_53473_1_1"
-  def furtherPreferredLocationsId  = s"${formId}_datafield_35884_1_1"
-  def availableFirstLocationsPath  = s".//select[@id='$firstLocationId']/option[@title]"
-  def availableSecondLocationsPath = s".//select[@id='$secondLocationId']/option[@title]"
-  def availableThirdLocationsPath  = s".//select[@id='$thirdLocationId']/option[@title]"
-  def errorSelectingLocationId     = s"${formId}_label_74449_1"
+  def vXMaxLocationsAllowed: Int              = vXMaxLocations.toInt
+  def firstLocationId                         = s"${longFormId}_datafield_53467_1_1"
+  def secondLocationId                        = s"${longFormId}_datafield_53470_1_1"
+  def thirdLocationId                         = s"${longFormId}_datafield_53473_1_1"
+  def furtherPreferredLocationsId             = s"${longFormId}_datafield_35884_1_1"
+  def availableFirstLocationsPath             = s".//select[@id='$firstLocationId']/option[@title]"
+  def availableSecondLocationsPath            = s".//select[@id='$secondLocationId']/option[@title]"
+  def availableThirdLocationsPath             = s".//select[@id='$thirdLocationId']/option[@title]"
+  def errorSelectingLocationId                = s"${longFormId}_label_74449_1"
 
   private def preferencesPageCheck(): Unit =
     eventually(onPage(preferencesPageTitle))

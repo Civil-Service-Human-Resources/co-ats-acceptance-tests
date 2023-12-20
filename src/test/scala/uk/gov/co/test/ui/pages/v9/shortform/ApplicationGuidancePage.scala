@@ -15,7 +15,7 @@ object ApplicationGuidancePage extends CivilServiceJobsBasePage {
   private lazy val appDeadline      = "The deadline is 11:55PM on 22 November 2023."
   val returnBackToSearchResultsPath = ".//a[@title='Return to search results']"
   val formIdPath                    = ".//form[@onsubmit='return submit_form()']"
-  var formId: String                = ""
+  var shortFormId: String           = ""
 
   private def confirmApplicationGuidance(appGuidanceDetails: AppGuidanceDetails): Unit = {
     eventually(onPage(appGuidanceTitle))
@@ -41,6 +41,6 @@ object ApplicationGuidancePage extends CivilServiceJobsBasePage {
     appGuidance.foreach { f =>
       f(shortFormDetails.appGuidanceDetails)
     }
-    formId = extractAppFormId()
+    shortFormId = extractAppFormId()
   }
 }

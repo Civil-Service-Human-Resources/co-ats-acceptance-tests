@@ -7,7 +7,7 @@ import scala.collection.mutable
 import scala.jdk.CollectionConverters._
 import scala.util.control.Breaks.{break, breakable}
 
-object ExternalPostingsPage extends VacancyBasePage {
+object ExternalPostingsTab extends VacancyBasePage {
 
   private lazy val externalPostingsTabId  = "oppTabs_external_posting"
   private lazy val addButtonPath          = ".//*[@class='btn btn-default ajax']"

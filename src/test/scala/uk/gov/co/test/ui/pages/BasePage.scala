@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.pages
 
 import org.openqa.selenium._
-import org.openqa.selenium.support.ui.ExpectedConditions.{elementToBeClickable, presenceOfElementLocated, visibilityOfElementLocated}
+import org.openqa.selenium.support.ui.ExpectedConditions.{elementToBeClickable, visibilityOfElementLocated}
 import org.openqa.selenium.support.ui.{ExpectedCondition, ExpectedConditions, WebDriverWait}
 import org.scalactic.source.Position
 import org.scalatest.concurrent.Eventually.eventually
@@ -10,6 +10,7 @@ import org.scalatest.matchers.should.Matchers
 import org.scalatest.time.{Millis, Seconds, Span}
 import org.scalatestplus.selenium.{Page, WebBrowser}
 
+import java.util
 import java.util.UUID
 import scala.jdk.CollectionConverters._
 import scala.util.Random
@@ -17,6 +18,11 @@ import scala.util.Random
 case class PageNotFoundException(s: String) extends Exception(s)
 
 trait BasePage extends Matchers with Page with WebBrowser with PatienceConfiguration {
+
+  def currentWindows()(implicit driver: WebDriver): util.Set[String] = driver.getWindowHandles
+  var firstWindowHandle: String                                      = ""
+  var secondWindowHandle: String                                     = ""
+
   override implicit val patienceConfig: PatienceConfig =
     PatienceConfig(timeout = scaled(Span(30, Seconds)), interval = scaled(Span(1000, Millis)))
 
@@ -37,7 +43,18 @@ trait BasePage extends Matchers with Page with WebBrowser with PatienceConfigura
   def waitForVisibilityOfElementByPath(pathway: String)(implicit driver: WebDriver): WebElement = {
     val wait = new WebDriverWait(driver, 30, 200)
     wait.until(visibilityOfElementLocated(By.xpath(pathway)))
+  }
 
+  def waitForVisibilityOfStatusElementByPath(pathway: String)(implicit driver: WebDriver): WebElement = {
+    val wait = new WebDriverWait(driver, 10, 1000)
+    wait.until(visibilityOfElementLocated(By.xpath(pathway)))
+  }
+
+  def checkForNewStatus(statusPath: String, expectedStatus: String)(implicit driver: WebDriver): Unit = {
+    val wait = new WebDriverWait(driver, 20, 1000)
+    wait.until { (d: WebDriver) =>
+      d.findElement(By.xpath(statusPath)).getText.endsWith(expectedStatus)
+    }
   }
 
   def waitForVisibilityOfElementByPathLast(pathway: String)(implicit webDriver: WebDriver): WebElement =
@@ -65,14 +82,19 @@ trait BasePage extends Matchers with Page with WebBrowser with PatienceConfigura
     wait.until(visibilityOfElementLocated(By.id(id)))
   }
 
+  def waitForVisibilityOfElementAlertByPath()(implicit driver: WebDriver): Alert = {
+    val wait = new WebDriverWait(driver, 30, 200)
+    wait.until(ExpectedConditions.alertIsPresent())
+  }
+
   def waitForVisibilityOfElement(ele: By)(implicit driver: WebDriver): WebElement = {
     val wait = new WebDriverWait(driver, 30, 200)
     wait.until(visibilityOfElementLocated(ele))
   }
 
-  def waitForVisibilityOfElementTest(ele: String)(implicit driver: WebDriver): WebElement = {
+  def waitForVisibilityOfElementCss(ele: String)(implicit driver: WebDriver): WebElement = {
     val wait = new WebDriverWait(driver, 30, 200)
-    wait.until(presenceOfElementLocated(By.id(ele)))
+    wait.until(visibilityOfElementLocated(By.cssSelector(ele)))
   }
 
   def waitForElementToBeClickableByLink(optionName: String)(implicit driver: WebDriver): WebElement = {
@@ -96,7 +118,7 @@ trait BasePage extends Matchers with Page with WebBrowser with PatienceConfigura
     waitForVisibilityOfElementById(id).click()
 
   def clickOnRadioButton(id: String)(implicit webDriver: WebDriver): Boolean = {
-    val wait   = new WebDriverWait(webDriver, 30, 200)
+    val wait   = new WebDriverWait(webDriver, 10, 200)
     val lookup = By.id(id)
     wait.until(ExpectedConditions.elementToBeClickable(By.xpath(s"//label[@for='$id']")))
 
@@ -109,6 +131,9 @@ trait BasePage extends Matchers with Page with WebBrowser with PatienceConfigura
       }
     })
   }
+
+  def radioClick(id: String)(implicit driver: WebDriver): Unit =
+    driver.findElement(By.xpath(s".//*[@id='$id']")).click()
 
   def uuid4: String = UUID.randomUUID.toString
 
@@ -127,12 +152,20 @@ trait BasePage extends Matchers with Page with WebBrowser with PatienceConfigura
 
   def selectOption(inputField: String, addOption: String)(implicit driver: WebDriver): Unit = {
     val selectOption = waitForVisibilityOfElementByPath(inputField)
+    selectOption.clear()
+    selectOption.sendKeys(addOption)
+    selectOption.sendKeys(Keys.ENTER)
+  }
+
+  def selectOptionFromList(inputField: String, addOption: String)(implicit driver: WebDriver): Unit = {
+    val selectOption = waitForVisibilityOfElementByPath(inputField)
     selectOption.sendKeys(addOption)
     selectOption.sendKeys(Keys.ENTER)
   }
 
   def selectOptionWithId(id: String, enterText: String)(implicit driver: WebDriver): Unit = {
     val selectOption = waitForVisibilityOfElementById(id)
+    selectOption.clear()
     selectOption.sendKeys(enterText)
     selectOption.sendKeys(Keys.ENTER)
   }
@@ -142,18 +175,57 @@ trait BasePage extends Matchers with Page with WebBrowser with PatienceConfigura
   def findAll(by: By)(implicit driver: WebDriver): Any = driver.findElements(by)
 
   def openWindows(expectedNumberOfWindows: Int)(implicit driver: WebDriver): Boolean = {
-    val wait = new WebDriverWait(driver, 30, 200)
+    val wait = new WebDriverWait(driver, 10, 200)
     wait.until(ExpectedConditions.numberOfWindowsToBe(expectedNumberOfWindows))
   }
 
-  def openNewWindow()(implicit driver: WebDriver): Unit =
-    //    openWindows(2)
-    for (chartWindow <- driver.getWindowHandles.asScala)
-      driver.switchTo.window(chartWindow)
+  def switchToAnotherWindow()(implicit driver: WebDriver): Unit =
+    if (driver.getWindowHandles.size() == 2) {
+      if (driver.getWindowHandle.contains(secondWindowHandle)) {
+        println(s"1. Is ${driver.getWindowHandle} equal to $secondWindowHandle?")
+        driver.switchTo().window(firstWindowHandle)
+      } else if (driver.getWindowHandle.contains(firstWindowHandle)) {
+        println(s"2. Is ${driver.getWindowHandle} equal to $firstWindowHandle?")
+        driver.switchTo().window(secondWindowHandle)
+      }
+      driver.navigate().refresh()
+    } else {
+      openAndMoveToNewWindow()
+    }
 
-  def openNewTabWithJavascript()(implicit webDriver: WebDriver): AnyRef = {
-    val jse: JavascriptExecutor = webDriver.asInstanceOf[JavascriptExecutor]
+  def openNewTabWithJavascript()(implicit driver: WebDriver): AnyRef = {
+    val jse: JavascriptExecutor = driver.asInstanceOf[JavascriptExecutor]
     jse.executeScript("window.open()")
   }
 
+  def openAndMoveToNewWindow()(implicit driver: WebDriver): Unit = {
+    openNewTabWithJavascript()
+    for (chartWindow <- driver.getWindowHandles.asScala)
+      driver.switchTo.window(chartWindow)
+
+    if (openWindows(2)) {
+      firstWindowHandle = currentWindows.asScala.head
+      secondWindowHandle = currentWindows.asScala.tail.head
+    }
+    println(s"3. currentWindows: $currentWindows 1st: $firstWindowHandle 2nd: $secondWindowHandle?")
+  }
+
+  def switchBackToWindow(windowName: String)(implicit driver: WebDriver): WebDriver =
+    driver.switchTo().window(windowName)
+
+  def switchToFirstWindow()(implicit driver: WebDriver): Unit = {
+    switchBackToWindow(firstWindowHandle)
+    refreshPage()
+  }
+
+  def switchToSecondWindow()(implicit driver: WebDriver): Unit = {
+    switchBackToWindow(secondWindowHandle)
+    refreshPage()
+  }
+
+  def refreshPage()(implicit driver: WebDriver): Unit =
+    driver.navigate().refresh()
+
+  def searchFunction(eleId: String)(implicit driver: WebDriver): util.List[WebElement] =
+    driver.findElements(By.id(eleId))
 }

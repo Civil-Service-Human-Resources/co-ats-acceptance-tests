@@ -3,9 +3,9 @@ package uk.gov.co.test.ui.pages.vx.vacancytabs
 import org.openqa.selenium.By
 import org.scalatest.concurrent.Eventually.eventually
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
-import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.vacancyName
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.vacancyName
 
-object SummaryPage extends VacancyBasePage {
+object SummaryTab extends VacancyBasePage {
 
   val saveVacancyId                 = "edit_opp_form_form_create"
   private lazy val isActivePath     = "//*[@id='details_form_is_active']/span"

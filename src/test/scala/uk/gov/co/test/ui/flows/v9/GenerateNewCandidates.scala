@@ -1,5 +1,6 @@
 package uk.gov.co.test.ui.flows.v9
 
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{randomEmail, randomFirstName, randomLastName}
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
 import uk.gov.co.test.ui.pages.v9.CreateAccountPage.{enterConfirmEmailLoop, enterConfirmPasswordLoop, enterEmailLoop, enterFirstNameLoop, enterLastNameLoop, enterPasswordLoop, navigateToCreateAccountPage, registerNewAccount, selectEmployeeTypeLoop, selectTermsAndConditionsLoop}
 
@@ -15,13 +16,8 @@ object GenerateNewCandidates extends CivilServiceJobsBasePage {
     val writer        = new PrintWriter(new File(file))
 
     for (i <- 1 to candidatesRequired) {
-//      randomFirstName = "A61"
-//      randomLastName = s"Candidate$i"
-//      randomEmail = s"${randomFirstName.toLowerCase}.${randomLastName.toLowerCase}@example.com"
-      generateCandidateDetailsIterator(i)
-      randomFirstName = s"${generateRandomFirstName()}"
-      randomLastName = s"${generateRandomLastName()}"
-      randomEmail = s"${randomFirstName.toLowerCase}.${randomLastName.toLowerCase}@example.com"
+      generateCandidateDetails() //use this for random names
+//      generateCandidateDetailsIterator(i) //use this to iterate a sequence of similar names
       navigateToCreateAccountPage()
       enterFirstNameLoop(randomFirstName)
       enterLastNameLoop(randomLastName)

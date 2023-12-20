@@ -1,6 +1,7 @@
 package uk.gov.co.test.ui.flows.v9
 
 import uk.gov.co.test.ui.data.v9.longform.LongFormDetails
+import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.continueApplicationName
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
 import uk.gov.co.test.ui.pages.v9.longform.BehavioursPage.behavioursPage
 import uk.gov.co.test.ui.pages.v9.longform.DeclarationPage.{declarationPage, longFormSubmission}
@@ -27,7 +28,7 @@ object LongFormFlow extends CivilServiceJobsBasePage {
   )
 
   def fillLongFormDetails(longFormDetails: LongFormDetails): Unit = {
-    clickOn("submit_form")
+    clickOn(continueApplicationName)
     longform.foreach { f =>
       f(longFormDetails)
     }

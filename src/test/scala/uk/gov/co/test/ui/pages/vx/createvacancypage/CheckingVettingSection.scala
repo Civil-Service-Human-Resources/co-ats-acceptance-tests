@@ -3,7 +3,7 @@ package uk.gov.co.test.ui.pages.vx.createvacancypage
 import org.openqa.selenium.By
 import uk.gov.co.test.ui.data.vx.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
-import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.formId
+import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.vacancyFormId
 
 case class VettingDetails(
   reservedStatus: Boolean,
@@ -15,23 +15,23 @@ case class VettingDetails(
 
 object CheckingVettingSection extends VacancyBasePage {
 
-  def reservedStatusId             = s"${formId}_datafield_59601_1_1_fieldset"
-  def reservedYesId                = s"${formId}_datafield_59601_1_1_868"
-  def reservedNoId                 = s"${formId}_datafield_59601_1_1_869"
-  def basicCheckId                 = s"${formId}_datafield_59611_1_1_12650"
-  def standardCheckId              = s"${formId}_datafield_59611_1_1_11340"
-  def enhancedCheckId              = s"${formId}_datafield_59611_1_1_11341"
-  def noCheckRequiredId            = s"${formId}_datafield_59611_1_1_15464"
-  def dbsProviderId                = s"${formId}_datafield_97307_1_1_15345"
-  def disclosureScotlandProviderId = s"${formId}_datafield_97307_1_1_15346"
-  def accessNIProviderId           = s"${formId}_datafield_97307_1_1_15346"
-  def vettingRequiredId            = s"${formId}_field_value_93637_1"
-  def counterTerroristCheckId      = s"${formId}_datafield_93637_1_1_15342"
-  def securityCheckId              = s"${formId}_datafield_93637_1_1_15343"
-  def developedVettingId           = s"${formId}_datafield_93637_1_1_15344"
-  def noVettingRequiredId          = s"${formId}_datafield_93637_1_1_15341"
-  def medicalRequiredYesId         = s"${formId}_datafield_59608_1_1_1"
-  def medicalRequiredNoId          = s"${formId}_datafield_59608_1_1_2"
+  def reservedStatusId             = s"${vacancyFormId}_datafield_59601_1_1_fieldset"
+  def reservedYesId                = s"${vacancyFormId}_datafield_59601_1_1_868"
+  def reservedNoId                 = s"${vacancyFormId}_datafield_59601_1_1_869"
+  def basicCheckId                 = s"${vacancyFormId}_datafield_59611_1_1_12650"
+  def standardCheckId              = s"${vacancyFormId}_datafield_59611_1_1_11340"
+  def enhancedCheckId              = s"${vacancyFormId}_datafield_59611_1_1_11341"
+  def noCheckRequiredId            = s"${vacancyFormId}_datafield_59611_1_1_15464"
+  def dbsProviderId                = s"${vacancyFormId}_datafield_97307_1_1_15345"
+  def disclosureScotlandProviderId = s"${vacancyFormId}_datafield_97307_1_1_15346"
+  def accessNIProviderId           = s"${vacancyFormId}_datafield_97307_1_1_15346"
+  def vettingRequiredId            = s"${vacancyFormId}_field_value_93637_1"
+  def counterTerroristCheckId      = s"${vacancyFormId}_datafield_93637_1_1_15342"
+  def securityCheckId              = s"${vacancyFormId}_datafield_93637_1_1_15343"
+  def developedVettingId           = s"${vacancyFormId}_datafield_93637_1_1_15344"
+  def noVettingRequiredId          = s"${vacancyFormId}_datafield_93637_1_1_15341"
+  def medicalRequiredYesId         = s"${vacancyFormId}_datafield_59608_1_1_1"
+  def medicalRequiredNoId          = s"${vacancyFormId}_datafield_59608_1_1_2"
 
   private def selectCheckLevelRequired(vettingDetails: VettingDetails): Unit =
     vettingDetails.checkLevelRequired match {

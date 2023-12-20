@@ -2,7 +2,7 @@ package uk.gov.co.test.ui.pages.v9
 
 import org.scalatest.concurrent.Eventually.eventually
 import uk.gov.co.test.ui.pages.v9.SearchJobsPage.navigateToSignInOrCreateAccount
-import uk.gov.co.test.ui.pages.v9.SignInPage.{checkV9Logout, createAnAccount}
+import uk.gov.co.test.ui.pages.v9.SignInPage.createAnAccount
 
 case class CandidateDetails(
   firstname: String,
@@ -35,7 +35,7 @@ object CreateAccountPage extends CivilServiceJobsBasePage {
   def recapClick(): Checkbox              = checkbox("recaptcha-checkbox-border")
 
   def navigateToCreateAccountPage(): Unit = {
-    checkV9Logout()
+    checkV9LogoutState()
     navigateToSignInOrCreateAccount()
     clickOn(createAnAccount())
     eventually(onPage(createAccountTitle))

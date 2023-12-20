@@ -6,9 +6,10 @@ import org.scalatest.concurrent.Eventually
 import org.scalatest.featurespec.AnyFeatureSpec
 import org.scalatest.matchers.should.Matchers
 import org.scalatestplus.selenium.WebBrowser
+import uk.gov.co.test.ui.data.vx.RECRUITER
 import uk.gov.co.test.ui.driver.BrowserDriver
-import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.navigateToVxConfigLogin
-import uk.gov.co.test.ui.pages.v9.SignInPage.{checkV9Logout, generateCandidateDetails, navigateToV9Test, searchForSignOut, signOutProcess, v9AcceptAllCookies, v9SearchCookiesById}
+import uk.gov.co.test.ui.flows.vx.RecruiterLoginFlow.loginWithRecruiterDetails
+import uk.gov.co.test.ui.pages.v9.SignInPage.{checkV9LogoutState, generateCandidateDetails, navigateToV9Test, v9AcceptAllCookies, v9SearchCookiesById}
 import uk.gov.co.test.ui.utils.SingletonScreenshotReport
 import uk.gov.co.test.ui.webdriver.SingletonDriver
 
@@ -26,20 +27,20 @@ trait BaseFeatureSpec
     with Eventually {
 
   override protected def beforeEach(testData: TestData): Unit =
-    if (testData.name.contains("Candidate")) {
+    if (testData.name.contains("V9")) {
       generateCandidateDetails()
       navigateToV9Test()
       if (!v9SearchCookiesById().isEmpty) {
         v9AcceptAllCookies()
       }
-    } else {
+    } else if (testData.name.contains("VX")) {
       generateCandidateDetails()
-      navigateToVxConfigLogin()
-    }
+      loginWithRecruiterDetails(RECRUITER)
+    } else throw new IllegalStateException("Change test name in order to start up correct system")
 
   override protected def afterEach(testData: TestData): Unit =
     if (testData.name.contains("Candidate")) {
-      checkV9Logout()
+      checkV9LogoutState()
     }
 
   override def afterAll(): Unit = {
