@@ -160,7 +160,8 @@ object MasterVacancyDetails extends VacancyBasePage {
   var v9ThirdEmployerToDate    = ""
 
   //vX interview schedule
-  var vXInterviewOneDate = ""
-  var vXInterviewLocation = "HMRC Government Offices Great George Street"
+  var vXInterviewOneDate       = ""
+  var vXInterviewLocation      = ""
+  var vXInterviewScheduleTitle = ""
 
 }

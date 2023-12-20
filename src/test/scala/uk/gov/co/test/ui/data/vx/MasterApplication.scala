@@ -2,8 +2,8 @@ package uk.gov.co.test.ui.data.vx
 
 import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{randomFirstName, randomLastName, vacancyId}
 import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.contactEmailVxConfig
-import uk.gov.co.test.ui.pages.vx.InterviewScheduleDetails
 import uk.gov.co.test.ui.pages.vx.vacancytabs.{HistoryDetails, Outcome, PreSiftDetails, SiftDetails}
+import uk.gov.co.test.ui.pages.vx.{CalenderScheduleDetails, InterviewScheduleDetails}
 
 import java.time.LocalDate
 
@@ -11,7 +11,8 @@ case class ApplicationDetails(
   historyDetails: HistoryDetails,
   preSiftDetails: PreSiftDetails,
   siftDetails: SiftDetails,
-  interviewScheduleDetails: InterviewScheduleDetails
+  interviewScheduleDetails: InterviewScheduleDetails,
+  calenderScheduleDetails: CalenderScheduleDetails
 )
 
 object APPLICATION_DATA
@@ -19,7 +20,8 @@ object APPLICATION_DATA
       APPLICATION_EMPLOYMENT_HISTORY,
       APPLICATION_PRE_SIFT_EVALUATION,
       APPLICATION_SIFT_EVALUATION,
-      APPLICATION_INTERVIEW_SCHEDULE
+      APPLICATION_INTERVIEW_SCHEDULE,
+      APPLICATION_CALENDER_SCHEDULE
     )
 
 object APPLICATION_EMPLOYMENT_HISTORY
@@ -115,4 +117,8 @@ object APPLICATION_INTERVIEW_SCHEDULE
       "Interview 1 - Invited",
       "Interview 1 - scheduled",
       false
+    )
+
+object APPLICATION_CALENDER_SCHEDULE
+    extends CalenderScheduleDetails(
     )

@@ -2,7 +2,7 @@ package uk.gov.co.test.ui.pages.vx
 
 import org.openqa.selenium.{By, WebElement}
 import uk.gov.co.test.ui.data.vx.ApplicationDetails
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXInterviewLocation, vXInterviewOneDate}
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXInterviewLocation, vXInterviewOneDate, vXInterviewScheduleTitle}
 import uk.gov.co.test.ui.pages.vx.createvacancypage.AdvertSection.switchBack
 import uk.gov.co.test.ui.specs.TestData.eventually
 
@@ -39,7 +39,7 @@ case class InterviewScheduleDetails(
 
 object InterviewSchedulePage extends VacancyBasePage {
 
-  private lazy val interviewSchedulePageTitle            = "Create Interview Schedule : Civil Service Jobs - GOV.UK"
+  private lazy val createInterviewSchedulePageTitle      = "Create Interview Schedule : Civil Service Jobs - GOV.UK"
   private lazy val createScheduleTitlePath               = ".//*[@id='page_navbar']/div/span"
   private lazy val createInterviewSchedulePath           = ".//a[contains(@href,'recruiter/interviews/create_interview')]"
   private lazy val interviewsSectionPath                 = ".//*[@id='lm-interviews']/h3/a"
@@ -73,22 +73,22 @@ object InterviewSchedulePage extends VacancyBasePage {
   private lazy val includeCandidateCVInICalsId           = "details_form_ical_attach_candidate_cv"
   private lazy val createId                              = "details_form_form_submit"
 
-  private def interviewSchedule: WebElement  = waitForVisibilityOfElementByPathLast(createInterviewSchedulePath)
+  private def createSchedule: WebElement     = waitForVisibilityOfElementByPathLast(createInterviewSchedulePath)
   private def interviewsSection: WebElement  = waitForVisibilityOfElementByPathLast(interviewsSectionPath)
   private def interviewDate(): TextField     = textField(dateId)
   private def interviewLocation(): TextField = textField(interviewLocationId)
 
-  private def interviewSchedulePageCheck(): Unit =
-    eventually(onPage(interviewSchedulePageTitle))
+  private def createInterviewSchedulePageCheck(): Unit =
+    eventually(onPage(createInterviewSchedulePageTitle))
 
   private def createInterviewSchedule(): Unit = {
     val scheduleTitle = "Create Interview Schedule"
-    if (interviewSchedule.getText == scheduleTitle) interviewSchedule.click()
+    if (createSchedule.getText == scheduleTitle) createSchedule.click()
     else {
       interviewsSection.click()
-      interviewSchedule.click()
+      createSchedule.click()
     }
-    interviewSchedulePageCheck()
+    createInterviewSchedulePageCheck()
     waitForVisibilityOfElementByPath(createScheduleTitlePath).getText shouldEqual scheduleTitle
   }
 
@@ -110,7 +110,8 @@ object InterviewSchedulePage extends VacancyBasePage {
 
   private def enterInterviewTitle(interviewScheduleDetails: InterviewScheduleDetails): Unit = {
     val schedule = interviewScheduleDetails
-    enterText(interviewTitleId, schedule.interviewTitle)
+    vXInterviewScheduleTitle = schedule.interviewTitle
+    enterText(interviewTitleId, vXInterviewScheduleTitle)
     addWelshTranslation(
       schedule.addWelshTitle,
       welshInterviewTitleId,
