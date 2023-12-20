@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.pages.vx.createvacancypage
 
 import org.openqa.selenium.By
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXLanguagesMandatory, vXLicencesMandatory, vXMembershipsMandatory, vXQualificationsMandatory, vXGuidanceText, vXStatementWordLimit}
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXGuidanceText, vXLanguagesMandatory, vXLicencesMandatory, vXMembershipsMandatory, vXQualificationsMandatory, vXStatementWordLimit}
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.vacancyFormId
 
@@ -192,7 +192,8 @@ object ExperienceSection extends VacancyBasePage {
   }
 
   private def selectMandatoryQualifications(successProfilesDetails: SuccessProfilesDetails): Unit = {
-    vXQualificationsMandatory = successProfilesDetails.experienceSection.map(_.qualifications.map(_.requirements).get).get
+    vXQualificationsMandatory =
+      successProfilesDetails.experienceSection.map(_.qualifications.map(_.requirements).get).get
     if (vXQualificationsMandatory) {
       clickOnRadioButton(mandatoryQualificationsYesId)
       enterQualificationsRequirements(successProfilesDetails)

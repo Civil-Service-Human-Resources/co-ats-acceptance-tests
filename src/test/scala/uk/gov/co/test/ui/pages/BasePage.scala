@@ -57,10 +57,10 @@ trait BasePage extends Matchers with Page with WebBrowser with PatienceConfigura
     }
   }
 
-  def checkForNewValue(valueId: String, expectedValue: String)(implicit driver: WebDriver): Unit = {
+  def checkForNewValue(valuePath: String, expectedValue: String)(implicit driver: WebDriver): Unit = {
     val wait = new WebDriverWait(driver, 20, 1000)
     wait.until { (d: WebDriver) =>
-      d.findElement(By.id(valueId)).getText.startsWith(expectedValue)
+      d.findElement(By.xpath(valuePath)).getText.startsWith(expectedValue)
     }
   }
 

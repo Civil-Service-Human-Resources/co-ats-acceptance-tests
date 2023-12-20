@@ -7,8 +7,8 @@ import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{civilServant, homeDepartm
 object ProvisionalOfferPage extends CivilServiceJobsBasePage {
 
   val provisionalOfferPageTitle  = "Provisional Offer - Civil Service Jobs - GOV.UK"
-  def congratsMessageId        = s"${offerDecisionFormId}_label_28793_1"
-  def offerDecisionOptionId    = s"${offerDecisionFormId}_datafield_56084_1_1"
+  def congratsMessageId          = s"${offerDecisionFormId}_label_28793_1"
+  def offerDecisionOptionId      = s"${offerDecisionFormId}_datafield_56084_1_1"
   def isCivilServantYesId        = s"${offerDecisionFormId}_datafield_183007_1_1_1_label"
   def isCivilServantNoId         = s"${offerDecisionFormId}_datafield_183007_1_1_2_label"
   def homeDepartmentId           = s"${offerDecisionFormId}_datafield_182930_1_1"

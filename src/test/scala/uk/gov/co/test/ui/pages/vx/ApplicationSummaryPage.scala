@@ -7,38 +7,38 @@ import uk.gov.co.test.ui.specs.TestData.eventually
 
 object ApplicationSummaryPage extends VacancyBasePage {
 
-  val dashboardPageTitle          = "Home : Civil Service Jobs - GOV.UK"
-  val applicationSummaryPageTitle = "Application Summary : Civil Service Jobs - GOV.UK"
-  val searchApplicationPath       = ".//*[@class='textlabel' and text() = 'Search Applications']"
-  val searchPath                  = "selected_option"
-  val searchInput                 = "search_input"
-  val matchingOption              = "matching_options"
-  val searchForId                 = "search_button"
-  val appIdPath                   = ".//*[@class='app_id']"
-  val preSiftEvaluationFormBarId  = "process_rule_but_468"
-  val completeSiftBarId           = "process_rule_but_18"
-  val progressBarId               = "process_rule_but_657"
-  val provisionalOfferOnlineBarId = "process_rule_but_3176"
-  val employmentHistoryBarId      = "process_rule_but_744"
-  val conditionalOfferBarId       = "process_rule_but_1024"
-  val withdrawApplicationBarId    = "process_rule_but_570"
-  val withdrawApplicationAtInterviewOneBarId    = "process_rule_but_511"
-  val updateApplicantBarId        = "process_rule_but_2008"
-  val emailVacancyHolderBarId     = "process_rule_but_2032"
-  val progressBarAfterPreSiftId   = "process_rule_but_155"
-  val rejectBarAfterPreSiftId     = "process_rule_but_154"
-  val withdrawBarId               = "process_rule_but_509"
-  val crcBarId                    = "process_rule_but_776"
-  val inviteToInterviewOneBarId                    = "process_rule_but_162"
-  val inviteToInterviewOneOfflineBarId                    = "process_rule_but_488"
-  val allBarItemsId               = "process_rules_bar"
-  val preSiftActionButtonsPath    = ".//*[@aria-label='Action Buttons']"
-  val siftEvaluationTabPath       = ".//span[@class='main-label' and text() = 'Sift evaluation']"
-  val commentsTabPath             = ".//span[@class='main-label' and text() = 'Comments']"
-  val vacancyAppliedDatePath      = ".//*[@id='collapse_panel']/span[2]"
-  var appSummaryFormId            = ""
-  def outcomeId                   = s"select2-${appSummaryFormId}_datafield_66487_1_1-container"
-  val messageIcon                 = ".//*[@class='msg_icon']"
+  val dashboardPageTitle                     = "Home : Civil Service Jobs - GOV.UK"
+  val applicationSummaryPageTitle            = "Application Summary : Civil Service Jobs - GOV.UK"
+  val searchApplicationPath                  = ".//*[@class='textlabel' and text() = 'Search Applications']"
+  val searchPath                             = "selected_option"
+  val searchInput                            = "search_input"
+  val matchingOption                         = "matching_options"
+  val searchForId                            = "search_button"
+  val appIdPath                              = ".//*[@class='app_id']"
+  val preSiftEvaluationFormBarId             = "process_rule_but_468"
+  val completeSiftBarId                      = "process_rule_but_18"
+  val progressBarId                          = "process_rule_but_657"
+  val provisionalOfferOnlineBarId            = "process_rule_but_3176"
+  val employmentHistoryBarId                 = "process_rule_but_744"
+  val conditionalOfferBarId                  = "process_rule_but_1024"
+  val withdrawApplicationBarId               = "process_rule_but_570"
+  val withdrawApplicationAtInterviewOneBarId = "process_rule_but_511"
+  val updateApplicantBarId                   = "process_rule_but_2008"
+  val emailVacancyHolderBarId                = "process_rule_but_2032"
+  val progressBarAfterPreSiftId              = "process_rule_but_155"
+  val rejectBarAfterPreSiftId                = "process_rule_but_154"
+  val withdrawBarId                          = "process_rule_but_509"
+  val crcBarId                               = "process_rule_but_776"
+  val inviteToInterviewOneBarId              = "process_rule_but_162"
+  val inviteToInterviewOneOfflineBarId       = "process_rule_but_488"
+  val allBarItemsId                          = "process_rules_bar"
+  val preSiftActionButtonsPath               = ".//*[@aria-label='Action Buttons']"
+  val siftEvaluationTabPath                  = ".//span[@class='main-label' and text() = 'Sift evaluation']"
+  val commentsTabPath                        = ".//span[@class='main-label' and text() = 'Comments']"
+  val vacancyAppliedDatePath                 = ".//*[@id='collapse_panel']/span[2]"
+  var appSummaryFormId                       = ""
+  def outcomeId                              = s"select2-${appSummaryFormId}_datafield_66487_1_1-container"
+  val messageIcon                            = ".//*[@class='msg_icon']"
 
   private def dashboardPageCheck(): Unit =
     eventually(onPage(dashboardPageTitle))
@@ -105,7 +105,9 @@ object ApplicationSummaryPage extends VacancyBasePage {
 
   def interviewStageOneOnline(): Unit = {
     checkForNewStatus(vacancyStatusPath, "Selected for Interview 1")
-    availableBarItems(List(inviteToInterviewOneBarId, inviteToInterviewOneOfflineBarId, withdrawApplicationAtInterviewOneBarId))
+    availableBarItems(
+      List(inviteToInterviewOneBarId, inviteToInterviewOneOfflineBarId, withdrawApplicationAtInterviewOneBarId)
+    )
     waitForVisibilityOfElementById(inviteToInterviewOneBarId).click()
   }
 

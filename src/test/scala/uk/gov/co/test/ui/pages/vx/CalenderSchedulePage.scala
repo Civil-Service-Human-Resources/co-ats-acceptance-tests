@@ -1,11 +1,14 @@
 package uk.gov.co.test.ui.pages.vx
 
-import org.openqa.selenium.By
+import org.openqa.selenium.{By, WebElement}
 import uk.gov.co.test.ui.data.vx.ApplicationDetails
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.vXInterviewScheduleTitle
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXApplicationClosingDate, vXApplicationLiveDate, vXInterviewScheduleTitle, vacancyId, vacancyName}
 import uk.gov.co.test.ui.specs.TestData.eventually
 
 import java.time.LocalTime
+import scala.collection.mutable
+import scala.jdk.CollectionConverters._
+import scala.util.control.Breaks.{break, breakable}
 
 case class CalenderScheduleDetails(
   slotStartTime: String,
@@ -38,11 +41,17 @@ object CalenderSchedulePage extends VacancyBasePage {
   private lazy val createSlotId                  = "create_slot_form_popup-submit"
   private lazy val createdFirstSlotPath          = ".//*[@class='streams-slot '][1]"
   private lazy val createdSecondSlotPath         = ".//*[@class='streams-slot '][2]"
-  private lazy val taggedVacanciesTabPath        = ".//span[@class='main-label' and text() = 'Tagged Vacancies']"
-  private lazy val calenderScheduleNoTitleId     = "No Title_description"
+  private lazy val calenderScheduleNoTitlePath   = ".//*[@id='No Title_description']"
   private lazy val allCalenderSlotsPath          = ".//*[@class='streams-slot ']"
+  private lazy val taggedVacanciesTabPath        = ".//span[@class='main-label' and text() = 'Tagged Vacancies']"
+  private lazy val addTaggedVacancyId            = "but_add_opportunity"
+  private lazy val addTaggedVacancyHeaderId      = "ui-id-1"
+  private lazy val filterVacancyResultsId        = "vacancy_Full_List-main-filter"
+  private lazy val addSelectedVacanciesId        = "add_opp_dlg-ok"
+  private lazy val displayingResultsT3Path       = "//*[@id='DataTables_Table_3_wrapper']/div[1]/div[2]/span[2]"
+  private lazy val displayingResultsT1Path       = "//*[@id='DataTables_Table_1_wrapper']/div[1]/div[2]/span[2]"
 
-  def enterSlotValue(inputId: String, value: String): Unit = {
+  def enterScheduleValue(inputId: String, value: String): Unit = {
     val enterOption = waitForVisibilityOfElementById(inputId)
     enterOption.clear()
     enterOption.sendKeys(value)
@@ -67,22 +76,22 @@ object CalenderSchedulePage extends VacancyBasePage {
   }
 
   private def enterSlotDuration(calenderScheduleDetails: CalenderScheduleDetails): Unit =
-    enterSlotValue(slotDurationId, calenderScheduleDetails.slotDuration.toString)
+    enterScheduleValue(slotDurationId, calenderScheduleDetails.slotDuration.toString)
 
   private def enterCandidatesPerSlot(calenderScheduleDetails: CalenderScheduleDetails): Unit =
-    enterSlotValue(candidatesPerSlotId, calenderScheduleDetails.candidatesPerSlot.toString)
+    enterScheduleValue(candidatesPerSlotId, calenderScheduleDetails.candidatesPerSlot.toString)
 
   private def checkAddMultipleSlots(calenderScheduleDetails: CalenderScheduleDetails): Unit = {
     val schedule = calenderScheduleDetails
     if (schedule.addMultipleSlots) {
       waitForVisibilityOfElementById(addMultipleSlotsId).click()
-      enterSlotValue(noOfConsecutiveSlotsId, schedule.noOfConsecutiveSlots.toString)
-      enterSlotValue(slotSpacingId, schedule.slotSpacing.toString)
+      enterScheduleValue(noOfConsecutiveSlotsId, schedule.noOfConsecutiveSlots.toString)
+      enterScheduleValue(slotSpacingId, schedule.slotSpacing.toString)
     }
   }
 
   private def enterInterviewRoom(calenderScheduleDetails: CalenderScheduleDetails): Unit =
-    enterSlotValue(interviewRoomId, calenderScheduleDetails.interviewRoom)
+    enterScheduleValue(interviewRoomId, calenderScheduleDetails.interviewRoom)
 
   private def checkSendInterviewerICalNow(calenderScheduleDetails: CalenderScheduleDetails): Unit = {
     val schedule = calenderScheduleDetails
@@ -106,7 +115,7 @@ object CalenderSchedulePage extends VacancyBasePage {
     val schedule      = calenderScheduleDetails
     val expectedTitle =
       s"Of ${schedule.noOfConsecutiveSlots} slots ${schedule.noOfConsecutiveSlots} need interviewers and 0 are fully booked."
-    checkForNewValue(calenderScheduleNoTitleId, expectedTitle)
+    checkForNewValue(calenderScheduleNoTitlePath, expectedTitle)
   }
 
   private def createdSlots(calenderScheduleDetails: CalenderScheduleDetails): Unit = {
@@ -144,6 +153,81 @@ object CalenderSchedulePage extends VacancyBasePage {
     createdSlotText(calenderScheduleDetails)
   }
 
+  def tableArea(tableNo: String): WebElement =
+    waitForVisibilityOfElement(By.xpath(s"//*[@id='$tableNo']/tbody"))
+
+  def summaryRows(tableNo: String = "DataTables_Table_3"): mutable.Buffer[WebElement] =
+    tableArea(tableNo).findElements(By.xpath("//tr[@tabindex='-1'][1]")).asScala
+
+  def firstRowItem(rowItem: WebElement): WebElement =
+    rowItem.findElement(By.xpath("td[1]"))
+
+  def secondRowItem(rowItem: WebElement): WebElement =
+    rowItem.findElement(By.xpath("td[2]"))
+
+  def thirdRowItem(rowItem: WebElement): WebElement =
+    rowItem.findElement(By.xpath("td[3]"))
+
+  def fourthRowItem(rowItem: WebElement): WebElement =
+    rowItem.findElement(By.xpath("td[4]"))
+
+  def fifthRowItem(rowItem: WebElement): WebElement =
+    rowItem.findElement(By.xpath("td[5]"))
+
+  def selectedVacancyValues(tableNo: String = "DataTables_Table_3"): (String, String, String, WebElement) = {
+    var _title: String        = ""
+    var _liveDate: String     = ""
+    var _closingDate: String  = ""
+    var _isActive: WebElement = null
+    val rows                  = summaryRows(tableNo)
+    breakable(
+      for (row <- rows) {
+        val q = firstRowItem(row)
+        println(q.getText)
+        if (q.getText == vacancyId) {
+          _title = secondRowItem(row).getText
+          _liveDate = thirdRowItem(row).getText
+          _closingDate = fourthRowItem(row).getText
+          _isActive = fifthRowItem(row)
+          break()
+        }
+      }
+    )
+    (_title, _liveDate, _closingDate, _isActive)
+  }
+
+  private def isVacancyActive(tableId: String): String = {
+    val active = s"//*[@id='$tableId']/tbody/tr/td[5]/span"
+    waitForVisibilityOfElementByPath(active).getAttribute("aria-label")
+  }
+
+  private def tagSelectedVacancy(): Unit = {
+    waitForVisibilityOfElementByPath(taggedVacanciesTabPath).click()
+    waitForVisibilityOfElementById(addTaggedVacancyId).click()
+    waitForVisibilityOfElementById(addTaggedVacancyHeaderId).getText shouldEqual "Add Selected Vacancies"
+    enterScheduleValue(filterVacancyResultsId, vacancyId)
+    checkForNewValue(displayingResultsT3Path, "Displaying 1 results")
+    val (_title, _liveDate, _closingDate, _isActive) = selectedVacancyValues()
+    _title  shouldEqual vacancyName
+    _liveDate    should startWith(vXApplicationLiveDate)
+    _closingDate should startWith(vXApplicationClosingDate)
+    if (isVacancyActive("DataTables_Table_3") == "Set to TRUE") {
+      clickOn(_isActive)
+      clickOn(addSelectedVacanciesId)
+    }
+  }
+
+  private def confirmTaggedVacancy(): Unit = {
+    checkForNewValue(displayingResultsT1Path, "Displaying 1 results")
+    val addVacancyTable                              = "DataTables_Table_1"
+    val (_title, _liveDate, _closingDate, _isActive) = selectedVacancyValues(addVacancyTable)
+    _title                           shouldEqual vacancyName
+    _liveDate                             should startWith(vXApplicationLiveDate)
+    _closingDate                          should startWith(vXApplicationClosingDate)
+    _isActive.isDisplayed
+    isVacancyActive(addVacancyTable) shouldEqual "Set to TRUE"
+  }
+
   private val calender: Seq[CalenderScheduleDetails => Unit] = Seq(
     createSlot,
     enterSlotStartTime,
@@ -161,6 +245,7 @@ object CalenderSchedulePage extends VacancyBasePage {
     calender.foreach { f =>
       f(applicationDetails.calenderScheduleDetails)
     }
-    println("Done!")
+    tagSelectedVacancy()
+    confirmTaggedVacancy()
   }
 }
