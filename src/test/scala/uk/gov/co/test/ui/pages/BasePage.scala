@@ -46,21 +46,33 @@ trait BasePage extends Matchers with Page with WebBrowser with PatienceConfigura
   }
 
   def waitForVisibilityOfStatusElementByPath(pathway: String)(implicit driver: WebDriver): WebElement = {
-    val wait = new WebDriverWait(driver, 10, 1000)
+    val wait = new WebDriverWait(driver, 10, 200)
     wait.until(visibilityOfElementLocated(By.xpath(pathway)))
   }
 
   def checkForNewStatus(statusPath: String, expectedStatus: String)(implicit driver: WebDriver): Unit = {
-    val wait = new WebDriverWait(driver, 20, 1000)
+    val wait = new WebDriverWait(driver, 20, 500)
+//    wait.until { (d: WebDriver) =>
+//      d.findElement(By.xpath(statusPath)).getText.endsWith(expectedStatus)
+//    }
     wait.until { (d: WebDriver) =>
-      d.findElement(By.xpath(statusPath)).getText.endsWith(expectedStatus)
+      println("Checking...")
+      val toFind = d.findElement(By.xpath(statusPath))
+      toFind.getText.endsWith(expectedStatus)
     }
   }
 
   def checkForNewValue(valuePath: String, expectedValue: String)(implicit driver: WebDriver): Unit = {
-    val wait = new WebDriverWait(driver, 20, 1000)
+    val wait = new WebDriverWait(driver, 20, 200)
     wait.until { (d: WebDriver) =>
       d.findElement(By.xpath(valuePath)).getText.startsWith(expectedValue)
+    }
+  }
+
+  def checkForNewValueId(valueId: String, expectedValue: String)(implicit driver: WebDriver): Unit = {
+    val wait = new WebDriverWait(driver, 20, 500)
+    wait.until { (d: WebDriver) =>
+      d.findElement(By.id(valueId)).getText.startsWith(expectedValue)
     }
   }
 
