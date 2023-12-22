@@ -61,7 +61,8 @@ object PEC_APPROVAL
     extends ApprovalDetails(
       true,
       "Autotest - budgetary authorisation info",
-      ""
+      "",
+      "Test-T&Cs.pdf"
     )
 
 object PEC_RESERVE_LIST

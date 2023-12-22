@@ -1,6 +1,6 @@
 package uk.gov.co.test.ui.pages.vx.createvacancypage
 
-import org.openqa.selenium.{By, WebElement}
+import org.openqa.selenium.By
 import uk.gov.co.test.ui.data.vx.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.vacancyFormId
@@ -8,7 +8,8 @@ import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.vacancyF
 case class ApprovalDetails(
   approval: Boolean,
   budgetaryAuthInfo: String,
-  costCentre: String
+  costCentre: String,
+  fileToUpload: String
 )
 
 object ApprovalSection extends VacancyBasePage {
@@ -41,17 +42,11 @@ object ApprovalSection extends VacancyBasePage {
       clickOnRadioButton(approvalNoId)
     }
     costCentre(approvalDetails.costCentre)
-    uploadApprovalFile("Test-T&Cs.pdf")
+    uploadApprovalFile(approvalDetails.fileToUpload)
   }
 
-  def importFilesPath: String = "/src/test/resource/import/"
-
-  private def uploadApprovalFile(fileName: String): Unit = {
-    val getCurrentDirectory     = new java.io.File(".").getCanonicalPath
-    val filePath                = getCurrentDirectory.concat(importFilesPath).concat(fileName)
-    val fileElement: WebElement = id(uploadApprovalFileOneId).findElement.get.underlying
-    fileElement.sendKeys(filePath)
-  }
+  private def uploadApprovalFile(fileName: String): Unit =
+    attachDocuments(uploadApprovalFileOneId, fileName)
 
   private val approval: Seq[ApprovalDetails => Unit] = Seq(
     selectApproval

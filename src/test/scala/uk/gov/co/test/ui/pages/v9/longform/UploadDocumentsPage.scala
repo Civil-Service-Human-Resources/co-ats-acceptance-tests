@@ -1,6 +1,5 @@
 package uk.gov.co.test.ui.pages.v9.longform
 
-import org.openqa.selenium.WebElement
 import org.scalatest.concurrent.Eventually.eventually
 import uk.gov.co.test.ui.data.v9.longform.LongFormDetails
 import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXCandidateInstructions, vXUploadAttachmentRequired}
@@ -26,14 +25,8 @@ object UploadDocumentsPage extends CivilServiceJobsBasePage {
     v9Instruction shouldEqual vXCandidateInstructions
   }
 
-  def importFilesPath: String = "/src/test/resource/import/"
-
-  private def uploadCandidateDocuments(uploadDocumentsDetails: UploadDocumentsDetails): Unit = {
-    val getCurrentDirectory     = new java.io.File(".").getCanonicalPath
-    val filePath                = getCurrentDirectory.concat(importFilesPath).concat(uploadDocumentsDetails.documentLocation)
-    val fileElement: WebElement = id(uploadDocumentsId).findElement.get.underlying
-    fileElement.sendKeys(filePath)
-  }
+  private def uploadCandidateDocuments(uploadDocumentsDetails: UploadDocumentsDetails): Unit =
+    attachDocuments(uploadDocumentsId, uploadDocumentsDetails.documentLocation)
 
   private val document: Seq[UploadDocumentsDetails => Unit] = Seq(
     uploadCandidateDocuments

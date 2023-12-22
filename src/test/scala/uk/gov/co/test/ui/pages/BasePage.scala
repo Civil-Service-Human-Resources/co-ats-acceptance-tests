@@ -22,6 +22,7 @@ trait BasePage extends Matchers with Page with WebBrowser with PatienceConfigura
   def currentWindows()(implicit driver: WebDriver): util.Set[String] = driver.getWindowHandles
   def firstWindowHandle()(implicit driver: WebDriver): String        = currentWindows.asScala.head
   def secondWindowHandle()(implicit driver: WebDriver): String       = currentWindows.asScala.tail.head
+  def importFilesPath: String                                        = "/src/test/resource/import/"
 
   override implicit val patienceConfig: PatienceConfig =
     PatienceConfig(timeout = scaled(Span(30, Seconds)), interval = scaled(Span(1000, Millis)))
@@ -214,22 +215,16 @@ trait BasePage extends Matchers with Page with WebBrowser with PatienceConfigura
       driver.switchTo.window(chartWindow)
   }
 
-//  def switchBackToWindow(windowName: String)(implicit driver: WebDriver): WebDriver =
-  //    driver.switchTo().window(windowName)
-  //
-  //  def switchToFirstWindow()(implicit driver: WebDriver): Unit = {
-  //    switchBackToWindow(firstWindowHandle)
-  //    refreshPage()
-  //  }
-  //
-  //  def switchToSecondWindow()(implicit driver: WebDriver): Unit = {
-  //    switchBackToWindow(secondWindowHandle)
-  //    refreshPage()
-  //  }
-
   def refreshPage()(implicit driver: WebDriver): Unit =
     driver.navigate().refresh()
 
   def searchFunction(eleId: String)(implicit driver: WebDriver): util.List[WebElement] =
     driver.findElements(By.id(eleId))
+
+  def attachDocuments(attachId: String, file: String)(implicit driver: WebDriver): Unit = {
+    val getCurrentDirectory     = new java.io.File(".").getCanonicalPath
+    val filePath                = getCurrentDirectory.concat(importFilesPath).concat(file)
+    val fileElement: WebElement = id(attachId).findElement.get.underlying
+    fileElement.sendKeys(filePath)
+  }
 }

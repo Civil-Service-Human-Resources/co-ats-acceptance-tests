@@ -66,7 +66,8 @@ object PEC_APPLY_ONLY_APPROVAL
     extends ApprovalDetails(
       true,
       "Autotest - budgetary authorisation info",
-      "Autotest - Cost centre (optional)"
+      "Autotest - Cost centre (optional)",
+      "Test-T&Cs.pdf"
     )
 
 object PEC_APPLY_ONLY_RESERVE_LIST
