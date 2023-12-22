@@ -21,7 +21,7 @@ object MasterVacancyDetails extends VacancyBasePage {
   var vacancyId                         = "9562"
   var vXApplicationLiveDate: String     = "22 December 2023"
   var vXApplicationLiveTime: String     = ""
-  var vXApplicationClosingDate: String  = "31/01/2023"
+  var vXApplicationClosingDate: String  = "31/01/2024"
   var vXAppConvertedClosingDate: String = ""
   var vXApplicationClosingTime: String  = ""
   var vXConvertedLiveDateTime           = ""
