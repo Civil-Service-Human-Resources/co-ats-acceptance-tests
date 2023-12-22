@@ -17,11 +17,11 @@ object MasterVacancyDetails extends VacancyBasePage {
   var candidateApproach = "External"
 
   //vx vacancy basicDetails section
-  var vacancyName                       = "HMRC Heritage Lead"
-  var vacancyId                         = "9546"
-  var vXApplicationLiveDate: String     = ""
+  var vacancyName                       = "HMRC - Technical Architect"
+  var vacancyId                         = "9562"
+  var vXApplicationLiveDate: String     = "22 December 2023"
   var vXApplicationLiveTime: String     = ""
-  var vXApplicationClosingDate: String  = ""
+  var vXApplicationClosingDate: String  = "31/01/2023"
   var vXAppConvertedClosingDate: String = ""
   var vXApplicationClosingTime: String  = ""
   var vXConvertedLiveDateTime           = ""
@@ -162,14 +162,19 @@ object MasterVacancyDetails extends VacancyBasePage {
   var v9ThirdEmployerFromDate  = ""
   var v9ThirdEmployerToDate    = ""
 
+  //vX calender schedule
+  var vXSlotOneStartTime = ""
+  var vXInterviewRoom    = ""
+
   //vX interview schedule
-  var vXInterviewExpectedRounds = "4"
-  var vXInterviewOneDate        = ""
-  var vXInterviewLocation       = ""
-  var vXInterviewScheduleTitle  = ""
-  var vXInterviewOneType        = "Telephone"
-  var vXInterviewTwoType        = "Assessment"
-  var vXInterviewThreeType      = "Video"
-  var vXInterviewFourType       = "Interview"
+  var vXInterviewExpectedRounds   = "4"
+  var vXInterviewOneDate          = ""
+  var vXInterviewLocation         = ""
+  var vXInterviewScheduleTitle    = ""
+  var vXInstructionsForCandidates = ""
+  var vXInterviewOneType          = "Telephone"
+  var vXInterviewTwoType          = "Assessment"
+  var vXInterviewThreeType        = "Video"
+  var vXInterviewFourType         = "Interview"
 
 }

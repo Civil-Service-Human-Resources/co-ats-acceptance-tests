@@ -36,7 +36,6 @@ class createVacancySpec extends BaseFeatureSpec {
 
       Then("the candidate is able to confirm short & long forms are completed")
       confirmLongFormCompletion()
-      completeFullPecFlow()
     }
 
     Scenario("VX: A Recruiter Creates A Insolvency Apply Only Vacancy; Full Application Process", RunInVX) {

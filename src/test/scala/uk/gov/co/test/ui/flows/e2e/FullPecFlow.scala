@@ -10,6 +10,7 @@ import uk.gov.co.test.ui.flows.v9.PecFormFlow.fillPecFormDetailsOnly
 import uk.gov.co.test.ui.flows.v9.ShortFormFlow.fillShortFormDetails
 import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.{applicationBeingReviewedState, candidateAcceptsOffer, confirmOfferAccepted, confirmPecSubmission, invitedForInterviewState}
 import uk.gov.co.test.ui.pages.v9.ApplicationsPage.extractApplicationId
+import uk.gov.co.test.ui.pages.v9.BookedInterviewPage.selectInterviewOneDateTime
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
 import uk.gov.co.test.ui.pages.v9.ProvisionalOfferPage.offerDecisionFlow
 import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.{navigateToApplicationSummary, progressApplicationToOffer, searchApplicationId}
@@ -23,8 +24,8 @@ import uk.gov.co.test.ui.pages.vx.vacancytabs.SiftEvaluationTab.SiftEvaluationFl
 object FullPecFlow extends CivilServiceJobsBasePage {
 
   private val fullPecFlow: Seq[Unit] = Seq(
-//    fillShortFormDetails(SHORT_FORM_DATA_PEC),
-//    fillLongFormDetails(MASTER_LONG_FORM_DATA),
+    fillShortFormDetails(SHORT_FORM_DATA_PEC),
+    fillLongFormDetails(MASTER_LONG_FORM_DATA),
     extractApplicationId(),
     navigateToApplicationSummary(),
     PreSiftEvaluationFlow(APPLICATION_DATA),
@@ -36,6 +37,7 @@ object FullPecFlow extends CivilServiceJobsBasePage {
     searchApplicationId(applicationId),
     inviteToInterviewEmailFlow(),
     invitedForInterviewState(),
+    selectInterviewOneDateTime(),
     println("So far..."),
     //TODO more flows here before progressing to offer!
     progressApplicationToOffer(),

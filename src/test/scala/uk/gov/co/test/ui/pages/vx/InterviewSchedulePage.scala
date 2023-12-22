@@ -2,7 +2,7 @@ package uk.gov.co.test.ui.pages.vx
 
 import org.openqa.selenium.{By, WebElement}
 import uk.gov.co.test.ui.data.vx.ApplicationDetails
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{applicationId, randomFirstName, randomLastName, vXInterviewExpectedRounds, vXInterviewLocation, vXInterviewOneDate, vXInterviewScheduleTitle, vXJobInfoDepartment, vacancyId, vacancyName}
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{applicationId, randomFirstName, randomLastName, vXInstructionsForCandidates, vXInterviewExpectedRounds, vXInterviewLocation, vXInterviewOneDate, vXInterviewScheduleTitle, vXJobInfoDepartment, vacancyId, vacancyName}
 import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.{availableBarItems, inviteToInterviewOneBarId, scheduleOfflineInterviewBarId, withdrawApplicationAtInterviewOneBarId}
 import uk.gov.co.test.ui.pages.vx.createvacancypage.AdvertSection.switchBack
 import uk.gov.co.test.ui.specs.TestData.eventually
@@ -185,10 +185,11 @@ object InterviewSchedulePage extends VacancyBasePage {
 
   private def enterInstructionsForCandidate(interviewScheduleDetails: InterviewScheduleDetails): Unit = {
     val schedule    = interviewScheduleDetails
+    vXInstructionsForCandidates = schedule.instructionsForCandidate
     val switchFrame = driver.switchTo().frame(instructionsForCandidateIFrameId)
     val notesArea   = switchFrame.findElement(By.id(instructionsForCandidateId))
     notesArea.clear()
-    notesArea.sendKeys(schedule.instructionsForCandidate)
+    notesArea.sendKeys(vXInstructionsForCandidates)
     switchBack()
     addWelshTranslationIFrame(
       schedule.addWelshInstructionsForCandidate,

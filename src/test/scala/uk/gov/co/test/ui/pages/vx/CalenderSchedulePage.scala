@@ -2,7 +2,7 @@ package uk.gov.co.test.ui.pages.vx
 
 import org.openqa.selenium.{By, WebElement}
 import uk.gov.co.test.ui.data.vx.ApplicationDetails
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXApplicationClosingDate, vXApplicationLiveDate, vXInterviewScheduleTitle, vacancyId, vacancyName}
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXApplicationClosingDate, vXApplicationLiveDate, vXInterviewRoom, vXInterviewScheduleTitle, vXSlotOneStartTime, vacancyId, vacancyName}
 import uk.gov.co.test.ui.specs.TestData.eventually
 
 import java.time.LocalTime
@@ -94,8 +94,10 @@ object CalenderSchedulePage extends VacancyBasePage {
     }
   }
 
-  private def enterInterviewRoom(calenderScheduleDetails: CalenderScheduleDetails): Unit =
-    enterScheduleValue(interviewRoomId, calenderScheduleDetails.interviewRoom)
+  private def enterInterviewRoom(calenderScheduleDetails: CalenderScheduleDetails): Unit = {
+    vXInterviewRoom = calenderScheduleDetails.interviewRoom
+    enterScheduleValue(interviewRoomId, vXInterviewRoom)
+  }
 
   private def checkSendInterviewerICalNow(calenderScheduleDetails: CalenderScheduleDetails): Unit = {
     val schedule = calenderScheduleDetails
@@ -131,14 +133,14 @@ object CalenderSchedulePage extends VacancyBasePage {
   private def confirmSlotText(calenderScheduleDetails: CalenderScheduleDetails): Unit = {
     val schedule          = calenderScheduleDetails
     val (_hour, _min)     = splitTime(calenderScheduleDetails.slotStartTime)
-    val slotOneStartTime  = schedule.slotStartTime.replaceFirst("^0*", "")
+    vXSlotOneStartTime = schedule.slotStartTime.replaceFirst("^0*", "")
     val slotOneFinishTime = LocalTime.of(_hour.toInt, _min.toInt).plusMinutes(schedule.slotDuration)
     val slotTwoStartTime  = slotOneFinishTime.plusMinutes(schedule.slotSpacing)
     val slotTwoFinishTime = slotTwoStartTime.plusMinutes(schedule.slotDuration)
 
     waitForVisibilityOfElementByPath(createdFirstSlotPath).getText shouldEqual
-      s"""${schedule.interviewRoom}: $slotOneStartTime am to $slotOneFinishTime am
-         |$slotOneStartTime am to $slotOneFinishTime am
+      s"""${schedule.interviewRoom}: $vXSlotOneStartTime am to $slotOneFinishTime am
+         |$vXSlotOneStartTime am to $slotOneFinishTime am
          |Room/Site : ${schedule.interviewRoom}
          |Panel Members/Administrators ( 0 of 1 ) :
          |Candidate ( 0 of 1 ) :""".stripMargin
