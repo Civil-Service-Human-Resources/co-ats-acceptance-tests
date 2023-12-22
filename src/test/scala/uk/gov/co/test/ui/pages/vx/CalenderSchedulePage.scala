@@ -52,6 +52,7 @@ object CalenderSchedulePage extends VacancyBasePage {
   private lazy val displayingResultsT3Path       = "//*[@id='DataTables_Table_3_wrapper']/div[1]/div[2]/span[2]"
   private lazy val displayingResultsT1Path       = "//*[@id='DataTables_Table_1_wrapper']/div[1]/div[2]/span[2]"
   private lazy val displayingResultsITPath       = "//*[@id='itinerary_list_wrapper']/div[1]/div[1]/span[2]"
+  private lazy val createdSlotsPagePath       = "//*[@id='itinerary_list']/tbody//tr[@tabindex='-1']"
 
   def enterScheduleValue(inputId: String, value: String): Unit = {
     val enterOption = waitForVisibilityOfElementById(inputId)
@@ -151,7 +152,6 @@ object CalenderSchedulePage extends VacancyBasePage {
 
   def tableArea(tableNo: String): WebElement = {
     xpath(s"//*[@id='$tableNo']/tbody").element.underlying
-//    waitForVisibilityOfElement(By.xpath(s"//*[@id='$tableNo']/tbody"))
   }
 
   def summaryRows(tableNo: String = "DataTables_Table_3"): mutable.Buffer[WebElement] =
@@ -201,7 +201,7 @@ object CalenderSchedulePage extends VacancyBasePage {
   private def checkCreatedSlots(): Unit = {
     waitForVisibilityOfElementByPath(createdSlotsTabPath).click()
     checkForNewValue(displayingResultsITPath, "Displaying 2 results")
-    driver.findElements(By.xpath("//*[@id='itinerary_list']/tbody//tr[@tabindex='-1']")).size() shouldEqual 2
+    driver.findElements(By.xpath(createdSlotsPagePath)).size() shouldEqual 2
   }
 
   private def tagSelectedVacancy(): Unit = {

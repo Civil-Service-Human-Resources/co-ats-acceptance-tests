@@ -27,6 +27,9 @@ object MasterVacancyDetails extends VacancyBasePage {
   var vXConvertedLiveDateTime           = ""
   var vXConvertedClosingDateTime        = ""
 
+  //vx job information section
+  var vXJobInfoDepartment = "HM Revenue and Customs"
+
   //vx vacancy behaviours section
   var vXHowManyBehaviours: Int                     = 8
 //  var vXListOfChosenBehaviours = new ListBuffer[String]()
@@ -160,6 +163,7 @@ object MasterVacancyDetails extends VacancyBasePage {
   var v9ThirdEmployerToDate    = ""
 
   //vX interview schedule
+  var vXInterviewExpectedRounds      = "4"
   var vXInterviewOneDate       = ""
   var vXInterviewLocation      = ""
   var vXInterviewScheduleTitle = ""

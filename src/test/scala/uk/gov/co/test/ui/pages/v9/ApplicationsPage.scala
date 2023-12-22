@@ -126,4 +126,12 @@ object ApplicationsPage extends CivilServiceJobsBasePage {
     applicationId = applicationIdValue()
   }
 
+  def confirmAppBeingReviewed(): Unit = {
+    refreshPage()
+    eventually {
+      statusValue() shouldEqual "Application being reviewed"
+    }
+    reviewUpdateValue().click()
+  }
+
 }

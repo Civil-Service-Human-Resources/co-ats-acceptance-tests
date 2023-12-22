@@ -2,6 +2,7 @@ package uk.gov.co.test.ui.pages.vx.vacancytabs
 
 import org.openqa.selenium.By
 import uk.gov.co.test.ui.data.vx.ApplicationDetails
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{applicationId, vXJobInfoDepartment, vacancyId, vacancyName}
 import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.{preSiftCompletion, preSiftEvaluationFormBarId}
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.vacancyFormId
@@ -33,6 +34,17 @@ object PreSiftEvaluationTab extends VacancyBasePage {
   def completePreSiftEvaluationForm(): Unit = {
     checkVacancyStatus("Pre-sift actions required")
     moveVacancyOnViaTopBar(preSiftEvaluationFormBarId, preSiftEvaluationTabPath)
+  }
+
+  private def confirmCandidateSummary(): Unit = {
+    waitForVisibilityOfElementById(candidateSummaryId("1")).getText shouldEqual applicationId
+    waitForVisibilityOfElementById(candidateSummaryId("2")).getText shouldEqual "Restricted Data"
+    waitForVisibilityOfElementById(candidateSummaryId("3")).getText shouldEqual "Restricted Data"
+    waitForVisibilityOfElementById(candidateSummaryId("4")).getText shouldEqual "Pre-sift actions required"
+    waitForVisibilityOfElementById(candidateSummaryId("5")).getText shouldEqual vacancyId
+    waitForVisibilityOfElementById(candidateSummaryId("6")).getText shouldEqual vacancyName
+    waitForVisibilityOfElementById(candidateSummaryId("7")).getText shouldEqual vXJobInfoDepartment
+    waitForVisibilityOfElementById(candidateSummaryId("8")).getText shouldEqual "Restricted Data"
   }
 
   private def completeCvAssessment(preSiftDetails: PreSiftDetails): Unit = {
@@ -73,6 +85,7 @@ object PreSiftEvaluationTab extends VacancyBasePage {
   )
 
   def PreSiftEvaluationFlow(applicationDetails: ApplicationDetails): Unit = {
+    confirmCandidateSummary()
     completePreSiftEvaluationForm()
     preSift.foreach { f =>
       f(applicationDetails.preSiftDetails)

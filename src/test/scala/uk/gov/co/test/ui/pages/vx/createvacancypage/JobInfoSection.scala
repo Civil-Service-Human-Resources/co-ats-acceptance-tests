@@ -1,6 +1,7 @@
 package uk.gov.co.test.ui.pages.vx.createvacancypage
 
 import org.openqa.selenium.By
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.vXJobInfoDepartment
 import uk.gov.co.test.ui.data.vx.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.vacancyFormId
@@ -21,6 +22,7 @@ object JobInfoSection extends VacancyBasePage {
 
   val createVacancyTitle = "Create New Vacancy : Civil Service Jobs - GOV.UK"
 
+  def departmentId              = s"select2-${vacancyFormId}_datafield_155191_1_1-container"
   def businessAreaId              = s"select2-${vacancyFormId}_datafield_155221_1_1-container"
   def whichProfessionId           = s"select2-${vacancyFormId}_datafield_155435_1_1-container"
   def noOfJobsId                  = s"${vacancyFormId}_datafield_155332_1_1"
@@ -35,6 +37,12 @@ object JobInfoSection extends VacancyBasePage {
 
   private def selectWelshVersion(jobInfoDetails: JobInfoDetails): Unit =
     if (jobInfoDetails.displayWelsh) checkbox(welshRequiredCheck).select()
+
+  private def selectDepartment(jobInfoDetails: JobInfoDetails): Unit = {
+    vXJobInfoDepartment = jobInfoDetails.department
+    waitForVisibilityOfElementById(departmentId).click()
+    selectOption(generalInput, vXJobInfoDepartment)
+  }
 
   private def selectBusinessArea(jobInfoDetails: JobInfoDetails): Unit = {
     val area            = jobInfoDetails.businessArea
@@ -78,6 +86,7 @@ object JobInfoSection extends VacancyBasePage {
 
   private val jobInfo: Seq[JobInfoDetails => Unit] = Seq(
     selectWelshVersion,
+    selectDepartment,
     selectBusinessArea,
     enterBusinessAreaDetail,
     selectTypeOfRole,

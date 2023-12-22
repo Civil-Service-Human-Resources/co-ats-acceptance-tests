@@ -2,7 +2,7 @@ package uk.gov.co.test.ui.pages.vx.vacancytabs
 
 import org.openqa.selenium.By
 import uk.gov.co.test.ui.data.vx.ApplicationDetails
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXBehavioursRequired, vXHowManyBehaviours, vXHowManySkills, vXListOfChosenBehaviours, vXListOfTechSkills, vXTechSkillsRequired}
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{applicationId, vXBehavioursRequired, vXHowManyBehaviours, vXHowManySkills, vXJobInfoDepartment, vXListOfChosenBehaviours, vXListOfTechSkills, vXTechSkillsRequired, vacancyId, vacancyName}
 import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.{availableBarItems, completeSiftBarId, siftEvaluation, withdrawBarId}
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.vacancyFormId
@@ -128,8 +128,20 @@ object SiftEvaluationTab extends VacancyBasePage {
     }
   }
 
+  private def confirmCandidateSummary(): Unit = {
+    waitForVisibilityOfElementById(candidateSummaryId("1")).getText shouldEqual applicationId
+    waitForVisibilityOfElementById(candidateSummaryId("2")).getText shouldEqual "Restricted Data"
+    waitForVisibilityOfElementById(candidateSummaryId("3")).getText shouldEqual "Restricted Data"
+    waitForVisibilityOfElementById(candidateSummaryId("4")).getText shouldEqual "Sift application"
+    waitForVisibilityOfElementById(candidateSummaryId("5")).getText shouldEqual vacancyId
+    waitForVisibilityOfElementById(candidateSummaryId("6")).getText shouldEqual vacancyName
+    waitForVisibilityOfElementById(candidateSummaryId("7")).getText shouldEqual vXJobInfoDepartment
+    waitForVisibilityOfElementById(candidateSummaryId("8")).getText shouldEqual "Restricted Data"
+  }
+
   private def moveSiftEvaluationForm(): Unit = {
     checkForNewStatus(vacancyStatusPath, "Sift application")
+    confirmCandidateSummary()
     moveVacancyOnViaTopBar(completeSiftBarId, siftEvaluationTabPath)
     availableBarItems(List(completeSiftBarId, withdrawBarId))
     waitForVisibilityOfElementById(siftEvaluationHeaderId).getText should endWith("Sift Evaluation")

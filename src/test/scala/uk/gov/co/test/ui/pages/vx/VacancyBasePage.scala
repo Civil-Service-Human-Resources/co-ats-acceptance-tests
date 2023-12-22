@@ -43,6 +43,7 @@ trait VacancyBasePage extends Matchers with BasePage with BrowserDriver {
   val vacancyStatusPath            = ".//*[@id='collapse_panel']/span[1]"
   val submitForm                   = "submit_button"
 
+  def candidateSummaryId(noEle: String)     = s"candidate_summary_entry_cand_summary_col_$noEle"
   def findUsernameField: util.List[WebElement] = driver.findElements(By.id("user"))
   def username(): TextField                    = textField("user")
   def password(): PasswordField                = pwdField("password")
@@ -188,12 +189,12 @@ trait VacancyBasePage extends Matchers with BasePage with BrowserDriver {
   }
 
   def switchToVXConfig(): Unit = {
-    switchToAnotherWindow()
+    switchToOtherWindow()
     loginWithRecruiterDetails(RECRUITER)
   }
 
   def switchToV9Test(): Unit = {
-    switchToAnotherWindow()
+    switchToOtherWindow()
     navigateToV9Test()
     if (!v9SearchCookiesById().isEmpty) v9AcceptAllCookies()
     checkV9LogoutState()
@@ -228,5 +229,10 @@ trait VacancyBasePage extends Matchers with BasePage with BrowserDriver {
   def enterTime(id: String, value: String): Unit = {
     val timeValue = new Select(waitForVisibilityOfElementById(id))
     timeValue.selectByVisibleText(value)
+  }
+
+  def checkCandidateSummary(eleNo: String): String = {
+    val ele = s"candidate_summary_entry_cand_summary_col_$eleNo"
+    waitForVisibilityOfElementById(ele).getText
   }
 }

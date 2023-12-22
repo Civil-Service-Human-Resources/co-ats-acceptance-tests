@@ -1,5 +1,6 @@
 package uk.gov.co.test.ui.pages.vx.createvacancypage
 
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.vXInterviewExpectedRounds
 import uk.gov.co.test.ui.data.vx.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.vacancyFormId
@@ -41,7 +42,8 @@ object InterviewsSection extends VacancyBasePage {
 
   def interviewsSection(newVacancyDetails: NewVacancyDetails): Unit = {
     val interviews = newVacancyDetails.interviewsDetails
-    interviews.expectedRounds match {
+    vXInterviewExpectedRounds = interviews.expectedRounds
+    vXInterviewExpectedRounds match {
       case "No interviews" => clickOnRadioButton(noInterviewsId)
       case "1"             =>
         clickOnRadioButton(oneInterviewId)

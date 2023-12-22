@@ -4,7 +4,7 @@ import org.openqa.selenium.{By, WebElement}
 import org.scalatest.concurrent.Eventually.eventually
 import uk.gov.co.test.ui.conf.TestConfiguration
 import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{v9AdjustmentsForTests, v9ReasonableAdjustments, vXAnyOnlineTests, vacancyName}
-import uk.gov.co.test.ui.pages.v9.ApplicationsPage.reviewUpdateValue
+import uk.gov.co.test.ui.pages.v9.ApplicationsPage.{confirmAppBeingReviewed, reviewUpdateValue, statusValue}
 import uk.gov.co.test.ui.pages.vx.DashboardPage.{contactEmailVxConfig, switchToV9Test}
 
 object ApplicationCentrePage extends CivilServiceJobsBasePage {
@@ -170,5 +170,16 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
     applicationForVacancyText  shouldEqual s"Application For $vacancyName"
     getApplicationState        shouldEqual "Application status: Pre-employment checks"
     getApplicationConfirmation shouldEqual "Great news, you've accepted your provisional offer and your pre-employment checks are underway.\nWe are still checking:\nyour employment history, including any gaps\nwhether you have any convictions\n\n\nWe will send an email notification to you once all pre-employment checks are complete."
+  }
+
+  def applicationBeingReviewed(): Unit = {
+    confirmAppBeingReviewed()
+    applicationCentrePageCheck()
+    feedbackFunction().isEnabled
+    withdrawApplicationFunction().isEnabled
+    advertDetailsFunction().isEnabled
+    applicationForVacancyText shouldEqual s"Application For $vacancyName"
+    getApplicationState shouldEqual "Application status: Application being reviewed"
+    getApplicationConfirmation shouldEqual "The selection panel are reviewing your application.\nWe'll email you updates on the progress of your application or you can check the progress here in your account."
   }
 }

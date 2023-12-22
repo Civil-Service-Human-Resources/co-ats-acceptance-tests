@@ -2,7 +2,8 @@ package uk.gov.co.test.ui.pages.vx
 
 import org.openqa.selenium.{By, WebElement}
 import uk.gov.co.test.ui.data.vx.ApplicationDetails
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXInterviewLocation, vXInterviewOneDate, vXInterviewScheduleTitle}
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{applicationId, randomFirstName, randomLastName, vXInterviewExpectedRounds, vXInterviewLocation, vXInterviewOneDate, vXInterviewScheduleTitle, vXJobInfoDepartment, vacancyId, vacancyName}
+import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.{availableBarItems, inviteToInterviewOneBarId, scheduleOfflineInterviewBarId, withdrawApplicationAtInterviewOneBarId, withdrawBarId}
 import uk.gov.co.test.ui.pages.vx.createvacancypage.AdvertSection.switchBack
 import uk.gov.co.test.ui.specs.TestData.eventually
 
@@ -80,6 +81,23 @@ object InterviewSchedulePage extends VacancyBasePage {
 
   private def createInterviewSchedulePageCheck(): Unit =
     eventually(onPage(createInterviewSchedulePageTitle))
+
+  private def confirmCandidateSummary(): Unit = {
+    checkCandidateSummary("1") shouldEqual applicationId
+    checkCandidateSummary("2") shouldEqual randomFirstName
+    checkCandidateSummary("3") shouldEqual randomLastName
+    checkCandidateSummary("4") shouldEqual "Selected for Interview 1"
+    checkCandidateSummary("5") shouldEqual vacancyId
+    checkCandidateSummary("6") shouldEqual vacancyName
+    checkCandidateSummary("7") shouldEqual vXJobInfoDepartment
+    checkCandidateSummary("8") shouldEqual "External - Non Civil Servant / External"
+  }
+
+  private def checkInterviewStatus(): Unit = {
+    confirmCandidateSummary()
+    checkForNewStatus(vacancyStatusPath, "Selected for Interview 1")
+    availableBarItems(List(inviteToInterviewOneBarId, scheduleOfflineInterviewBarId, withdrawApplicationAtInterviewOneBarId))
+  }
 
   private def createInterviewSchedule(): Unit = {
     val scheduleTitle = "Create Interview Schedule"
@@ -254,11 +272,13 @@ object InterviewSchedulePage extends VacancyBasePage {
     checkCandidateCVInICals
   )
 
-  def interviewSchedulePage(applicationDetails: ApplicationDetails): Unit = {
-    createInterviewSchedule()
-    schedule.foreach { f =>
-      f(applicationDetails.interviewScheduleDetails)
+  def interviewSchedulePage(applicationDetails: ApplicationDetails): Unit =
+    if (vXInterviewExpectedRounds != "No interviews") {
+      checkInterviewStatus()
+      createInterviewSchedule()
+      schedule.foreach { f =>
+        f(applicationDetails.interviewScheduleDetails)
+      }
+      clickOn(createId)
     }
-    clickOn(createId)
-  }
 }
