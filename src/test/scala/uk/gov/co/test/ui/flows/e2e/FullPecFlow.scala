@@ -8,14 +8,14 @@ import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.applicationId
 import uk.gov.co.test.ui.flows.v9.LongFormFlow.fillLongFormDetails
 import uk.gov.co.test.ui.flows.v9.PecFormFlow.fillPecFormDetailsOnly
 import uk.gov.co.test.ui.flows.v9.ShortFormFlow.fillShortFormDetails
-import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.{applicationBeingReviewed, candidateAcceptsOffer, confirmOfferAccepted, confirmPecSubmission}
+import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.{applicationBeingReviewedState, candidateAcceptsOffer, confirmOfferAccepted, confirmPecSubmission, invitedForInterviewState}
 import uk.gov.co.test.ui.pages.v9.ApplicationsPage.extractApplicationId
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
 import uk.gov.co.test.ui.pages.v9.ProvisionalOfferPage.offerDecisionFlow
 import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.{navigateToApplicationSummary, progressApplicationToOffer, searchApplicationId}
 import uk.gov.co.test.ui.pages.vx.CalenderSchedulePage.calenderSchedulePage
 import uk.gov.co.test.ui.pages.vx.InterviewSchedulePage.interviewSchedulePage
-import uk.gov.co.test.ui.pages.vx.SendInterviewEmailPage.inviteToInterviewEmailPage
+import uk.gov.co.test.ui.pages.vx.SendInterviewEmailPage.inviteToInterviewEmailFlow
 import uk.gov.co.test.ui.pages.vx.vacancytabs.EmploymentHistoryTab.{EmploymentHistoryVXFlow, completeVXEmploymentHistory}
 import uk.gov.co.test.ui.pages.vx.vacancytabs.PreSiftEvaluationTab.PreSiftEvaluationFlow
 import uk.gov.co.test.ui.pages.vx.vacancytabs.SiftEvaluationTab.SiftEvaluationFlow
@@ -23,19 +23,19 @@ import uk.gov.co.test.ui.pages.vx.vacancytabs.SiftEvaluationTab.SiftEvaluationFl
 object FullPecFlow extends CivilServiceJobsBasePage {
 
   private val fullPecFlow: Seq[Unit] = Seq(
-    fillShortFormDetails(SHORT_FORM_DATA_PEC),
-    fillLongFormDetails(MASTER_LONG_FORM_DATA),
+//    fillShortFormDetails(SHORT_FORM_DATA_PEC),
+//    fillLongFormDetails(MASTER_LONG_FORM_DATA),
     extractApplicationId(),
     navigateToApplicationSummary(),
     PreSiftEvaluationFlow(APPLICATION_DATA),
     SiftEvaluationFlow(APPLICATION_DATA),
     interviewSchedulePage(APPLICATION_DATA),
     calenderSchedulePage(APPLICATION_DATA),
-    switchToOtherWindow,
-    applicationBeingReviewed(),
+    applicationBeingReviewedState(),
     switchToOtherWindow,
     searchApplicationId(applicationId),
-    inviteToInterviewEmailPage(),
+    inviteToInterviewEmailFlow(),
+    invitedForInterviewState(),
     println("So far..."),
     //TODO more flows here before progressing to offer!
     progressApplicationToOffer(),

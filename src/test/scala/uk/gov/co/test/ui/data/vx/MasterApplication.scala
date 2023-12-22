@@ -99,7 +99,7 @@ object APPLICATION_INTERVIEW_SCHEDULE
       s"$vacancyId - Interview 1 for $randomFirstName $randomLastName",
       true,
       s"$vacancyId - Prawf awtomeiddio $randomFirstName $randomLastName",
-      1,
+      15,
       "Interview 1",
       false,
       s"$contactEmailVxConfig",

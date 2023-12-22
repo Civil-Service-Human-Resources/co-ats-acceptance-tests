@@ -22,7 +22,7 @@ object JobInfoSection extends VacancyBasePage {
 
   val createVacancyTitle = "Create New Vacancy : Civil Service Jobs - GOV.UK"
 
-  def departmentId              = s"select2-${vacancyFormId}_datafield_155191_1_1-container"
+  def departmentId                = s"select2-${vacancyFormId}_datafield_155191_1_1-container"
   def businessAreaId              = s"select2-${vacancyFormId}_datafield_155221_1_1-container"
   def whichProfessionId           = s"select2-${vacancyFormId}_datafield_155435_1_1-container"
   def noOfJobsId                  = s"${vacancyFormId}_datafield_155332_1_1"

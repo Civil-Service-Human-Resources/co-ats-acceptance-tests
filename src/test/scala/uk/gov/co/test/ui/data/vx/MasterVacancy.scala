@@ -145,7 +145,7 @@ object MASTER_INTERVIEWS_DETAILS
       "Assessment",
       "Video",
       "Interview",
-      true
+      false
     )
 
 object MASTER_SUCCESS_PROFILES

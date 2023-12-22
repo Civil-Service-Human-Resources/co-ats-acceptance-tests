@@ -52,7 +52,8 @@ object CalenderSchedulePage extends VacancyBasePage {
   private lazy val displayingResultsT3Path       = "//*[@id='DataTables_Table_3_wrapper']/div[1]/div[2]/span[2]"
   private lazy val displayingResultsT1Path       = "//*[@id='DataTables_Table_1_wrapper']/div[1]/div[2]/span[2]"
   private lazy val displayingResultsITPath       = "//*[@id='itinerary_list_wrapper']/div[1]/div[1]/span[2]"
-  private lazy val createdSlotsPagePath       = "//*[@id='itinerary_list']/tbody//tr[@tabindex='-1']"
+  private lazy val createdSlotsPagePath          = "//*[@id='itinerary_list']/tbody//tr[@tabindex='-1']"
+  private lazy val vXVacancyLiveDate             = changeDateFormat(vXApplicationLiveDate, "short")
 
   def enterScheduleValue(inputId: String, value: String): Unit = {
     val enterOption = waitForVisibilityOfElementById(inputId)
@@ -150,9 +151,8 @@ object CalenderSchedulePage extends VacancyBasePage {
          |Candidate ( 0 of 1 ) :""".stripMargin
   }
 
-  def tableArea(tableNo: String): WebElement = {
+  def tableArea(tableNo: String): WebElement =
     xpath(s"//*[@id='$tableNo']/tbody").element.underlying
-  }
 
   def summaryRows(tableNo: String = "DataTables_Table_3"): mutable.Buffer[WebElement] =
     tableArea(tableNo).findElements(By.xpath("//tr[@tabindex='-1']")).asScala
@@ -205,6 +205,7 @@ object CalenderSchedulePage extends VacancyBasePage {
   }
 
   private def tagSelectedVacancy(): Unit = {
+    println(vXVacancyLiveDate)
     waitForVisibilityOfElementByPath(taggedVacanciesTabPath).click()
     waitForVisibilityOfElementById(addTaggedVacancyId).click()
     waitForVisibilityOfElementById(addTaggedVacancyHeaderId).getText shouldEqual "Add Selected Vacancies"
@@ -212,7 +213,7 @@ object CalenderSchedulePage extends VacancyBasePage {
     checkForNewValue(displayingResultsT3Path, "Displaying 1 results")
     val (_title, _liveDate, _closingDate, _isActive) = selectedVacancyValues()
     _title  shouldEqual vacancyName
-    _liveDate    should startWith(vXApplicationLiveDate)
+    _liveDate    should startWith(vXVacancyLiveDate)
     _closingDate should startWith(vXApplicationClosingDate)
     _isActive.isDisplayed
     if (isVacancyActive() == "Set to TRUE") {
@@ -226,7 +227,7 @@ object CalenderSchedulePage extends VacancyBasePage {
     val addVacancyTable                              = "DataTables_Table_1"
     val (_title, _liveDate, _closingDate, _isActive) = selectedVacancyValues(addVacancyTable)
     _title                           shouldEqual vacancyName
-    _liveDate                             should startWith(vXApplicationLiveDate)
+    _liveDate                             should startWith(vXVacancyLiveDate)
     _closingDate                          should startWith(vXApplicationClosingDate)
     _isActive.isDisplayed
     isVacancyActive(addVacancyTable) shouldEqual "Set to TRUE"

@@ -43,7 +43,7 @@ trait VacancyBasePage extends Matchers with BasePage with BrowserDriver {
   val vacancyStatusPath            = ".//*[@id='collapse_panel']/span[1]"
   val submitForm                   = "submit_button"
 
-  def candidateSummaryId(noEle: String)     = s"candidate_summary_entry_cand_summary_col_$noEle"
+  def candidateSummaryId(noEle: String)        = s"candidate_summary_entry_cand_summary_col_$noEle"
   def findUsernameField: util.List[WebElement] = driver.findElements(By.id("user"))
   def username(): TextField                    = textField("user")
   def password(): PasswordField                = pwdField("password")
@@ -234,5 +234,17 @@ trait VacancyBasePage extends Matchers with BasePage with BrowserDriver {
   def checkCandidateSummary(eleNo: String): String = {
     val ele = s"candidate_summary_entry_cand_summary_col_$eleNo"
     waitForVisibilityOfElementById(ele).getText
+  }
+
+  def changeDateFormat(dateToFormat: String, formatStyle: String): String = {
+    val formatter1 = DateTimeFormatter.ofPattern("d MMMM yyyy")
+    val formatter2 = DateTimeFormatter.ofPattern("d/MM/uuuu")
+    if (formatStyle == "short") {
+      val formattedDate = LocalDate.parse(dateToFormat, formatter1)
+      formattedDate.format(formatter2)
+    } else {
+      val formattedDate = LocalDate.parse(dateToFormat, formatter2)
+      formattedDate.format(formatter1)
+    }
   }
 }

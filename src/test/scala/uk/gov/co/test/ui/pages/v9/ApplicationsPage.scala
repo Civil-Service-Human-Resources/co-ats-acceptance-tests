@@ -3,6 +3,9 @@ package uk.gov.co.test.ui.pages.v9
 import org.openqa.selenium.{By, WebElement}
 import org.scalatest.concurrent.Eventually.eventually
 import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{applicationId, vacancyId}
+import uk.gov.co.test.ui.flows.v9.LoginCandidateFlow.loginNewCandidate
+import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.applicationCentreTitle
+import uk.gov.co.test.ui.pages.v9.SignInPage.signOut
 
 import scala.collection.mutable
 import scala.jdk.CollectionConverters._
@@ -14,7 +17,7 @@ object ApplicationsPage extends CivilServiceJobsBasePage {
   val applicationLinkPath      = ".//a[@title='Applications']"
   val applicationTableAreaPath = ".//*[@id='DataTables_Table_0']/tbody"
 
-  private def applicationsPageCheck(): Unit =
+  def applicationsPageCheck(): Unit =
     eventually(onPage(applicationsPageTitle))
 
   def navigateToApplicationsPage(): Unit = {
@@ -126,11 +129,19 @@ object ApplicationsPage extends CivilServiceJobsBasePage {
     applicationId = applicationIdValue()
   }
 
-  def confirmAppBeingReviewed(): Unit = {
+  def navigateToApplicationCentrePage(): Unit = {
+    if (driver.getTitle == applicationCentreTitle)
+      refreshPage()
+    eventually(statusValue() shouldEqual "Application being reviewed")
+    reviewUpdateValue().click()
+  }
+
+  def confirmStatusOnApplicationPage(currentStatus: String): Unit = {
+    if (!signOut().isDisplayed) loginNewCandidate()
     refreshPage()
-    eventually {
-      statusValue() shouldEqual "Application being reviewed"
-    }
+    waitForVisibilityOfElementByPath(applicationLinkPath).click()
+    applicationsPageCheck()
+    statusValue() shouldEqual currentStatus
     reviewUpdateValue().click()
   }
 

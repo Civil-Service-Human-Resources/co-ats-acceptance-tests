@@ -1,6 +1,7 @@
 package uk.gov.co.test.ui.pages.v9
 
 import org.scalatest.concurrent.Eventually.eventually
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.randomEmail
 import uk.gov.co.test.ui.pages.v9.SearchJobsPage.navigateToSignInOrCreateAccount
 import uk.gov.co.test.ui.pages.v9.SignInPage.createAnAccount
 
@@ -33,6 +34,8 @@ object CreateAccountPage extends CivilServiceJobsBasePage {
   def nonEmployeePublicBody(): Boolean    = clickOnRadioButton("id_is_cs_user_no")
   def agreeTermsAndConditions(): Checkbox = checkbox("agree")
   def recapClick(): Checkbox              = checkbox("recaptcha-checkbox-border")
+  def username(): EmailField              = emailField("ID_username")
+  def password(): PasswordField           = pwdField("ID_password_login_window")
 
   def navigateToCreateAccountPage(): Unit = {
     checkV9LogoutState()
@@ -49,6 +52,12 @@ object CreateAccountPage extends CivilServiceJobsBasePage {
 
   def enterEmail(user: CandidateDetails): Unit =
     email().value = user.email.toLowerCase
+
+  def enterUsername(): Unit =
+    username().value = randomEmail
+
+  def enterPassword(): Unit =
+    password().value = passwordCandidate
 
   def enterConfirmEmail(user: CandidateDetails): Unit =
     confirmEmail().value = user.email.toLowerCase

@@ -17,7 +17,6 @@ object SendInterviewEmailPage extends VacancyBasePage {
   private lazy val emailPreviewContentId         = "preview_div"
   private lazy val emailPreviewContentClosePath  = ".//button[@title='Close']"
   private lazy val addLocalFilePath              = ".//a[text()='Add Local File']"
-//  private lazy val addEmailAttachmentsOneId      = "invite_form_attachments-new-file-1"
   private lazy val addEmailAttachmentsOneId      = "invite_form_attachments-new-file-0"
 
   private def sendEmailPageCheck(): Unit = {
@@ -90,16 +89,21 @@ object SendInterviewEmailPage extends VacancyBasePage {
     )
   }
 
-  def inviteToInterviewEmailPage(): Unit = {
-    clickOn(inviteToInterviewOneBarId)
-    sendEmailPageCheck()
-    checkAutoSelect()
-    checkSendEmail()
-    selectCorrespondence()
-    checkEmailContents()
-    addEmailAttachments()
-    waitForVisibilityOfElementById(sendInviteId).click()
-    confirmCandidateSummaryAfterEmail()
+  private val sendEmail: Seq[Unit] = Seq(
+    clickOn(inviteToInterviewOneBarId),
+    sendEmailPageCheck(),
+    checkAutoSelect(),
+    checkSendEmail(),
+    selectCorrespondence(),
+    checkEmailContents(),
+    addEmailAttachments(),
+    waitForVisibilityOfElementById(sendInviteId).click(),
+    confirmCandidateSummaryAfterEmail(),
     interviewOneInvitedStatus()
-  }
+  )
+
+  def inviteToInterviewEmailFlow(): Unit =
+    sendEmail.foreach { f =>
+      f
+    }
 }
