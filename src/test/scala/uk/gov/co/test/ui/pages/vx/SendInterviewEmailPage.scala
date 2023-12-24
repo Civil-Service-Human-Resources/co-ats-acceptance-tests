@@ -2,7 +2,7 @@ package uk.gov.co.test.ui.pages.vx
 
 import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{applicationId, preferredFirstName, randomFirstName, randomLastName, vXJobInfoDepartment, vacancyId, vacancyName}
 import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.{availableBarItems, interviewNotBookedBarId, inviteToInterviewOneBarId, scheduleInterviewBarId, scheduleOfflineInterviewBarId, withdrawApplicationAtInterviewOneBarId}
-import uk.gov.co.test.ui.specs.TestData.eventually
+import uk.gov.co.test.ui.data.TestData.eventually
 
 object SendInterviewEmailPage extends VacancyBasePage {
 

@@ -8,7 +8,7 @@ import uk.gov.co.test.ui.flows.v9.RegisterCandidateFlow.fillNewCandidateDetails
 import uk.gov.co.test.ui.flows.v9.ShortFormFlow.fillShortFormDetails
 import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.{confirmLongFormPECCompletion, confirmShortFormCompletion}
 import uk.gov.co.test.ui.specs.BaseFeatureSpec
-import uk.gov.co.test.ui.specs.TestData.pecTestData
+import uk.gov.co.test.ui.data.TestData.pecTestData
 import uk.gov.co.test.ui.tags.RunInV9
 
 class pecVacancySpec extends BaseFeatureSpec {

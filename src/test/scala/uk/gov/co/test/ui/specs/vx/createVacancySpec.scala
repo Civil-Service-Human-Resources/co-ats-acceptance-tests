@@ -14,7 +14,7 @@ import uk.gov.co.test.ui.flows.vx.RecruiterLoginFlow.loginWithRecruiterDetails
 import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.{confirmLongFormCompletion, confirmShortFormCompletion}
 import uk.gov.co.test.ui.pages.vx.DashboardPage.{activateAndPostVacancy, searchForActiveVacancy}
 import uk.gov.co.test.ui.specs.BaseFeatureSpec
-import uk.gov.co.test.ui.specs.TestData.setPecTestData
+import uk.gov.co.test.ui.data.TestData.setPecTestData
 import uk.gov.co.test.ui.tags.RunInVX
 
 class createVacancySpec extends BaseFeatureSpec {

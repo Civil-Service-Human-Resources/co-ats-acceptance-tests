@@ -1,9 +1,9 @@
 package uk.gov.co.test.ui.pages.vx
 
 import org.openqa.selenium.{By, WebElement}
+import uk.gov.co.test.ui.data.TestData.eventually
 import uk.gov.co.test.ui.data.vx.ApplicationDetails
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXApplicationClosingDate, vXApplicationLiveDate, vXInterviewRoom, vXInterviewScheduleTitle, vXSlotOneStartTime, vacancyId, vacancyName}
-import uk.gov.co.test.ui.specs.TestData.eventually
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXApplicationClosingDate, vXApplicationLiveDate, vXInterviewID, vXInterviewRoom, vXInterviewScheduleTitle, vXSlotOneStartTime, vacancyId, vacancyName}
 
 import java.time.LocalTime
 import scala.collection.mutable
@@ -45,7 +45,11 @@ object CalenderSchedulePage extends VacancyBasePage {
   private lazy val allCalenderSlotsPath          = ".//*[@class='streams-slot ']"
   private lazy val taggedVacanciesTabPath        = ".//span[@class='main-label' and text() = 'Tagged Vacancies']"
   private lazy val createdSlotsTabPath           = ".//span[@class='main-label' and text() = 'Created Slots']"
+  private lazy val detailsTabPath                = ".//span[@class='main-label' and text() = 'Details']"
+  private lazy val interviewIDId                 = "details_form_id"
   private lazy val addTaggedVacancyId            = "but_add_opportunity"
+  private lazy val removeSelectedVacancyId       = "but_remove_opportunity"
+  private lazy val noRecordsPath                 = ".//*[@id='DataTables_Table_1']/tbody/tr/td"
   private lazy val addTaggedVacancyHeaderId      = "ui-id-1"
   private lazy val filterVacancyResultsId        = "vacancy_Full_List-main-filter"
   private lazy val addSelectedVacanciesId        = "add_opp_dlg-ok"
@@ -206,8 +210,25 @@ object CalenderSchedulePage extends VacancyBasePage {
     driver.findElements(By.xpath(createdSlotsPagePath)).size() shouldEqual 2
   }
 
+  private def extractInterviewID(): Unit = {
+    waitForVisibilityOfElementByPath(detailsTabPath).click()
+    vXInterviewID = waitForVisibilityOfElementById(interviewIDId).getText
+  }
+
+  def removeTaggedVacancyToSlots(): Unit = {
+    waitForVisibilityOfElementByPath(taggedVacanciesTabPath).click()
+    val rows = summaryRows("DataTables_Table_1")
+    for (row <- rows) {
+      val q = firstRowItem(row)
+      if (q.getText == vacancyId) {
+        firstRowItem(row).click()
+      }
+    }
+    waitForVisibilityOfElementById(removeSelectedVacancyId).click()
+    waitForVisibilityOfElementByPath(noRecordsPath).getText shouldEqual "No records"
+  }
+
   private def tagSelectedVacancy(): Unit = {
-    println(vXVacancyLiveDate)
     waitForVisibilityOfElementByPath(taggedVacanciesTabPath).click()
     waitForVisibilityOfElementById(addTaggedVacancyId).click()
     waitForVisibilityOfElementById(addTaggedVacancyHeaderId).getText shouldEqual "Add Selected Vacancies"
@@ -242,6 +263,7 @@ object CalenderSchedulePage extends VacancyBasePage {
   }
 
   private def tagAndConfirmSlots(): Unit = {
+    extractInterviewID()
     checkCreatedSlots()
     tagSelectedVacancy()
     confirmTaggedVacancy()

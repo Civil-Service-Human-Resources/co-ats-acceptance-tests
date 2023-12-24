@@ -3,7 +3,7 @@ package uk.gov.co.test.ui.pages.vx
 import org.openqa.selenium.By
 import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.applicationId
 import uk.gov.co.test.ui.pages.vx.DashboardPage.matchCriteria
-import uk.gov.co.test.ui.specs.TestData.eventually
+import uk.gov.co.test.ui.data.TestData.eventually
 
 object ApplicationSummaryPage extends VacancyBasePage {
 

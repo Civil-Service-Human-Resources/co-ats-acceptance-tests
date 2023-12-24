@@ -165,6 +165,7 @@ object MasterVacancyDetails extends VacancyBasePage {
   //vX calender schedule
   var vXSlotOneStartTime = ""
   var vXInterviewRoom    = ""
+  var vXInterviewID    = ""
 
   //vX interview schedule
   var vXInterviewExpectedRounds   = "4"

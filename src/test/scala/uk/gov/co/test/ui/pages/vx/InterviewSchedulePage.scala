@@ -1,11 +1,11 @@
 package uk.gov.co.test.ui.pages.vx
 
 import org.openqa.selenium.{By, WebElement}
+import uk.gov.co.test.ui.data.TestData.eventually
 import uk.gov.co.test.ui.data.vx.ApplicationDetails
 import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{applicationId, randomFirstName, randomLastName, vXInstructionsForCandidates, vXInterviewExpectedRounds, vXInterviewLocation, vXInterviewOneDate, vXInterviewScheduleTitle, vXJobInfoDepartment, vacancyId, vacancyName}
 import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.{availableBarItems, inviteToInterviewOneBarId, scheduleOfflineInterviewBarId, withdrawApplicationAtInterviewOneBarId}
 import uk.gov.co.test.ui.pages.vx.createvacancypage.AdvertSection.switchBack
-import uk.gov.co.test.ui.specs.TestData.eventually
 
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -43,6 +43,7 @@ object InterviewSchedulePage extends VacancyBasePage {
   private lazy val createInterviewSchedulePageTitle      = "Create Interview Schedule : Civil Service Jobs - GOV.UK"
   private lazy val createScheduleTitlePath               = ".//*[@id='page_navbar']/div/span"
   private lazy val createInterviewSchedulePath           = ".//a[contains(@href,'recruiter/interviews/create_interview')]"
+  private lazy val viewInterviewSchedulePath             = ".//a[contains(@href,'/recruiter/interviews/list')]"
   private lazy val interviewsSectionPath                 = ".//*[@id='lm-interviews']/h3/a"
   private lazy val copyFromId                            = "select2-details_form_populate_from-container"
   private lazy val copyFromTemplateId                    = "select2-details_form_template_id-container"
@@ -73,11 +74,13 @@ object InterviewSchedulePage extends VacancyBasePage {
   private lazy val bookedEmailTemplateId                 = "select2-details_form_email_confirm_id-container"
   private lazy val includeCandidateCVInICalsId           = "details_form_ical_attach_candidate_cv"
   private lazy val createId                              = "details_form_form_submit"
+  private lazy val interviewId                           = ".//th[@aria-label='Interview ID: activate to sort column descending']"
 
-  private def createSchedule: WebElement     = waitForVisibilityOfElementByPathLast(createInterviewSchedulePath)
-  private def interviewsSection: WebElement  = waitForVisibilityOfElementByPathLast(interviewsSectionPath)
-  private def interviewDate(): TextField     = textField(dateId)
-  private def interviewLocation(): TextField = textField(interviewLocationId)
+  private def createSchedule: WebElement        = waitForVisibilityOfElementByPathLast(createInterviewSchedulePath)
+  private def viewInterviewSchedule: WebElement = waitForVisibilityOfElementByPathLast(viewInterviewSchedulePath)
+  private def interviewsSection: WebElement     = waitForVisibilityOfElementByPathLast(interviewsSectionPath)
+  private def interviewDate(): TextField        = textField(dateId)
+  private def interviewLocation(): TextField    = textField(interviewLocationId)
 
   private def createInterviewSchedulePageCheck(): Unit =
     eventually(onPage(createInterviewSchedulePageTitle))
@@ -110,6 +113,17 @@ object InterviewSchedulePage extends VacancyBasePage {
     }
     createInterviewSchedulePageCheck()
     waitForVisibilityOfElementByPath(createScheduleTitlePath).getText shouldEqual scheduleTitle
+  }
+
+  def untagVacancy(): Unit = {
+    val viewSchedule = "View Interview Schedule"
+    if (viewInterviewSchedule.getText == viewSchedule) viewInterviewSchedule.click()
+    else {
+      interviewsSection.click()
+      viewInterviewSchedule.click()
+    }
+//    createInterviewSchedulePageCheck()
+//    waitForVisibilityOfElementByPath(createScheduleTitlePath).getText shouldEqual scheduleTitle
   }
 
   def selectCopyFrom(interviewScheduleDetails: InterviewScheduleDetails): Unit = {

@@ -201,10 +201,29 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
     advertDetailsFunction().isEnabled
     applicationForVacancyText  shouldEqual s"Application For $vacancyName"
     getApplicationState        shouldEqual s"Application status: $status"
-    println(getApplicationConfirmation)
     getApplicationConfirmation shouldEqual s"""Congratulations, we'd like to invite you for a ${vXInterviewOneType.toLowerCase} interview.
                                              |To book your interview slot click 'Schedule interview'.
                                              |To get your preferred time we recommend you book as early as possible.
                                              |If you're no longer interested in this job, please withdraw your application.""".stripMargin
+  }
+
+  def interviewSlotBookedState(): Unit = {
+    val status = "Interview slot booked"
+    if (currentUrl.contains("recruiter")) {
+      switchToOtherWindow()
+    }
+    confirmStatusOnApplicationPage(status)
+    applicationCentrePageCheck()
+    scheduleInterviewFunction().isEnabled
+    feedbackFunction().isEnabled
+    withdrawApplicationFunction().isEnabled
+    advertDetailsFunction().isEnabled
+    applicationForVacancyText shouldEqual s"Application For $vacancyName"
+    getApplicationState shouldEqual s"Application status: $status"
+    getApplicationConfirmation shouldEqual
+      s"""Congratulations, we'd like to invite you for a ${vXInterviewOneType.toLowerCase} interview.
+         |To book your interview slot click 'Schedule interview'.
+         |To get your preferred time we recommend you book as early as possible.
+         |If you're no longer interested in this job, please withdraw your application.""".stripMargin
   }
 }
