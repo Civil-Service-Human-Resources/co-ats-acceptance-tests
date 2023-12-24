@@ -9,6 +9,8 @@ import org.scalatest.concurrent.PatienceConfiguration
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.time.{Millis, Seconds, Span}
 import org.scalatestplus.selenium.{Page, WebBrowser}
+import uk.gov.co.test.ui.flows.v9.LoginCandidateFlow.loginNewCandidate
+import uk.gov.co.test.ui.pages.v9.SignInPage.signOut
 
 import java.util
 import java.util.UUID
@@ -226,5 +228,14 @@ trait BasePage extends Matchers with Page with WebBrowser with PatienceConfigura
     val filePath                = getCurrentDirectory.concat(importFilesPath).concat(file)
     val fileElement: WebElement = id(attachId).findElement.get.underlying
     fileElement.sendKeys(filePath)
+  }
+
+  def changeSystem(system: String)(implicit driver: WebDriver): Unit = {
+    if (!currentUrl.contains(system)) {
+      switchToOtherWindow()
+      if (currentUrl.contains("candidate") && !signOut().isDisplayed)
+        loginNewCandidate()
+    }
+    refreshPage()
   }
 }

@@ -137,8 +137,6 @@ object ApplicationsPage extends CivilServiceJobsBasePage {
   }
 
   def confirmStatusOnApplicationPage(currentStatus: String): Unit = {
-    if (!signOut().isDisplayed) loginNewCandidate()
-    refreshPage()
     waitForVisibilityOfElementByPath(applicationLinkPath).click()
     applicationsPageCheck()
     statusValue() shouldEqual currentStatus

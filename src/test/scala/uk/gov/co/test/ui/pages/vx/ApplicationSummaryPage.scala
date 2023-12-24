@@ -33,6 +33,8 @@ object ApplicationSummaryPage extends VacancyBasePage {
   val scheduleOfflineInterviewBarId          = "process_rule_but_488"
   val interviewNotBookedBarId                = "process_rule_but_484"
   val scheduleInterviewBarId                 = "process_rule_but_23"
+  val completeInterviewEvaluationBarId                 = "process_rule_but_579"
+  val noShowBarId                 = "process_rule_but_25"
   val allBarItemsId                          = "process_rules_bar"
   val preSiftActionButtonsPath               = ".//*[@aria-label='Action Buttons']"
   val siftEvaluationTabPath                  = ".//span[@class='main-label' and text() = 'Sift evaluation']"
@@ -111,5 +113,11 @@ object ApplicationSummaryPage extends VacancyBasePage {
       for (barItem <- expectedBarItems)
         driver.findElement(By.id(barItem)).isDisplayed
     }
+  }
+
+  def interviewOneScheduled(): Unit = {
+    changeSystem("recruiter")
+    checkForNewStatus(vacancyStatusPath, "Interview 1 - scheduled")
+    availableBarItems(List(completeInterviewEvaluationBarId, noShowBarId, withdrawApplicationAtInterviewOneBarId))
   }
 }

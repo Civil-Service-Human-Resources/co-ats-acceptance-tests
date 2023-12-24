@@ -8,12 +8,12 @@ import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.applicationId
 import uk.gov.co.test.ui.flows.v9.LongFormFlow.fillLongFormDetails
 import uk.gov.co.test.ui.flows.v9.PecFormFlow.fillPecFormDetailsOnly
 import uk.gov.co.test.ui.flows.v9.ShortFormFlow.fillShortFormDetails
-import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.{applicationBeingReviewedState, candidateAcceptsOffer, confirmOfferAccepted, confirmPecSubmission, invitedForInterviewState}
+import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.{applicationBeingReviewedState, candidateAcceptsOffer, confirmOfferAccepted, confirmPecSubmission, interviewSlotBookedState, invitedForInterviewState}
 import uk.gov.co.test.ui.pages.v9.ApplicationsPage.extractApplicationId
 import uk.gov.co.test.ui.pages.v9.BookedInterviewPage.confirmBookingSlot
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
 import uk.gov.co.test.ui.pages.v9.ProvisionalOfferPage.offerDecisionFlow
-import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.{navigateToApplicationSummary, progressApplicationToOffer, searchApplicationId}
+import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.{interviewOneScheduled, navigateToApplicationSummary, progressApplicationToOffer, searchApplicationId}
 import uk.gov.co.test.ui.pages.vx.CalenderSchedulePage.calenderSchedulePage
 import uk.gov.co.test.ui.pages.vx.InterviewSchedulePage.interviewSchedulePage
 import uk.gov.co.test.ui.pages.vx.SendInterviewEmailPage.inviteToInterviewEmailFlow
@@ -38,6 +38,8 @@ object FullPecFlow extends CivilServiceJobsBasePage {
     inviteToInterviewEmailFlow(),
     invitedForInterviewState(),
     confirmBookingSlot(),
+    interviewSlotBookedState(),
+    interviewOneScheduled(),
     println("So far..."),
     //TODO more flows here before progressing to offer!
     progressApplicationToOffer(),

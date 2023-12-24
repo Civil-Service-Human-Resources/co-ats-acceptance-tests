@@ -3,8 +3,9 @@ package uk.gov.co.test.ui.pages.v9
 import org.openqa.selenium.{By, WebElement}
 import org.scalatest.concurrent.Eventually.eventually
 import uk.gov.co.test.ui.conf.TestConfiguration
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{v9AdjustmentsForTests, v9ReasonableAdjustments, vXAnyOnlineTests, vXInterviewOneType, vacancyName}
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{randomFirstName, randomLastName, v9AdjustmentsForTests, v9ReasonableAdjustments, vXAnyOnlineTests, vXInterviewOneType, vXSlotTwoStartTime, vacancyName}
 import uk.gov.co.test.ui.pages.v9.ApplicationsPage.{confirmStatusOnApplicationPage, reviewUpdateValue}
+import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.changeSystem
 import uk.gov.co.test.ui.pages.vx.DashboardPage.{contactEmailVxConfig, switchToV9Test}
 
 object ApplicationCentrePage extends CivilServiceJobsBasePage {
@@ -209,21 +210,20 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
 
   def interviewSlotBookedState(): Unit = {
     val status = "Interview slot booked"
-    if (currentUrl.contains("recruiter")) {
-      switchToOtherWindow()
-    }
+    changeSystem("candidate")
     confirmStatusOnApplicationPage(status)
     applicationCentrePageCheck()
-    scheduleInterviewFunction().isEnabled
     feedbackFunction().isEnabled
     withdrawApplicationFunction().isEnabled
     advertDetailsFunction().isEnabled
     applicationForVacancyText shouldEqual s"Application For $vacancyName"
     getApplicationState shouldEqual s"Application status: $status"
     getApplicationConfirmation shouldEqual
-      s"""Congratulations, we'd like to invite you for a ${vXInterviewOneType.toLowerCase} interview.
-         |To book your interview slot click 'Schedule interview'.
-         |To get your preferred time we recommend you book as early as possible.
+      s"""Your ${vXInterviewOneType.toLowerCase} interview slot is booked and details are shown below:
+         |Date: 13 January 2024
+         |Time: ${vXSlotTwoStartTime.replaceAll("[A-Za-z ]", "").filterNot(_.isWhitespace)}
+         |We will send details on how to access your ${vXInterviewOneType.toLowerCase} interview separately when they are available.
+         |Autotest - Instructions for $randomFirstName $randomLastName
          |If you're no longer interested in this job, please withdraw your application.""".stripMargin
   }
 }
