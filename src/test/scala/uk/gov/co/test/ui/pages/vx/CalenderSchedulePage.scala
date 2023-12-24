@@ -3,9 +3,10 @@ package uk.gov.co.test.ui.pages.vx
 import org.openqa.selenium.{By, WebElement}
 import uk.gov.co.test.ui.data.TestData.eventually
 import uk.gov.co.test.ui.data.vx.ApplicationDetails
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXApplicationClosingDate, vXApplicationLiveDate, vXInterviewID, vXInterviewRoom, vXInterviewScheduleTitle, vXSlotOneStartTime, vacancyId, vacancyName}
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXApplicationClosingDate, vXApplicationLiveDate, vXInterviewID, vXInterviewRoom, vXInterviewScheduleTitle, vXSlotOneFinishTime, vXSlotOneStartTime, vXSlotTwoFinishTime, vXSlotTwoStartTime, vacancyId, vacancyName}
 
 import java.time.LocalTime
+import java.time.format.DateTimeFormatter
 import scala.collection.mutable
 import scala.jdk.CollectionConverters._
 import scala.util.control.Breaks.{break, breakable}
@@ -135,23 +136,42 @@ object CalenderSchedulePage extends VacancyBasePage {
   }
 
   private def confirmSlotText(calenderScheduleDetails: CalenderScheduleDetails): Unit = {
-    val schedule          = calenderScheduleDetails
-    val (_hour, _min)     = splitTime(calenderScheduleDetails.slotStartTime)
-    vXSlotOneStartTime = schedule.slotStartTime.replaceFirst("^0*", "")
-    val slotOneFinishTime = LocalTime.of(_hour.toInt, _min.toInt).plusMinutes(schedule.slotDuration)
-    val slotTwoStartTime  = slotOneFinishTime.plusMinutes(schedule.slotSpacing)
-    val slotTwoFinishTime = slotTwoStartTime.plusMinutes(schedule.slotDuration)
+    val formatter     = DateTimeFormatter.ofPattern("hh:mm a")
+    val schedule      = calenderScheduleDetails
+    val (_hour, _min) = splitTime(calenderScheduleDetails.slotStartTime)
+    vXSlotOneStartTime = LocalTime.of(_hour.toInt, _min.toInt).format(formatter).replaceFirst("^0*", "").toLowerCase
+    vXSlotOneFinishTime = LocalTime
+      .of(_hour.toInt, _min.toInt)
+      .plusMinutes(schedule.slotDuration)
+      .format(formatter)
+      .replaceFirst("^0*", "")
+      .toLowerCase
+    vXSlotTwoStartTime = LocalTime
+      .of(_hour.toInt, _min.toInt)
+      .plusMinutes(schedule.slotDuration)
+      .plusMinutes(schedule.slotSpacing)
+      .format(formatter)
+      .replaceFirst("^0*", "")
+      .toLowerCase
+    vXSlotTwoFinishTime = LocalTime
+      .of(_hour.toInt, _min.toInt)
+      .plusMinutes(schedule.slotDuration)
+      .plusMinutes(schedule.slotSpacing)
+      .plusMinutes(schedule.slotDuration)
+      .format(formatter)
+      .replaceFirst("^0*", "")
+      .toLowerCase
 
     waitForVisibilityOfElementByPath(createdFirstSlotPath).getText shouldEqual
-      s"""${schedule.interviewRoom}: $vXSlotOneStartTime am to $slotOneFinishTime am
-         |$vXSlotOneStartTime am to $slotOneFinishTime am
+      s"""${schedule.interviewRoom}: $vXSlotOneStartTime to $vXSlotOneFinishTime
+         |$vXSlotOneStartTime to $vXSlotOneFinishTime
          |Room/Site : ${schedule.interviewRoom}
          |Panel Members/Administrators ( 0 of 1 ) :
          |Candidate ( 0 of 1 ) :""".stripMargin
 
     waitForVisibilityOfElementByPath(createdSecondSlotPath).getText shouldEqual
-      s"""${schedule.interviewRoom}: $slotTwoStartTime am to $slotTwoFinishTime pm
-         |$slotTwoStartTime am to $slotTwoFinishTime pm
+      s"""${schedule.interviewRoom}: $vXSlotTwoStartTime to $vXSlotTwoFinishTime
+         |$vXSlotTwoStartTime to $vXSlotTwoFinishTime
          |Room/Site : ${schedule.interviewRoom}
          |Panel Members/Administrators ( 0 of 1 ) :
          |Candidate ( 0 of 1 ) :""".stripMargin
