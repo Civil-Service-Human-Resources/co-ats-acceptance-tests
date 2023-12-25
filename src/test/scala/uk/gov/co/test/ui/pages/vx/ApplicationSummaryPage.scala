@@ -1,9 +1,9 @@
 package uk.gov.co.test.ui.pages.vx
 
 import org.openqa.selenium.By
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.applicationId
-import uk.gov.co.test.ui.pages.vx.DashboardPage.matchCriteria
 import uk.gov.co.test.ui.data.TestData.eventually
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{applicationId, randomFirstName, randomLastName, vXJobInfoDepartment, vacancyId, vacancyName}
+import uk.gov.co.test.ui.pages.vx.DashboardPage.matchCriteria
 
 object ApplicationSummaryPage extends VacancyBasePage {
 
@@ -33,8 +33,8 @@ object ApplicationSummaryPage extends VacancyBasePage {
   val scheduleOfflineInterviewBarId          = "process_rule_but_488"
   val interviewNotBookedBarId                = "process_rule_but_484"
   val scheduleInterviewBarId                 = "process_rule_but_23"
-  val completeInterviewEvaluationBarId                 = "process_rule_but_579"
-  val noShowBarId                 = "process_rule_but_25"
+  val completeInterviewEvaluationBarId       = "process_rule_but_579"
+  val noShowBarId                            = "process_rule_but_25"
   val allBarItemsId                          = "process_rules_bar"
   val preSiftActionButtonsPath               = ".//*[@aria-label='Action Buttons']"
   val siftEvaluationTabPath                  = ".//span[@class='main-label' and text() = 'Sift evaluation']"
@@ -116,8 +116,26 @@ object ApplicationSummaryPage extends VacancyBasePage {
   }
 
   def interviewOneScheduled(): Unit = {
+    val newStatus = "Interview 1 - scheduled"
     changeSystem("recruiter")
-    checkForNewStatus(vacancyStatusPath, "Interview 1 - scheduled")
+    checkForNewStatus(vacancyStatusPath, newStatus)
     availableBarItems(List(completeInterviewEvaluationBarId, noShowBarId, withdrawApplicationAtInterviewOneBarId))
+    confirmCandidateSummary(newStatus)
+  }
+
+  private def checkCandidateSummary(eleNo: String): String = {
+    val ele = s"candidate_summary_entry_cand_summary_col_$eleNo"
+    waitForVisibilityOfElementById(ele).getText
+  }
+
+  def confirmCandidateSummary(newStatus: String): Unit = {
+    checkCandidateSummary("1") shouldEqual applicationId
+    checkCandidateSummary("2") shouldEqual randomFirstName
+    checkCandidateSummary("3") shouldEqual randomLastName
+    checkCandidateSummary("4") shouldEqual newStatus
+    checkCandidateSummary("5") shouldEqual vacancyId
+    checkCandidateSummary("6") shouldEqual vacancyName
+    checkCandidateSummary("7") shouldEqual vXJobInfoDepartment
+    checkCandidateSummary("8") shouldEqual "External - Non Civil Servant / External"
   }
 }

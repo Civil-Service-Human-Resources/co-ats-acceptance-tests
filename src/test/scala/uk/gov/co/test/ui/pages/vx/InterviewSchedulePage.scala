@@ -3,8 +3,8 @@ package uk.gov.co.test.ui.pages.vx
 import org.openqa.selenium.{By, WebElement}
 import uk.gov.co.test.ui.data.TestData.eventually
 import uk.gov.co.test.ui.data.vx.ApplicationDetails
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{applicationId, randomFirstName, randomLastName, vXInstructionsForCandidates, vXInterviewExpectedRounds, vXInterviewLocation, vXInterviewOneDate, vXInterviewScheduleTitle, vXJobInfoDepartment, vacancyId, vacancyName}
-import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.{availableBarItems, inviteToInterviewOneBarId, scheduleOfflineInterviewBarId, withdrawApplicationAtInterviewOneBarId}
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXInstructionsForCandidates, vXInterviewExpectedRounds, vXInterviewLocation, vXInterviewOneDate, vXInterviewOneLongDate, vXInterviewOneShortDate, vXInterviewScheduleTitle}
+import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.{availableBarItems, confirmCandidateSummary, inviteToInterviewOneBarId, scheduleOfflineInterviewBarId, withdrawApplicationAtInterviewOneBarId}
 import uk.gov.co.test.ui.pages.vx.createvacancypage.AdvertSection.switchBack
 
 import java.time.LocalDate
@@ -85,20 +85,10 @@ object InterviewSchedulePage extends VacancyBasePage {
   private def createInterviewSchedulePageCheck(): Unit =
     eventually(onPage(createInterviewSchedulePageTitle))
 
-  private def confirmCandidateSummary(): Unit = {
-    checkCandidateSummary("1") shouldEqual applicationId
-    checkCandidateSummary("2") shouldEqual randomFirstName
-    checkCandidateSummary("3") shouldEqual randomLastName
-    checkCandidateSummary("4") shouldEqual "Selected for Interview 1"
-    checkCandidateSummary("5") shouldEqual vacancyId
-    checkCandidateSummary("6") shouldEqual vacancyName
-    checkCandidateSummary("7") shouldEqual vXJobInfoDepartment
-    checkCandidateSummary("8") shouldEqual "External - Non Civil Servant / External"
-  }
-
   private def checkInterviewStatus(): Unit = {
-    confirmCandidateSummary()
-    checkForNewStatus(vacancyStatusPath, "Selected for Interview 1")
+    val newStatus = "Selected for Interview 1"
+    confirmCandidateSummary(newStatus)
+    checkForNewStatus(vacancyStatusPath, newStatus)
     availableBarItems(
       List(inviteToInterviewOneBarId, scheduleOfflineInterviewBarId, withdrawApplicationAtInterviewOneBarId)
     )
@@ -161,9 +151,13 @@ object InterviewSchedulePage extends VacancyBasePage {
   }
 
   def interviewScheduleDate(days: Int): String = {
-    val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
-    val now       = LocalDate.now()
-    val addDays   = now.plusDays(days)
+    val formatter  = DateTimeFormatter.ofPattern("dd/MM/yyyy")
+    val formatter2 = DateTimeFormatter.ofPattern("d MMMM yyyy")
+    val formatter3 = DateTimeFormatter.ofPattern("d MMM yyyy")
+    val now        = LocalDate.now()
+    val addDays    = now.plusDays(days)
+    vXInterviewOneLongDate = addDays.format(formatter2)
+    vXInterviewOneShortDate = addDays.format(formatter3)
     vXInterviewOneDate = addDays.format(formatter)
     vXInterviewOneDate
   }

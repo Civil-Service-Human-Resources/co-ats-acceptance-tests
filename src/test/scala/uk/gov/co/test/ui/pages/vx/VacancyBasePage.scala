@@ -231,11 +231,6 @@ trait VacancyBasePage extends Matchers with BasePage with BrowserDriver {
     timeValue.selectByVisibleText(value)
   }
 
-  def checkCandidateSummary(eleNo: String): String = {
-    val ele = s"candidate_summary_entry_cand_summary_col_$eleNo"
-    waitForVisibilityOfElementById(ele).getText
-  }
-
   def changeDateFormat(dateToFormat: String, formatStyle: String): String = {
     val formatter1 = DateTimeFormatter.ofPattern("d MMMM yyyy")
     val formatter2 = DateTimeFormatter.ofPattern("d/MM/uuuu")

@@ -16,15 +16,15 @@ object BookedInterviewPage extends CivilServiceJobsBasePage {
   private lazy val allBookingSectionsPath          = "//*[@class='interview_schedule_details']"
   private lazy val interviewBookingTitleId         = "interview_schedule_title"
   private lazy val allSlotsSelectionPath           = ".//*[@id='itinerary']"
-  private lazy val slotOneSelectionPath            =
-    s"//*[contains(text(),'${vXSlotOneStartTime.replaceAll("[A-Za-z ]", "").filterNot(_.isWhitespace)}')]"
-  private lazy val slotTwoSelectionPath            =
-    s"//*[contains(text(),'${vXSlotTwoStartTime.replaceAll("[A-Za-z ]", "").filterNot(_.isWhitespace)}')]"
   private lazy val bookSlotId                      = "book_interview_button"
   private lazy val confirmBookSlotTitleTag         = "h2"
   private lazy val candidateInstructionsHeaderPath = ".//*[@class='interview_cand_description']"
   private lazy val interviewLocationPath           = ".//*[@class='interview_location']"
   private lazy val anotherLocationPath             = "(//p)[9]"
+  private lazy val slotOneSelectionPath            =
+    s"//*[contains(text(),'${vXSlotOneStartTime.replaceAll("[A-Za-z ]", "").filterNot(_.isWhitespace)}')]"
+  private lazy val slotTwoSelectionPath            =
+    s"//*[contains(text(),'${vXSlotTwoStartTime.replaceAll("[A-Za-z ]", "").filterNot(_.isWhitespace)}')]"
 
   private def bookedInterviewPageCheck(): Unit =
     eventually(onPage(bookedInterviewPageTitle))

@@ -163,16 +163,18 @@ object MasterVacancyDetails extends VacancyBasePage {
   var v9ThirdEmployerToDate    = ""
 
   //vX calender schedule
-  var vXSlotOneStartTime = ""
+  var vXSlotOneStartTime  = ""
   var vXSlotOneFinishTime = ""
-  var vXSlotTwoStartTime = ""
+  var vXSlotTwoStartTime  = ""
   var vXSlotTwoFinishTime = ""
-  var vXInterviewRoom    = ""
-  var vXInterviewID    = ""
+  var vXInterviewRoom     = ""
+  var vXInterviewID       = ""
 
   //vX interview schedule
   var vXInterviewExpectedRounds   = "4"
   var vXInterviewOneDate          = ""
+  var vXInterviewOneLongDate      = ""
+  var vXInterviewOneShortDate     = ""
   var vXInterviewLocation         = ""
   var vXInterviewScheduleTitle    = ""
   var vXInstructionsForCandidates = ""

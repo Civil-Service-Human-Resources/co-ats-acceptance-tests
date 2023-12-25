@@ -3,7 +3,7 @@ package uk.gov.co.test.ui.pages.v9
 import org.openqa.selenium.{By, WebElement}
 import org.scalatest.concurrent.Eventually.eventually
 import uk.gov.co.test.ui.conf.TestConfiguration
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{randomFirstName, randomLastName, v9AdjustmentsForTests, v9ReasonableAdjustments, vXAnyOnlineTests, vXInterviewOneType, vXSlotTwoStartTime, vacancyName}
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{randomFirstName, randomLastName, v9AdjustmentsForTests, v9ReasonableAdjustments, vXAnyOnlineTests, vXInterviewOneLongDate, vXInterviewOneType, vXSlotTwoStartTime, vacancyName}
 import uk.gov.co.test.ui.pages.v9.ApplicationsPage.{confirmStatusOnApplicationPage, reviewUpdateValue}
 import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.changeSystem
 import uk.gov.co.test.ui.pages.vx.DashboardPage.{contactEmailVxConfig, switchToV9Test}
@@ -220,7 +220,7 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
     getApplicationState shouldEqual s"Application status: $status"
     getApplicationConfirmation shouldEqual
       s"""Your ${vXInterviewOneType.toLowerCase} interview slot is booked and details are shown below:
-         |Date: 13 January 2024
+         |Date: $vXInterviewOneLongDate
          |Time: ${vXSlotTwoStartTime.replaceAll("[A-Za-z ]", "").filterNot(_.isWhitespace)}
          |We will send details on how to access your ${vXInterviewOneType.toLowerCase} interview separately when they are available.
          |Autotest - Instructions for $randomFirstName $randomLastName

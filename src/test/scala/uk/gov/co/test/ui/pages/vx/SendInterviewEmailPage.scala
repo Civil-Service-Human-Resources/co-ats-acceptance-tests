@@ -1,8 +1,8 @@
 package uk.gov.co.test.ui.pages.vx
 
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{applicationId, preferredFirstName, randomFirstName, randomLastName, vXJobInfoDepartment, vacancyId, vacancyName}
-import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.{availableBarItems, interviewNotBookedBarId, inviteToInterviewOneBarId, scheduleInterviewBarId, scheduleOfflineInterviewBarId, withdrawApplicationAtInterviewOneBarId}
 import uk.gov.co.test.ui.data.TestData.eventually
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{preferredFirstName, randomFirstName, randomLastName, vXJobInfoDepartment, vacancyId, vacancyName}
+import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.{availableBarItems, confirmCandidateSummary, interviewNotBookedBarId, inviteToInterviewOneBarId, scheduleInterviewBarId, scheduleOfflineInterviewBarId, withdrawApplicationAtInterviewOneBarId}
 
 object SendInterviewEmailPage extends VacancyBasePage {
 
@@ -66,17 +66,6 @@ object SendInterviewEmailPage extends VacancyBasePage {
     attachDocuments(addEmailAttachmentsOneId, "Test-T&Cs.pdf")
   }
 
-  private def confirmCandidateSummaryAfterEmail(): Unit = {
-    checkCandidateSummary("1") shouldEqual applicationId
-    checkCandidateSummary("2") shouldEqual randomFirstName
-    checkCandidateSummary("3") shouldEqual randomLastName
-    checkCandidateSummary("4") shouldEqual "Interview 1 - invited"
-    checkCandidateSummary("5") shouldEqual vacancyId
-    checkCandidateSummary("6") shouldEqual vacancyName
-    checkCandidateSummary("7") shouldEqual vXJobInfoDepartment
-    checkCandidateSummary("8") shouldEqual "External - Non Civil Servant / External"
-  }
-
   private def interviewOneInvitedStatus(): Unit = {
     checkForNewStatus(vacancyStatusPath, "Interview 1 - invited")
     availableBarItems(
@@ -98,7 +87,7 @@ object SendInterviewEmailPage extends VacancyBasePage {
     checkEmailContents(),
     addEmailAttachments(),
     waitForVisibilityOfElementById(sendInviteId).click(),
-    confirmCandidateSummaryAfterEmail(),
+    confirmCandidateSummary("Interview 1 - invited"),
     interviewOneInvitedStatus()
   )
 
