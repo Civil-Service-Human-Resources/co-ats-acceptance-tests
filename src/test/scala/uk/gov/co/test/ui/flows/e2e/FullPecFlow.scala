@@ -8,7 +8,7 @@ import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.applicationId
 import uk.gov.co.test.ui.flows.v9.LongFormFlow.fillLongFormDetails
 import uk.gov.co.test.ui.flows.v9.PecFormFlow.fillPecFormDetailsOnly
 import uk.gov.co.test.ui.flows.v9.ShortFormFlow.fillShortFormDetails
-import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.{applicationBeingReviewedState, candidateAcceptsOffer, confirmOfferAccepted, confirmPecSubmission, interviewSlotBookedState, invitedForInterviewState}
+import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.{applicationBeingReviewedState, candidateAcceptsOffer, confirmOfferAccepted, confirmPecSubmission, interviewOneSlotBookedState, invitedForInterviewOneState}
 import uk.gov.co.test.ui.pages.v9.ApplicationsPage.extractApplicationId
 import uk.gov.co.test.ui.pages.v9.BookedInterviewPage.confirmBookingSlot
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
@@ -37,9 +37,9 @@ object FullPecFlow extends CivilServiceJobsBasePage {
     switchToOtherWindow,
     searchApplicationId(applicationId),
     inviteToInterviewEmailFlow(),
-    invitedForInterviewState(),
+    invitedForInterviewOneState(),
     confirmBookingSlot(),
-    interviewSlotBookedState(),
+    interviewOneSlotBookedState(),
     interviewOneScheduled(),
     interviewOneEvaluationFlow(APPLICATION_DATA),
     println("So far..."),

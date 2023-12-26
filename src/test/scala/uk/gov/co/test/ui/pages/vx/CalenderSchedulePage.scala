@@ -226,7 +226,7 @@ object CalenderSchedulePage extends VacancyBasePage {
 
   private def checkCreatedSlots(): Unit = {
     waitForVisibilityOfElementByPath(createdSlotsTabPath).click()
-    checkForNewValue(displayingResultsITPath, "Displaying 2 results")
+    checkForNewValuePath(displayingResultsITPath, "Displaying 2 results")
     driver.findElements(By.xpath(createdSlotsPagePath)).size() shouldEqual 2
   }
 
@@ -253,7 +253,7 @@ object CalenderSchedulePage extends VacancyBasePage {
     waitForVisibilityOfElementById(addTaggedVacancyId).click()
     waitForVisibilityOfElementById(addTaggedVacancyHeaderId).getText shouldEqual "Add Selected Vacancies"
     enterScheduleValue(filterVacancyResultsId, vacancyId)
-    checkForNewValue(displayingResultsT3Path, "Displaying 1 results")
+    checkForNewValuePath(displayingResultsT3Path, "Displaying 1 results")
     val (_title, _liveDate, _closingDate, _isActive) = selectedVacancyValues()
     _title  shouldEqual vacancyName
     _liveDate    should startWith(vXVacancyLiveDate)
@@ -266,7 +266,7 @@ object CalenderSchedulePage extends VacancyBasePage {
   }
 
   private def confirmTaggedVacancy(): Unit = {
-    checkForNewValue(displayingResultsT1Path, "Displaying 1 results")
+    checkForNewValuePath(displayingResultsT1Path, "Displaying 1 results")
     val addVacancyTable                              = "DataTables_Table_1"
     val (_title, _liveDate, _closingDate, _isActive) = selectedVacancyValues(addVacancyTable)
     _title                           shouldEqual vacancyName

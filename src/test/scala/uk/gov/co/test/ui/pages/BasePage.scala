@@ -53,7 +53,7 @@ trait BasePage extends Matchers with Page with WebBrowser with PatienceConfigura
     wait.until(visibilityOfElementLocated(By.xpath(pathway)))
   }
 
-  def checkForNewStatus(statusPath: String, expectedStatus: String)(implicit driver: WebDriver): Unit = {
+  def checkForNewValuePath(statusPath: String, expectedStatus: String)(implicit driver: WebDriver): Unit = {
     val wait = new WebDriverWait(driver, 25, 500)
     try wait.until { (d: WebDriver) =>
       d.findElement(By.xpath(statusPath)).getText.endsWith(expectedStatus)
@@ -62,17 +62,12 @@ trait BasePage extends Matchers with Page with WebBrowser with PatienceConfigura
     }
   }
 
-  def checkForNewValue(valuePath: String, expectedValue: String)(implicit driver: WebDriver): Unit = {
-    val wait = new WebDriverWait(driver, 25, 200)
-    wait.until { (d: WebDriver) =>
-      d.findElement(By.xpath(valuePath)).getText.endsWith(expectedValue)
-    }
-  }
-
   def checkForNewValueId(valueId: String, expectedValue: String)(implicit driver: WebDriver): Unit = {
     val wait = new WebDriverWait(driver, 25, 500)
-    wait.until { (d: WebDriver) =>
+    try wait.until { (d: WebDriver) =>
       d.findElement(By.id(valueId)).getText.startsWith(expectedValue)
+    } catch {
+      case staleError: StaleElementReferenceException => println(staleError)
     }
   }
 

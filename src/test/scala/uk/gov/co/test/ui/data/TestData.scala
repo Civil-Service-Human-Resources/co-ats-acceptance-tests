@@ -25,8 +25,8 @@ object TestData extends BaseFeatureSpec {
   }
 
   def setPecTestData(): Unit = {
-    vacancyName = "System Architect"
-    vacancyId = "9533"
+    vacancyName = "HMRC - Technical Architect"
+    vacancyId = "9562"
     vXAnyAdditionalQuestions = false
     vXUploadAttachmentRequired = false
     vXProbationIncomplete = false

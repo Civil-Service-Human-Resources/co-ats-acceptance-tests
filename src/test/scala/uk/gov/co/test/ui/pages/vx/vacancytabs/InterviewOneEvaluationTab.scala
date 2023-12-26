@@ -3,7 +3,8 @@ package uk.gov.co.test.ui.pages.vx.vacancytabs
 import org.openqa.selenium.By
 import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXBehavioursRequired, vXHowManyBehaviours, vXHowManySkills, vXHowManyStrengths, vXListOfChosenBehaviours, vXListOfStrengths, vXListOfTechSkills, vXStrengthsRequired, vXTechSkillsRequired}
 import uk.gov.co.test.ui.data.vx.{ApplicationDetails, AssessmentOutcome, Outcome}
-import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.{availableBarItems, completeInterviewEvaluationBarId, interviewOneEvaluation, noShowBarId, withdrawApplicationAtInterviewOneBarId}
+import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.applicationBeingReviewedAfterInterviewState
+import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.{availableBarItems, completeI1EvaluationBarId, interviewOneEvaluation, noShowI1BarId, withdrawAtInterviewBarId}
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.vacancyFormId
 
@@ -214,8 +215,8 @@ object InterviewOneEvaluationTab extends VacancyBasePage {
   }
 
   private def moveInterviewScheduleForm(): Unit = {
-    moveVacancyOnViaTopBar(completeInterviewEvaluationBarId, interviewOneEvaluationTabPath)
-    availableBarItems(List(completeInterviewEvaluationBarId, noShowBarId, withdrawApplicationAtInterviewOneBarId))
+    moveVacancyOnViaTopBar(completeI1EvaluationBarId, interviewOneEvaluationTabPath)
+    availableBarItems(List(completeI1EvaluationBarId, noShowI1BarId, withdrawAtInterviewBarId))
     waitForVisibilityOfElementById(interviewOneEvaluationHeaderId).getText should endWith("Interview 1 Evaluation")
   }
 
@@ -746,5 +747,6 @@ object InterviewOneEvaluationTab extends VacancyBasePage {
     }
     clickOn(submitForm)
     interviewOneEvaluation()
+    applicationBeingReviewedAfterInterviewState()
   }
 }

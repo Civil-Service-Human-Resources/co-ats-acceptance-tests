@@ -128,7 +128,7 @@ object SiftEvaluationTab extends VacancyBasePage {
   }
 
   private def moveSiftEvaluationForm(): Unit = {
-    checkForNewStatus(vacancyStatusPath, siftEvaluationStatus)
+    checkForNewValuePath(vacancyStatusPath, siftEvaluationStatus)
     confirmCandidateSummary(siftEvaluationStatus, Some("restricted"))
     moveVacancyOnViaTopBar(completeSiftBarId, siftEvaluationTabPath)
     availableBarItems(List(completeSiftBarId, withdrawBarId))

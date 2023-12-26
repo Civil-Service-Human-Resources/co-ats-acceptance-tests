@@ -43,20 +43,16 @@ object InterviewsSection extends VacancyBasePage {
   def interviewsSection(newVacancyDetails: NewVacancyDetails): Unit = {
     val interviews = newVacancyDetails.interviewsDetails
     vXInterviewExpectedRounds = interviews.expectedRounds
-    vXInterviewExpectedRounds match {
-      case "No interviews" => clickOnRadioButton(noInterviewsId)
-      case "1"             =>
-        clickOnRadioButton(oneInterviewId)
-        interviewsTypes(interviews, 1)
-      case "2"             =>
-        clickOnRadioButton(twoInterviewId)
-        interviewsTypes(interviews, 2)
-      case "3"             =>
-        clickOnRadioButton(threeInterviewId)
-        interviewsTypes(interviews, 3)
-      case "4"             =>
-        clickOnRadioButton(fourInterviewId)
-        interviewsTypes(interviews, 4)
+    if (vXInterviewExpectedRounds == "No interviews") {
+      clickOnRadioButton(noInterviewsId)
+    } else {
+      vXInterviewExpectedRounds.toInt match {
+        case 1 => clickOnRadioButton(oneInterviewId)
+        case 2 => clickOnRadioButton(twoInterviewId)
+        case 3 => clickOnRadioButton(threeInterviewId)
+        case 4 => clickOnRadioButton(fourInterviewId)
+      }
+      interviewsTypes(interviews, vXInterviewExpectedRounds.toInt)
     }
     selectAvailableOffline(interviews)
   }
@@ -112,9 +108,8 @@ object InterviewsSection extends VacancyBasePage {
     selectInterviewRoundFourType
   )
 
-  private def interviewsTypes(interviewsDetails: InterviewsDetails, interviewTypes: Int): Unit =
-    interviews.take(interviewTypes).foreach { f =>
+  private def interviewsTypes(interviewsDetails: InterviewsDetails, noOfInterviews: Int): Unit =
+    interviews.take(noOfInterviews).foreach { f =>
       f(interviewsDetails)
     }
-
 }

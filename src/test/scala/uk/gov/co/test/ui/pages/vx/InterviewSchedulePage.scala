@@ -4,7 +4,7 @@ import org.openqa.selenium.{By, WebElement}
 import uk.gov.co.test.ui.data.TestData.eventually
 import uk.gov.co.test.ui.data.vx.ApplicationDetails
 import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXInstructionsForCandidates, vXInterviewExpectedRounds, vXInterviewLocation, vXInterviewOneDate, vXInterviewOneLongDate, vXInterviewOneShortDate, vXInterviewScheduleTitle}
-import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.{availableBarItems, confirmCandidateSummary, inviteToInterviewOneBarId, scheduleOfflineInterviewBarId, withdrawApplicationAtInterviewOneBarId}
+import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.{availableBarItems, confirmCandidateSummary, inviteToI1BarId, scheduleOfflineI1BarId, withdrawAtInterviewBarId}
 import uk.gov.co.test.ui.pages.vx.createvacancypage.AdvertSection.switchBack
 
 import java.time.LocalDate
@@ -88,9 +88,9 @@ object InterviewSchedulePage extends VacancyBasePage {
   private def checkInterviewStatus(): Unit = {
     val newStatus = "Selected for Interview 1"
     confirmCandidateSummary(newStatus)
-    checkForNewStatus(vacancyStatusPath, newStatus)
+    checkForNewValuePath(vacancyStatusPath, newStatus)
     availableBarItems(
-      List(inviteToInterviewOneBarId, scheduleOfflineInterviewBarId, withdrawApplicationAtInterviewOneBarId)
+      List(inviteToI1BarId, scheduleOfflineI1BarId, withdrawAtInterviewBarId)
     )
   }
 

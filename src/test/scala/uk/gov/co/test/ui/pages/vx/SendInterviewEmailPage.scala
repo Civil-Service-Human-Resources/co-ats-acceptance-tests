@@ -2,7 +2,7 @@ package uk.gov.co.test.ui.pages.vx
 
 import uk.gov.co.test.ui.data.TestData.eventually
 import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{preferredFirstName, randomFirstName, randomLastName, vXJobInfoDepartment, vacancyId, vacancyName}
-import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.{availableBarItems, confirmCandidateSummary, interviewNotBookedBarId, inviteToInterviewOneBarId, scheduleInterviewBarId, scheduleOfflineInterviewBarId, withdrawApplicationAtInterviewOneBarId}
+import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.{availableBarItems, confirmCandidateSummary, interviewNotBookedBarId, inviteToI1BarId, scheduleI1BarId, scheduleOfflineI1BarId, withdrawAtInterviewBarId}
 
 object SendInterviewEmailPage extends VacancyBasePage {
 
@@ -68,19 +68,19 @@ object SendInterviewEmailPage extends VacancyBasePage {
   }
 
   private def interviewOneInvitedStatus(): Unit = {
-    checkForNewStatus(vacancyStatusPath, sendInterviewStatus)
+    checkForNewValuePath(vacancyStatusPath, sendInterviewStatus)
     availableBarItems(
       List(
-        scheduleInterviewBarId,
-        scheduleOfflineInterviewBarId,
+        scheduleI1BarId,
+        scheduleOfflineI1BarId,
         interviewNotBookedBarId,
-        withdrawApplicationAtInterviewOneBarId
+        withdrawAtInterviewBarId
       )
     )
   }
 
   private val sendEmail: Seq[Unit] = Seq(
-    clickOn(inviteToInterviewOneBarId),
+    clickOn(inviteToI1BarId),
     sendEmailPageCheck(),
     checkAutoSelect(),
     checkSendEmail(),
