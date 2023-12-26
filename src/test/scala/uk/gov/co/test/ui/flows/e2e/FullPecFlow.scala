@@ -18,6 +18,7 @@ import uk.gov.co.test.ui.pages.vx.CalenderSchedulePage.calenderSchedulePage
 import uk.gov.co.test.ui.pages.vx.InterviewSchedulePage.interviewSchedulePage
 import uk.gov.co.test.ui.pages.vx.SendInterviewEmailPage.inviteToInterviewEmailFlow
 import uk.gov.co.test.ui.pages.vx.vacancytabs.EmploymentHistoryTab.{EmploymentHistoryVXFlow, completeVXEmploymentHistory}
+import uk.gov.co.test.ui.pages.vx.vacancytabs.InterviewOneEvaluationTab.interviewOneEvaluationFlow
 import uk.gov.co.test.ui.pages.vx.vacancytabs.PreSiftEvaluationTab.PreSiftEvaluationFlow
 import uk.gov.co.test.ui.pages.vx.vacancytabs.SiftEvaluationTab.SiftEvaluationFlow
 
@@ -40,6 +41,7 @@ object FullPecFlow extends CivilServiceJobsBasePage {
     confirmBookingSlot(),
     interviewSlotBookedState(),
     interviewOneScheduled(),
+    interviewOneEvaluationFlow(APPLICATION_DATA),
     println("So far..."),
     //TODO more flows here before progressing to offer!
     progressApplicationToOffer(),

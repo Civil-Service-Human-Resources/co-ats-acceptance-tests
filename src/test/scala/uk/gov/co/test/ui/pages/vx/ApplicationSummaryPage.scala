@@ -22,7 +22,6 @@ object ApplicationSummaryPage extends VacancyBasePage {
   val employmentHistoryBarId                 = "process_rule_but_744"
   val conditionalOfferBarId                  = "process_rule_but_1024"
   val withdrawApplicationBarId               = "process_rule_but_570"
-  val withdrawApplicationAtInterviewOneBarId = "process_rule_but_511"
   val updateApplicantBarId                   = "process_rule_but_2008"
   val emailVacancyHolderBarId                = "process_rule_but_2032"
   val progressBarAfterPreSiftId              = "process_rule_but_155"
@@ -35,10 +34,14 @@ object ApplicationSummaryPage extends VacancyBasePage {
   val scheduleInterviewBarId                 = "process_rule_but_23"
   val completeInterviewEvaluationBarId       = "process_rule_but_579"
   val noShowBarId                            = "process_rule_but_25"
+  val uploadIDEditFeedbackBarId              = "process_rule_but_1462"
+  val progressAfterEvaluationBarId           = "process_rule_but_703"
+  val withdrawApplicationAtInterviewOneBarId = "process_rule_but_511"
   val allBarItemsId                          = "process_rules_bar"
   val preSiftActionButtonsPath               = ".//*[@aria-label='Action Buttons']"
   val siftEvaluationTabPath                  = ".//span[@class='main-label' and text() = 'Sift evaluation']"
   val commentsTabPath                        = ".//span[@class='main-label' and text() = 'Comments']"
+  val summaryTabPath                        = ".//span[@class='main-label' and text() = 'Summary']"
   val vacancyAppliedDatePath                 = ".//*[@id='collapse_panel']/span[2]"
   var appSummaryFormId                       = ""
   def outcomeId                              = s"select2-${appSummaryFormId}_datafield_66487_1_1-container"
@@ -107,6 +110,14 @@ object ApplicationSummaryPage extends VacancyBasePage {
     waitForVisibilityOfElementById(progressBarId).click()
   }
 
+  def interviewOneEvaluation(): Unit = {
+    val newStatus = "Interview 1 - Feedback Captured (Not Issued)"
+    checkForNewStatus(vacancyStatusPath, newStatus)
+    availableBarItems(List(progressAfterEvaluationBarId, uploadIDEditFeedbackBarId, withdrawApplicationAtInterviewOneBarId))
+    confirmCandidateSummary(newStatus)
+    waitForVisibilityOfElementById(progressAfterEvaluationBarId).click()
+  }
+
   def availableBarItems(expectedBarItems: List[String]): Unit = {
     val actualBarItems = waitForVisibilityOfElementById(allBarItemsId).findElements(By.tagName("li"))
     if (actualBarItems.size() == expectedBarItems.size) {
@@ -128,14 +139,21 @@ object ApplicationSummaryPage extends VacancyBasePage {
     waitForVisibilityOfElementById(ele).getText
   }
 
-  def confirmCandidateSummary(newStatus: String): Unit = {
+  def confirmCandidateSummary(newStatus: String, dataLevel: Option[String] = None): Unit = {
+    if (!waitForVisibilityOfElementByPath(summaryTabPath).isSelected) {
+      waitForVisibilityOfElementByPath(summaryTabPath).click()
+      refreshPage()
+    }
     checkCandidateSummary("1") shouldEqual applicationId
-    checkCandidateSummary("2") shouldEqual randomFirstName
-    checkCandidateSummary("3") shouldEqual randomLastName
+    checkCandidateSummary("2") shouldEqual (if (dataLevel.isDefined && dataLevel.get == "restricted") "Restricted Data"
+                                            else randomFirstName)
+    checkCandidateSummary("3") shouldEqual (if (dataLevel.isDefined && dataLevel.get == "restricted") "Restricted Data"
+                                            else randomLastName)
     checkCandidateSummary("4") shouldEqual newStatus
     checkCandidateSummary("5") shouldEqual vacancyId
     checkCandidateSummary("6") shouldEqual vacancyName
     checkCandidateSummary("7") shouldEqual vXJobInfoDepartment
-    checkCandidateSummary("8") shouldEqual "External - Non Civil Servant / External"
+    checkCandidateSummary("8") shouldEqual (if (dataLevel.isDefined && dataLevel.get == "restricted") "Restricted Data"
+                                            else "External - Non Civil Servant / External")
   }
 }

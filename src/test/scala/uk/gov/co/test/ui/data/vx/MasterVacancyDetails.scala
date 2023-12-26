@@ -83,7 +83,6 @@ object MasterVacancyDetails extends VacancyBasePage {
 
   //vx vacancy technical skills section
   var vXHowManySkills: Int                              = 8
-//  var vXListOfTechSkills            = new ListBuffer[String]()
   var vXListOfTechSkills: ListBuffer[String]            = ListBuffer(
     "Autotest - technical skills 1",
     "Autotest - technical skills 2",
@@ -106,6 +105,19 @@ object MasterVacancyDetails extends VacancyBasePage {
   )
   var vXListOfApplicationStage                          = new ListBuffer[Boolean]()
   var vXNoOfApplicationStage: Int                       = 8
+
+  //vX strengths
+  var vXHowManyStrengths: Int                              = 8
+  var vXListOfStrengths: ListBuffer[String] = ListBuffer(
+    "Adaptable",
+    "Analytical",
+    "Improver",
+    "Relationship Builder",
+    "Challenger",
+    "Change Agent",
+    "Team Leader",
+    "Service Focussed"
+  )
 
   //vx vacancy tests section
   var vXAnyOnlineTests = false

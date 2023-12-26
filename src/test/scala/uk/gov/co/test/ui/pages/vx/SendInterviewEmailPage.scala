@@ -7,6 +7,7 @@ import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.{availableBarItems, con
 object SendInterviewEmailPage extends VacancyBasePage {
 
   private lazy val sendEmailToCandidatePageTitle = s"$randomFirstName $randomLastName : Civil Service Jobs - GOV.UK"
+  private lazy val sendInterviewStatus           = "Interview 1 - invited"
   private lazy val sendEmailHeaderPath           = ".//*[@class='brand_main_title_left']"
   private lazy val sendEmailCheckId              = "invite_form_send_email"
   private lazy val autoSelectId                  = "invite_form_select_mode_2"
@@ -67,7 +68,7 @@ object SendInterviewEmailPage extends VacancyBasePage {
   }
 
   private def interviewOneInvitedStatus(): Unit = {
-    checkForNewStatus(vacancyStatusPath, "Interview 1 - invited")
+    checkForNewStatus(vacancyStatusPath, sendInterviewStatus)
     availableBarItems(
       List(
         scheduleInterviewBarId,
@@ -87,7 +88,7 @@ object SendInterviewEmailPage extends VacancyBasePage {
     checkEmailContents(),
     addEmailAttachments(),
     waitForVisibilityOfElementById(sendInviteId).click(),
-    confirmCandidateSummary("Interview 1 - invited"),
+    confirmCandidateSummary(sendInterviewStatus),
     interviewOneInvitedStatus()
   )
 
