@@ -1,10 +1,12 @@
 package uk.gov.co.test.ui.specs.vx
 
+import uk.gov.co.test.ui.data.TestData.setPecTestData
 import uk.gov.co.test.ui.data.v9.applicants.{MASTER_REGISTER_CANDIDATE, REGISTER_CANDIDATE_INSOLVENCY, REGISTER_CANDIDATE_PEC}
 import uk.gov.co.test.ui.data.v9.longform.{LONG_FORM_DATA_INSOLVENCY, MASTER_LONG_FORM_DATA}
 import uk.gov.co.test.ui.data.v9.shortform.{MASTER_SHORT_FORM_DATA, SHORT_FORM_DATA_INSOLVENCY}
 import uk.gov.co.test.ui.data.vx._
 import uk.gov.co.test.ui.flows.e2e.FullPecFlow.completeFullPecFlow
+import uk.gov.co.test.ui.flows.e2e.InterviewFlow.untagVacancies
 import uk.gov.co.test.ui.flows.e2e.PecFlow.completePecFlow
 import uk.gov.co.test.ui.flows.v9.LongFormFlow.fillLongFormDetails
 import uk.gov.co.test.ui.flows.v9.RegisterCandidateFlow.fillNewCandidateDetails
@@ -14,7 +16,6 @@ import uk.gov.co.test.ui.flows.vx.RecruiterLoginFlow.loginWithRecruiterDetails
 import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.{confirmLongFormCompletion, confirmShortFormCompletion}
 import uk.gov.co.test.ui.pages.vx.DashboardPage.{activateAndPostVacancy, searchForActiveVacancy}
 import uk.gov.co.test.ui.specs.BaseFeatureSpec
-import uk.gov.co.test.ui.data.TestData.setPecTestData
 import uk.gov.co.test.ui.tags.RunInVX
 
 class createVacancySpec extends BaseFeatureSpec {
@@ -81,8 +82,11 @@ class createVacancySpec extends BaseFeatureSpec {
     }
 
     Scenario("VX: A Recruiter Extracts Vacancy Details", RunInVX) {
-      loginWithRecruiterDetails(RECRUITER)
       searchForActiveVacancy()
+    }
+
+    Scenario("VX: A Recruiter Untags Vacancy Details", RunInVX) {
+      untagVacancies()
     }
   }
 }

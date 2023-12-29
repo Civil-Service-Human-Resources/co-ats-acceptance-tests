@@ -3,8 +3,8 @@ package uk.gov.co.test.ui.pages.vx
 import org.openqa.selenium.{By, WebElement}
 import uk.gov.co.test.ui.data.TestData.eventually
 import uk.gov.co.test.ui.data.vx.ApplicationDetails
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXInstructionsForCandidates, vXInterviewExpectedRounds, vXInterviewLocation, vXInterviewOneDate, vXInterviewOneLongDate, vXInterviewOneShortDate, vXInterviewScheduleTitle}
-import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.{availableBarItems, confirmCandidateSummary, inviteToI1BarId, scheduleOfflineI1BarId, withdrawAtInterviewBarId}
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXInstructionsForCandidates, vXInterviewDate, vXInterviewLocation, vXInterviewLongDate, vXInterviewNumber, vXInterviewScheduleTitle, vXInterviewShortDate}
+import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.{availableBarItems, confirmCandidateSummary, inviteToI1BarId, inviteToI2BarId, inviteToI3BarId, scheduleOfflineI1BarId, scheduleOfflineI2BarId, scheduleOfflineI3BarId, withdrawAtInterviewBarId}
 import uk.gov.co.test.ui.pages.vx.createvacancypage.AdvertSection.switchBack
 
 import java.time.LocalDate
@@ -43,7 +43,7 @@ object InterviewSchedulePage extends VacancyBasePage {
   private lazy val createInterviewSchedulePageTitle      = "Create Interview Schedule : Civil Service Jobs - GOV.UK"
   private lazy val createScheduleTitlePath               = ".//*[@id='page_navbar']/div/span"
   private lazy val createInterviewSchedulePath           = ".//a[contains(@href,'recruiter/interviews/create_interview')]"
-  private lazy val viewInterviewSchedulePath             = ".//a[contains(@href,'/recruiter/interviews/list')]"
+  private lazy val viewInterviewSchedulePath             = "//*[@id='lm-interviews']/ul/li[2]/a"
   private lazy val interviewsSectionPath                 = ".//*[@id='lm-interviews']/h3/a"
   private lazy val copyFromId                            = "select2-details_form_populate_from-container"
   private lazy val copyFromTemplateId                    = "select2-details_form_template_id-container"
@@ -86,12 +86,14 @@ object InterviewSchedulePage extends VacancyBasePage {
     eventually(onPage(createInterviewSchedulePageTitle))
 
   private def checkInterviewStatus(): Unit = {
-    val newStatus = "Selected for Interview 1"
+    val newStatus = s"Selected for Interview ${vXInterviewNumber.head}"
     confirmCandidateSummary(newStatus)
     checkForNewValuePath(vacancyStatusPath, newStatus)
-    availableBarItems(
-      List(inviteToI1BarId, scheduleOfflineI1BarId, withdrawAtInterviewBarId)
-    )
+    vXInterviewNumber.head match {
+      case "1" => availableBarItems(List(inviteToI1BarId, scheduleOfflineI1BarId, withdrawAtInterviewBarId))
+      case "2" => availableBarItems(List(inviteToI2BarId, scheduleOfflineI2BarId, withdrawAtInterviewBarId))
+      case "3" => availableBarItems(List(inviteToI3BarId, scheduleOfflineI3BarId, withdrawAtInterviewBarId))
+    }
   }
 
   private def createInterviewSchedule(): Unit = {
@@ -106,14 +108,21 @@ object InterviewSchedulePage extends VacancyBasePage {
   }
 
   def untagVacancy(): Unit = {
-    val viewSchedule = "View Interview Schedule"
+    val viewSchedule  = "View Interview Schedule"
     if (viewInterviewSchedule.getText == viewSchedule) viewInterviewSchedule.click()
     else {
       interviewsSection.click()
       viewInterviewSchedule.click()
     }
-//    createInterviewSchedulePageCheck()
-//    waitForVisibilityOfElementByPath(createScheduleTitlePath).getText shouldEqual scheduleTitle
+    waitForVisibilityOfElementByPath(".//*[@class='column1 sorting sorting_asc']").click()
+    waitForVisibilityOfElementByPath(".//tr[@tabindex='-1'][1]").click()
+    waitForVisibilityOfElementByPath(".//a[text()='Edit']").click()
+    waitForVisibilityOfElementByPath(".//span[@class='main-label' and text() = 'Tagged Vacancies']").click()
+    val taggedVacancy = driver.findElements(By.xpath(".//tr[@tabindex='-1'][1]"))
+    if (taggedVacancy.size() == 1) {
+      waitForVisibilityOfElementByPath(".//tr[@tabindex='-1'][1]").click()
+      waitForVisibilityOfElementById("but_remove_opportunity").click()
+    }
   }
 
   def selectCopyFrom(interviewScheduleDetails: InterviewScheduleDetails): Unit = {
@@ -134,7 +143,7 @@ object InterviewSchedulePage extends VacancyBasePage {
 
   private def enterInterviewTitle(interviewScheduleDetails: InterviewScheduleDetails): Unit = {
     val schedule = interviewScheduleDetails
-    vXInterviewScheduleTitle = schedule.interviewTitle
+    vXInterviewScheduleTitle = schedule.interviewTitle.format(vXInterviewNumber.head)
     enterValue(interviewTitleId, vXInterviewScheduleTitle)
     addWelshTranslation(
       schedule.addWelshTitle,
@@ -147,24 +156,24 @@ object InterviewSchedulePage extends VacancyBasePage {
 
   private def selectInterviewDate(interviewScheduleDetails: InterviewScheduleDetails): Unit = {
     val schedule = interviewScheduleDetails
-    interviewDate().value = interviewScheduleDate(schedule.daysAfterCurrentDate)
+    interviewDate().value = interviewScheduleDate(schedule.daysAfterCurrentDate + vXInterviewNumber.head.toInt)
   }
 
   def interviewScheduleDate(days: Int): String = {
-    val formatter  = DateTimeFormatter.ofPattern("dd/MM/yyyy")
-    val formatter2 = DateTimeFormatter.ofPattern("d MMMM yyyy")
-    val formatter3 = DateTimeFormatter.ofPattern("d MMM yyyy")
+    val formatter  = DateTimeFormatter.ofPattern("dd/MM/uuuu")
+    val formatter2 = DateTimeFormatter.ofPattern("d MMMM uuuu")
+    val formatter3 = DateTimeFormatter.ofPattern("d MMM uuuu")
     val now        = LocalDate.now()
     val addDays    = now.plusDays(days)
-    vXInterviewOneLongDate = addDays.format(formatter2)
-    vXInterviewOneShortDate = addDays.format(formatter3)
-    vXInterviewOneDate = addDays.format(formatter)
-    vXInterviewOneDate
+    vXInterviewLongDate = addDays.format(formatter2)
+    vXInterviewShortDate = addDays.format(formatter3)
+    vXInterviewDate = addDays.format(formatter)
+    vXInterviewDate
   }
 
   def selectInterviewRound(interviewScheduleDetails: InterviewScheduleDetails): Unit = {
-    val schedule = interviewScheduleDetails
-    selectDropdownOption(interviewRoundId, schedule.interviewRound)
+    val schedule = interviewScheduleDetails.interviewRound.format(vXInterviewNumber.head)
+    selectDropdownOption(interviewRoundId, schedule)
   }
 
   private def selectCoordinator(interviewScheduleDetails: InterviewScheduleDetails): Unit = {
@@ -179,7 +188,7 @@ object InterviewSchedulePage extends VacancyBasePage {
     val switchFrame = driver.switchTo().frame(internalNotesIFrameId)
     val notesArea   = switchFrame.findElement(By.id(internalNotesId))
     notesArea.clear()
-    notesArea.sendKeys(schedule.internalNotes)
+    notesArea.sendKeys(schedule.internalNotes.format(vXInterviewNumber.head))
     switchBack()
     addWelshTranslationIFrame(
       schedule.addWelshTitle,
@@ -193,7 +202,7 @@ object InterviewSchedulePage extends VacancyBasePage {
 
   private def enterInstructionsForCandidate(interviewScheduleDetails: InterviewScheduleDetails): Unit = {
     val schedule    = interviewScheduleDetails
-    vXInstructionsForCandidates = schedule.instructionsForCandidate
+    vXInstructionsForCandidates = schedule.instructionsForCandidate.format(vXInterviewNumber.head)
     val switchFrame = driver.switchTo().frame(instructionsForCandidateIFrameId)
     val notesArea   = switchFrame.findElement(By.id(instructionsForCandidateId))
     notesArea.clear()
@@ -248,13 +257,13 @@ object InterviewSchedulePage extends VacancyBasePage {
   }
 
   def selectInviteEmailTemplate(interviewScheduleDetails: InterviewScheduleDetails): Unit = {
-    val schedule = interviewScheduleDetails
-    selectDropdownOption(inviteEmailTemplateId, schedule.inviteEmailTemplate)
+    val emailTemplate = interviewScheduleDetails.inviteEmailTemplate.format(vXInterviewNumber.head)
+    selectDropdownOption(inviteEmailTemplateId, emailTemplate)
   }
 
   def selectBookedEmailTemplate(interviewScheduleDetails: InterviewScheduleDetails): Unit = {
-    val schedule = interviewScheduleDetails
-    selectDropdownOption(bookedEmailTemplateId, schedule.bookedEmailTemplate)
+    val bookedEmail = interviewScheduleDetails.bookedEmailTemplate.format(vXInterviewNumber.head)
+    selectDropdownOption(bookedEmailTemplateId, bookedEmail)
   }
 
   private def checkCandidateCVInICals(interviewScheduleDetails: InterviewScheduleDetails): Unit = {
@@ -283,13 +292,12 @@ object InterviewSchedulePage extends VacancyBasePage {
     checkCandidateCVInICals
   )
 
-  def interviewSchedulePage(applicationDetails: ApplicationDetails): Unit =
-    if (vXInterviewExpectedRounds != "No interviews") {
-      checkInterviewStatus()
-      createInterviewSchedule()
-      schedule.foreach { f =>
-        f(applicationDetails.interviewScheduleDetails)
-      }
-      clickOn(createId)
+  def interviewSchedulePage(applicationDetails: ApplicationDetails): Unit = {
+    checkInterviewStatus()
+    createInterviewSchedule()
+    schedule.foreach { f =>
+      f(applicationDetails.interviewScheduleDetails)
     }
+    clickOn(createId)
+  }
 }

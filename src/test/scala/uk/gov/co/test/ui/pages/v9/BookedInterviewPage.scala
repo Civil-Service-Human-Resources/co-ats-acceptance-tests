@@ -3,7 +3,7 @@ package uk.gov.co.test.ui.pages.v9
 import org.openqa.selenium.support.ui.Select
 import org.openqa.selenium.{By, WebElement}
 import org.scalatest.concurrent.Eventually.eventually
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{randomFirstName, vXInstructionsForCandidates, vXInterviewLocation, vXInterviewRoom, vXInterviewScheduleTitle, vXSlotOneStartTime, vXSlotTwoStartTime}
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{randomFirstName, vXInstructionsForCandidates, vXInterviewLocation, vXInterviewNumber, vXInterviewRoom, vXInterviewScheduleTitle, vXSlotOneStartTime, vXSlotTwoStartTime}
 import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.scheduleInterviewFunction
 
 import scala.collection.mutable
@@ -12,24 +12,45 @@ import scala.util.control.Breaks.{break, breakable}
 
 object BookedInterviewPage extends CivilServiceJobsBasePage {
 
-  private lazy val bookedInterviewPageTitle        = "Booked Interviews - Civil Service Jobs - GOV.UK"
-  private lazy val allBookingSectionsPath          = "//*[@class='interview_schedule_details']"
-  private lazy val interviewBookingTitleId         = "interview_schedule_title"
-  private lazy val allSlotsSelectionPath           = ".//*[@id='itinerary']"
-  private lazy val bookSlotId                      = "book_interview_button"
-  private lazy val confirmBookSlotTitleTag         = "h2"
-  private lazy val candidateInstructionsHeaderPath = ".//*[@class='interview_cand_description']"
-  private lazy val interviewLocationPath           = ".//*[@class='interview_location']"
-  private lazy val anotherLocationPath             = "(//p)[9]"
-  private lazy val slotOneSelectionPath            =
+  private lazy val bookedInterviewPageTitle = "Booked Interviews - Civil Service Jobs - GOV.UK"
+  private lazy val allBookingSectionsPath   = "//*[@class='interview_schedule_details']"
+  private lazy val interviewBookingTitleId  = "interview_schedule_title"
+  private lazy val allSlotsSelectionPath    = ".//*[@id='itinerary']"
+  private lazy val bookSlotId               = "book_interview_button"
+//  private lazy val anotherLocationPath             = "(//p)[9]"
+  private lazy val slotOneSelectionPath     =
     s"//*[contains(text(),'${vXSlotOneStartTime.replaceAll("[A-Za-z ]", "").filterNot(_.isWhitespace)}')]"
-  private lazy val slotTwoSelectionPath            =
+  private lazy val slotTwoSelectionPath     =
     s"//*[contains(text(),'${vXSlotTwoStartTime.replaceAll("[A-Za-z ]", "").filterNot(_.isWhitespace)}')]"
 
   private def bookedInterviewPageCheck(): Unit =
     eventually(onPage(bookedInterviewPageTitle))
 
-  private def selectInterviewOneDateTime(): Unit = {
+  def confirmBookSlotTitlePath: String = {
+    val position = vXInterviewNumber.head.toInt + 1
+    val ele      = s"//*[@id='main-content']/div/div[${position.toString}]/h2"
+    ele
+  }
+
+  def candidateInstructionsHeaderPath: String = {
+    val position = vXInterviewNumber.head.toInt + 1
+    val ele      = s"//*[@id='main-content']/div/div[${position.toString}]/div"
+    ele
+  }
+
+  def interviewLocationPath: String = {
+    val position = vXInterviewNumber.head.toInt + 1
+    val ele      = s"//*[@id='main-content']/div/div[${position.toString}]/p[1]"
+    ele
+  }
+
+  def anotherLocationPath: String = {
+    val position = vXInterviewNumber.head.toInt + 1
+    val ele      = s"//*[@id='main-content']/div/div[${position.toString}]/ul/li[2]/p[2]"
+    ele
+  }
+
+  private def selectInterviewDateTime(): Unit = {
     scheduleInterviewFunction().click()
     bookedInterviewPageCheck()
     val (_slotTitle, _instructions, _slotSelection, _slotOne, _slotTwo, _bookSlot) = slotSectionValues()
@@ -41,16 +62,16 @@ object BookedInterviewPage extends CivilServiceJobsBasePage {
   }
 
   def confirmBookingSlot(): Unit = {
-    selectInterviewOneDateTime()
-    waitForVisibilityOfElementByTag("h1").getText                    shouldEqual "Booked Interviews"
-    waitForVisibilityOfElementByTag(confirmBookSlotTitleTag).getText shouldEqual s"$vXInterviewScheduleTitle"
+    selectInterviewDateTime()
+    waitForVisibilityOfElementByTag("h1").getText                      shouldEqual "Booked Interviews"
+    waitForVisibilityOfElementByPath(confirmBookSlotTitlePath).getText shouldEqual s"$vXInterviewScheduleTitle"
     waitForVisibilityOfElementByPath(
       candidateInstructionsHeaderPath
-    ).getText                                                        shouldEqual s"$vXInstructionsForCandidates"
+    ).getText                                                          shouldEqual s"$vXInstructionsForCandidates"
     waitForVisibilityOfElementByPath(
       interviewLocationPath
-    ).getText                                                        shouldEqual s"Interview Location: $vXInterviewLocation"
-    waitForVisibilityOfElementByPath(anotherLocationPath).getText    shouldEqual s"Location: - $vXInterviewRoom"
+    ).getText                                                          shouldEqual s"Interview Location: $vXInterviewLocation"
+    waitForVisibilityOfElementByPath(anotherLocationPath).getText      shouldEqual s"Location: - $vXInterviewRoom"
   }
 
   def availableSlots(): mutable.Buffer[WebElement] =

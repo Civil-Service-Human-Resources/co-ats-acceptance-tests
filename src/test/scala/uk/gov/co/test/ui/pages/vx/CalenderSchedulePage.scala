@@ -3,7 +3,7 @@ package uk.gov.co.test.ui.pages.vx
 import org.openqa.selenium.{By, WebElement}
 import uk.gov.co.test.ui.data.TestData.eventually
 import uk.gov.co.test.ui.data.vx.ApplicationDetails
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXApplicationClosingDate, vXApplicationLiveDate, vXInterviewID, vXInterviewRoom, vXInterviewScheduleTitle, vXSlotOneFinishTime, vXSlotOneStartTime, vXSlotTwoFinishTime, vXSlotTwoStartTime, vacancyId, vacancyName}
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXApplicationClosingDate, vXApplicationLiveDate, vXInterviewID, vXInterviewNumber, vXInterviewRoom, vXInterviewScheduleTitle, vXSlotOneFinishTime, vXSlotOneStartTime, vXSlotTwoFinishTime, vXSlotTwoStartTime, vacancyId, vacancyName}
 
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
@@ -100,7 +100,7 @@ object CalenderSchedulePage extends VacancyBasePage {
   }
 
   private def enterInterviewRoom(calenderScheduleDetails: CalenderScheduleDetails): Unit = {
-    vXInterviewRoom = calenderScheduleDetails.interviewRoom
+    vXInterviewRoom = calenderScheduleDetails.interviewRoom.format(vXInterviewNumber.head)
     enterScheduleValue(interviewRoomId, vXInterviewRoom)
   }
 
@@ -139,7 +139,11 @@ object CalenderSchedulePage extends VacancyBasePage {
     val formatter     = DateTimeFormatter.ofPattern("hh:mm a")
     val schedule      = calenderScheduleDetails
     val (_hour, _min) = splitTime(calenderScheduleDetails.slotStartTime)
-    vXSlotOneStartTime = LocalTime.of(_hour.toInt, _min.toInt).format(formatter).replaceFirst("^0*", "").toLowerCase
+    vXSlotOneStartTime = LocalTime
+      .of(_hour.toInt, _min.toInt)
+      .format(formatter)
+      .replaceFirst("^0*", "")
+      .toLowerCase
     vXSlotOneFinishTime = LocalTime
       .of(_hour.toInt, _min.toInt)
       .plusMinutes(schedule.slotDuration)
@@ -162,17 +166,19 @@ object CalenderSchedulePage extends VacancyBasePage {
       .replaceFirst("^0*", "")
       .toLowerCase
 
+    val roomLocation = schedule.interviewRoom.format(vXInterviewNumber.head)
+
     waitForVisibilityOfElementByPath(createdFirstSlotPath).getText shouldEqual
-      s"""${schedule.interviewRoom}: $vXSlotOneStartTime to $vXSlotOneFinishTime
+      s"""${roomLocation}: $vXSlotOneStartTime to $vXSlotOneFinishTime
          |$vXSlotOneStartTime to $vXSlotOneFinishTime
-         |Room/Site : ${schedule.interviewRoom}
+         |Room/Site : ${roomLocation}
          |Panel Members/Administrators ( 0 of 1 ) :
          |Candidate ( 0 of 1 ) :""".stripMargin
 
     waitForVisibilityOfElementByPath(createdSecondSlotPath).getText shouldEqual
-      s"""${schedule.interviewRoom}: $vXSlotTwoStartTime to $vXSlotTwoFinishTime
+      s"""${roomLocation}: $vXSlotTwoStartTime to $vXSlotTwoFinishTime
          |$vXSlotTwoStartTime to $vXSlotTwoFinishTime
-         |Room/Site : ${schedule.interviewRoom}
+         |Room/Site : ${roomLocation}
          |Panel Members/Administrators ( 0 of 1 ) :
          |Candidate ( 0 of 1 ) :""".stripMargin
   }

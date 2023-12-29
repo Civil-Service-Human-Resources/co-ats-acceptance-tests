@@ -16,7 +16,9 @@ case class ApplicationDetails(
   siftDetails: SiftDetails,
   interviewScheduleDetails: InterviewScheduleDetails,
   calenderScheduleDetails: CalenderScheduleDetails,
-  interviewOneDetails: InterviewOneDetails
+  interviewOneDetails: InterviewOneDetails,
+  interviewTwoDetails: InterviewTwoDetails,
+  interviewThreeDetails: InterviewThreeDetails
 )
 
 object APPLICATION_DATA
@@ -26,7 +28,9 @@ object APPLICATION_DATA
       APPLICATION_SIFT_EVALUATION,
       APPLICATION_INTERVIEW_SCHEDULE,
       APPLICATION_CALENDER_SCHEDULE,
-      APPLICATION_INTERVIEW_ONE_EVALUATION
+      APPLICATION_INTERVIEW_ONE_EVALUATION,
+      APPLICATION_INTERVIEW_TWO_EVALUATION,
+      APPLICATION_INTERVIEW_THREE_EVALUATION
     )
 
 object APPLICATION_EMPLOYMENT_HISTORY
@@ -101,17 +105,17 @@ object APPLICATION_INTERVIEW_SCHEDULE
       Some("Copy From Template"),
       "",
       "",
-      s"$vacancyId - Interview 1 for $randomFirstName $randomLastName",
+      s"$vacancyId - Interview %s for $randomFirstName $randomLastName",
       true,
       s"$vacancyId - Prawf awtomeiddio $randomFirstName $randomLastName",
       20,
-      "Interview 1",
+      "Interview %s",
       false,
       s"$contactEmailVxConfig",
-      s"Autotest - Internal notes for $randomFirstName $randomLastName",
+      s"Autotest - Internal notes for $randomFirstName $randomLastName for interview %s",
       true,
       "Prawf awtomeiddio",
-      s"Autotest - Instructions for $randomFirstName $randomLastName",
+      s"Autotest - Instructions for $randomFirstName $randomLastName for interview %s",
       true,
       "Prawf awtomeiddio",
       "HMRC Government Offices Great George Street",
@@ -119,20 +123,20 @@ object APPLICATION_INTERVIEW_SCHEDULE
       24,
       "Use System Default",
       "24 Hours",
-      "Interview 1 - Invited",
-      "Interview 1 - scheduled",
+      "Interview %s - Invited",
+      "Interview %s - scheduled",
       false
     )
 
 object APPLICATION_CALENDER_SCHEDULE
     extends CalenderScheduleDetails(
-      "09:30",
+      "09:00",
       60,
       1,
       true,
       2,
       60,
-      "HMRC George Street - Room 1",
+      s"HMRC George Street - Room %s",
       sendInterviewerICal = Some(false),
       None
     )
@@ -147,61 +151,202 @@ object APPLICATION_INTERVIEW_ONE_EVALUATION
           |Good demonstration - Substantial positive evidence of the competency or behaviour
           |Strong demonstration - Substantial positive evidence; includes some evidence of exceeding expectations at this level
           |Outstanding demonstration - The evidence provided wholly exceeds expectation at this level""".stripMargin,
-      behaviourOne = Outcome(6, Some("Autotest - Changing and Improving - behaviour one comments")),
-      behaviourTwo = Outcome(7, Some("Autotest - Changing and Improving - behaviour one comments")),
-      behaviourThree = Outcome(7, Some("Autotest - Delivering at Pace - behaviour three comments")),
-      behaviourFour = Outcome(7, Some("Autotest - Developing Self and Others - behaviour four comments")),
-      behaviourFive = Outcome(7, Some("Autotest - Leadership - behaviour five comments")),
-      behaviourSix = Outcome(6, Some("Autotest - Making Effective Decisions - behaviour six comments")),
-      behaviourSeven = Outcome(6, Some("Autotest - Managing a Quality Service - behaviour seven comments")),
-      behaviourEight = Outcome(7, Some("Autotest - Working Together - behaviour eight comments")),
-      techSkillOne = Outcome(5, Some("Autotest - Tech Skill One - tech skill one  comments")),
-      techSkillTwo = Outcome(7, Some("Autotest - Tech Skill Two - tech skill two comments")),
-      techSkillThree = Outcome(7, Some("Autotest - Tech Skill Three - tech skill three comments")),
-      techSkillFour = Outcome(7, Some("Autotest - Tech Skill Four - tech skill four comments")),
-      techSkillFive = Outcome(6, Some("Autotest - Tech Skill Five - tech skill five comments")),
-      techSkillSix = Outcome(7, Some("Autotest - Tech Skill Six - tech skill six comments")),
-      techSkillSeven = Outcome(6, Some("Autotest - Tech Skill Seven - tech skill seven comments")),
-      techSkillEight = Outcome(7, Some("Autotest - Tech Skill Eight - tech skill eight comments")),
+      behaviourOne = Outcome(7, Some("Autotest - I1 - Changing and Improving - behaviour one comments")),
+      behaviourTwo = Outcome(5, Some("Autotest - I1 - Changing and Improving - behaviour one comments")),
+      behaviourThree = Outcome(6, Some("Autotest - I1 - Delivering at Pace - behaviour three comments")),
+      behaviourFour = Outcome(7, Some("Autotest - I1 - Developing Self and Others - behaviour four comments")),
+      behaviourFive = Outcome(7, Some("Autotest - I1 - Leadership - behaviour five comments")),
+      behaviourSix = Outcome(6, Some("Autotest - I1 - Making Effective Decisions - behaviour six comments")),
+      behaviourSeven = Outcome(7, Some("Autotest - I1 - Managing a Quality Service - behaviour seven comments")),
+      behaviourEight = Outcome(7, Some("Autotest - I1 - Working Together - behaviour eight comments")),
+      techSkillOne = Outcome(5, Some("Autotest - I1 - Tech Skill One - tech skill one  comments")),
+      techSkillTwo = Outcome(7, Some("Autotest - I1 - Tech Skill Two - tech skill two comments")),
+      techSkillThree = Outcome(6, Some("Autotest - I1 - Tech Skill Three - tech skill three comments")),
+      techSkillFour = Outcome(7, Some("Autotest - I1 - Tech Skill Four - tech skill four comments")),
+      techSkillFive = Outcome(6, Some("Autotest - I1 - Tech Skill Five - tech skill five comments")),
+      techSkillSix = Outcome(7, Some("Autotest - I1 - Tech Skill Six - tech skill six comments")),
+      techSkillSeven = Outcome(7, Some("Autotest - I1 - Tech Skill Seven - tech skill seven comments")),
+      techSkillEight = Outcome(7, Some("Autotest - I1 - Tech Skill Eight - tech skill eight comments")),
       strengthScoringGuide = """Scoring guide:
           |Please score the candidates using the following scoring guidelines:
           |Weakness - Lower engagement, lower capability, lower use
           |Learned Behaviour - Lower engagement, higher capability, some use
           |Potential Strength - Higher engagement, some capability, some use
           |Strength - higher engagement, higher capability, higher use""".stripMargin,
-      strengthOne = Outcome(4, Some("Autotest - Adaptable - strength one comments")),
-      strengthTwo = Outcome(4, Some("Autotest - Analytical - strength two comments")),
-      strengthThree = Outcome(4, Some("Autotest - Improver  - strength three comments")),
-      strengthFour = Outcome(4, Some("Autotest - Relationship Builder - strength four comments")),
-      strengthFive = Outcome(4, Some("Autotest - Challenger - strength five comments")),
-      strengthSix = Outcome(4, Some("Autotest - Change Agent - strength six comments")),
-      strengthSeven = Outcome(4, Some("Autotest - Team Leader - strength seven comments")),
-      strengthEight = Outcome(4, Some("Autotest - Service Focussed - strength eight comments")),
+      strengthOne = Outcome(3, Some("Autotest - I1 - Adaptable - strength one comments")),
+      strengthTwo = Outcome(4, Some("Autotest - I1 - Analytical - strength two comments")),
+      strengthThree = Outcome(4, Some("Autotest - I1 - Improver  - strength three comments")),
+      strengthFour = Outcome(3, Some("Autotest - I1 - Relationship Builder - strength four comments")),
+      strengthFive = Outcome(4, Some("Autotest - I1 - Challenger - strength five comments")),
+      strengthSix = Outcome(4, Some("Autotest - I1 - Change Agent - strength six comments")),
+      strengthSeven = Outcome(2, Some("Autotest - I1 - Team Leader - strength seven comments")),
+      strengthEight = Outcome(4, Some("Autotest - I1 - Service Focussed - strength eight comments")),
       additionalAssessments = "6",
-      assessmentOne = AssessmentOutcome("Presentation", 6, Some("Autotest - Presentation - assessment one comments")),
+      assessmentOne =
+        AssessmentOutcome("Presentation", 5, Some("Autotest - I1 - Presentation - assessment one comments")),
       assessmentTwo =
-        AssessmentOutcome("Physical ability", 5, Some("Autotest - Physical ability - assessment two comments")),
+        AssessmentOutcome("Physical ability", 6, Some("Autotest - I1 - Physical ability - assessment two comments")),
       assessmentThree = AssessmentOutcome(
         "Verbal comprehension",
-        4,
-        Some("Autotest - Verbal comprehension - assessment three comments")
+        6,
+        Some("Autotest - I1 - Verbal comprehension - assessment three comments")
       ),
       assessmentFour = AssessmentOutcome(
         "Workplace personality",
-        6,
-        Some("Autotest - Workplace personality - assessment four comments")
+        4,
+        Some("Autotest - I1 - Workplace personality - assessment four comments")
       ),
       assessmentFive =
-        AssessmentOutcome("Role knowledge", 6, Some("Autotest - Role knowledge - assessment five comments")),
+        AssessmentOutcome("Role knowledge", 4, Some("Autotest - I1 - Role knowledge - assessment five comments")),
       assessmentSix =
-        AssessmentOutcome("Cognitive ability", 3, Some("Autotest - Cognitive ability - assessment six comments")),
-      experience = Outcome(6, Some("Autotest - Changing and Improving - behaviour one comments")),
+        AssessmentOutcome("Cognitive ability", 5, Some("Autotest - I1 - Cognitive ability - assessment six comments")),
+      experience = Outcome(91, Some("Autotest - I1 - Changing and Improving - behaviour one comments")),
       false,
       101,
       "Progress",
-      s"Autotest - $randomFirstName $randomLastName overall performed very well!",
+      s"Autotest - I1 - $randomFirstName $randomLastName overall performed very well!",
       "Test-T&Cs.pdf",
       declarationStatement = """Declaration
           |
           |By submitting this form you are agreeing to and accepting that you have no conflict of interest with this applicant and the evaluation reflects the views of all the selection panel members.""".stripMargin
+    )
+
+object APPLICATION_INTERVIEW_TWO_EVALUATION
+    extends InterviewTwoDetails(
+      scoringGuide = """Scoring guide:
+                     |Not demonstrated - No positive evidence and/or substantial negative evidence demonstrated
+                     |Minimal demonstration - Limited positive evidence and/or mainly negative evidence demonstrated
+                     |Moderate demonstration - Moderate positive evidence but some negative evidence demonstrated
+                     |Acceptable demonstration - Adequate positive evidence and any negative evidence would not cause concern
+                     |Good demonstration - Substantial positive evidence of the competency or behaviour
+                     |Strong demonstration - Substantial positive evidence; includes some evidence of exceeding expectations at this level
+                     |Outstanding demonstration - The evidence provided wholly exceeds expectation at this level""".stripMargin,
+      behaviourOne = Outcome(7, Some("Autotest - I2 - Changing and Improving - behaviour one comments")),
+      behaviourTwo = Outcome(7, Some("Autotest - I2 - Changing and Improving - behaviour one comments")),
+      behaviourThree = Outcome(7, Some("Autotest - I2 - Delivering at Pace - behaviour three comments")),
+      behaviourFour = Outcome(7, Some("Autotest - I2 - Developing Self and Others - behaviour four comments")),
+      behaviourFive = Outcome(7, Some("Autotest - I2 - Leadership - behaviour five comments")),
+      behaviourSix = Outcome(7, Some("Autotest - I2 - Making Effective Decisions - behaviour six comments")),
+      behaviourSeven = Outcome(7, Some("Autotest - I2 - Managing a Quality Service - behaviour seven comments")),
+      behaviourEight = Outcome(7, Some("Autotest - I2 - Working Together - behaviour eight comments")),
+      techSkillOne = Outcome(7, Some("Autotest - I2 - Tech Skill One - tech skill one  comments")),
+      techSkillTwo = Outcome(7, Some("Autotest - I2 - Tech Skill Two - tech skill two comments")),
+      techSkillThree = Outcome(7, Some("Autotest - I2 - Tech Skill Three - tech skill three comments")),
+      techSkillFour = Outcome(7, Some("Autotest - I2 - Tech Skill Four - tech skill four comments")),
+      techSkillFive = Outcome(7, Some("Autotest - I2 - Tech Skill Five - tech skill five comments")),
+      techSkillSix = Outcome(7, Some("Autotest - I2 - Tech Skill Six - tech skill six comments")),
+      techSkillSeven = Outcome(7, Some("Autotest - I2 - Tech Skill Seven - tech skill seven comments")),
+      techSkillEight = Outcome(7, Some("Autotest - I2 - Tech Skill Eight - tech skill eight comments")),
+      strengthScoringGuide = """Scoring guide:
+                             |Please score the candidates using the following scoring guidelines:
+                             |Weakness - Lower engagement, lower capability, lower use
+                             |Learned Behaviour - Lower engagement, higher capability, some use
+                             |Potential Strength - Higher engagement, some capability, some use
+                             |Strength - higher engagement, higher capability, higher use""".stripMargin,
+      strengthOne = Outcome(3, Some("Autotest - I2 - Adaptable - strength one comments")),
+      strengthTwo = Outcome(4, Some("Autotest - I2 - Analytical - strength two comments")),
+      strengthThree = Outcome(4, Some("Autotest - I2 - Improver  - strength three comments")),
+      strengthFour = Outcome(4, Some("Autotest - I2 - Relationship Builder - strength four comments")),
+      strengthFive = Outcome(3, Some("Autotest - I2 - Challenger - strength five comments")),
+      strengthSix = Outcome(4, Some("Autotest - I2 - Change Agent - strength six comments")),
+      strengthSeven = Outcome(4, Some("Autotest - I2 - Team Leader - strength seven comments")),
+      strengthEight = Outcome(4, Some("Autotest - I2 - Service Focussed - strength eight comments")),
+      additionalAssessments = "6",
+      assessmentOne =
+        AssessmentOutcome("Presentation", 7, Some("Autotest - I2 - Presentation - assessment one comments")),
+      assessmentTwo =
+        AssessmentOutcome("Physical ability", 7, Some("Autotest - I2 - Physical ability - assessment two comments")),
+      assessmentThree = AssessmentOutcome(
+        "Verbal comprehension",
+        7,
+        Some("Autotest - I2 - Verbal comprehension - assessment three comments")
+      ),
+      assessmentFour = AssessmentOutcome(
+        "Workplace personality",
+        7,
+        Some("Autotest - I2 - Workplace personality - assessment four comments")
+      ),
+      assessmentFive =
+        AssessmentOutcome("Role knowledge", 7, Some("Autotest - I2 - Role knowledge - assessment five comments")),
+      assessmentSix =
+        AssessmentOutcome("Cognitive ability", 6, Some("Autotest - I2 - Cognitive ability - assessment six comments")),
+      experience = Outcome(92, Some("Autotest - I2 - Changing and Improving - behaviour one comments")),
+      false,
+      102,
+      "Progress",
+      s"Autotest - I2 - $randomFirstName $randomLastName overall performed very well!",
+      "Test-T&Cs.pdf",
+      declarationStatement = """Declaration
+                             |
+                             |By submitting this form you are agreeing to and accepting that you have no conflict of interest with this applicant and the evaluation reflects the views of all the selection panel members.""".stripMargin
+    )
+
+object APPLICATION_INTERVIEW_THREE_EVALUATION
+    extends InterviewThreeDetails(
+      scoringGuide = """Scoring guide:
+                     |Not demonstrated - No positive evidence and/or substantial negative evidence demonstrated
+                     |Minimal demonstration - Limited positive evidence and/or mainly negative evidence demonstrated
+                     |Moderate demonstration - Moderate positive evidence but some negative evidence demonstrated
+                     |Acceptable demonstration - Adequate positive evidence and any negative evidence would not cause concern
+                     |Good demonstration - Substantial positive evidence of the competency or behaviour
+                     |Strong demonstration - Substantial positive evidence; includes some evidence of exceeding expectations at this level
+                     |Outstanding demonstration - The evidence provided wholly exceeds expectation at this level""".stripMargin,
+      behaviourOne = Outcome(7, Some("Autotest - I3 - Changing and Improving - behaviour one comments")),
+      behaviourTwo = Outcome(7, Some("Autotest - I3 - Changing and Improving - behaviour one comments")),
+      behaviourThree = Outcome(7, Some("Autotest - I3 - Delivering at Pace - behaviour three comments")),
+      behaviourFour = Outcome(7, Some("Autotest - I3 - Developing Self and Others - behaviour four comments")),
+      behaviourFive = Outcome(7, Some("Autotest - I3 - Leadership - behaviour five comments")),
+      behaviourSix = Outcome(6, Some("Autotest - I3 - Making Effective Decisions - behaviour six comments")),
+      behaviourSeven = Outcome(7, Some("Autotest - I3 - Managing a Quality Service - behaviour seven comments")),
+      behaviourEight = Outcome(7, Some("Autotest - I3 - Working Together - behaviour eight comments")),
+      techSkillOne = Outcome(6, Some("Autotest - I3 - Tech Skill One - tech skill one  comments")),
+      techSkillTwo = Outcome(7, Some("Autotest - I3 - Tech Skill Two - tech skill two comments")),
+      techSkillThree = Outcome(7, Some("Autotest - I3 - Tech Skill Three - tech skill three comments")),
+      techSkillFour = Outcome(7, Some("Autotest - I3 - Tech Skill Four - tech skill four comments")),
+      techSkillFive = Outcome(6, Some("Autotest - I3 - Tech Skill Five - tech skill five comments")),
+      techSkillSix = Outcome(7, Some("Autotest - I3 - Tech Skill Six - tech skill six comments")),
+      techSkillSeven = Outcome(7, Some("Autotest - I3 - Tech Skill Seven - tech skill seven comments")),
+      techSkillEight = Outcome(7, Some("Autotest - I3 - Tech Skill Eight - tech skill eight comments")),
+      strengthScoringGuide = """Scoring guide:
+                             |Please score the candidates using the following scoring guidelines:
+                             |Weakness - Lower engagement, lower capability, lower use
+                             |Learned Behaviour - Lower engagement, higher capability, some use
+                             |Potential Strength - Higher engagement, some capability, some use
+                             |Strength - higher engagement, higher capability, higher use""".stripMargin,
+      strengthOne = Outcome(3, Some("Autotest - I3 - Adaptable - strength one comments")),
+      strengthTwo = Outcome(4, Some("Autotest - I3 - Analytical - strength two comments")),
+      strengthThree = Outcome(4, Some("Autotest - I3 - Improver  - strength three comments")),
+      strengthFour = Outcome(4, Some("Autotest - I3 - Relationship Builder - strength four comments")),
+      strengthFive = Outcome(4, Some("Autotest - I3 - Challenger - strength five comments")),
+      strengthSix = Outcome(4, Some("Autotest - I3 - Change Agent - strength six comments")),
+      strengthSeven = Outcome(3, Some("Autotest - I3 - Team Leader - strength seven comments")),
+      strengthEight = Outcome(4, Some("Autotest - I3 - Service Focussed - strength eight comments")),
+      additionalAssessments = "6",
+      assessmentOne =
+        AssessmentOutcome("Presentation", 7, Some("Autotest - I3 - Presentation - assessment one comments")),
+      assessmentTwo =
+        AssessmentOutcome("Physical ability", 6, Some("Autotest - I3 - Physical ability - assessment two comments")),
+      assessmentThree = AssessmentOutcome(
+        "Verbal comprehension",
+        7,
+        Some("Autotest - I3 - Verbal comprehension - assessment three comments")
+      ),
+      assessmentFour = AssessmentOutcome(
+        "Workplace personality",
+        6,
+        Some("Autotest - I3 - Workplace personality - assessment four comments")
+      ),
+      assessmentFive =
+        AssessmentOutcome("Role knowledge", 6, Some("Autotest - I3 - Role knowledge - assessment five comments")),
+      assessmentSix =
+        AssessmentOutcome("Cognitive ability", 6, Some("Autotest - I3 - Cognitive ability - assessment six comments")),
+      experience = Outcome(93, Some("Autotest - I3 - Changing and Improving - behaviour one comments")),
+      false,
+      103,
+      "Progress",
+      s"Autotest - I3 - $randomFirstName $randomLastName overall performed very well!",
+      "Test-T&Cs.pdf",
+      declarationStatement = """Declaration
+                             |
+                             |By submitting this form you are agreeing to and accepting that you have no conflict of interest with this applicant and the evaluation reflects the views of all the selection panel members.""".stripMargin
     )

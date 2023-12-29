@@ -107,7 +107,7 @@ object MasterVacancyDetails extends VacancyBasePage {
   var vXNoOfApplicationStage: Int                       = 8
 
   //vX strengths
-  var vXHowManyStrengths: Int                              = 8
+  var vXHowManyStrengths: Int               = 8
   var vXListOfStrengths: ListBuffer[String] = ListBuffer(
     "Adaptable",
     "Analytical",
@@ -160,7 +160,7 @@ object MasterVacancyDetails extends VacancyBasePage {
   var v9AdjustmentsForTests   = true
 
   //v9 applications page
-  var applicationId: String = "0"
+  var applicationId: String = ""
 
   //v9 pec form employment history
   var v9EmployedWithin3Years   = true
@@ -183,16 +183,17 @@ object MasterVacancyDetails extends VacancyBasePage {
   var vXInterviewID       = ""
 
   //vX interview schedule
-  var vXInterviewExpectedRounds   = "4"
-  var vXInterviewOneDate          = ""
-  var vXInterviewOneLongDate      = ""
-  var vXInterviewOneShortDate     = ""
-  var vXInterviewLocation         = ""
-  var vXInterviewScheduleTitle    = ""
-  var vXInstructionsForCandidates = ""
-  var vXInterviewOneType          = "Telephone"
-  var vXInterviewTwoType          = "Assessment"
-  var vXInterviewThreeType        = "Video"
-  var vXInterviewFourType         = "Interview"
+  var vXInterviewNumber: ListBuffer[String] = ListBuffer("1", "2", "3", "4")
+  var vXInterviewExpectedRounds             = "3"
+  var vXInterviewDate                       = ""
+  var vXInterviewLongDate                   = ""
+  var vXInterviewShortDate                  = ""
+  var vXInterviewLocation                   = ""
+  var vXInterviewScheduleTitle              = ""
+  var vXInstructionsForCandidates           = ""
+  var vXInterviewOneType                    = "Telephone"
+  var vXInterviewTwoType                    = "Assessment"
+  var vXInterviewThreeType                  = "Video"
+  var vXInterviewFourType                   = "Interview"
 
 }

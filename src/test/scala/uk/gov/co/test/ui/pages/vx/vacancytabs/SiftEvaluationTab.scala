@@ -3,7 +3,8 @@ package uk.gov.co.test.ui.pages.vx.vacancytabs
 import org.openqa.selenium.By
 import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXBehavioursRequired, vXHowManyBehaviours, vXHowManySkills, vXListOfChosenBehaviours, vXListOfTechSkills, vXTechSkillsRequired}
 import uk.gov.co.test.ui.data.vx.{ApplicationDetails, Outcome}
-import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.{availableBarItems, completeSiftBarId, confirmCandidateSummary, siftEvaluation, withdrawBarId}
+import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.applicationBeingReviewedState
+import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.{availableBarItems, completeSiftBarId, confirmCandidateSummary, progressBarAfterPreSiftId, siftEvaluation, withdrawBarId}
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.vacancyFormId
 
@@ -128,6 +129,7 @@ object SiftEvaluationTab extends VacancyBasePage {
   }
 
   private def moveSiftEvaluationForm(): Unit = {
+    waitForVisibilityOfElementById(progressBarAfterPreSiftId).click()
     checkForNewValuePath(vacancyStatusPath, siftEvaluationStatus)
     confirmCandidateSummary(siftEvaluationStatus, Some("restricted"))
     moveVacancyOnViaTopBar(completeSiftBarId, siftEvaluationTabPath)
@@ -441,5 +443,6 @@ object SiftEvaluationTab extends VacancyBasePage {
     }
     clickOn(submitForm)
     siftEvaluation()
+    applicationBeingReviewedState()
   }
 }

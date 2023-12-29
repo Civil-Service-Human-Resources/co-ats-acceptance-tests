@@ -4,7 +4,7 @@ import org.openqa.selenium.By
 import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXBehavioursRequired, vXHowManyBehaviours, vXHowManySkills, vXHowManyStrengths, vXListOfChosenBehaviours, vXListOfStrengths, vXListOfTechSkills, vXStrengthsRequired, vXTechSkillsRequired}
 import uk.gov.co.test.ui.data.vx.{ApplicationDetails, AssessmentOutcome, Outcome}
 import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.applicationBeingReviewedAfterInterviewState
-import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.{availableBarItems, completeI1EvaluationBarId, interviewOneEvaluation, noShowI1BarId, withdrawAtInterviewBarId}
+import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.{availableBarItems, completeI1EvaluationBarId, interviewEvaluation, noShowI1BarId, withdrawAtInterviewBarId}
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.vacancyFormId
 
@@ -56,12 +56,13 @@ case class InterviewOneDetails(
 object InterviewOneEvaluationTab extends VacancyBasePage {
 
   private lazy val interviewOneEvaluationTabPath = ".//span[@class='main-label' and text() = 'Interview 1 Evaluation']"
-  var vXBehavioursTotalScore: ListBuffer[Int]    = ListBuffer()
-  var vXTechSkillsTotalScore: ListBuffer[Int]    = ListBuffer()
-  var vXStrengthsTotalScore: ListBuffer[Int]     = ListBuffer()
-  var vXAssessmentsTotalScore: ListBuffer[Int]   = ListBuffer()
-  var vXExperienceScore: Int                     = 90
+  var vXI1BehavioursTotalScore: ListBuffer[Int]    = ListBuffer()
+  var vXI1TechSkillsTotalScore: ListBuffer[Int]    = ListBuffer()
+  var vXI1StrengthsTotalScore: ListBuffer[Int]     = ListBuffer()
+  var vXI1AssessmentsTotalScore: ListBuffer[Int]   = ListBuffer()
+  var vXI1ExperienceScore: Int                     = 91
   def interviewOneEvaluationHeaderId             = s"${vacancyFormId}_label_153071_1"
+  def interviewTwoEvaluationHeaderId             = s"${vacancyFormId}_label_153356_1"
   def behaviourAssessmentHeaderId                = s"${vacancyFormId}_label_23467_1"
   def behaviourScoringGuideId                    = s"${vacancyFormId}_label_153737_1"
   def behaviourOneTitleId                        = s"${vacancyFormId}_label_23469_1"
@@ -167,7 +168,6 @@ object InterviewOneEvaluationTab extends VacancyBasePage {
   def assessmentSixScoreId                       = s"select2-${vacancyFormId}_datafield_46176_1_1-container"
   def assessmentSixCommentsId                    = s"${vacancyFormId}_datafield_45912_1_1"
   def experienceTitleId                          = s"${vacancyFormId}_label_108163_1"
-//  def experienceInfoId                           = s"${vacancyFormId}_label_116155_1"
   def experienceScoreId                          = s"select2-${vacancyFormId}_datafield_108315_1_1-container"
   def experienceDescriptionId                    = s"${vacancyFormId}_datafield_108156_1_1"
   def overallScoreTitleId                        = s"${vacancyFormId}_label_23487_1"
@@ -231,8 +231,8 @@ object InterviewOneEvaluationTab extends VacancyBasePage {
       behaviourOneCommentsId,
       interviewOneDetails.behaviourOne.comment
     )
-    vXBehavioursTotalScore.clear()
-    vXBehavioursTotalScore += interviewOneDetails.behaviourOne.score
+    vXI1BehavioursTotalScore.clear()
+    vXI1BehavioursTotalScore += interviewOneDetails.behaviourOne.score
   }
 
   private def enterBehaviourTwoOutcome(interviewOneDetails: InterviewOneDetails): Unit = {
@@ -244,7 +244,7 @@ object InterviewOneEvaluationTab extends VacancyBasePage {
       behaviourTwoCommentsId,
       interviewOneDetails.behaviourTwo.comment
     )
-    vXBehavioursTotalScore += interviewOneDetails.behaviourTwo.score
+    vXI1BehavioursTotalScore += interviewOneDetails.behaviourTwo.score
   }
 
   private def enterBehaviourThreeOutcome(interviewOneDetails: InterviewOneDetails): Unit = {
@@ -256,7 +256,7 @@ object InterviewOneEvaluationTab extends VacancyBasePage {
       behaviourThreeCommentsId,
       interviewOneDetails.behaviourThree.comment
     )
-    vXBehavioursTotalScore += interviewOneDetails.behaviourThree.score
+    vXI1BehavioursTotalScore += interviewOneDetails.behaviourThree.score
   }
 
   private def enterBehaviourFourOutcome(interviewOneDetails: InterviewOneDetails): Unit = {
@@ -269,7 +269,7 @@ object InterviewOneEvaluationTab extends VacancyBasePage {
       behaviourFourCommentsId,
       interviewOneDetails.behaviourFour.comment
     )
-    vXBehavioursTotalScore += interviewOneDetails.behaviourFour.score
+    vXI1BehavioursTotalScore += interviewOneDetails.behaviourFour.score
   }
 
   private def enterBehaviourFiveOutcome(interviewOneDetails: InterviewOneDetails): Unit = {
@@ -281,7 +281,7 @@ object InterviewOneEvaluationTab extends VacancyBasePage {
       behaviourFiveCommentsId,
       interviewOneDetails.behaviourFive.comment
     )
-    vXBehavioursTotalScore += interviewOneDetails.behaviourFive.score
+    vXI1BehavioursTotalScore += interviewOneDetails.behaviourFive.score
   }
 
   private def enterBehaviourSixOutcome(interviewOneDetails: InterviewOneDetails): Unit = {
@@ -294,7 +294,7 @@ object InterviewOneEvaluationTab extends VacancyBasePage {
       behaviourSixCommentsId,
       interviewOneDetails.behaviourSix.comment
     )
-    vXBehavioursTotalScore += interviewOneDetails.behaviourSix.score
+    vXI1BehavioursTotalScore += interviewOneDetails.behaviourSix.score
   }
 
   private def enterBehaviourSevenOutcome(interviewOneDetails: InterviewOneDetails): Unit = {
@@ -306,7 +306,7 @@ object InterviewOneEvaluationTab extends VacancyBasePage {
       behaviourSevenCommentsId,
       interviewOneDetails.behaviourSeven.comment
     )
-    vXBehavioursTotalScore += interviewOneDetails.behaviourSeven.score
+    vXI1BehavioursTotalScore += interviewOneDetails.behaviourSeven.score
   }
 
   private def enterBehaviourEightOutcome(interviewOneDetails: InterviewOneDetails): Unit = {
@@ -318,7 +318,7 @@ object InterviewOneEvaluationTab extends VacancyBasePage {
       behaviourEightCommentsId,
       interviewOneDetails.behaviourEight.comment
     )
-    vXBehavioursTotalScore += interviewOneDetails.behaviourEight.score
+    vXI1BehavioursTotalScore += interviewOneDetails.behaviourEight.score
   }
 
   private def totalScore(runningScore: ListBuffer[Int]): Int = {
@@ -345,7 +345,7 @@ object InterviewOneEvaluationTab extends VacancyBasePage {
       }
       waitForVisibilityOfElementById(
         behaviourTotalScoreId
-      ).getText shouldEqual s"Behaviour total score\n  ${totalScore(vXBehavioursTotalScore)}"
+      ).getText shouldEqual s"Behaviour total score\n  ${totalScore(vXI1BehavioursTotalScore)}"
     }
 
   private def enterTechSkillOneOutcome(interviewOneDetails: InterviewOneDetails): Unit = {
@@ -360,8 +360,8 @@ object InterviewOneEvaluationTab extends VacancyBasePage {
       techSkillOneCommentsId,
       interviewOneDetails.techSkillOne.comment
     )
-    vXTechSkillsTotalScore.clear()
-    vXTechSkillsTotalScore += interviewOneDetails.techSkillOne.score
+    vXI1TechSkillsTotalScore.clear()
+    vXI1TechSkillsTotalScore += interviewOneDetails.techSkillOne.score
   }
 
   private def enterTechSkillTwoOutcome(interviewOneDetails: InterviewOneDetails): Unit = {
@@ -373,7 +373,7 @@ object InterviewOneEvaluationTab extends VacancyBasePage {
       techSkillTwoCommentsId,
       interviewOneDetails.techSkillTwo.comment
     )
-    vXTechSkillsTotalScore += interviewOneDetails.techSkillTwo.score
+    vXI1TechSkillsTotalScore += interviewOneDetails.techSkillTwo.score
   }
 
   private def enterTechSkillThreeOutcome(interviewOneDetails: InterviewOneDetails): Unit = {
@@ -385,7 +385,7 @@ object InterviewOneEvaluationTab extends VacancyBasePage {
       techSkillThreeCommentsId,
       interviewOneDetails.techSkillThree.comment
     )
-    vXTechSkillsTotalScore += interviewOneDetails.techSkillThree.score
+    vXI1TechSkillsTotalScore += interviewOneDetails.techSkillThree.score
   }
 
   private def enterTechSkillFourOutcome(interviewOneDetails: InterviewOneDetails): Unit = {
@@ -397,7 +397,7 @@ object InterviewOneEvaluationTab extends VacancyBasePage {
       techSkillFourCommentsId,
       interviewOneDetails.techSkillFour.comment
     )
-    vXTechSkillsTotalScore += interviewOneDetails.techSkillFour.score
+    vXI1TechSkillsTotalScore += interviewOneDetails.techSkillFour.score
   }
 
   private def enterTechSkillFiveOutcome(interviewOneDetails: InterviewOneDetails): Unit = {
@@ -409,7 +409,7 @@ object InterviewOneEvaluationTab extends VacancyBasePage {
       techSkillFiveCommentsId,
       interviewOneDetails.techSkillFive.comment
     )
-    vXTechSkillsTotalScore += interviewOneDetails.techSkillFive.score
+    vXI1TechSkillsTotalScore += interviewOneDetails.techSkillFive.score
   }
 
   private def enterTechSkillSixOutcome(interviewOneDetails: InterviewOneDetails): Unit = {
@@ -421,7 +421,7 @@ object InterviewOneEvaluationTab extends VacancyBasePage {
       techSkillSixCommentsId,
       interviewOneDetails.techSkillSix.comment
     )
-    vXTechSkillsTotalScore += interviewOneDetails.techSkillSix.score
+    vXI1TechSkillsTotalScore += interviewOneDetails.techSkillSix.score
   }
 
   private def enterTechSkillSevenOutcome(interviewOneDetails: InterviewOneDetails): Unit = {
@@ -433,7 +433,7 @@ object InterviewOneEvaluationTab extends VacancyBasePage {
       techSkillSevenCommentsId,
       interviewOneDetails.techSkillSeven.comment
     )
-    vXTechSkillsTotalScore += interviewOneDetails.techSkillSeven.score
+    vXI1TechSkillsTotalScore += interviewOneDetails.techSkillSeven.score
   }
 
   private def enterTechSkillEightOutcome(interviewOneDetails: InterviewOneDetails): Unit = {
@@ -445,7 +445,7 @@ object InterviewOneEvaluationTab extends VacancyBasePage {
       techSkillEightCommentsId,
       interviewOneDetails.techSkillEight.comment
     )
-    vXTechSkillsTotalScore += interviewOneDetails.techSkillEight.score
+    vXI1TechSkillsTotalScore += interviewOneDetails.techSkillEight.score
   }
 
   private val skillOutcome: Seq[InterviewOneDetails => Unit] = Seq(
@@ -466,7 +466,7 @@ object InterviewOneEvaluationTab extends VacancyBasePage {
       }
       waitForVisibilityOfElementById(
         techSkillTotalScoreId
-      ).getText shouldEqual s"Technical skill overall score\n  ${totalScore(vXTechSkillsTotalScore)}"
+      ).getText shouldEqual s"Technical skill overall score\n  ${totalScore(vXI1TechSkillsTotalScore)}"
     }
 
   private def enterStrengthOneOutcome(interviewOneDetails: InterviewOneDetails): Unit = {
@@ -483,8 +483,8 @@ object InterviewOneEvaluationTab extends VacancyBasePage {
       strengthOneCommentsId,
       interviewOneDetails.strengthOne.comment
     )
-    vXStrengthsTotalScore.clear()
-    vXStrengthsTotalScore += interviewOneDetails.strengthOne.score
+    vXI1StrengthsTotalScore.clear()
+    vXI1StrengthsTotalScore += interviewOneDetails.strengthOne.score
   }
 
   private def enterStrengthTwoOutcome(interviewOneDetails: InterviewOneDetails): Unit = {
@@ -496,7 +496,7 @@ object InterviewOneEvaluationTab extends VacancyBasePage {
       strengthTwoCommentsId,
       interviewOneDetails.strengthTwo.comment
     )
-    vXStrengthsTotalScore += interviewOneDetails.strengthTwo.score
+    vXI1StrengthsTotalScore += interviewOneDetails.strengthTwo.score
   }
 
   private def enterStrengthThreeOutcome(interviewOneDetails: InterviewOneDetails): Unit = {
@@ -508,7 +508,7 @@ object InterviewOneEvaluationTab extends VacancyBasePage {
       strengthThreeCommentsId,
       interviewOneDetails.strengthThree.comment
     )
-    vXStrengthsTotalScore += interviewOneDetails.strengthThree.score
+    vXI1StrengthsTotalScore += interviewOneDetails.strengthThree.score
   }
 
   private def enterStrengthFourOutcome(interviewOneDetails: InterviewOneDetails): Unit = {
@@ -520,7 +520,7 @@ object InterviewOneEvaluationTab extends VacancyBasePage {
       strengthFourCommentsId,
       interviewOneDetails.strengthFour.comment
     )
-    vXStrengthsTotalScore += interviewOneDetails.strengthFour.score
+    vXI1StrengthsTotalScore += interviewOneDetails.strengthFour.score
   }
 
   private def enterStrengthFiveOutcome(interviewOneDetails: InterviewOneDetails): Unit = {
@@ -532,7 +532,7 @@ object InterviewOneEvaluationTab extends VacancyBasePage {
       strengthFiveCommentsId,
       interviewOneDetails.strengthFive.comment
     )
-    vXStrengthsTotalScore += interviewOneDetails.strengthFive.score
+    vXI1StrengthsTotalScore += interviewOneDetails.strengthFive.score
   }
 
   private def enterStrengthSixOutcome(interviewOneDetails: InterviewOneDetails): Unit = {
@@ -544,7 +544,7 @@ object InterviewOneEvaluationTab extends VacancyBasePage {
       strengthSixCommentsId,
       interviewOneDetails.strengthSix.comment
     )
-    vXStrengthsTotalScore += interviewOneDetails.strengthSix.score
+    vXI1StrengthsTotalScore += interviewOneDetails.strengthSix.score
   }
 
   private def enterStrengthSevenOutcome(interviewOneDetails: InterviewOneDetails): Unit = {
@@ -556,7 +556,7 @@ object InterviewOneEvaluationTab extends VacancyBasePage {
       strengthSevenCommentsId,
       interviewOneDetails.strengthSeven.comment
     )
-    vXStrengthsTotalScore += interviewOneDetails.strengthSeven.score
+    vXI1StrengthsTotalScore += interviewOneDetails.strengthSeven.score
   }
 
   private def enterStrengthEightOutcome(interviewOneDetails: InterviewOneDetails): Unit = {
@@ -568,7 +568,7 @@ object InterviewOneEvaluationTab extends VacancyBasePage {
       strengthEightCommentsId,
       interviewOneDetails.strengthEight.comment
     )
-    vXStrengthsTotalScore += interviewOneDetails.strengthEight.score
+    vXI1StrengthsTotalScore += interviewOneDetails.strengthEight.score
   }
 
   private val strengths: Seq[InterviewOneDetails => Unit] = Seq(
@@ -589,7 +589,7 @@ object InterviewOneEvaluationTab extends VacancyBasePage {
       }
       waitForVisibilityOfElementById(
         strengthTotalScoreId
-      ).getText shouldEqual s"Strengths total score\n  ${totalScore(vXStrengthsTotalScore)}"
+      ).getText shouldEqual s"Strengths total score\n  ${totalScore(vXI1StrengthsTotalScore)}"
     }
 
   private def howManyAssessments(interviewOneDetails: InterviewOneDetails): Unit = {
@@ -611,8 +611,8 @@ object InterviewOneEvaluationTab extends VacancyBasePage {
       assessmentOneCommentsId,
       interviewOneDetails.assessmentOne.comment
     )
-    vXAssessmentsTotalScore.clear()
-    vXAssessmentsTotalScore += interviewOneDetails.assessmentOne.score
+    vXI1AssessmentsTotalScore.clear()
+    vXI1AssessmentsTotalScore += interviewOneDetails.assessmentOne.score
   }
 
   private def enterAssessmentTwoOutcome(interviewOneDetails: InterviewOneDetails): Unit = {
@@ -624,7 +624,7 @@ object InterviewOneEvaluationTab extends VacancyBasePage {
       assessmentTwoCommentsId,
       interviewOneDetails.assessmentTwo.comment
     )
-    vXAssessmentsTotalScore += interviewOneDetails.assessmentTwo.score
+    vXI1AssessmentsTotalScore += interviewOneDetails.assessmentTwo.score
   }
 
   private def enterAssessmentThreeOutcome(interviewOneDetails: InterviewOneDetails): Unit = {
@@ -636,7 +636,7 @@ object InterviewOneEvaluationTab extends VacancyBasePage {
       assessmentThreeCommentsId,
       interviewOneDetails.assessmentThree.comment
     )
-    vXAssessmentsTotalScore += interviewOneDetails.assessmentThree.score
+    vXI1AssessmentsTotalScore += interviewOneDetails.assessmentThree.score
   }
 
   private def enterAssessmentFourOutcome(interviewOneDetails: InterviewOneDetails): Unit = {
@@ -648,7 +648,7 @@ object InterviewOneEvaluationTab extends VacancyBasePage {
       assessmentFourCommentsId,
       interviewOneDetails.assessmentFour.comment
     )
-    vXAssessmentsTotalScore += interviewOneDetails.assessmentFour.score
+    vXI1AssessmentsTotalScore += interviewOneDetails.assessmentFour.score
   }
 
   private def enterAssessmentFiveOutcome(interviewOneDetails: InterviewOneDetails): Unit = {
@@ -660,7 +660,7 @@ object InterviewOneEvaluationTab extends VacancyBasePage {
       assessmentFiveCommentsId,
       interviewOneDetails.assessmentFive.comment
     )
-    vXAssessmentsTotalScore += interviewOneDetails.assessmentFive.score
+    vXI1AssessmentsTotalScore += interviewOneDetails.assessmentFive.score
   }
 
   private def enterAssessmentSixOutcome(interviewOneDetails: InterviewOneDetails): Unit = {
@@ -672,7 +672,7 @@ object InterviewOneEvaluationTab extends VacancyBasePage {
       assessmentSixCommentsId,
       interviewOneDetails.assessmentSix.comment
     )
-    vXAssessmentsTotalScore += interviewOneDetails.assessmentSix.score
+    vXI1AssessmentsTotalScore += interviewOneDetails.assessmentSix.score
   }
 
   private val assessments: Seq[InterviewOneDetails => Unit] = Seq(
@@ -689,7 +689,7 @@ object InterviewOneEvaluationTab extends VacancyBasePage {
     assessments.take(interviewOneDetails.additionalAssessments.toInt).foreach { f =>
       f(interviewOneDetails)
     }
-    totalScore(vXAssessmentsTotalScore)
+    totalScore(vXI1AssessmentsTotalScore)
   }
 
   private def enterExperienceOutcome(interviewOneDetails: InterviewOneDetails): Unit = {
@@ -701,7 +701,7 @@ object InterviewOneEvaluationTab extends VacancyBasePage {
       experienceDescriptionId,
       interviewOneDetails.experience.comment
     )
-    vXExperienceScore = interviewOneDetails.experience.score
+    vXI1ExperienceScore = interviewOneDetails.experience.score
   }
 
   private def checkOverallScore(interviewOneDetails: InterviewOneDetails): Unit = {
@@ -709,9 +709,9 @@ object InterviewOneEvaluationTab extends VacancyBasePage {
     if (interviewOneDetails.overrideScore) {
       enterValue(overallOverrideScoreId, interviewOneDetails.overallOverrideScore.toString)
     }
-    val overallScore = totalScore(vXBehavioursTotalScore) + totalScore(vXTechSkillsTotalScore) + totalScore(
-      vXStrengthsTotalScore
-    ) + totalScore(vXAssessmentsTotalScore) + vXExperienceScore
+    val overallScore = totalScore(vXI1BehavioursTotalScore) + totalScore(vXI1TechSkillsTotalScore) + totalScore(
+      vXI1StrengthsTotalScore
+    ) + totalScore(vXI1AssessmentsTotalScore) + vXI1ExperienceScore
     waitForVisibilityOfElementById(overallScoreId).getText shouldEqual s"Overall score\n  $overallScore"
   }
 
@@ -746,7 +746,7 @@ object InterviewOneEvaluationTab extends VacancyBasePage {
       f(applicationDetails.interviewOneDetails)
     }
     clickOn(submitForm)
-    interviewOneEvaluation()
+    interviewEvaluation()
     applicationBeingReviewedAfterInterviewState()
   }
 }

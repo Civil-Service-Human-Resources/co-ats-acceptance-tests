@@ -1,13 +1,13 @@
 package uk.gov.co.test.ui.pages.vx
 
 import uk.gov.co.test.ui.data.TestData.eventually
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{preferredFirstName, randomFirstName, randomLastName, vXJobInfoDepartment, vacancyId, vacancyName}
-import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.{availableBarItems, confirmCandidateSummary, interviewNotBookedBarId, inviteToI1BarId, scheduleI1BarId, scheduleOfflineI1BarId, withdrawAtInterviewBarId}
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{applicationId, preferredFirstName, randomFirstName, randomLastName, vXInterviewNumber, vXJobInfoDepartment, vacancyId, vacancyName}
+import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.invitedForInterviewState
+import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.{availableBarItems, confirmCandidateSummary, interviewNotBookedBarId, inviteToI1BarId, inviteToI2BarId, inviteToI3BarId, scheduleI1BarId, scheduleOfflineI1BarId, searchApplicationId, withdrawAtInterviewBarId}
 
 object SendInterviewEmailPage extends VacancyBasePage {
 
   private lazy val sendEmailToCandidatePageTitle = s"$randomFirstName $randomLastName : Civil Service Jobs - GOV.UK"
-  private lazy val sendInterviewStatus           = "Interview 1 - invited"
   private lazy val sendEmailHeaderPath           = ".//*[@class='brand_main_title_left']"
   private lazy val sendEmailCheckId              = "invite_form_send_email"
   private lazy val autoSelectId                  = "invite_form_select_mode_2"
@@ -39,17 +39,26 @@ object SendInterviewEmailPage extends VacancyBasePage {
     }
   }
 
-  private def selectCorrespondence(interviewNo: String = "Interview 1 - Invited"): Unit = {
+  private def selectCorrespondence(): Unit = {
     waitForVisibilityOfElementById(correspondenceId).click()
-    selectActionLocator(interviewNo)
+    vXInterviewNumber.head match {
+      case "1" => selectActionLocator("Interview 1 - Invited")
+      case "2" => selectActionLocator("Interview 2 - Invited")
+      case "3" => selectActionLocator("Interview 3 - Invited")
+    }
   }
 
   private def checkEmailContents(): Unit = {
+    val inviteState = vXInterviewNumber.head match {
+      case "1" => "a telephone interview"
+      case "2" => "an assessment"
+      case "3" => "a video interview"
+    }
     waitForVisibilityOfElementById(emailSubjectId).isDisplayed
     waitForVisibilityOfElementById(emailPreviewId).click()
     waitForVisibilityOfElementById(emailPreviewContentId).getText shouldEqual s"""Dear $preferredFirstName,
                                                                                          |$vacancyId: $vacancyName
-                                                                                         |Congratulations, you've been invited to attend a telephone interview.
+                                                                                         |Congratulations, you've been invited to attend $inviteState.
                                                                                          |Access your application centre to book your interview time and to review your application.
                                                                                          |To get your preferred time we recommend that you book as early as possible.
                                                                                          |**Enter department specific ID requirements here**
@@ -67,8 +76,9 @@ object SendInterviewEmailPage extends VacancyBasePage {
     attachDocuments(addEmailAttachmentsOneId, "Test-T&Cs.pdf")
   }
 
-  private def interviewOneInvitedStatus(): Unit = {
-    checkForNewValuePath(vacancyStatusPath, sendInterviewStatus)
+  private def interviewOneVXInvitedStatus(): Unit = {
+    val sendStatus = s"Interview ${vXInterviewNumber.head} - invited"
+    checkForNewValuePath(vacancyStatusPath, sendStatus)
     availableBarItems(
       List(
         scheduleI1BarId,
@@ -79,21 +89,30 @@ object SendInterviewEmailPage extends VacancyBasePage {
     )
   }
 
-  private val sendEmail: Seq[Unit] = Seq(
-    clickOn(inviteToI1BarId),
-    sendEmailPageCheck(),
-    checkAutoSelect(),
-    checkSendEmail(),
-    selectCorrespondence(),
-    checkEmailContents(),
-    addEmailAttachments(),
-    waitForVisibilityOfElementById(sendInviteId).click(),
-    confirmCandidateSummary(sendInterviewStatus),
-    interviewOneInvitedStatus()
-  )
-
-  def inviteToInterviewEmailFlow(): Unit =
-    sendEmail.foreach { f =>
-      f
+  private def inviteToInterview(): Unit =
+    vXInterviewNumber.head match {
+      case "1" => waitForVisibilityOfElementById(inviteToI1BarId).click()
+      case "2" => waitForVisibilityOfElementById(inviteToI2BarId).click()
+      case "3" => waitForVisibilityOfElementById(inviteToI3BarId).click()
     }
+
+  private def confirmVXCandidateSummary(): Unit = {
+    val candidateStatus = s"Interview ${vXInterviewNumber.head} - invited"
+    confirmCandidateSummary(candidateStatus)
+  }
+
+  def inviteToInterviewEmailFlow(): Unit = {
+    searchApplicationId(applicationId)
+    inviteToInterview()
+    sendEmailPageCheck()
+    checkAutoSelect()
+    checkSendEmail()
+    selectCorrespondence()
+    checkEmailContents()
+    addEmailAttachments()
+    waitForVisibilityOfElementById(sendInviteId).click()
+    confirmVXCandidateSummary()
+    interviewOneVXInvitedStatus()
+    invitedForInterviewState()
+  }
 }

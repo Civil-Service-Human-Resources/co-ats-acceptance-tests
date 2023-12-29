@@ -3,9 +3,9 @@ package uk.gov.co.test.ui.pages.v9
 import org.openqa.selenium.{By, WebElement}
 import org.scalatest.concurrent.Eventually.eventually
 import uk.gov.co.test.ui.conf.TestConfiguration
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{randomFirstName, randomLastName, v9AdjustmentsForTests, v9ReasonableAdjustments, vXAnyOnlineTests, vXInterviewOneLongDate, vXInterviewOneType, vXSlotTwoStartTime, vacancyName}
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{randomFirstName, randomLastName, v9AdjustmentsForTests, v9ReasonableAdjustments, vXAnyOnlineTests, vXInterviewLongDate, vXInterviewNumber, vXInterviewOneType, vXInterviewThreeType, vXInterviewTwoType, vXSlotTwoStartTime, vacancyName}
 import uk.gov.co.test.ui.pages.v9.ApplicationsPage.{confirmStatusOnApplicationPage, reviewUpdateValue}
-import uk.gov.co.test.ui.pages.vx.DashboardPage.{contactEmailVxConfig, switchToV9Test}
+import uk.gov.co.test.ui.pages.vx.DashboardPage.contactEmailVxConfig
 
 object ApplicationCentrePage extends CivilServiceJobsBasePage {
 
@@ -76,9 +76,9 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
 
   def confirmShortFormCompletion(): Unit = {
     applicationCentrePageCheck()
+    continueApplicationFunction().isEnabled
     advertDetailsFunction().isEnabled
     withdrawApplicationFunction().isEnabled
-    continueApplicationFunction().isEnabled
     applicationForVacancyText shouldEqual s"Application For $vacancyName"
     getApplicationState       shouldEqual "Application status: Application started"
     getApplicationConfirmation     should include(
@@ -88,8 +88,8 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
 
   def confirmShortFormCompletionNoLongForm(): Unit = {
     applicationCentrePageCheck()
-    advertDetailsFunction().isEnabled
     withdrawApplicationFunction().isEnabled
+    advertDetailsFunction().isEnabled
     applicationForVacancyText  shouldEqual s"Application For $vacancyName"
     getApplicationState        shouldEqual "Application status: Application received"
     getApplicationConfirmation shouldEqual "Your application has been received.\nWe’ll email you about your application’s progress, or you can check this in your Application Centre."
@@ -149,7 +149,7 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
     waitForVisibilityOfElementByPath(applicationLinkPath).click()
 
   def candidateAcceptsOffer(): Unit = {
-    switchToV9Test()
+//    switchToV9Test()
     driver.navigate().to(TestConfiguration.urlHost("vxconfig") + "/vx/lang-en-GB/candidate/application")
     reviewUpdateValue().click()
     confirmProvisionalOffer()
@@ -177,6 +177,20 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
     getApplicationConfirmation shouldEqual "Great news, you've accepted your provisional offer and your pre-employment checks are underway.\nWe are still checking:\nyour employment history, including any gaps\nwhether you have any convictions\n\n\nWe will send an email notification to you once all pre-employment checks are complete."
   }
 
+  def applicationBeingReviewedPreSiftState(): Unit = {
+    val status = "Application being reviewed"
+    switchToOtherWindow
+    confirmStatusOnApplicationPage(status)
+    advertDetailsFunction().isEnabled
+    withdrawApplicationFunction().isEnabled
+    applicationForVacancyText  shouldEqual s"Application For $vacancyName"
+    getApplicationState        shouldEqual s"Application status: $status"
+    getApplicationConfirmation shouldEqual
+      """Your application is being reviewed.
+        |If you are no longer interested in this job, you can withdraw your application at any time.""".stripMargin
+    switchToOtherWindow
+  }
+
   def applicationBeingReviewedState(): Unit = {
     val status = "Application being reviewed"
     switchToOtherWindow
@@ -188,42 +202,78 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
     getApplicationState        shouldEqual s"Application status: $status"
     getApplicationConfirmation shouldEqual """The selection panel are reviewing your application.
                                              |We'll email you updates on the progress of your application or you can check the progress here in your account.""".stripMargin
+    switchToOtherWindow
   }
 
-  def invitedForInterviewOneState(): Unit = {
-    val status = "Invited for interview"
-    switchToOtherWindow()
+  def invitedForInterviewState(): Unit = {
+    val status     = vXInterviewNumber.head match {
+      case "1" => "Invited for interview"
+      case "2" => "Invited for second interview"
+      case "3" => "Invited for third interview"
+    }
+    val inviteType = vXInterviewNumber.head match {
+      case "1" => s"for a ${vXInterviewOneType.toLowerCase} interview"
+      case "2" => s"to an ${vXInterviewTwoType.toLowerCase}"
+      case "3" => s"for a ${vXInterviewThreeType.toLowerCase} interview"
+    }
+    // TODO to bypass grammatical bug, this function was created
+    val schedule   = vXInterviewNumber.head match {
+      case "1" => s"'Schedule interview'"
+      case "2" => s"\'Schedule interview\""//TODO requires fix to align with other fields
+      case "3" => s"'Schedule interview'"
+    }
+    changeSystem("candidate")
     confirmStatusOnApplicationPage(status)
     applicationCentrePageCheck()
     scheduleInterviewFunction().isEnabled
     feedbackFunction().isEnabled
     withdrawApplicationFunction().isEnabled
     advertDetailsFunction().isEnabled
-    applicationForVacancyText  shouldEqual s"Application For $vacancyName"
+    applicationForVacancyText shouldEqual s"Application For $vacancyName"
     getApplicationState        shouldEqual s"Application status: $status"
-    getApplicationConfirmation shouldEqual s"""Congratulations, we'd like to invite you for a ${vXInterviewOneType.toLowerCase} interview.
-                                             |To book your interview slot click 'Schedule interview'.
+    getApplicationConfirmation shouldEqual s"""Congratulations, we'd like to invite you $inviteType.
+                                             |To book your interview slot click $schedule.
                                              |To get your preferred time we recommend you book as early as possible.
-                                             |If you're no longer interested in this job, please withdraw your application.""".stripMargin
+                                             |If you're no longer interested in this job, please withdraw your application.""".stripMargin //TODO an issue with speech mark on I2 'Schedule interview"
   }
 
-  def interviewOneSlotBookedState(): Unit = {
-    val status = "Interview slot booked"
+  def interviewSlotBookedState(): Unit = {
+    val status          = vXInterviewNumber.head match {
+      case "1" => "Interview slot booked"
+      case "2" => "Second interview slot booked"
+      case "3" => "Scheduled for third interview" //TODO different wording structure compared to I2
+    }
+    val appConfirmation = vXInterviewNumber.head match {
+      case "1" =>
+        s"""Your ${vXInterviewOneType.toLowerCase} interview slot is booked and details are shown below:
+                     |Date: $vXInterviewLongDate
+                     |Time: ${vXSlotTwoStartTime.replaceAll("[A-Za-z ]", "").filterNot(_.isWhitespace)}
+                     |We will send details on how to access your ${vXInterviewOneType.toLowerCase} interview separately when they are available.
+                     |Autotest - Instructions for $randomFirstName $randomLastName for interview ${vXInterviewNumber.head}
+                     |If you're no longer interested in this job, please withdraw your application.""".stripMargin
+      case "2" =>
+        s"""Your ${vXInterviewTwoType.toLowerCase} slot is booked and details are shown below:
+                     |Date: $vXInterviewLongDate
+                     |Time: ${vXSlotTwoStartTime.replaceAll("[A-Za-z ]", "").filterNot(_.isWhitespace)}
+                     |Autotest - Instructions for $randomFirstName $randomLastName for interview ${vXInterviewNumber.head}
+                     |If you're no longer interested in this job, please withdraw your application.""".stripMargin
+      case "3" =>
+        s"""Your ${vXInterviewThreeType.toLowerCase} interview slot is booked and details are shown below:
+                     |Date: $vXInterviewLongDate
+                     |Time: ${vXSlotTwoStartTime.replaceAll("[A-Za-z ]", "").filterNot(_.isWhitespace)}
+                     |We will send details on how to access your ${vXInterviewThreeType.toLowerCase} interview separately when they are available.
+                     |Autotest - Instructions for $randomFirstName $randomLastName for interview ${vXInterviewNumber.head}
+                     |If you're no longer interested in this job, please withdraw your application.""".stripMargin
+    }
     changeSystem("candidate")
     confirmStatusOnApplicationPage(status)
     applicationCentrePageCheck()
     feedbackFunction().isEnabled
     withdrawApplicationFunction().isEnabled
     advertDetailsFunction().isEnabled
-    applicationForVacancyText  shouldEqual s"Application For $vacancyName"
+    applicationForVacancyText shouldEqual s"Application For $vacancyName"
     getApplicationState        shouldEqual s"Application status: $status"
-    getApplicationConfirmation shouldEqual
-      s"""Your ${vXInterviewOneType.toLowerCase} interview slot is booked and details are shown below:
-         |Date: $vXInterviewOneLongDate
-         |Time: ${vXSlotTwoStartTime.replaceAll("[A-Za-z ]", "").filterNot(_.isWhitespace)}
-         |We will send details on how to access your ${vXInterviewOneType.toLowerCase} interview separately when they are available.
-         |Autotest - Instructions for $randomFirstName $randomLastName
-         |If you're no longer interested in this job, please withdraw your application.""".stripMargin
+    getApplicationConfirmation shouldEqual appConfirmation
   }
 
   def applicationBeingReviewedAfterInterviewState(): Unit = {
@@ -240,41 +290,5 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
       s"""Thank you for attending your recent interview.
          |The selection panel are reviewing your application.
          |We'll email you updates on the progress of your application or you can check the progress here in your account.""".stripMargin
-  }
-
-  def invitedForInterviewTwoState(): Unit = {
-    val status = "Invited for second interview"
-    changeSystem("candidate")
-    confirmStatusOnApplicationPage(status)
-    applicationCentrePageCheck()
-    scheduleInterviewFunction().isEnabled
-    feedbackFunction().isEnabled
-    withdrawApplicationFunction().isEnabled
-    advertDetailsFunction().isEnabled
-    applicationForVacancyText  shouldEqual s"Application For $vacancyName"
-    getApplicationState        shouldEqual s"Application status: $status"
-    getApplicationConfirmation shouldEqual
-      s"""Congratulations, we'd like to invite you for an ${vXInterviewOneType.toLowerCase} interview.
-         |To book your interview slot click 'Schedule interview'.
-         |To get your preferred time we recommend you book as early as possible.
-         |If you're no longer interested in this job, please withdraw your application.""".stripMargin
-  }
-
-  def interviewTwoSlotBookedState(): Unit = {
-    val status = "Second interview slot booked"
-    changeSystem("candidate")
-    confirmStatusOnApplicationPage(status)
-    applicationCentrePageCheck()
-    feedbackFunction().isEnabled
-    withdrawApplicationFunction().isEnabled
-    advertDetailsFunction().isEnabled
-    applicationForVacancyText shouldEqual s"Application For $vacancyName"
-    getApplicationState shouldEqual s"Application status: $status"
-    getApplicationConfirmation shouldEqual
-      s"""Your ${vXInterviewOneType.toLowerCase} slot is booked and details are shown below:
-         |Date: $vXInterviewOneLongDate
-         |Time: ${vXSlotTwoStartTime.replaceAll("[A-Za-z ]", "").filterNot(_.isWhitespace)}
-         |Autotest - Instructions for $randomFirstName $randomLastName
-         |If you're no longer interested in this job, please withdraw your application.""".stripMargin
   }
 }

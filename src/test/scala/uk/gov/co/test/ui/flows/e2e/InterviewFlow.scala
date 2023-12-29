@@ -1,35 +1,47 @@
 package uk.gov.co.test.ui.flows.e2e
 
-import uk.gov.co.test.ui.data.vx.APPLICATION_DATA
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.applicationId
-import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.{applicationBeingReviewedState, interviewOneSlotBookedState, invitedForInterviewOneState}
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXInterviewExpectedRounds, vXInterviewNumber}
+import uk.gov.co.test.ui.data.vx.{APPLICATION_DATA, ApplicationDetails}
+import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.interviewSlotBookedState
 import uk.gov.co.test.ui.pages.v9.BookedInterviewPage.confirmBookingSlot
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
-import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.{interviewOneScheduled, searchApplicationId}
+import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.interviewScheduled
 import uk.gov.co.test.ui.pages.vx.CalenderSchedulePage.calenderSchedulePage
-import uk.gov.co.test.ui.pages.vx.InterviewSchedulePage.interviewSchedulePage
+import uk.gov.co.test.ui.pages.vx.InterviewSchedulePage.{interviewSchedulePage, untagVacancy}
 import uk.gov.co.test.ui.pages.vx.SendInterviewEmailPage.inviteToInterviewEmailFlow
 import uk.gov.co.test.ui.pages.vx.vacancytabs.InterviewOneEvaluationTab.interviewOneEvaluationFlow
+import uk.gov.co.test.ui.pages.vx.vacancytabs.InterviewThreeEvaluationTab.interviewThreeEvaluationFlow
+import uk.gov.co.test.ui.pages.vx.vacancytabs.InterviewTwoEvaluationTab.interviewTwoEvaluationFlow
 
 object InterviewFlow extends CivilServiceJobsBasePage {
 
-  private val interview: Seq[Unit] = Seq(
-    interviewSchedulePage(APPLICATION_DATA),
-    calenderSchedulePage(APPLICATION_DATA),
-    applicationBeingReviewedState(),
-    switchToOtherWindow,
-    searchApplicationId(applicationId),
-    inviteToInterviewEmailFlow(),
-    invitedForInterviewOneState(),
-    confirmBookingSlot(),
-    interviewOneSlotBookedState(),
-    interviewOneScheduled(),
-    interviewOneEvaluationFlow(APPLICATION_DATA),
-    println("So far...")
-  )
+  private def interviewProcess(): Unit = {
+    interviewSchedulePage(APPLICATION_DATA)
+    calenderSchedulePage(APPLICATION_DATA)
+    inviteToInterviewEmailFlow() //check function inside
+    confirmBookingSlot()
+    interviewSlotBookedState()
+    interviewScheduled()
+    interviewEvaluations(APPLICATION_DATA)
+  }
 
-  def completeInterviewProcess(): Unit =
-    interview.foreach { f =>
-      f
+  def completeAllInterviews(): Unit =
+    if (vXInterviewExpectedRounds != "No interviews") {
+      1 to vXInterviewExpectedRounds.toInt foreach { _ =>
+        interviewProcess()
+        changeSystem("recruiter")
+        vXInterviewNumber.remove(0)
+      }
     }
+
+  private def interviewEvaluations(applicationDetails: ApplicationDetails): Unit =
+    vXInterviewNumber.head match {
+      case "1" => interviewOneEvaluationFlow(applicationDetails)
+      case "2" => interviewTwoEvaluationFlow(applicationDetails)
+      case "3" => interviewThreeEvaluationFlow(applicationDetails)
+    }
+
+  def untagVacancies(): Unit = {
+    1 to 20 foreach { _ => untagVacancy()}
+  }
 }
