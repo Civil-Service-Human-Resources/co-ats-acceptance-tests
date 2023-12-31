@@ -184,7 +184,7 @@ object MasterVacancyDetails extends VacancyBasePage {
 
   //vX interview schedule
   var vXInterviewNumber: ListBuffer[String] = ListBuffer("1", "2", "3", "4")
-  var vXInterviewExpectedRounds             = "3"
+  var vXInterviewExpectedRounds             = "4"
   var vXInterviewDate                       = ""
   var vXInterviewLongDate                   = ""
   var vXInterviewShortDate                  = ""

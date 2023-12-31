@@ -37,17 +37,6 @@ object DashboardPage extends VacancyBasePage {
     clickOn(searchForId)
   }
 
-  def searchForActiveVacancy(): Unit = {
-    dashboardPageCheck()
-    waitForVisibilityOfElementById(searchPath).click()
-    waitForVisibilityOfElementByPath(searchVacanciesPath).click()
-    waitForVisibilityOfElementById(searchInput).sendKeys(vacancyId)
-    matchCriteria("Exact Match")
-    clickOn(searchForId)
-    waitForVisibilityOfElementByPath(previewJobPath).isDisplayed
-    onPage(s"$vacancyName : Civil Service Jobs - GOV.UK")
-  }
-
   def searchForApplication(applicationId: String): Unit = {
     dashboardPageCheck()
     waitForVisibilityOfElementById(searchPath).click()

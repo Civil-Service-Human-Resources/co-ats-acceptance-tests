@@ -9,6 +9,7 @@ import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.interviewScheduled
 import uk.gov.co.test.ui.pages.vx.CalenderSchedulePage.calenderSchedulePage
 import uk.gov.co.test.ui.pages.vx.InterviewSchedulePage.{interviewSchedulePage, untagVacancy}
 import uk.gov.co.test.ui.pages.vx.SendInterviewEmailPage.inviteToInterviewEmailFlow
+import uk.gov.co.test.ui.pages.vx.vacancytabs.InterviewFourEvaluationTab.interviewFourEvaluationFlow
 import uk.gov.co.test.ui.pages.vx.vacancytabs.InterviewOneEvaluationTab.interviewOneEvaluationFlow
 import uk.gov.co.test.ui.pages.vx.vacancytabs.InterviewThreeEvaluationTab.interviewThreeEvaluationFlow
 import uk.gov.co.test.ui.pages.vx.vacancytabs.InterviewTwoEvaluationTab.interviewTwoEvaluationFlow
@@ -39,9 +40,10 @@ object InterviewFlow extends CivilServiceJobsBasePage {
       case "1" => interviewOneEvaluationFlow(applicationDetails)
       case "2" => interviewTwoEvaluationFlow(applicationDetails)
       case "3" => interviewThreeEvaluationFlow(applicationDetails)
+      case "4" => interviewFourEvaluationFlow(applicationDetails)
     }
 
   def untagVacancies(): Unit = {
-    1 to 20 foreach { _ => untagVacancy()}
+    for (i <- 1 to 25) untagVacancy(i)
   }
 }

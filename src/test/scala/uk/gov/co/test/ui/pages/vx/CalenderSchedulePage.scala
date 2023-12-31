@@ -54,8 +54,8 @@ object CalenderSchedulePage extends VacancyBasePage {
   private lazy val addTaggedVacancyHeaderId      = "ui-id-1"
   private lazy val filterVacancyResultsId        = "vacancy_Full_List-main-filter"
   private lazy val addSelectedVacanciesId        = "add_opp_dlg-ok"
-  private lazy val displayingResultsT3Path       = "//*[@id='DataTables_Table_3_wrapper']/div[1]/div[2]/span[2]"
-  private lazy val displayingResultsT1Path       = "//*[@id='DataTables_Table_1_wrapper']/div[1]/div[2]/span[2]"
+  private lazy val displayingResultsT3Path       = ".//*[@id='DataTables_Table_3']/tbody/tr/td[1]"
+  private lazy val displayingResultsT1Path       = ".//*[@id='DataTables_Table_1']/tbody/tr/td[1]"
   private lazy val displayingResultsITPath       = "//*[@id='itinerary_list_wrapper']/div[1]/div[1]/span[2]"
   private lazy val createdSlotsPagePath          = "//*[@id='itinerary_list']/tbody//tr[@tabindex='-1']"
   private lazy val vXVacancyLiveDate             = changeDateFormat(vXApplicationLiveDate, "short")
@@ -169,16 +169,16 @@ object CalenderSchedulePage extends VacancyBasePage {
     val roomLocation = schedule.interviewRoom.format(vXInterviewNumber.head)
 
     waitForVisibilityOfElementByPath(createdFirstSlotPath).getText shouldEqual
-      s"""${roomLocation}: $vXSlotOneStartTime to $vXSlotOneFinishTime
+      s"""$roomLocation: $vXSlotOneStartTime to $vXSlotOneFinishTime
          |$vXSlotOneStartTime to $vXSlotOneFinishTime
-         |Room/Site : ${roomLocation}
+         |Room/Site : $roomLocation
          |Panel Members/Administrators ( 0 of 1 ) :
          |Candidate ( 0 of 1 ) :""".stripMargin
 
     waitForVisibilityOfElementByPath(createdSecondSlotPath).getText shouldEqual
-      s"""${roomLocation}: $vXSlotTwoStartTime to $vXSlotTwoFinishTime
+      s"""$roomLocation: $vXSlotTwoStartTime to $vXSlotTwoFinishTime
          |$vXSlotTwoStartTime to $vXSlotTwoFinishTime
-         |Room/Site : ${roomLocation}
+         |Room/Site : $roomLocation
          |Panel Members/Administrators ( 0 of 1 ) :
          |Candidate ( 0 of 1 ) :""".stripMargin
   }
@@ -259,7 +259,7 @@ object CalenderSchedulePage extends VacancyBasePage {
     waitForVisibilityOfElementById(addTaggedVacancyId).click()
     waitForVisibilityOfElementById(addTaggedVacancyHeaderId).getText shouldEqual "Add Selected Vacancies"
     enterScheduleValue(filterVacancyResultsId, vacancyId)
-    checkForNewValuePath(displayingResultsT3Path, "Displaying 1 results")
+    checkForNewValuePath(displayingResultsT3Path, vacancyId)
     val (_title, _liveDate, _closingDate, _isActive) = selectedVacancyValues()
     _title  shouldEqual vacancyName
     _liveDate    should startWith(vXVacancyLiveDate)
@@ -272,7 +272,7 @@ object CalenderSchedulePage extends VacancyBasePage {
   }
 
   private def confirmTaggedVacancy(): Unit = {
-    checkForNewValuePath(displayingResultsT1Path, "Displaying 1 results")
+    checkForNewValuePath(displayingResultsT1Path, vacancyId)
     val addVacancyTable                              = "DataTables_Table_1"
     val (_title, _liveDate, _closingDate, _isActive) = selectedVacancyValues(addVacancyTable)
     _title                           shouldEqual vacancyName

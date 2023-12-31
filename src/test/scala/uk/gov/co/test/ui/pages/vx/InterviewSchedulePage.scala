@@ -4,7 +4,7 @@ import org.openqa.selenium.{By, WebElement}
 import uk.gov.co.test.ui.data.TestData.eventually
 import uk.gov.co.test.ui.data.vx.ApplicationDetails
 import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXInstructionsForCandidates, vXInterviewDate, vXInterviewLocation, vXInterviewLongDate, vXInterviewNumber, vXInterviewScheduleTitle, vXInterviewShortDate}
-import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.{availableBarItems, confirmCandidateSummary, inviteToI1BarId, inviteToI2BarId, inviteToI3BarId, scheduleOfflineI1BarId, scheduleOfflineI2BarId, scheduleOfflineI3BarId, withdrawAtInterviewBarId}
+import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.{availableBarItems, confirmCandidateSummary, inviteToI1BarId, inviteToI2BarId, inviteToI3BarId, inviteToI4BarId, scheduleOfflineI1BarId, scheduleOfflineI2BarId, scheduleOfflineI3BarId, scheduleOfflineI4BarId, withdrawAtInterviewBarId}
 import uk.gov.co.test.ui.pages.vx.createvacancypage.AdvertSection.switchBack
 
 import java.time.LocalDate
@@ -74,7 +74,7 @@ object InterviewSchedulePage extends VacancyBasePage {
   private lazy val bookedEmailTemplateId                 = "select2-details_form_email_confirm_id-container"
   private lazy val includeCandidateCVInICalsId           = "details_form_ical_attach_candidate_cv"
   private lazy val createId                              = "details_form_form_submit"
-  private lazy val interviewId                           = ".//th[@aria-label='Interview ID: activate to sort column descending']"
+  private lazy val removeTimezonePath                           = "//*[@id='item_details_form_time_zone']/div/span/span[1]/span/button"
 
   private def createSchedule: WebElement        = waitForVisibilityOfElementByPathLast(createInterviewSchedulePath)
   private def viewInterviewSchedule: WebElement = waitForVisibilityOfElementByPathLast(viewInterviewSchedulePath)
@@ -93,6 +93,7 @@ object InterviewSchedulePage extends VacancyBasePage {
       case "1" => availableBarItems(List(inviteToI1BarId, scheduleOfflineI1BarId, withdrawAtInterviewBarId))
       case "2" => availableBarItems(List(inviteToI2BarId, scheduleOfflineI2BarId, withdrawAtInterviewBarId))
       case "3" => availableBarItems(List(inviteToI3BarId, scheduleOfflineI3BarId, withdrawAtInterviewBarId))
+      case "4" => availableBarItems(List(inviteToI4BarId, scheduleOfflineI4BarId, withdrawAtInterviewBarId))
     }
   }
 
@@ -107,21 +108,29 @@ object InterviewSchedulePage extends VacancyBasePage {
     waitForVisibilityOfElementByPath(createScheduleTitlePath).getText shouldEqual scheduleTitle
   }
 
-  def untagVacancy(): Unit = {
-    val viewSchedule  = "View Interview Schedule"
+  def untagVacancy(position: Int): Unit = {
+    val viewSchedule = "View Interview Schedule"
     if (viewInterviewSchedule.getText == viewSchedule) viewInterviewSchedule.click()
     else {
       interviewsSection.click()
       viewInterviewSchedule.click()
     }
-    waitForVisibilityOfElementByPath(".//*[@class='column1 sorting sorting_asc']").click()
-    waitForVisibilityOfElementByPath(".//tr[@tabindex='-1'][1]").click()
+    waitForVisibilityOfElementByPath(".//*[@id='DataTables_Table_0_wrapper']/div[2]/div[1]/div/table/thead/tr[2]/th[1]")
+      .click()
+    Thread.sleep(1500)
+    waitForVisibilityOfElementByPath(".//*[@id='DataTables_Table_0_select']/option[4]").click()
+    Thread.sleep(2000)
+    scrollToElement(By.xpath(s".//*[@id='DataTables_Table_0']/tbody/tr[${position.toString}]"))
+    waitForVisibilityOfElementByPath(s".//*[@id='DataTables_Table_0']/tbody/tr[${position.toString}]").click()
     waitForVisibilityOfElementByPath(".//a[text()='Edit']").click()
     waitForVisibilityOfElementByPath(".//span[@class='main-label' and text() = 'Tagged Vacancies']").click()
-    val taggedVacancy = driver.findElements(By.xpath(".//tr[@tabindex='-1'][1]"))
-    if (taggedVacancy.size() == 1) {
-      waitForVisibilityOfElementByPath(".//tr[@tabindex='-1'][1]").click()
+    val vacancyUsed  = ".//*[@id='DataTables_Table_1']/tbody/tr/td[1]"
+    Thread.sleep(1000)
+    var anyRecords = waitForVisibilityOfElementByPath(vacancyUsed).getText
+    if (anyRecords == "9562") {
+      waitForVisibilityOfElementByPath(vacancyUsed).click()
       waitForVisibilityOfElementById("but_remove_opportunity").click()
+      checkForNewValuePath(vacancyUsed, "No records")
     }
   }
 
@@ -237,12 +246,21 @@ object InterviewSchedulePage extends VacancyBasePage {
     enterValue(minAlterationNoticeId, schedule.minAlterationNotice.toString)
   }
 
+  def waitForOptionByText(option: String): WebElement =
+    waitForVisibilityOfElementByPath(s".//span[@title='$option']")
+
   private def selectTimezone(interviewScheduleDetails: InterviewScheduleDetails): Unit = {
     val schedule = interviewScheduleDetails
     val zone     = waitForVisibilityOfElementById(timezoneId)
     if (zone.getText != schedule.timezone) {
+      waitForVisibilityOfElementByPath(removeTimezonePath).click()
       zone.click()
-      selectOption(generalInput, schedule.timezone)
+//      val enterOption = waitForVisibilityOfElementByPath(generalInput)
+//      if (enterOption.getText == "") {
+//        enterOption.sendKeys(schedule.timezone)
+//        action().moveToElement(waitForOptionByText(schedule.timezone)).perform()
+//        waitForOptionByText(schedule.timezone).click()
+//      }
     }
   }
 

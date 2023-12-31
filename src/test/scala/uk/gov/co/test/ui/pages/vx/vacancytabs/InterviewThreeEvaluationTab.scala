@@ -169,6 +169,7 @@ object InterviewThreeEvaluationTab extends VacancyBasePage {
   def experienceScoreId                            = s"select2-${vacancyFormId}_datafield_108325_1_1-container"
   def experienceDescriptionId                      = s"${vacancyFormId}_datafield_108213_1_1"
   def overallScoreTitleId                          = s"${vacancyFormId}_label_23545_1"
+  def overallScoreTitlePath                          = s".//*[@id='${vacancyFormId}_label_23545_1']/span/strong"
   def overallScoreId                               = s"${vacancyFormId}_datafield_27738_1_1"
   def overallOverrideScoreId                       = s"${vacancyFormId}_datafield_116088_1_1"
   def outcomeTitleId                               = s"${vacancyFormId}_label_23547_1"
@@ -707,9 +708,7 @@ object InterviewThreeEvaluationTab extends VacancyBasePage {
   }
 
   private def checkOverallScore(interviewThreeDetails: InterviewThreeDetails): Unit = {
-    waitForVisibilityOfElementById(
-      overallScoreTitleId
-    ).getText shouldEqual "Overall Score" //TODO this is different in I2, in Pascal Case
+    waitForVisibilityOfElementByPath(overallScoreTitlePath).getText should endWith("Overall Score") //TODO this is different in I2, in Pascal Case and space
     if (interviewThreeDetails.overrideScore) {
       enterValue(overallOverrideScoreId, interviewThreeDetails.overallOverrideScore.toString)
     }

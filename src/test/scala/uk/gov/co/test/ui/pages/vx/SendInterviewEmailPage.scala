@@ -3,7 +3,7 @@ package uk.gov.co.test.ui.pages.vx
 import uk.gov.co.test.ui.data.TestData.eventually
 import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{applicationId, preferredFirstName, randomFirstName, randomLastName, vXInterviewNumber, vXJobInfoDepartment, vacancyId, vacancyName}
 import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.invitedForInterviewState
-import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.{availableBarItems, confirmCandidateSummary, interviewNotBookedBarId, inviteToI1BarId, inviteToI2BarId, inviteToI3BarId, scheduleI1BarId, scheduleOfflineI1BarId, searchApplicationId, withdrawAtInterviewBarId}
+import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.{availableBarItems, confirmCandidateSummary, interviewNotBookedBarId, inviteToI1BarId, inviteToI2BarId, inviteToI3BarId, inviteToI4BarId, scheduleI1BarId, scheduleOfflineI1BarId, searchApplicationId, withdrawAtInterviewBarId}
 
 object SendInterviewEmailPage extends VacancyBasePage {
 
@@ -45,28 +45,65 @@ object SendInterviewEmailPage extends VacancyBasePage {
       case "1" => selectActionLocator("Interview 1 - Invited")
       case "2" => selectActionLocator("Interview 2 - Invited")
       case "3" => selectActionLocator("Interview 3 - Invited")
+      case "4" => selectActionLocator("Interview 4 - Invited")
     }
   }
 
-  private def checkEmailContents(): Unit = {
-    val inviteState = vXInterviewNumber.head match {
-      case "1" => "a telephone interview"
-      case "2" => "an assessment"
-      case "3" => "a video interview"
+  private def checkPreviewEmail(): Unit = {
+    val emailPreview = vXInterviewNumber.head match {
+      case "1" =>
+        s"""Dear $preferredFirstName,
+           |$vacancyId: $vacancyName
+           |Congratulations, you've been invited to attend a telephone interview.
+           |Access your application centre to book your interview time and to review your application.
+           |To get your preferred time we recommend that you book as early as possible.
+           |**Enter department specific ID requirements here**
+           |If you're no longer interested in this position, please withdraw your application.
+           |
+           |Kind regards
+           |
+           |$vXJobInfoDepartment recruitment team""".stripMargin
+      case "2" =>
+        s"""Dear $preferredFirstName,
+           |$vacancyId: $vacancyName
+           |Congratulations, you've been invited to attend an assessment.
+           |Access your application centre to book your interview time and to review your application.
+           |To get your preferred time we recommend that you book as early as possible.
+           |**Enter department specific ID requirements here**
+           |If you're no longer interested in this position, please withdraw your application.
+           |
+           |Kind regards
+           |
+           |$vXJobInfoDepartment recruitment team""".stripMargin
+      case "3" =>
+        s"""Dear $preferredFirstName,
+           |$vacancyId: $vacancyName
+           |Congratulations, you've been invited to attend a video interview.
+           |Access your application centre to book your interview time and to review your application.
+           |To get your preferred time we recommend that you book as early as possible.
+           |**Enter department specific ID requirements here**
+           |If you're no longer interested in this position, please withdraw your application.
+           |
+           |Kind regards
+           |
+           |$vXJobInfoDepartment recruitment team""".stripMargin
+      case "4" =>
+        s"""Dear $preferredFirstName,
+           |$vacancyId: $vacancyName
+           |Congratulations, you've been invited to attend an interview.
+           |Access your application centre to book your interview time and to review your application.
+           |To get your preferred time we recommend that you book as early as possible.
+           |Remember to arrive at least twenty minutes before your interview and make sure you bring some form of photo identification (such as your work pass or passport).
+           |**Enter department specific ID requirements here**
+           |If you're no longer interested in this position, please withdraw your application.
+           |
+           |Kind regards
+           |
+           |$vXJobInfoDepartment recruitment team""".stripMargin
     }
     waitForVisibilityOfElementById(emailSubjectId).isDisplayed
     waitForVisibilityOfElementById(emailPreviewId).click()
-    waitForVisibilityOfElementById(emailPreviewContentId).getText shouldEqual s"""Dear $preferredFirstName,
-                                                                                         |$vacancyId: $vacancyName
-                                                                                         |Congratulations, you've been invited to attend $inviteState.
-                                                                                         |Access your application centre to book your interview time and to review your application.
-                                                                                         |To get your preferred time we recommend that you book as early as possible.
-                                                                                         |**Enter department specific ID requirements here**
-                                                                                         |If you're no longer interested in this position, please withdraw your application.
-                                                                                         |
-                                                                                         |Kind regards
-                                                                                         |
-                                                                                         |$vXJobInfoDepartment recruitment team""".stripMargin
+    waitForVisibilityOfElementById(emailPreviewContentId).getText shouldEqual emailPreview
     waitForVisibilityOfElementByPath(emailPreviewContentClosePath).click()
   }
 
@@ -94,6 +131,7 @@ object SendInterviewEmailPage extends VacancyBasePage {
       case "1" => waitForVisibilityOfElementById(inviteToI1BarId).click()
       case "2" => waitForVisibilityOfElementById(inviteToI2BarId).click()
       case "3" => waitForVisibilityOfElementById(inviteToI3BarId).click()
+      case "4" => waitForVisibilityOfElementById(inviteToI4BarId).click()
     }
 
   private def confirmVXCandidateSummary(): Unit = {
@@ -108,7 +146,7 @@ object SendInterviewEmailPage extends VacancyBasePage {
     checkAutoSelect()
     checkSendEmail()
     selectCorrespondence()
-    checkEmailContents()
+    checkPreviewEmail()
     addEmailAttachments()
     waitForVisibilityOfElementById(sendInviteId).click()
     confirmVXCandidateSummary()

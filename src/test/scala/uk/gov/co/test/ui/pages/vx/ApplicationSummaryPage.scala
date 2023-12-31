@@ -19,6 +19,7 @@ object ApplicationSummaryPage extends VacancyBasePage {
   val completeSiftBarId           = "process_rule_but_18"
   val progressBarId               = "process_rule_but_657"
   val provisionalOfferOnlineBarId = "process_rule_but_3176"
+  val provisionalOfferOfflineBarId = "process_rule_but_725"
   val employmentHistoryBarId      = "process_rule_but_744"
   val conditionalOfferBarId       = "process_rule_but_1024"
   val withdrawApplicationBarId    = "process_rule_but_570"
@@ -31,21 +32,26 @@ object ApplicationSummaryPage extends VacancyBasePage {
   val inviteToI1BarId             = "process_rule_but_162"
   val inviteToI2BarId             = "process_rule_but_164"
   val inviteToI3BarId             = "process_rule_but_176"
+  val inviteToI4BarId             = "process_rule_but_192"
   val scheduleOfflineI1BarId      = "process_rule_but_488"
   val scheduleOfflineI2BarId      = "process_rule_but_489"
   val scheduleOfflineI3BarId      = "process_rule_but_490"
+  val scheduleOfflineI4BarId      = "process_rule_but_491"
   val interviewNotBookedBarId     = "process_rule_but_484"
   val scheduleI1BarId             = "process_rule_but_23"
   val completeI1EvaluationBarId   = "process_rule_but_579"
   val completeI2EvaluationBarId   = "process_rule_but_580"
   val completeI3EvaluationBarId   = "process_rule_but_581"
+  val completeI4EvaluationBarId   = "process_rule_but_582"
   val noShowI1BarId               = "process_rule_but_25"
   val noShowI2BarId               = "process_rule_but_166"
   val noShowI3BarId               = "process_rule_but_181"
+  val noShowI4BarId               = "process_rule_but_197"
   val uploadIDEditFeedbackBarId   = "process_rule_but_1462"
   val progressI1EvaluationBarId   = "process_rule_but_703"
   val progressI2EvaluationBarId   = "process_rule_but_704"
   val progressI3EvaluationBarId   = "process_rule_but_1085"
+  val progressI4EvaluationBarId   = "process_rule_but_1086"
   val withdrawAtInterviewBarId    = "process_rule_but_511"
   val scheduleI2BarId             = "process_rule_but_34"
   val allBarItemsId               = "process_rules_bar"
@@ -126,6 +132,12 @@ object ApplicationSummaryPage extends VacancyBasePage {
         ) //TODO check to see why no uploadID bar
         confirmCandidateSummary(newStatus)
         waitForVisibilityOfElementById(progressI3EvaluationBarId).click()
+      case "4" =>
+        availableBarItems(
+          List(progressI4EvaluationBarId, withdrawAtInterviewBarId)
+        ) //TODO check to see why no uploadID bar
+        confirmCandidateSummary(newStatus)
+//        waitForVisibilityOfElementById(progressI4EvaluationBarId).click() // Next step initiates progression
     }
   }
 
@@ -150,6 +162,7 @@ object ApplicationSummaryPage extends VacancyBasePage {
       case "1" => availableBarItems(List(completeI1EvaluationBarId, noShowI1BarId, withdrawAtInterviewBarId))
       case "2" => availableBarItems(List(completeI2EvaluationBarId, noShowI2BarId, withdrawAtInterviewBarId))
       case "3" => availableBarItems(List(completeI3EvaluationBarId, noShowI3BarId, withdrawAtInterviewBarId))
+      case "4" => availableBarItems(List(completeI4EvaluationBarId, noShowI4BarId, withdrawAtInterviewBarId))
     }
     confirmCandidateSummary(newStatus)
   }
