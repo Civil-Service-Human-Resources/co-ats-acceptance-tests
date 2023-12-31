@@ -25,7 +25,8 @@ object ProvisionalOfferPage extends CivilServiceJobsBasePage {
     extractOfferDecisionFormId()
     waitForVisibilityOfElementById(
       congratsMessageId
-    ).getText shouldEqual s"Congratulations, following recent communication we are pleased to offer you the position of $vacancyName, subject to satisfactory completion of pre-employment checks.\nPlease do not resign from your current employment until you‘ve been made a formal offer."
+    ).getText shouldEqual s"""Congratulations, following recent communication we are pleased to offer you the position of $vacancyName, subject to satisfactory completion of pre-employment checks.
+                                 |Please do not resign from your current employment until you‘ve been made a formal offer.""".stripMargin
   }
 
   private def extractOfferDecisionFormId(): String = {

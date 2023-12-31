@@ -2,9 +2,9 @@ package uk.gov.co.test.ui.pages.v9
 
 import org.openqa.selenium.{By, WebElement}
 import org.scalatest.concurrent.Eventually.eventually
-import uk.gov.co.test.ui.conf.TestConfiguration
 import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{randomFirstName, randomLastName, v9AdjustmentsForTests, v9ReasonableAdjustments, vXAnyOnlineTests, vXInterviewFourType, vXInterviewLocation, vXInterviewLongDate, vXInterviewNumber, vXInterviewOneType, vXInterviewThreeType, vXInterviewTwoType, vXSlotTwoStartTime, vacancyName}
-import uk.gov.co.test.ui.pages.v9.ApplicationsPage.{confirmStatusOnApplicationPage, reviewUpdateValue}
+import uk.gov.co.test.ui.pages.v9.ApplicationsPage.{confirmStatusOnApplicationPage, reviewUpdateOnApplicationPage}
+import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.changeSystem
 import uk.gov.co.test.ui.pages.vx.DashboardPage.contactEmailVxConfig
 
 object ApplicationCentrePage extends CivilServiceJobsBasePage {
@@ -96,6 +96,7 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
   }
 
   def confirmLongFormCompletion(): Unit = { //TODO check last text doesn't match with confirmLongFormPECCompletion()
+    reviewUpdateOnApplicationPage()
     applicationCentrePageCheck()
     advertDetailsFunction().isEnabled
     withdrawApplicationFunction().isEnabled
@@ -135,51 +136,65 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
     }
   }
 
-  def confirmProvisionalOffer(): Unit = {
+  def confirmProvisionalOfferState(): Unit = {
+    val status = "Provisional offer"
+    changeSystem("candidate")
+    confirmStatusOnApplicationPage(status)
     applicationCentrePageCheck()
-    advertDetailsFunction().isEnabled
-    withdrawApplicationFunction().isEnabled
+    offerDecisionFunction().isEnabled
     feedbackFunction().isEnabled
+    withdrawApplicationFunction().isEnabled
+    advertDetailsFunction().isEnabled
     applicationForVacancyText  shouldEqual s"Application For $vacancyName"
-    getApplicationState        shouldEqual "Application status: Provisional offer"
-    getApplicationConfirmation shouldEqual "Congratulations, we'd like to make you a provisional job offer.\nPlease click \"Offer Decision\" to accept this offer.\nWe'll then conduct some pre-employment checks before we consider making you a formal job offer.\nPlease do not resign from your current employment until you‘ve been made a formal offer.\nYou can see any feedback that's been given by clicking the \"Feedback\" button.\nIf you're no longer interested in this job please withdraw your application."
+    getApplicationState        shouldEqual s"Application status: $status"
+    getApplicationConfirmation shouldEqual """Congratulations, we'd like to make you a provisional job offer.
+                                             |Please click "Offer Decision" to accept this offer.
+                                             |We'll then conduct some pre-employment checks before we consider making you a formal job offer.
+                                             |Please do not resign from your current employment until you‘ve been made a formal offer.
+                                             |You can see any feedback that's been given by clicking the "Feedback" button.
+                                             |If you're no longer interested in this job please withdraw your application.""".stripMargin
   }
 
   def navigateToApplicationsPage(): Unit =
     waitForVisibilityOfElementByPath(applicationLinkPath).click()
 
   def candidateAcceptsOffer(): Unit = {
-//    switchToV9Test()
-    driver.navigate().to(TestConfiguration.urlHost("vxconfig") + "/vx/lang-en-GB/candidate/application")
-    reviewUpdateValue().click()
-    confirmProvisionalOffer()
+    confirmProvisionalOfferState()
     offerDecisionFunction().click()
   }
 
-  def confirmOfferAccepted(): Unit = {
+  def confirmOfferAcceptedState(): Unit = {
+    val newStatus = "Offer accepted"
+    changeSystem("candidate")
+    confirmStatusOnApplicationPage(newStatus)
     applicationCentrePageCheck()
-    advertDetailsFunction().isEnabled
-    withdrawApplicationFunction().isEnabled
-    feedbackFunction().isEnabled
     pecStartFunction().isEnabled
+    feedbackFunction().isEnabled
+    withdrawApplicationFunction().isEnabled
+    advertDetailsFunction().isEnabled
     applicationForVacancyText  shouldEqual s"Application For $vacancyName"
-    getApplicationState        shouldEqual "Application status: Offer accepted"
-    getApplicationConfirmation shouldEqual "We're delighted that you have accepted our job offer.\nAs part of the onboarding process we require additional information."
+    getApplicationState        shouldEqual s"Application status: $newStatus"
+    getApplicationConfirmation shouldEqual """We're delighted that you have accepted our job offer.
+                                             |As part of the onboarding process we require additional information.""".stripMargin
   }
 
-  def confirmPecSubmission(): Unit = {
+
+  def confirmPecSubmissionState(): Unit = {
+    val status = "Pre-employment checks"
+    changeSystem("candidate")
+    confirmStatusOnApplicationPage(status)
     applicationCentrePageCheck()
     advertDetailsFunction().isEnabled
     feedbackFunction().isEnabled
     withdrawApplicationFunction().isEnabled
     applicationForVacancyText  shouldEqual s"Application For $vacancyName"
-    getApplicationState        shouldEqual "Application status: Pre-employment checks"
+    getApplicationState        shouldEqual s"Application status: $status"
     getApplicationConfirmation shouldEqual "Great news, you've accepted your provisional offer and your pre-employment checks are underway.\nWe are still checking:\nyour employment history, including any gaps\nwhether you have any convictions\n\n\nWe will send an email notification to you once all pre-employment checks are complete."
   }
 
   def applicationBeingReviewedPreSiftState(): Unit = {
     val status = "Application being reviewed"
-    switchToOtherWindow
+    changeSystem("candidate")
     confirmStatusOnApplicationPage(status)
     advertDetailsFunction().isEnabled
     withdrawApplicationFunction().isEnabled
@@ -193,7 +208,7 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
 
   def applicationBeingReviewedState(): Unit = {
     val status = "Application being reviewed"
-    switchToOtherWindow
+    changeSystem("candidate")
     confirmStatusOnApplicationPage(status)
     feedbackFunction().isEnabled
     withdrawApplicationFunction().isEnabled
@@ -312,10 +327,11 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
     feedbackFunction().isEnabled
     advertDetailsFunction().isEnabled
     withdrawApplicationFunction().isEnabled
-    applicationForVacancyText shouldEqual s"Application For $vacancyName"
-    getApplicationState shouldEqual s"Application status: $status"
+    applicationForVacancyText  shouldEqual s"Application For $vacancyName"
+    getApplicationState        shouldEqual s"Application status: $status"
     getApplicationConfirmation shouldEqual
       s"""Congratulations you have been successful at interview.
          |We will be in contact shortly with more information about the next steps.""".stripMargin
+    changeSystem("recruiter")
   }
 }

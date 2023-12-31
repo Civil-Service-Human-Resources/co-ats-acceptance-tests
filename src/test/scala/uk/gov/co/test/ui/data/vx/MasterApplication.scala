@@ -120,7 +120,7 @@ object APPLICATION_INTERVIEW_SCHEDULE
       s"Autotest - Instructions for $randomFirstName $randomLastName for interview %s",
       true,
       "Prawf awtomeiddio",
-      "HMRC Government Offices Great George Street",
+      s"HMRC Government Offices Great George Street I%s",
       false,
       24,
       "Use System Default",

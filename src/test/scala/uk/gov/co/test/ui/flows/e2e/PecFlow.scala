@@ -5,7 +5,7 @@ import uk.gov.co.test.ui.data.v9.shortform.SHORT_FORM_DATA_PEC
 import uk.gov.co.test.ui.data.vx.APPLICATION_DATA
 import uk.gov.co.test.ui.flows.v9.PecFormFlow.fillPecFormDetailsOnly
 import uk.gov.co.test.ui.flows.v9.ShortFormFlow.fillShortFormDetails
-import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.{candidateAcceptsOffer, confirmOfferAccepted, confirmPecSubmission, confirmShortFormCompletionNoLongForm}
+import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.{candidateAcceptsOffer, confirmOfferAcceptedState, confirmPecSubmissionState, confirmShortFormCompletionNoLongForm}
 import uk.gov.co.test.ui.pages.v9.ApplicationsPage.extractApplicationId
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
 import uk.gov.co.test.ui.pages.v9.ProvisionalOfferPage.offerDecisionFlow
@@ -22,9 +22,9 @@ object PecFlow extends CivilServiceJobsBasePage {
     progressApplicationToOffer(),
     candidateAcceptsOffer(),
     offerDecisionFlow("Accept"),
-    confirmOfferAccepted(),
+    confirmOfferAcceptedState(),
     fillPecFormDetailsOnly(MASTER_PEC_FORM_DATA),
-    confirmPecSubmission(),
+    confirmPecSubmissionState(),
     navigateToApplicationSummary(),
     completeVXEmploymentHistory(),
     EmploymentHistoryVXFlow(APPLICATION_DATA)

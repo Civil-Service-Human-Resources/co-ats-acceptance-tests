@@ -1,11 +1,12 @@
 package uk.gov.co.test.ui.data.v9.pecform
 
-import uk.gov.co.test.ui.pages.v9.pecform.{DeclarationDetails, EmploymentHistoryDetails, VerifyingHistoryDetails, YourDetails}
+import uk.gov.co.test.ui.pages.v9.pecform._
 import uk.gov.co.test.ui.pages.vx.DashboardPage.v9RefereeEmail
 
 object MASTER_PEC_FORM_DATA
     extends PecFormDetails(
       MASTER_PEC_FORM_YOUR_DETAILS,
+      MASTER_PEC_RIGHT_TO_WORK,
       MASTER_PEC_FORM_EMPLOYMENT_HISTORY,
       MASTER_PEC_FORM_VERIFYING_HISTORY,
       MASTER_PEC_FORM_DECLARATION
@@ -27,6 +28,27 @@ object MASTER_PEC_FORM_YOUR_DETAILS
       "United Kingdom",
       "SK91BX",
       "00110000001"
+    )
+
+object MASTER_PEC_RIGHT_TO_WORK
+    extends RtwDetails(
+      "British citizen, Briton",
+      "British citizen, Briton",
+      false,
+      "Egyptian",
+      true,
+      true,
+      true,
+      false,
+      "I have settled status",
+      "Autotest-certificate/application number",
+      "Autotest-shareCode",
+      true,
+      "Autotest-statusCode",
+      "Test-T&Cs.pdf",
+      false,
+      true,
+      false
     )
 
 object MASTER_PEC_FORM_EMPLOYMENT_HISTORY

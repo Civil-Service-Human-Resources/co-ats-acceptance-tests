@@ -229,7 +229,7 @@ object InterviewSchedulePage extends VacancyBasePage {
 
   private def selectInterviewLocation(interviewScheduleDetails: InterviewScheduleDetails): Unit = {
     val schedule = interviewScheduleDetails
-    vXInterviewLocation = schedule.interviewLocation
+    vXInterviewLocation = schedule.interviewLocation.format(vXInterviewNumber.head)
     interviewLocation().value = vXInterviewLocation
   }
 

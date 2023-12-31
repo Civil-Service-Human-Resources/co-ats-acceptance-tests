@@ -143,4 +143,10 @@ object ApplicationsPage extends CivilServiceJobsBasePage {
     reviewUpdateValue().click()
   }
 
+  def reviewUpdateOnApplicationPage(): Unit = {
+    waitForVisibilityOfElementByPath(applicationLinkPath).click()
+    applicationsPageCheck()
+    reviewUpdateValue().click()
+  }
+
 }
