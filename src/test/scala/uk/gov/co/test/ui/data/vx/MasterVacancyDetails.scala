@@ -17,11 +17,11 @@ object MasterVacancyDetails extends VacancyBasePage {
   var candidateApproach = "External"
 
   //vx vacancy basicDetails section
-  var vacancyName                       = "HMRC - Technical Architect"
-  var vacancyId                         = "9562"
-  var vXApplicationLiveDate: String     = "22 December 2023"
+  var vacancyName                       = "HMRC - Technology Technician"
+  var vacancyId                         = "9564"
+  var vXApplicationLiveDate: String     = "31 December 2023"
   var vXApplicationLiveTime: String     = ""
-  var vXApplicationClosingDate: String  = "31/01/2024"
+  var vXApplicationClosingDate: String  = "01/02/2024"
   var vXAppConvertedClosingDate: String = ""
   var vXApplicationClosingTime: String  = ""
   var vXConvertedLiveDateTime           = ""
@@ -121,6 +121,11 @@ object MasterVacancyDetails extends VacancyBasePage {
 
   //vx vacancy tests section
   var vXAnyOnlineTests = false
+
+
+  //vx pec form checks
+  var vXRtwChecks: List[String] = List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates")
+  var vXWhenRtwChecks = "Before pre employment checks"
 
   //candidate details
   var randomFirstName: String    = ""

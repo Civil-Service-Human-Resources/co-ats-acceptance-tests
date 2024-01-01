@@ -2,6 +2,7 @@ package uk.gov.co.test.ui.pages.v9.pecform
 
 import org.scalatest.concurrent.Eventually.eventually
 import uk.gov.co.test.ui.data.v9.pecform.PecFormDetails
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXRtwChecks, vXWhenRtwChecks}
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
 import uk.gov.co.test.ui.pages.v9.pecform.YourDetailsPage.pecFormId
 
@@ -156,10 +157,12 @@ object RightToWorkPage extends CivilServiceJobsBasePage {
   )
 
   def rightToWorkPage(pecFormDetails: PecFormDetails): Unit = {
-    rtwPageCheck()
-    rtw.foreach { f =>
-      f(pecFormDetails.rtwDetails)
+    if (!vXRtwChecks.contains("Not Applicable") && vXWhenRtwChecks == "Before pre employment checks") {
+      rtwPageCheck()
+      rtw.foreach { f =>
+        f(pecFormDetails.rtwDetails)
+      }
+      clickOn(pageContinue)
     }
-    clickOn(pageContinue)
   }
 }

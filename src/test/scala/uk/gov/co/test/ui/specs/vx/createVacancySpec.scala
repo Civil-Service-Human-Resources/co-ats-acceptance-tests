@@ -14,6 +14,7 @@ import uk.gov.co.test.ui.flows.v9.ShortFormFlow.fillShortFormDetails
 import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.fillNewVacancyForm
 import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.{confirmLongFormCompletion, confirmShortFormCompletion}
 import uk.gov.co.test.ui.pages.vx.DashboardPage.activateAndPostVacancy
+import uk.gov.co.test.ui.pages.vx.VacancyDetailsPage.extractAllVacancyDetails
 import uk.gov.co.test.ui.specs.BaseFeatureSpec
 import uk.gov.co.test.ui.tags.RunInVX
 
@@ -79,6 +80,10 @@ class createVacancySpec extends BaseFeatureSpec {
 
       Then("the candidate is able to confirm insolvency short & long forms are completed")
       println("WIP...")
+    }
+
+    Scenario("VX: A Recruiter Extracts All Vacancy Details", RunInVX) {
+      extractAllVacancyDetails()
     }
 
     Scenario("VX: A Recruiter Untags Vacancy Details", RunInVX) {
