@@ -17,15 +17,18 @@ object MasterVacancyDetails extends VacancyBasePage {
   var candidateApproach = "External"
 
   //vx vacancy basicDetails section
-  var vacancyName                       = "HMRC Heritage Lead"
-  var vacancyId                         = "9546"
-  var vXApplicationLiveDate: String     = ""
+  var vacancyName                       = "HMRC - Technology Technician"
+  var vacancyId                         = "9564"
+  var vXApplicationLiveDate: String     = "31 December 2023"
   var vXApplicationLiveTime: String     = ""
-  var vXApplicationClosingDate: String  = ""
+  var vXApplicationClosingDate: String  = "01/02/2024"
   var vXAppConvertedClosingDate: String = ""
   var vXApplicationClosingTime: String  = ""
   var vXConvertedLiveDateTime           = ""
   var vXConvertedClosingDateTime        = ""
+
+  //vx job information section
+  var vXJobInfoDepartment = "HM Revenue and Customs"
 
   //vx vacancy behaviours section
   var vXHowManyBehaviours: Int                     = 8
@@ -80,7 +83,6 @@ object MasterVacancyDetails extends VacancyBasePage {
 
   //vx vacancy technical skills section
   var vXHowManySkills: Int                              = 8
-//  var vXListOfTechSkills            = new ListBuffer[String]()
   var vXListOfTechSkills: ListBuffer[String]            = ListBuffer(
     "Autotest - technical skills 1",
     "Autotest - technical skills 2",
@@ -104,8 +106,26 @@ object MasterVacancyDetails extends VacancyBasePage {
   var vXListOfApplicationStage                          = new ListBuffer[Boolean]()
   var vXNoOfApplicationStage: Int                       = 8
 
+  //vX strengths
+  var vXHowManyStrengths: Int               = 8
+  var vXListOfStrengths: ListBuffer[String] = ListBuffer(
+    "Adaptable",
+    "Analytical",
+    "Improver",
+    "Relationship Builder",
+    "Challenger",
+    "Change Agent",
+    "Team Leader",
+    "Service Focussed"
+  )
+
   //vx vacancy tests section
   var vXAnyOnlineTests = false
+
+
+  //vx pec form checks
+  var vXRtwChecks: List[String] = List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates")
+  var vXWhenRtwChecks = "Before pre employment checks"
 
   //candidate details
   var randomFirstName: String    = ""
@@ -145,7 +165,7 @@ object MasterVacancyDetails extends VacancyBasePage {
   var v9AdjustmentsForTests   = true
 
   //v9 applications page
-  var applicationId: String = "0"
+  var applicationId: String = ""
 
   //v9 pec form employment history
   var v9EmployedWithin3Years   = true
@@ -159,9 +179,26 @@ object MasterVacancyDetails extends VacancyBasePage {
   var v9ThirdEmployerFromDate  = ""
   var v9ThirdEmployerToDate    = ""
 
+  //vX calender schedule
+  var vXSlotOneStartTime  = ""
+  var vXSlotOneFinishTime = ""
+  var vXSlotTwoStartTime  = ""
+  var vXSlotTwoFinishTime = ""
+  var vXInterviewRoom     = ""
+  var vXInterviewID       = ""
+
   //vX interview schedule
-  var vXInterviewOneDate       = ""
-  var vXInterviewLocation      = ""
-  var vXInterviewScheduleTitle = ""
+  var vXInterviewNumber: ListBuffer[String] = ListBuffer("1", "2", "3", "4")
+  var vXInterviewExpectedRounds             = "4"
+  var vXInterviewDate                       = ""
+  var vXInterviewLongDate                   = ""
+  var vXInterviewShortDate                  = ""
+  var vXInterviewLocation                   = ""
+  var vXInterviewScheduleTitle              = ""
+  var vXInstructionsForCandidates           = ""
+  var vXInterviewOneType                    = "Telephone"
+  var vXInterviewTwoType                    = "Assessment"
+  var vXInterviewThreeType                  = "Video"
+  var vXInterviewFourType                   = "Interview"
 
 }

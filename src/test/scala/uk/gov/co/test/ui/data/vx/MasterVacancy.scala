@@ -66,7 +66,8 @@ object MASTER_APPROVAL
     extends ApprovalDetails(
       true,
       "Autotest - budgetary authorisation info",
-      "Autotest - Cost centre (optional)"
+      "Autotest - Cost centre (optional)",
+      "Test-T&Cs.pdf"
     )
 
 object MASTER_RESERVE_LIST
@@ -144,7 +145,7 @@ object MASTER_INTERVIEWS_DETAILS
       "Assessment",
       "Video",
       "Interview",
-      true
+      false
     )
 
 object MASTER_SUCCESS_PROFILES

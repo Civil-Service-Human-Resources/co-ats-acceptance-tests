@@ -9,6 +9,8 @@ import org.scalatest.concurrent.PatienceConfiguration
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.time.{Millis, Seconds, Span}
 import org.scalatestplus.selenium.{Page, WebBrowser}
+import uk.gov.co.test.ui.flows.v9.LoginCandidateFlow.loginNewCandidate
+import uk.gov.co.test.ui.pages.v9.SignInPage.signOut
 
 import java.util
 import java.util.UUID
@@ -20,8 +22,9 @@ case class PageNotFoundException(s: String) extends Exception(s)
 trait BasePage extends Matchers with Page with WebBrowser with PatienceConfiguration {
 
   def currentWindows()(implicit driver: WebDriver): util.Set[String] = driver.getWindowHandles
-  var firstWindowHandle: String                                      = ""
-  var secondWindowHandle: String                                     = ""
+  def firstWindowHandle()(implicit driver: WebDriver): String        = currentWindows.asScala.head
+  def secondWindowHandle()(implicit driver: WebDriver): String       = currentWindows.asScala.tail.head
+  def importFilesPath: String                                        = "/src/test/resource/import/"
 
   override implicit val patienceConfig: PatienceConfig =
     PatienceConfig(timeout = scaled(Span(30, Seconds)), interval = scaled(Span(1000, Millis)))
@@ -46,14 +49,25 @@ trait BasePage extends Matchers with Page with WebBrowser with PatienceConfigura
   }
 
   def waitForVisibilityOfStatusElementByPath(pathway: String)(implicit driver: WebDriver): WebElement = {
-    val wait = new WebDriverWait(driver, 10, 1000)
+    val wait = new WebDriverWait(driver, 10, 200)
     wait.until(visibilityOfElementLocated(By.xpath(pathway)))
   }
 
-  def checkForNewStatus(statusPath: String, expectedStatus: String)(implicit driver: WebDriver): Unit = {
-    val wait = new WebDriverWait(driver, 20, 1000)
-    wait.until { (d: WebDriver) =>
+  def checkForNewValuePath(statusPath: String, expectedStatus: String)(implicit driver: WebDriver): Unit = {
+    val wait = new WebDriverWait(driver, 35, 500)
+    try wait.until { (d: WebDriver) =>
       d.findElement(By.xpath(statusPath)).getText.endsWith(expectedStatus)
+    } catch {
+      case staleError: StaleElementReferenceException => println(staleError)
+    }
+  }
+
+  def checkForNewValueId(valueId: String, expectedValue: String)(implicit driver: WebDriver): Unit = {
+    val wait = new WebDriverWait(driver, 25, 500)
+    try wait.until { (d: WebDriver) =>
+      d.findElement(By.id(valueId)).getText.startsWith(expectedValue)
+    } catch {
+      case staleError: StaleElementReferenceException => println(staleError)
     }
   }
 
@@ -104,7 +118,6 @@ trait BasePage extends Matchers with Page with WebBrowser with PatienceConfigura
 
   def waitForElementToBeClickableByLabel(id: String)(implicit driver: WebDriver): WebElement = {
     val wait = new WebDriverWait(driver, 30, 200)
-    //Wait for element to be clickable
     wait.until(ExpectedConditions.elementToBeClickable(By.xpath(s"//label[@for='$id']")))
   }
 
@@ -179,16 +192,13 @@ trait BasePage extends Matchers with Page with WebBrowser with PatienceConfigura
     wait.until(ExpectedConditions.numberOfWindowsToBe(expectedNumberOfWindows))
   }
 
-  def switchToAnotherWindow()(implicit driver: WebDriver): Unit =
+  def switchToOtherWindow()(implicit driver: WebDriver): Unit =
     if (driver.getWindowHandles.size() == 2) {
       if (driver.getWindowHandle.contains(secondWindowHandle)) {
-        println(s"1. Is ${driver.getWindowHandle} equal to $secondWindowHandle?")
         driver.switchTo().window(firstWindowHandle)
       } else if (driver.getWindowHandle.contains(firstWindowHandle)) {
-        println(s"2. Is ${driver.getWindowHandle} equal to $firstWindowHandle?")
         driver.switchTo().window(secondWindowHandle)
       }
-      driver.navigate().refresh()
     } else {
       openAndMoveToNewWindow()
     }
@@ -202,25 +212,6 @@ trait BasePage extends Matchers with Page with WebBrowser with PatienceConfigura
     openNewTabWithJavascript()
     for (chartWindow <- driver.getWindowHandles.asScala)
       driver.switchTo.window(chartWindow)
-
-    if (openWindows(2)) {
-      firstWindowHandle = currentWindows.asScala.head
-      secondWindowHandle = currentWindows.asScala.tail.head
-    }
-    println(s"3. currentWindows: $currentWindows 1st: $firstWindowHandle 2nd: $secondWindowHandle?")
-  }
-
-  def switchBackToWindow(windowName: String)(implicit driver: WebDriver): WebDriver =
-    driver.switchTo().window(windowName)
-
-  def switchToFirstWindow()(implicit driver: WebDriver): Unit = {
-    switchBackToWindow(firstWindowHandle)
-    refreshPage()
-  }
-
-  def switchToSecondWindow()(implicit driver: WebDriver): Unit = {
-    switchBackToWindow(secondWindowHandle)
-    refreshPage()
   }
 
   def refreshPage()(implicit driver: WebDriver): Unit =
@@ -228,4 +219,20 @@ trait BasePage extends Matchers with Page with WebBrowser with PatienceConfigura
 
   def searchFunction(eleId: String)(implicit driver: WebDriver): util.List[WebElement] =
     driver.findElements(By.id(eleId))
+
+  def attachDocuments(attachId: String, file: String)(implicit driver: WebDriver): Unit = {
+    val getCurrentDirectory     = new java.io.File(".").getCanonicalPath
+    val filePath                = getCurrentDirectory.concat(importFilesPath).concat(file)
+    val fileElement: WebElement = id(attachId).findElement.get.underlying
+    fileElement.sendKeys(filePath)
+  }
+
+  def changeSystem(system: String)(implicit driver: WebDriver): Unit = {
+    if (!currentUrl.contains(system)) {
+      switchToOtherWindow()
+      if (currentUrl.contains("candidate") && !signOut().isDisplayed)
+        loginNewCandidate()
+    }
+    refreshPage()
+  }
 }

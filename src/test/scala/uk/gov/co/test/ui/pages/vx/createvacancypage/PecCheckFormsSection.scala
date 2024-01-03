@@ -1,6 +1,7 @@
 package uk.gov.co.test.ui.pages.vx.createvacancypage
 
 import org.openqa.selenium.By
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.vXRtwChecks
 import uk.gov.co.test.ui.data.vx.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.vacancyFormId
@@ -77,9 +78,9 @@ object PecCheckFormsSection extends VacancyBasePage {
   def pnHrEmailId                      = s"${vacancyFormId}_datafield_141267_1_1"
 
   private def selectWhenCompleteRtwCheck(pecCheckFormsDetails: PecCheckFormsDetails): Unit = {
-    val rtwList = pecCheckFormsDetails.rtwCheck
-    if (rtwList.contains("Not Applicable")) {
-      if (rtwList.size >= 2) {
+    vXRtwChecks = pecCheckFormsDetails.rtwCheck
+    if (vXRtwChecks.contains("Not Applicable")) {
+      if (vXRtwChecks.size >= 2) {
         pecCheckFormsDetails.whenCompleteRtwCheck match {
           case "Before pre employment checks"              => clickOnRadioButton(beforePecChecksId)
           case "At the same time as pre employment checks" => clickOnRadioButton(sameTimeAsPecChecksId)
@@ -100,7 +101,7 @@ object PecCheckFormsSection extends VacancyBasePage {
   private def selectUploadIdentityDocs(pecCheckFormsDetails: PecCheckFormsDetails): Unit =
     if (pecCheckFormsDetails.uploadIdentityDocs) {
       clickOnRadioButton(uploadIdentityYesId)
-      enterText(detailsIdentityDocsId, pecCheckFormsDetails.detailsOfIdentityDocs)
+      enterValue(detailsIdentityDocsId, pecCheckFormsDetails.detailsOfIdentityDocs)
       if (pecCheckFormsDetails.manualIdentityDocCheck) clickOnRadioButton(manualIdentityCheckYesId)
       else clickOnRadioButton(manualIdentityCheckNoId)
     } else clickOnRadioButton(uploadIdentityNoId)
@@ -137,7 +138,7 @@ object PecCheckFormsSection extends VacancyBasePage {
   private def selectIncludeAdditionalCheck(pecCheckFormsDetails: PecCheckFormsDetails): Unit =
     if (pecCheckFormsDetails.includeAdditionalCheck) {
       clickOnRadioButton(includeAdditionalCheckYesId)
-      enterText(nameOfCheckInputId, pecCheckFormsDetails.nameOfCheck)
+      enterValue(nameOfCheckInputId, pecCheckFormsDetails.nameOfCheck)
       enterRoles(pecCheckFormsDetails.additionalCheck, additionalCheckInputId)
     } else clickOnRadioButton(includeAdditionalCheckNoId)
 

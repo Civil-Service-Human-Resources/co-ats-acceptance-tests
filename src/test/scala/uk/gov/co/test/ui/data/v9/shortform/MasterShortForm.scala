@@ -38,9 +38,9 @@ object MASTER_SHORT_FORM_PERSONAL_INFO
       secondaryNo = Option("07770000000"),
       s"$randomEmail",
       false,
-      true,
+      false, //reasonable adjustments set to false, requires logic at later date
       "Autotest - Provide details of what reasonable adjustments might help you",
-      true,
+      false, //reasonable adjustments for tests set to false, requires logic at later date
       "Autotest - reasonable adjustments to be able to complete online tests",
       "Yes",
       true,

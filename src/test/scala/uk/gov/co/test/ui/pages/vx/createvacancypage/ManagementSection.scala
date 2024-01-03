@@ -140,14 +140,14 @@ object ManagementSection extends VacancyBasePage {
   private def selectLinkToProject(managementDetails: ManagementDetails): Unit =
     if (managementDetails.linkToProject.get) {
       clickOnRadioButton(linkToProjectYesId)
-      enterText(projectNameInputId, managementDetails.projectName.get)
+      enterValue(projectNameInputId, managementDetails.projectName.get)
     } else clickOnRadioButton(linkToProjectNoId)
 
   private def enterComplaintsProcess(managementDetails: ManagementDetails): Unit =
-    enterText(complaintsProcessInputId, managementDetails.deptComplaintsProcess.get)
+    enterValue(complaintsProcessInputId, managementDetails.deptComplaintsProcess.get)
 
   private def enterVacancyComments(managementDetails: ManagementDetails): Unit =
-    enterText(vacancyCommentsInputId, managementDetails.vacancyComments.get)
+    enterValue(vacancyCommentsInputId, managementDetails.vacancyComments.get)
 
   private val management: Seq[ManagementDetails => Unit] = Seq(
     selectVeteransAndPrisonLeaversPosition,

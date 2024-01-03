@@ -17,7 +17,7 @@ class ApplicationSpec extends BaseFeatureSpec {
       fillNewCandidateDetails(REGISTER_CANDIDATE_HMRC)
 
       When("candidate completes the short form")
-      val vacancyName = "GCQACO - Consultant"
+      val vacancyName = "Security Consultant"
       val vacancyId   = "9416"
       fillShortFormDetails(SHORT_FORM_DATA_HMRC, Some(vacancyName), Some(vacancyId))
       confirmShortFormCompletion()

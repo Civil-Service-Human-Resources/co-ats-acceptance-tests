@@ -4,7 +4,7 @@ import org.openqa.selenium.{By, Keys, WebElement}
 import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXAppConvertedClosingDate, vXApplicationClosingDate, vXApplicationClosingTime, vXApplicationLiveDate, vXApplicationLiveTime, vXConvertedClosingDateTime, vXConvertedLiveDateTime, vacancyName}
 import uk.gov.co.test.ui.data.vx.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
-import uk.gov.co.test.ui.specs.TestData.eventually
+import uk.gov.co.test.ui.data.TestData.eventually
 
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter

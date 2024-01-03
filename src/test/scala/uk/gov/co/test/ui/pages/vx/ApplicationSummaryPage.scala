@@ -1,50 +1,84 @@
 package uk.gov.co.test.ui.pages.vx
 
 import org.openqa.selenium.By
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.applicationId
+import uk.gov.co.test.ui.data.TestData.eventually
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{applicationId, randomFirstName, randomLastName, vXInterviewNumber, vXJobInfoDepartment, vacancyId, vacancyName}
+import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.{candidateAcceptsOffer, confirmOfferAcceptedState}
+import uk.gov.co.test.ui.pages.v9.ProvisionalOfferPage.offerDecisionFlow
 import uk.gov.co.test.ui.pages.vx.DashboardPage.matchCriteria
-import uk.gov.co.test.ui.specs.TestData.eventually
 
 object ApplicationSummaryPage extends VacancyBasePage {
 
-  val dashboardPageTitle          = "Home : Civil Service Jobs - GOV.UK"
-  val applicationSummaryPageTitle = "Application Summary : Civil Service Jobs - GOV.UK"
-  val searchApplicationPath       = ".//*[@class='textlabel' and text() = 'Search Applications']"
-  val searchPath                  = "selected_option"
-  val searchInput                 = "search_input"
-  val matchingOption              = "matching_options"
-  val searchForId                 = "search_button"
-  val appIdPath                   = ".//*[@class='app_id']"
-  val preSiftEvaluationFormBarId  = "process_rule_but_468"
-  val completeSiftBarId           = "process_rule_but_18"
-  val progressBarId               = "process_rule_but_657"
-  val provisionalOfferOnlineBarId = "process_rule_but_3176"
-  val employmentHistoryBarId      = "process_rule_but_744"
-  val conditionalOfferBarId       = "process_rule_but_1024"
-  val withdrawApplicationBarId    = "process_rule_but_570"
-  val withdrawApplicationAtInterviewOneBarId    = "process_rule_but_511"
-  val updateApplicantBarId        = "process_rule_but_2008"
-  val emailVacancyHolderBarId     = "process_rule_but_2032"
-  val progressBarAfterPreSiftId   = "process_rule_but_155"
-  val rejectBarAfterPreSiftId     = "process_rule_but_154"
-  val withdrawBarId               = "process_rule_but_509"
-  val crcBarId                    = "process_rule_but_776"
-  val inviteToInterviewOneBarId                    = "process_rule_but_162"
-  val inviteToInterviewOneOfflineBarId                    = "process_rule_but_488"
-  val allBarItemsId               = "process_rules_bar"
-  val preSiftActionButtonsPath    = ".//*[@aria-label='Action Buttons']"
-  val siftEvaluationTabPath       = ".//span[@class='main-label' and text() = 'Sift evaluation']"
-  val commentsTabPath             = ".//span[@class='main-label' and text() = 'Comments']"
-  val vacancyAppliedDatePath      = ".//*[@id='collapse_panel']/span[2]"
-  var appSummaryFormId            = ""
-  def outcomeId                   = s"select2-${appSummaryFormId}_datafield_66487_1_1-container"
-  val messageIcon                 = ".//*[@class='msg_icon']"
+  val dashboardPageTitle              = "Home : Civil Service Jobs - GOV.UK"
+  val applicationSummaryPageTitle     = "Application Summary : Civil Service Jobs - GOV.UK"
+  val searchApplicationPath           = ".//*[@class='textlabel' and text() = 'Search Applications']"
+  val searchPath                      = "selected_option"
+  val searchInput                     = "search_input"
+  val matchingOption                  = "matching_options"
+  val searchForId                     = "search_button"
+  val appIdPath                       = ".//*[@class='app_id']"
+  val preSiftEvaluationFormBarId      = "process_rule_but_468"
+  val completeSiftBarId               = "process_rule_but_18"
+  val progressBarId                   = "process_rule_but_657"
+  val provisionalOfferOnlineBarId     = "process_rule_but_3176"
+  val provisionalOfferOfflineBarId    = "process_rule_but_725"
+  val employmentHistoryBarId          = "process_rule_but_744"
+  val conditionalOfferBarId           = "process_rule_but_1024"
+  val updateApplicantBarId            = "process_rule_but_2008"
+  val emailVacancyHolderBarId         = "process_rule_but_2032"
+  val progressBarAfterPreSiftId       = "process_rule_but_155"
+  val rejectBarAfterPreSiftId         = "process_rule_but_154"
+  val withdrawBarId                   = "process_rule_but_509"
+  val withdrawApplicationOnOfferBarId = "process_rule_but_570"
+  val updateApplicantTypeBarId        = "process_rule_but_2008"
+  val crcBarId                        = "process_rule_but_776"
+  val inviteToI1BarId                 = "process_rule_but_162"
+  val inviteToI2BarId                 = "process_rule_but_164"
+  val inviteToI3BarId                 = "process_rule_but_176"
+  val inviteToI4BarId                 = "process_rule_but_192"
+  val scheduleOfflineI1BarId          = "process_rule_but_488"
+  val scheduleOfflineI2BarId          = "process_rule_but_489"
+  val scheduleOfflineI3BarId          = "process_rule_but_490"
+  val scheduleOfflineI4BarId          = "process_rule_but_491"
+  val interviewNotBookedBarId         = "process_rule_but_484"
+  val scheduleI1BarId                 = "process_rule_but_23"
+  val completeI1EvaluationBarId       = "process_rule_but_579"
+  val completeI2EvaluationBarId       = "process_rule_but_580"
+  val completeI3EvaluationBarId       = "process_rule_but_581"
+  val completeI4EvaluationBarId       = "process_rule_but_582"
+  val noShowI1BarId                   = "process_rule_but_25"
+  val noShowI2BarId                   = "process_rule_but_166"
+  val noShowI3BarId                   = "process_rule_but_181"
+  val noShowI4BarId                   = "process_rule_but_197"
+  val uploadIDEditFeedbackBarId       = "process_rule_but_1462"
+  val uploadIDOnOfferBarId            = "process_rule_but_1064"
+  val progressI1EvaluationBarId       = "process_rule_but_703"
+  val progressI2EvaluationBarId       = "process_rule_but_704"
+  val progressI3EvaluationBarId       = "process_rule_but_1085"
+  val progressI4EvaluationBarId       = "process_rule_but_1086"
+  val withdrawAtInterviewBarId        = "process_rule_but_511"
+  val launchFullPecRecruiterFormBarId = "process_rule_but_731"
+  val scheduleI2BarId                 = "process_rule_but_34"
+  val offerDecisionBarId              = "process_rule_but_564"
+  val allBarItemsId                   = "process_rules_bar"
+  val preSiftActionButtonsPath        = ".//*[@aria-label='Action Buttons']"
+  val siftEvaluationTabPath           = ".//span[@class='main-label' and text() = 'Sift evaluation']"
+  val commentsTabPath                 = ".//span[@class='main-label' and text() = 'Comments']"
+  val summaryTabPath                  = ".//span[@class='main-label' and text() = 'Summary']"
+  val vacancyAppliedDatePath          = ".//*[@id='collapse_panel']/span[2]"
+  var appSummaryFormId                = ""
+  def outcomeId                       = s"select2-${appSummaryFormId}_datafield_66487_1_1-container"
+  val messageIcon                     = ".//*[@class='msg_icon']"
 
   private def dashboardPageCheck(): Unit =
     eventually(onPage(dashboardPageTitle))
 
   def searchForApplication(applicationId: String): Unit = {
     dashboardPageCheck()
+    searchApplicationId(applicationId)
+  }
+
+  def searchApplicationId(applicationId: String): Unit = {
     waitForVisibilityOfElementById(searchPath).click()
     waitForVisibilityOfElementByPath(searchApplicationPath).click()
     waitForVisibilityOfElementById(searchInput).sendKeys(applicationId)
@@ -71,42 +105,84 @@ object ApplicationSummaryPage extends VacancyBasePage {
     waitForDropdownOption(outcome).click()
   }
 
+  def moveAndAcceptOffer(): Unit = {
+    progressApplicationToOffer()
+    candidateAcceptsOffer()
+    offerDecisionFlow("Accept")
+    provisionalOfferAccepted()
+    confirmOfferAcceptedState()
+  }
+
   def progressApplicationToOffer(): Unit = {
-    waitForVisibilityOfElementById(progressBarId).click()
+    val newStatus = "Provisional Offer - Online"
+    if (!driver.findElements(By.id(progressBarId)).isEmpty) {
+      waitForVisibilityOfElementById(progressBarId).click()
+    }
     waitForVisibilityOfElementById(provisionalOfferOnlineBarId).click()
+    checkForNewValuePath(vacancyStatusPath, newStatus)
+    availableBarItems(
+      List(
+        offerDecisionBarId,
+        uploadIDOnOfferBarId,
+        withdrawApplicationOnOfferBarId,
+        updateApplicantTypeBarId,
+        emailVacancyHolderBarId
+      )
+    )
+    confirmCandidateSummary(newStatus)
   }
 
-  def siftCompletion(): Unit = {
-    val completeSift = waitForVisibilityOfElementById(completeSiftBarId)
-    availableBarItems(List(progressBarAfterPreSiftId, withdrawBarId))
-    checkVacancyStatus("Sift application")
-    completeSift.click()
-    waitForVisibilityOfElementByPath(siftEvaluationTabPath).isEnabled
-    extractTabFormId()
-//    selectOutcome("Progress")
-//    clickOn("submit_button")
-  }
-
-//  def checkForNewStatusUpdate(previousUpdate: String): Unit =
-//    while (waitForVisibilityOfStatusElementByPath(vacancyStatusPath).getText.endsWith(previousUpdate))
-//      println("Checking for status update")
-
-  def preSiftCompletion(): Unit = {
-    checkForNewStatus(vacancyStatusPath, "Pre-sift complete")
-    availableBarItems(List(progressBarAfterPreSiftId, rejectBarAfterPreSiftId, withdrawBarId))
-    waitForVisibilityOfElementById(progressBarAfterPreSiftId).click()
+  def provisionalOfferAccepted(): Unit = {
+    val newStatus = "Provisional Offer Accepted"
+    changeSystem("recruiter")
+    checkForNewValuePath(vacancyStatusPath, newStatus)
+    availableBarItems(
+      List(
+        launchFullPecRecruiterFormBarId,
+        withdrawApplicationOnOfferBarId,
+        uploadIDOnOfferBarId,
+        updateApplicantTypeBarId,
+        emailVacancyHolderBarId
+      )
+    )
+    confirmCandidateSummary(newStatus)
   }
 
   def siftEvaluation(): Unit = {
-    checkForNewStatus(vacancyStatusPath, "Sift Evaluation – Feedback Captured (Not Issued)")
+    val newStatus = "Sift Evaluation – Feedback Captured (Not Issued)"
+    checkForNewValuePath(vacancyStatusPath, newStatus)
     availableBarItems(List(progressBarId, withdrawBarId))
+    confirmCandidateSummary(newStatus, Some("restricted"))
     waitForVisibilityOfElementById(progressBarId).click()
   }
 
-  def interviewStageOneOnline(): Unit = {
-    checkForNewStatus(vacancyStatusPath, "Selected for Interview 1")
-    availableBarItems(List(inviteToInterviewOneBarId, inviteToInterviewOneOfflineBarId, withdrawApplicationAtInterviewOneBarId))
-    waitForVisibilityOfElementById(inviteToInterviewOneBarId).click()
+  def interviewEvaluation(): Unit = {
+    val newStatus = s"Interview ${vXInterviewNumber.head} - Feedback Captured (Not Issued)"
+    checkForNewValuePath(vacancyStatusPath, newStatus)
+    vXInterviewNumber.head match {
+      case "1" =>
+        availableBarItems(List(progressI1EvaluationBarId, uploadIDEditFeedbackBarId, withdrawAtInterviewBarId))
+        confirmCandidateSummary(newStatus)
+        waitForVisibilityOfElementById(progressI1EvaluationBarId).click()
+      case "2" =>
+        availableBarItems(
+          List(progressI2EvaluationBarId, withdrawAtInterviewBarId)
+        ) //TODO check to see why no uploadID bar
+        confirmCandidateSummary(newStatus)
+        waitForVisibilityOfElementById(progressI2EvaluationBarId).click()
+      case "3" =>
+        availableBarItems(
+          List(progressI3EvaluationBarId, withdrawAtInterviewBarId)
+        ) //TODO check to see why no uploadID bar
+        confirmCandidateSummary(newStatus)
+        waitForVisibilityOfElementById(progressI3EvaluationBarId).click()
+      case "4" =>
+        availableBarItems(
+          List(progressI4EvaluationBarId, withdrawAtInterviewBarId)
+        ) //TODO check to see why no uploadID bar
+        confirmCandidateSummary(newStatus)
+        waitForVisibilityOfElementById(progressI4EvaluationBarId).click()
+    }
   }
 
   def availableBarItems(expectedBarItems: List[String]): Unit = {
@@ -115,5 +191,46 @@ object ApplicationSummaryPage extends VacancyBasePage {
       for (barItem <- expectedBarItems)
         driver.findElement(By.id(barItem)).isDisplayed
     }
+  }
+
+  def interviewScheduled(): Unit = {
+    val newStatus = vXInterviewNumber.head match {
+      case "1" => "Interview 1 - scheduled"
+      case "2" => "Interview 2 - scheduled"
+      case "3" => "Interview 3 - scheduled"
+      case "4" => "Interview 4 - scheduled"
+    }
+    changeSystem("recruiter")
+    checkForNewValuePath(vacancyStatusPath, newStatus)
+    vXInterviewNumber.head match {
+      case "1" => availableBarItems(List(completeI1EvaluationBarId, noShowI1BarId, withdrawAtInterviewBarId))
+      case "2" => availableBarItems(List(completeI2EvaluationBarId, noShowI2BarId, withdrawAtInterviewBarId))
+      case "3" => availableBarItems(List(completeI3EvaluationBarId, noShowI3BarId, withdrawAtInterviewBarId))
+      case "4" => availableBarItems(List(completeI4EvaluationBarId, noShowI4BarId, withdrawAtInterviewBarId))
+    }
+    confirmCandidateSummary(newStatus)
+  }
+
+  private def checkCandidateSummary(eleNo: String): String = {
+    val ele = s"candidate_summary_entry_cand_summary_col_$eleNo"
+    waitForVisibilityOfElementById(ele).getText
+  }
+
+  def confirmCandidateSummary(newStatus: String, dataLevel: Option[String] = None): Unit = {
+    if (!waitForVisibilityOfElementByPath(summaryTabPath).isSelected) {
+      waitForVisibilityOfElementByPath(summaryTabPath).click()
+      refreshPage()
+    }
+    checkCandidateSummary("1") shouldEqual applicationId
+    checkCandidateSummary("2") shouldEqual (if (dataLevel.isDefined && dataLevel.get == "restricted") "Restricted Data"
+                                            else randomFirstName)
+    checkCandidateSummary("3") shouldEqual (if (dataLevel.isDefined && dataLevel.get == "restricted") "Restricted Data"
+                                            else randomLastName)
+    checkCandidateSummary("4") shouldEqual newStatus
+    checkCandidateSummary("5") shouldEqual vacancyId
+    checkCandidateSummary("6") shouldEqual vacancyName
+    checkCandidateSummary("7") shouldEqual vXJobInfoDepartment
+    checkCandidateSummary("8") shouldEqual (if (dataLevel.isDefined && dataLevel.get == "restricted") "Restricted Data"
+                                            else "External - Non Civil Servant / External")
   }
 }

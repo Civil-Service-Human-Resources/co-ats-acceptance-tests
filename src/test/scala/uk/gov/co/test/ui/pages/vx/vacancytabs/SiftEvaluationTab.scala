@@ -1,15 +1,14 @@
 package uk.gov.co.test.ui.pages.vx.vacancytabs
 
 import org.openqa.selenium.By
-import uk.gov.co.test.ui.data.vx.ApplicationDetails
 import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXBehavioursRequired, vXHowManyBehaviours, vXHowManySkills, vXListOfChosenBehaviours, vXListOfTechSkills, vXTechSkillsRequired}
-import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.{availableBarItems, completeSiftBarId, siftEvaluation, withdrawBarId}
+import uk.gov.co.test.ui.data.vx.{ApplicationDetails, Outcome}
+import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.applicationBeingReviewedState
+import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.{availableBarItems, completeSiftBarId, confirmCandidateSummary, progressBarAfterPreSiftId, siftEvaluation, withdrawBarId}
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.vacancyFormId
 
 import scala.collection.mutable.ListBuffer
-
-case class Outcome(score: Int, comment: Option[String] = None)
 
 case class SiftDetails(
   scoringGuide: String,
@@ -39,6 +38,7 @@ case class SiftDetails(
 object SiftEvaluationTab extends VacancyBasePage {
 
   private lazy val siftEvaluationTabPath      = ".//span[@class='main-label' and text() = 'Sift evaluation']"
+  val siftEvaluationStatus                    = "Sift application"
   var vXBehavioursTotalScore: ListBuffer[Int] = ListBuffer()
   var vXTechSkillsTotalScore: ListBuffer[Int] = ListBuffer()
   var vXCVAssessmentScore: Int                = 7
@@ -124,12 +124,14 @@ object SiftEvaluationTab extends VacancyBasePage {
     action().moveToElement(waitForDropdownOption(score.toString)).perform()
     waitForDropdownOption(score.toString).click()
     if (comment.isDefined) {
-      enterText(commentsId, comment.get)
+      enterValue(commentsId, comment.get)
     }
   }
 
   private def moveSiftEvaluationForm(): Unit = {
-    checkVacancyStatus("Sift application")
+    waitForVisibilityOfElementById(progressBarAfterPreSiftId).click()
+    checkForNewValuePath(vacancyStatusPath, siftEvaluationStatus)
+    confirmCandidateSummary(siftEvaluationStatus, Some("restricted"))
     moveVacancyOnViaTopBar(completeSiftBarId, siftEvaluationTabPath)
     availableBarItems(List(completeSiftBarId, withdrawBarId))
     waitForVisibilityOfElementById(siftEvaluationHeaderId).getText should endWith("Sift Evaluation")
@@ -410,7 +412,7 @@ object SiftEvaluationTab extends VacancyBasePage {
 
   private def enterOverallScore(siftDetails: SiftDetails): Unit = {
     waitForVisibilityOfElementById(overallScoreTitleId).getText shouldEqual "Overall score"
-    enterText(overallCommentsId, siftDetails.overallScoreComments)
+    enterValue(overallCommentsId, siftDetails.overallScoreComments)
     val overallScore = totalScore(vXBehavioursTotalScore) + totalScore(
       vXTechSkillsTotalScore
     ) + vXCVAssessmentScore + vXPersonalStatementScore
@@ -441,5 +443,6 @@ object SiftEvaluationTab extends VacancyBasePage {
     }
     clickOn(submitForm)
     siftEvaluation()
+    applicationBeingReviewedState()
   }
 }

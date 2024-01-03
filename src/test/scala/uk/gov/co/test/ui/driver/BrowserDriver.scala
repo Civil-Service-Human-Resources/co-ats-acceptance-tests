@@ -13,4 +13,5 @@ trait BrowserDriver extends LazyLogging {
   implicit lazy val driver: WebDriver = SingletonDriver.getInstance()
 
   def action()(implicit driver: WebDriver): Actions = new Actions(driver)
+
 }

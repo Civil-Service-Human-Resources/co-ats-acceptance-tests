@@ -3,8 +3,7 @@ package uk.gov.co.test.ui.pages.vx.vacancytabs
 import org.openqa.selenium.{By, WebElement}
 import uk.gov.co.test.ui.data.vx.ApplicationDetails
 import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{v9EmployedWithin3Years, v9FirstEmployerFromDate, v9FirstEmployerName}
-import uk.gov.co.test.ui.pages.v9.longform.UploadDocumentsPage.importFilesPath
-import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.employmentHistoryBarId
+import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.{employmentHistoryBarId, navigateToApplicationSummary}
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.vacancyFormId
 
@@ -88,7 +87,7 @@ object EmploymentHistoryTab extends VacancyBasePage {
     waitForVisibilityOfElementById(everBeenEmployedId).getText    should endWith(s"$anyEmployment3Years")
     waitForVisibilityOfElementById(employerOneNameId).getText     should endWith(v9FirstEmployerName)
     waitForVisibilityOfElementById(employerOneDateFromId).getText should endWith(
-      s"${formatEmploymentDate(v9FirstEmployerFromDate)}"
+      s"${changeDateFormat(v9FirstEmployerFromDate, "long")}"
     )
     //TODO Uncomment once issue is fixed and it appears
 //    waitForVisibilityOfElementById(employerOneDateToId).getText should endWith(
@@ -247,12 +246,12 @@ object EmploymentHistoryTab extends VacancyBasePage {
           clickOnRadioButton(historyCheckPassedId)
         case "Refer to risk assessment" =>
           clickOnRadioButton(referToRiskAssessmentId)
-          enterText(riskAssessmentCommentsInputId, historyDetails.riskAssessmentComments)
+          enterValue(riskAssessmentCommentsInputId, historyDetails.riskAssessmentComments)
       }
     }
 
   private def enterInternalNotes(historyDetails: HistoryDetails): Unit =
-    enterText(internalNotesInputId, historyDetails.internalNotes)
+    enterValue(internalNotesInputId, historyDetails.internalNotes)
 
   private def selectAdditionalInfoReceived(historyDetails: HistoryDetails): Unit =
     if (historyDetails.historyCheckOutcome) {
@@ -270,6 +269,7 @@ object EmploymentHistoryTab extends VacancyBasePage {
   )
 
   def EmploymentHistoryVXFlow(applicationDetails: ApplicationDetails): Unit = {
+    navigateToApplicationSummary()
     completeVXEmploymentHistory()
     history.foreach { f =>
       f(applicationDetails.historyDetails)

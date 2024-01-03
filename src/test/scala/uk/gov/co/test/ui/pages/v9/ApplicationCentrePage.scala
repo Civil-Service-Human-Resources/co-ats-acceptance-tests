@@ -2,10 +2,10 @@ package uk.gov.co.test.ui.pages.v9
 
 import org.openqa.selenium.{By, WebElement}
 import org.scalatest.concurrent.Eventually.eventually
-import uk.gov.co.test.ui.conf.TestConfiguration
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{v9AdjustmentsForTests, v9ReasonableAdjustments, vXAnyOnlineTests, vacancyName}
-import uk.gov.co.test.ui.pages.v9.ApplicationsPage.reviewUpdateValue
-import uk.gov.co.test.ui.pages.vx.DashboardPage.{contactEmailVxConfig, switchToV9Test}
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{randomFirstName, randomLastName, v9AdjustmentsForTests, v9ReasonableAdjustments, vXAnyOnlineTests, vXInterviewFourType, vXInterviewLocation, vXInterviewLongDate, vXInterviewNumber, vXInterviewOneType, vXInterviewThreeType, vXInterviewTwoType, vXSlotTwoStartTime, vacancyName}
+import uk.gov.co.test.ui.pages.v9.ApplicationsPage.{confirmStatusOnApplicationPage, reviewUpdateOnApplicationPage}
+import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.changeSystem
+import uk.gov.co.test.ui.pages.vx.DashboardPage.contactEmailVxConfig
 
 object ApplicationCentrePage extends CivilServiceJobsBasePage {
 
@@ -22,6 +22,7 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
   val continueApplicationButtonPath = ".//input[@value='Continue application']"
   val offerDecisionButtonPath       = ".//input[@value='Offer Decision']"
   val feedbackButtonPath            = ".//input[@value='Feedback']"
+  val scheduleInterviewButtonPath   = ".//input[@value='Schedule interview']"
   val startTestButtonPath           = ".//input[@value='Start Test']"
   val resumeTestButtonPath          = ".//input[@value='Resume Test']"
   val pecStartButtonPath            = ".//input[@value='Begin pre-employment checks']"
@@ -45,6 +46,9 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
 
   def advertDetailsFunction(): WebElement =
     waitForVisibilityOfElementByPath(advertDetailsButtonPath)
+
+  def scheduleInterviewFunction(): WebElement =
+    waitForVisibilityOfElementByPath(scheduleInterviewButtonPath)
 
   def withdrawApplicationFunction(): WebElement =
     waitForVisibilityOfElementByPath(withdrawApplicationButtonPath)
@@ -72,9 +76,9 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
 
   def confirmShortFormCompletion(): Unit = {
     applicationCentrePageCheck()
+    continueApplicationFunction().isEnabled
     advertDetailsFunction().isEnabled
     withdrawApplicationFunction().isEnabled
-    continueApplicationFunction().isEnabled
     applicationForVacancyText shouldEqual s"Application For $vacancyName"
     getApplicationState       shouldEqual "Application status: Application started"
     getApplicationConfirmation     should include(
@@ -84,14 +88,15 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
 
   def confirmShortFormCompletionNoLongForm(): Unit = {
     applicationCentrePageCheck()
-    advertDetailsFunction().isEnabled
     withdrawApplicationFunction().isEnabled
+    advertDetailsFunction().isEnabled
     applicationForVacancyText  shouldEqual s"Application For $vacancyName"
     getApplicationState        shouldEqual "Application status: Application received"
     getApplicationConfirmation shouldEqual "Your application has been received.\nWe’ll email you about your application’s progress, or you can check this in your Application Centre."
   }
 
   def confirmLongFormCompletion(): Unit = { //TODO check last text doesn't match with confirmLongFormPECCompletion()
+    reviewUpdateOnApplicationPage()
     applicationCentrePageCheck()
     advertDetailsFunction().isEnabled
     withdrawApplicationFunction().isEnabled
@@ -107,7 +112,8 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
       }
     } else {
       getApplicationState        shouldEqual "Application status: Application received"
-      getApplicationConfirmation shouldEqual "Your application has been received.\nWe’ll email you about your application’s progress, or you can check this in your Application Centre."
+      getApplicationConfirmation shouldEqual """Your application has been received.
+                                               |We'll email you updates on the progress of your application or you can check the progress here in your account.""".stripMargin
     }
   }
 
@@ -130,45 +136,202 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
     }
   }
 
-  def confirmProvisionalOffer(): Unit = {
+  def confirmProvisionalOfferState(): Unit = {
+    val status = "Provisional offer"
+    changeSystem("candidate")
+    confirmStatusOnApplicationPage(status)
     applicationCentrePageCheck()
-    advertDetailsFunction().isEnabled
-    withdrawApplicationFunction().isEnabled
+    offerDecisionFunction().isEnabled
     feedbackFunction().isEnabled
+    withdrawApplicationFunction().isEnabled
+    advertDetailsFunction().isEnabled
     applicationForVacancyText  shouldEqual s"Application For $vacancyName"
-    getApplicationState        shouldEqual "Application status: Provisional offer"
-    getApplicationConfirmation shouldEqual "Congratulations, we'd like to make you a provisional job offer.\nPlease click \"Offer Decision\" to accept this offer.\nWe'll then conduct some pre-employment checks before we consider making you a formal job offer.\nPlease do not resign from your current employment until you‘ve been made a formal offer.\nYou can see any feedback that's been given by clicking the \"Feedback\" button.\nIf you're no longer interested in this job please withdraw your application."
+    getApplicationState        shouldEqual s"Application status: $status"
+    getApplicationConfirmation shouldEqual """Congratulations, we'd like to make you a provisional job offer.
+                                             |Please click "Offer Decision" to accept this offer.
+                                             |We'll then conduct some pre-employment checks before we consider making you a formal job offer.
+                                             |Please do not resign from your current employment until you‘ve been made a formal offer.
+                                             |You can see any feedback that's been given by clicking the "Feedback" button.
+                                             |If you're no longer interested in this job please withdraw your application.""".stripMargin
   }
 
   def navigateToApplicationsPage(): Unit =
     waitForVisibilityOfElementByPath(applicationLinkPath).click()
 
   def candidateAcceptsOffer(): Unit = {
-    switchToV9Test()
-    driver.navigate().to(TestConfiguration.urlHost("vxconfig") + "/vx/lang-en-GB/candidate/application")
-    reviewUpdateValue().click()
-    confirmProvisionalOffer()
+    confirmProvisionalOfferState()
     offerDecisionFunction().click()
   }
 
-  def confirmOfferAccepted(): Unit = {
+  def confirmOfferAcceptedState(): Unit = {
+    val newStatus = "Offer accepted"
+    changeSystem("candidate")
+    confirmStatusOnApplicationPage(newStatus)
     applicationCentrePageCheck()
-    advertDetailsFunction().isEnabled
-    withdrawApplicationFunction().isEnabled
-    feedbackFunction().isEnabled
     pecStartFunction().isEnabled
+    feedbackFunction().isEnabled
+    withdrawApplicationFunction().isEnabled
+    advertDetailsFunction().isEnabled
     applicationForVacancyText  shouldEqual s"Application For $vacancyName"
-    getApplicationState        shouldEqual "Application status: Offer accepted"
-    getApplicationConfirmation shouldEqual "We're delighted that you have accepted our job offer.\nAs part of the onboarding process we require additional information."
+    getApplicationState        shouldEqual s"Application status: $newStatus"
+    getApplicationConfirmation shouldEqual """We're delighted that you have accepted our job offer.
+                                             |As part of the onboarding process we require additional information.""".stripMargin
   }
 
-  def confirmPecSubmission(): Unit = {
+
+  def confirmPecSubmissionState(): Unit = {
+    val status = "Pre-employment checks"
+    changeSystem("candidate")
+    confirmStatusOnApplicationPage(status)
     applicationCentrePageCheck()
     advertDetailsFunction().isEnabled
     feedbackFunction().isEnabled
     withdrawApplicationFunction().isEnabled
     applicationForVacancyText  shouldEqual s"Application For $vacancyName"
-    getApplicationState        shouldEqual "Application status: Pre-employment checks"
+    getApplicationState        shouldEqual s"Application status: $status"
     getApplicationConfirmation shouldEqual "Great news, you've accepted your provisional offer and your pre-employment checks are underway.\nWe are still checking:\nyour employment history, including any gaps\nwhether you have any convictions\n\n\nWe will send an email notification to you once all pre-employment checks are complete."
+  }
+
+  def applicationBeingReviewedPreSiftState(): Unit = {
+    val status = "Application being reviewed"
+    changeSystem("candidate")
+    confirmStatusOnApplicationPage(status)
+    advertDetailsFunction().isEnabled
+    withdrawApplicationFunction().isEnabled
+    applicationForVacancyText  shouldEqual s"Application For $vacancyName"
+    getApplicationState        shouldEqual s"Application status: $status"
+    getApplicationConfirmation shouldEqual
+      """Your application is being reviewed.
+        |If you are no longer interested in this job, you can withdraw your application at any time.""".stripMargin
+    switchToOtherWindow
+  }
+
+  def applicationBeingReviewedState(): Unit = {
+    val status = "Application being reviewed"
+    changeSystem("candidate")
+    confirmStatusOnApplicationPage(status)
+    feedbackFunction().isEnabled
+    withdrawApplicationFunction().isEnabled
+    advertDetailsFunction().isEnabled
+    applicationForVacancyText  shouldEqual s"Application For $vacancyName"
+    getApplicationState        shouldEqual s"Application status: $status"
+    getApplicationConfirmation shouldEqual """The selection panel are reviewing your application.
+                                             |We'll email you updates on the progress of your application or you can check the progress here in your account.""".stripMargin
+    switchToOtherWindow
+  }
+
+  def invitedForInterviewState(): Unit = {
+    val status     = vXInterviewNumber.head match {
+      case "1" => "Invited for interview"
+      case "2" => "Invited for second interview"
+      case "3" => "Invited for third interview"
+      case "4" => "Invited for fourth interview"
+    }
+    val inviteType = vXInterviewNumber.head match {
+      case "1" => s"for a ${vXInterviewOneType.toLowerCase} interview"
+      case "2" => s"to an ${vXInterviewTwoType.toLowerCase}"
+      case "3" => s"for a ${vXInterviewThreeType.toLowerCase} interview"
+      case "4" => s"for an ${vXInterviewFourType.toLowerCase}"
+    }
+    // TODO to bypass grammatical bug, this function was created
+    val schedule   = vXInterviewNumber.head match {
+      case "1" => s"'Schedule interview'"
+      case "2" => s"\'Schedule interview\""//TODO requires fix to align with other fields
+      case "3" => s"'Schedule interview'"
+      case "4" => s"'Schedule interview'"
+    }
+    changeSystem("candidate")
+    confirmStatusOnApplicationPage(status)
+    applicationCentrePageCheck()
+    scheduleInterviewFunction().isEnabled
+    feedbackFunction().isEnabled
+    withdrawApplicationFunction().isEnabled
+    advertDetailsFunction().isEnabled
+    applicationForVacancyText shouldEqual s"Application For $vacancyName"
+    getApplicationState        shouldEqual s"Application status: $status"
+    getApplicationConfirmation shouldEqual s"""Congratulations, we'd like to invite you $inviteType.
+                                             |To book your interview slot click $schedule.
+                                             |To get your preferred time we recommend you book as early as possible.
+                                             |If you're no longer interested in this job, please withdraw your application.""".stripMargin //TODO an issue with speech mark on I2 'Schedule interview"
+  }
+
+  def interviewSlotBookedState(): Unit = {
+    val status          = vXInterviewNumber.head match {
+      case "1" => "Interview slot booked"
+      case "2" => "Second interview slot booked"
+      case "3" => "Scheduled for third interview" //TODO different wording structure compared to I2
+      case "4" => "Scheduled for fourth interview"
+    }
+    val appConfirmation = vXInterviewNumber.head match {
+      case "1" =>
+        s"""Your ${vXInterviewOneType.toLowerCase} interview slot is booked and details are shown below:
+                     |Date: $vXInterviewLongDate
+                     |Time: ${vXSlotTwoStartTime.replaceAll("[A-Za-z ]", "").filterNot(_.isWhitespace)}
+                     |We will send details on how to access your ${vXInterviewOneType.toLowerCase} interview separately when they are available.
+                     |Autotest - Instructions for $randomFirstName $randomLastName for interview ${vXInterviewNumber.head}
+                     |If you're no longer interested in this job, please withdraw your application.""".stripMargin
+      case "2" =>
+        s"""Your ${vXInterviewTwoType.toLowerCase} slot is booked and details are shown below:
+                     |Date: $vXInterviewLongDate
+                     |Time: ${vXSlotTwoStartTime.replaceAll("[A-Za-z ]", "").filterNot(_.isWhitespace)}
+                     |Autotest - Instructions for $randomFirstName $randomLastName for interview ${vXInterviewNumber.head}
+                     |If you're no longer interested in this job, please withdraw your application.""".stripMargin
+      case "3" =>
+        s"""Your ${vXInterviewThreeType.toLowerCase} interview slot is booked and details are shown below:
+                     |Date: $vXInterviewLongDate
+                     |Time: ${vXSlotTwoStartTime.replaceAll("[A-Za-z ]", "").filterNot(_.isWhitespace)}
+                     |We will send details on how to access your ${vXInterviewThreeType.toLowerCase} interview separately when they are available.
+                     |Autotest - Instructions for $randomFirstName $randomLastName for interview ${vXInterviewNumber.head}
+                     |If you're no longer interested in this job, please withdraw your application.""".stripMargin
+      case "4" =>
+        s"""Your ${vXInterviewFourType.toLowerCase} slot is booked and details are shown below:
+                     |Date: $vXInterviewLongDate
+                     |Time: ${vXSlotTwoStartTime.replaceAll("[A-Za-z ]", "").filterNot(_.isWhitespace)}
+                     |Location: $vXInterviewLocation
+                     |Please arrive at least twenty minutes before your interview and make sure you bring some form of picture ID, such as your driving licence or passport.
+                     |Autotest - Instructions for $randomFirstName $randomLastName for interview ${vXInterviewNumber.head}
+                     |If you're no longer interested in this job, please withdraw your application.""".stripMargin
+    }
+    changeSystem("candidate")
+    confirmStatusOnApplicationPage(status)
+    applicationCentrePageCheck()
+    feedbackFunction().isEnabled
+    withdrawApplicationFunction().isEnabled
+    advertDetailsFunction().isEnabled
+    applicationForVacancyText shouldEqual s"Application For $vacancyName"
+    getApplicationState        shouldEqual s"Application status: $status"
+    getApplicationConfirmation shouldEqual appConfirmation
+  }
+
+  def applicationBeingReviewedAfterInterviewState(): Unit = {
+    val status = "Application being reviewed"
+    changeSystem("candidate")
+    confirmStatusOnApplicationPage(status)
+    applicationCentrePageCheck()
+    feedbackFunction().isEnabled
+    withdrawApplicationFunction().isEnabled
+    advertDetailsFunction().isEnabled
+    applicationForVacancyText  shouldEqual s"Application For $vacancyName"
+    getApplicationState        shouldEqual s"Application status: $status"
+    getApplicationConfirmation shouldEqual
+      s"""Thank you for attending your recent interview.
+         |The selection panel are reviewing your application.
+         |We'll email you updates on the progress of your application or you can check the progress here in your account.""".stripMargin
+  }
+
+  def successfulAtInterviewState(): Unit = {
+    val status = "Successful at Interview"
+    changeSystem("candidate")
+    confirmStatusOnApplicationPage(status)
+    applicationCentrePageCheck()
+    feedbackFunction().isEnabled
+    advertDetailsFunction().isEnabled
+    withdrawApplicationFunction().isEnabled
+    applicationForVacancyText  shouldEqual s"Application For $vacancyName"
+    getApplicationState        shouldEqual s"Application status: $status"
+    getApplicationConfirmation shouldEqual
+      s"""Congratulations you have been successful at interview.
+         |We will be in contact shortly with more information about the next steps.""".stripMargin
+    changeSystem("recruiter")
   }
 }

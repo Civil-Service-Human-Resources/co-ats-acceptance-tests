@@ -66,7 +66,8 @@ object INSOLVENCY_APPROVAL
     extends ApprovalDetails(
       true,
       "Autotest - budgetary authorisation info",
-      "Autotest - Cost centre (optional)"
+      "Autotest - Cost centre (optional)",
+      "Test-T&Cs.pdf"
     )
 
 object INSOLVENCY_RESERVE_LIST

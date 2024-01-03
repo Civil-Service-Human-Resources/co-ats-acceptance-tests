@@ -39,12 +39,4 @@ object ShortFormFlow extends CivilServiceJobsBasePage {
       confirmShortFormCompletion()
     } else confirmShortFormCompletionNoLongForm()
   }
-
-  //  def fillShortFormDetailsOnly(shortFormDetails: ShortFormDetails): Unit = {
-//    jobSearchAndApplyFlow(vacancyName, vacancyId, "what")
-//    shortForm.foreach { f =>
-//      f(shortFormDetails)
-//    }
-//    clickOn(submitForm)
-//  }
 }

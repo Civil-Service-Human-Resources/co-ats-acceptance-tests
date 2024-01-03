@@ -43,6 +43,7 @@ trait VacancyBasePage extends Matchers with BasePage with BrowserDriver {
   val vacancyStatusPath            = ".//*[@id='collapse_panel']/span[1]"
   val submitForm                   = "submit_button"
 
+  def candidateSummaryId(noEle: String)        = s"candidate_summary_entry_cand_summary_col_$noEle"
   def findUsernameField: util.List[WebElement] = driver.findElements(By.id("user"))
   def username(): TextField                    = textField("user")
   def password(): PasswordField                = pwdField("password")
@@ -125,7 +126,7 @@ trait VacancyBasePage extends Matchers with BasePage with BrowserDriver {
     waitForDropdownOptionByText(listValues).click()
   }
 
-  def enterText(inputId: String, text: String): Unit = {
+  def enterValue(inputId: String, text: String): Unit = {
     val enterOption = waitForVisibilityOfElementById(inputId)
     enterOption.clear()
     enterOption.sendKeys(text)
@@ -188,12 +189,12 @@ trait VacancyBasePage extends Matchers with BasePage with BrowserDriver {
   }
 
   def switchToVXConfig(): Unit = {
-    switchToAnotherWindow()
+    switchToOtherWindow()
     loginWithRecruiterDetails(RECRUITER)
   }
 
   def switchToV9Test(): Unit = {
-    switchToAnotherWindow()
+    switchToOtherWindow()
     navigateToV9Test()
     if (!v9SearchCookiesById().isEmpty) v9AcceptAllCookies()
     checkV9LogoutState()
@@ -215,5 +216,34 @@ trait VacancyBasePage extends Matchers with BasePage with BrowserDriver {
     waitForVisibilityOfElementById(selectId).click()
     action().moveToElement(waitForDropdownOption(selectOption)).perform()
     waitForDropdownOption(selectOption).click()
+  }
+
+  def splitTime(givenTime: String): (String, String) = {
+    val time  = givenTime
+    val parts = time.split(":")
+    val _hour = parts(0)
+    val _min  = parts(1)
+    (_hour, _min)
+  }
+
+  def enterTime(id: String, value: String): Unit = {
+    val timeValue = new Select(waitForVisibilityOfElementById(id))
+    timeValue.selectByVisibleText(value)
+  }
+
+  def changeDateFormat(dateToFormat: String, formatStyle: String): String = {
+    val formatter1 = DateTimeFormatter.ofPattern("d MMMM yyyy")
+    val formatter2 = DateTimeFormatter.ofPattern("d/MM/uuuu")
+    val formatter3 = DateTimeFormatter.ofPattern("d MMM yyyy")
+    if (formatStyle == "short") {
+      val formattedDate = LocalDate.parse(dateToFormat, formatter1)
+      formattedDate.format(formatter2)
+    } else if (formatStyle == "long") {
+      val formattedDate = LocalDate.parse(dateToFormat, formatter2)
+      formattedDate.format(formatter1)
+    } else {
+      val formattedDate = LocalDate.parse(dateToFormat, formatter2)
+      formattedDate.format(formatter3)
+    }
   }
 }
