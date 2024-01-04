@@ -188,6 +188,8 @@ trait VacancyBasePage extends Matchers with BasePage with BrowserDriver {
     addExternalPosting()
   }
 
+  def repostVacancy(): Unit = {}
+
   def switchToVXConfig(): Unit = {
     switchToOtherWindow()
     loginWithRecruiterDetails(RECRUITER)
@@ -246,4 +248,14 @@ trait VacancyBasePage extends Matchers with BasePage with BrowserDriver {
       formattedDate.format(formatter3)
     }
   }
+
+  def deleteTextFromField(fieldId: WebElement): Unit =
+    if (fieldId.getText.nonEmpty) {
+      if (!getOs.contains("mac")) {
+        fieldId.sendKeys(Keys.CONTROL, "a")
+      } else {
+        fieldId.sendKeys(Keys.COMMAND, "a")
+      }
+      fieldId.sendKeys(Keys.BACK_SPACE)
+    }
 }

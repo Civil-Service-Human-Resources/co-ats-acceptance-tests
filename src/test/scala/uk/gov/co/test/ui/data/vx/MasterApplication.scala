@@ -205,7 +205,7 @@ object APPLICATION_INTERVIEW_ONE_EVALUATION
       experience = Outcome(91, Some("Autotest - I1 - experience comments")),
       false,
       101,
-      "Progress",
+      "Hold",
       s"Autotest - I1 - $randomFirstName $randomLastName overall performed very well!",
       "Test-T&Cs.pdf",
       declarationStatement = """Declaration

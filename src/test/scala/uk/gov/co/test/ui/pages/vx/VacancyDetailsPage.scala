@@ -46,8 +46,8 @@ object VacancyDetailsPage extends VacancyBasePage {
   def locationsToChooseId                  = s"select2-${vacancyFormId}_datafield_155836_1_1-container"
 
   //vX job information
-  var vacancyId               = "9564"
-  var vacancyName             = "HMRC - Technology Technician"
+  var vacancyId               = ""
+  var vacancyName             = ""
   var vacancyFormId           = ""
   var vXDepartment            = ""
   var vXBusinessArea          = ""
@@ -76,7 +76,7 @@ object VacancyDetailsPage extends VacancyBasePage {
   private def dashboardPageCheck(): Unit =
     eventually(onPage(dashboardPageTitle))
 
-  private def extractVacancyId(): String = {
+  def extractVacancyId(): String = {
     vacancyId = waitForVisibilityOfElementByPath(appIdPath).getText
     vacancyId
   }
@@ -99,7 +99,7 @@ object VacancyDetailsPage extends VacancyBasePage {
     println(vacancyName)
   }
 
-  private def navigateToVacancyForms(): Unit = {
+  def navigateToVacancyForms(): Unit = {
     waitForVisibilityOfElementByPath(vacancyFormsPath).click()
     waitForVisibilityOfElementByPath(previewAdvertButtonPath).isDisplayed
     extractTabFormId()
@@ -178,7 +178,7 @@ object VacancyDetailsPage extends VacancyBasePage {
     println(vXCostCentre)
   }
 
-  private def extractReserveListRequired(): Unit = {
+   private def  extractReserveListRequired(): Unit = {
     val reserve = waitForVisibilityOfElementById(reserveListRequiredId).findElement(By.xpath(checkLabelPath))
     if (reserve.getText == "Yes") {
       vXReserveListRequired = true
@@ -187,8 +187,10 @@ object VacancyDetailsPage extends VacancyBasePage {
   }
 
   private def extractReserveLength(): Unit = {
-    vXReserveListLength = waitForVisibilityOfElementById(reserveListLengthId).getText
-    println(vXReserveListLength)
+    if (vXReserveListRequired) {
+      vXReserveListLength = waitForVisibilityOfElementById(reserveListLengthId).getText
+      println(vXReserveListLength)
+    }
   }
 
   private def extractLocationType(): Unit = {
@@ -257,7 +259,7 @@ object VacancyDetailsPage extends VacancyBasePage {
     extractCostCentre()
   }
 
-  private def reserveList(): Unit = {
+  def reserveList(): Unit = {
     extractReserveListRequired()
     extractReserveLength()
   }

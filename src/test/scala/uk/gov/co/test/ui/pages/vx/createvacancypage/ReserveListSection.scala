@@ -1,9 +1,11 @@
 package uk.gov.co.test.ui.pages.vx.createvacancypage
 
 import org.openqa.selenium.By
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.vacancyId
 import uk.gov.co.test.ui.data.vx.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
-import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.vacancyFormId
+import uk.gov.co.test.ui.pages.vx.VacancyDetailsPage.{extractTabFormId, navigateToVacancyForms, reserveList, searchForVacancy, vXReserveListLength, vXReserveListRequired}
+import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.{extractFormId, vacancyFormId}
 
 case class ReserveListDetails(
   reserveList: Boolean,
@@ -19,6 +21,7 @@ object ReserveListSection extends VacancyBasePage {
   def reserveListLengthId   = s"select2-${vacancyFormId}_datafield_154637_1_1-container"
   def approvalToExtendYesId = s"${vacancyFormId}_datafield_177141_1_1_1"
   def approvalToExtendNoId  = s"${vacancyFormId}_datafield_177141_1_1_2"
+  def extendLengthId        = s"select2-${vacancyFormId}_datafield_177145_1_1-container"
 
   def selectReserveList(reserveListDetails: ReserveListDetails): Unit = {
     scrollToElement(By.id(reserveListId))
@@ -51,4 +54,31 @@ object ReserveListSection extends VacancyBasePage {
     reserve.foreach { f =>
       f(newVacancyDetails.reserveListDetails)
     }
+
+  def changeReserveListDetails(
+    reserveLength: String,
+    approvalToExtend: Option[Boolean] = None,
+    extendLength: Option[String] = None
+  ): Unit = {
+    searchForVacancy(vacancyId)
+    navigateToVacancyForms()
+    val formId = waitForVisibilityOfElementByPath(".//form[@class='form-horizontal']")
+    vacancyFormId = formId.getAttribute("id")
+    reserveList()
+    if (!vXReserveListRequired || vXReserveListLength != reserveLength) {
+      scrollToElement(By.id(reserveListId))
+      clickOnRadioButton(reserveListYesId)
+      lengthOfReserveList(reserveLength)
+      if (reserveLength == "12 Months") {
+        if (approvalToExtend.get) {
+          clickOnRadioButton(approvalToExtendYesId)
+          waitForVisibilityOfElementById(reserveListLengthId).click()
+          action().moveToElement(waitForDropdownOption(extendLength.get)).perform()
+          waitForDropdownOption(extendLength.get).click()
+        } else clickOnRadioButton(approvalToExtendNoId)
+      }
+      scrollToElement(By.id(submitForm))
+      clickOn(submitForm)
+    }
+  }
 }

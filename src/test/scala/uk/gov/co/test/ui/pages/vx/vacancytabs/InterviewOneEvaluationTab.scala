@@ -747,6 +747,8 @@ object InterviewOneEvaluationTab extends VacancyBasePage {
     }
     clickOn(submitForm)
     interviewEvaluation()
-    applicationBeingReviewedAfterInterviewState()
+    if (applicationDetails.interviewOneDetails.finalOutcome == "Hold") {
+      applicationBeingReviewedAfterInterviewState()
+    } else applicationBeingReviewedAfterInterviewState()
   }
 }

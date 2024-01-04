@@ -125,7 +125,7 @@ object BasicDetailsSection extends VacancyBasePage {
     vXApplicationLiveTime
   }
 
-  private def extractFormId(): String = {
+  def extractFormId(): String = {
     waitForTemplateLoad()
     val formClass = driver.findElement(By.className(extractFormClass))
     vacancyFormId = formClass.getAttribute("id")
