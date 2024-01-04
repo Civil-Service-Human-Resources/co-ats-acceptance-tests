@@ -2,8 +2,10 @@ package uk.gov.co.test.ui.specs.vx
 
 import uk.gov.co.test.ui.data.v9.applicants.MASTER_REGISTER_CANDIDATE
 import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vacancyId, vacancyName}
-import uk.gov.co.test.ui.flows.e2e.FullPecFlow.completeFullPecFlow
+import uk.gov.co.test.ui.flows.e2e.ReserveListFlow.reserveListFlow
 import uk.gov.co.test.ui.flows.v9.RegisterCandidateFlow.fillNewCandidateDetails
+import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.applicationInReserveState
+import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.reserveExpiryList
 import uk.gov.co.test.ui.pages.vx.createvacancypage.ReserveListSection.changeReserveListDetails
 import uk.gov.co.test.ui.pages.vx.vacancytabs.ExternalPostingsTab.repostExternalPosting
 import uk.gov.co.test.ui.specs.BaseFeatureSpec
@@ -21,9 +23,11 @@ class reserveListSpec extends BaseFeatureSpec {
 
       When("candidate registers application and is held in reserve offer")
       fillNewCandidateDetails(MASTER_REGISTER_CANDIDATE)
-      completeFullPecFlow()
+      reserveListFlow()
 
       Then("the candidate is reserve offer expires after the reserve duration")
+      reserveExpiryList()
+      applicationInReserveState()
     }
 
     Scenario("VX: Recruiter Checks 6 Months Reserve List", RunInVX) {
@@ -33,7 +37,7 @@ class reserveListSpec extends BaseFeatureSpec {
 
       When("candidate registers application and is held in reserve offer")
       fillNewCandidateDetails(MASTER_REGISTER_CANDIDATE)
-      completeFullPecFlow()
+      reserveListFlow()
 
       Then("the candidate is reserve offer expires after the reserve duration")
     }
@@ -45,7 +49,7 @@ class reserveListSpec extends BaseFeatureSpec {
 
       When("candidate registers application and is held in reserve offer")
       fillNewCandidateDetails(MASTER_REGISTER_CANDIDATE)
-      completeFullPecFlow()
+      reserveListFlow()
 
       Then("the candidate is reserve offer expires after the reserve duration")
     }
@@ -57,7 +61,7 @@ class reserveListSpec extends BaseFeatureSpec {
 
       When("candidate registers application and is held in reserve offer")
       fillNewCandidateDetails(MASTER_REGISTER_CANDIDATE)
-      completeFullPecFlow()
+      reserveListFlow()
 
       Then("the candidate is reserve offer expires after the reserve duration")
     }
@@ -69,7 +73,7 @@ class reserveListSpec extends BaseFeatureSpec {
 
       When("candidate registers application and is held in reserve offer")
       fillNewCandidateDetails(MASTER_REGISTER_CANDIDATE)
-      completeFullPecFlow()
+      reserveListFlow()
 
       Then("the candidate is reserve offer expires after the reserve duration")
     }

@@ -19,6 +19,6 @@ object ReserveListFlow extends CivilServiceJobsBasePage {
     PreSiftEvaluationFlow(APPLICATION_DATA)
     SiftEvaluationFlow(APPLICATION_DATA)
     completeAllInterviews()
-    moveAndAcceptOffer()
+//    moveAndAcceptOffer()
   }
 }

@@ -4,7 +4,6 @@ import org.openqa.selenium.{By, WebElement}
 import org.scalatest.concurrent.Eventually.eventually
 import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{randomFirstName, randomLastName, v9AdjustmentsForTests, v9ReasonableAdjustments, vXAnyOnlineTests, vXInterviewFourType, vXInterviewLocation, vXInterviewLongDate, vXInterviewNumber, vXInterviewOneType, vXInterviewThreeType, vXInterviewTwoType, vXSlotTwoStartTime, vacancyName}
 import uk.gov.co.test.ui.pages.v9.ApplicationsPage.{confirmStatusOnApplicationPage, reviewUpdateOnApplicationPage}
-import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.changeSystem
 import uk.gov.co.test.ui.pages.vx.DashboardPage.contactEmailVxConfig
 
 object ApplicationCentrePage extends CivilServiceJobsBasePage {
@@ -317,6 +316,24 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
       s"""Thank you for attending your recent interview.
          |The selection panel are reviewing your application.
          |We'll email you updates on the progress of your application or you can check the progress here in your account.""".stripMargin
+  }
+
+  def applicationInReserveState(): Unit = {
+    val status = "Application in reserve"
+    changeSystem("candidate")
+    confirmStatusOnApplicationPage(status)
+    applicationCentrePageCheck()
+    feedbackFunction().isEnabled
+    withdrawApplicationFunction().isEnabled
+    advertDetailsFunction().isEnabled
+    applicationForVacancyText shouldEqual s"Application For $vacancyName"
+    getApplicationState shouldEqual s"Application status: $status"
+    getApplicationConfirmation shouldEqual
+      s"""We've placed you on a reserve list until 5 January 2024
+         |This means that you meet our required standard but unfortunately, we’re unable to offer you a job immediately.
+         |If a similar job becomes available we may appoint from this reserve list.
+         |You can see any feedback that's been given by clicking the "Feedback" button.
+         |Thank you for the time you have invested in your application and the selection process.""".stripMargin
   }
 
   def successfulAtInterviewState(): Unit = {

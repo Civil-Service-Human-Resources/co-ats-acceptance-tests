@@ -56,11 +56,11 @@ case class InterviewOneDetails(
 object InterviewOneEvaluationTab extends VacancyBasePage {
 
   private lazy val interviewOneEvaluationTabPath = ".//span[@class='main-label' and text() = 'Interview 1 Evaluation']"
-  var vXI1BehavioursTotalScore: ListBuffer[Int]    = ListBuffer()
-  var vXI1TechSkillsTotalScore: ListBuffer[Int]    = ListBuffer()
-  var vXI1StrengthsTotalScore: ListBuffer[Int]     = ListBuffer()
-  var vXI1AssessmentsTotalScore: ListBuffer[Int]   = ListBuffer()
-  var vXI1ExperienceScore: Int                     = 91
+  var vXI1BehavioursTotalScore: ListBuffer[Int]  = ListBuffer()
+  var vXI1TechSkillsTotalScore: ListBuffer[Int]  = ListBuffer()
+  var vXI1StrengthsTotalScore: ListBuffer[Int]   = ListBuffer()
+  var vXI1AssessmentsTotalScore: ListBuffer[Int] = ListBuffer()
+  var vXI1ExperienceScore: Int                   = 91
   def interviewOneEvaluationHeaderId             = s"${vacancyFormId}_label_153071_1"
   def interviewTwoEvaluationHeaderId             = s"${vacancyFormId}_label_153356_1"
   def behaviourAssessmentHeaderId                = s"${vacancyFormId}_label_23467_1"
@@ -747,8 +747,8 @@ object InterviewOneEvaluationTab extends VacancyBasePage {
     }
     clickOn(submitForm)
     interviewEvaluation()
-    if (applicationDetails.interviewOneDetails.finalOutcome == "Hold") {
+    if (applicationDetails.interviewOneDetails.finalOutcome == "Progress") {
       applicationBeingReviewedAfterInterviewState()
-    } else applicationBeingReviewedAfterInterviewState()
+    }
   }
 }
