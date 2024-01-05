@@ -4,7 +4,7 @@ import org.openqa.selenium.By
 import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{applicationId, preferredFirstName, randomEmail}
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 import uk.gov.co.test.ui.pages.vx.VacancyDetailsPage.{vXReserveListLength, vacancyId, vacancyName}
-import uk.gov.co.test.ui.pages.vx.vacancytabs.HistoryTab.{categoryDetail, categoryDetailLink, historyEmailValues, historyTabPath}
+import uk.gov.co.test.ui.pages.vx.vacancytabs.HistoryTab.{historyTabPath, reserveEmailDetails, reserveScheduleDetails}
 
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -32,6 +32,7 @@ object ReserveListsTab extends VacancyBasePage {
   }
 
   private def checkReserveValue(fieldId: String, expectedReserveValue: String): Unit = {
+    scrollToElement(By.id(fieldId))
     val expiry = waitForVisibilityOfElementById(fieldId).getText
     expiry shouldEqual expectedReserveValue
   }
@@ -49,56 +50,37 @@ object ReserveListsTab extends VacancyBasePage {
       "Reserve list expiry dates (auto-populated when candidate enters Reserve List status)"
     )
     checkReserveValue(currentReserveListLengthId, s"Current reserve list length  \n$vXReserveListLength")
-    checkReserveValue(
-      reserveList3MonthsExpiryId,
-      s"""3 month expiry date
-                                                     |  ${reserveExpiryDateDays(1)}""".stripMargin
-    )
-    checkReserveValue(
-      reserveList6MonthsExpiryId,
-      s"""6 months expiry date
-                                                     |  ${reserveExpiryDateDays(2)}""".stripMargin
-    )
-    checkReserveValue(
-      reserveList12MonthsExpiryId,
-      s"""12 months expiry date
-                                                      |  ${reserveExpiryDateDays(4)}""".stripMargin
-    )
-    checkReserveValue(
-      reserveList15MonthsExpiryId,
-      s"""15 months expiry date
-                                                      |  ${reserveExpiryDateDays(5)}""".stripMargin
-    )
-    checkReserveValue(
-      reserveList18MonthsExpiryId,
-      s"""18 months expiry date
-                                                      |  ${reserveExpiryDateDays(6)}""".stripMargin
-    )
-    checkReserveValue(
-      reserveList21MonthsExpiryId,
-      s"""21 months expiry date
-                                                      |  ${reserveExpiryDateDays(7)}""".stripMargin
-    )
-    checkReserveValue(
-      reserveList24MonthsExpiryId,
-      s"""24 months expiry date
-                                                      |  ${reserveExpiryDateDays(8)}""".stripMargin
-    )
+    checkReserveValue(reserveList3MonthsExpiryId, s"3 month expiry date\n  ${reserveExpiryDateDays(1)}")
+    checkReserveValue(reserveList6MonthsExpiryId, s"6 months expiry date\n  ${reserveExpiryDateDays(2)}")
+    checkReserveValue(reserveList12MonthsExpiryId, s"12 months expiry date\n  ${reserveExpiryDateDays(4)}")
+    checkReserveValue(reserveList15MonthsExpiryId, s"15 months expiry date\n  ${reserveExpiryDateDays(5)}")
+    checkReserveValue(reserveList18MonthsExpiryId, s"18 months expiry date\n  ${reserveExpiryDateDays(6)}")
+    checkReserveValue(reserveList21MonthsExpiryId, s"21 months expiry date\n  ${reserveExpiryDateDays(7)}")
+    checkReserveValue(reserveList24MonthsExpiryId, s"24 months expiry date\n  ${reserveExpiryDateDays(8)}")
   }
 
   def reserveListHistoryChecks(): Unit = {
     waitForVisibilityOfElementByPath(historyTabPath).click()
     waitForVisibilityOfElementById("summary_tabs_history_tab").isDisplayed
-    categoryDetail("Email") shouldEqual s"Subject: Application update - $vacancyName - $vacancyId"
-    categoryDetailLink("Email").click()
+    waitForVisibilityOfElementByPath(
+      "(//*[@class='detail-grid-tl'])[3]"
+    ).getText shouldEqual s"Subject: Application update - $vacancyName - $vacancyId"
+    waitForVisibilityOfElementByPath("(//*[@class='detail-grid-tr'])[3]//a").click()
   }
 
   def reserveListEmailChecks(): Unit = {
-    val (_destination, _subject, _status, _emailPreview) = historyEmailValues("Email")
-    _destination  shouldEqual randomEmail
-    _subject      shouldEqual s"Subject: Application update - $vacancyName - $vacancyId"
-    _status       shouldEqual s"$randomEmail: Not sent yet"
-    _emailPreview shouldEqual
+    val scheduleDate = reserveScheduleDetails()
+    val templateId   = reserveEmailDetails("1")
+    val destination  = reserveEmailDetails("2")
+    val subject      = reserveEmailDetails("3")
+    val status       = reserveEmailDetails("4")
+    val emailPreview = waitForVisibilityOfElementByPath("//*[@class='email_preview ']//tbody/tr[2]").getText
+    scheduleDate      should startWith(s"Process rule scheduled for ${reserveExpiryDateReformatted(1)}")
+    templateId   shouldEqual "220"
+    destination  shouldEqual randomEmail
+    subject      shouldEqual s"Application update - $vacancyName - $vacancyId"
+    status       shouldEqual s"$randomEmail: Not sent yet"
+    emailPreview shouldEqual
       s"""Dear $preferredFirstName,
          |$vacancyId - $vacancyName
          |Application ID number: $applicationId
@@ -127,6 +109,13 @@ object ReserveListsTab extends VacancyBasePage {
   //test purposes
   def reserveExpiryDateDays(days: Int): String = {
     val formatter  = DateTimeFormatter.ofPattern("d MMMM yyyy")
+    val expiry     = LocalDate.now().plusDays(days)
+    val expiryDate = expiry.format(formatter)
+    expiryDate
+  }
+
+  def reserveExpiryDateReformatted(days: Int): String = {
+    val formatter  = DateTimeFormatter.ofPattern("yyyy-MM-dd")
     val expiry     = LocalDate.now().plusDays(days)
     val expiryDate = expiry.format(formatter)
     expiryDate

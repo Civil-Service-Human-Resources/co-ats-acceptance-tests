@@ -3,7 +3,7 @@ package uk.gov.co.test.ui.pages.vx.vacancytabs
 import org.openqa.selenium.{By, WebElement}
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 
-import scala.collection.mutable
+import scala.collection.{Seq, mutable}
 import scala.jdk.CollectionConverters._
 import scala.util.control.Breaks.{break, breakable}
 
@@ -11,11 +11,23 @@ object HistoryTab extends VacancyBasePage {
 
   val historyTabPath = ".//span[@class='main-label' and text() = 'History']"
 
-  def tableArea(): WebElement =
-    waitForVisibilityOfElement(By.xpath("//*[@class='day']"))
+  def reserveScheduleDetails(): String = {
+    val reserveSchedulePath = s"(//*[@class='detail-grid-tl'])[1]"
+    val scheduleDate        = waitForVisibilityOfElementByPath(reserveSchedulePath).getText
+    scheduleDate
+  }
+
+  def reserveEmailDetails(position: String): String = {
+    val reserveEmailDestinationPath = s"//table[@class='display email_information']/tbody/tr[$position]/td"
+    val emailValue                  = waitForVisibilityOfElementByPath(reserveEmailDestinationPath).getText
+    emailValue
+  }
+
+  def HistoryArea(): WebElement =
+    xpath(s"//*[@class='day']").element.underlying
 
   def summaryRows(): mutable.Buffer[WebElement] =
-    tableArea().findElements(By.xpath("//*[@class='time-object']//*[@class='line']")).asScala
+    HistoryArea().findElements(By.className("time-object")).asScala
 
   def firstRowItem(rowItem: WebElement): WebElement =
     rowItem.findElement(By.xpath("//*[@class='category line-recruiter']"))
@@ -33,7 +45,7 @@ object HistoryTab extends VacancyBasePage {
     breakable(
       for (row <- rows) {
         val d = firstRowItem(row)
-        if (d.getText == category) {
+        if (d.getText.contains(category)) {
           _detail = secondRowItem(row).getText
           _detailLink = thirdRowItem(row)
           break()
@@ -53,22 +65,28 @@ object HistoryTab extends VacancyBasePage {
     _detailLink
   }
 
-  def summaryEmailRows(): mutable.Buffer[WebElement] =
-    tableArea().findElements(By.xpath("//*[@class='display email_information']//tr")).asScala
+  def tableArea(): WebElement =
+    waitForVisibilityOfElementByPath("//table[@class='display email_information']/tbody/tr[1]/td")
 
-  def fourthRowEmailItem(rowItem: WebElement): WebElement =
-    rowItem.findElement(By.xpath("/*[@class='display email_information']//tr[2]"))
+  def summaryEmailRows(): Seq[WebElement] =
+    tableArea().findElements(By.xpath("/tbody")).asScala
 
-  def fifthRowEmailItem(rowItem: WebElement): WebElement =
-    rowItem.findElement(By.xpath("/*[@class='display email_information']//tr[3]"))
+  def firstEmailRowItem(rowItem: WebElement): WebElement =
+    rowItem.findElement(By.xpath("/tr[1]/td"))
 
-  def sixthRowEmailItem(rowItem: WebElement): WebElement =
-    rowItem.findElement(By.xpath("/*[@class='display email_information']//tr[4]"))
+  def secondEmailRowItem(rowItem: WebElement): WebElement =
+    rowItem.findElement(By.xpath("/tr[2]/td"))
 
-  def seventhRowPreviewEmailItem(rowItem: WebElement): WebElement =
-    rowItem.findElement(By.xpath("//*[@class='email_preview ']"))
+  def thirdEmailRowItem(rowItem: WebElement): WebElement =
+    rowItem.findElement(By.xpath("/tr[3]/td"))
 
-  def historyEmailValues(category: String): (String, String, String, String) = {
+  def fourthEmailRowItem(rowItem: WebElement): WebElement =
+    rowItem.findElement(By.xpath("/tr[4]/td"))
+
+  def fifthEmailRowItem(rowItem: WebElement): WebElement =
+    rowItem.findElement(By.xpath("//..//..//..//span[@class='email_preview ']//tr[2]"))
+
+  def historyEmailValues(templateId: String): (String, String, String, String) = {
     var _destination: String  = ""
     var _subject: String      = ""
     var _status: String       = ""
@@ -76,12 +94,17 @@ object HistoryTab extends VacancyBasePage {
     val rows                  = summaryEmailRows()
     breakable(
       for (row <- rows) {
-        val d = firstRowItem(row)
-        if (d.getText == category) {
-          _destination = fourthRowEmailItem(row).getText
-          _subject = fifthRowEmailItem(row).getText
-          _status = sixthRowEmailItem(row).getText
-          _emailPreview = seventhRowPreviewEmailItem(row).getText
+        val d = firstEmailRowItem(row)
+        println(firstEmailRowItem(row).getText)
+        if (d.getText == templateId) {
+          _destination = secondEmailRowItem(row).getText
+          _subject = thirdEmailRowItem(row).getText
+          _status = fourthEmailRowItem(row).getText
+          _emailPreview = fifthEmailRowItem(row).getText
+          println(secondEmailRowItem(row).getText)
+          println(thirdEmailRowItem(row).getText)
+          println(fourthEmailRowItem(row).getText)
+          println(fifthEmailRowItem(row).getText)
           break()
         }
       }
