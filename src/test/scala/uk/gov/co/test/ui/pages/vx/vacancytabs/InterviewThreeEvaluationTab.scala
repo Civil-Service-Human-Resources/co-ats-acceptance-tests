@@ -1,9 +1,9 @@
 package uk.gov.co.test.ui.pages.vx.vacancytabs
 
 import org.openqa.selenium.By
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXBehavioursRequired, vXHowManyBehaviours, vXHowManySkills, vXHowManyStrengths, vXListOfChosenBehaviours, vXListOfStrengths, vXListOfTechSkills, vXStrengthsRequired, vXTechSkillsRequired}
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXBehavioursRequired, vXHowManyBehaviours, vXHowManySkills, vXHowManyStrengths, vXInterviewThreeOutcome, vXListOfChosenBehaviours, vXListOfStrengths, vXListOfTechSkills, vXStrengthsRequired, vXTechSkillsRequired}
 import uk.gov.co.test.ui.data.vx.{ApplicationDetails, AssessmentOutcome, Outcome}
-import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.applicationBeingReviewedAfterInterviewState
+import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.applicationStateAfterInterview
 import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.{availableBarItems, completeI3EvaluationBarId, interviewEvaluation, noShowI3BarId, withdrawAtInterviewBarId}
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.vacancyFormId
@@ -169,7 +169,7 @@ object InterviewThreeEvaluationTab extends VacancyBasePage {
   def experienceScoreId                            = s"select2-${vacancyFormId}_datafield_108325_1_1-container"
   def experienceDescriptionId                      = s"${vacancyFormId}_datafield_108213_1_1"
   def overallScoreTitleId                          = s"${vacancyFormId}_label_23545_1"
-  def overallScoreTitlePath                          = s".//*[@id='${vacancyFormId}_label_23545_1']/span/strong"
+  def overallScoreTitlePath                        = s".//*[@id='${vacancyFormId}_label_23545_1']/span/strong"
   def overallScoreId                               = s"${vacancyFormId}_datafield_27738_1_1"
   def overallOverrideScoreId                       = s"${vacancyFormId}_datafield_116088_1_1"
   def outcomeTitleId                               = s"${vacancyFormId}_label_23547_1"
@@ -708,7 +708,9 @@ object InterviewThreeEvaluationTab extends VacancyBasePage {
   }
 
   private def checkOverallScore(interviewThreeDetails: InterviewThreeDetails): Unit = {
-    waitForVisibilityOfElementByPath(overallScoreTitlePath).getText should endWith("Overall Score") //TODO this is different in I2, in Pascal Case and space
+    waitForVisibilityOfElementByPath(overallScoreTitlePath).getText should endWith(
+      "Overall Score"
+    ) //TODO this is different in I2, in Pascal Case and space
     if (interviewThreeDetails.overrideScore) {
       enterValue(overallOverrideScoreId, interviewThreeDetails.overallOverrideScore.toString)
     }
@@ -719,10 +721,11 @@ object InterviewThreeEvaluationTab extends VacancyBasePage {
   }
 
   private def enterOutcome(interviewThreeDetails: InterviewThreeDetails): Unit = {
+    vXInterviewThreeOutcome = interviewThreeDetails.finalOutcome
     waitForVisibilityOfElementById(outcomeTitleId).getText shouldEqual "Outcome"
     waitForVisibilityOfElementById(outcomeId).click()
-    action().moveToElement(waitForDropdownOption(interviewThreeDetails.finalOutcome)).perform()
-    waitForDropdownOption(interviewThreeDetails.finalOutcome).click()
+    action().moveToElement(waitForDropdownOption(vXInterviewThreeOutcome)).perform()
+    waitForDropdownOption(vXInterviewThreeOutcome).click()
     enterValue(outcomeCommentsId, interviewThreeDetails.finalOutcomeComments)
   }
 
@@ -752,6 +755,6 @@ object InterviewThreeEvaluationTab extends VacancyBasePage {
     }
     clickOn(submitForm)
     interviewEvaluation()
-    applicationBeingReviewedAfterInterviewState()
+    applicationStateAfterInterview(applicationDetails)
   }
 }

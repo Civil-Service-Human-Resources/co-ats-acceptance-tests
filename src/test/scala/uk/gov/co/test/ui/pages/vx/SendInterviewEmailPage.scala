@@ -2,7 +2,7 @@ package uk.gov.co.test.ui.pages.vx
 
 import uk.gov.co.test.ui.data.TestData.eventually
 import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{applicationId, preferredFirstName, randomFirstName, randomLastName, vXInterviewNumber, vXJobInfoDepartment, vacancyId, vacancyName}
-import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.invitedForInterviewState
+import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.{interviewTypeDetail, invitedForInterviewState}
 import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.{availableBarItems, confirmCandidateSummary, interviewNotBookedBarId, inviteToI1BarId, inviteToI2BarId, inviteToI3BarId, inviteToI4BarId, scheduleI1BarId, scheduleOfflineI1BarId, searchApplicationId, withdrawAtInterviewBarId}
 
 object SendInterviewEmailPage extends VacancyBasePage {
@@ -50,8 +50,8 @@ object SendInterviewEmailPage extends VacancyBasePage {
   }
 
   private def checkPreviewEmail(): Unit = {
-    val emailPreview = vXInterviewNumber.head match {
-      case "1" =>
+    val emailPreview = interviewTypeDetail() match {
+      case "Telephone" =>
         s"""Dear $preferredFirstName,
            |$vacancyId: $vacancyName
            |Congratulations, you've been invited to attend a telephone interview.
@@ -63,7 +63,7 @@ object SendInterviewEmailPage extends VacancyBasePage {
            |Kind regards
            |
            |$vXJobInfoDepartment recruitment team""".stripMargin
-      case "2" =>
+      case "Assessment" =>
         s"""Dear $preferredFirstName,
            |$vacancyId: $vacancyName
            |Congratulations, you've been invited to attend an assessment.
@@ -75,7 +75,7 @@ object SendInterviewEmailPage extends VacancyBasePage {
            |Kind regards
            |
            |$vXJobInfoDepartment recruitment team""".stripMargin
-      case "3" =>
+      case "Video" =>
         s"""Dear $preferredFirstName,
            |$vacancyId: $vacancyName
            |Congratulations, you've been invited to attend a video interview.
@@ -87,7 +87,7 @@ object SendInterviewEmailPage extends VacancyBasePage {
            |Kind regards
            |
            |$vXJobInfoDepartment recruitment team""".stripMargin
-      case "4" =>
+      case "Interview" =>
         s"""Dear $preferredFirstName,
            |$vacancyId: $vacancyName
            |Congratulations, you've been invited to attend an interview.

@@ -122,10 +122,10 @@ object MasterVacancyDetails extends VacancyBasePage {
   //vx vacancy tests section
   var vXAnyOnlineTests = false
 
-
   //vx pec form checks
-  var vXRtwChecks: List[String] = List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates")
-  var vXWhenRtwChecks = "Before pre employment checks"
+  var vXRtwChecks: List[String] =
+    List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates")
+  var vXWhenRtwChecks           = "Before pre employment checks"
 
   //candidate details
   var randomFirstName: String    = ""
@@ -200,5 +200,9 @@ object MasterVacancyDetails extends VacancyBasePage {
   var vXInterviewTwoType                    = "Assessment"
   var vXInterviewThreeType                  = "Video"
   var vXInterviewFourType                   = "Interview"
+  var vXInterviewOneOutcome                 = ""
+  var vXInterviewTwoOutcome                 = ""
+  var vXInterviewThreeOutcome               = ""
+  var vXInterviewFourOutcome                = ""
 
 }

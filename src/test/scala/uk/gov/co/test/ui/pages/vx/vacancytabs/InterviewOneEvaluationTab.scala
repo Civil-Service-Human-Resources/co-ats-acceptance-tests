@@ -1,9 +1,9 @@
 package uk.gov.co.test.ui.pages.vx.vacancytabs
 
 import org.openqa.selenium.By
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXBehavioursRequired, vXHowManyBehaviours, vXHowManySkills, vXHowManyStrengths, vXListOfChosenBehaviours, vXListOfStrengths, vXListOfTechSkills, vXStrengthsRequired, vXTechSkillsRequired}
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXBehavioursRequired, vXHowManyBehaviours, vXHowManySkills, vXHowManyStrengths, vXInterviewOneOutcome, vXListOfChosenBehaviours, vXListOfStrengths, vXListOfTechSkills, vXStrengthsRequired, vXTechSkillsRequired}
 import uk.gov.co.test.ui.data.vx.{ApplicationDetails, AssessmentOutcome, Outcome}
-import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.applicationBeingReviewedAfterInterviewState
+import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.applicationStateAfterInterview
 import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.{availableBarItems, completeI1EvaluationBarId, interviewEvaluation, noShowI1BarId, withdrawAtInterviewBarId}
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.vacancyFormId
@@ -716,10 +716,11 @@ object InterviewOneEvaluationTab extends VacancyBasePage {
   }
 
   private def enterOutcome(interviewOneDetails: InterviewOneDetails): Unit = {
+    vXInterviewOneOutcome = interviewOneDetails.finalOutcome
     waitForVisibilityOfElementById(outcomeTitleId).getText shouldEqual "Outcome"
     waitForVisibilityOfElementById(outcomeId).click()
-    action().moveToElement(waitForDropdownOption(interviewOneDetails.finalOutcome)).perform()
-    waitForDropdownOption(interviewOneDetails.finalOutcome).click()
+    action().moveToElement(waitForDropdownOption(vXInterviewOneOutcome)).perform()
+    waitForDropdownOption(vXInterviewOneOutcome).click()
     enterValue(outcomeCommentsId, interviewOneDetails.finalOutcomeComments)
   }
 
@@ -747,8 +748,6 @@ object InterviewOneEvaluationTab extends VacancyBasePage {
     }
     clickOn(submitForm)
     interviewEvaluation()
-    if (applicationDetails.interviewOneDetails.finalOutcome == "Progress") {
-      applicationBeingReviewedAfterInterviewState()
-    }
+    applicationStateAfterInterview(applicationDetails)
   }
 }

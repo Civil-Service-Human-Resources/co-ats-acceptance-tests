@@ -127,7 +127,7 @@ object InterviewSchedulePage extends VacancyBasePage {
     val vacancyUsed  = ".//*[@id='DataTables_Table_1']/tbody/tr/td[1]"
     Thread.sleep(1000)
     var anyRecords = waitForVisibilityOfElementByPath(vacancyUsed).getText
-    if (anyRecords == "9562") {
+    if (anyRecords == "9574") {
       waitForVisibilityOfElementByPath(vacancyUsed).click()
       waitForVisibilityOfElementById("but_remove_opportunity").click()
       checkForNewValuePath(vacancyUsed, "No records")

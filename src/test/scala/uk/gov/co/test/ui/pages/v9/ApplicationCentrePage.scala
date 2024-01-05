@@ -2,9 +2,11 @@ package uk.gov.co.test.ui.pages.v9
 
 import org.openqa.selenium.{By, WebElement}
 import org.scalatest.concurrent.Eventually.eventually
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{randomFirstName, randomLastName, v9AdjustmentsForTests, v9ReasonableAdjustments, vXAnyOnlineTests, vXInterviewFourType, vXInterviewLocation, vXInterviewLongDate, vXInterviewNumber, vXInterviewOneType, vXInterviewThreeType, vXInterviewTwoType, vXSlotTwoStartTime, vacancyName}
+import uk.gov.co.test.ui.data.vx.ApplicationDetails
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{randomFirstName, randomLastName, v9AdjustmentsForTests, v9ReasonableAdjustments, vXAnyOnlineTests, vXInterviewExpectedRounds, vXInterviewFourType, vXInterviewLocation, vXInterviewLongDate, vXInterviewNumber, vXInterviewOneType, vXInterviewThreeType, vXInterviewTwoType, vXSlotTwoStartTime, vacancyName}
 import uk.gov.co.test.ui.pages.v9.ApplicationsPage.{confirmStatusOnApplicationPage, reviewUpdateOnApplicationPage}
 import uk.gov.co.test.ui.pages.vx.DashboardPage.contactEmailVxConfig
+import uk.gov.co.test.ui.pages.vx.vacancytabs.ReserveListsTab.reserveExpiryDateDays
 
 object ApplicationCentrePage extends CivilServiceJobsBasePage {
 
@@ -177,7 +179,6 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
                                              |As part of the onboarding process we require additional information.""".stripMargin
   }
 
-
   def confirmPecSubmissionState(): Unit = {
     val status = "Pre-employment checks"
     changeSystem("candidate")
@@ -226,19 +227,31 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
       case "3" => "Invited for third interview"
       case "4" => "Invited for fourth interview"
     }
-    val inviteType = vXInterviewNumber.head match {
-      case "1" => s"for a ${vXInterviewOneType.toLowerCase} interview"
-      case "2" => s"to an ${vXInterviewTwoType.toLowerCase}"
-      case "3" => s"for a ${vXInterviewThreeType.toLowerCase} interview"
-      case "4" => s"for an ${vXInterviewFourType.toLowerCase}"
+//    val inviteType = vXInterviewNumber.head match {
+//      case "1" => s"for a ${vXInterviewOneType.toLowerCase} interview"
+//      case "2" => s"to an ${vXInterviewTwoType.toLowerCase}"
+//      case "3" => s"for a ${vXInterviewThreeType.toLowerCase} interview"
+//      case "4" => s"for an ${vXInterviewFourType.toLowerCase}"
+//    }
+    val inviteType = interviewTypeDetail() match {
+      case "Telephone"  => s"for a ${interviewTypeDetail().toLowerCase} interview"
+      case "Assessment" => s"to an ${interviewTypeDetail().toLowerCase}"
+      case "Video"      => s"for a ${interviewTypeDetail().toLowerCase} interview"
+      case "Interview"  => s"for an ${interviewTypeDetail().toLowerCase}"
     }
     // TODO to bypass grammatical bug, this function was created
-    val schedule   = vXInterviewNumber.head match {
-      case "1" => s"'Schedule interview'"
-      case "2" => s"\'Schedule interview\""//TODO requires fix to align with other fields
-      case "3" => s"'Schedule interview'"
-      case "4" => s"'Schedule interview'"
+    val schedule   = interviewTypeDetail() match {
+      case "Telephone"  => s"'Schedule interview'"
+      case "Assessment" => s"\'Schedule interview\""//TODO requires fix to align with other fields
+      case "Video"      => s"'Schedule interview'"
+      case "Interview"  => s"'Schedule interview'"
     }
+//    val schedule   = vXInterviewNumber.head match {
+//      case "1" => s"'Schedule interview'"
+//      case "2" => s"\'Schedule interview\""//TODO requires fix to align with other fields
+//      case "3" => s"'Schedule interview'"
+//      case "4" => s"'Schedule interview'"
+//    }
     changeSystem("candidate")
     confirmStatusOnApplicationPage(status)
     applicationCentrePageCheck()
@@ -261,28 +274,28 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
       case "3" => "Scheduled for third interview" //TODO different wording structure compared to I2
       case "4" => "Scheduled for fourth interview"
     }
-    val appConfirmation = vXInterviewNumber.head match {
-      case "1" =>
+    val appConfirmation = interviewTypeDetail() match {
+      case "Telephone" =>
         s"""Your ${vXInterviewOneType.toLowerCase} interview slot is booked and details are shown below:
                      |Date: $vXInterviewLongDate
                      |Time: ${vXSlotTwoStartTime.replaceAll("[A-Za-z ]", "").filterNot(_.isWhitespace)}
                      |We will send details on how to access your ${vXInterviewOneType.toLowerCase} interview separately when they are available.
                      |Autotest - Instructions for $randomFirstName $randomLastName for interview ${vXInterviewNumber.head}
                      |If you're no longer interested in this job, please withdraw your application.""".stripMargin
-      case "2" =>
+      case "Assessment" =>
         s"""Your ${vXInterviewTwoType.toLowerCase} slot is booked and details are shown below:
                      |Date: $vXInterviewLongDate
                      |Time: ${vXSlotTwoStartTime.replaceAll("[A-Za-z ]", "").filterNot(_.isWhitespace)}
                      |Autotest - Instructions for $randomFirstName $randomLastName for interview ${vXInterviewNumber.head}
                      |If you're no longer interested in this job, please withdraw your application.""".stripMargin
-      case "3" =>
+      case "Video" =>
         s"""Your ${vXInterviewThreeType.toLowerCase} interview slot is booked and details are shown below:
                      |Date: $vXInterviewLongDate
                      |Time: ${vXSlotTwoStartTime.replaceAll("[A-Za-z ]", "").filterNot(_.isWhitespace)}
                      |We will send details on how to access your ${vXInterviewThreeType.toLowerCase} interview separately when they are available.
                      |Autotest - Instructions for $randomFirstName $randomLastName for interview ${vXInterviewNumber.head}
                      |If you're no longer interested in this job, please withdraw your application.""".stripMargin
-      case "4" =>
+      case "Interview" =>
         s"""Your ${vXInterviewFourType.toLowerCase} slot is booked and details are shown below:
                      |Date: $vXInterviewLongDate
                      |Time: ${vXSlotTwoStartTime.replaceAll("[A-Za-z ]", "").filterNot(_.isWhitespace)}
@@ -326,14 +339,14 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
     feedbackFunction().isEnabled
     withdrawApplicationFunction().isEnabled
     advertDetailsFunction().isEnabled
-    applicationForVacancyText shouldEqual s"Application For $vacancyName"
-    getApplicationState shouldEqual s"Application status: $status"
+    applicationForVacancyText  shouldEqual s"Application For $vacancyName"
+    getApplicationState        shouldEqual s"Application status: $status"
     getApplicationConfirmation shouldEqual
-      s"""We've placed you on a reserve list until 5 January 2024
-         |This means that you meet our required standard but unfortunately, we’re unable to offer you a job immediately.
-         |If a similar job becomes available we may appoint from this reserve list.
-         |You can see any feedback that's been given by clicking the "Feedback" button.
-         |Thank you for the time you have invested in your application and the selection process.""".stripMargin
+      s"""We've placed you on a reserve list until ${reserveExpiryDateDays(1)}
+         | This means that you meet our required standard but unfortunately, we’re unable to offer you a job immediately.
+         | If a similar job becomes available we may appoint from this reserve list.
+         | You can see any feedback that's been given by clicking the "Feedback" button.
+         | Thank you for the time you have invested in your application and the selection process.""".stripMargin
   }
 
   def successfulAtInterviewState(): Unit = {
@@ -351,4 +364,29 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
          |We will be in contact shortly with more information about the next steps.""".stripMargin
     changeSystem("recruiter")
   }
+
+  def applicationStateAfterInterview(applicationDetails: ApplicationDetails): Unit =
+    if (vXInterviewExpectedRounds.toInt == vXInterviewNumber.head.toInt) {
+      if (interviewNumberDetail(applicationDetails) == "Progress") {
+        successfulAtInterviewState()
+      } else if (interviewNumberDetail(applicationDetails) == "Hold") {
+        applicationInReserveState()
+      }
+    } else applicationBeingReviewedAfterInterviewState()
+
+  def interviewNumberDetail(applicationDetails: ApplicationDetails): String =
+    vXInterviewExpectedRounds.toInt match {
+      case 1 => applicationDetails.interviewOneDetails.finalOutcome
+      case 2 => applicationDetails.interviewTwoDetails.finalOutcome
+      case 3 => applicationDetails.interviewThreeDetails.finalOutcome
+      case 4 => applicationDetails.interviewFourDetails.finalOutcome
+    }
+
+  def interviewTypeDetail(): String =
+    vXInterviewNumber.head match {
+      case "1" => vXInterviewOneType
+      case "2" => vXInterviewTwoType
+      case "3" => vXInterviewThreeType
+      case "4" => vXInterviewFourType
+    }
 }

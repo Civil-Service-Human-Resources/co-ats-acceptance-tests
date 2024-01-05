@@ -1,10 +1,9 @@
 package uk.gov.co.test.ui.pages.vx.vacancytabs
 
 import org.openqa.selenium.By
-import uk.gov.co.test.ui.data.TestData.eventually
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXBehavioursRequired, vXHowManyBehaviours, vXHowManySkills, vXHowManyStrengths, vXListOfChosenBehaviours, vXListOfStrengths, vXListOfTechSkills, vXStrengthsRequired, vXTechSkillsRequired}
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXBehavioursRequired, vXHowManyBehaviours, vXHowManySkills, vXHowManyStrengths, vXInterviewTwoOutcome, vXListOfChosenBehaviours, vXListOfStrengths, vXListOfTechSkills, vXStrengthsRequired, vXTechSkillsRequired}
 import uk.gov.co.test.ui.data.vx.{ApplicationDetails, AssessmentOutcome, Outcome}
-import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.applicationBeingReviewedAfterInterviewState
+import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.applicationStateAfterInterview
 import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.{availableBarItems, completeI2EvaluationBarId, interviewEvaluation, noShowI2BarId, withdrawAtInterviewBarId}
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.vacancyFormId
@@ -716,10 +715,11 @@ object InterviewTwoEvaluationTab extends VacancyBasePage {
   }
 
   private def enterOutcome(interviewTwoDetails: InterviewTwoDetails): Unit = {
+    vXInterviewTwoOutcome = interviewTwoDetails.finalOutcome
     waitForVisibilityOfElementById(outcomeTitleId).getText shouldEqual "Outcome"
     waitForVisibilityOfElementById(outcomeId).click()
-    action().moveToElement(waitForDropdownOption(interviewTwoDetails.finalOutcome)).perform()
-    waitForDropdownOption(interviewTwoDetails.finalOutcome).click()
+    action().moveToElement(waitForDropdownOption(vXInterviewTwoOutcome)).perform()
+    waitForDropdownOption(vXInterviewTwoOutcome).click()
     enterValue(outcomeCommentsId, interviewTwoDetails.finalOutcomeComments)
   }
 
@@ -747,6 +747,7 @@ object InterviewTwoEvaluationTab extends VacancyBasePage {
     }
     clickOn(submitForm)
     interviewEvaluation()
-    applicationBeingReviewedAfterInterviewState()
+    applicationStateAfterInterview(applicationDetails)
+//    applicationBeingReviewedAfterInterviewState()
   }
 }

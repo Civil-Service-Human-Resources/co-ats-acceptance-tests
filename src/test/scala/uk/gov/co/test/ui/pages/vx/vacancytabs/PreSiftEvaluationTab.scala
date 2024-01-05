@@ -1,4 +1,4 @@
-package uk.gov.co.test.ui.pages.vx.vacancytabs
+ package uk.gov.co.test.ui.pages.vx.vacancytabs
 
 import org.openqa.selenium.By
 import uk.gov.co.test.ui.data.vx.ApplicationDetails
