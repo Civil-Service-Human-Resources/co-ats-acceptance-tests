@@ -342,7 +342,7 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
     applicationForVacancyText  shouldEqual s"Application For $vacancyName"
     getApplicationState        shouldEqual s"Application status: $status"
     getApplicationConfirmation shouldEqual
-      s"""We've placed you on a reserve list until ${reserveExpiryDateDays(1)}
+      s"""We've placed you on a reserve list until ${reserveExpiryDateDays()}
          | This means that you meet our required standard but unfortunately, we’re unable to offer you a job immediately.
          | If a similar job becomes available we may appoint from this reserve list.
          | You can see any feedback that's been given by clicking the "Feedback" button.

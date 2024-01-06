@@ -50,13 +50,13 @@ object ReserveListsTab extends VacancyBasePage {
       "Reserve list expiry dates (auto-populated when candidate enters Reserve List status)"
     )
     checkReserveValue(currentReserveListLengthId, s"Current reserve list length  \n$vXReserveListLength")
-    checkReserveValue(reserveList3MonthsExpiryId, s"3 month expiry date\n  ${reserveExpiryDateDays(1)}")
-    checkReserveValue(reserveList6MonthsExpiryId, s"6 months expiry date\n  ${reserveExpiryDateDays(2)}")
-    checkReserveValue(reserveList12MonthsExpiryId, s"12 months expiry date\n  ${reserveExpiryDateDays(4)}")
-    checkReserveValue(reserveList15MonthsExpiryId, s"15 months expiry date\n  ${reserveExpiryDateDays(5)}")
-    checkReserveValue(reserveList18MonthsExpiryId, s"18 months expiry date\n  ${reserveExpiryDateDays(6)}")
-    checkReserveValue(reserveList21MonthsExpiryId, s"21 months expiry date\n  ${reserveExpiryDateDays(7)}")
-    checkReserveValue(reserveList24MonthsExpiryId, s"24 months expiry date\n  ${reserveExpiryDateDays(8)}")
+    checkReserveValue(reserveList3MonthsExpiryId, s"3 month expiry date\n  ${calculatedExpiryDate(1)}")
+    checkReserveValue(reserveList6MonthsExpiryId, s"6 months expiry date\n  ${calculatedExpiryDate(2)}")
+    checkReserveValue(reserveList12MonthsExpiryId, s"12 months expiry date\n  ${calculatedExpiryDate(4)}")
+    checkReserveValue(reserveList15MonthsExpiryId, s"15 months expiry date\n  ${calculatedExpiryDate(5)}")
+    checkReserveValue(reserveList18MonthsExpiryId, s"18 months expiry date\n  ${calculatedExpiryDate(6)}")
+    checkReserveValue(reserveList21MonthsExpiryId, s"21 months expiry date\n  ${calculatedExpiryDate(7)}")
+    checkReserveValue(reserveList24MonthsExpiryId, s"24 months expiry date\n  ${calculatedExpiryDate(8)}")
   }
 
   def reserveListHistoryChecks(): Unit = {
@@ -75,7 +75,7 @@ object ReserveListsTab extends VacancyBasePage {
     val subject      = reserveEmailDetails("3")
     val status       = reserveEmailDetails("4")
     val emailPreview = waitForVisibilityOfElementByPath("//*[@class='email_preview ']//tbody/tr[2]").getText
-    scheduleDate      should startWith(s"Process rule scheduled for ${reserveExpiryDateReformatted(1)}")
+    scheduleDate      should startWith(s"Process rule scheduled for ${reserveExpiryDateReformatted()}")
     templateId   shouldEqual "220"
     destination  shouldEqual randomEmail
     subject      shouldEqual s"Application update - $vacancyName - $vacancyId"
@@ -86,7 +86,7 @@ object ReserveListsTab extends VacancyBasePage {
          |Application ID number: $applicationId
          |You have reached the required standard, but we are unable to offer you a job immediately.
          |We have placed you on a reserve list from which future appointments may be made.
-         |The reserve list for $vacancyName will expire on ${reserveExpiryDateDays(1)} and if we are able to offer you a role before this date we will contact you again.
+         |The reserve list for $vacancyName will expire on ${reserveExpiryDateDays()} and if we are able to offer you a role before this date we will contact you again.
          |Please let us know if you would like us to remove you from the reserve list at any time.
          |Kind Regards,
          |
@@ -106,18 +106,42 @@ object ReserveListsTab extends VacancyBasePage {
     expiryDate
   }
 
-  //test purposes
-  def reserveExpiryDateDays(days: Int): String = {
+  def calculatedExpiryDate(days: Int): String = {
     val formatter  = DateTimeFormatter.ofPattern("d MMMM yyyy")
     val expiry     = LocalDate.now().plusDays(days)
     val expiryDate = expiry.format(formatter)
     expiryDate
   }
 
-  def reserveExpiryDateReformatted(days: Int): String = {
+  def calculatedExpiryDateReformatted(days: Int): String = {
     val formatter  = DateTimeFormatter.ofPattern("yyyy-MM-dd")
     val expiry     = LocalDate.now().plusDays(days)
     val expiryDate = expiry.format(formatter)
     expiryDate
   }
+
+  //test purposes
+  def reserveExpiryDateDays(): String =
+    vXReserveListLength match {
+      case "3 Months"  => calculatedExpiryDate(1)
+      case "6 Months"  => calculatedExpiryDate(2)
+      case "12 Months" => calculatedExpiryDate(4)
+      case "15 Months" => calculatedExpiryDate(5)
+      case "18 Months" => calculatedExpiryDate(6)
+      case "21 Months" => calculatedExpiryDate(7)
+      case "24 Months" => calculatedExpiryDate(8)
+      case _           => throw new IllegalStateException("Invalid reserve period!")
+    }
+
+  def reserveExpiryDateReformatted(): String =
+    vXReserveListLength match {
+      case "3 Months"  => calculatedExpiryDateReformatted(2)
+      case "6 Months"  => calculatedExpiryDateReformatted(3)
+      case "12 Months" => calculatedExpiryDateReformatted(5)
+      case "15 Months" => calculatedExpiryDateReformatted(6)
+      case "18 Months" => calculatedExpiryDateReformatted(7)
+      case "21 Months" => calculatedExpiryDateReformatted(8)
+      case "24 Months" => calculatedExpiryDateReformatted(9)
+      case _           => throw new IllegalStateException("Invalid reserve period!")
+    }
 }

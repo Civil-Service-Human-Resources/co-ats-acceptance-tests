@@ -4,8 +4,8 @@ import org.openqa.selenium.By
 import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.vacancyId
 import uk.gov.co.test.ui.data.vx.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
-import uk.gov.co.test.ui.pages.vx.VacancyDetailsPage.{extractTabFormId, navigateToVacancyForms, reserveList, searchForVacancy, vXReserveListLength, vXReserveListRequired}
-import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.{extractFormId, vacancyFormId}
+import uk.gov.co.test.ui.pages.vx.VacancyDetailsPage.{navigateToVacancyForms, reserveList, searchForVacancy, vXReserveListLength, vXReserveListRequired}
+import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.vacancyFormId
 
 case class ReserveListDetails(
   reserveList: Boolean,
@@ -57,7 +57,7 @@ object ReserveListSection extends VacancyBasePage {
 
   def changeReserveListDetails(
     reserveLength: String,
-    approvalToExtend: Option[Boolean] = None,
+    extendRequired: Option[Boolean] = None,
     extendLength: Option[String] = None
   ): Unit = {
     searchForVacancy(vacancyId)
@@ -65,18 +65,19 @@ object ReserveListSection extends VacancyBasePage {
     val formId = waitForVisibilityOfElementByPath(".//form[@class='form-horizontal']")
     vacancyFormId = formId.getAttribute("id")
     reserveList()
-    if (!vXReserveListRequired || vXReserveListLength != reserveLength) {
+    if (!vXReserveListRequired || vXReserveListLength != reserveLength || vXReserveListLength == "12 Months") {
       scrollToElement(By.id(reserveListId))
       clickOnRadioButton(reserveListYesId)
       lengthOfReserveList(reserveLength)
       if (reserveLength == "12 Months") {
-        if (approvalToExtend.get) {
+        if (extendRequired.get) {
           clickOnRadioButton(approvalToExtendYesId)
           waitForVisibilityOfElementById(reserveListLengthId).click()
           action().moveToElement(waitForDropdownOption(extendLength.get)).perform()
           waitForDropdownOption(extendLength.get).click()
         } else clickOnRadioButton(approvalToExtendNoId)
       }
+      reserveList()
       scrollToElement(By.id(submitForm))
       clickOn(submitForm)
     }

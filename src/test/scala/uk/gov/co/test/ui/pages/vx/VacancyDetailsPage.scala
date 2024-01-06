@@ -35,7 +35,9 @@ object VacancyDetailsPage extends VacancyBasePage {
   def budgetaryApprovalId                  = s"${vacancyFormId}_datafield_154507_1_1_fieldset"
   def costCentreId                         = s"${vacancyFormId}_datafield_154493_1_1"
   def reserveListRequiredId                = s"${vacancyFormId}_datafield_154633_1_1_fieldset"
+  def reserveExtendRequiredId                  = s"${vacancyFormId}_datafield_177141_1_1_fieldset"
   def reserveListLengthId                  = s"select2-${vacancyFormId}_datafield_154637_1_1-container"
+  def reserveExtendLengthId                = s"select2-${vacancyFormId}_datafield_177145_1_1-container"
   def locationTypeId                       = s"select2-${vacancyFormId}_datafield_155639_1_1-container"
   def locationDisplayOverrideId            = s"${vacancyFormId}_datafield_155654_1_1_en-GB"
   def vacancyInNIId                        = s"${vacancyFormId}_datafield_155854_1_1_fieldset"
@@ -63,6 +65,8 @@ object VacancyDetailsPage extends VacancyBasePage {
   //vX reserve
   var vXReserveListRequired   = true
   var vXReserveListLength     = ""
+  var vXReserveExtendRequired = false
+  var vXReserveExtendLength   = ""
   //vX locations
   var vXLocationType          = ""
   var vXLocationDisplay       = ""
@@ -178,7 +182,7 @@ object VacancyDetailsPage extends VacancyBasePage {
     println(vXCostCentre)
   }
 
-   private def  extractReserveListRequired(): Unit = {
+  private def extractReserveListRequired(): Unit = {
     val reserve = waitForVisibilityOfElementById(reserveListRequiredId).findElement(By.xpath(checkLabelPath))
     if (reserve.getText == "Yes") {
       vXReserveListRequired = true
@@ -186,12 +190,27 @@ object VacancyDetailsPage extends VacancyBasePage {
     println(vXReserveListRequired)
   }
 
-  private def extractReserveLength(): Unit = {
+  private def extractReserveLength(): Unit =
     if (vXReserveListRequired) {
       vXReserveListLength = waitForVisibilityOfElementById(reserveListLengthId).getText
       println(vXReserveListLength)
     }
-  }
+
+  private def extractReserveExtendRequired(): Unit =
+    if (vXReserveListLength == "12 Months") {
+      val extendRequired = waitForVisibilityOfElementById(reserveExtendRequiredId).findElement(By.xpath(checkLabelPath))
+      if (extendRequired.getText == "Yes") {
+        vXReserveExtendRequired = true
+        extractReserveExtendLength()
+      } else vXReserveExtendRequired = false
+      println(vXReserveExtendRequired)
+    }
+
+  private def extractReserveExtendLength(): Unit =
+    if (vXReserveExtendRequired) {
+      vXReserveExtendLength = waitForVisibilityOfElementById(reserveExtendLengthId).getText
+      println(vXReserveExtendLength)
+    }
 
   private def extractLocationType(): Unit = {
     vXLocationType = waitForVisibilityOfElementById(locationTypeId).getText
@@ -262,6 +281,7 @@ object VacancyDetailsPage extends VacancyBasePage {
   def reserveList(): Unit = {
     extractReserveListRequired()
     extractReserveLength()
+    extractReserveExtendRequired()
   }
 
   private def locations(): Unit = {
