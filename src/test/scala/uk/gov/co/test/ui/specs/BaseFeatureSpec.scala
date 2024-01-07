@@ -10,7 +10,7 @@ import uk.gov.co.test.ui.data.vx.RECRUITER
 import uk.gov.co.test.ui.driver.BrowserDriver
 import uk.gov.co.test.ui.flows.vx.RecruiterLoginFlow.loginWithRecruiterDetails
 import uk.gov.co.test.ui.pages.v9.SignInPage.{checkV9LogoutState, generateCandidateDetails, navigateToV9Test, v9AcceptAllCookies, v9SearchCookiesById}
-import uk.gov.co.test.ui.utils.SingletonScreenshotReport
+import uk.gov.co.test.ui.utils.{OncePerSuiteRun, SingletonScreenshotReport}
 import uk.gov.co.test.ui.webdriver.SingletonDriver
 
 import scala.util.Try
@@ -25,6 +25,8 @@ trait BaseFeatureSpec
     with WebBrowser
     with BrowserDriver
     with Eventually {
+
+  OncePerSuiteRun.register("deleteScreenshots", () => SingletonScreenshotReport.clearReportDirectory())
 
   override protected def beforeEach(testData: TestData): Unit =
     if (testData.name.contains("V9")) {
