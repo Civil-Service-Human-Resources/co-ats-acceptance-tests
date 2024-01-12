@@ -6,7 +6,7 @@ import uk.gov.co.test.ui.data.vx.ApplicationDetails
 import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{randomFirstName, randomLastName, v9AdjustmentsForTests, v9ReasonableAdjustments, vXAnyOnlineTests, vXInterviewExpectedRounds, vXInterviewFourType, vXInterviewLocation, vXInterviewLongDate, vXInterviewNumber, vXInterviewOneType, vXInterviewThreeType, vXInterviewTwoType, vXSlotTwoStartTime, vacancyName}
 import uk.gov.co.test.ui.pages.v9.ApplicationsPage.{confirmStatusOnApplicationPage, reviewUpdateOnApplicationPage}
 import uk.gov.co.test.ui.pages.vx.DashboardPage.contactEmailVxConfig
-import uk.gov.co.test.ui.pages.vx.vacancytabs.ReserveListsTab.reserveExpiryDateDays
+import uk.gov.co.test.ui.pages.vx.vacancytabs.ReserveListsTab.reserveExpiryDateMonths
 
 object ApplicationCentrePage extends CivilServiceJobsBasePage {
 
@@ -342,7 +342,7 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
     applicationForVacancyText  shouldEqual s"Application For $vacancyName"
     getApplicationState        shouldEqual s"Application status: $status"
     getApplicationConfirmation shouldEqual
-      s"""We've placed you on a reserve list until ${reserveExpiryDateDays()}
+      s"""We've placed you on a reserve list until ${reserveExpiryDateMonths()}
          | This means that you meet our required standard but unfortunately, we’re unable to offer you a job immediately.
          | If a similar job becomes available we may appoint from this reserve list.
          | You can see any feedback that's been given by clicking the "Feedback" button.

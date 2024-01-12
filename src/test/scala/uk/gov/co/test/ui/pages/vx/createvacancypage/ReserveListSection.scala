@@ -4,7 +4,7 @@ import org.openqa.selenium.By
 import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.vacancyId
 import uk.gov.co.test.ui.data.vx.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
-import uk.gov.co.test.ui.pages.vx.VacancyDetailsPage.{navigateToVacancyForms, reserveList, searchForVacancy, vXReserveListLength, vXReserveListRequired}
+import uk.gov.co.test.ui.pages.vx.VacancyDetailsPage.{navigateToVacancyForms, reserveList, searchForVacancy, vXReserveExtendLength, vXReserveExtendRequired, vXReserveListLength, vXReserveListRequired}
 import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.vacancyFormId
 
 case class ReserveListDetails(
@@ -55,31 +55,43 @@ object ReserveListSection extends VacancyBasePage {
       f(newVacancyDetails.reserveListDetails)
     }
 
-  def changeReserveListDetails(
-    reserveLength: String,
-    extendRequired: Option[Boolean] = None,
-    extendLength: Option[String] = None
-  ): Unit = {
+  def calculatedVXExtendedReserveDate(extendLength: Option[String]): Unit = {
+    val baseReserveLength = vXReserveListLength.replaceAll("[A-Za-z ]", "").filterNot(_.isWhitespace).toInt
+    val reserveExtendLength = extendLength.get.replaceAll("[A-Za-z ]", "").filterNot(_.isWhitespace).toInt
+    val totalLength = baseReserveLength + reserveExtendLength
+    vXReserveListLength = s"${totalLength.toString} Months"
+    println(vXReserveListLength)
+  }
+
+  def changeReserveListDetails(reserveLength: String, extendRequired: Option[Boolean] = None, extendLength: Option[String] = None): Unit = {
     searchForVacancy(vacancyId)
     navigateToVacancyForms()
     val formId = waitForVisibilityOfElementByPath(".//form[@class='form-horizontal']")
     vacancyFormId = formId.getAttribute("id")
     reserveList()
     if (!vXReserveListRequired || vXReserveListLength != reserveLength || vXReserveListLength == "12 Months") {
+      vXReserveListRequired = true
+      vXReserveListLength = reserveLength
       scrollToElement(By.id(reserveListId))
       clickOnRadioButton(reserveListYesId)
-      lengthOfReserveList(reserveLength)
-      if (reserveLength == "12 Months") {
-        if (extendRequired.get) {
+      lengthOfReserveList(vXReserveListLength)
+      if (vXReserveListLength == "12 Months") {
+        vXReserveExtendRequired = extendRequired.get
+        if (vXReserveExtendRequired) {
+          vXReserveExtendLength = extendLength.get
           clickOnRadioButton(approvalToExtendYesId)
-          waitForVisibilityOfElementById(reserveListLengthId).click()
-          action().moveToElement(waitForDropdownOption(extendLength.get)).perform()
-          waitForDropdownOption(extendLength.get).click()
+          waitForVisibilityOfElementById(extendLengthId).click()
+          action().moveToElement(waitForDropdownOption(vXReserveExtendLength)).perform()
+          waitForDropdownOption(vXReserveExtendLength).click()
+//          calculatedVXExtendedReserveDate(Some(vXReserveExtendLength))
         } else clickOnRadioButton(approvalToExtendNoId)
       }
-      reserveList()
       scrollToElement(By.id(submitForm))
       clickOn(submitForm)
+      searchForVacancy(vacancyId)
+      navigateToVacancyForms()
+      reserveList()
+      calculatedVXExtendedReserveDate(Some(vXReserveExtendLength))
     }
   }
 }

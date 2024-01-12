@@ -6,6 +6,9 @@ import scala.collection.mutable.ListBuffer
 
 object MasterVacancyDetails extends VacancyBasePage {
 
+  //vx formId
+  var vacancyFormId = ""
+
   //vx vacancy additionalQuestions section
   var vXAnyAdditionalQuestions = true
   var vXHowManyQuestions       = 3

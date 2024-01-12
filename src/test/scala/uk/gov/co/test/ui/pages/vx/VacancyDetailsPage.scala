@@ -2,6 +2,7 @@ package uk.gov.co.test.ui.pages.vx
 
 import org.openqa.selenium.{By, WebElement}
 import org.scalatest.concurrent.Eventually.eventually
+import uk.gov.co.test.ui.pages.vx.createvacancypage.ReserveListSection.calculatedVXExtendedReserveDate
 
 import scala.collection.mutable
 import scala.collection.mutable.ListBuffer
@@ -9,73 +10,74 @@ import scala.jdk.CollectionConverters._
 
 object VacancyDetailsPage extends VacancyBasePage {
 
-  private lazy val dashboardPageTitle      = "Home : Civil Service Jobs - GOV.UK"
+  private lazy val dashboardPageTitle = "Home : Civil Service Jobs - GOV.UK"
   private lazy val previewAdvertButtonPath = ".//a[@aria-label='Preview advert ']"
-  private lazy val searchVacanciesPath     = ".//*[@class='textlabel' and text() = 'Search Vacancies']"
-  private lazy val vacancyFormsPath        = ".//*[@class='main-label' and text()='Vacancy Forms']"
-  private lazy val searchPath              = "selected_option"
-  private lazy val searchInput             = "search_input"
-  private lazy val matchingOption          = "matching_options"
-  private lazy val matchedOption           = ".//li[@class='qs_option active']/a/span[1]"
-  private lazy val searchForId             = "search_button"
-  private lazy val appIdPath               = ".//*[@class='app_id']"
-  private lazy val vacancyNamePath         = ".//span[@class='obj_name']"
-  private lazy val checkLabelPath          = ".//input[@checked='checked']/following-sibling::label"
-  def departmentId                         = s"select2-${vacancyFormId}_datafield_155191_1_1-container"
-  def businessAreaId                       = s"select2-${vacancyFormId}_datafield_155221_1_1-container"
-  def whichProfessionId                    = s"select2-${vacancyFormId}_datafield_155435_1_1-container"
-  def noOfJobsId                           = s"${vacancyFormId}_datafield_155332_1_1"
-  def typeOfRoleId                         = s"select2-${vacancyFormId}_datafield_155369_1_1-container"
-  def welshRequiredCheck                   = s"${vacancyFormId}_datafield_179408_1_1"
-  def businessAreaDetailId                 = s"${vacancyFormId}_datafield_155206_1_1_en-GB"
-  def typeOfRoleInput                      = s".//*[@aria-describedby='$typeOfRoleId']"
-  def listOptionsPath                      = ".//li[@role='option']"
-  def approachId                           = s"${vacancyFormId}_datafield_154380_1_1_fieldset"
-  def approachExternalId                   = s"${vacancyFormId}_datafield_154380_1_1_11774_label"
-  def budgetaryApprovalId                  = s"${vacancyFormId}_datafield_154507_1_1_fieldset"
-  def costCentreId                         = s"${vacancyFormId}_datafield_154493_1_1"
-  def reserveListRequiredId                = s"${vacancyFormId}_datafield_154633_1_1_fieldset"
-  def reserveExtendRequiredId                  = s"${vacancyFormId}_datafield_177141_1_1_fieldset"
-  def reserveListLengthId                  = s"select2-${vacancyFormId}_datafield_154637_1_1-container"
-  def reserveExtendLengthId                = s"select2-${vacancyFormId}_datafield_177145_1_1-container"
-  def locationTypeId                       = s"select2-${vacancyFormId}_datafield_155639_1_1-container"
-  def locationDisplayOverrideId            = s"${vacancyFormId}_datafield_155654_1_1_en-GB"
-  def vacancyInNIId                        = s"${vacancyFormId}_datafield_155854_1_1_fieldset"
-  def availableOutsideNIId                 = s"${vacancyFormId}_datafield_155922_1_1_fieldset"
-  def whichCommunitiesApplyId              = s"${vacancyFormId}_field_value_155869_1"
-  def locationPreferencesId                = s"${vacancyFormId}_field_value_155799_1"
-  def maxLocationPreferenceId              = s"select2-${vacancyFormId}_datafield_155818_1_1-container"
-  def locationsToChooseId                  = s"select2-${vacancyFormId}_datafield_155836_1_1-container"
+  private lazy val searchVacanciesPath = ".//*[@class='textlabel' and text() = 'Search Vacancies']"
+  private lazy val vacancyFormsPath = ".//*[@class='main-label' and text()='Vacancy Forms']"
+  private lazy val searchPath = "selected_option"
+  private lazy val searchInput = "search_input"
+  private lazy val matchingOption = "matching_options"
+  private lazy val matchedOption = ".//li[@class='qs_option active']/a/span[1]"
+  private lazy val searchForId = "search_button"
+  private lazy val appIdPath = ".//*[@class='app_id']"
+  private lazy val vacancyNamePath = ".//span[@class='obj_name']"
+  private lazy val checkLabelPath = ".//input[@checked='checked']/following-sibling::label[1]"
 
-  //vX job information
-  var vacancyId               = ""
-  var vacancyName             = ""
-  var vacancyFormId           = ""
-  var vXDepartment            = ""
-  var vXBusinessArea          = ""
-  var vXBusinessAreaDetail    = ""
-  var vXTypeOfRole            = new ListBuffer[String]()
-  var vXProfession            = ""
-  var vXNoOfJobsAvailable     = ""
-  //vX approach
-  var vXApproach              = ""
-  //vX approval
-  var vXBudgetaryApproval     = true
-  var vXCostCentre            = ""
-  //vX reserve
-  var vXReserveListRequired   = true
-  var vXReserveListLength     = ""
-  var vXReserveExtendRequired = false
-  var vXReserveExtendLength   = ""
-  //vX locations
-  var vXLocationType          = ""
-  var vXLocationDisplay       = ""
-  var vXVacancyInNI           = false
-  var vXAvailableOutsideInNI  = false
-  var vXWhichCommunitiesApply = ""
-  var vXLocationPreferences   = true
-  var vXMaxLocationPreference = ""
-  var vXLocationsToChoose     = new ListBuffer[String]()
+  def departmentId = s"select2-${vacancyFormId}_datafield_155191_1_1-container"
+  def businessAreaId = s"select2-${vacancyFormId}_datafield_155221_1_1-container"
+  def whichProfessionId = s"select2-${vacancyFormId}_datafield_155435_1_1-container"
+  def noOfJobsId = s"${vacancyFormId}_datafield_155332_1_1"
+  def typeOfRoleId = s"select2-${vacancyFormId}_datafield_155369_1_1-container"
+  def welshRequiredCheck = s"${vacancyFormId}_datafield_179408_1_1"
+  def businessAreaDetailId = s"${vacancyFormId}_datafield_155206_1_1_en-GB"
+  def typeOfRoleInput = s".//*[@aria-describedby='$typeOfRoleId']"
+  def listOptionsPath = ".//li[@role='option']"
+  def approachId = s"${vacancyFormId}_datafield_154380_1_1_fieldset"
+  def approachExternalId = s"${vacancyFormId}_datafield_154380_1_1_11774_label"
+  def budgetaryApprovalId = s"${vacancyFormId}_datafield_154507_1_1_fieldset"
+  def costCentreId = s"${vacancyFormId}_datafield_154493_1_1"
+  def reserveListRequiredId = s"${vacancyFormId}_datafield_154633_1_1_fieldset"
+  def reserveExtendRequiredId = s"${vacancyFormId}_datafield_177141_1_1_fieldset"
+  def reserveListLengthId = s"select2-${vacancyFormId}_datafield_154637_1_1-container"
+  def reserveExtendLengthId = s"select2-${vacancyFormId}_datafield_177145_1_1-container"
+  def locationTypeId = s"select2-${vacancyFormId}_datafield_155639_1_1-container"
+  def locationDisplayOverrideId = s"${vacancyFormId}_datafield_155654_1_1_en-GB"
+  def vacancyInNIId = s"${vacancyFormId}_datafield_155854_1_1_fieldset"
+  def availableOutsideNIId = s"${vacancyFormId}_datafield_155922_1_1_fieldset"
+  def whichCommunitiesApplyId = s"${vacancyFormId}_field_value_155869_1"
+  def locationPreferencesId = s"${vacancyFormId}_field_value_155799_1"
+  def maxLocationPreferenceId = s"select2-${vacancyFormId}_datafield_155818_1_1-container"
+  def locationsToChooseId = s"select2-${vacancyFormId}_datafield_155836_1_1-container"
+
+//  //vX job information
+//  var vacancyId = ""
+//  var vacancyName = ""
+//  var vacancyFormId = ""
+//  var vXDepartment = ""
+//  var vXBusinessArea = ""
+//  var vXBusinessAreaDetail = ""
+//  var vXTypeOfRole = new ListBuffer[String]()
+//  var vXProfession = ""
+//  var vXNoOfJobsAvailable = ""
+//  //vX approach
+//  var vXApproach = ""
+//  //vX approval
+//  var vXBudgetaryApproval = true
+//  var vXCostCentre = ""
+//  //vX reserve
+//  var vXReserveListRequired = true
+//  var vXReserveListLength = ""
+//  var vXReserveExtendRequired = false
+//  var vXReserveExtendLength = ""
+//  //vX locations
+//  var vXLocationType = ""
+//  var vXLocationDisplay = ""
+//  var vXVacancyInNI = false
+//  var vXAvailableOutsideInNI = false
+//  var vXWhichCommunitiesApply = ""
+//  var vXLocationPreferences = true
+//  var vXMaxLocationPreference = ""
+//  var vXLocationsToChoose = new ListBuffer[String]()
 
   private def dashboardPageCheck(): Unit =
     eventually(onPage(dashboardPageTitle))
@@ -91,7 +93,7 @@ object VacancyDetailsPage extends VacancyBasePage {
   }
 
   def searchForVacancy(vacancyId: String): Unit = {
-    dashboardPageCheck()
+//    dashboardPageCheck()
     waitForVisibilityOfElementById(searchPath).click()
     waitForVisibilityOfElementByPath(searchVacanciesPath).click()
     waitForVisibilityOfElementById(searchInput).sendKeys(vacancyId)
@@ -206,11 +208,10 @@ object VacancyDetailsPage extends VacancyBasePage {
       println(vXReserveExtendRequired)
     }
 
-  private def extractReserveExtendLength(): Unit =
-    if (vXReserveExtendRequired) {
-      vXReserveExtendLength = waitForVisibilityOfElementById(reserveExtendLengthId).getText
-      println(vXReserveExtendLength)
-    }
+  private def extractReserveExtendLength(): Unit = {
+    vXReserveExtendLength = waitForVisibilityOfElementById(reserveExtendLengthId).getText
+    println(vXReserveExtendLength)
+  }
 
   private def extractLocationType(): Unit = {
     vXLocationType = waitForVisibilityOfElementById(locationTypeId).getText
