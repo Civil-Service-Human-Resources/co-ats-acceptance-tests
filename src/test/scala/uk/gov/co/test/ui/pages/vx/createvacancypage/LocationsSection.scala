@@ -1,10 +1,12 @@
 package uk.gov.co.test.ui.pages.vx.createvacancypage
 
 import org.openqa.selenium.{By, WebElement}
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXCommunitiesInNIR, vXGiveLocationPreference, vXMaxLocations, vXOtherLocations, vXVacanciesInNIR, vacancyFormId}
 import uk.gov.co.test.ui.data.vx.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
-import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.vacancyFormId
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXCommunitiesInNIR, vXGiveLocationPreference, vXMaxLocations, vXOtherLocations, vXVacanciesInNIR}
+
+import scala.collection.mutable.ListBuffer
+import scala.jdk.CollectionConverters._
 
 case class LocationsDetails(
   locationType: String,
@@ -18,7 +20,7 @@ case class LocationsDetails(
   whichCommunityEncouraged: String,
   giveLocationPreference: Boolean,
   maxLocations: String,
-  otherLocations: List[String]
+  otherLocations: ListBuffer[String]
 )
 
 object LocationsSection extends VacancyBasePage {

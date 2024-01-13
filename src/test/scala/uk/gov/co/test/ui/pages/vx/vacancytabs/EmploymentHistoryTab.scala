@@ -2,10 +2,9 @@ package uk.gov.co.test.ui.pages.vx.vacancytabs
 
 import org.openqa.selenium.{By, WebElement}
 import uk.gov.co.test.ui.data.vx.ApplicationDetails
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{v9EmployedWithin3Years, v9FirstEmployerFromDate, v9FirstEmployerName}
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{v9EmployedWithin3Years, v9FirstEmployerFromDate, v9FirstEmployerName, vacancyFormId}
 import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.{employmentHistoryBarId, navigateToApplicationSummary}
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
-import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.vacancyFormId
 
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter

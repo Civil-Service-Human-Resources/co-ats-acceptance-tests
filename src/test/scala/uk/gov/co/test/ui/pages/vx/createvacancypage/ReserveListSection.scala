@@ -1,11 +1,10 @@
 package uk.gov.co.test.ui.pages.vx.createvacancypage
 
 import org.openqa.selenium.By
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.vacancyId
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXReserveExtendLength, vXReserveExtendRequired, vXReserveListLength, vXReserveListRequired, vXReserveListTotalLength, vacancyFormId, vacancyId}
 import uk.gov.co.test.ui.data.vx.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
-import uk.gov.co.test.ui.pages.vx.VacancyDetailsPage.{navigateToVacancyForms, reserveList, searchForVacancy, vXReserveExtendLength, vXReserveExtendRequired, vXReserveListLength, vXReserveListRequired}
-import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.vacancyFormId
+import uk.gov.co.test.ui.pages.vx.VacancyDetailsPage.{extractAllVacancyDetails, navigateToVacancyForms, reserveList, searchForVacancy}
 
 case class ReserveListDetails(
   reserveList: Boolean,
@@ -55,43 +54,44 @@ object ReserveListSection extends VacancyBasePage {
       f(newVacancyDetails.reserveListDetails)
     }
 
-  def calculatedVXExtendedReserveDate(extendLength: Option[String]): Unit = {
+  def totalReserveExpiryLength(): Unit = {
     val baseReserveLength = vXReserveListLength.replaceAll("[A-Za-z ]", "").filterNot(_.isWhitespace).toInt
-    val reserveExtendLength = extendLength.get.replaceAll("[A-Za-z ]", "").filterNot(_.isWhitespace).toInt
-    val totalLength = baseReserveLength + reserveExtendLength
-    vXReserveListLength = s"${totalLength.toString} Months"
-    println(vXReserveListLength)
+    if (vXReserveExtendRequired) {
+      val reserveExtendLength = vXReserveExtendLength.replaceAll("[A-Za-z ]", "").filterNot(_.isWhitespace).toInt
+      val totalLength         = baseReserveLength + reserveExtendLength
+      vXReserveListTotalLength = s"${totalLength.toString} Months"
+    } else {
+      if (vXReserveListLength == "3 Month") {
+        vXReserveListTotalLength = s"${baseReserveLength.toString} Month"
+      } else vXReserveListTotalLength = s"${baseReserveLength.toString} Months"
+    }
+    println(vXReserveListTotalLength)
   }
 
-  def changeReserveListDetails(reserveLength: String, extendRequired: Option[Boolean] = None, extendLength: Option[String] = None): Unit = {
+  def changeReserveListDetails(
+    reserveLength: String,
+    extendRequired: Option[Boolean] = None,
+    extendLength: Option[String] = None
+  ): Unit = {
     searchForVacancy(vacancyId)
     navigateToVacancyForms()
-    val formId = waitForVisibilityOfElementByPath(".//form[@class='form-horizontal']")
-    vacancyFormId = formId.getAttribute("id")
     reserveList()
     if (!vXReserveListRequired || vXReserveListLength != reserveLength || vXReserveListLength == "12 Months") {
-      vXReserveListRequired = true
-      vXReserveListLength = reserveLength
       scrollToElement(By.id(reserveListId))
       clickOnRadioButton(reserveListYesId)
-      lengthOfReserveList(vXReserveListLength)
-      if (vXReserveListLength == "12 Months") {
-        vXReserveExtendRequired = extendRequired.get
-        if (vXReserveExtendRequired) {
-          vXReserveExtendLength = extendLength.get
+      lengthOfReserveList(reserveLength)
+      if (reserveLength == "12 Months") {
+        if (extendRequired.get) {
           clickOnRadioButton(approvalToExtendYesId)
           waitForVisibilityOfElementById(extendLengthId).click()
-          action().moveToElement(waitForDropdownOption(vXReserveExtendLength)).perform()
-          waitForDropdownOption(vXReserveExtendLength).click()
-//          calculatedVXExtendedReserveDate(Some(vXReserveExtendLength))
+          action().moveToElement(waitForDropdownOption(extendLength.get)).perform()
+          waitForDropdownOption(extendLength.get).click()
         } else clickOnRadioButton(approvalToExtendNoId)
       }
       scrollToElement(By.id(submitForm))
       clickOn(submitForm)
-      searchForVacancy(vacancyId)
-      navigateToVacancyForms()
-      reserveList()
-      calculatedVXExtendedReserveDate(Some(vXReserveExtendLength))
     }
+    extractAllVacancyDetails(vacancyId)
+    totalReserveExpiryLength()
   }
 }

@@ -40,39 +40,6 @@ object MASTER_REGISTER_CANDIDATE
     )
 
 object MASTER_REGISTER_CANDIDATE_3_MONTHS
-  extends CandidateDetails(
-    firstname = s"$randomFirstName",
-    lastname = s"$randomLastName",
-    preferredFirstName = s"$preferredFirstName",
-    email = s"$randomEmail",
-    s"$passwordCandidate",
-    false,
-    true
-  )
-
-object MASTER_REGISTER_CANDIDATE_6_MONTHS
-  extends CandidateDetails(
-    firstname = s"$randomFirstName",
-    lastname = s"$randomLastName",
-    preferredFirstName = s"$preferredFirstName",
-    email = s"$randomEmail",
-    s"$passwordCandidate",
-    false,
-    true
-  )
-
-object MASTER_REGISTER_CANDIDATE_12_MONTHS
-  extends CandidateDetails(
-    firstname = s"$randomFirstName",
-    lastname = s"$randomLastName",
-    preferredFirstName = s"$preferredFirstName",
-    email = s"$randomEmail",
-    s"$passwordCandidate",
-    false,
-    true
-  )
-
-object REGISTER_CANDIDATE_HMRC
     extends CandidateDetails(
       firstname = s"$randomFirstName",
       lastname = s"$randomLastName",
@@ -83,7 +50,29 @@ object REGISTER_CANDIDATE_HMRC
       true
     )
 
-object REGISTER_CANDIDATE_INSOLVENCY
+object MASTER_REGISTER_CANDIDATE_6_MONTHS
+    extends CandidateDetails(
+      firstname = s"$randomFirstName",
+      lastname = s"$randomLastName",
+      preferredFirstName = s"$preferredFirstName",
+      email = s"$randomEmail",
+      s"$passwordCandidate",
+      false,
+      true
+    )
+
+object MASTER_REGISTER_CANDIDATE_12_MONTHS
+    extends CandidateDetails(
+      firstname = s"$randomFirstName",
+      lastname = s"$randomLastName",
+      preferredFirstName = s"$preferredFirstName",
+      email = s"$randomEmail",
+      s"$passwordCandidate",
+      false,
+      true
+    )
+
+object REGISTER_CANDIDATE_HMRC
     extends CandidateDetails(
       firstname = s"$randomFirstName",
       lastname = s"$randomLastName",

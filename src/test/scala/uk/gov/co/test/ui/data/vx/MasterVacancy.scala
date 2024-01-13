@@ -4,6 +4,8 @@ import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.{contactEmailVxConfig, contactN
 import uk.gov.co.test.ui.pages.v9.SignInPage.generateRandomJobPosition
 import uk.gov.co.test.ui.pages.vx.createvacancypage._
 
+import scala.collection.mutable.ListBuffer
+
 object MASTER_VACANCY_DATA
     extends NewVacancyDetails(
       MASTER_BASIC_DETAILS,
@@ -90,7 +92,7 @@ object MASTER_LOCATIONS
       "All communities",
       true,
       "3",
-      otherLocations = List("London", "Southampton", "Manchester")
+      otherLocations = ListBuffer("London", "Southampton", "Manchester")
     )
 
 object MASTER_CONTRACT_DETAILS
@@ -308,7 +310,7 @@ object MASTER_TECH_SKILLS
 
 object MASTER_VACANCY_TESTS
     extends VacancyTestsDetails(
-      true, //only part on master vacancy set to false!
+      false, //only part on master vacancy set to false!
       "Online Tests",
       "Executive Officer",
       testName = Map(

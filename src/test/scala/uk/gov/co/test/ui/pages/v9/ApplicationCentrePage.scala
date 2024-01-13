@@ -241,10 +241,10 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
     }
     // TODO to bypass grammatical bug, this function was created
     val schedule   = interviewTypeDetail() match {
-      case "Telephone"  => s"'Schedule interview'"
+      case "Telephone" => s"'Schedule interview'"
       case "Assessment" => s"\'Schedule interview\""//TODO requires fix to align with other fields
-      case "Video"      => s"'Schedule interview'"
-      case "Interview"  => s"'Schedule interview'"
+      case "Video"     => s"'Schedule interview'"
+      case "Interview" => s"'Schedule interview'"
     }
 //    val schedule   = vXInterviewNumber.head match {
 //      case "1" => s"'Schedule interview'"
@@ -275,7 +275,7 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
       case "4" => "Scheduled for fourth interview"
     }
     val appConfirmation = interviewTypeDetail() match {
-      case "Telephone" =>
+      case "Telephone"  =>
         s"""Your ${vXInterviewOneType.toLowerCase} interview slot is booked and details are shown below:
                      |Date: $vXInterviewLongDate
                      |Time: ${vXSlotTwoStartTime.replaceAll("[A-Za-z ]", "").filterNot(_.isWhitespace)}
@@ -288,14 +288,14 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
                      |Time: ${vXSlotTwoStartTime.replaceAll("[A-Za-z ]", "").filterNot(_.isWhitespace)}
                      |Autotest - Instructions for $randomFirstName $randomLastName for interview ${vXInterviewNumber.head}
                      |If you're no longer interested in this job, please withdraw your application.""".stripMargin
-      case "Video" =>
+      case "Video"      =>
         s"""Your ${vXInterviewThreeType.toLowerCase} interview slot is booked and details are shown below:
                      |Date: $vXInterviewLongDate
                      |Time: ${vXSlotTwoStartTime.replaceAll("[A-Za-z ]", "").filterNot(_.isWhitespace)}
                      |We will send details on how to access your ${vXInterviewThreeType.toLowerCase} interview separately when they are available.
                      |Autotest - Instructions for $randomFirstName $randomLastName for interview ${vXInterviewNumber.head}
                      |If you're no longer interested in this job, please withdraw your application.""".stripMargin
-      case "Interview" =>
+      case "Interview"  =>
         s"""Your ${vXInterviewFourType.toLowerCase} slot is booked and details are shown below:
                      |Date: $vXInterviewLongDate
                      |Time: ${vXSlotTwoStartTime.replaceAll("[A-Za-z ]", "").filterNot(_.isWhitespace)}

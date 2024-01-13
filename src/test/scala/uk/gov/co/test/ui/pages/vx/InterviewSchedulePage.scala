@@ -74,7 +74,7 @@ object InterviewSchedulePage extends VacancyBasePage {
   private lazy val bookedEmailTemplateId                 = "select2-details_form_email_confirm_id-container"
   private lazy val includeCandidateCVInICalsId           = "details_form_ical_attach_candidate_cv"
   private lazy val createId                              = "details_form_form_submit"
-  private lazy val removeTimezonePath                           = "//*[@id='item_details_form_time_zone']/div/span/span[1]/span/button"
+  private lazy val removeTimezonePath                    = "//*[@id='item_details_form_time_zone']/div/span/span[1]/span/button"
 
   private def createSchedule: WebElement        = waitForVisibilityOfElementByPathLast(createInterviewSchedulePath)
   private def viewInterviewSchedule: WebElement = waitForVisibilityOfElementByPathLast(viewInterviewSchedulePath)
@@ -108,7 +108,7 @@ object InterviewSchedulePage extends VacancyBasePage {
     waitForVisibilityOfElementByPath(createScheduleTitlePath).getText shouldEqual scheduleTitle
   }
 
-  def untagVacancy(position: Int): Unit = {
+  def untagVacancy(position: Int, vacancyToUntag: String): Unit = {
     val viewSchedule = "View Interview Schedule"
     if (viewInterviewSchedule.getText == viewSchedule) viewInterviewSchedule.click()
     else {
@@ -120,14 +120,17 @@ object InterviewSchedulePage extends VacancyBasePage {
     Thread.sleep(1500)
     waitForVisibilityOfElementByPath(".//*[@id='DataTables_Table_0_select']/option[4]").click()
     Thread.sleep(2000)
+    waitForVisibilityOfElementById("interviews-main-filter").sendKeys(vacancyToUntag)
+//    waitForVisibilityOfElementById("interviews-main-filter").sendKeys(Keys.ENTER)
+    Thread.sleep(6000)
     scrollToElement(By.xpath(s".//*[@id='DataTables_Table_0']/tbody/tr[${position.toString}]"))
     waitForVisibilityOfElementByPath(s".//*[@id='DataTables_Table_0']/tbody/tr[${position.toString}]").click()
     waitForVisibilityOfElementByPath(".//a[text()='Edit']").click()
     waitForVisibilityOfElementByPath(".//span[@class='main-label' and text() = 'Tagged Vacancies']").click()
     val vacancyUsed  = ".//*[@id='DataTables_Table_1']/tbody/tr/td[1]"
     Thread.sleep(1000)
-    var anyRecords = waitForVisibilityOfElementByPath(vacancyUsed).getText
-    if (anyRecords == "9574") {
+    var anyRecords   = waitForVisibilityOfElementByPath(vacancyUsed).getText
+    if (anyRecords == vacancyToUntag) {
       waitForVisibilityOfElementByPath(vacancyUsed).click()
       waitForVisibilityOfElementById("but_remove_opportunity").click()
       checkForNewValuePath(vacancyUsed, "No records")

@@ -2,7 +2,8 @@ package uk.gov.co.test.ui.pages.vx
 
 import org.openqa.selenium.{By, WebElement}
 import org.scalatest.concurrent.Eventually.eventually
-import uk.gov.co.test.ui.pages.vx.createvacancypage.ReserveListSection.calculatedVXExtendedReserveDate
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXApplicationClosingDate, vXApplicationLiveDate, vXApproach, vXAvailableOutsideInNI, vXBudgetaryApproval, vXBusinessArea, vXBusinessAreaDetail, vXCommunitiesInNIR, vXCostCentre, vXGiveLocationPreference, vXJobInfoDepartment, vXLocationDisplay, vXLocationType, vXMaxLocations, vXNoOfJobsAvailable, vXOtherLocations, vXProfession, vXReserveExtendLength, vXReserveExtendRequired, vXReserveListLength, vXReserveListRequired, vXTypeOfRole, vXVacanciesInNIR, vacancyFormId, vacancyId, vacancyName}
+import uk.gov.co.test.ui.pages.vx.vacancytabs.SummaryTab.{vacancyActive, vacancyClosingDateId, vacancyLiveDateId}
 
 import scala.collection.mutable
 import scala.collection.mutable.ListBuffer
@@ -10,44 +11,44 @@ import scala.jdk.CollectionConverters._
 
 object VacancyDetailsPage extends VacancyBasePage {
 
-  private lazy val dashboardPageTitle = "Home : Civil Service Jobs - GOV.UK"
+  private lazy val dashboardPageTitle      = "Home : Civil Service Jobs - GOV.UK"
   private lazy val previewAdvertButtonPath = ".//a[@aria-label='Preview advert ']"
-  private lazy val searchVacanciesPath = ".//*[@class='textlabel' and text() = 'Search Vacancies']"
-  private lazy val vacancyFormsPath = ".//*[@class='main-label' and text()='Vacancy Forms']"
-  private lazy val searchPath = "selected_option"
-  private lazy val searchInput = "search_input"
-  private lazy val matchingOption = "matching_options"
-  private lazy val matchedOption = ".//li[@class='qs_option active']/a/span[1]"
-  private lazy val searchForId = "search_button"
-  private lazy val appIdPath = ".//*[@class='app_id']"
-  private lazy val vacancyNamePath = ".//span[@class='obj_name']"
-  private lazy val checkLabelPath = ".//input[@checked='checked']/following-sibling::label[1]"
+  private lazy val searchVacanciesPath     = ".//*[@class='textlabel' and text() = 'Search Vacancies']"
+  private lazy val vacancyFormsPath        = ".//*[@class='main-label' and text()='Vacancy Forms']"
+  private lazy val searchPath              = "selected_option"
+  private lazy val searchInput             = "search_input"
+  private lazy val matchingOption          = "matching_options"
+  private lazy val matchedOption           = ".//li[@class='qs_option active']/a/span[1]"
+  private lazy val searchForId             = "search_button"
+  private lazy val appIdPath               = ".//*[@class='app_id']"
+  private lazy val vacancyNamePath         = ".//span[@class='obj_name']"
+  private lazy val checkLabelPath          = ".//input[@checked='checked']/following-sibling::label[1]"
 
-  def departmentId = s"select2-${vacancyFormId}_datafield_155191_1_1-container"
-  def businessAreaId = s"select2-${vacancyFormId}_datafield_155221_1_1-container"
-  def whichProfessionId = s"select2-${vacancyFormId}_datafield_155435_1_1-container"
-  def noOfJobsId = s"${vacancyFormId}_datafield_155332_1_1"
-  def typeOfRoleId = s"select2-${vacancyFormId}_datafield_155369_1_1-container"
-  def welshRequiredCheck = s"${vacancyFormId}_datafield_179408_1_1"
-  def businessAreaDetailId = s"${vacancyFormId}_datafield_155206_1_1_en-GB"
-  def typeOfRoleInput = s".//*[@aria-describedby='$typeOfRoleId']"
-  def listOptionsPath = ".//li[@role='option']"
-  def approachId = s"${vacancyFormId}_datafield_154380_1_1_fieldset"
-  def approachExternalId = s"${vacancyFormId}_datafield_154380_1_1_11774_label"
-  def budgetaryApprovalId = s"${vacancyFormId}_datafield_154507_1_1_fieldset"
-  def costCentreId = s"${vacancyFormId}_datafield_154493_1_1"
-  def reserveListRequiredId = s"${vacancyFormId}_datafield_154633_1_1_fieldset"
-  def reserveExtendRequiredId = s"${vacancyFormId}_datafield_177141_1_1_fieldset"
-  def reserveListLengthId = s"select2-${vacancyFormId}_datafield_154637_1_1-container"
-  def reserveExtendLengthId = s"select2-${vacancyFormId}_datafield_177145_1_1-container"
-  def locationTypeId = s"select2-${vacancyFormId}_datafield_155639_1_1-container"
+  def departmentId              = s"select2-${vacancyFormId}_datafield_155191_1_1-container"
+  def businessAreaId            = s"select2-${vacancyFormId}_datafield_155221_1_1-container"
+  def whichProfessionId         = s"select2-${vacancyFormId}_datafield_155435_1_1-container"
+  def noOfJobsId                = s"${vacancyFormId}_datafield_155332_1_1"
+  def typeOfRoleId              = s"select2-${vacancyFormId}_datafield_155369_1_1-container"
+  def welshRequiredCheck        = s"${vacancyFormId}_datafield_179408_1_1"
+  def businessAreaDetailId      = s"${vacancyFormId}_datafield_155206_1_1_en-GB"
+  def typeOfRoleInput           = s".//*[@aria-describedby='$typeOfRoleId']"
+  def listOptionsPath           = ".//li[@role='option']"
+  def approachId                = s"${vacancyFormId}_datafield_154380_1_1_fieldset"
+  def approachExternalId        = s"${vacancyFormId}_datafield_154380_1_1_11774_label"
+  def budgetaryApprovalId       = s"${vacancyFormId}_datafield_154507_1_1_fieldset"
+  def costCentreId              = s"${vacancyFormId}_datafield_154493_1_1"
+  def reserveListRequiredId     = s"${vacancyFormId}_datafield_154633_1_1_fieldset"
+  def reserveExtendRequiredId   = s"${vacancyFormId}_datafield_177141_1_1_fieldset"
+  def reserveListLengthId       = s"select2-${vacancyFormId}_datafield_154637_1_1-container"
+  def reserveExtendLengthId     = s"select2-${vacancyFormId}_datafield_177145_1_1-container"
+  def locationTypeId            = s"select2-${vacancyFormId}_datafield_155639_1_1-container"
   def locationDisplayOverrideId = s"${vacancyFormId}_datafield_155654_1_1_en-GB"
-  def vacancyInNIId = s"${vacancyFormId}_datafield_155854_1_1_fieldset"
-  def availableOutsideNIId = s"${vacancyFormId}_datafield_155922_1_1_fieldset"
-  def whichCommunitiesApplyId = s"${vacancyFormId}_field_value_155869_1"
-  def locationPreferencesId = s"${vacancyFormId}_field_value_155799_1"
-  def maxLocationPreferenceId = s"select2-${vacancyFormId}_datafield_155818_1_1-container"
-  def locationsToChooseId = s"select2-${vacancyFormId}_datafield_155836_1_1-container"
+  def vacancyInNIId             = s"${vacancyFormId}_datafield_155854_1_1_fieldset"
+  def availableOutsideNIId      = s"${vacancyFormId}_datafield_155922_1_1_fieldset"
+  def whichCommunitiesApplyId   = s"${vacancyFormId}_field_value_155869_1"
+  def locationPreferencesId     = s"${vacancyFormId}_field_value_155799_1"
+  def maxLocationPreferenceId   = s"select2-${vacancyFormId}_datafield_155818_1_1-container"
+  def locationsToChooseId       = s"select2-${vacancyFormId}_datafield_155836_1_1-container"
 
 //  //vX job information
 //  var vacancyId = ""
@@ -93,7 +94,6 @@ object VacancyDetailsPage extends VacancyBasePage {
   }
 
   def searchForVacancy(vacancyId: String): Unit = {
-//    dashboardPageCheck()
     waitForVisibilityOfElementById(searchPath).click()
     waitForVisibilityOfElementByPath(searchVacanciesPath).click()
     waitForVisibilityOfElementById(searchInput).sendKeys(vacancyId)
@@ -101,9 +101,20 @@ object VacancyDetailsPage extends VacancyBasePage {
     clickOn(searchForId)
     extractVacancyId()
     extractVacancyName()
+    extractVacancySummary()
     println(vacancyId)
     println(vacancyName)
   }
+
+  private def extractVacancySummary(): Unit =
+    if (vacancyActive() == "Set to TRUE") {
+      val liveDate    = waitForVisibilityOfElementById(vacancyLiveDateId).getText.replaceAll(""" at.*""", "")
+      val closingDate = waitForVisibilityOfElementById(vacancyClosingDateId).getText.replaceAll(""" at.*""", "")
+      vXApplicationLiveDate = liveDate
+      vXApplicationClosingDate = closingDate
+      println(vXApplicationLiveDate)
+      println(vXApplicationClosingDate)
+    } else println("Vacancy is inactive!")
 
   def navigateToVacancyForms(): Unit = {
     waitForVisibilityOfElementByPath(vacancyFormsPath).click()
@@ -121,8 +132,8 @@ object VacancyDetailsPage extends VacancyBasePage {
       clickOn(matchingOption)
 
   private def extractDepartment(): Unit = {
-    vXDepartment = waitForVisibilityOfElementById(departmentId).getText
-    println(vXDepartment)
+    vXJobInfoDepartment = waitForVisibilityOfElementById(departmentId).getText
+    println(vXJobInfoDepartment)
   }
 
   private def extractBusinessArea(): Unit = {
@@ -227,9 +238,9 @@ object VacancyDetailsPage extends VacancyBasePage {
   private def extractVacancyInNI(): Unit = {
     val inNI = waitForVisibilityOfElementById(vacancyInNIId).findElement(By.xpath(checkLabelPath))
     if (inNI.getText == "Yes") {
-      vXVacancyInNI = true
-    } else vXVacancyInNI = false
-    println(vXVacancyInNI)
+      vXVacanciesInNIR = true
+    } else vXVacanciesInNIR = false
+    println(vXVacanciesInNIR)
   }
 
   private def extractAvailableOutsideNI(): Unit = {
@@ -242,26 +253,26 @@ object VacancyDetailsPage extends VacancyBasePage {
 
   private def extractWhichCommunitiesApply(): Unit = {
     val communities = waitForVisibilityOfElementById(whichCommunitiesApplyId).findElement(By.xpath(checkLabelPath))
-    vXWhichCommunitiesApply = communities.getText
-    println(vXWhichCommunitiesApply)
+    vXCommunitiesInNIR = communities.getText
+    println(vXCommunitiesInNIR)
   }
 
   private def extractGiveLocationPreferences(): Unit = {
     val preference = waitForVisibilityOfElementById(locationPreferencesId).findElement(By.xpath(checkLabelPath))
     if (preference.getText == "Yes") {
-      vXLocationPreferences = true
-    } else vXLocationPreferences = false
-    println(vXLocationPreferences)
+      vXGiveLocationPreference = true
+    } else vXGiveLocationPreference = false
+    println(vXGiveLocationPreference)
   }
 
   private def extractMaxLocationPreferences(): Unit = {
-    vXMaxLocationPreference = waitForVisibilityOfElementById(maxLocationPreferenceId).getAttribute("title")
-    println(vXMaxLocationPreference)
+    vXMaxLocations = waitForVisibilityOfElementById(maxLocationPreferenceId).getAttribute("title")
+    println(vXMaxLocations)
   }
 
   private def extractLocationsToChoose(): Unit = {
-    extractValues(locationsToChooseId, vXLocationsToChoose)
-    println(vXLocationsToChoose)
+    extractValues(locationsToChooseId, vXOtherLocations)
+    println(vXOtherLocations)
   }
 
   private def jobInformationDetails(): Unit = {
@@ -296,8 +307,8 @@ object VacancyDetailsPage extends VacancyBasePage {
     extractLocationsToChoose()
   }
 
-  def extractAllVacancyDetails(): Unit = {
-    searchForVacancy("9564")
+  def extractAllVacancyDetails(vacancyToExtract: String): Unit = {
+    searchForVacancy(vacancyToExtract)
     navigateToVacancyForms()
     jobInformationDetails()
     extractApproach()

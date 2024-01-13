@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.flows.v9
 
 import uk.gov.co.test.ui.data.v9.shortform.ShortFormDetails
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{candidateApproach, vXAnyOnlineTests, vXHowManyQuestions, vXHowManySkills, vacancyId, vacancyName}
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXAnyOnlineTests, vXApproach, vXHowManyQuestions, vXHowManySkills, vacancyId, vacancyName}
 import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.{confirmShortFormCompletion, confirmShortFormCompletionNoLongForm}
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
 import uk.gov.co.test.ui.pages.v9.SearchJobsPage.jobSearchAndApplyFlow
@@ -26,7 +26,7 @@ object ShortFormFlow extends CivilServiceJobsBasePage {
     vName: Option[String] = None,
     vId: Option[String] = None
   ): Unit = {
-    if (candidateApproach == "External" || candidateApproach == "Pre-release") {
+    if (vXApproach == "External" || vXApproach == "Pre-release") {
       if (vName.isDefined) { vacancyName = vName.get }
       if (vId.isDefined) { vacancyId = vId.get }
       jobSearchAndApplyFlow(vacancyName, vacancyId, "what")
@@ -34,7 +34,7 @@ object ShortFormFlow extends CivilServiceJobsBasePage {
         f(shortFormDetails)
       }
       clickOn(submitForm)
-    } else println(s"Vacancy is not open for '$candidateApproach' candidates!")
+    } else println(s"Vacancy is not open for '$vXApproach' candidates!")
     if (vXHowManySkills > 0 || vXAnyOnlineTests || vXHowManyQuestions > 0) {
       confirmShortFormCompletion()
     } else confirmShortFormCompletionNoLongForm()

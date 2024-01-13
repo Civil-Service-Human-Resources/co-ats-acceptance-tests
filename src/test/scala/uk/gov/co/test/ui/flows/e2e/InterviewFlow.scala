@@ -43,7 +43,6 @@ object InterviewFlow extends CivilServiceJobsBasePage {
       case "4" => interviewFourEvaluationFlow(applicationDetails)
     }
 
-  def untagVacancies(): Unit = {
-    for (i <- 1 to 25) untagVacancy(i)
-  }
+  def untagVacancies(vacancyToUntag: String): Unit =
+    for (i <- 1 to 50) untagVacancy(i, vacancyToUntag)
 }

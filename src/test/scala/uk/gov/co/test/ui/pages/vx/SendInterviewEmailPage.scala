@@ -51,7 +51,7 @@ object SendInterviewEmailPage extends VacancyBasePage {
 
   private def checkPreviewEmail(): Unit = {
     val emailPreview = interviewTypeDetail() match {
-      case "Telephone" =>
+      case "Telephone"  =>
         s"""Dear $preferredFirstName,
            |$vacancyId: $vacancyName
            |Congratulations, you've been invited to attend a telephone interview.
@@ -75,7 +75,7 @@ object SendInterviewEmailPage extends VacancyBasePage {
            |Kind regards
            |
            |$vXJobInfoDepartment recruitment team""".stripMargin
-      case "Video" =>
+      case "Video"      =>
         s"""Dear $preferredFirstName,
            |$vacancyId: $vacancyName
            |Congratulations, you've been invited to attend a video interview.
@@ -87,7 +87,7 @@ object SendInterviewEmailPage extends VacancyBasePage {
            |Kind regards
            |
            |$vXJobInfoDepartment recruitment team""".stripMargin
-      case "Interview" =>
+      case "Interview"  =>
         s"""Dear $preferredFirstName,
            |$vacancyId: $vacancyName
            |Congratulations, you've been invited to attend an interview.

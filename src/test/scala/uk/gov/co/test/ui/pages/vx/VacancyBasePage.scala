@@ -235,7 +235,7 @@ trait VacancyBasePage extends Matchers with BasePage with BrowserDriver {
 
   def changeDateFormat(dateToFormat: String, formatStyle: String): String = {
     val formatter1 = DateTimeFormatter.ofPattern("d MMMM yyyy")
-    val formatter2 = DateTimeFormatter.ofPattern("d/MM/uuuu")
+    val formatter2 = DateTimeFormatter.ofPattern("dd/MM/uuuu")
     val formatter3 = DateTimeFormatter.ofPattern("d MMM yyyy")
     if (formatStyle == "short") {
       val formattedDate = LocalDate.parse(dateToFormat, formatter1)

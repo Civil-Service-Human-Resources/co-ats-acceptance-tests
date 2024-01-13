@@ -142,12 +142,12 @@ object ExternalPostingsTab extends VacancyBasePage {
   }
 
   def repostExternalPosting(): Unit = {
-    val formatter = DateTimeFormatter.ofPattern("dd/MM/uuuu")
-    val todayDate = LocalDate.now().format(formatter)
+    val formatter     = DateTimeFormatter.ofPattern("dd/MM/uuuu")
+    val todayDate     = LocalDate.now().format(formatter)
     val yesterdayDate = LocalDate.now().minusDays(1).format(formatter)
     selectExternalPostingsTab()
     editPosting()
-    val liveDate  = waitForVisibilityOfElementById(externalPostLiveDateId).getAttribute("value")
+    val liveDate      = waitForVisibilityOfElementById(externalPostLiveDateId).getAttribute("value")
     if (liveDate <= todayDate) {
       val tomorrowDate = LocalDate.now().plusDays(2).format(formatter)
       changeLiveDate(tomorrowDate, "Offline")

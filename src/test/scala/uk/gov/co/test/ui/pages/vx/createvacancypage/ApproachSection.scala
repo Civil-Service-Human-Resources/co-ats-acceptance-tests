@@ -1,10 +1,9 @@
 package uk.gov.co.test.ui.pages.vx.createvacancypage
 
 import org.openqa.selenium.By
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXApproach, vacancyFormId}
 import uk.gov.co.test.ui.data.vx.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
-import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.vacancyFormId
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.candidateApproach
 
 case class ApproachDetails(
   approach: String,
@@ -42,8 +41,8 @@ object ApproachSection extends VacancyBasePage {
 
   private def selectApproach(approachDetails: ApproachDetails): Unit = {
     scrollToElement(By.id(approachId))
-    candidateApproach = approachDetails.approach
-    candidateApproach match {
+    vXApproach = approachDetails.approach
+    vXApproach match {
       case "Pre-release"       => clickOnRadioButton(prereleaseId)
       case "Internal"          => clickOnRadioButton(internalId)
       case "Across government" => clickOnRadioButton(acrossGovernmentId)

@@ -58,7 +58,8 @@ object CalenderSchedulePage extends VacancyBasePage {
   private lazy val displayingResultsT1Path       = ".//*[@id='DataTables_Table_1']/tbody/tr/td[1]"
   private lazy val displayingResultsITPath       = "//*[@id='itinerary_list_wrapper']/div[1]/div[1]/span[2]"
   private lazy val createdSlotsPagePath          = "//*[@id='itinerary_list']/tbody//tr[@tabindex='-1']"
-  private lazy val vXVacancyLiveDate             = changeDateFormat(vXApplicationLiveDate, "short")
+  private lazy val appLiveDate                   = changeDateFormat(vXApplicationLiveDate, "short")
+  private lazy val appClosingDate                = changeDateFormat(vXApplicationClosingDate, "short")
 
   def enterScheduleValue(inputId: String, value: String): Unit = {
     val enterOption = waitForVisibilityOfElementById(inputId)
@@ -262,8 +263,8 @@ object CalenderSchedulePage extends VacancyBasePage {
     checkForNewValuePath(displayingResultsT3Path, vacancyId)
     val (_title, _liveDate, _closingDate, _isActive) = selectedVacancyValues()
     _title  shouldEqual vacancyName
-    _liveDate    should startWith(vXVacancyLiveDate)
-    _closingDate should startWith(vXApplicationClosingDate)
+    _liveDate    should startWith(appLiveDate)
+    _closingDate should startWith(appClosingDate)
     _isActive.isDisplayed
     if (isVacancyActive() == "Set to TRUE") {
       clickOn(_isActive)
@@ -276,8 +277,8 @@ object CalenderSchedulePage extends VacancyBasePage {
     val addVacancyTable                              = "DataTables_Table_1"
     val (_title, _liveDate, _closingDate, _isActive) = selectedVacancyValues(addVacancyTable)
     _title                           shouldEqual vacancyName
-    _liveDate                             should startWith(vXVacancyLiveDate)
-    _closingDate                          should startWith(vXApplicationClosingDate)
+    _liveDate                             should startWith(appLiveDate)
+    _closingDate                          should startWith(appClosingDate)
     _isActive.isDisplayed
     isVacancyActive(addVacancyTable) shouldEqual "Set to TRUE"
   }
