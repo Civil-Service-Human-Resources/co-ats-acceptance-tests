@@ -1,4 +1,4 @@
-package uk.gov.co.test.ui.specs.vx
+package uk.gov.co.test.ui.specs
 
 import uk.gov.co.test.ui.data.TestData.setPecTestData
 import uk.gov.co.test.ui.data.v9.applicants.{MASTER_REGISTER_CANDIDATE, REGISTER_CANDIDATE_PEC}
@@ -11,9 +11,7 @@ import uk.gov.co.test.ui.flows.v9.LongFormFlow.fillLongFormDetails
 import uk.gov.co.test.ui.flows.v9.RegisterCandidateFlow.fillNewCandidateDetails
 import uk.gov.co.test.ui.flows.v9.ShortFormFlow.fillShortFormDetails
 import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.fillNewVacancyForm
-import uk.gov.co.test.ui.pages.vx.DashboardPage.activateAndPostVacancy
 import uk.gov.co.test.ui.pages.vx.VacancyDetailsPage.extractAllVacancyDetails
-import uk.gov.co.test.ui.specs.BaseFeatureSpec
 import uk.gov.co.test.ui.tags.RunInVX
 
 class CreateVacancySpec extends BaseFeatureSpec {

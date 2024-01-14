@@ -1,4 +1,4 @@
-package uk.gov.co.test.ui.specs.vx
+package uk.gov.co.test.ui.specs
 
 import uk.gov.co.test.ui.data.v9.applicants.{MASTER_REGISTER_CANDIDATE, MASTER_REGISTER_CANDIDATE_12_MONTHS, MASTER_REGISTER_CANDIDATE_3_MONTHS, MASTER_REGISTER_CANDIDATE_6_MONTHS}
 import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.vacancyId
@@ -8,7 +8,6 @@ import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.reserveExpiryList
 import uk.gov.co.test.ui.pages.vx.createvacancypage.ReserveListSection.changeReserveListDetails
 import uk.gov.co.test.ui.pages.vx.vacancytabs.ExternalPostingsTab.repostExternalPosting
 import uk.gov.co.test.ui.pages.vx.vacancytabs.ReserveListsTab.{reserveExpiryListChecks, reserveListEmailChecks, reserveListHistoryChecks}
-import uk.gov.co.test.ui.specs.BaseFeatureSpec
 import uk.gov.co.test.ui.tags.RunInVX
 
 class ReserveListSpec extends BaseFeatureSpec {
