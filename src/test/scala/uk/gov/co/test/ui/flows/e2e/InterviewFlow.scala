@@ -44,5 +44,5 @@ object InterviewFlow extends CivilServiceJobsBasePage {
     }
 
   def untagVacancies(vacancyToUntag: String): Unit =
-    for (i <- 1 to 50) untagVacancy(i, vacancyToUntag)
+    for (i <- 1 to 25) untagVacancy(i, vacancyToUntag)
 }
