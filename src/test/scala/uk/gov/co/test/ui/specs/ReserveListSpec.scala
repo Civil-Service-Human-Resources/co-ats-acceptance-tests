@@ -14,8 +14,8 @@ class ReserveListSpec extends BaseFeatureSpec {
   Feature("Recruiter Checks The Reserve List For Rejected Status") {
     vacancyId = "9579"
 
-    Scenario("VX: Recruiter Checks 3 Month Reserve List", RunInVX) {
-      Given("a recruiter changes the reserve list to 3 month for a vacancy")
+    Scenario("VX: Recruiter Checks 3 Months Reserve List", RunInVX) {
+      Given("a recruiter changes the reserve list to 3 months for a vacancy")
       changeReserveListDetails("3 Months")
       repostExternalPosting()
 
