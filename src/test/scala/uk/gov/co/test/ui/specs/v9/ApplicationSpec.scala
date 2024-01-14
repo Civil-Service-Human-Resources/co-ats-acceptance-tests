@@ -1,8 +1,8 @@
 package uk.gov.co.test.ui.specs.v9
 
-import uk.gov.co.test.ui.data.v9.applicants.REGISTER_CANDIDATE_HMRC
-import uk.gov.co.test.ui.data.v9.longform.LONG_FORM_DATA_HMRC
-import uk.gov.co.test.ui.data.v9.shortform.SHORT_FORM_DATA_HMRC
+import uk.gov.co.test.ui.data.v9.applicants.MASTER_REGISTER_CANDIDATE
+import uk.gov.co.test.ui.data.v9.longform.MASTER_LONG_FORM_DATA
+import uk.gov.co.test.ui.data.v9.shortform.MASTER_SHORT_FORM_DATA
 import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vacancyId, vacancyName}
 import uk.gov.co.test.ui.flows.v9.LongFormFlow.fillLongFormDetails
 import uk.gov.co.test.ui.flows.v9.RegisterCandidateFlow.fillNewCandidateDetails
@@ -13,16 +13,16 @@ import uk.gov.co.test.ui.tags.RunInV9
 
 class ApplicationSpec extends BaseFeatureSpec {
   Feature("Candidate Completes Short & Long Form Application Process") {
-    Scenario("V9: A Candidate Completes Short And Long Forms", RunInV9) {
+    Scenario("VX: A Candidate Completes Short And Long Forms", RunInV9) {
       Given("candidate registers a new account")
       extractAllVacancyDetails("9579")
-      fillNewCandidateDetails(REGISTER_CANDIDATE_HMRC)
+      fillNewCandidateDetails(MASTER_REGISTER_CANDIDATE)
 
       When("candidate completes the short form")
-      fillShortFormDetails(SHORT_FORM_DATA_HMRC, Some(vacancyName), Some(vacancyId))
+      fillShortFormDetails(MASTER_SHORT_FORM_DATA, Some(vacancyName), Some(vacancyId))
 
       Then("candidate is able to confirm successful completion of forms")
-      fillLongFormDetails(LONG_FORM_DATA_HMRC)
+      fillLongFormDetails(MASTER_LONG_FORM_DATA)
     }
   }
 }

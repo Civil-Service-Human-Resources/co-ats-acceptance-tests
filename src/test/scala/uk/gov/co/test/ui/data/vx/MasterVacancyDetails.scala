@@ -182,8 +182,8 @@ object MasterVacancyDetails extends VacancyBasePage {
   var homeDepartment: String = "Attorney General's Office"
 
   //v9 SHORT FORM personal info page
-  var v9ReasonableAdjustments = true
-  var v9AdjustmentsForTests   = true
+  var v9ReasonableAdjustments = false
+  var v9AdjustmentsForTests   = false
 
   //v9 SHORT FORM applications page
   var applicationId: String = ""
