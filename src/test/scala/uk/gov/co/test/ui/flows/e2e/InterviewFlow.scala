@@ -16,20 +16,20 @@ import uk.gov.co.test.ui.pages.vx.vacancytabs.InterviewTwoEvaluationTab.intervie
 
 object InterviewFlow extends CivilServiceJobsBasePage {
 
-  private def interviewProcess(): Unit = {
-    interviewSchedulePage(APPLICATION_DATA)
-    calenderSchedulePage(APPLICATION_DATA)
+  private def interviewProcess(applicationDetails: ApplicationDetails): Unit = {
+    interviewSchedulePage(applicationDetails)
+    calenderSchedulePage(applicationDetails)
     inviteToInterviewEmailFlow() //check function inside
     confirmBookingSlot()
     interviewSlotBookedState()
     interviewScheduled()
-    interviewEvaluations(APPLICATION_DATA)
+    interviewEvaluations(applicationDetails)
   }
 
-  def completeAllInterviews(): Unit =
+  def completeAllInterviews(applicationDetails: ApplicationDetails): Unit =
     if (vXInterviewExpectedRounds != "No interviews") {
       1 to vXInterviewExpectedRounds.toInt foreach { _ =>
-        interviewProcess()
+        interviewProcess(applicationDetails)
         changeSystem("recruiter")
         vXInterviewNumber.remove(0)
       }

@@ -2,7 +2,7 @@ package uk.gov.co.test.ui.pages.vx
 
 import org.openqa.selenium.{By, WebElement}
 import org.scalatest.concurrent.Eventually.eventually
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXApplicationClosingDate, vXApplicationLiveDate, vXApproach, vXAvailableOutsideInNI, vXBudgetaryApproval, vXBusinessArea, vXBusinessAreaDetail, vXCommunitiesInNIR, vXCostCentre, vXGiveLocationPreference, vXJobInfoDepartment, vXLocationDisplay, vXLocationType, vXMaxLocations, vXNoOfJobsAvailable, vXOtherLocations, vXProfession, vXReserveExtendLength, vXReserveExtendRequired, vXReserveListLength, vXReserveListRequired, vXTypeOfRole, vXVacanciesInNIR, vacancyFormId, vacancyId, vacancyName}
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXApplicationClosingDate, vXApplicationLiveDate, vXApproach, vXAvailableOutsideInNI, vXBudgetaryApproval, vXBusinessArea, vXBusinessAreaDetail, vXCommunitiesInNIR, vXCostCentre, vXGiveLocationPreference, vXInterviewExpectedRounds, vXInterviewFourType, vXInterviewNumber, vXInterviewOneType, vXInterviewThreeType, vXInterviewTwoType, vXJobInfoDepartment, vXLocationDisplay, vXLocationType, vXMaxLocations, vXNoOfJobsAvailable, vXOtherLocations, vXProfession, vXReserveExtendLength, vXReserveExtendRequired, vXReserveListLength, vXReserveListRequired, vXTypeOfRole, vXVacanciesInNIR, vacancyFormId, vacancyId, vacancyName}
 import uk.gov.co.test.ui.pages.vx.vacancytabs.SummaryTab.{vacancyActive, vacancyClosingDateId, vacancyLiveDateId}
 
 import scala.collection.mutable
@@ -49,36 +49,12 @@ object VacancyDetailsPage extends VacancyBasePage {
   def locationPreferencesId     = s"${vacancyFormId}_field_value_155799_1"
   def maxLocationPreferenceId   = s"select2-${vacancyFormId}_datafield_155818_1_1-container"
   def locationsToChooseId       = s"select2-${vacancyFormId}_datafield_155836_1_1-container"
-
-//  //vX job information
-//  var vacancyId = ""
-//  var vacancyName = ""
-//  var vacancyFormId = ""
-//  var vXDepartment = ""
-//  var vXBusinessArea = ""
-//  var vXBusinessAreaDetail = ""
-//  var vXTypeOfRole = new ListBuffer[String]()
-//  var vXProfession = ""
-//  var vXNoOfJobsAvailable = ""
-//  //vX approach
-//  var vXApproach = ""
-//  //vX approval
-//  var vXBudgetaryApproval = true
-//  var vXCostCentre = ""
-//  //vX reserve
-//  var vXReserveListRequired = true
-//  var vXReserveListLength = ""
-//  var vXReserveExtendRequired = false
-//  var vXReserveExtendLength = ""
-//  //vX locations
-//  var vXLocationType = ""
-//  var vXLocationDisplay = ""
-//  var vXVacancyInNI = false
-//  var vXAvailableOutsideInNI = false
-//  var vXWhichCommunitiesApply = ""
-//  var vXLocationPreferences = true
-//  var vXMaxLocationPreference = ""
-//  var vXLocationsToChoose = new ListBuffer[String]()
+  def interviewRoundsId         = s"${vacancyFormId}_datafield_91703_1_1_fieldset"
+  def interviewOneId            = s"${vacancyFormId}_datafield_125056_1_1_fieldset"
+  def interviewTwoId            = s"${vacancyFormId}_datafield_125060_1_1_fieldset"
+  def interviewThreeId          = s"${vacancyFormId}_datafield_125063_1_1_fieldset"
+  def interviewFourId           = s"${vacancyFormId}_datafield_125066_1_1_fieldset"
+  def interviewOfflineId        = s"${vacancyFormId}_datafield_125052_1_1_fieldset"
 
   private def dashboardPageCheck(): Unit =
     eventually(onPage(dashboardPageTitle))
@@ -275,6 +251,51 @@ object VacancyDetailsPage extends VacancyBasePage {
     println(vXOtherLocations)
   }
 
+  private def extractInterviewRounds(): Unit = {
+    val expectedRounds = waitForVisibilityOfElementById(interviewRoundsId).findElement(By.xpath(checkLabelPath))
+    vXInterviewExpectedRounds = expectedRounds.getText
+    println(vXInterviewExpectedRounds)
+  }
+
+  private def extractInterviewType(): Unit = {
+    def interviewType(fieldId: String): WebElement =
+      waitForVisibilityOfElementById(fieldId).findElement(By.xpath(checkLabelPath))
+    if (vXInterviewExpectedRounds != "No interviews") {
+      vXInterviewNumber.clear()
+      vXInterviewExpectedRounds.toInt match {
+        case 1 =>
+          vXInterviewOneType = interviewType(interviewOneId).getText
+          println(vXInterviewOneType)
+          vXInterviewNumber = ListBuffer("1")
+        case 2 =>
+          vXInterviewOneType = interviewType(interviewOneId).getText
+          println(vXInterviewOneType)
+          vXInterviewTwoType = interviewType(interviewTwoId).getText
+          println(vXInterviewTwoType)
+          vXInterviewNumber = ListBuffer("1", "2")
+        case 3 =>
+          vXInterviewOneType = interviewType(interviewOneId).getText
+          println(vXInterviewOneType)
+          vXInterviewTwoType = interviewType(interviewTwoId).getText
+          println(vXInterviewTwoType)
+          vXInterviewThreeType = interviewType(interviewThreeId).getText
+          println(vXInterviewThreeType)
+          vXInterviewNumber = ListBuffer("1", "2", "3")
+        case 4 =>
+          vXInterviewOneType = interviewType(interviewOneId).getText
+          println(vXInterviewOneType)
+          vXInterviewTwoType = interviewType(interviewTwoId).getText
+          println(vXInterviewTwoType)
+          vXInterviewThreeType = interviewType(interviewThreeId).getText
+          println(vXInterviewThreeType)
+          vXInterviewFourType = interviewType(interviewFourId).getText
+          println(vXInterviewFourType)
+          vXInterviewNumber = ListBuffer("1", "2", "3", "4")
+      }
+      println(vXInterviewNumber)
+    }
+  }
+
   private def jobInformationDetails(): Unit = {
     extractDepartment()
     extractBusinessArea()
@@ -307,6 +328,11 @@ object VacancyDetailsPage extends VacancyBasePage {
     extractLocationsToChoose()
   }
 
+  def interviews(): Unit = {
+    extractInterviewRounds()
+    extractInterviewType()
+  }
+
   def extractAllVacancyDetails(vacancyToExtract: String): Unit = {
     searchForVacancy(vacancyToExtract)
     navigateToVacancyForms()
@@ -315,5 +341,6 @@ object VacancyDetailsPage extends VacancyBasePage {
     approvalsDetails()
     reserveList()
     locations()
+    interviews()
   }
 }

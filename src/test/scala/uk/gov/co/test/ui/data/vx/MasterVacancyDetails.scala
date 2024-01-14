@@ -209,18 +209,18 @@ object MasterVacancyDetails extends VacancyBasePage {
   var vXInterviewID       = ""
 
   //vX APPLICATION -interview schedule
-  var vXInterviewNumber: ListBuffer[String] = ListBuffer("1", "2", "3", "4")
-  var vXInterviewExpectedRounds             = "1"
+  var vXInterviewNumber: ListBuffer[String] = ListBuffer("")
+  var vXInterviewExpectedRounds             = ""
+  var vXInterviewOneType                    = ""
+  var vXInterviewTwoType                    = ""
+  var vXInterviewThreeType                  = ""
+  var vXInterviewFourType                   = ""
   var vXInterviewDate                       = ""
   var vXInterviewLongDate                   = ""
   var vXInterviewShortDate                  = ""
   var vXInterviewLocation                   = ""
   var vXInterviewScheduleTitle              = ""
   var vXInstructionsForCandidates           = ""
-  var vXInterviewOneType                    = "Telephone"
-  var vXInterviewTwoType                    = "Assessment"
-  var vXInterviewThreeType                  = "Video"
-  var vXInterviewFourType                   = "Interview"
   var vXInterviewOneOutcome                 = ""
   var vXInterviewTwoOutcome                 = ""
   var vXInterviewThreeOutcome               = ""
