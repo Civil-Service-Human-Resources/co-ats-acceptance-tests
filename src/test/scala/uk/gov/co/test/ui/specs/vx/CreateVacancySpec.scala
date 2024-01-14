@@ -12,6 +12,7 @@ import uk.gov.co.test.ui.flows.v9.RegisterCandidateFlow.fillNewCandidateDetails
 import uk.gov.co.test.ui.flows.v9.ShortFormFlow.fillShortFormDetails
 import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.fillNewVacancyForm
 import uk.gov.co.test.ui.pages.vx.DashboardPage.activateAndPostVacancy
+import uk.gov.co.test.ui.pages.vx.VacancyDetailsPage.extractAllVacancyDetails
 import uk.gov.co.test.ui.specs.BaseFeatureSpec
 import uk.gov.co.test.ui.tags.RunInVX
 
@@ -20,7 +21,6 @@ class CreateVacancySpec extends BaseFeatureSpec {
     Scenario("VX: Recruiter Creates A Master Vacancy; Candidate Completes A Master Application Process", RunInVX) {
       Given("a recruiter creates & posts a new vacancy")
       fillNewVacancyForm(MASTER_VACANCY_DATA)
-      activateAndPostVacancy()
 
       When("candidate registers for new job application")
       fillNewCandidateDetails(MASTER_REGISTER_CANDIDATE)
@@ -42,8 +42,9 @@ class CreateVacancySpec extends BaseFeatureSpec {
       println("WIP...")
     }
 
-    Scenario("V9: A Candidate Applies And Completes The PEC Form; Full Application Process", RunInVX) {
+    Scenario("VX: A Candidate Applies And Completes The PEC Form; Full Application Process", RunInVX) {
       Given("candidate registers for new job application")
+      extractAllVacancyDetails("9579")
       fillNewCandidateDetails(REGISTER_CANDIDATE_PEC)
 
       When("candidate completes the gors short, long & pec forms")

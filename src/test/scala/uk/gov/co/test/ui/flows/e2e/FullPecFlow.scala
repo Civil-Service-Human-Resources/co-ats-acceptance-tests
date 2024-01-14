@@ -4,6 +4,7 @@ import uk.gov.co.test.ui.data.v9.longform.MASTER_LONG_FORM_DATA
 import uk.gov.co.test.ui.data.v9.pecform.MASTER_PEC_FORM_DATA
 import uk.gov.co.test.ui.data.v9.shortform.MASTER_SHORT_FORM_DATA
 import uk.gov.co.test.ui.data.vx.APPLICATION_DATA
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vacancyId, vacancyName}
 import uk.gov.co.test.ui.flows.e2e.InterviewFlow.completeAllInterviews
 import uk.gov.co.test.ui.flows.v9.LongFormFlow.fillLongFormDetails
 import uk.gov.co.test.ui.flows.v9.PecFormFlow.fillPecFormDetailsOnly

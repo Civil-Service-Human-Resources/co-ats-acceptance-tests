@@ -21,14 +21,8 @@ object ShortFormFlow extends CivilServiceJobsBasePage {
     declarationPage
   )
 
-  def fillShortFormDetails(
-    shortFormDetails: ShortFormDetails,
-    vName: Option[String] = None,
-    vId: Option[String] = None
-  ): Unit = {
+  def fillShortFormDetails(shortFormDetails: ShortFormDetails): Unit = {
     if (vXApproach == "External" || vXApproach == "Pre-release") {
-      if (vName.isDefined) { vacancyName = vName.get }
-      if (vId.isDefined) { vacancyId = vId.get }
       jobSearchAndApplyFlow(vacancyName, vacancyId, "what")
       shortForm.foreach { f =>
         f(shortFormDetails)
