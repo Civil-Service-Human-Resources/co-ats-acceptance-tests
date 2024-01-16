@@ -3,7 +3,7 @@ package uk.gov.co.test.ui.pages.vx
 import org.openqa.selenium.{By, WebElement}
 import uk.gov.co.test.ui.data.TestData.eventually
 import uk.gov.co.test.ui.data.vx.ApplicationDetails
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXInstructionsForCandidates, vXInterviewDate, vXInterviewLocation, vXInterviewLongDate, vXInterviewNumber, vXInterviewScheduleTitle, vXInterviewShortDate}
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{randomFirstName, randomLastName, vXInstructionsForCandidates, vXInterviewDate, vXInterviewLocation, vXInterviewLongDate, vXInterviewNumber, vXInterviewScheduleTitle, vXInterviewShortDate, vacancyId}
 import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.{availableBarItems, confirmCandidateSummary, inviteToI1BarId, inviteToI2BarId, inviteToI3BarId, inviteToI4BarId, scheduleOfflineI1BarId, scheduleOfflineI2BarId, scheduleOfflineI3BarId, scheduleOfflineI4BarId, withdrawAtInterviewBarId}
 import uk.gov.co.test.ui.pages.vx.createvacancypage.AdvertSection.switchBack
 
@@ -15,17 +15,13 @@ case class InterviewScheduleDetails(
   copyFrom: Option[String] = None,
   copyFromTemplate: String,
   copyFromInterviewSchedule: String,
-  interviewTitle: String,
   addWelshTitle: Boolean,
-  welshInterviewTitle: String,
   daysAfterCurrentDate: Int,
   interviewRound: String,
   assignCoordinator: Boolean,
   coordinator: String,
-  internalNotes: String,
   addWelshInternalNotes: Boolean,
   welshInternalNotes: String,
-  instructionsForCandidate: String,
   addWelshInstructionsForCandidate: Boolean,
   welshInstructionsForCandidate: String,
   interviewLocation: String,
@@ -155,13 +151,13 @@ object InterviewSchedulePage extends VacancyBasePage {
 
   private def enterInterviewTitle(interviewScheduleDetails: InterviewScheduleDetails): Unit = {
     val schedule = interviewScheduleDetails
-    vXInterviewScheduleTitle = schedule.interviewTitle.format(vXInterviewNumber.head)
+    vXInterviewScheduleTitle = s"$vacancyId - Interview ${vXInterviewNumber.head} for $randomFirstName $randomLastName"
     enterValue(interviewTitleId, vXInterviewScheduleTitle)
     addWelshTranslation(
       schedule.addWelshTitle,
       welshInterviewTitleId,
       welshInterviewTitleInputId,
-      schedule.welshInterviewTitle,
+      s"$vacancyId - Prawf awtomeiddio $randomFirstName $randomLastName",
       welshInterviewTitleUpdateId
     )
   }
@@ -200,21 +196,24 @@ object InterviewSchedulePage extends VacancyBasePage {
     val switchFrame = driver.switchTo().frame(internalNotesIFrameId)
     val notesArea   = switchFrame.findElement(By.id(internalNotesId))
     notesArea.clear()
-    notesArea.sendKeys(schedule.internalNotes.format(vXInterviewNumber.head))
+    notesArea.sendKeys(
+      s"Autotest - Internal notes for $randomFirstName $randomLastName for interview ${vXInterviewNumber.head}"
+    )
     switchBack()
     addWelshTranslationIFrame(
       schedule.addWelshTitle,
       welshInternalNotesId,
       welshInternalNotesIFrameId,
       internalNotesId,
-      schedule.welshInterviewTitle,
+      s"$vacancyId - Prawf awtomeiddio $randomFirstName $randomLastName",
       welshInternalNotesUpdateId
     )
   }
 
   private def enterInstructionsForCandidate(interviewScheduleDetails: InterviewScheduleDetails): Unit = {
     val schedule    = interviewScheduleDetails
-    vXInstructionsForCandidates = schedule.instructionsForCandidate.format(vXInterviewNumber.head)
+    vXInstructionsForCandidates =
+      s"Autotest - Instructions for $randomFirstName $randomLastName for interview ${vXInterviewNumber.head}"
     val switchFrame = driver.switchTo().frame(instructionsForCandidateIFrameId)
     val notesArea   = switchFrame.findElement(By.id(instructionsForCandidateId))
     notesArea.clear()

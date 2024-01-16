@@ -1,6 +1,6 @@
 package uk.gov.co.test.ui.specs
 
-import uk.gov.co.test.ui.data.v9.applicants.{MASTER_REGISTER_CANDIDATE, MASTER_REGISTER_CANDIDATE_12_MONTHS, MASTER_REGISTER_CANDIDATE_3_MONTHS, MASTER_REGISTER_CANDIDATE_6_MONTHS}
+import uk.gov.co.test.ui.data.v9.applicants._
 import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.vacancyId
 import uk.gov.co.test.ui.flows.e2e.ReserveListFlow.reserveListFlow
 import uk.gov.co.test.ui.flows.v9.RegisterCandidateFlow.fillNewCandidateDetails
@@ -62,13 +62,13 @@ class ReserveListSpec extends BaseFeatureSpec {
       reserveListEmailChecks()
     }
 
-    Scenario("VX: Recruiter Checks 15 Months Extended Reserve List", RunInVX) {
-      Given("a recruiter changes the reserve list to 15 months for a vacancy")
+    Scenario("VX: Recruiter Checks 18 Months Extended Reserve List", RunInVX) {
+      Given("a recruiter changes the reserve list to 18 months for a vacancy")
       changeReserveListDetails("12 Months", Some(true), Some("6 Months"))
       repostExternalPosting()
 
       When("candidate applies and is held in a reserve list position")
-      fillNewCandidateDetails(MASTER_REGISTER_CANDIDATE)
+      fillNewCandidateDetails(MASTER_REGISTER_CANDIDATE_18_MONTHS)
       reserveListFlow()
 
       Then("the reserve offer expires after the reserve duration")
@@ -84,7 +84,7 @@ class ReserveListSpec extends BaseFeatureSpec {
       repostExternalPosting()
 
       When("candidate applies and is held in a reserve list position")
-      fillNewCandidateDetails(MASTER_REGISTER_CANDIDATE)
+      fillNewCandidateDetails(MASTER_REGISTER_CANDIDATE_21_MONTHS)
       reserveListFlow()
 
       Then("the reserve offer expires after the reserve duration")

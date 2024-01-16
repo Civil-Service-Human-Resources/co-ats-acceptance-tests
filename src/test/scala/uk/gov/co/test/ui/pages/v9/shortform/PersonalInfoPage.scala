@@ -3,17 +3,13 @@ package uk.gov.co.test.ui.pages.v9.shortform
 import org.openqa.selenium.By
 import org.scalatest.concurrent.Eventually.eventually
 import uk.gov.co.test.ui.data.v9.shortform.ShortFormDetails
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{civilServant, v9AdjustmentsForTests, v9ReasonableAdjustments, vXAnyOnlineTests, vXGreatForVeterans}
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{civilServant, preferredFirstName, randomEmail, randomFirstName, randomLastName, v9AdjustmentsForTests, v9ReasonableAdjustments, vXAnyOnlineTests, vXGreatForVeterans}
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
 import uk.gov.co.test.ui.pages.v9.shortform.ApplicationGuidancePage.shortFormId
 
 case class PersonalInfoDetails(
-  firstName: String,
-  lastName: String,
-  preferredFirstName: Option[String] = None,
   preferredTeleNo: String,
   secondaryNo: Option[String] = None,
-  email: String,
   applyDCS: Boolean,
   reasonableAdjustments: Boolean,
   reasonableAdjustmentsDetails: String,
@@ -56,24 +52,24 @@ object PersonalInfoPage extends CivilServiceJobsBasePage {
   private def enterFirstName(personalInfoDetails: PersonalInfoDetails): Unit = {
     personalInfoPageCheck()
     if (extractValue(firstNameInputId).isEmpty) {
-      enterDetails(firstNameInputId, personalInfoDetails.firstName)
-    } else extractValue(firstNameInputId) shouldEqual personalInfoDetails.firstName
+      enterDetails(firstNameInputId, randomFirstName)
+    } else extractValue(firstNameInputId) shouldEqual randomFirstName
   }
 
   private def enterLastName(personalInfoDetails: PersonalInfoDetails): Unit           =
     if (extractValue(lastNameInputId).isEmpty) {
-      enterDetails(lastNameInputId, personalInfoDetails.lastName)
-    } else extractValue(lastNameInputId) shouldEqual personalInfoDetails.lastName
+      enterDetails(lastNameInputId, randomLastName)
+    } else extractValue(lastNameInputId) shouldEqual randomLastName
 
   private def enterPreferredFirstName(personalInfoDetails: PersonalInfoDetails): Unit =
     if (extractValue(preferredFirstNameInputId).isEmpty) {
-      enterDetails(preferredFirstNameInputId, personalInfoDetails.preferredFirstName.get)
-    } else extractValue(preferredFirstNameInputId) shouldEqual personalInfoDetails.preferredFirstName
+      enterDetails(preferredFirstNameInputId, preferredFirstName)
+    } else extractValue(preferredFirstNameInputId) shouldEqual preferredFirstName
 
   private def enterEmail(personalInfoDetails: PersonalInfoDetails): Unit              =
     if (extractValue(emailInputId).isEmpty) {
-      enterDetails(emailInputId, personalInfoDetails.email)
-    } else extractValue(emailInputId) shouldEqual personalInfoDetails.email
+      enterDetails(emailInputId, randomEmail)
+    } else extractValue(emailInputId) shouldEqual randomEmail
 
   private def enterPreferredTeleNo(personalInfoDetails: PersonalInfoDetails): Unit = {
     scrollToElement(By.id(preferredTeleNoInputId))

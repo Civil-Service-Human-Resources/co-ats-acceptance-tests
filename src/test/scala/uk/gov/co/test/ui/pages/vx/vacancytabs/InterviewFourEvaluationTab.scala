@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.pages.vx.vacancytabs
 
 import org.openqa.selenium.By
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXBehavioursRequired, vXHowManyBehaviours, vXHowManySkills, vXHowManyStrengths, vXInterviewFourOutcome, vXListOfChosenBehaviours, vXListOfStrengths, vXListOfTechSkills, vXStrengthsRequired, vXTechSkillsRequired, vacancyFormId}
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{randomFirstName, randomLastName, vXBehavioursRequired, vXHowManyBehaviours, vXHowManySkills, vXHowManyStrengths, vXInterviewFourOutcome, vXListOfChosenBehaviours, vXListOfStrengths, vXListOfTechSkills, vXStrengthsRequired, vXTechSkillsRequired, vacancyFormId}
 import uk.gov.co.test.ui.data.vx.{ApplicationDetails, AssessmentOutcome, Outcome}
 import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.applicationStateAfterInterview
 import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.{availableBarItems, completeI4EvaluationBarId, interviewEvaluation, noShowI4BarId, withdrawAtInterviewBarId}
@@ -47,7 +47,6 @@ case class InterviewFourDetails(
   overrideScore: Boolean,
   overallOverrideScore: Int,
   finalOutcome: String,
-  finalOutcomeComments: String,
   uploadDocs: String,
   declarationStatement: String
 )
@@ -725,7 +724,7 @@ object InterviewFourEvaluationTab extends VacancyBasePage {
     waitForVisibilityOfElementById(outcomeId).click()
     action().moveToElement(waitForDropdownOption(vXInterviewFourOutcome)).perform()
     waitForDropdownOption(vXInterviewFourOutcome).click()
-    enterValue(outcomeCommentsId, interviewFourDetails.finalOutcomeComments)
+    enterValue(outcomeCommentsId, s"Autotest - I4 - $randomFirstName $randomLastName overall performed very well!")
   }
 
   private def uploadDocuments(interviewFourDetails: InterviewFourDetails): Unit = {

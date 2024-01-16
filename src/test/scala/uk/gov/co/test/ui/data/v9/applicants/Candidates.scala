@@ -72,6 +72,28 @@ object MASTER_REGISTER_CANDIDATE_12_MONTHS
       true
     )
 
+object MASTER_REGISTER_CANDIDATE_18_MONTHS
+    extends CandidateDetails(
+      firstname = s"$randomFirstName",
+      lastname = s"$randomLastName",
+      preferredFirstName = s"$preferredFirstName",
+      email = s"$randomEmail",
+      s"$passwordCandidate",
+      false,
+      true
+    )
+
+object MASTER_REGISTER_CANDIDATE_21_MONTHS
+    extends CandidateDetails(
+      firstname = s"$randomFirstName",
+      lastname = s"$randomLastName",
+      preferredFirstName = s"$preferredFirstName",
+      email = s"$randomEmail",
+      s"$passwordCandidate",
+      false,
+      true
+    )
+
 object REGISTER_CANDIDATE_PEC
     extends CandidateDetails(
       firstname = s"$randomFirstName",

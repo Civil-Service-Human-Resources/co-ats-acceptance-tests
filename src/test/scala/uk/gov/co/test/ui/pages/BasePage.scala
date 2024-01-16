@@ -21,10 +21,10 @@ case class PageNotFoundException(s: String) extends Exception(s)
 
 trait BasePage extends Matchers with Page with WebBrowser with PatienceConfiguration {
 
-  def currentWindows()(implicit driver: WebDriver): util.Set[String] = driver.getWindowHandles
-  def firstWindowHandle()(implicit driver: WebDriver): String        = currentWindows.asScala.head
-  def secondWindowHandle()(implicit driver: WebDriver): String       = currentWindows.asScala.tail.head
-  def importFilesPath: String                                        = "/src/test/resource/import/"
+  protected def currentWindows(implicit driver: WebDriver): util.Set[String] = driver.getWindowHandles
+  protected def firstWindowHandle(implicit driver: WebDriver): String        = currentWindows.asScala.head
+  protected def secondWindowHandle(implicit driver: WebDriver): String       = currentWindows.asScala.tail.head
+  def importFilesPath: String                                                = "/src/test/resource/import/"
 
   override implicit val patienceConfig: PatienceConfig =
     PatienceConfig(timeout = scaled(Span(30, Seconds)), interval = scaled(Span(1000, Millis)))
@@ -192,7 +192,7 @@ trait BasePage extends Matchers with Page with WebBrowser with PatienceConfigura
     wait.until(ExpectedConditions.numberOfWindowsToBe(expectedNumberOfWindows))
   }
 
-  def switchToOtherWindow()(implicit driver: WebDriver): Unit =
+  def switchToOtherWindow(implicit driver: WebDriver): Unit =
     if (driver.getWindowHandles.size() == 2) {
       if (driver.getWindowHandle.contains(secondWindowHandle)) {
         driver.switchTo().window(firstWindowHandle)
@@ -229,7 +229,7 @@ trait BasePage extends Matchers with Page with WebBrowser with PatienceConfigura
 
   def changeSystem(system: String)(implicit driver: WebDriver): Unit = {
     if (!currentUrl.contains(system)) {
-      switchToOtherWindow()
+      switchToOtherWindow
       if (currentUrl.contains("candidate") && !signOut().isDisplayed)
         loginNewCandidate()
     }

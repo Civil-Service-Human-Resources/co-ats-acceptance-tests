@@ -1,6 +1,5 @@
 package uk.gov.co.test.ui.data.vx
 
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{randomFirstName, randomLastName, vacancyId}
 import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.contactEmailVxConfig
 import uk.gov.co.test.ui.pages.vx.vacancytabs._
 import uk.gov.co.test.ui.pages.vx.{CalenderScheduleDetails, InterviewScheduleDetails}
@@ -92,17 +91,13 @@ object RESERVE_APPLICATION_INTERVIEW_SCHEDULE
       Some("Copy From Template"),
       "",
       "",
-      s"$vacancyId - Interview %s for $randomFirstName $randomLastName",
       true,
-      s"$vacancyId - Prawf awtomeiddio $randomFirstName $randomLastName",
       20,
       "Interview %s",
       false,
       s"$contactEmailVxConfig",
-      s"Autotest - Internal notes for $randomFirstName $randomLastName for interview %s",
       true,
       "Prawf awtomeiddio",
-      s"Autotest - Instructions for $randomFirstName $randomLastName for interview %s",
       true,
       "Prawf awtomeiddio",
       s"HMRC Government Offices Great George Street I%s",
@@ -191,7 +186,6 @@ object RESERVE_APPLICATION_INTERVIEW_ONE_EVALUATION
       false,
       101,
       "Hold",
-      s"Autotest - I1 - $randomFirstName $randomLastName overall performed very well!",
       "Test-T&Cs.pdf",
       declarationStatement = """Declaration
           |
@@ -261,7 +255,6 @@ object RESERVE_APPLICATION_INTERVIEW_TWO_EVALUATION
       false,
       102,
       "Progress",
-      s"Autotest - I2 - $randomFirstName $randomLastName overall performed very well!",
       "Test-T&Cs.pdf",
       declarationStatement = """Declaration
                              |
@@ -331,7 +324,6 @@ object RESERVE_APPLICATION_INTERVIEW_THREE_EVALUATION
       false,
       103,
       "Progress",
-      s"Autotest - I3 - $randomFirstName $randomLastName overall performed very well!",
       "Test-T&Cs.pdf",
       declarationStatement = """Declaration
                              |
@@ -401,7 +393,6 @@ object RESERVE_APPLICATION_INTERVIEW_FOUR_EVALUATION
       false,
       104,
       "Progress",
-      s"Autotest - I4 - $randomFirstName $randomLastName overall performed very well!",
       "Test-T&Cs.pdf",
       declarationStatement = """Declaration
                              |

@@ -1,6 +1,5 @@
 package uk.gov.co.test.ui.data.v9.shortform
 
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{preferredFirstName, randomEmail, randomFirstName, randomLastName}
 import uk.gov.co.test.ui.pages.v9.shortform._
 
 object MASTER_SHORT_FORM_DATA
@@ -31,12 +30,8 @@ object MASTER_SHORT_FORM_ELIGIBILITY
 
 object MASTER_SHORT_FORM_PERSONAL_INFO
     extends PersonalInfoDetails(
-      firstName = s"$randomFirstName",
-      lastName = s"$randomLastName",
-      preferredFirstName = Option(s"$preferredFirstName"),
       "01520000000",
       secondaryNo = Option("07770000000"),
-      s"$randomEmail",
       false,
       false, //reasonable adjustments set to false, requires logic at later date
       "Autotest - Provide details of what reasonable adjustments might help you",

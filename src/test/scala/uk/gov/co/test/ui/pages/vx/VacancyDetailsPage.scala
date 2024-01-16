@@ -123,6 +123,7 @@ object VacancyDetailsPage extends VacancyBasePage {
   }
 
   private def extractTypeOfRole(): Unit = {
+    vXTypeOfRole.clear()
     extractValues(typeOfRoleId, vXTypeOfRole)
     println(vXTypeOfRole)
   }
@@ -185,15 +186,19 @@ object VacancyDetailsPage extends VacancyBasePage {
       println(vXReserveListLength)
     }
 
-  private def extractReserveExtendRequired(): Unit =
+  private def extractReserveExtendRequired(): Unit = {
     if (vXReserveListLength == "12 Months") {
       val extendRequired = waitForVisibilityOfElementById(reserveExtendRequiredId).findElement(By.xpath(checkLabelPath))
-      if (extendRequired.getText == "Yes") {
+      if (extendRequired.isDisplayed && extendRequired.getText == "Yes") {
         vXReserveExtendRequired = true
         extractReserveExtendLength()
-      } else vXReserveExtendRequired = false
-      println(vXReserveExtendRequired)
+      }
+    } else {
+      vXReserveExtendRequired = false
+      vXReserveExtendLength = ""
     }
+    println(vXReserveExtendRequired)
+  }
 
   private def extractReserveExtendLength(): Unit = {
     vXReserveExtendLength = waitForVisibilityOfElementById(reserveExtendLengthId).getText
@@ -247,6 +252,7 @@ object VacancyDetailsPage extends VacancyBasePage {
   }
 
   private def extractLocationsToChoose(): Unit = {
+    vXOtherLocations.clear()
     extractValues(locationsToChooseId, vXOtherLocations)
     println(vXOtherLocations)
   }

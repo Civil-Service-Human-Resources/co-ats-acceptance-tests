@@ -191,12 +191,12 @@ trait VacancyBasePage extends Matchers with BasePage with BrowserDriver {
   def repostVacancy(): Unit = {}
 
   def switchToVXConfig(): Unit = {
-    switchToOtherWindow()
+    switchToOtherWindow
     loginWithRecruiterDetails(RECRUITER)
   }
 
   def switchToV9Test(): Unit = {
-    switchToOtherWindow()
+    switchToOtherWindow
     navigateToV9Test()
     if (!v9SearchCookiesById().isEmpty) v9AcceptAllCookies()
     checkV9LogoutState()

@@ -227,12 +227,6 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
       case "3" => "Invited for third interview"
       case "4" => "Invited for fourth interview"
     }
-//    val inviteType = vXInterviewNumber.head match {
-//      case "1" => s"for a ${vXInterviewOneType.toLowerCase} interview"
-//      case "2" => s"to an ${vXInterviewTwoType.toLowerCase}"
-//      case "3" => s"for a ${vXInterviewThreeType.toLowerCase} interview"
-//      case "4" => s"for an ${vXInterviewFourType.toLowerCase}"
-//    }
     val inviteType = interviewTypeDetail() match {
       case "Telephone"  => s"for a ${interviewTypeDetail().toLowerCase} interview"
       case "Assessment" => s"to an ${interviewTypeDetail().toLowerCase}"
@@ -246,12 +240,6 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
       case "Video"     => s"'Schedule interview'"
       case "Interview" => s"'Schedule interview'"
     }
-//    val schedule   = vXInterviewNumber.head match {
-//      case "1" => s"'Schedule interview'"
-//      case "2" => s"\'Schedule interview\""//TODO requires fix to align with other fields
-//      case "3" => s"'Schedule interview'"
-//      case "4" => s"'Schedule interview'"
-//    }
     changeSystem("candidate")
     confirmStatusOnApplicationPage(status)
     applicationCentrePageCheck()

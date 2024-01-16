@@ -7,21 +7,20 @@ import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.{availableBarItems, con
 
 object SendInterviewEmailPage extends VacancyBasePage {
 
-  private lazy val sendEmailToCandidatePageTitle = s"$randomFirstName $randomLastName : Civil Service Jobs - GOV.UK"
-  private lazy val sendEmailHeaderPath           = ".//*[@class='brand_main_title_left']"
-  private lazy val sendEmailCheckId              = "invite_form_send_email"
-  private lazy val autoSelectId                  = "invite_form_select_mode_2"
-  private lazy val correspondenceId              = "select2-invite_form_correspondence-container"
-  private lazy val sendInviteId                  = "invite_form_form_submit"
-  private lazy val emailSubjectId                = "item_invite_form_subject"
-  private lazy val emailPreviewId                = "invite_form_preview_but"
-  private lazy val emailPreviewContentId         = "preview_div"
-  private lazy val emailPreviewContentClosePath  = ".//button[@title='Close']"
-  private lazy val addLocalFilePath              = ".//a[text()='Add Local File']"
-  private lazy val addEmailAttachmentsOneId      = "invite_form_attachments-new-file-0"
+  private lazy val sendEmailHeaderPath          = ".//*[@class='brand_main_title_left']"
+  private lazy val sendEmailCheckId             = "invite_form_send_email"
+  private lazy val autoSelectId                 = "invite_form_select_mode_2"
+  private lazy val correspondenceId             = "select2-invite_form_correspondence-container"
+  private lazy val sendInviteId                 = "invite_form_form_submit"
+  private lazy val emailSubjectId               = "item_invite_form_subject"
+  private lazy val emailPreviewId               = "invite_form_preview_but"
+  private lazy val emailPreviewContentId        = "preview_div"
+  private lazy val emailPreviewContentClosePath = ".//button[@title='Close']"
+  private lazy val addLocalFilePath             = ".//a[text()='Add Local File']"
+  private lazy val addEmailAttachmentsOneId     = "invite_form_attachments-new-file-0"
 
   private def sendEmailPageCheck(): Unit = {
-    eventually(onPage(sendEmailToCandidatePageTitle))
+    eventually(onPage(s"$randomFirstName $randomLastName : Civil Service Jobs - GOV.UK"))
     waitForVisibilityOfElementByPath(sendEmailHeaderPath).getText shouldEqual s"$randomFirstName $randomLastName"
   }
 
