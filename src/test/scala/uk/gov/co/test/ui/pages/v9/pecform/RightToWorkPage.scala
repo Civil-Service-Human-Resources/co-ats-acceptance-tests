@@ -156,7 +156,7 @@ object RightToWorkPage extends CivilServiceJobsBasePage {
     selectEUOrSwissCitizen
   )
 
-  def rightToWorkPage(pecFormDetails: PecFormDetails): Unit = {
+  def rightToWorkPage(pecFormDetails: PecFormDetails): Unit =
     if (!vXRtwChecks.contains("Not Applicable") && vXWhenRtwChecks == "Before pre employment checks") {
       rtwPageCheck()
       rtw.foreach { f =>
@@ -164,5 +164,4 @@ object RightToWorkPage extends CivilServiceJobsBasePage {
       }
       clickOn(pageContinue)
     }
-  }
 }

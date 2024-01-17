@@ -1,10 +1,9 @@
 package uk.gov.co.test.ui.pages.vx.createvacancypage
 
 import org.openqa.selenium.By
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXAttendancePoor, vXCandidateInstructions, vXExperiencesRequired, vXLanguagesMandatory, vXLicencesMandatory, vXMembershipsMandatory, vXMisconductLive, vXNationalityRequirements, vXPerformanceReview, vXProbationIncomplete, vXPromotionApply, vXQualificationsMandatory, vXRightToRemainUK, vXUploadAttachmentRequired}
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXAttendancePoor, vXCandidateInstructions, vXExperiencesRequired, vXLanguagesMandatory, vXLicencesMandatory, vXMembershipsMandatory, vXMisconductLive, vXNationalityRequirements, vXPerformanceReview, vXProbationIncomplete, vXPromotionApply, vXQualificationsMandatory, vXRightToRemainUK, vXUploadAttachmentRequired, vacancyFormId}
 import uk.gov.co.test.ui.data.vx.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
-import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.vacancyFormId
 
 case class CriteriaDetails(
   campaignID: Option[String] = None,

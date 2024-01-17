@@ -1,10 +1,10 @@
 package uk.gov.co.test.ui.pages.vx.createvacancypage
 
 import org.openqa.selenium.{By, Keys, WebElement}
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXAppConvertedClosingDate, vXApplicationClosingDate, vXApplicationClosingTime, vXApplicationLiveDate, vXApplicationLiveTime, vXConvertedClosingDateTime, vXConvertedLiveDateTime, vacancyName}
+import uk.gov.co.test.ui.data.TestData.eventually
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXAppConvertedClosingDate, vXApplicationClosingDate, vXApplicationClosingTime, vXApplicationLiveDate, vXApplicationLiveTime, vXConvertedClosingDateTime, vXConvertedLiveDateTime, vacancyFormId, vacancyName}
 import uk.gov.co.test.ui.data.vx.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
-import uk.gov.co.test.ui.data.TestData.eventually
 
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -34,9 +34,9 @@ object BasicDetailsSection extends VacancyBasePage {
   val addWelshTranslationId = "edit_opp_form_title_button"
   val welshTitleInput       = "edit_opp_form_title_cy"
   val updateWelshId         = "lbledit_edit_opp_form_title-update"
-  var vacancyFormId: String = ""
 
-  def newVacancy: WebElement     = waitForVisibilityOfElementByPathLast(newVacancyPath)
+  def newVacancy: WebElement = waitForVisibilityOfElementByPathLast(newVacancyPath)
+
   def vacancySection: WebElement = waitForVisibilityOfElementByPathLast(vacancySectionPath)
 
   def createNewVacancy(): Unit = {
@@ -51,11 +51,13 @@ object BasicDetailsSection extends VacancyBasePage {
   private def displayWelshVersion(): WebElement =
     waitForVisibilityOfElementByPath(displayWelshPath)
 
-  private def title(): TextField       = textField("title")
+  private def title(): TextField = textField("title")
+
   private def closingDate(): TextField = textField(closingDateId)
 
   private def templateSelect: WebElement = waitForVisibilityOfElementByPath(selectTemplatePath)
-  private def enterTemplate: WebElement  = waitForVisibilityOfElementByPath(enterTemplatePath)
+
+  private def enterTemplate: WebElement = waitForVisibilityOfElementByPath(enterTemplatePath)
 
   private def selectTemplate(basicDetails: BasicDetails): Unit = {
     templateSelect.click()
@@ -119,17 +121,16 @@ object BasicDetailsSection extends VacancyBasePage {
   }
 
   def appLiveTime(): String = {
-    val hourlive   = waitForVisibilityOfElementByPath(liveHourPath).getText
+    val hourLive   = waitForVisibilityOfElementByPath(liveHourPath).getText
     val minuteLive = waitForVisibilityOfElementByPath(liveMinutePath).getText
-    vXApplicationLiveTime = s"$hourlive:$minuteLive:00"
+    vXApplicationLiveTime = s"$hourLive:$minuteLive:00"
     vXApplicationLiveTime
   }
 
-  private def extractFormId(): String = {
+  def extractFormId(): Unit = {
     waitForTemplateLoad()
     val formClass = driver.findElement(By.className(extractFormClass))
     vacancyFormId = formClass.getAttribute("id")
-    vacancyFormId
   }
 
   private def waitForTemplateLoad(): Unit =

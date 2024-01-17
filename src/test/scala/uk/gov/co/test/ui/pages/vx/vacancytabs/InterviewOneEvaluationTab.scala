@@ -1,12 +1,11 @@
 package uk.gov.co.test.ui.pages.vx.vacancytabs
 
 import org.openqa.selenium.By
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXBehavioursRequired, vXHowManyBehaviours, vXHowManySkills, vXHowManyStrengths, vXListOfChosenBehaviours, vXListOfStrengths, vXListOfTechSkills, vXStrengthsRequired, vXTechSkillsRequired}
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{randomFirstName, randomLastName, vXBehavioursRequired, vXHowManyBehaviours, vXHowManySkills, vXHowManyStrengths, vXInterviewOneOutcome, vXListOfChosenBehaviours, vXListOfStrengths, vXListOfTechSkills, vXStrengthsRequired, vXTechSkillsRequired, vacancyFormId}
 import uk.gov.co.test.ui.data.vx.{ApplicationDetails, AssessmentOutcome, Outcome}
-import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.applicationBeingReviewedAfterInterviewState
+import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.applicationStateAfterInterview
 import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.{availableBarItems, completeI1EvaluationBarId, interviewEvaluation, noShowI1BarId, withdrawAtInterviewBarId}
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
-import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.vacancyFormId
 
 import scala.collection.mutable.ListBuffer
 
@@ -48,7 +47,6 @@ case class InterviewOneDetails(
   overrideScore: Boolean,
   overallOverrideScore: Int,
   finalOutcome: String,
-  finalOutcomeComments: String,
   uploadDocs: String,
   declarationStatement: String
 )
@@ -56,11 +54,11 @@ case class InterviewOneDetails(
 object InterviewOneEvaluationTab extends VacancyBasePage {
 
   private lazy val interviewOneEvaluationTabPath = ".//span[@class='main-label' and text() = 'Interview 1 Evaluation']"
-  var vXI1BehavioursTotalScore: ListBuffer[Int]    = ListBuffer()
-  var vXI1TechSkillsTotalScore: ListBuffer[Int]    = ListBuffer()
-  var vXI1StrengthsTotalScore: ListBuffer[Int]     = ListBuffer()
-  var vXI1AssessmentsTotalScore: ListBuffer[Int]   = ListBuffer()
-  var vXI1ExperienceScore: Int                     = 91
+  var vXI1BehavioursTotalScore: ListBuffer[Int]  = ListBuffer()
+  var vXI1TechSkillsTotalScore: ListBuffer[Int]  = ListBuffer()
+  var vXI1StrengthsTotalScore: ListBuffer[Int]   = ListBuffer()
+  var vXI1AssessmentsTotalScore: ListBuffer[Int] = ListBuffer()
+  var vXI1ExperienceScore: Int                   = 91
   def interviewOneEvaluationHeaderId             = s"${vacancyFormId}_label_153071_1"
   def interviewTwoEvaluationHeaderId             = s"${vacancyFormId}_label_153356_1"
   def behaviourAssessmentHeaderId                = s"${vacancyFormId}_label_23467_1"
@@ -716,11 +714,12 @@ object InterviewOneEvaluationTab extends VacancyBasePage {
   }
 
   private def enterOutcome(interviewOneDetails: InterviewOneDetails): Unit = {
+    vXInterviewOneOutcome = interviewOneDetails.finalOutcome
     waitForVisibilityOfElementById(outcomeTitleId).getText shouldEqual "Outcome"
     waitForVisibilityOfElementById(outcomeId).click()
-    action().moveToElement(waitForDropdownOption(interviewOneDetails.finalOutcome)).perform()
-    waitForDropdownOption(interviewOneDetails.finalOutcome).click()
-    enterValue(outcomeCommentsId, interviewOneDetails.finalOutcomeComments)
+    action().moveToElement(waitForDropdownOption(vXInterviewOneOutcome)).perform()
+    waitForDropdownOption(vXInterviewOneOutcome).click()
+    enterValue(outcomeCommentsId, s"Autotest - I1 - $randomFirstName $randomLastName overall performed very well!")
   }
 
   private def uploadDocuments(interviewOneDetails: InterviewOneDetails): Unit = {
@@ -747,6 +746,6 @@ object InterviewOneEvaluationTab extends VacancyBasePage {
     }
     clickOn(submitForm)
     interviewEvaluation()
-    applicationBeingReviewedAfterInterviewState()
+    applicationStateAfterInterview(applicationDetails)
   }
 }

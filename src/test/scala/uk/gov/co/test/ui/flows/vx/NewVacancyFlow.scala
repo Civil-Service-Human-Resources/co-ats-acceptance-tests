@@ -51,5 +51,6 @@ object NewVacancyFlow extends VacancyBasePage {
       f(vacancy)
     }
     clickOn(saveVacancyId)
+    activateAndPostVacancy()
   }
 }

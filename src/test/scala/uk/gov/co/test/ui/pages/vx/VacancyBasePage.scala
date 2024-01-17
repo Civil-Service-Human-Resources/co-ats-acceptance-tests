@@ -188,13 +188,15 @@ trait VacancyBasePage extends Matchers with BasePage with BrowserDriver {
     addExternalPosting()
   }
 
+  def repostVacancy(): Unit = {}
+
   def switchToVXConfig(): Unit = {
-    switchToOtherWindow()
+    switchToOtherWindow
     loginWithRecruiterDetails(RECRUITER)
   }
 
   def switchToV9Test(): Unit = {
-    switchToOtherWindow()
+    switchToOtherWindow
     navigateToV9Test()
     if (!v9SearchCookiesById().isEmpty) v9AcceptAllCookies()
     checkV9LogoutState()
@@ -233,7 +235,7 @@ trait VacancyBasePage extends Matchers with BasePage with BrowserDriver {
 
   def changeDateFormat(dateToFormat: String, formatStyle: String): String = {
     val formatter1 = DateTimeFormatter.ofPattern("d MMMM yyyy")
-    val formatter2 = DateTimeFormatter.ofPattern("d/MM/uuuu")
+    val formatter2 = DateTimeFormatter.ofPattern("dd/MM/uuuu")
     val formatter3 = DateTimeFormatter.ofPattern("d MMM yyyy")
     if (formatStyle == "short") {
       val formattedDate = LocalDate.parse(dateToFormat, formatter1)
@@ -246,4 +248,14 @@ trait VacancyBasePage extends Matchers with BasePage with BrowserDriver {
       formattedDate.format(formatter3)
     }
   }
+
+  def deleteTextFromField(fieldId: WebElement): Unit =
+    if (fieldId.getText.nonEmpty) {
+      if (!getOs.contains("mac")) {
+        fieldId.sendKeys(Keys.CONTROL, "a")
+      } else {
+        fieldId.sendKeys(Keys.COMMAND, "a")
+      }
+      fieldId.sendKeys(Keys.BACK_SPACE)
+    }
 }

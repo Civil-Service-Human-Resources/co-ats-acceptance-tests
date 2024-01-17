@@ -1,10 +1,9 @@
 package uk.gov.co.test.ui.pages.vx.createvacancypage
 
 import org.openqa.selenium.By
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXApproach, vXGreatForVeterans, vXGrsVacancy, vacancyFormId}
 import uk.gov.co.test.ui.data.vx.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
-import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.vacancyFormId
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{candidateApproach, vXGreatForVeterans, vXGrsVacancy}
 
 case class ManagementDetails(
   greatWorkForVeterans: Boolean,
@@ -56,7 +55,7 @@ object ManagementSection extends VacancyBasePage {
   private def selectVeteransAndPrisonLeaversPosition(managementDetails: ManagementDetails): Unit = {
     scrollToElement(By.id(managementSectionId))
     vXGreatForVeterans = managementDetails.greatWorkForVeterans
-    if (candidateApproach == "External") {
+    if (vXApproach == "External") {
       if (vXGreatForVeterans) {
         clickOnRadioButton(greatWorkForVeteransYesId)
       } else {

@@ -1,9 +1,10 @@
 package uk.gov.co.test.ui.pages.vx.createvacancypage
 
 import org.openqa.selenium.By
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXReserveExtendLength, vXReserveExtendRequired, vXReserveListLength, vXReserveListRequired, vXReserveListTotalLength, vacancyFormId, vacancyId}
 import uk.gov.co.test.ui.data.vx.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
-import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.vacancyFormId
+import uk.gov.co.test.ui.pages.vx.VacancyDetailsPage.{extractAllVacancyDetails, navigateToVacancyForms, reserveList, searchForVacancy}
 
 case class ReserveListDetails(
   reserveList: Boolean,
@@ -19,6 +20,7 @@ object ReserveListSection extends VacancyBasePage {
   def reserveListLengthId   = s"select2-${vacancyFormId}_datafield_154637_1_1-container"
   def approvalToExtendYesId = s"${vacancyFormId}_datafield_177141_1_1_1"
   def approvalToExtendNoId  = s"${vacancyFormId}_datafield_177141_1_1_2"
+  def extendLengthId        = s"select2-${vacancyFormId}_datafield_177145_1_1-container"
 
   def selectReserveList(reserveListDetails: ReserveListDetails): Unit = {
     scrollToElement(By.id(reserveListId))
@@ -51,4 +53,45 @@ object ReserveListSection extends VacancyBasePage {
     reserve.foreach { f =>
       f(newVacancyDetails.reserveListDetails)
     }
+
+  def totalReserveExpiryLength(): Unit = {
+    val baseReserveLength = vXReserveListLength.replaceAll("[A-Za-z ]", "").filterNot(_.isWhitespace).toInt
+    if (vXReserveExtendRequired) {
+      val reserveExtendLength = vXReserveExtendLength.replaceAll("[A-Za-z ]", "").filterNot(_.isWhitespace).toInt
+      val totalLength         = baseReserveLength + reserveExtendLength
+      vXReserveListTotalLength = s"${totalLength.toString} Months"
+    } else vXReserveListTotalLength = s"${baseReserveLength.toString} Months"
+    println(s"1. The length required is: $vXReserveListRequired")
+    println(s"2. The list length is: $vXReserveListLength")
+    println(s"3. The extend length required is: $vXReserveExtendRequired")
+    println(s"4. The extend length is: $vXReserveExtendLength")
+    println(s"5. The total length is: $vXReserveListTotalLength")
+  }
+
+  def changeReserveListDetails(
+    reserveLength: String,
+    extendRequired: Option[Boolean] = None,
+    extendLength: Option[String] = None
+  ): Unit = {
+    searchForVacancy(vacancyId)
+    navigateToVacancyForms()
+    reserveList()
+    if (!vXReserveListRequired || vXReserveListLength != reserveLength || vXReserveListLength == "12 Months") {
+      scrollToElement(By.id(reserveListId))
+      clickOnRadioButton(reserveListYesId)
+      lengthOfReserveList(reserveLength)
+      if (reserveLength == "12 Months") {
+        if (extendRequired.get) {
+          clickOnRadioButton(approvalToExtendYesId)
+          waitForVisibilityOfElementById(extendLengthId).click()
+          action().moveToElement(waitForDropdownOption(extendLength.get)).perform()
+          waitForDropdownOption(extendLength.get).click()
+        } else clickOnRadioButton(approvalToExtendNoId)
+      }
+      scrollToElement(By.id(submitForm))
+      clickOn(submitForm)
+    }
+    extractAllVacancyDetails(vacancyId)
+    totalReserveExpiryLength()
+  }
 }

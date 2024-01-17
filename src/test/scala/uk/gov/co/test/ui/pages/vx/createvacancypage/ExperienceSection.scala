@@ -1,9 +1,8 @@
 package uk.gov.co.test.ui.pages.vx.createvacancypage
 
 import org.openqa.selenium.By
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXGuidanceText, vXLanguagesMandatory, vXLicencesMandatory, vXMembershipsMandatory, vXQualificationsMandatory, vXStatementWordLimit}
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXGuidanceText, vXLanguagesMandatory, vXLicencesMandatory, vXMembershipsMandatory, vXQualificationsMandatory, vXStatementWordLimit, vacancyFormId}
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
-import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.vacancyFormId
 
 case class MandatoryRequirements(requirements: Boolean, requirementsInfo: String)
 

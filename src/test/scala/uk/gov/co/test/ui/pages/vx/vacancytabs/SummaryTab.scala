@@ -2,8 +2,8 @@ package uk.gov.co.test.ui.pages.vx.vacancytabs
 
 import org.openqa.selenium.By
 import org.scalatest.concurrent.Eventually.eventually
-import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.vacancyName
+import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 
 object SummaryTab extends VacancyBasePage {
 
@@ -17,13 +17,15 @@ object SummaryTab extends VacancyBasePage {
   private lazy val vacancyTitleId   = "details_form_title"
   private lazy val vacancyTitle     = ".//*[@class='obj_name']"
   private lazy val alertMessagePath = ".//*[@class='cn']"
+  val vacancyLiveDateId             = "details_form_pld"
+  val vacancyClosingDateId          = "details_form_pcd"
 
   private def newVacancyPageTitle(): String = {
     val pageTitle = s"$vacancyName : Civil Service Jobs - GOV.UK"
     pageTitle
   }
 
-  private def vacancyActive(): String = {
+  def vacancyActive(): String = {
     val active = waitForVisibilityOfElementByPath(isActivePath).getAttribute("aria-label")
     active
   }

@@ -3,7 +3,7 @@ package uk.gov.co.test.ui.pages.vx
 import org.openqa.selenium.{By, WebElement}
 import uk.gov.co.test.ui.data.TestData.eventually
 import uk.gov.co.test.ui.data.vx.ApplicationDetails
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXInstructionsForCandidates, vXInterviewDate, vXInterviewLocation, vXInterviewLongDate, vXInterviewNumber, vXInterviewScheduleTitle, vXInterviewShortDate}
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{randomFirstName, randomLastName, vXInstructionsForCandidates, vXInterviewDate, vXInterviewLocation, vXInterviewLongDate, vXInterviewNumber, vXInterviewScheduleTitle, vXInterviewShortDate, vacancyId}
 import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.{availableBarItems, confirmCandidateSummary, inviteToI1BarId, inviteToI2BarId, inviteToI3BarId, inviteToI4BarId, scheduleOfflineI1BarId, scheduleOfflineI2BarId, scheduleOfflineI3BarId, scheduleOfflineI4BarId, withdrawAtInterviewBarId}
 import uk.gov.co.test.ui.pages.vx.createvacancypage.AdvertSection.switchBack
 
@@ -15,17 +15,13 @@ case class InterviewScheduleDetails(
   copyFrom: Option[String] = None,
   copyFromTemplate: String,
   copyFromInterviewSchedule: String,
-  interviewTitle: String,
   addWelshTitle: Boolean,
-  welshInterviewTitle: String,
   daysAfterCurrentDate: Int,
   interviewRound: String,
   assignCoordinator: Boolean,
   coordinator: String,
-  internalNotes: String,
   addWelshInternalNotes: Boolean,
   welshInternalNotes: String,
-  instructionsForCandidate: String,
   addWelshInstructionsForCandidate: Boolean,
   welshInstructionsForCandidate: String,
   interviewLocation: String,
@@ -74,7 +70,7 @@ object InterviewSchedulePage extends VacancyBasePage {
   private lazy val bookedEmailTemplateId                 = "select2-details_form_email_confirm_id-container"
   private lazy val includeCandidateCVInICalsId           = "details_form_ical_attach_candidate_cv"
   private lazy val createId                              = "details_form_form_submit"
-  private lazy val removeTimezonePath                           = "//*[@id='item_details_form_time_zone']/div/span/span[1]/span/button"
+  private lazy val removeTimezonePath                    = "//*[@id='item_details_form_time_zone']/div/span/span[1]/span/button"
 
   private def createSchedule: WebElement        = waitForVisibilityOfElementByPathLast(createInterviewSchedulePath)
   private def viewInterviewSchedule: WebElement = waitForVisibilityOfElementByPathLast(viewInterviewSchedulePath)
@@ -108,7 +104,7 @@ object InterviewSchedulePage extends VacancyBasePage {
     waitForVisibilityOfElementByPath(createScheduleTitlePath).getText shouldEqual scheduleTitle
   }
 
-  def untagVacancy(position: Int): Unit = {
+  def untagVacancy(position: Int, vacancyToUntag: String): Unit = {
     val viewSchedule = "View Interview Schedule"
     if (viewInterviewSchedule.getText == viewSchedule) viewInterviewSchedule.click()
     else {
@@ -120,14 +116,17 @@ object InterviewSchedulePage extends VacancyBasePage {
     Thread.sleep(1500)
     waitForVisibilityOfElementByPath(".//*[@id='DataTables_Table_0_select']/option[4]").click()
     Thread.sleep(2000)
+    waitForVisibilityOfElementById("interviews-main-filter").sendKeys(vacancyToUntag)
+//    waitForVisibilityOfElementById("interviews-main-filter").sendKeys(Keys.ENTER)
+    Thread.sleep(6000)
     scrollToElement(By.xpath(s".//*[@id='DataTables_Table_0']/tbody/tr[${position.toString}]"))
     waitForVisibilityOfElementByPath(s".//*[@id='DataTables_Table_0']/tbody/tr[${position.toString}]").click()
     waitForVisibilityOfElementByPath(".//a[text()='Edit']").click()
     waitForVisibilityOfElementByPath(".//span[@class='main-label' and text() = 'Tagged Vacancies']").click()
     val vacancyUsed  = ".//*[@id='DataTables_Table_1']/tbody/tr/td[1]"
     Thread.sleep(1000)
-    var anyRecords = waitForVisibilityOfElementByPath(vacancyUsed).getText
-    if (anyRecords == "9562") {
+    var anyRecords   = waitForVisibilityOfElementByPath(vacancyUsed).getText
+    if (anyRecords == vacancyToUntag) {
       waitForVisibilityOfElementByPath(vacancyUsed).click()
       waitForVisibilityOfElementById("but_remove_opportunity").click()
       checkForNewValuePath(vacancyUsed, "No records")
@@ -152,13 +151,13 @@ object InterviewSchedulePage extends VacancyBasePage {
 
   private def enterInterviewTitle(interviewScheduleDetails: InterviewScheduleDetails): Unit = {
     val schedule = interviewScheduleDetails
-    vXInterviewScheduleTitle = schedule.interviewTitle.format(vXInterviewNumber.head)
+    vXInterviewScheduleTitle = s"$vacancyId - Interview ${vXInterviewNumber.head} for $randomFirstName $randomLastName"
     enterValue(interviewTitleId, vXInterviewScheduleTitle)
     addWelshTranslation(
       schedule.addWelshTitle,
       welshInterviewTitleId,
       welshInterviewTitleInputId,
-      schedule.welshInterviewTitle,
+      s"$vacancyId - Prawf awtomeiddio $randomFirstName $randomLastName",
       welshInterviewTitleUpdateId
     )
   }
@@ -197,21 +196,24 @@ object InterviewSchedulePage extends VacancyBasePage {
     val switchFrame = driver.switchTo().frame(internalNotesIFrameId)
     val notesArea   = switchFrame.findElement(By.id(internalNotesId))
     notesArea.clear()
-    notesArea.sendKeys(schedule.internalNotes.format(vXInterviewNumber.head))
+    notesArea.sendKeys(
+      s"Autotest - Internal notes for $randomFirstName $randomLastName for interview ${vXInterviewNumber.head}"
+    )
     switchBack()
     addWelshTranslationIFrame(
       schedule.addWelshTitle,
       welshInternalNotesId,
       welshInternalNotesIFrameId,
       internalNotesId,
-      schedule.welshInterviewTitle,
+      s"$vacancyId - Prawf awtomeiddio $randomFirstName $randomLastName",
       welshInternalNotesUpdateId
     )
   }
 
   private def enterInstructionsForCandidate(interviewScheduleDetails: InterviewScheduleDetails): Unit = {
     val schedule    = interviewScheduleDetails
-    vXInstructionsForCandidates = schedule.instructionsForCandidate.format(vXInterviewNumber.head)
+    vXInstructionsForCandidates =
+      s"Autotest - Instructions for $randomFirstName $randomLastName for interview ${vXInterviewNumber.head}"
     val switchFrame = driver.switchTo().frame(instructionsForCandidateIFrameId)
     val notesArea   = switchFrame.findElement(By.id(instructionsForCandidateId))
     notesArea.clear()

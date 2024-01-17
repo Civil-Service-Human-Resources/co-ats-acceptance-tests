@@ -2,26 +2,25 @@ package uk.gov.co.test.ui.pages.vx
 
 import uk.gov.co.test.ui.data.TestData.eventually
 import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{applicationId, preferredFirstName, randomFirstName, randomLastName, vXInterviewNumber, vXJobInfoDepartment, vacancyId, vacancyName}
-import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.invitedForInterviewState
+import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.{interviewTypeDetail, invitedForInterviewState}
 import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.{availableBarItems, confirmCandidateSummary, interviewNotBookedBarId, inviteToI1BarId, inviteToI2BarId, inviteToI3BarId, inviteToI4BarId, scheduleI1BarId, scheduleOfflineI1BarId, searchApplicationId, withdrawAtInterviewBarId}
 
 object SendInterviewEmailPage extends VacancyBasePage {
 
-  private lazy val sendEmailToCandidatePageTitle = s"$randomFirstName $randomLastName : Civil Service Jobs - GOV.UK"
-  private lazy val sendEmailHeaderPath           = ".//*[@class='brand_main_title_left']"
-  private lazy val sendEmailCheckId              = "invite_form_send_email"
-  private lazy val autoSelectId                  = "invite_form_select_mode_2"
-  private lazy val correspondenceId              = "select2-invite_form_correspondence-container"
-  private lazy val sendInviteId                  = "invite_form_form_submit"
-  private lazy val emailSubjectId                = "item_invite_form_subject"
-  private lazy val emailPreviewId                = "invite_form_preview_but"
-  private lazy val emailPreviewContentId         = "preview_div"
-  private lazy val emailPreviewContentClosePath  = ".//button[@title='Close']"
-  private lazy val addLocalFilePath              = ".//a[text()='Add Local File']"
-  private lazy val addEmailAttachmentsOneId      = "invite_form_attachments-new-file-0"
+  private lazy val sendEmailHeaderPath          = ".//*[@class='brand_main_title_left']"
+  private lazy val sendEmailCheckId             = "invite_form_send_email"
+  private lazy val autoSelectId                 = "invite_form_select_mode_2"
+  private lazy val correspondenceId             = "select2-invite_form_correspondence-container"
+  private lazy val sendInviteId                 = "invite_form_form_submit"
+  private lazy val emailSubjectId               = "item_invite_form_subject"
+  private lazy val emailPreviewId               = "invite_form_preview_but"
+  private lazy val emailPreviewContentId        = "preview_div"
+  private lazy val emailPreviewContentClosePath = ".//button[@title='Close']"
+  private lazy val addLocalFilePath             = ".//a[text()='Add Local File']"
+  private lazy val addEmailAttachmentsOneId     = "invite_form_attachments-new-file-0"
 
   private def sendEmailPageCheck(): Unit = {
-    eventually(onPage(sendEmailToCandidatePageTitle))
+    eventually(onPage(s"$randomFirstName $randomLastName : Civil Service Jobs - GOV.UK"))
     waitForVisibilityOfElementByPath(sendEmailHeaderPath).getText shouldEqual s"$randomFirstName $randomLastName"
   }
 
@@ -50,8 +49,8 @@ object SendInterviewEmailPage extends VacancyBasePage {
   }
 
   private def checkPreviewEmail(): Unit = {
-    val emailPreview = vXInterviewNumber.head match {
-      case "1" =>
+    val emailPreview = interviewTypeDetail() match {
+      case "Telephone"  =>
         s"""Dear $preferredFirstName,
            |$vacancyId: $vacancyName
            |Congratulations, you've been invited to attend a telephone interview.
@@ -63,7 +62,7 @@ object SendInterviewEmailPage extends VacancyBasePage {
            |Kind regards
            |
            |$vXJobInfoDepartment recruitment team""".stripMargin
-      case "2" =>
+      case "Assessment" =>
         s"""Dear $preferredFirstName,
            |$vacancyId: $vacancyName
            |Congratulations, you've been invited to attend an assessment.
@@ -75,7 +74,7 @@ object SendInterviewEmailPage extends VacancyBasePage {
            |Kind regards
            |
            |$vXJobInfoDepartment recruitment team""".stripMargin
-      case "3" =>
+      case "Video"      =>
         s"""Dear $preferredFirstName,
            |$vacancyId: $vacancyName
            |Congratulations, you've been invited to attend a video interview.
@@ -87,7 +86,7 @@ object SendInterviewEmailPage extends VacancyBasePage {
            |Kind regards
            |
            |$vXJobInfoDepartment recruitment team""".stripMargin
-      case "4" =>
+      case "Interview"  =>
         s"""Dear $preferredFirstName,
            |$vacancyId: $vacancyName
            |Congratulations, you've been invited to attend an interview.

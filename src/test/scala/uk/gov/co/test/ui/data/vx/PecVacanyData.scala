@@ -4,6 +4,8 @@ import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.{contactEmailVxConfig, contactN
 import uk.gov.co.test.ui.pages.v9.SignInPage.generateRandomJobPosition
 import uk.gov.co.test.ui.pages.vx.createvacancypage._
 
+import scala.collection.mutable.ListBuffer
+
 object PEC_VACANCY_DATA
     extends NewVacancyDetails(
       PEC_BASIC_DETAILS,
@@ -85,7 +87,7 @@ object PEC_LOCATIONS
       "All communities",
       false,
       "3",
-      otherLocations = List("London", "Southampton", "Manchester")
+      otherLocations = ListBuffer("London", "Southampton", "Manchester")
     )
 
 object PEC_CONTRACT_DETAILS

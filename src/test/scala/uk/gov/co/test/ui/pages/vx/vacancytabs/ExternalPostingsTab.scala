@@ -1,24 +1,29 @@
 package uk.gov.co.test.ui.pages.vx.vacancytabs
 
-import org.openqa.selenium.{By, WebElement}
+import org.openqa.selenium.{By, Keys, WebElement}
+import uk.gov.co.test.ui.data.TestData.eventually
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import scala.collection.mutable
 import scala.jdk.CollectionConverters._
 import scala.util.control.Breaks.{break, breakable}
 
 object ExternalPostingsTab extends VacancyBasePage {
 
-  private lazy val externalPostingsTabId  = "oppTabs_external_posting"
-  private lazy val addButtonPath          = ".//*[@class='btn btn-default ajax']"
-  private lazy val editButtonPath         = ".//*[@class='btn btn-default ']"
-  private lazy val destinationId          = "select2-external_posting_form_destination_class_id-container"
-  private lazy val postToCsJobsOptionPath = ".//li[@title='Post to Civil Service Jobs']"
-  private lazy val nextStep2PostingId     = "external_posting_form_form_submit"
-  private lazy val nextStep3PostingId     = "external_posting_form_step3_form_submit"
-  private lazy val nextCompletePostingId  = "external_posting_complete_form_submit"
-  private lazy val destinationType        = "PostingDestination::ExternalVx"
-  private lazy val postingSubHeaderPath   = ".//*[@id='externalpostings_container']/h2"
+  private lazy val externalPostingsTabId   = "oppTabs_external_posting"
+  private lazy val addButtonPath           = ".//*[@class='btn btn-default ajax']"
+  private lazy val editButtonPath          = ".//*[@class='btn btn-default ']"
+  private lazy val destinationId           = "select2-external_posting_form_destination_class_id-container"
+  private lazy val postToCsJobsOptionPath  = ".//li[@title='Post to Civil Service Jobs']"
+  private lazy val editPostDestinationPath = ".//a[text()='Edit']"
+  private lazy val nextStep2PostingId      = "external_posting_form_form_submit"
+  private lazy val nextStep3PostingId      = "external_posting_form_step3_form_submit"
+  private lazy val nextCompletePostingId   = "external_posting_complete_form_submit"
+  private lazy val destinationType         = "PostingDestination::ExternalVx"
+  private lazy val postingSubHeaderPath    = ".//*[@id='externalpostings_container']/h2"
+  private lazy val externalPostLiveDateId  = "external_posting_form_live_date"
 
   private def newPostingHeader: String = {
     val header = waitForVisibilityOfElementByPath(postingSubHeaderPath).getText
@@ -37,7 +42,8 @@ object ExternalPostingsTab extends VacancyBasePage {
   }
 
   private def editPosting(): Unit = {
-    val edit = waitForVisibilityOfElementById(editButtonPath)
+    waitForVisibilityOfElementByPath(".//tr[@tabindex='-1'][1]").click()
+    val edit = waitForVisibilityOfElementByPath(editButtonPath)
     edit.isEnabled
     edit.click()
   }
@@ -125,5 +131,30 @@ object ExternalPostingsTab extends VacancyBasePage {
     waitForVisibilityOfElementById(nextStep3PostingId).click()
     waitForVisibilityOfElementById(nextCompletePostingId).click()
     confirmPostingDetails()
+  }
+
+  def changeLiveDate(newLiveDate: String, status: String): Unit = {
+    waitForVisibilityOfElementById(externalPostLiveDateId).clear()
+    waitForVisibilityOfElementById(externalPostLiveDateId).sendKeys(newLiveDate)
+    waitForVisibilityOfElementById(externalPostLiveDateId).sendKeys(Keys.ENTER)
+    waitForVisibilityOfElementById(nextStep2PostingId).click()
+    eventually(postingStatusDateValue() shouldEqual status)
+  }
+
+  def repostExternalPosting(): Unit = {
+    val formatter     = DateTimeFormatter.ofPattern("dd/MM/uuuu")
+    val todayDate     = LocalDate.now().format(formatter)
+    val yesterdayDate = LocalDate.now().minusDays(1).format(formatter)
+    selectExternalPostingsTab()
+    editPosting()
+    val liveDate      = waitForVisibilityOfElementById(externalPostLiveDateId).getAttribute("value")
+    if (liveDate <= todayDate) {
+      val tomorrowDate = LocalDate.now().plusDays(2).format(formatter)
+      changeLiveDate(tomorrowDate, "Offline")
+      editPosting()
+      changeLiveDate(yesterdayDate, "Online")
+    } else if (liveDate > todayDate) {
+      changeLiveDate(yesterdayDate, "Online")
+    }
   }
 }

@@ -10,7 +10,7 @@ import uk.gov.co.test.ui.data.vx.RECRUITER
 import uk.gov.co.test.ui.driver.BrowserDriver
 import uk.gov.co.test.ui.flows.vx.RecruiterLoginFlow.loginWithRecruiterDetails
 import uk.gov.co.test.ui.pages.v9.SignInPage.{checkV9LogoutState, generateCandidateDetails, navigateToV9Test, v9AcceptAllCookies, v9SearchCookiesById}
-import uk.gov.co.test.ui.utils.SingletonScreenshotReport
+import uk.gov.co.test.ui.utils.{OncePerSuiteRun, SingletonScreenshotReport}
 import uk.gov.co.test.ui.webdriver.SingletonDriver
 
 import scala.util.Try
@@ -26,7 +26,10 @@ trait BaseFeatureSpec
     with BrowserDriver
     with Eventually {
 
-  override protected def beforeEach(testData: TestData): Unit =
+  OncePerSuiteRun.register("deleteScreenshots", () => SingletonScreenshotReport.clearReportDirectory())
+
+  override protected def beforeEach(testData: TestData): Unit = {
+//    driver.manage().window().maximize()
     if (testData.name.contains("V9")) {
       generateCandidateDetails()
       navigateToV9Test()
@@ -37,6 +40,7 @@ trait BaseFeatureSpec
       generateCandidateDetails()
       loginWithRecruiterDetails(RECRUITER)
     } else throw new IllegalStateException("Change test name in order to start up correct system")
+  }
 
   override protected def afterEach(testData: TestData): Unit =
     if (testData.name.contains("Candidate")) {

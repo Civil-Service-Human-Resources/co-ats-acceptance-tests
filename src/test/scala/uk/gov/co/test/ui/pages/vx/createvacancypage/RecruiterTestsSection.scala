@@ -1,9 +1,8 @@
 package uk.gov.co.test.ui.pages.vx.createvacancypage
 
 import org.openqa.selenium.By
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXApplicationClosingDate, vacancyFormId}
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
-import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.vacancyFormId
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.vXApplicationClosingDate
 
 case class RecruiterTestsDetails(
   whenDeadline: String,

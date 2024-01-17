@@ -6,33 +6,51 @@ import scala.collection.mutable.ListBuffer
 
 object MasterVacancyDetails extends VacancyBasePage {
 
-  //vx vacancy additionalQuestions section
+  //vx VACANCY formId
+  var vacancyFormId = ""
+
+  //vx VACANCY additionalQuestions section
   var vXAnyAdditionalQuestions = true
   var vXHowManyQuestions       = 3
   var vXQuestionOne            = "Autotest - Question 1"
   var vXQuestionTwo            = "Autotest - Question 2"
   var vXQuestionThree          = "Autotest - Question 3"
 
-  //vx vacancy approach section
-  var candidateApproach = "External"
+  //vx VACANCY approach section
+  var vXApproach = ""
 
-  //vx vacancy basicDetails section
-  var vacancyName                       = "HMRC - Technology Technician"
-  var vacancyId                         = "9564"
-  var vXApplicationLiveDate: String     = "31 December 2023"
+  //vX VACANCY approval
+  var vXBudgetaryApproval = true
+  var vXCostCentre        = ""
+
+  //vx VACANCY basicDetails section
+  var vacancyName                       = ""
+  var vacancyId                         = ""
+  var vXApplicationLiveDate: String     = ""
   var vXApplicationLiveTime: String     = ""
-  var vXApplicationClosingDate: String  = "01/02/2024"
+  var vXApplicationClosingDate: String  = ""
   var vXAppConvertedClosingDate: String = ""
   var vXApplicationClosingTime: String  = ""
   var vXConvertedLiveDateTime           = ""
   var vXConvertedClosingDateTime        = ""
 
-  //vx job information section
-  var vXJobInfoDepartment = "HM Revenue and Customs"
+  //vX VACANCY reserve list
+  var vXReserveListRequired    = true
+  var vXReserveListLength      = ""
+  var vXReserveExtendRequired  = false
+  var vXReserveExtendLength    = ""
+  var vXReserveListTotalLength = ""
 
-  //vx vacancy behaviours section
+  //vx VACANCY job information section
+  var vXJobInfoDepartment  = ""
+  var vXBusinessArea       = ""
+  var vXBusinessAreaDetail = ""
+  var vXTypeOfRole         = new ListBuffer[String]()
+  var vXProfession         = ""
+  var vXNoOfJobsAvailable  = ""
+
+  //vx VACANCY behaviours section
   var vXHowManyBehaviours: Int                     = 8
-//  var vXListOfChosenBehaviours = new ListBuffer[String]()
   var vXListOfChosenBehaviours: ListBuffer[String] = ListBuffer(
     "Changing and Improving",
     "Communicating and Influencing",
@@ -44,7 +62,7 @@ object MasterVacancyDetails extends VacancyBasePage {
     "Working Together"
   )
 
-  //vx vacancy criteria section
+  //vx VACANCY criteria section
   var vXCandidateInstructions: String     = "Autotest - Instructions for candidate"
   var vXUploadAttachmentRequired: Boolean = true
   var vXProbationIncomplete: Boolean      = true
@@ -55,7 +73,7 @@ object MasterVacancyDetails extends VacancyBasePage {
   var vXNationalityRequirements: Boolean  = true
   var vXRightToRemainUK: Boolean          = true
 
-  //vx vacancy experience section
+  //vx VACANCY experience section
   var vXGuidanceText: String             = "Autotest - Enter guidance text for the candidate"
   var vXStatementWordLimit: Int          = 250
   var vXLicencesMandatory: Boolean       = true
@@ -63,25 +81,28 @@ object MasterVacancyDetails extends VacancyBasePage {
   var vXLanguagesMandatory: Boolean      = true
   var vXQualificationsMandatory: Boolean = true
 
-  //vx vacancy location section
+  //vx VACANCY location section
+  var vXLocationType                    = ""
+  var vXLocationDisplay                 = ""
   var vXVacanciesInNIR                  = true
   var vXCommunitiesInNIR                = ""
+  var vXAvailableOutsideInNI            = false
   var vXGiveLocationPreference: Boolean = true
-  var vXMaxLocations: String            = "3"
-  var vXOtherLocations: Seq[String]     = List("London", "Southampton", "Manchester")
+  var vXMaxLocations: String            = ""
+  var vXOtherLocations                  = new ListBuffer[String]()
 
-  //vx vacancy management section
+  //vx VACANCY management section
   var vXGreatForVeterans: Boolean = true
   var vXGrsVacancy: Boolean       = true
 
-  //vx vacancy success profiles section
+  //vx VACANCY success profiles section
   var vXAbilitiesRequired: Boolean   = true
   var vXBehavioursRequired: Boolean  = true
   var vXExperiencesRequired: Boolean = true
   var vXStrengthsRequired: Boolean   = true
   var vXTechSkillsRequired: Boolean  = true
 
-  //vx vacancy technical skills section
+  //vx VACANCY technical skills section
   var vXHowManySkills: Int                              = 8
   var vXListOfTechSkills: ListBuffer[String]            = ListBuffer(
     "Autotest - technical skills 1",
@@ -119,22 +140,22 @@ object MasterVacancyDetails extends VacancyBasePage {
     "Service Focussed"
   )
 
-  //vx vacancy tests section
+  //vx VACANCY tests section
   var vXAnyOnlineTests = false
 
+  //vx PEC FORM checks
+  var vXRtwChecks: List[String] =
+    List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates")
+  var vXWhenRtwChecks           = "Before pre employment checks"
 
-  //vx pec form checks
-  var vXRtwChecks: List[String] = List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates")
-  var vXWhenRtwChecks = "Before pre employment checks"
-
-  //candidate details
+  //v9 candidate details
   var randomFirstName: String    = ""
   var randomLastName: String     = ""
   var preferredFirstName: String = ""
   var randomEmail: String        = ""
   var randomJobPosition: String  = ""
 
-  //v9 short form technical skills
+  //v9 SHORT FORM technical skills
   val sortedListOfTechSkills: Seq[String]            = List(
     "Autotest - technical skills 1",
     "Autotest - technical skills 2",
@@ -156,18 +177,18 @@ object MasterVacancyDetails extends VacancyBasePage {
     "Autotest - technical skills 8 description"
   )
 
-  //v9 short form eligibility page
+  //v9 SHORT FORM eligibility page
   var civilServant: Boolean  = true
   var homeDepartment: String = "Attorney General's Office"
 
-  //v9 short form personal info page
-  var v9ReasonableAdjustments = true
-  var v9AdjustmentsForTests   = true
+  //v9 SHORT FORM personal info page
+  var v9ReasonableAdjustments = false
+  var v9AdjustmentsForTests   = false
 
-  //v9 applications page
+  //v9 SHORT FORM applications page
   var applicationId: String = ""
 
-  //v9 pec form employment history
+  //v9 PEC FORM employment history
   var v9EmployedWithin3Years   = true
   var v9FirstEmployerName      = ""
   var v9FirstEmployerFromDate  = ""
@@ -179,7 +200,7 @@ object MasterVacancyDetails extends VacancyBasePage {
   var v9ThirdEmployerFromDate  = ""
   var v9ThirdEmployerToDate    = ""
 
-  //vX calender schedule
+  //vX APPLICATION calender schedule
   var vXSlotOneStartTime  = ""
   var vXSlotOneFinishTime = ""
   var vXSlotTwoStartTime  = ""
@@ -187,18 +208,22 @@ object MasterVacancyDetails extends VacancyBasePage {
   var vXInterviewRoom     = ""
   var vXInterviewID       = ""
 
-  //vX interview schedule
-  var vXInterviewNumber: ListBuffer[String] = ListBuffer("1", "2", "3", "4")
-  var vXInterviewExpectedRounds             = "4"
+  //vX APPLICATION -interview schedule
+  var vXInterviewNumber: ListBuffer[String] = ListBuffer("")
+  var vXInterviewExpectedRounds             = ""
+  var vXInterviewOneType                    = ""
+  var vXInterviewTwoType                    = ""
+  var vXInterviewThreeType                  = ""
+  var vXInterviewFourType                   = ""
   var vXInterviewDate                       = ""
   var vXInterviewLongDate                   = ""
   var vXInterviewShortDate                  = ""
   var vXInterviewLocation                   = ""
   var vXInterviewScheduleTitle              = ""
   var vXInstructionsForCandidates           = ""
-  var vXInterviewOneType                    = "Telephone"
-  var vXInterviewTwoType                    = "Assessment"
-  var vXInterviewThreeType                  = "Video"
-  var vXInterviewFourType                   = "Interview"
+  var vXInterviewOneOutcome                 = ""
+  var vXInterviewTwoOutcome                 = ""
+  var vXInterviewThreeOutcome               = ""
+  var vXInterviewFourOutcome                = ""
 
 }
