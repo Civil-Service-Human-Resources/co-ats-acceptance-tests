@@ -2,7 +2,7 @@ package uk.gov.co.test.ui.pages.v9.longform
 
 import org.scalatest.concurrent.Eventually.eventually
 import uk.gov.co.test.ui.data.v9.longform.LongFormDetails
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXGuidanceText, vXStatementWordLimit}
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXExperiencesRequired, vXGuidanceText, vXStatementWordLimit}
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
 import uk.gov.co.test.ui.pages.v9.longform.DiversityMonitoringPage.longFormId
 
@@ -44,12 +44,13 @@ object PersonalStatementPage extends CivilServiceJobsBasePage {
     selectDetailsRemoved
   )
 
-  def personalStatementPage(longFormDetails: LongFormDetails): Unit = {
-    personalStatementPageCheck()
-    confirmGuidanceText()
-    statement.foreach { f =>
-      f(longFormDetails.statementDetails)
+  def personalStatementPage(longFormDetails: LongFormDetails): Unit =
+    if (vXExperiencesRequired) {
+      personalStatementPageCheck()
+      confirmGuidanceText()
+      statement.foreach { f =>
+        f(longFormDetails.statementDetails)
+      }
+      clickOn(pageContinue)
     }
-    clickOn(pageContinue)
-  }
 }

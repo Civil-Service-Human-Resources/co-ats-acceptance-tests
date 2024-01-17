@@ -167,7 +167,7 @@ object OrderTestsSections extends VacancyBasePage {
     val groupBOrder = vacancyTestsDetails.groupBTests.map(_.order).get
     val groupCOrder = vacancyTestsDetails.groupCTests.map(_.order).get
     val order       = vacancyTestsDetails.groupBTests.map(_.order).get
-    if ((groupBOrder != groupCOrder) && (groupBOrder != groupAOrder)) {
+    if (((groupBOrder != groupCOrder) && (groupBOrder != groupAOrder)) || (groupBOrder == groupCOrder)) {
       waitForVisibilityOfElementById(groupBTestsId).click()
       selectActionLocator(order)
     } else { throw new IllegalStateException("Group tests need to have unique order option!") }

@@ -29,33 +29,40 @@ object SuccessProfilesSection extends VacancyBasePage {
   def experienceId      = s"${vacancyFormId}_datafield_154245_1_1_12687"
   def strengthsId       = s"${vacancyFormId}_datafield_154245_1_1_12689"
   def technicalSkillsId = s"${vacancyFormId}_datafield_154245_1_1_12688"
+  private lazy val checkLabelPath          = ".//input[@checked='checked']"
+
+  private def checkboxCheck(successRequired: Boolean, checkId: String): Unit = {
+    if (!successRequired && waitForVisibilityOfElementById(checkId).isSelected) {
+      waitForVisibilityOfElementById(checkId).click()
+    }
+  }
 
   private def whichSuccessProfiles(successProfilesDetails: SuccessProfilesDetails): Unit = {
     if (successProfilesDetails.abilities) {
       vXAbilitiesRequired = successProfilesDetails.abilities
       checkbox(abilitiesId).select()
       selectAbilitiesProfile(successProfilesDetails)
-    }
+    } else checkboxCheck(vXAbilitiesRequired, abilitiesId)
     if (successProfilesDetails.behaviours) {
       vXBehavioursRequired = successProfilesDetails.behaviours
       checkbox(behavioursId).select()
       selectBehavioursProfiles(successProfilesDetails)
-    }
+    } else checkboxCheck(vXBehavioursRequired, behavioursId)
     if (successProfilesDetails.experience) {
       vXExperiencesRequired = successProfilesDetails.experience
       checkbox(experienceId).select()
       selectExperiencesRequired(successProfilesDetails)
-    }
+    } else checkboxCheck(vXExperiencesRequired, experienceId)
     if (successProfilesDetails.strengths) {
       vXStrengthsRequired = successProfilesDetails.strengths
       checkbox(strengthsId).select()
       selectStrengthsAssessed(successProfilesDetails)
-    }
+    } else checkboxCheck(vXStrengthsRequired, strengthsId)
     if (successProfilesDetails.technicalSkills) {
       vXTechSkillsRequired = successProfilesDetails.technicalSkills
       checkbox(technicalSkillsId).select()
       selectTechnicalSkills(successProfilesDetails)
-    }
+    } else checkboxCheck(vXTechSkillsRequired, technicalSkillsId)
   }
 
   private val successProfiles: Seq[SuccessProfilesDetails => Unit] = Seq(

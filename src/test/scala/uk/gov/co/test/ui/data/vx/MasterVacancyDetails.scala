@@ -96,11 +96,11 @@ object MasterVacancyDetails extends VacancyBasePage {
   var vXGrsVacancy: Boolean       = true
 
   //vx VACANCY success profiles section
-  var vXAbilitiesRequired: Boolean   = true
-  var vXBehavioursRequired: Boolean  = true
-  var vXExperiencesRequired: Boolean = true
-  var vXStrengthsRequired: Boolean   = true
-  var vXTechSkillsRequired: Boolean  = true
+  var vXAbilitiesRequired: Boolean   = false
+  var vXBehavioursRequired: Boolean  = false
+  var vXExperiencesRequired: Boolean = false
+  var vXStrengthsRequired: Boolean   = false
+  var vXTechSkillsRequired: Boolean  = false
 
   //vx VACANCY technical skills section
   var vXHowManySkills: Int                              = 8
