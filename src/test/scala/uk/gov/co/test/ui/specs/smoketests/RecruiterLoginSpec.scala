@@ -24,11 +24,11 @@ class RecruiterLoginSpec extends BaseFeatureSpec {
     }
 
     Scenario("VX: A Recruiter Extracts All Vacancy Details", RunInVX) {
-      extractAllVacancyDetails("9579")
+      extractAllVacancyDetails(vacancyId)
     }
 
     Scenario("VX: A Recruiter Untags Vacancy Details", RunInVX) {
-      untagVacancies("9579")
+      untagVacancies(vacancyId)
     }
   }
 }

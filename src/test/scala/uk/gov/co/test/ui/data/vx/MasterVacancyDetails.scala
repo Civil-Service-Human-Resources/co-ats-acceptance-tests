@@ -25,7 +25,7 @@ object MasterVacancyDetails extends VacancyBasePage {
 
   //vx VACANCY basicDetails section
   var vacancyName                       = ""
-  var vacancyId                         = ""
+  var vacancyId                         = "9592"
   var vXApplicationLiveDate: String     = ""
   var vXApplicationLiveTime: String     = ""
   var vXApplicationClosingDate: String  = ""

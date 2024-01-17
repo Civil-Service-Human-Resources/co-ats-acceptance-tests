@@ -40,7 +40,7 @@ object MASTER_JOB_INFORMATION
     extends JobInfoDetails(
       true,
       "HM Revenue and Customs",
-      "HMRC - Borders and Trade - Border Change Delivery",
+      "HMRC - CCG - Strategy",
       true,
       "Prawf awtomeiddio",
       "Autotest - Business area detail",

@@ -4,6 +4,7 @@ import uk.gov.co.test.ui.data.TestData.setPecTestData
 import uk.gov.co.test.ui.data.v9.applicants.{MASTER_REGISTER_CANDIDATE, REGISTER_CANDIDATE_PEC}
 import uk.gov.co.test.ui.data.v9.longform.MASTER_LONG_FORM_DATA
 import uk.gov.co.test.ui.data.v9.shortform.MASTER_SHORT_FORM_DATA
+import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.vacancyId
 import uk.gov.co.test.ui.data.vx._
 import uk.gov.co.test.ui.flows.e2e.FullPecFlow.completeFullPecFlow
 import uk.gov.co.test.ui.flows.e2e.PecFlow.completePecFlow
@@ -42,7 +43,7 @@ class CreateVacancySpec extends BaseFeatureSpec {
 
     Scenario("VX: A Candidate Applies And Completes The PEC Form; Full Application Process", RunInVX) {
       Given("candidate registers for new job application")
-      extractAllVacancyDetails("9579")
+      extractAllVacancyDetails(vacancyId)
       fillNewCandidateDetails(REGISTER_CANDIDATE_PEC)
 
       When("candidate completes the gors short, long & pec forms")

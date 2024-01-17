@@ -1,7 +1,6 @@
 package uk.gov.co.test.ui.specs
 
 import uk.gov.co.test.ui.data.v9.applicants._
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.vacancyId
 import uk.gov.co.test.ui.flows.e2e.ReserveListFlow.reserveListFlow
 import uk.gov.co.test.ui.flows.v9.RegisterCandidateFlow.fillNewCandidateDetails
 import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.reserveExpiryList
@@ -12,8 +11,6 @@ import uk.gov.co.test.ui.tags.RunInVX
 
 class ReserveListSpec extends BaseFeatureSpec {
   Feature("Recruiter Checks The Reserve List For Rejected Status") {
-    vacancyId = "9579"
-
     Scenario("VX: Recruiter Checks 3 Months Reserve List", RunInVX) {
       Given("a recruiter changes the reserve list to 3 months for a vacancy")
       changeReserveListDetails("3 Months")

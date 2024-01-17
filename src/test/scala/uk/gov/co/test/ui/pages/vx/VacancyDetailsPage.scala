@@ -182,7 +182,7 @@ object VacancyDetailsPage extends VacancyBasePage {
 
   private def extractReserveLength(): Unit =
     if (vXReserveListRequired) {
-      vXReserveListLength = waitForVisibilityOfElementById(reserveListLengthId).getText
+      vXReserveListLength = waitForVisibilityOfElementById(reserveListLengthId).getAttribute("title")
       println(vXReserveListLength)
     }
 
@@ -201,7 +201,7 @@ object VacancyDetailsPage extends VacancyBasePage {
   }
 
   private def extractReserveExtendLength(): Unit = {
-    vXReserveExtendLength = waitForVisibilityOfElementById(reserveExtendLengthId).getText
+    vXReserveExtendLength = waitForVisibilityOfElementById(reserveExtendLengthId).getAttribute("title")
     println(vXReserveExtendLength)
   }
 
