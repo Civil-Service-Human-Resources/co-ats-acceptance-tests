@@ -4,6 +4,7 @@ import org.openqa.selenium.By
 import org.scalatest.concurrent.Eventually.eventually
 import uk.gov.co.test.ui.data.MasterVacancyDetails.vacancyName
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
+import uk.gov.co.test.ui.pages.vx.VacancyDetailsPage.extractVacancySummary
 
 object SummaryTab extends VacancyBasePage {
 
@@ -48,6 +49,7 @@ object SummaryTab extends VacancyBasePage {
   def confirmAndActivateVacancy(): Unit = {
     eventually(onPage(newVacancyPageTitle()))
     setVacancyToActive()
+    extractVacancySummary()
   }
 
   def confirmFormEdit(): String = {

@@ -77,7 +77,8 @@ object CSJT_RESERVE_LIST
     extends ReserveListDetails(
       true,
       "12 Months",
-      false
+      false,
+      "6 Months"
     )
 
 object CSJT_LOCATIONS

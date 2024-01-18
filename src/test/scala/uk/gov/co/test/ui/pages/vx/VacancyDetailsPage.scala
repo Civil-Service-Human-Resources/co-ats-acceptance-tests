@@ -82,7 +82,7 @@ object VacancyDetailsPage extends VacancyBasePage {
     println(vacancyName)
   }
 
-  private def extractVacancySummary(): Unit =
+  def extractVacancySummary(): Unit =
     if (vacancyActive() == "Set to TRUE") {
       val liveDate    = waitForVisibilityOfElementById(vacancyLiveDateId).getText.replaceAll(""" at.*""", "")
       val closingDate = waitForVisibilityOfElementById(vacancyClosingDateId).getText.replaceAll(""" at.*""", "")

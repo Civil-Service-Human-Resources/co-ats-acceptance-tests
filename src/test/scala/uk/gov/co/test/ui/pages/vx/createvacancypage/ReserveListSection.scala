@@ -9,7 +9,8 @@ import uk.gov.co.test.ui.pages.vx.VacancyDetailsPage.{extractAllVacancyDetails, 
 case class ReserveListDetails(
   reserveList: Boolean,
   reserveListLength: String,
-  approvalToExtend: Boolean
+  approvalToExtend: Boolean,
+  extendLength: String
 )
 
 object ReserveListSection extends VacancyBasePage {
@@ -24,10 +25,12 @@ object ReserveListSection extends VacancyBasePage {
 
   def selectReserveList(reserveListDetails: ReserveListDetails): Unit = {
     scrollToElement(By.id(reserveListId))
-    if (reserveListDetails.reserveList) {
+    vXReserveListRequired = reserveListDetails.reserveList
+    if (vXReserveListRequired) {
       clickOnRadioButton(reserveListYesId)
-      lengthOfReserveList(reserveListDetails.reserveListLength)
-      if (reserveListDetails.reserveListLength == "12 Months") {
+      vXReserveListLength = reserveListDetails.reserveListLength
+      lengthOfReserveList(vXReserveListLength)
+      if (vXReserveListLength == "12 Months") {
         selectApprovalToExtend(reserveListDetails)
       }
     } else {
@@ -35,14 +38,25 @@ object ReserveListSection extends VacancyBasePage {
     }
   }
 
-  def selectApprovalToExtend(reserveListDetails: ReserveListDetails): Unit =
-    if (reserveListDetails.approvalToExtend) clickOnRadioButton(approvalToExtendYesId)
-    else clickOnRadioButton(approvalToExtendNoId)
+  def selectApprovalToExtend(reserveListDetails: ReserveListDetails): Unit = {
+    vXReserveExtendRequired = reserveListDetails.approvalToExtend
+    if (vXReserveExtendRequired) {
+      clickOnRadioButton(approvalToExtendYesId)
+      vXReserveExtendLength = reserveListDetails.extendLength
+      extendLengthOfReserveList(vXReserveExtendLength)
+    } else clickOnRadioButton(approvalToExtendNoId)
+  }
 
   def lengthOfReserveList(length: String): Unit = {
     waitForVisibilityOfElementById(reserveListLengthId).click()
     action().moveToElement(waitForDropdownOption(length)).perform()
     waitForDropdownOption(length).click()
+  }
+
+  def extendLengthOfReserveList(extendLength: String): Unit = {
+    waitForVisibilityOfElementById(extendLengthId).click()
+    action().moveToElement(waitForDropdownOption(extendLength)).perform()
+    waitForDropdownOption(extendLength).click()
   }
 
   private val reserve: Seq[ReserveListDetails => Unit] = Seq(
@@ -53,20 +67,6 @@ object ReserveListSection extends VacancyBasePage {
     reserve.foreach { f =>
       f(newVacancyDetails.reserveListDetails)
     }
-
-  def totalReserveExpiryLength(): Unit = {
-    val baseReserveLength = vXReserveListLength.replaceAll("[A-Za-z ]", "").filterNot(_.isWhitespace).toInt
-    if (vXReserveExtendRequired) {
-      val reserveExtendLength = vXReserveExtendLength.replaceAll("[A-Za-z ]", "").filterNot(_.isWhitespace).toInt
-      val totalLength         = baseReserveLength + reserveExtendLength
-      vXReserveListTotalLength = s"${totalLength.toString} Months"
-    } else vXReserveListTotalLength = s"${baseReserveLength.toString} Months"
-    println(s"1. The length required is: $vXReserveListRequired")
-    println(s"2. The list length is: $vXReserveListLength")
-    println(s"3. The extend length required is: $vXReserveExtendRequired")
-    println(s"4. The extend length is: $vXReserveExtendLength")
-    println(s"5. The total length is: $vXReserveListTotalLength")
-  }
 
   def changeReserveListDetails(
     reserveLength: String,
@@ -93,5 +93,19 @@ object ReserveListSection extends VacancyBasePage {
     }
     extractAllVacancyDetails(vacancyId)
     totalReserveExpiryLength()
+  }
+
+  def totalReserveExpiryLength(): Unit = {
+    val baseReserveLength = vXReserveListLength.replaceAll("[A-Za-z ]", "").filterNot(_.isWhitespace).toInt
+    if (vXReserveExtendRequired) {
+      val reserveExtendLength = vXReserveExtendLength.replaceAll("[A-Za-z ]", "").filterNot(_.isWhitespace).toInt
+      val totalLength         = baseReserveLength + reserveExtendLength
+      vXReserveListTotalLength = s"${totalLength.toString} Months"
+    } else vXReserveListTotalLength = s"${baseReserveLength.toString} Months"
+    println(s"1. The length required is: $vXReserveListRequired")
+    println(s"2. The list length is: $vXReserveListLength")
+    println(s"3. The extend length required is: $vXReserveExtendRequired")
+    println(s"4. The extend length is: $vXReserveExtendLength")
+    println(s"5. The total length is: $vXReserveListTotalLength")
   }
 }

@@ -14,7 +14,7 @@ import uk.gov.co.test.ui.tags.RunInVX
 
 class ReserveListSpec extends BaseFeatureSpec {
   Feature("Recruiter Checks The Reserve List For Rejected Status") {
-    Scenario("VX: Recruiter Checks 3 Months Reserve List", RunInVX) {
+    Scenario("VX: Recruiter Checks 6 Months Reserve List", RunInVX) {
       Given("a recruiter changes the reserve list to 6 months for a vacancy")
       fillNewVacancyForm(RESERVE_VACANCY_DATA)
 //      vacancyId = "9615"

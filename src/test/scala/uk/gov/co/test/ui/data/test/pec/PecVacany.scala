@@ -72,7 +72,8 @@ object PEC_RESERVE_LIST
     extends ReserveListDetails(
       false,
       "12 Months",
-      false
+      false,
+      "6 Months"
     )
 
 object PEC_LOCATIONS

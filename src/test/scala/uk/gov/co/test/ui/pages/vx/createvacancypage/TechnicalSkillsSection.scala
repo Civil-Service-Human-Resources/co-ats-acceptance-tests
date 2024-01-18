@@ -46,7 +46,7 @@ object TechnicalSkillsSection extends VacancyBasePage {
   def applicationSixId             = s"${vacancyFormId}_datafield_65059_1_1_12683"
   def applicationSevenId           = s"${vacancyFormId}_datafield_65063_1_1_12683"
   def applicationEightId           = s"${vacancyFormId}_datafield_65067_1_1_12683"
-  def interviewOneId               = s"${vacancyFormId}_datafield_65039_1_1_12683"
+  def interviewOneId               = s"${vacancyFormId}_datafield_65039_1_1_12684"
   def interviewTwoId               = s"${vacancyFormId}_datafield_65043_1_1_12684"
   def interviewThreeId             = s"${vacancyFormId}_datafield_65047_1_1_12684"
   def interviewFourId              = s"${vacancyFormId}_datafield_65051_1_1_12684"

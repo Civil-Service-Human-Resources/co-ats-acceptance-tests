@@ -76,7 +76,8 @@ object MASTER_RESERVE_LIST
     extends ReserveListDetails(
       true,
       "12 Months",
-      false
+      false,
+      "6 Months"
     )
 
 object MASTER_LOCATIONS

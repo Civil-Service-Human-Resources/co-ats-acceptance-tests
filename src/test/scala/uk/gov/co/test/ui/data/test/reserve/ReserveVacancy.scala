@@ -77,7 +77,8 @@ object RESERVE_RESERVE_LIST
     extends ReserveListDetails(
       true,
       "6 Months",
-      false
+      false,
+      "6 Months"
     )
 
 object RESERVE_LOCATIONS
