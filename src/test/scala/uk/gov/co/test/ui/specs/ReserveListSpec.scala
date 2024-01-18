@@ -1,8 +1,10 @@
 package uk.gov.co.test.ui.specs
 
+import uk.gov.co.test.ui.data.reserve.RESERVE_VACANCY_DATA
 import uk.gov.co.test.ui.data.v9.applicants._
 import uk.gov.co.test.ui.flows.e2e.ReserveListFlow.reserveListFlow
 import uk.gov.co.test.ui.flows.v9.RegisterCandidateFlow.fillNewCandidateDetails
+import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.fillNewVacancyForm
 import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.reserveExpiryList
 import uk.gov.co.test.ui.pages.vx.createvacancypage.ReserveListSection.changeReserveListDetails
 import uk.gov.co.test.ui.pages.vx.vacancytabs.ExternalPostingsTab.repostExternalPosting
@@ -13,8 +15,7 @@ class ReserveListSpec extends BaseFeatureSpec {
   Feature("Recruiter Checks The Reserve List For Rejected Status") {
     Scenario("VX: Recruiter Checks 3 Months Reserve List", RunInVX) {
       Given("a recruiter changes the reserve list to 3 months for a vacancy")
-      changeReserveListDetails("3 Months")
-      repostExternalPosting()
+      fillNewVacancyForm(RESERVE_VACANCY_DATA)
 
       When("candidate applies and is held in a reserve list position")
       fillNewCandidateDetails(MASTER_REGISTER_CANDIDATE_3_MONTHS)

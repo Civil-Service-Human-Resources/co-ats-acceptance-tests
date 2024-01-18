@@ -59,7 +59,7 @@ trait CivilServiceJobsBasePage extends Matchers with BasePage with BrowserDriver
 
   def generateRandomJobPosition(): String = {
     val fake = new Faker()
-    randomJobPosition = s"${fake.job().field()} ${fake.job().position()}"
+    randomJobPosition = s"${fake.job().title()} ${fake.job().position()}"
     randomJobPosition
   }
 

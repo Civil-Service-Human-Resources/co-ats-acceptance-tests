@@ -1,5 +1,6 @@
-package uk.gov.co.test.ui.data.vx
+package uk.gov.co.test.ui.data.reserve
 
+import uk.gov.co.test.ui.data.vx.{ApplicationDetails, AssessmentOutcome, Outcome}
 import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.contactEmailVxConfig
 import uk.gov.co.test.ui.pages.vx.vacancytabs._
 import uk.gov.co.test.ui.pages.vx.{CalenderScheduleDetails, InterviewScheduleDetails}
