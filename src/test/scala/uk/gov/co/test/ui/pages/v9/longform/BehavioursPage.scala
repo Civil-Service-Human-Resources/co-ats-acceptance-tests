@@ -3,7 +3,7 @@ package uk.gov.co.test.ui.pages.v9.longform
 import org.openqa.selenium.By
 import org.scalatest.concurrent.Eventually.eventually
 import uk.gov.co.test.ui.data.v9.longform.LongFormDetails
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXBehavioursRequired, vXHowManyBehaviours, vXListOfChosenBehaviours}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXBehavioursRequired, vXHowManyBehaviours, vXListOfChosenBehaviours}
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
 import uk.gov.co.test.ui.pages.v9.longform.DiversityMonitoringPage.longFormId
 

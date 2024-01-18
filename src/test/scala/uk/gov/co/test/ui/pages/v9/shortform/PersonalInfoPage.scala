@@ -3,7 +3,7 @@ package uk.gov.co.test.ui.pages.v9.shortform
 import org.openqa.selenium.By
 import org.scalatest.concurrent.Eventually.eventually
 import uk.gov.co.test.ui.data.v9.shortform.ShortFormDetails
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{civilServant, preferredFirstName, randomEmail, randomFirstName, randomLastName, v9AdjustmentsForTests, v9ReasonableAdjustments, vXAnyOnlineTests, vXGreatForVeterans}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{civilServant, preferredFirstName, randomEmail, randomFirstName, randomLastName, v9AdjustmentsForTests, v9ReasonableAdjustments, vXAnyOnlineTests, vXGreatForVeterans}
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
 import uk.gov.co.test.ui.pages.v9.shortform.ApplicationGuidancePage.shortFormId
 

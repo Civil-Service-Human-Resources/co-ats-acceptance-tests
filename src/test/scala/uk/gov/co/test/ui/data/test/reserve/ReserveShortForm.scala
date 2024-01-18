@@ -1,4 +1,4 @@
-package uk.gov.co.test.ui.data.reserve
+package uk.gov.co.test.ui.data.test.reserve
 
 import uk.gov.co.test.ui.data.v9.shortform.ShortFormDetails
 import uk.gov.co.test.ui.pages.v9.shortform._

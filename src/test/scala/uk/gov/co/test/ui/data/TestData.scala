@@ -1,6 +1,6 @@
 package uk.gov.co.test.ui.data
 
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXAnyAdditionalQuestions, vXAnyOnlineTests, vXAttendancePoor, vXGiveLocationPreference, vXGreatForVeterans, vXGrsVacancy, vXLanguagesMandatory, vXLicencesMandatory, vXMembershipsMandatory, vXMisconductLive, vXNoOfApplicationStage, vXPerformanceReview, vXProbationIncomplete, vXPromotionApply, vXQualificationsMandatory, vXRightToRemainUK, vXStatementWordLimit, vXUploadAttachmentRequired, vXVacanciesInNIR, vacancyId, vacancyName}
+import MasterVacancyDetails.{vXAnyAdditionalQuestions, vXAnyOnlineTests, vXAttendancePoor, vXGiveLocationPreference, vXGreatForVeterans, vXGrsVacancy, vXLanguagesMandatory, vXLicencesMandatory, vXMembershipsMandatory, vXMisconductLive, vXNoOfApplicationStage, vXPerformanceReview, vXProbationIncomplete, vXPromotionApply, vXQualificationsMandatory, vXRightToRemainUK, vXStatementWordLimit, vXUploadAttachmentRequired, vXVacanciesInNIR, vacancyId, vacancyName}
 import uk.gov.co.test.ui.specs.BaseFeatureSpec
 
 object TestData extends BaseFeatureSpec {

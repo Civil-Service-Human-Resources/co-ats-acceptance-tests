@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.pages.vx.createvacancypage
 
 import org.openqa.selenium.By
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXHowManyBehaviours, vXListOfChosenBehaviours, vacancyFormId}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXHowManyBehaviours, vXListOfChosenBehaviours, vacancyFormId}
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 
 case class Behaviours(chosenBehaviour: String, stageApplication: Boolean, stageInterview: Boolean)

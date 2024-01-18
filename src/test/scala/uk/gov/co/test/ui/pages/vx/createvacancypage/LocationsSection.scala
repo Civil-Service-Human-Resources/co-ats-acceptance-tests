@@ -1,12 +1,11 @@
 package uk.gov.co.test.ui.pages.vx.createvacancypage
 
 import org.openqa.selenium.{By, WebElement}
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXCommunitiesInNIR, vXGiveLocationPreference, vXMaxLocations, vXOtherLocations, vXVacanciesInNIR, vacancyFormId}
-import uk.gov.co.test.ui.data.vx.NewVacancyDetails
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXAvailableOutsideInNI, vXCommunitiesInNIR, vXGiveLocationPreference, vXLocationType, vXMaxLocations, vXOtherLocations, vXVacanciesInNIR, vacancyFormId}
+import uk.gov.co.test.ui.data.vx.vacancy.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 
 import scala.collection.mutable.ListBuffer
-import scala.jdk.CollectionConverters._
 
 case class LocationsDetails(
   locationType: String,
@@ -57,12 +56,14 @@ object LocationsSection extends VacancyBasePage {
     }
   }
 
-  def selectVacancyOutsideNIR(locationsDetails: LocationsDetails): Unit =
-    if (locationsDetails.openOutsideNIR) {
+  def selectVacancyOutsideNIR(locationsDetails: LocationsDetails): Unit = {
+    vXAvailableOutsideInNI = locationsDetails.openOutsideNIR
+    if (vXAvailableOutsideInNI) {
       clickOnRadioButton(outsideNIRYesId)
     } else {
       clickOnRadioButton(outsideNIRNoId)
     }
+  }
 
   def selectWhichCommunity(locationsDetails: LocationsDetails): Unit = {
     vXCommunitiesInNIR = locationsDetails.whichCommunityEncouraged
@@ -138,8 +139,9 @@ object LocationsSection extends VacancyBasePage {
 
   def selectLocationType(locationsDetails: LocationsDetails): Unit = {
     scrollToElement(By.id(locationTypeId))
-    locationType(locationsDetails.locationType)
-    locationsDetails.locationType match {
+    vXLocationType = locationsDetails.locationType
+    locationType(vXLocationType)
+    vXLocationType match {
       case "Postcodes" => enterPostcodes(locationsDetails.postcodes)
       case "Towns"     => selectCityOrTown(locationsDetails.cityOrTown)
       case "Regions"   => selectRegion(locationsDetails.region)

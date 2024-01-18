@@ -2,7 +2,7 @@ package uk.gov.co.test.ui.pages.vx.vacancytabs
 
 import org.openqa.selenium.By
 import org.scalatest.concurrent.Eventually.eventually
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.vacancyName
+import uk.gov.co.test.ui.data.MasterVacancyDetails.vacancyName
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 
 object SummaryTab extends VacancyBasePage {

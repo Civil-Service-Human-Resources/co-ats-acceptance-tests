@@ -1,66 +1,45 @@
 package uk.gov.co.test.ui.pages.vx.createvacancypage
 
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXInterviewExpectedRounds, vXInterviewFourType, vXInterviewNumber, vXInterviewOneType, vXInterviewThreeType, vXInterviewTwoType, vacancyFormId}
-import uk.gov.co.test.ui.data.vx.NewVacancyDetails
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXInterviewExpectedRounds, vXInterviewFourType, vXInterviewNumber, vXInterviewOneType, vXInterviewThreeType, vXInterviewTwoType, vacancyFormId}
+import uk.gov.co.test.ui.data.vx.vacancy.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 
 import scala.collection.mutable.ListBuffer
 
-case class InterviewsDetails(expectedRounds: String,
-                             interviewOneType: String,
-                             interviewTwoType: String,
-                             interviewThreeType: String,
-                             interviewFourType: String,
-                             availableOffline: Boolean
-                            )
+case class InterviewsDetails(
+  expectedRounds: String,
+  interviewOneType: String,
+  interviewTwoType: String,
+  interviewThreeType: String,
+  interviewFourType: String,
+  availableOffline: Boolean
+)
 
 object InterviewsSection extends VacancyBasePage {
 
-  def noInterviewsId = s"${vacancyFormId}_datafield_91703_1_1_15327"
-
-  def oneInterviewId = s"${vacancyFormId}_datafield_91703_1_1_15328"
-
-  def twoInterviewId = s"${vacancyFormId}_datafield_91703_1_1_15329"
-
-  def threeInterviewId = s"${vacancyFormId}_datafield_91703_1_1_15330"
-
-  def fourInterviewId = s"${vacancyFormId}_datafield_91703_1_1_15331"
-
+  def noInterviewsId        = s"${vacancyFormId}_datafield_91703_1_1_15327"
+  def oneInterviewId        = s"${vacancyFormId}_datafield_91703_1_1_15328"
+  def twoInterviewId        = s"${vacancyFormId}_datafield_91703_1_1_15329"
+  def threeInterviewId      = s"${vacancyFormId}_datafield_91703_1_1_15330"
+  def fourInterviewId       = s"${vacancyFormId}_datafield_91703_1_1_15331"
   def availableOfflineYesId = s"${vacancyFormId}_datafield_125052_1_1_1"
-
-  def availableOfflineNoId = s"${vacancyFormId}_datafield_125052_1_1_2"
-
-  def assessmentOneId = s"${vacancyFormId}_datafield_125056_1_1_17756"
-
-  def interviewOneId = s"${vacancyFormId}_datafield_125056_1_1_17753"
-
-  def telephoneOneId = s"${vacancyFormId}_datafield_125056_1_1_17755"
-
-  def videoOneId = s"${vacancyFormId}_datafield_125056_1_1_17754"
-
-  def assessmentTwoId = s"${vacancyFormId}_datafield_125060_1_1_17756"
-
-  def interviewTwoId = s"${vacancyFormId}_datafield_125060_1_1_17753"
-
-  def telephoneTwoId = s"${vacancyFormId}_datafield_125060_1_1_17755"
-
-  def videoTwoId = s"${vacancyFormId}_datafield_125060_1_1_17754"
-
-  def assessmentThreeId = s"${vacancyFormId}_datafield_125063_1_1_17756"
-
-  def interviewThreeId = s"${vacancyFormId}_datafield_125063_1_1_17753"
-
-  def telephoneThreeId = s"${vacancyFormId}_datafield_125063_1_1_17755"
-
-  def videoThreeId = s"${vacancyFormId}_datafield_125063_1_1_17754"
-
-  def assessmentFourId = s"${vacancyFormId}_datafield_125066_1_1_17756"
-
-  def interviewFourId = s"${vacancyFormId}_datafield_125066_1_1_17753"
-
-  def telephoneFourId = s"${vacancyFormId}_datafield_125066_1_1_17755"
-
-  def videoFourId = s"${vacancyFormId}_datafield_125066_1_1_17754"
+  def availableOfflineNoId  = s"${vacancyFormId}_datafield_125052_1_1_2"
+  def assessmentOneId       = s"${vacancyFormId}_datafield_125056_1_1_17756"
+  def interviewOneId        = s"${vacancyFormId}_datafield_125056_1_1_17753"
+  def telephoneOneId        = s"${vacancyFormId}_datafield_125056_1_1_17755"
+  def videoOneId            = s"${vacancyFormId}_datafield_125056_1_1_17754"
+  def assessmentTwoId       = s"${vacancyFormId}_datafield_125060_1_1_17756"
+  def interviewTwoId        = s"${vacancyFormId}_datafield_125060_1_1_17753"
+  def telephoneTwoId        = s"${vacancyFormId}_datafield_125060_1_1_17755"
+  def videoTwoId            = s"${vacancyFormId}_datafield_125060_1_1_17754"
+  def assessmentThreeId     = s"${vacancyFormId}_datafield_125063_1_1_17756"
+  def interviewThreeId      = s"${vacancyFormId}_datafield_125063_1_1_17753"
+  def telephoneThreeId      = s"${vacancyFormId}_datafield_125063_1_1_17755"
+  def videoThreeId          = s"${vacancyFormId}_datafield_125063_1_1_17754"
+  def assessmentFourId      = s"${vacancyFormId}_datafield_125066_1_1_17756"
+  def interviewFourId       = s"${vacancyFormId}_datafield_125066_1_1_17753"
+  def telephoneFourId       = s"${vacancyFormId}_datafield_125066_1_1_17755"
+  def videoFourId           = s"${vacancyFormId}_datafield_125066_1_1_17754"
 
   def interviewsSection(newVacancyDetails: NewVacancyDetails): Unit = {
     val interviews = newVacancyDetails.interviewsDetails
@@ -91,9 +70,9 @@ object InterviewsSection extends VacancyBasePage {
     vXInterviewOneType = interviewsDetails.interviewOneType
     vXInterviewOneType match {
       case "Assessment" => clickOnRadioButton(assessmentOneId)
-      case "Interview" => clickOnRadioButton(interviewOneId)
-      case "Telephone" => clickOnRadioButton(telephoneOneId)
-      case "Video" => clickOnRadioButton(videoOneId)
+      case "Interview"  => clickOnRadioButton(interviewOneId)
+      case "Telephone"  => clickOnRadioButton(telephoneOneId)
+      case "Video"      => clickOnRadioButton(videoOneId)
     }
   }
 
@@ -101,9 +80,9 @@ object InterviewsSection extends VacancyBasePage {
     vXInterviewTwoType = interviewsDetails.interviewTwoType
     vXInterviewTwoType match {
       case "Assessment" => clickOnRadioButton(assessmentTwoId)
-      case "Interview" => clickOnRadioButton(interviewTwoId)
-      case "Telephone" => clickOnRadioButton(telephoneTwoId)
-      case "Video" => clickOnRadioButton(videoTwoId)
+      case "Interview"  => clickOnRadioButton(interviewTwoId)
+      case "Telephone"  => clickOnRadioButton(telephoneTwoId)
+      case "Video"      => clickOnRadioButton(videoTwoId)
     }
   }
 
@@ -111,9 +90,9 @@ object InterviewsSection extends VacancyBasePage {
     vXInterviewThreeType = interviewsDetails.interviewThreeType
     vXInterviewThreeType match {
       case "Assessment" => clickOnRadioButton(assessmentThreeId)
-      case "Interview" => clickOnRadioButton(interviewThreeId)
-      case "Telephone" => clickOnRadioButton(telephoneThreeId)
-      case "Video" => clickOnRadioButton(videoThreeId)
+      case "Interview"  => clickOnRadioButton(interviewThreeId)
+      case "Telephone"  => clickOnRadioButton(telephoneThreeId)
+      case "Video"      => clickOnRadioButton(videoThreeId)
     }
   }
 
@@ -121,9 +100,9 @@ object InterviewsSection extends VacancyBasePage {
     vXInterviewFourType = interviewsDetails.interviewFourType
     vXInterviewFourType match {
       case "Assessment" => clickOnRadioButton(assessmentFourId)
-      case "Interview" => clickOnRadioButton(interviewFourId)
-      case "Telephone" => clickOnRadioButton(telephoneFourId)
-      case "Video" => clickOnRadioButton(videoFourId)
+      case "Interview"  => clickOnRadioButton(interviewFourId)
+      case "Telephone"  => clickOnRadioButton(telephoneFourId)
+      case "Video"      => clickOnRadioButton(videoFourId)
     }
   }
 

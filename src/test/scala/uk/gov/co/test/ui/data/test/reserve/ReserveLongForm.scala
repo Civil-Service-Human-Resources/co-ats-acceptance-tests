@@ -1,9 +1,9 @@
-package uk.gov.co.test.ui.data.reserve
+package uk.gov.co.test.ui.data.test.reserve
 
 import uk.gov.co.test.ui.data.Characters.{valid250Characters, valid500Characters}
 import uk.gov.co.test.ui.data.v9.longform.LongFormDetails
 import uk.gov.co.test.ui.pages.v9.longform._
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.vXOtherLocations
+import uk.gov.co.test.ui.data.MasterVacancyDetails.vXOtherLocations
 
 object RESERVE_LONG_FORM_DATA
     extends LongFormDetails(

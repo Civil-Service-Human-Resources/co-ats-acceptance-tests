@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.pages.v9
 
 import org.scalatest.concurrent.Eventually.eventually
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.randomEmail
+import uk.gov.co.test.ui.data.MasterVacancyDetails.randomEmail
 import uk.gov.co.test.ui.pages.v9.SearchJobsPage.navigateToSignInOrCreateAccount
 import uk.gov.co.test.ui.pages.v9.SignInPage.createAnAccount
 

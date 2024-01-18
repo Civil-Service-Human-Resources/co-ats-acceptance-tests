@@ -3,8 +3,8 @@ package uk.gov.co.test.ui.specs
 import uk.gov.co.test.ui.data.v9.applicants._
 import uk.gov.co.test.ui.data.v9.longform.MASTER_LONG_FORM_DATA
 import uk.gov.co.test.ui.data.v9.shortform.MASTER_SHORT_FORM_DATA
-import uk.gov.co.test.ui.data.vx.CSJT_VACANCY_DATA
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXAnyOnlineTests, vacancyId}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXAnyOnlineTests, vacancyId}
+import uk.gov.co.test.ui.data.test.csjt.CSJT_VACANCY_DATA
 import uk.gov.co.test.ui.flows.v9.LongFormFlow.fillLongFormDetails
 import uk.gov.co.test.ui.flows.v9.RegisterCandidateFlow.fillNewCandidateDetails
 import uk.gov.co.test.ui.flows.v9.ShortFormFlow.fillShortFormDetails

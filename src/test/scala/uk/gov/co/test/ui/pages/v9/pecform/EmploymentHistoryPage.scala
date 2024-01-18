@@ -2,7 +2,7 @@ package uk.gov.co.test.ui.pages.v9.pecform
 
 import org.scalatest.concurrent.Eventually.eventually
 import uk.gov.co.test.ui.data.v9.pecform.PecFormDetails
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{v9EmployedWithin3Years, v9FirstEmployerFromDate, v9FirstEmployerName, v9FirstEmployerToDate, v9SecondEmployerFromDate, v9SecondEmployerName, v9SecondEmployerToDate, v9ThirdEmployerFromDate, v9ThirdEmployerName, v9ThirdEmployerToDate}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{v9EmployedWithin3Years, v9FirstEmployerFromDate, v9FirstEmployerName, v9FirstEmployerToDate, v9SecondEmployerFromDate, v9SecondEmployerName, v9SecondEmployerToDate, v9ThirdEmployerFromDate, v9ThirdEmployerName, v9ThirdEmployerToDate}
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
 import uk.gov.co.test.ui.pages.v9.pecform.YourDetailsPage.pecFormId
 

@@ -1,6 +1,6 @@
 package uk.gov.co.test.ui.flows.vx
 
-import uk.gov.co.test.ui.data.vx.NewVacancyDetails
+import uk.gov.co.test.ui.data.vx.vacancy.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 import uk.gov.co.test.ui.pages.vx.createvacancypage.AdditionalQuestionsSection.additionalQuestionsSection
 import uk.gov.co.test.ui.pages.vx.createvacancypage.AdvertSection.advertSection

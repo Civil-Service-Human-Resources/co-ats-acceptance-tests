@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.specs.smoketests
 
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.vacancyId
-import uk.gov.co.test.ui.data.vx.RECRUITER
+import uk.gov.co.test.ui.data.MasterVacancyDetails.vacancyId
+import uk.gov.co.test.ui.data.vx.recruiters.RECRUITER
 import uk.gov.co.test.ui.flows.e2e.InterviewFlow.untagVacancies
 import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.vxConfigHomePageTitle
 import uk.gov.co.test.ui.flows.vx.RecruiterLoginFlow.loginWithRecruiterDetails

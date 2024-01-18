@@ -2,8 +2,7 @@ package uk.gov.co.test.ui.pages.vx
 
 import org.openqa.selenium.{By, WebElement}
 import org.scalatest.concurrent.Eventually.eventually
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXApplicationClosingDate, vXApplicationLiveDate, vXApproach, vXAvailableOutsideInNI, vXBudgetaryApproval, vXBusinessArea, vXBusinessAreaDetail, vXCommunitiesInNIR, vXCostCentre, vXGiveLocationPreference, vXInterviewExpectedRounds, vXInterviewFourType, vXInterviewNumber, vXInterviewOneType, vXInterviewThreeType, vXInterviewTwoType, vXJobInfoDepartment, vXLocationDisplay, vXLocationType, vXMaxLocations, vXNoOfJobsAvailable, vXOtherLocations, vXProfession, vXReserveExtendLength, vXReserveExtendRequired, vXReserveListLength, vXReserveListRequired, vXTypeOfRole, vXVacanciesInNIR, vacancyFormId, vacancyId, vacancyName}
-import uk.gov.co.test.ui.pages.vx.DashboardPage.{previewJobPath, searchOn}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXApplicationClosingDate, vXApplicationLiveDate, vXApproach, vXAvailableOutsideInNI, vXBudgetaryApproval, vXBusinessArea, vXBusinessAreaDetail, vXCommunitiesInNIR, vXCostCentre, vXGiveLocationPreference, vXInterviewExpectedRounds, vXInterviewFourType, vXInterviewNumber, vXInterviewOneType, vXInterviewThreeType, vXInterviewTwoType, vXJobInfoDepartment, vXLocationDisplay, vXLocationType, vXMaxLocations, vXNoOfJobsAvailable, vXOtherLocations, vXProfession, vXReserveExtendLength, vXReserveExtendRequired, vXReserveListLength, vXReserveListRequired, vXTypeOfRole, vXVacanciesInNIR, vacancyFormId, vacancyId, vacancyName}
 import uk.gov.co.test.ui.pages.vx.vacancytabs.SummaryTab.{vacancyActive, vacancyClosingDateId, vacancyLiveDateId}
 
 import scala.collection.mutable
@@ -181,12 +180,11 @@ object VacancyDetailsPage extends VacancyBasePage {
     println(vXReserveListRequired)
   }
 
-  private def extractReserveLength(): Unit = {
+  private def extractReserveLength(): Unit =
     if (vXReserveListRequired) {
       vXReserveListLength = waitForVisibilityOfElementById(reserveListLengthId).getText
       println(vXReserveListLength)
     }
-  }
 
   private def extractReserveExtendRequired(): Unit = {
     if (vXReserveListLength == "12 Months") {

@@ -1,8 +1,8 @@
 package uk.gov.co.test.ui.pages.vx.createvacancypage
 
 import org.openqa.selenium.By
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXApproach, vXGreatForVeterans, vXGrsVacancy, vacancyFormId}
-import uk.gov.co.test.ui.data.vx.NewVacancyDetails
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXApproach, vXGreatForVeterans, vXGrsVacancy, vacancyFormId}
+import uk.gov.co.test.ui.data.vx.vacancy.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 
 case class ManagementDetails(

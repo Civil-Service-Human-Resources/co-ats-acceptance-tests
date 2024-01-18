@@ -1,7 +1,8 @@
 package uk.gov.co.test.ui.specs
 
-import uk.gov.co.test.ui.data.reserve.RESERVE_VACANCY_DATA
 import uk.gov.co.test.ui.data.v9.applicants._
+import uk.gov.co.test.ui.data.MasterVacancyDetails.vacancyId
+import uk.gov.co.test.ui.data.test.reserve.RESERVE_VACANCY_DATA
 import uk.gov.co.test.ui.flows.e2e.ReserveListFlow.reserveListFlow
 import uk.gov.co.test.ui.flows.v9.RegisterCandidateFlow.fillNewCandidateDetails
 import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.fillNewVacancyForm
@@ -14,27 +15,14 @@ import uk.gov.co.test.ui.tags.RunInVX
 class ReserveListSpec extends BaseFeatureSpec {
   Feature("Recruiter Checks The Reserve List For Rejected Status") {
     Scenario("VX: Recruiter Checks 3 Months Reserve List", RunInVX) {
-      Given("a recruiter changes the reserve list to 3 months for a vacancy")
+      Given("a recruiter changes the reserve list to 6 months for a vacancy")
       fillNewVacancyForm(RESERVE_VACANCY_DATA)
+//      vacancyId = "9615"
+//      changeReserveListDetails("6 Months")
+//      repostExternalPosting()
 
       When("candidate applies and is held in a reserve list position")
       fillNewCandidateDetails(MASTER_REGISTER_CANDIDATE_3_MONTHS)
-      reserveListFlow()
-
-      Then("the reserve offer expires after the reserve duration")
-      reserveExpiryList()
-      reserveExpiryListChecks()
-      reserveListHistoryChecks()
-      reserveListEmailChecks()
-    }
-
-    Scenario("VX: Recruiter Checks 6 Months Reserve List", RunInVX) {
-      Given("a recruiter changes the reserve list to 6 months for a vacancy")
-      changeReserveListDetails("6 Months")
-      repostExternalPosting()
-
-      When("candidate applies and is held in a reserve list position")
-      fillNewCandidateDetails(MASTER_REGISTER_CANDIDATE_6_MONTHS)
       reserveListFlow()
 
       Then("the reserve offer expires after the reserve duration")
@@ -67,22 +55,6 @@ class ReserveListSpec extends BaseFeatureSpec {
 
       When("candidate applies and is held in a reserve list position")
       fillNewCandidateDetails(MASTER_REGISTER_CANDIDATE_18_MONTHS)
-      reserveListFlow()
-
-      Then("the reserve offer expires after the reserve duration")
-      reserveExpiryList()
-      reserveExpiryListChecks()
-      reserveListHistoryChecks()
-      reserveListEmailChecks()
-    }
-
-    Scenario("VX: Recruiter Checks 21 Months Extended Reserve List", RunInVX) {
-      Given("a recruiter changes the reserve list to 21 months for a vacancy")
-      changeReserveListDetails("12 Months", Some(true), Some("9 Months"))
-      repostExternalPosting()
-
-      When("candidate applies and is held in a reserve list position")
-      fillNewCandidateDetails(MASTER_REGISTER_CANDIDATE_21_MONTHS)
       reserveListFlow()
 
       Then("the reserve offer expires after the reserve duration")

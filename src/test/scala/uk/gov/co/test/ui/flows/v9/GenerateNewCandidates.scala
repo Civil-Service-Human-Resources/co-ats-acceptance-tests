@@ -1,6 +1,6 @@
 package uk.gov.co.test.ui.flows.v9
 
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{randomEmail, randomFirstName, randomLastName}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{randomEmail, randomFirstName, randomLastName}
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
 import uk.gov.co.test.ui.pages.v9.CreateAccountPage.{enterConfirmEmailLoop, enterConfirmPasswordLoop, enterEmailLoop, enterFirstNameLoop, enterLastNameLoop, enterPasswordLoop, navigateToCreateAccountPage, registerNewAccount, selectEmployeeTypeLoop, selectTermsAndConditionsLoop}
 

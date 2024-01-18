@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.pages.vx.createvacancypage
 
 import org.openqa.selenium.By
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXHowManySkills, vXListOfApplicationStage, vXListOfTechSkills, vXListOfTechSkillsDescription, vXNoOfApplicationStage, vacancyFormId}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXHowManySkills, vXListOfApplicationStage, vXListOfTechSkills, vXListOfTechSkillsDescription, vXNoOfApplicationStage, vacancyFormId}
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 
 case class TechSkills(techSkill: String, description: String, techApplication: Boolean, techInterview: Boolean)

@@ -1,4 +1,4 @@
-package uk.gov.co.test.ui.data.vx
+package uk.gov.co.test.ui.data.vx.application
 
 import uk.gov.co.test.ui.pages.vx.vacancytabs._
 import uk.gov.co.test.ui.pages.vx.{CalenderScheduleDetails, InterviewScheduleDetails}

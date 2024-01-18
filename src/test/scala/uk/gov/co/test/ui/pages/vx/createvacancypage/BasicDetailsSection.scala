@@ -2,8 +2,8 @@ package uk.gov.co.test.ui.pages.vx.createvacancypage
 
 import org.openqa.selenium.{By, Keys, WebElement}
 import uk.gov.co.test.ui.data.TestData.eventually
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXAppConvertedClosingDate, vXApplicationClosingDate, vXApplicationClosingTime, vXApplicationLiveDate, vXApplicationLiveTime, vXConvertedClosingDateTime, vXConvertedLiveDateTime, vacancyFormId, vacancyName}
-import uk.gov.co.test.ui.data.vx.NewVacancyDetails
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXAppConvertedClosingDate, vXApplicationClosingDate, vXApplicationClosingTime, vXApplicationLiveDate, vXApplicationLiveTime, vXConvertedClosingDateTime, vXConvertedLiveDateTime, vacancyFormId, vacancyName}
+import uk.gov.co.test.ui.data.vx.vacancy.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 
 import java.time.LocalDate

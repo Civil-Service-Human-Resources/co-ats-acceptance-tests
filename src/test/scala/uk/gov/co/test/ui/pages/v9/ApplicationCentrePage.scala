@@ -2,8 +2,8 @@ package uk.gov.co.test.ui.pages.v9
 
 import org.openqa.selenium.{By, WebElement}
 import org.scalatest.concurrent.Eventually.eventually
-import uk.gov.co.test.ui.data.vx.ApplicationDetails
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{randomFirstName, randomLastName, v9AdjustmentsForTests, v9ReasonableAdjustments, vXAnyOnlineTests, vXInterviewExpectedRounds, vXInterviewFourType, vXInterviewLocation, vXInterviewLongDate, vXInterviewNumber, vXInterviewOneType, vXInterviewThreeType, vXInterviewTwoType, vXSlotTwoStartTime, vacancyName}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{randomFirstName, randomLastName, v9AdjustmentsForTests, v9ReasonableAdjustments, vXAnyOnlineTests, vXInterviewExpectedRounds, vXInterviewFourType, vXInterviewLocation, vXInterviewLongDate, vXInterviewNumber, vXInterviewOneType, vXInterviewThreeType, vXInterviewTwoType, vXSlotTwoStartTime, vacancyName}
+import uk.gov.co.test.ui.data.vx.application.ApplicationDetails
 import uk.gov.co.test.ui.pages.v9.ApplicationsPage.{confirmStatusOnApplicationPage, reviewUpdateOnApplicationPage}
 import uk.gov.co.test.ui.pages.vx.DashboardPage.contactEmailVxConfig
 import uk.gov.co.test.ui.pages.vx.vacancytabs.ReserveListsTab.reserveExpiryDateMonths

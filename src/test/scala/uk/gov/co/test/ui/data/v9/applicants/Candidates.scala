@@ -1,6 +1,6 @@
 package uk.gov.co.test.ui.data.v9.applicants
 
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{preferredFirstName, randomEmail, randomFirstName, randomLastName}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{preferredFirstName, randomEmail, randomFirstName, randomLastName}
 import uk.gov.co.test.ui.pages.v9.CandidateDetails
 import uk.gov.co.test.ui.pages.v9.SignInPage.passwordCandidate
 

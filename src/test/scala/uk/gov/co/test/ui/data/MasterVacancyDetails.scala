@@ -1,4 +1,4 @@
-package uk.gov.co.test.ui.data.vx
+package uk.gov.co.test.ui.data
 
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 
@@ -96,11 +96,11 @@ object MasterVacancyDetails extends VacancyBasePage {
   var vXGrsVacancy: Boolean       = true
 
   //vx VACANCY success profiles section
-  var vXAbilitiesRequired: Boolean   = false
-  var vXBehavioursRequired: Boolean  = false
-  var vXExperiencesRequired: Boolean = false
-  var vXStrengthsRequired: Boolean   = false
-  var vXTechSkillsRequired: Boolean  = false
+  var vXAbilitiesRequired: Boolean   = true
+  var vXBehavioursRequired: Boolean  = true
+  var vXExperiencesRequired: Boolean = true
+  var vXStrengthsRequired: Boolean   = true
+  var vXTechSkillsRequired: Boolean  = true
 
   //vx VACANCY technical skills section
   var vXHowManySkills: Int                              = 8

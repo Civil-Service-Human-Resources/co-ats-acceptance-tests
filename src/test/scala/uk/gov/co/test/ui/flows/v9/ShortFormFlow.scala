@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.flows.v9
 
 import uk.gov.co.test.ui.data.v9.shortform.ShortFormDetails
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXAnyOnlineTests, vXApproach, vXHowManyQuestions, vXHowManySkills, vacancyId, vacancyName}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXAnyOnlineTests, vXApproach, vXHowManyQuestions, vXHowManySkills, vacancyId, vacancyName}
 import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.{confirmShortFormCompletion, confirmShortFormCompletionNoLongForm}
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
 import uk.gov.co.test.ui.pages.v9.SearchJobsPage.jobSearchAndApplyFlow

@@ -2,7 +2,7 @@ package uk.gov.co.test.ui.pages.v9
 
 import org.openqa.selenium.By
 import org.scalatest.concurrent.Eventually.eventually
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{civilServant, homeDepartment, vacancyName}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{civilServant, homeDepartment, vacancyName}
 
 object ProvisionalOfferPage extends CivilServiceJobsBasePage {
 

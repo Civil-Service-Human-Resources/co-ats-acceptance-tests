@@ -6,7 +6,7 @@ import org.scalatest.concurrent.Eventually
 import org.scalatest.featurespec.AnyFeatureSpec
 import org.scalatest.matchers.should.Matchers
 import org.scalatestplus.selenium.WebBrowser
-import uk.gov.co.test.ui.data.vx.RECRUITER
+import uk.gov.co.test.ui.data.vx.recruiters.RECRUITER
 import uk.gov.co.test.ui.driver.BrowserDriver
 import uk.gov.co.test.ui.flows.vx.RecruiterLoginFlow.loginWithRecruiterDetails
 import uk.gov.co.test.ui.pages.v9.SignInPage.{checkV9LogoutState, generateCandidateDetails, navigateToV9Test, v9AcceptAllCookies, v9SearchCookiesById}

@@ -4,7 +4,7 @@ import org.scalatest.concurrent.Eventually.eventually
 import uk.gov.co.test.ui.data.v9.shortform.ShortFormDetails
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
 import uk.gov.co.test.ui.pages.v9.shortform.ApplicationGuidancePage.shortFormId
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.vXVacanciesInNIR
+import uk.gov.co.test.ui.data.MasterVacancyDetails.vXVacanciesInNIR
 
 case class DiversityDetails(
   haveDisability: String,

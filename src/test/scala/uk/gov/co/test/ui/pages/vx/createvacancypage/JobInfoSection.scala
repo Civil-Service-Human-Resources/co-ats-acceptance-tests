@@ -1,9 +1,11 @@
 package uk.gov.co.test.ui.pages.vx.createvacancypage
 
 import org.openqa.selenium.By
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXJobInfoDepartment, vacancyFormId}
-import uk.gov.co.test.ui.data.vx.NewVacancyDetails
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXBusinessAreaDetail, vXJobInfoDepartment, vXNoOfJobsAvailable, vXProfession, vXTypeOfRole, vacancyFormId}
+import uk.gov.co.test.ui.data.vx.vacancy.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
+
+import scala.collection.mutable.ListBuffer
 
 case class JobInfoDetails(
   displayWelsh: Boolean,
@@ -12,7 +14,7 @@ case class JobInfoDetails(
   addWelshBusinessArea: Boolean,
   welshBusinessArea: String,
   businessAreaDetail: String,
-  typeOfRole: List[String],
+  typeOfRole: ListBuffer[String],
   whichProfession: String,
   noOfJobs: String
 )
@@ -57,7 +59,8 @@ object JobInfoSection extends VacancyBasePage {
   private def enterBusinessAreaDetail(jobInfoDetails: JobInfoDetails): Unit = {
     val businessDetailsInput = waitForVisibilityOfElementById(businessAreaDetailId)
     businessDetailsInput.clear()
-    businessDetailsInput.sendKeys(jobInfoDetails.businessAreaDetail)
+    vXBusinessAreaDetail = jobInfoDetails.businessAreaDetail
+    businessDetailsInput.sendKeys(vXBusinessAreaDetail)
     addWelshTranslation(
       jobInfoDetails.addWelshBusinessArea,
       addWelshBusinessAreaId(),
@@ -69,18 +72,21 @@ object JobInfoSection extends VacancyBasePage {
 
   private def selectTypeOfRole(jobInfoDetails: JobInfoDetails): Unit = {
     scrollToElement(By.id(typeOfRoleId))
-    enterRoles(jobInfoDetails.typeOfRole, typeOfRoleId)
+    vXTypeOfRole = jobInfoDetails.typeOfRole
+    enterTypeRoles(jobInfoDetails.typeOfRole, typeOfRoleId)
   }
 
   private def whichProfessionIsJob(jobInfoDetails: JobInfoDetails): Unit = {
     scrollToElement(By.id(whichProfessionId))
+    vXProfession = jobInfoDetails.whichProfession
     waitForVisibilityOfElementById(whichProfessionId).click()
-    selectOption(generalInput, jobInfoDetails.whichProfession)
+    selectOption(generalInput, vXProfession)
   }
 
   private def noOfJobsAvailable(jobInfoDetails: JobInfoDetails): Unit = {
     val noOfJobsInput = textField(noOfJobsId)
-    noOfJobsInput.value = jobInfoDetails.noOfJobs
+    vXNoOfJobsAvailable = jobInfoDetails.noOfJobs
+    noOfJobsInput.value = vXNoOfJobsAvailable
   }
 
   private val jobInfo: Seq[JobInfoDetails => Unit] = Seq(

@@ -1,8 +1,8 @@
 package uk.gov.co.test.ui.pages.vx.vacancytabs
 
 import org.openqa.selenium.By
-import uk.gov.co.test.ui.data.vx.ApplicationDetails
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.vacancyFormId
+import uk.gov.co.test.ui.data.MasterVacancyDetails.vacancyFormId
+import uk.gov.co.test.ui.data.vx.application.ApplicationDetails
 import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.applicationBeingReviewedPreSiftState
 import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.{availableBarItems, confirmCandidateSummary, navigateToApplicationSummary, preSiftEvaluationFormBarId, progressBarAfterPreSiftId, rejectBarAfterPreSiftId, withdrawBarId}
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
