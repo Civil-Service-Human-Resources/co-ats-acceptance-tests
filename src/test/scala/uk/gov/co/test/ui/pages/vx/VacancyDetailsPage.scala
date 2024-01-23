@@ -176,15 +176,16 @@ object VacancyDetailsPage extends VacancyBasePage {
     val reserve = waitForVisibilityOfElementById(reserveListRequiredId).findElement(By.xpath(checkLabelPath))
     if (reserve.getText == "Yes") {
       vXReserveListRequired = true
+      extractReserveLength()
+      extractReserveExtendRequired()
     } else vXReserveListRequired = false
     println(vXReserveListRequired)
   }
 
-  private def extractReserveLength(): Unit =
-    if (vXReserveListRequired) {
-      vXReserveListLength = waitForVisibilityOfElementById(reserveListLengthId).getText
-      println(vXReserveListLength)
-    }
+  private def extractReserveLength(): Unit = {
+    vXReserveListLength = waitForVisibilityOfElementById(reserveListLengthId).getText
+    println(vXReserveListLength)
+  }
 
   private def extractReserveExtendRequired(): Unit = {
     if (vXReserveListLength == "12 Months") {
@@ -220,6 +221,8 @@ object VacancyDetailsPage extends VacancyBasePage {
     val inNI = waitForVisibilityOfElementById(vacancyInNIId).findElement(By.xpath(checkLabelPath))
     if (inNI.getText == "Yes") {
       vXVacanciesInNIR = true
+      extractAvailableOutsideNI()
+      extractWhichCommunitiesApply()
     } else vXVacanciesInNIR = false
     println(vXVacanciesInNIR)
   }
@@ -242,6 +245,8 @@ object VacancyDetailsPage extends VacancyBasePage {
     val preference = waitForVisibilityOfElementById(locationPreferencesId).findElement(By.xpath(checkLabelPath))
     if (preference.getText == "Yes") {
       vXGiveLocationPreference = true
+      extractMaxLocationPreferences()
+      extractLocationsToChoose()
     } else vXGiveLocationPreference = false
     println(vXGiveLocationPreference)
   }
@@ -309,7 +314,6 @@ object VacancyDetailsPage extends VacancyBasePage {
     extractTypeOfRole()
     extractWhichProfession()
     extractNoOfJobsAvailable()
-    extractBudgetaryApproval()
   }
 
   private def approvalsDetails(): Unit = {
@@ -317,21 +321,14 @@ object VacancyDetailsPage extends VacancyBasePage {
     extractCostCentre()
   }
 
-  def reserveList(): Unit = {
+  def reserveList(): Unit =
     extractReserveListRequired()
-    extractReserveLength()
-    extractReserveExtendRequired()
-  }
 
   private def locations(): Unit = {
     extractLocationType()
     extractLocationDisplay()
     extractVacancyInNI()
-    extractAvailableOutsideNI()
-    extractWhichCommunitiesApply()
     extractGiveLocationPreferences()
-    extractMaxLocationPreferences()
-    extractLocationsToChoose()
   }
 
   def interviews(): Unit = {

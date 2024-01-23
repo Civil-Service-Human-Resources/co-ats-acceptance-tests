@@ -10,11 +10,11 @@ object MasterVacancyDetails extends VacancyBasePage {
   var vacancyFormId = ""
 
   //vx VACANCY additionalQuestions section
-  var vXAnyAdditionalQuestions = true
-  var vXHowManyQuestions       = 3
-  var vXQuestionOne            = "Autotest - Question 1"
-  var vXQuestionTwo            = "Autotest - Question 2"
-  var vXQuestionThree          = "Autotest - Question 3"
+  var vXAnyAdditionalQuestions = false
+  var vXHowManyQuestions       = 0
+  var vXQuestionOne            = ""
+  var vXQuestionTwo            = ""
+  var vXQuestionThree          = ""
 
   //vx VACANCY approach section
   var vXApproach = ""
@@ -25,7 +25,7 @@ object MasterVacancyDetails extends VacancyBasePage {
 
   //vx VACANCY basicDetails section
   var vacancyName                       = ""
-  var vacancyId                         = "9592"
+  var vacancyId                         = ""
   var vXApplicationLiveDate: String     = ""
   var vXApplicationLiveTime: String     = ""
   var vXApplicationClosingDate: String  = ""
@@ -50,36 +50,28 @@ object MasterVacancyDetails extends VacancyBasePage {
   var vXNoOfJobsAvailable  = ""
 
   //vx VACANCY behaviours section
-  var vXHowManyBehaviours: Int                     = 8
-  var vXListOfChosenBehaviours: ListBuffer[String] = ListBuffer(
-    "Changing and Improving",
-    "Communicating and Influencing",
-    "Delivering at Pace",
-    "Developing Self and Others",
-    "Leadership",
-    "Making Effective Decisions",
-    "Managing a Quality Service",
-    "Working Together"
-  )
+  var vXHowManyBehaviours: Int                     = 0
+  var vXListOfChosenBehaviours: ListBuffer[String] = ListBuffer("")
 
   //vx VACANCY criteria section
-  var vXCandidateInstructions: String     = "Autotest - Instructions for candidate"
-  var vXUploadAttachmentRequired: Boolean = true
-  var vXProbationIncomplete: Boolean      = true
-  var vXPromotionApply: Boolean           = true
-  var vXMisconductLive: Boolean           = true
-  var vXPerformanceReview: Boolean        = true
-  var vXAttendancePoor: Boolean           = true
+  var vXCandidateInstructions: String     = ""
+  var vXPreSiftRequired: Boolean          = false
+  var vXUploadAttachmentRequired: Boolean = false
+  var vXProbationIncomplete: Boolean      = false
+  var vXPromotionApply: Boolean           = false
+  var vXMisconductLive: Boolean           = false
+  var vXPerformanceReview: Boolean        = false
+  var vXAttendancePoor: Boolean           = false
   var vXNationalityRequirements: Boolean  = true
   var vXRightToRemainUK: Boolean          = true
 
   //vx VACANCY experience section
-  var vXGuidanceText: String             = "Autotest - Enter guidance text for the candidate"
+  var vXGuidanceText: String             = ""
   var vXStatementWordLimit: Int          = 250
-  var vXLicencesMandatory: Boolean       = true
-  var vXMembershipsMandatory: Boolean    = true
-  var vXLanguagesMandatory: Boolean      = true
-  var vXQualificationsMandatory: Boolean = true
+  var vXLicencesMandatory: Boolean       = false
+  var vXMembershipsMandatory: Boolean    = false
+  var vXLanguagesMandatory: Boolean      = false
+  var vXQualificationsMandatory: Boolean = false
 
   //vx VACANCY location section
   var vXLocationType                    = ""
@@ -87,66 +79,38 @@ object MasterVacancyDetails extends VacancyBasePage {
   var vXVacanciesInNIR                  = true
   var vXCommunitiesInNIR                = ""
   var vXAvailableOutsideInNI            = false
-  var vXGiveLocationPreference: Boolean = true
+  var vXGiveLocationPreference: Boolean = false
   var vXMaxLocations: String            = ""
-  var vXOtherLocations                  = new ListBuffer[String]()
+  var vXOtherLocations: ListBuffer[String] = ListBuffer("London", "Southampton", "Manchester")
 
   //vx VACANCY management section
-  var vXGreatForVeterans: Boolean = true
+  var vXGreatForVeterans: Boolean = false
   var vXGrsVacancy: Boolean       = true
 
   //vx VACANCY success profiles section
-  var vXAbilitiesRequired: Boolean   = true
-  var vXBehavioursRequired: Boolean  = true
-  var vXExperiencesRequired: Boolean = true
-  var vXStrengthsRequired: Boolean   = true
-  var vXTechSkillsRequired: Boolean  = true
+  var vXAbilitiesRequired: Boolean   = false
+  var vXBehavioursRequired: Boolean  = false
+  var vXExperiencesRequired: Boolean = false
+  var vXStrengthsRequired: Boolean   = false
+  var vXTechSkillsRequired: Boolean  = false
 
   //vx VACANCY technical skills section
-  var vXHowManySkills: Int                              = 8
-  var vXListOfTechSkills: ListBuffer[String]            = ListBuffer(
-    "Autotest - technical skills 1",
-    "Autotest - technical skills 2",
-    "Autotest - technical skills 3",
-    "Autotest - technical skills 4",
-    "Autotest - technical skills 5",
-    "Autotest - technical skills 6",
-    "Autotest - technical skills 7",
-    "Autotest - technical skills 8"
-  )
-  var vXListOfTechSkillsDescription: ListBuffer[String] = ListBuffer(
-    "Autotest - technical skills 1 description",
-    "Autotest - technical skills 2 description",
-    "Autotest - technical skills 3 description",
-    "Autotest - technical skills 4 description",
-    "Autotest - technical skills 5 description",
-    "Autotest - technical skills 6 description",
-    "Autotest - technical skills 7 description",
-    "Autotest - technical skills 8 description"
-  )
+  var vXHowManySkills: Int                              = 0
+  var vXListOfTechSkills: ListBuffer[String]            = ListBuffer("")
+  var vXListOfTechSkillsDescription: ListBuffer[String] = ListBuffer("")
   var vXListOfApplicationStage                          = new ListBuffer[Boolean]()
-  var vXNoOfApplicationStage: Int                       = 8
+  var vXNoOfApplicationStage: Int                       = 0
 
   //vX strengths
-  var vXHowManyStrengths: Int               = 8
-  var vXListOfStrengths: ListBuffer[String] = ListBuffer(
-    "Adaptable",
-    "Analytical",
-    "Improver",
-    "Relationship Builder",
-    "Challenger",
-    "Change Agent",
-    "Team Leader",
-    "Service Focussed"
-  )
+  var vXHowManyStrengths: Int               = 0
+  var vXListOfStrengths: ListBuffer[String] = ListBuffer("")
 
   //vx VACANCY tests section
   var vXAnyOnlineTests = false
 
   //vx PEC FORM checks
-  var vXRtwChecks: List[String] =
-    List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates")
-  var vXWhenRtwChecks           = "Before pre employment checks"
+  var vXRtwChecks: List[String] = List("")
+  var vXWhenRtwChecks           = ""
 
   //v9 candidate details
   var randomFirstName: String    = ""
@@ -156,26 +120,8 @@ object MasterVacancyDetails extends VacancyBasePage {
   var randomJobPosition: String  = ""
 
   //v9 SHORT FORM technical skills
-  val sortedListOfTechSkills: Seq[String]            = List(
-    "Autotest - technical skills 1",
-    "Autotest - technical skills 2",
-    "Autotest - technical skills 3",
-    "Autotest - technical skills 4",
-    "Autotest - technical skills 5",
-    "Autotest - technical skills 6",
-    "Autotest - technical skills 7",
-    "Autotest - technical skills 8"
-  )
-  val sortedListOfTechSkillsDescription: Seq[String] = List(
-    "Autotest - technical skills 1 description",
-    "Autotest - technical skills 2 description",
-    "Autotest - technical skills 3 description",
-    "Autotest - technical skills 4 description",
-    "Autotest - technical skills 5 description",
-    "Autotest - technical skills 6 description",
-    "Autotest - technical skills 7 description",
-    "Autotest - technical skills 8 description"
-  )
+  val sortedListOfTechSkills: Seq[String]            = List("")
+  val sortedListOfTechSkillsDescription: Seq[String] = List("")
 
   //v9 SHORT FORM eligibility page
   var civilServant: Boolean  = true

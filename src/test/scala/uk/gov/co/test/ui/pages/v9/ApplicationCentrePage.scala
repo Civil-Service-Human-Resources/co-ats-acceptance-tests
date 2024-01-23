@@ -220,6 +220,21 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
     switchToOtherWindow
   }
 
+  def successfulAtSiftState(): Unit = {
+    val status = "Successful at Interview"
+    changeSystem("candidate")
+    confirmStatusOnApplicationPage(status)
+    feedbackFunction().isEnabled
+    advertDetailsFunction().isEnabled
+    withdrawApplicationFunction().isEnabled
+    applicationForVacancyText shouldEqual s"Application For $vacancyName"
+    getApplicationState shouldEqual s"Application status: $status"
+    getApplicationConfirmation shouldEqual
+      """Congratulations you have been successful at sift.
+        |We will be in contact shortly with more information about the next steps.""".stripMargin
+    switchToOtherWindow
+  }
+
   def invitedForInterviewState(): Unit = {
     val status     = vXInterviewNumber.head match {
       case "1" => "Invited for interview"

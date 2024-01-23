@@ -28,7 +28,7 @@ class RecruiterLoginSpec extends BaseFeatureSpec {
     }
 
     Scenario("VX: A Recruiter Untags Vacancy Details", RunInVX) {
-      untagVacancies(vacancyId)
+      untagVacancies("9615")
     }
   }
 }

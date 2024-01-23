@@ -136,7 +136,7 @@ object PersonalInfoPage extends CivilServiceJobsBasePage {
     selectApplyDCS,
     selectReasonableAdjustments,
     selectReasonableAdjustmentsForTests,
-    enterRedeploymentScheme,
+//    enterRedeploymentScheme, //TODO requires additional logic
     selectAreYouVeteran
   )
 

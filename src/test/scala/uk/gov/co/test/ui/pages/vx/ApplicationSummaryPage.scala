@@ -1,8 +1,8 @@
 package uk.gov.co.test.ui.pages.vx
 
 import org.openqa.selenium.By
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{applicationId, civilServant, homeDepartment, randomFirstName, randomLastName, vXInterviewNumber, vXJobInfoDepartment, vacancyId, vacancyName}
 import uk.gov.co.test.ui.data.TestData.eventually
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{applicationId, randomFirstName, randomLastName, vXInterviewNumber, vXJobInfoDepartment, vacancyId, vacancyName}
 import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.{candidateAcceptsOffer, confirmOfferAcceptedState}
 import uk.gov.co.test.ui.pages.v9.ProvisionalOfferPage.offerDecisionFlow
 import uk.gov.co.test.ui.pages.vx.DashboardPage.matchCriteria
@@ -111,8 +111,8 @@ object ApplicationSummaryPage extends VacancyBasePage {
     progressApplicationToOffer()
     candidateAcceptsOffer()
     offerDecisionFlow("Accept")
-    provisionalOfferAccepted()
     confirmOfferAcceptedState()
+    provisionalOfferAccepted()
   }
 
   def progressApplicationToOffer(): Unit = {
@@ -247,7 +247,10 @@ object ApplicationSummaryPage extends VacancyBasePage {
     checkCandidateSummary("5") shouldEqual vacancyId
     checkCandidateSummary("6") shouldEqual vacancyName
     checkCandidateSummary("7") shouldEqual vXJobInfoDepartment
-    checkCandidateSummary("8") shouldEqual (if (dataLevel.isDefined && dataLevel.get == "restricted") "Restricted Data"
-                                            else "External - Non Civil Servant / External")
+    checkCandidateSummary("8") shouldEqual
+      (if (dataLevel.isDefined && dataLevel.get == "restricted") { "Restricted Data" }
+       else if (civilServant && (homeDepartment != vXJobInfoDepartment)) {
+         "OGD - Current employee of another Civil Service Department"
+       } else "External - Non Civil Servant / External")
   }
 }

@@ -1,6 +1,6 @@
 package uk.gov.co.test.ui.pages.vx.vacancytabs
 
-import org.openqa.selenium.{By, WebElement}
+import org.openqa.selenium.{By, Keys, WebElement}
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 
 import scala.collection.{Seq, mutable}
@@ -110,5 +110,22 @@ object HistoryTab extends VacancyBasePage {
       }
     )
     (_destination, _subject, _status, _emailPreview)
+  }
+
+  def emailChecks(i: String): Unit = {
+    val subjectSummary = "(//*[@class='detail-grid-tl'])"
+    val subject = driver.findElement(By.xpath(s"$subjectSummary[$i]")).getText
+    println(subject)
+  }
+
+  def emailHistoryChecks(): Unit = {
+    waitForVisibilityOfElementByPath(historyTabPath).click()
+    waitForVisibilityOfElementById("summary_tabs_history_tab").isDisplayed
+//    waitForVisibilityOfElementByPath("//*[@class='ng-input']").sendKeys("Email")
+//    waitForVisibilityOfElementByPath("//*[@class='ng-input']").sendKeys(Keys.ENTER)
+    waitForVisibilityOfElementByPath("//*[@class='ng-input']").click()
+    action().moveToElement(waitForDropdownHistoryOptionByText("a41f1fe7ade6-6")).perform()
+    waitForDropdownHistoryOptionByText("a41f1fe7ade6-6").click()
+    for (i <- 1 to 5) emailChecks(i.toString) should not be "Subject: Start Civil Service Employee Transfer Process"
   }
 }

@@ -3,6 +3,7 @@ package uk.gov.co.test.ui.pages.vx.createvacancypage
 import org.openqa.selenium.By
 import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXReserveExtendLength, vXReserveExtendRequired, vXReserveListLength, vXReserveListRequired, vXReserveListTotalLength, vacancyFormId, vacancyId}
 import uk.gov.co.test.ui.data.vx.vacancy.NewVacancyDetails
+import uk.gov.co.test.ui.pages.vx.DashboardPage.previewJobPath
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 import uk.gov.co.test.ui.pages.vx.VacancyDetailsPage.{extractAllVacancyDetails, navigateToVacancyForms, reserveList, searchForVacancy}
 
@@ -22,6 +23,7 @@ object ReserveListSection extends VacancyBasePage {
   def approvalToExtendYesId = s"${vacancyFormId}_datafield_177141_1_1_1"
   def approvalToExtendNoId  = s"${vacancyFormId}_datafield_177141_1_1_2"
   def extendLengthId        = s"select2-${vacancyFormId}_datafield_177145_1_1-container"
+  def approveForPublicationMessageId        = s"${vacancyFormId}_label_72537_1"
 
   def selectReserveList(reserveListDetails: ReserveListDetails): Unit = {
     scrollToElement(By.id(reserveListId))
@@ -90,7 +92,29 @@ object ReserveListSection extends VacancyBasePage {
       }
       scrollToElement(By.id(submitForm))
       clickOn(submitForm)
+      waitForVisibilityOfElementById(approveForPublicationMessageId).isDisplayed
     }
+    extractAllVacancyDetails(vacancyId)
+    totalReserveExpiryLength()
+  }
+
+  def changeReserveListDetails2(
+    reserveLength: String,
+    extendRequired: Option[Boolean] = None,
+    extendLength: Option[String] = None
+  ): Unit = {
+    searchForVacancy(vacancyId)
+    navigateToVacancyForms()
+    scrollToElement(By.id(reserveListId))
+    clickOnRadioButton(reserveListYesId)
+    lengthOfReserveList(reserveLength)
+    if (reserveLength == "12 Months" && extendRequired.get) {
+      clickOnRadioButton(approvalToExtendYesId)
+      extendLengthOfReserveList(extendLength.get)
+    } else clickOnRadioButton(approvalToExtendNoId)
+    scrollToElement(By.id(submitForm))
+    clickOn(submitForm)
+    waitForVisibilityOfElementById(previewJobPath).isDisplayed
     extractAllVacancyDetails(vacancyId)
     totalReserveExpiryLength()
   }
