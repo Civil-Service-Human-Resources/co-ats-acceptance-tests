@@ -44,6 +44,7 @@ class CreateVacancySpec extends BaseFeatureSpec {
 
     Scenario("VX: A Candidate Applies And Completes The PEC Form; Full Application Process", RunInVX) {
       Given("candidate registers for new job application")
+      vacancyId                         = "9667"
       extractAllVacancyDetails(vacancyId)
       fillNewCandidateDetails(REGISTER_CANDIDATE_PEC)
 

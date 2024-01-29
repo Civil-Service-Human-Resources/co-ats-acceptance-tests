@@ -20,7 +20,6 @@ object OGD_SHORT_FORM_APP_GUIDANCE
 object OGD_SHORT_FORM_ELIGIBILITY
     extends EligibilityDetails(
       true,
-      "Attorney General's Office",
       true,
       true,
       true,

@@ -17,7 +17,7 @@ class ReserveListSpec extends BaseFeatureSpec {
     Scenario("VX: Recruiter Checks 6 Months Reserve List", RunInVX) {
       Given("a recruiter changes the reserve list to 6 months for a vacancy")
 //      fillNewVacancyForm(RESERVE_VACANCY_DATA)
-      vacancyId = "9615"
+      vacancyId = "9658"
       changeReserveListDetails("6 Months")
       repostExternalPosting()
 

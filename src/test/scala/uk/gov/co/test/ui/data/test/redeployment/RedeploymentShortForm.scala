@@ -1,24 +1,26 @@
-package uk.gov.co.test.ui.data.v9.shortform
+package uk.gov.co.test.ui.data.test.redeployment
 
+import uk.gov.co.test.ui.data.MasterVacancyDetails.v9HomeDepartment
+import uk.gov.co.test.ui.data.v9.shortform.ShortFormDetails
 import uk.gov.co.test.ui.pages.v9.shortform._
 
-object MASTER_SHORT_FORM_DATA
+object REDEPLOYMENT_SHORT_FORM_DATA
     extends ShortFormDetails(
-      MASTER_SHORT_FORM_APP_GUIDANCE,
-      MASTER_SHORT_FORM_ELIGIBILITY,
-      MASTER_SHORT_FORM_PERSONAL_INFO,
-      MASTER_SHORT_FORM_DIVERSITY_MONITORING,
-      MASTER_SHORT_FORM_DECLARATION
+      REDEPLOYMENT_SHORT_FORM_APP_GUIDANCE,
+      REDEPLOYMENT_SHORT_FORM_ELIGIBILITY,
+      REDEPLOYMENT_SHORT_FORM_PERSONAL_INFO,
+      REDEPLOYMENT_SHORT_FORM_DIVERSITY_MONITORING,
+      REDEPLOYMENT_SHORT_FORM_DECLARATION
     )
 
-object MASTER_SHORT_FORM_APP_GUIDANCE
+object REDEPLOYMENT_SHORT_FORM_APP_GUIDANCE
     extends AppGuidanceDetails(
       true
     )
 
-object MASTER_SHORT_FORM_ELIGIBILITY
+object REDEPLOYMENT_SHORT_FORM_ELIGIBILITY
     extends EligibilityDetails(
-      false,
+      true,
       true,
       true,
       true,
@@ -27,7 +29,7 @@ object MASTER_SHORT_FORM_ELIGIBILITY
       "Yes"
     )
 
-object MASTER_SHORT_FORM_PERSONAL_INFO
+object REDEPLOYMENT_SHORT_FORM_PERSONAL_INFO
     extends PersonalInfoDetails(
       "01520000000",
       secondaryNo = Option("07770000000"),
@@ -38,10 +40,10 @@ object MASTER_SHORT_FORM_PERSONAL_INFO
       "Autotest - reasonable adjustments to be able to complete online tests",
       "Yes",
       true,
-      redeploymentScheme = Option(false)
+      redeploymentScheme = Option(true)
     )
 
-object MASTER_SHORT_FORM_DIVERSITY_MONITORING
+object REDEPLOYMENT_SHORT_FORM_DIVERSITY_MONITORING
     extends DiversityDetails(
       "No",
       "Man",
@@ -92,7 +94,7 @@ object MASTER_SHORT_FORM_DIVERSITY_MONITORING
       "Protestant"
     )
 
-object MASTER_SHORT_FORM_DECLARATION
+object REDEPLOYMENT_SHORT_FORM_DECLARATION
     extends DeclarationDetails(
       true
     )

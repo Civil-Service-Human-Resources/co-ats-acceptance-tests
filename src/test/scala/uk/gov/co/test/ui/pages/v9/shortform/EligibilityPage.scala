@@ -1,14 +1,13 @@
 package uk.gov.co.test.ui.pages.v9.shortform
 
 import org.scalatest.concurrent.Eventually.eventually
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{v9CivilServant, v9HomeDepartment, vXExperiencesRequired, vXLanguagesMandatory, vXLicencesMandatory, vXMembershipsMandatory, vXNationalityRequirements, vXQualificationsMandatory, vXRightToRemainUK, vacancyId, vacancyName}
 import uk.gov.co.test.ui.data.v9.shortform.ShortFormDetails
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
 import uk.gov.co.test.ui.pages.v9.shortform.ApplicationGuidancePage.shortFormId
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{civilServant, homeDepartment, vXExperiencesRequired, vXLanguagesMandatory, vXLicencesMandatory, vXMembershipsMandatory, vXNationalityRequirements, vXQualificationsMandatory, vXRightToRemainUK}
 
 case class EligibilityDetails(
   currentCivilServant: Boolean,
-  homeDepartment: String,
   nationalityReqMet: Boolean,
   rightToRemain: Boolean,
   membershipsRequirements: Boolean,
@@ -43,11 +42,17 @@ object EligibilityPage extends CivilServiceJobsBasePage {
 
   private def currentCivilServantOrCSCEmployed(eligibilityDetails: EligibilityDetails): Unit = {
     eligibilityPageCheck()
-    civilServant = eligibilityDetails.currentCivilServant
-    if (civilServant) {
+    v9CivilServant = eligibilityDetails.currentCivilServant
+    if (v9CivilServant) {
       radioSelect(currentCivilServantYesId)
-      homeDepartment = eligibilityDetails.homeDepartment
-      selectDropdownOption(homeDepartmentSelectId, homeDepartment)
+      if (v9HomeDepartment.isEmpty) {
+        selectDropdownOption(homeDepartmentSelectId, "Attorney General's Office")
+      } else {
+        selectDropdownOption(homeDepartmentSelectId, v9HomeDepartment)
+        println(v9HomeDepartment)
+        println(vacancyId)
+        println(vacancyName)
+      }
     } else radioSelect(currentCivilServantNoId)
   }
 

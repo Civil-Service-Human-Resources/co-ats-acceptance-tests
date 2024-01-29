@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.pages.vx
 
 import org.openqa.selenium.By
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{applicationId, civilServant, homeDepartment, randomFirstName, randomLastName, vXInterviewNumber, vXJobInfoDepartment, vacancyId, vacancyName}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{applicationId, v9CivilServant, v9HomeDepartment, randomFirstName, randomLastName, vXInterviewNumber, vXJobInfoDepartment, vacancyId, vacancyName}
 import uk.gov.co.test.ui.data.TestData.eventually
 import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.{candidateAcceptsOffer, confirmOfferAcceptedState}
 import uk.gov.co.test.ui.pages.v9.ProvisionalOfferPage.offerDecisionFlow
@@ -249,7 +249,7 @@ object ApplicationSummaryPage extends VacancyBasePage {
     checkCandidateSummary("7") shouldEqual vXJobInfoDepartment
     checkCandidateSummary("8") shouldEqual
       (if (dataLevel.isDefined && dataLevel.get == "restricted") { "Restricted Data" }
-       else if (civilServant && (homeDepartment != vXJobInfoDepartment)) {
+       else if (v9CivilServant && (v9HomeDepartment != vXJobInfoDepartment)) {
          "OGD - Current employee of another Civil Service Department"
        } else "External - Non Civil Servant / External")
   }

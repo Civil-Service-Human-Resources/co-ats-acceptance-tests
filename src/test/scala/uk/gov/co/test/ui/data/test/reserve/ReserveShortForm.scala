@@ -20,7 +20,6 @@ object RESERVE_SHORT_FORM_APP_GUIDANCE
 object RESERVE_SHORT_FORM_ELIGIBILITY
     extends EligibilityDetails(
       false,
-      "Attorney General's Office",
       true,
       true,
       true,
