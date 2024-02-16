@@ -153,7 +153,7 @@ object MasterVacancyDetails extends VacancyBasePage {
   )
 
   //vx VACANCY tests section
-  var vXAnyOnlineTests = false
+  var vXAnyOnlineTests: Boolean = _
 
   //vx PEC FORM checks
   var vXRtwChecks: List[String] =

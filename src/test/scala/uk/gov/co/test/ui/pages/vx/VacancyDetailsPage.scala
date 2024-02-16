@@ -2,7 +2,7 @@ package uk.gov.co.test.ui.pages.vx
 
 import org.openqa.selenium.{By, WebElement}
 import org.scalatest.concurrent.Eventually.eventually
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXAbilitiesRequired, vXApplicationClosingDate, vXApplicationLiveDate, vXApproach, vXAvailableOutsideInNI, vXBehavioursRequired, vXBudgetaryApproval, vXBusinessArea, vXBusinessAreaDetail, vXCommunitiesInNIR, vXCostCentre, vXDesirablePastExperience, vXExperiencesRequired, vXFullQualification, vXGiveLocationPreference, vXGreatForVeterans, vXGuidanceText, vXInterviewExpectedRounds, vXInterviewFourType, vXInterviewNumber, vXInterviewOneType, vXInterviewThreeType, vXInterviewTwoType, vXJobHistory, vXJobInfoDepartment, vXLanguagesMandatory, vXLicencesMandatory, vXLocationDisplay, vXLocationType, vXMaxLocations, vXMembershipsMandatory, vXNoOfJobsAvailable, vXOtherLocations, vXPersonalStatement, vXPreviousExperiences, vXProfession, vXQualificationsMandatory, vXReserveExtendLength, vXReserveExtendRequired, vXReserveListLength, vXReserveListRequired, vXSpecificLanguages, vXSpecificLicences, vXSpecificMemberships, vXSpecificPastExperience, vXSpecificQualifications, vXSpecifyGuidance, vXStatementWordLimit, vXStrengthsRequired, vXTechSkillsRequired, vXTypeOfRole, vXVacanciesInNIR, vacancyFormId, vacancyId, vacancyName}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXAbilitiesRequired, vXAnyOnlineTests, vXApplicationClosingDate, vXApplicationLiveDate, vXApproach, vXAvailableOutsideInNI, vXBehavioursRequired, vXBudgetaryApproval, vXBusinessArea, vXBusinessAreaDetail, vXCommunitiesInNIR, vXCostCentre, vXDesirablePastExperience, vXExperiencesRequired, vXFullQualification, vXGiveLocationPreference, vXGreatForVeterans, vXGuidanceText, vXInterviewExpectedRounds, vXInterviewFourType, vXInterviewNumber, vXInterviewOneType, vXInterviewThreeType, vXInterviewTwoType, vXJobHistory, vXJobInfoDepartment, vXLanguagesMandatory, vXLicencesMandatory, vXLocationDisplay, vXLocationType, vXMaxLocations, vXMembershipsMandatory, vXNoOfJobsAvailable, vXOtherLocations, vXPersonalStatement, vXPreviousExperiences, vXProfession, vXQualificationsMandatory, vXReserveExtendLength, vXReserveExtendRequired, vXReserveListLength, vXReserveListRequired, vXSpecificLanguages, vXSpecificLicences, vXSpecificMemberships, vXSpecificPastExperience, vXSpecificQualifications, vXSpecifyGuidance, vXStatementWordLimit, vXStrengthsRequired, vXTechSkillsRequired, vXTypeOfRole, vXVacanciesInNIR, vacancyFormId, vacancyId, vacancyName}
 import uk.gov.co.test.ui.pages.vx.vacancytabs.SummaryTab.{vacancyActive, vacancyClosingDateId, vacancyLiveDateId}
 
 import scala.collection.mutable
@@ -78,6 +78,7 @@ object VacancyDetailsPage extends VacancyBasePage {
   def experienceId                      = s"${vacancyFormId}_datafield_154245_1_1_12687"
   def strengthsId                       = s"${vacancyFormId}_datafield_154245_1_1_12689"
   def technicalSkillsId                 = s"${vacancyFormId}_datafield_154245_1_1_12688"
+  def onlineTestsId                     = s"${vacancyFormId}_datafield_129689_1_1_fieldset"
 
   private def dashboardPageCheck(): Unit =
     eventually(onPage(dashboardPageTitle))
@@ -432,6 +433,14 @@ object VacancyDetailsPage extends VacancyBasePage {
     } else vXTechSkillsRequired = false
   }
 
+  def onlineTests(): Unit = {
+    val tests = waitForVisibilityOfElementById(onlineTestsId).findElement(By.xpath(checkLabelPath))
+    if (tests.getText == "Yes") {
+      vXAnyOnlineTests = true
+    } else vXAnyOnlineTests = false
+    println(s"Online tests set to $vXAnyOnlineTests")
+  }
+
   private def jobInformationDetails(): Unit = {
     extractDepartment()
     extractBusinessArea()
@@ -495,5 +504,6 @@ object VacancyDetailsPage extends VacancyBasePage {
     interviews()
     successProfiles()
     vacancyManagement()
+    onlineTests()
   }
 }

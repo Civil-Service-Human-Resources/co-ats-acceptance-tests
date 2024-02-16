@@ -444,6 +444,7 @@ object SiftEvaluationTab extends VacancyBasePage {
     }
     clickOn(submitForm)
     siftEvaluation()
+    applicationBeingReviewedState()
     if (vXAnyOnlineTests) {
       applicationBeingReviewedState()
     } else successfulAtSiftState()

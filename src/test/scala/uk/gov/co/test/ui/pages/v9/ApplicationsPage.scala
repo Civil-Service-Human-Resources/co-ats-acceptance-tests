@@ -3,9 +3,6 @@ package uk.gov.co.test.ui.pages.v9
 import org.openqa.selenium.{By, WebElement}
 import org.scalatest.concurrent.Eventually.eventually
 import uk.gov.co.test.ui.data.MasterVacancyDetails.{applicationId, vacancyId}
-import uk.gov.co.test.ui.flows.v9.LoginCandidateFlow.loginNewCandidate
-import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.applicationCentreTitle
-import uk.gov.co.test.ui.pages.v9.SignInPage.signOut
 
 import scala.collection.mutable
 import scala.jdk.CollectionConverters._
@@ -129,12 +126,14 @@ object ApplicationsPage extends CivilServiceJobsBasePage {
     applicationId = applicationIdValue()
   }
 
-  def navigateToApplicationCentrePage(): Unit = {
-    if (driver.getTitle == applicationCentreTitle)
-      refreshPage()
-    eventually(statusValue() shouldEqual "Application being reviewed")
-    reviewUpdateValue().click()
-  }
+  def navigateToApplicationCentrePage(): Unit =
+    if (driver.getTitle == applicationsPageTitle) {
+      reviewUpdateValue().click()
+    } else {
+      navigateToApplicationsPage()
+      eventually(statusValue() shouldEqual "Application being reviewed")
+      reviewUpdateValue().click()
+    }
 
   def confirmStatusOnApplicationPage(currentStatus: String): Unit = {
     waitForVisibilityOfElementByPath(applicationLinkPath).click()
