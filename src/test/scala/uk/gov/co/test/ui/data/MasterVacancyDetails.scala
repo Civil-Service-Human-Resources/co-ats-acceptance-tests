@@ -108,11 +108,11 @@ object MasterVacancyDetails extends VacancyBasePage {
   var vXGrsVacancy: Boolean       = true
 
   //vx VACANCY success profiles section
-  var vXAbilitiesRequired: Boolean   = true
-  var vXBehavioursRequired: Boolean  = true
-  var vXExperiencesRequired: Boolean = true
-  var vXStrengthsRequired: Boolean   = true
-  var vXTechSkillsRequired: Boolean  = true
+  var vXAbilitiesRequired: Boolean   = _
+  var vXBehavioursRequired: Boolean  = _
+  var vXExperiencesRequired: Boolean = _
+  var vXStrengthsRequired: Boolean   = _
+  var vXTechSkillsRequired: Boolean  = _
 
   //vx VACANCY technical skills section
   var vXHowManySkills: Int                              = 8
@@ -191,7 +191,7 @@ object MasterVacancyDetails extends VacancyBasePage {
 
   //v9 SHORT FORM eligibility page
   var v9CivilServant: Boolean  = true
-  var v9HomeDepartment: String = ""
+  var v9HomeDepartment: String = "Independent Parliamentary Standards Authority"
 
   //v9 SHORT FORM personal info page
   var v9ReasonableAdjustments = false

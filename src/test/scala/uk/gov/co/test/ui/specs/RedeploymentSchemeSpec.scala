@@ -1,8 +1,10 @@
 package uk.gov.co.test.ui.specs
 
 import uk.gov.co.test.ui.data.MasterVacancyDetails.{v9HomeDepartment, vacancyId}
+import uk.gov.co.test.ui.data.test.ogd.OGD_LONG_FORM_DATA
 import uk.gov.co.test.ui.data.test.redeployment.{NON_REDEPLOYMENT_VACANCY_DATA, REDEPLOYMENT_SHORT_FORM_DATA}
 import uk.gov.co.test.ui.data.v9.applicants._
+import uk.gov.co.test.ui.flows.v9.LongFormFlow.fillLongFormDetails
 import uk.gov.co.test.ui.flows.v9.RegisterCandidateFlow.fillNewCandidateDetails
 import uk.gov.co.test.ui.flows.v9.ShortFormFlow.fillShortFormDetails
 import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.fillNewVacancyForm

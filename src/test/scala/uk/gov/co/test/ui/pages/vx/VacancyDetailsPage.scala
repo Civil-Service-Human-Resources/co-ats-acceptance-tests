@@ -2,7 +2,7 @@ package uk.gov.co.test.ui.pages.vx
 
 import org.openqa.selenium.{By, WebElement}
 import org.scalatest.concurrent.Eventually.eventually
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXApplicationClosingDate, vXApplicationLiveDate, vXApproach, vXAvailableOutsideInNI, vXBudgetaryApproval, vXBusinessArea, vXBusinessAreaDetail, vXCommunitiesInNIR, vXCostCentre, vXDesirablePastExperience, vXFullQualification, vXGiveLocationPreference, vXGreatForVeterans, vXGuidanceText, vXInterviewExpectedRounds, vXInterviewFourType, vXInterviewNumber, vXInterviewOneType, vXInterviewThreeType, vXInterviewTwoType, vXJobHistory, vXJobInfoDepartment, vXLanguagesMandatory, vXLicencesMandatory, vXLocationDisplay, vXLocationType, vXMaxLocations, vXMembershipsMandatory, vXNoOfJobsAvailable, vXOtherLocations, vXPersonalStatement, vXPreviousExperiences, vXProfession, vXQualificationsMandatory, vXReserveExtendLength, vXReserveExtendRequired, vXReserveListLength, vXReserveListRequired, vXSpecificLanguages, vXSpecificLicences, vXSpecificMemberships, vXSpecificPastExperience, vXSpecificQualifications, vXSpecifyGuidance, vXStatementWordLimit, vXTypeOfRole, vXVacanciesInNIR, vacancyFormId, vacancyId, vacancyName}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXAbilitiesRequired, vXApplicationClosingDate, vXApplicationLiveDate, vXApproach, vXAvailableOutsideInNI, vXBehavioursRequired, vXBudgetaryApproval, vXBusinessArea, vXBusinessAreaDetail, vXCommunitiesInNIR, vXCostCentre, vXDesirablePastExperience, vXExperiencesRequired, vXFullQualification, vXGiveLocationPreference, vXGreatForVeterans, vXGuidanceText, vXInterviewExpectedRounds, vXInterviewFourType, vXInterviewNumber, vXInterviewOneType, vXInterviewThreeType, vXInterviewTwoType, vXJobHistory, vXJobInfoDepartment, vXLanguagesMandatory, vXLicencesMandatory, vXLocationDisplay, vXLocationType, vXMaxLocations, vXMembershipsMandatory, vXNoOfJobsAvailable, vXOtherLocations, vXPersonalStatement, vXPreviousExperiences, vXProfession, vXQualificationsMandatory, vXReserveExtendLength, vXReserveExtendRequired, vXReserveListLength, vXReserveListRequired, vXSpecificLanguages, vXSpecificLicences, vXSpecificMemberships, vXSpecificPastExperience, vXSpecificQualifications, vXSpecifyGuidance, vXStatementWordLimit, vXStrengthsRequired, vXTechSkillsRequired, vXTypeOfRole, vXVacanciesInNIR, vacancyFormId, vacancyId, vacancyName}
 import uk.gov.co.test.ui.pages.vx.vacancytabs.SummaryTab.{vacancyActive, vacancyClosingDateId, vacancyLiveDateId}
 
 import scala.collection.mutable
@@ -73,6 +73,11 @@ object VacancyDetailsPage extends VacancyBasePage {
   def qualificationsMandatoryId         = s"${vacancyFormId}_datafield_60215_1_1_fieldset"
   def specificQualificationsId          = s"${vacancyFormId}_datafield_60209_1_1_en-GB"
   def greatForVeteransId                = s"${vacancyFormId}_datafield_138150_1_1_fieldset"
+  def abilitiesId                       = s"${vacancyFormId}_datafield_154245_1_1_12685"
+  def behavioursId                      = s"${vacancyFormId}_datafield_154245_1_1_12686"
+  def experienceId                      = s"${vacancyFormId}_datafield_154245_1_1_12687"
+  def strengthsId                       = s"${vacancyFormId}_datafield_154245_1_1_12689"
+  def technicalSkillsId                 = s"${vacancyFormId}_datafield_154245_1_1_12688"
 
   private def dashboardPageCheck(): Unit =
     eventually(onPage(dashboardPageTitle))
@@ -87,6 +92,13 @@ object VacancyDetailsPage extends VacancyBasePage {
     vacancyName
   }
 
+  private def extractBooleanValue(): Unit = {
+    val veterans = waitForVisibilityOfElementById(greatForVeteransId).findElement(By.xpath(checkLabelPath))
+    if (veterans.getText == "Yes") {
+      vXGreatForVeterans = true
+    } else vXGreatForVeterans = false
+  }
+
   def searchForVacancy(vacancyId: String): Unit = {
     waitForVisibilityOfElementById(searchPath).click()
     waitForVisibilityOfElementByPath(searchVacanciesPath).click()
@@ -96,8 +108,7 @@ object VacancyDetailsPage extends VacancyBasePage {
     extractVacancyId()
     extractVacancyName()
     extractVacancySummary()
-    println(vacancyId)
-    println(vacancyName)
+    println(s"$vacancyId - $vacancyName")
   }
 
   def extractVacancySummary(): Unit =
@@ -106,8 +117,6 @@ object VacancyDetailsPage extends VacancyBasePage {
       val closingDate = waitForVisibilityOfElementById(vacancyClosingDateId).getText.replaceAll(""" at.*""", "")
       vXApplicationLiveDate = liveDate
       vXApplicationClosingDate = closingDate
-      println(vXApplicationLiveDate)
-      println(vXApplicationClosingDate)
     } else println("Vacancy is inactive!")
 
   def navigateToVacancyForms(): Unit = {
@@ -125,25 +134,18 @@ object VacancyDetailsPage extends VacancyBasePage {
     while (waitForVisibilityOfElementByPath(matchedOption).getText != criteria)
       clickOn(matchingOption)
 
-  private def extractDepartment(): Unit = {
+  private def extractDepartment(): Unit =
     vXJobInfoDepartment = waitForVisibilityOfElementById(departmentId).getText
-    println(vXJobInfoDepartment)
-  }
 
-  private def extractBusinessArea(): Unit = {
+  private def extractBusinessArea(): Unit =
     vXBusinessArea = waitForVisibilityOfElementById(businessAreaId).getText
-    println(vXBusinessArea)
-  }
 
-  private def extractBusinessAreaDetail(): Unit = {
+  private def extractBusinessAreaDetail(): Unit =
     vXBusinessAreaDetail = waitForVisibilityOfElementById(businessAreaDetailId).getText
-    println(vXBusinessAreaDetail)
-  }
 
   private def extractTypeOfRole(): Unit = {
     vXTypeOfRole.clear()
     extractValues(typeOfRoleId, vXTypeOfRole)
-    println(vXTypeOfRole)
   }
 
   def tableArea(id: String): WebElement =
@@ -161,20 +163,15 @@ object VacancyDetailsPage extends VacancyBasePage {
       vXListItem += rolesItem(howManyItem).getText
   }
 
-  private def extractWhichProfession(): Unit = {
+  private def extractWhichProfession(): Unit =
     vXProfession = waitForVisibilityOfElementById(whichProfessionId).getText
-    println(vXProfession)
-  }
 
-  private def extractNoOfJobsAvailable(): Unit = {
+  private def extractNoOfJobsAvailable(): Unit =
     vXNoOfJobsAvailable = waitForVisibilityOfElementById(noOfJobsId).getAttribute("value")
-    println(vXNoOfJobsAvailable)
-  }
 
   private def extractApproach(): Unit = {
     val whichApproach = waitForVisibilityOfElementById(approachId).findElement(By.xpath(checkLabelPath))
     vXApproach = whichApproach.getText
-    println(vXApproach)
   }
 
   private def extractBudgetaryApproval(): Unit = {
@@ -182,13 +179,10 @@ object VacancyDetailsPage extends VacancyBasePage {
     if (budget.getText == "Yes") {
       vXBudgetaryApproval = true
     } else vXBudgetaryApproval = false
-    println(vXBudgetaryApproval)
   }
 
-  private def extractCostCentre(): Unit = {
+  private def extractCostCentre(): Unit =
     vXCostCentre = waitForVisibilityOfElementById(costCentreId).getAttribute("value")
-    println(vXCostCentre)
-  }
 
   private def extractReserveListRequired(): Unit = {
     val reserve = waitForVisibilityOfElementById(reserveListRequiredId).findElement(By.xpath(checkLabelPath))
@@ -197,15 +191,12 @@ object VacancyDetailsPage extends VacancyBasePage {
       extractReserveLength()
       extractReserveExtendRequired()
     } else vXReserveListRequired = false
-    println(vXReserveListRequired)
   }
 
-  private def extractReserveLength(): Unit = {
+  private def extractReserveLength(): Unit =
     vXReserveListLength = waitForVisibilityOfElementById(reserveListLengthId).getText
-    println(vXReserveListLength)
-  }
 
-  private def extractReserveExtendRequired(): Unit = {
+  private def extractReserveExtendRequired(): Unit =
     if (vXReserveListLength == "12 Months") {
       val extendRequired = waitForVisibilityOfElementById(reserveExtendRequiredId).findElement(By.xpath(checkLabelPath))
       if (extendRequired.isDisplayed && extendRequired.getText == "Yes") {
@@ -216,23 +207,16 @@ object VacancyDetailsPage extends VacancyBasePage {
       vXReserveExtendRequired = false
       vXReserveExtendLength = ""
     }
-    println(vXReserveExtendRequired)
-  }
 
-  private def extractReserveExtendLength(): Unit = {
+  private def extractReserveExtendLength(): Unit =
     vXReserveExtendLength = waitForVisibilityOfElementById(reserveExtendLengthId).getText
-    println(vXReserveExtendLength)
-  }
 
-  private def extractLocationType(): Unit = {
+  private def extractLocationType(): Unit =
     vXLocationType = waitForVisibilityOfElementById(locationTypeId).getText
-    println(vXLocationType)
-  }
 
   private def extractLocationDisplay(): Unit = {
     val display = waitForVisibilityOfElementById(locationDisplayOverrideId).getAttribute("value")
     vXLocationDisplay = display.split(",").mkString("List(", ", ", ")")
-    println(vXLocationDisplay)
   }
 
   private def extractVacancyInNI(): Unit = {
@@ -242,7 +226,6 @@ object VacancyDetailsPage extends VacancyBasePage {
       extractAvailableOutsideNI()
       extractWhichCommunitiesApply()
     } else vXVacanciesInNIR = false
-    println(vXVacanciesInNIR)
   }
 
   private def extractAvailableOutsideNI(): Unit = {
@@ -250,13 +233,11 @@ object VacancyDetailsPage extends VacancyBasePage {
     if (outsideNI.getText == "Yes") {
       vXAvailableOutsideInNI = true
     } else vXAvailableOutsideInNI = false
-    println(vXAvailableOutsideInNI)
   }
 
   private def extractWhichCommunitiesApply(): Unit = {
     val communities = waitForVisibilityOfElementById(whichCommunitiesApplyId).findElement(By.xpath(checkLabelPath))
     vXCommunitiesInNIR = communities.getText
-    println(vXCommunitiesInNIR)
   }
 
   private def extractGiveLocationPreferences(): Unit = {
@@ -266,24 +247,19 @@ object VacancyDetailsPage extends VacancyBasePage {
       extractMaxLocationPreferences()
       extractLocationsToChoose()
     } else vXGiveLocationPreference = false
-    println(vXGiveLocationPreference)
   }
 
-  private def extractMaxLocationPreferences(): Unit = {
+  private def extractMaxLocationPreferences(): Unit =
     vXMaxLocations = waitForVisibilityOfElementById(maxLocationPreferenceId).getAttribute("title")
-    println(vXMaxLocations)
-  }
 
   private def extractLocationsToChoose(): Unit = {
     vXOtherLocations.clear()
     extractValues(locationsToChooseId, vXOtherLocations)
-    println(vXOtherLocations)
   }
 
   private def extractInterviewRounds(): Unit = {
     val expectedRounds = waitForVisibilityOfElementById(interviewRoundsId).findElement(By.xpath(checkLabelPath))
     vXInterviewExpectedRounds = expectedRounds.getText
-    println(vXInterviewExpectedRounds)
   }
 
   private def extractInterviewType(): Unit = {
@@ -294,43 +270,31 @@ object VacancyDetailsPage extends VacancyBasePage {
       vXInterviewExpectedRounds.toInt match {
         case 1 =>
           vXInterviewOneType = interviewType(interviewOneId).getText
-          println(vXInterviewOneType)
           vXInterviewNumber = ListBuffer("1")
         case 2 =>
           vXInterviewOneType = interviewType(interviewOneId).getText
-          println(vXInterviewOneType)
           vXInterviewTwoType = interviewType(interviewTwoId).getText
-          println(vXInterviewTwoType)
           vXInterviewNumber = ListBuffer("1", "2")
         case 3 =>
           vXInterviewOneType = interviewType(interviewOneId).getText
-          println(vXInterviewOneType)
           vXInterviewTwoType = interviewType(interviewTwoId).getText
-          println(vXInterviewTwoType)
           vXInterviewThreeType = interviewType(interviewThreeId).getText
-          println(vXInterviewThreeType)
           vXInterviewNumber = ListBuffer("1", "2", "3")
         case 4 =>
           vXInterviewOneType = interviewType(interviewOneId).getText
-          println(vXInterviewOneType)
           vXInterviewTwoType = interviewType(interviewTwoId).getText
-          println(vXInterviewTwoType)
           vXInterviewThreeType = interviewType(interviewThreeId).getText
-          println(vXInterviewThreeType)
           vXInterviewFourType = interviewType(interviewFourId).getText
-          println(vXInterviewFourType)
           vXInterviewNumber = ListBuffer("1", "2", "3", "4")
       }
-      println(vXInterviewNumber)
     }
   }
 
   private def extractGreatForVeterans(): Unit = {
     val veterans = waitForVisibilityOfElementById(greatForVeteransId).findElement(By.xpath(checkLabelPath))
-    if (veterans.getText == "Yes") {
+    if (veterans != null && veterans.getText == "Yes") {
       vXGreatForVeterans = true
     } else vXGreatForVeterans = false
-    println(s"Veterans option is selected as: $vXGreatForVeterans")
   }
 
   private def extractJobHistory(): Unit = {
@@ -338,7 +302,6 @@ object VacancyDetailsPage extends VacancyBasePage {
     if (history.getText == "Yes") {
       vXJobHistory = true
     } else vXJobHistory = false
-    println(vXJobHistory)
   }
 
   private def extractFullQualificationDetails(): Unit = {
@@ -346,7 +309,6 @@ object VacancyDetailsPage extends VacancyBasePage {
     if (fullQualifications.getText == "Yes") {
       vXFullQualification = true
     } else vXFullQualification = false
-    println(vXFullQualification)
   }
 
   private def extractPreviousExperiences(): Unit = {
@@ -354,7 +316,6 @@ object VacancyDetailsPage extends VacancyBasePage {
     if (previous.getText == "Yes") {
       vXPreviousExperiences = true
     } else vXPreviousExperiences = false
-    println(vXPreviousExperiences)
   }
 
   private def extractPersonalStatement(): Unit = {
@@ -364,13 +325,10 @@ object VacancyDetailsPage extends VacancyBasePage {
       extractStatementWordLimit()
       extractSpecifyGuidance()
     } else vXPersonalStatement = false
-    println(vXPersonalStatement)
   }
 
-  private def extractStatementWordLimit(): Unit = {
+  private def extractStatementWordLimit(): Unit =
     vXStatementWordLimit = waitForVisibilityOfElementById(personalStatementWordLimitId).getText.toInt
-    println(vXStatementWordLimit)
-  }
 
   private def extractSpecifyGuidance(): Unit = {
     val specify = waitForVisibilityOfElementById(specifyGuidanceId).findElement(By.xpath(checkLabelPath))
@@ -378,13 +336,10 @@ object VacancyDetailsPage extends VacancyBasePage {
       vXSpecifyGuidance = true
       extractGuidanceText()
     } else vXSpecifyGuidance = false
-    println(vXSpecifyGuidance)
   }
 
-  private def extractGuidanceText(): Unit = {
+  private def extractGuidanceText(): Unit =
     vXGuidanceText = waitForVisibilityOfElementById(guidanceTextId).getText
-    println(vXGuidanceText)
-  }
 
   private def extractDesirablePastExperience(): Unit = {
     val desirablePast = waitForVisibilityOfElementById(desirablePastExperienceId).findElement(By.xpath(checkLabelPath))
@@ -392,13 +347,10 @@ object VacancyDetailsPage extends VacancyBasePage {
       vXDesirablePastExperience = true
       extractSpecificPastExperience()
     } else vXDesirablePastExperience = false
-    println(vXDesirablePastExperience)
   }
 
-  private def extractSpecificPastExperience(): Unit = {
+  private def extractSpecificPastExperience(): Unit =
     vXSpecificPastExperience = waitForVisibilityOfElementById(specificDesirablePastExperienceId).getText
-    println(vXSpecificPastExperience)
-  }
 
   private def extractLicencesMandatory(): Unit = {
     val licences = waitForVisibilityOfElementById(licencesMandatoryId).findElement(By.xpath(checkLabelPath))
@@ -406,13 +358,10 @@ object VacancyDetailsPage extends VacancyBasePage {
       vXLicencesMandatory = true
       extractSpecificLanguages()
     } else vXLicencesMandatory = false
-    println(vXLicencesMandatory)
   }
 
-  private def extractSpecificLanguages(): Unit = {
+  private def extractSpecificLanguages(): Unit =
     vXSpecificLicences = waitForVisibilityOfElementById(specificLicencesId).getText
-    println(vXSpecificLicences)
-  }
 
   private def extractMembershipsMandatory(): Unit = {
     val memberships = waitForVisibilityOfElementById(membershipsMandatoryId).findElement(By.xpath(checkLabelPath))
@@ -420,13 +369,10 @@ object VacancyDetailsPage extends VacancyBasePage {
       vXMembershipsMandatory = true
       extractMembershipsLanguages()
     } else vXMembershipsMandatory = false
-    println(vXMembershipsMandatory)
   }
 
-  private def extractMembershipsLanguages(): Unit = {
+  private def extractMembershipsLanguages(): Unit =
     vXSpecificMemberships = waitForVisibilityOfElementById(specificMembershipsId).getText
-    println(vXSpecificMemberships)
-  }
 
   private def extractLanguagesMandatory(): Unit = {
     val languages = waitForVisibilityOfElementById(languagesMandatoryId).findElement(By.xpath(checkLabelPath))
@@ -434,13 +380,10 @@ object VacancyDetailsPage extends VacancyBasePage {
       vXLanguagesMandatory = true
       extractLanguagesLanguages()
     } else vXLanguagesMandatory = false
-    println(vXLanguagesMandatory)
   }
 
-  private def extractLanguagesLanguages(): Unit = {
+  private def extractLanguagesLanguages(): Unit =
     vXSpecificLanguages = waitForVisibilityOfElementById(specificLanguagesId).getText
-    println(vXSpecificLanguages)
-  }
 
   private def extractQualificationsMandatory(): Unit = {
     val qualifications = waitForVisibilityOfElementById(qualificationsMandatoryId).findElement(By.xpath(checkLabelPath))
@@ -448,12 +391,45 @@ object VacancyDetailsPage extends VacancyBasePage {
       vXQualificationsMandatory = true
       extractSpecificQualifications()
     } else vXQualificationsMandatory = false
-    println(vXQualificationsMandatory)
   }
 
-  private def extractSpecificQualifications(): Unit = {
+  private def extractSpecificQualifications(): Unit =
     vXSpecificQualifications = waitForVisibilityOfElementById(specificQualificationsId).getText
-    println(vXSpecificQualifications)
+
+  private def extractAbilities(): Unit = {
+    val abilities = waitForVisibilityOfElementById(abilitiesId).getAttribute("checked")
+    if (abilities != null) {
+      vXAbilitiesRequired = true
+    } else vXAbilitiesRequired = false
+  }
+
+  private def extractBehaviours(): Unit = {
+    val behaviours = waitForVisibilityOfElementById(behavioursId).getAttribute("checked")
+    if (behaviours != null) {
+      vXBehavioursRequired = true
+    } else vXBehavioursRequired = false
+  }
+
+  private def extractExperience(): Unit = {
+    val experience = waitForVisibilityOfElementById(experienceId).getAttribute("checked")
+    if (experience != null) {
+      vXExperiencesRequired = true
+      extractExperienceSection()
+    } else vXExperiencesRequired = false
+  }
+
+  private def extractStrengths(): Unit = {
+    val strengths = waitForVisibilityOfElementById(strengthsId).getAttribute("checked")
+    if (strengths != null) {
+      vXStrengthsRequired = true
+    } else vXStrengthsRequired = false
+  }
+
+  private def extractTechnicalSkills(): Unit = {
+    val skills = waitForVisibilityOfElementById(technicalSkillsId).getAttribute("checked")
+    if (skills != null) {
+      vXTechSkillsRequired = true
+    } else vXTechSkillsRequired = false
   }
 
   private def jobInformationDetails(): Unit = {
@@ -485,7 +461,15 @@ object VacancyDetailsPage extends VacancyBasePage {
     extractInterviewType()
   }
 
-  def experience(): Unit = {
+  def successProfiles(): Unit = {
+    extractAbilities()
+    extractBehaviours()
+    extractExperience()
+    extractStrengths()
+    extractTechnicalSkills()
+  }
+
+  def extractExperienceSection(): Unit = {
     extractJobHistory()
     extractFullQualificationDetails()
     extractPreviousExperiences()
@@ -497,7 +481,7 @@ object VacancyDetailsPage extends VacancyBasePage {
     extractQualificationsMandatory()
   }
 
-  def management(): Unit =
+  def vacancyManagement(): Unit =
     extractGreatForVeterans()
 
   def extractAllVacancyDetails(vacancyToExtract: String): Unit = {
@@ -509,7 +493,7 @@ object VacancyDetailsPage extends VacancyBasePage {
     reserveList()
     locations()
     interviews()
-    experience()
-    management()
+    successProfiles()
+    vacancyManagement()
   }
 }

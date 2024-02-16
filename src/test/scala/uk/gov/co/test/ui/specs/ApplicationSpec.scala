@@ -15,7 +15,7 @@ class ApplicationSpec extends BaseFeatureSpec {
     Scenario("VX: A Candidate Completes Short And Long Forms", RunInV9) {
       Given("candidate registers a new account")
       vacancyId = "9606"
-//      extractAllVacancyDetails(vacancyId)
+      extractAllVacancyDetails(vacancyId)
       fillNewCandidateDetails(MASTER_REGISTER_CANDIDATE)
 
       When("candidate completes the short form")

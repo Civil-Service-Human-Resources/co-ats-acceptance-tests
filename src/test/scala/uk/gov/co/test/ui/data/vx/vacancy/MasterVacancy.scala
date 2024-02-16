@@ -31,7 +31,7 @@ object MASTER_VACANCY_DATA
 object MASTER_BASIC_DETAILS
     extends BasicDetails(
       "DO NOT USE- Automation Test Template",
-      s"HMRC - " + generateRandomJobPosition(),
+      s"DWP - " + generateRandomJobPosition(),
       true,
       "Prawf awtomeiddio",
       32
@@ -39,8 +39,8 @@ object MASTER_BASIC_DETAILS
 object MASTER_JOB_INFORMATION
     extends JobInfoDetails(
       true,
-      "HM Revenue and Customs",
-      "HMRC - CCG - Strategy",
+      "Department for Work and Pensions",
+      "DWP - Communications",
       true,
       "Prawf awtomeiddio",
       "Autotest - Business area detail",
