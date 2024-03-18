@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.pages.vx
 
 import org.openqa.selenium.By
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{applicationId, v9CivilServant, v9HomeDepartment, randomFirstName, randomLastName, vXInterviewNumber, vXJobInfoDepartment, vacancyId, vacancyName}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{applicationId, randomFirstName, randomLastName, v9CivilServant, v9HomeDepartment, vXInterviewNumber, vXJobInfoDepartment, vacancyId, vacancyName}
 import uk.gov.co.test.ui.data.TestData.eventually
 import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.{candidateAcceptsOffer, confirmOfferAcceptedState}
 import uk.gov.co.test.ui.pages.v9.ProvisionalOfferPage.offerDecisionFlow
@@ -248,9 +248,18 @@ object ApplicationSummaryPage extends VacancyBasePage {
     checkCandidateSummary("6") shouldEqual vacancyName
     checkCandidateSummary("7") shouldEqual vXJobInfoDepartment
     checkCandidateSummary("8") shouldEqual
-      (if (dataLevel.isDefined && dataLevel.get == "restricted") { "Restricted Data" }
-       else if (v9CivilServant && (v9HomeDepartment != vXJobInfoDepartment)) {
+      (if (dataLevel.isDefined && dataLevel.get == "restricted") {
+         "Restricted Data"
+       } else if (
+         v9CivilServant && (v9HomeDepartment != vXJobInfoDepartment) && (v9HomeDepartment == "Independent Parliamentary Standards Authority")
+       ) {
+         "NDPB - Current employee of Accredited NDPB"
+       } else if (
+         v9CivilServant && (v9HomeDepartment != vXJobInfoDepartment) && (v9HomeDepartment != "Independent Parliamentary Standards Authority")
+       ) {
          "OGD - Current employee of another Civil Service Department"
+       } else if (v9CivilServant && (v9HomeDepartment == vXJobInfoDepartment)) {
+         "Internal - Current employee of advertising department"
        } else "External - Non Civil Servant / External")
   }
 }

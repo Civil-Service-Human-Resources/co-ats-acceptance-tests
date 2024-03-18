@@ -52,7 +52,9 @@ object TechnicalSkillsPage extends CivilServiceJobsBasePage {
     val testInfoOne = waitForVisibilityOfElementById(techSkillOneHeaderId).getText
     if (vXListOfTechSkills.isEmpty) {
       testInfoOne shouldEqual s"${sortedListOfTechSkills.head}\nDescription: ${sortedListOfTechSkillsDescription.head}"
-    } else testInfoOne shouldEqual s"${vXListOfTechSkills.head}\nDescription: ${vXListOfTechSkillsDescription.head}"
+    } else testInfoOne shouldEqual s"""${vXListOfTechSkills.head}
+                                        |
+                                        |Description: ${sortedListOfTechSkillsDescription.head}""".stripMargin
     enterDetails(techSkillOneInputId, techSkillsDetails.techSkillOne)
   }
 

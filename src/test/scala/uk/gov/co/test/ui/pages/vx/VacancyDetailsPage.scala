@@ -438,7 +438,6 @@ object VacancyDetailsPage extends VacancyBasePage {
     if (tests.getText == "Yes") {
       vXAnyOnlineTests = true
     } else vXAnyOnlineTests = false
-    println(s"Online tests set to $vXAnyOnlineTests")
   }
 
   private def jobInformationDetails(): Unit = {
