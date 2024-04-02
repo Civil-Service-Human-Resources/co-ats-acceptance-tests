@@ -2,6 +2,7 @@ package uk.gov.co.test.ui.pages.v9.longform
 
 import org.scalatest.concurrent.Eventually.eventually
 import uk.gov.co.test.ui.data.v9.longform.LongFormDetails
+import uk.gov.co.test.ui.data.MasterVacancyDetails.vXExperiencesRequired
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
 import uk.gov.co.test.ui.pages.v9.shortform.ApplicationGuidancePage.extractAppFormId
 
@@ -32,11 +33,14 @@ object DiversityMonitoringPage extends CivilServiceJobsBasePage {
   )
 
   def experienceAndSkillsPage(longFormDetails: LongFormDetails): Unit = {
-    experienceAndSkillsPageCheck()
-    longFormId = extractAppFormId()
-    experienceAndSkills.foreach { f =>
-      f(longFormDetails.experienceAndSkillsDetails)
+    if (vXExperiencesRequired) {
+      experienceAndSkillsPageCheck()
+      longFormId = extractAppFormId()
+      experienceAndSkills.foreach { f =>
+        f(longFormDetails.experienceAndSkillsDetails)
+      }
+      clickOn(pageContinue)
     }
-    clickOn(pageContinue)
+    longFormId = extractAppFormId()
   }
 }

@@ -1,4 +1,4 @@
-package uk.gov.co.test.ui.data.vx
+package uk.gov.co.test.ui.data.vx.vacancy
 
 import uk.gov.co.test.ui.pages.vx.createvacancypage._
 

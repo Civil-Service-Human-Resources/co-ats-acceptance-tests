@@ -1,4 +1,4 @@
-package uk.gov.co.test.ui.data.vx
+package uk.gov.co.test.ui.data
 
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 
@@ -74,12 +74,24 @@ object MasterVacancyDetails extends VacancyBasePage {
   var vXRightToRemainUK: Boolean          = true
 
   //vx VACANCY experience section
-  var vXGuidanceText: String             = "Autotest - Enter guidance text for the candidate"
+  var vXJobHistory: Boolean              = false
+  var vXFullQualification: Boolean       = false
+  var vXPreviousExperiences: Boolean     = false
+  var vXPersonalStatement: Boolean       = false
+  var vXSpecifyGuidance: Boolean         = false
+  var vXGuidanceText: String             = ""
+  var vXDesirablePastExperience: Boolean = false
+  var vXSpecificPastExperience: String   = ""
   var vXStatementWordLimit: Int          = 250
-  var vXLicencesMandatory: Boolean       = true
-  var vXMembershipsMandatory: Boolean    = true
-  var vXLanguagesMandatory: Boolean      = true
-  var vXQualificationsMandatory: Boolean = true
+  var vXPreSiftRequired: Boolean         = true
+  var vXLicencesMandatory: Boolean       = false
+  var vXSpecificLicences: String         = ""
+  var vXMembershipsMandatory: Boolean    = false
+  var vXSpecificMemberships: String      = ""
+  var vXLanguagesMandatory: Boolean      = false
+  var vXSpecificLanguages: String        = ""
+  var vXQualificationsMandatory: Boolean = false
+  var vXSpecificQualifications: String   = ""
 
   //vx VACANCY location section
   var vXLocationType                    = ""
@@ -92,15 +104,15 @@ object MasterVacancyDetails extends VacancyBasePage {
   var vXOtherLocations                  = new ListBuffer[String]()
 
   //vx VACANCY management section
-  var vXGreatForVeterans: Boolean = true
+  var vXGreatForVeterans: Boolean = false
   var vXGrsVacancy: Boolean       = true
 
   //vx VACANCY success profiles section
-  var vXAbilitiesRequired: Boolean   = true
-  var vXBehavioursRequired: Boolean  = true
-  var vXExperiencesRequired: Boolean = true
-  var vXStrengthsRequired: Boolean   = true
-  var vXTechSkillsRequired: Boolean  = true
+  var vXAbilitiesRequired: Boolean   = _
+  var vXBehavioursRequired: Boolean  = _
+  var vXExperiencesRequired: Boolean = _
+  var vXStrengthsRequired: Boolean   = _
+  var vXTechSkillsRequired: Boolean  = _
 
   //vx VACANCY technical skills section
   var vXHowManySkills: Int                              = 8
@@ -141,7 +153,7 @@ object MasterVacancyDetails extends VacancyBasePage {
   )
 
   //vx VACANCY tests section
-  var vXAnyOnlineTests = false
+  var vXAnyOnlineTests: Boolean = _
 
   //vx PEC FORM checks
   var vXRtwChecks: List[String] =
@@ -178,8 +190,8 @@ object MasterVacancyDetails extends VacancyBasePage {
   )
 
   //v9 SHORT FORM eligibility page
-  var civilServant: Boolean  = true
-  var homeDepartment: String = "Attorney General's Office"
+  var v9CivilServant: Boolean  = true
+  var v9HomeDepartment: String = "Independent Parliamentary Standards Authority"
 
   //v9 SHORT FORM personal info page
   var v9ReasonableAdjustments = false

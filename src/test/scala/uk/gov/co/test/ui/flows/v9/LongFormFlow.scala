@@ -1,5 +1,6 @@
 package uk.gov.co.test.ui.flows.v9
 
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXAnyAdditionalQuestions, vXBehavioursRequired, vXExperiencesRequired, vXGiveLocationPreference, vXTechSkillsRequired, vXUploadAttachmentRequired}
 import uk.gov.co.test.ui.data.v9.longform.LongFormDetails
 import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.{confirmLongFormCompletion, continueApplicationName}
 import uk.gov.co.test.ui.pages.v9.ApplicationsPage.extractApplicationId
@@ -28,13 +29,21 @@ object LongFormFlow extends CivilServiceJobsBasePage {
     declarationPage
   )
 
-  def fillLongFormDetails(longFormDetails: LongFormDetails): Unit = {
-    clickOn(continueApplicationName)
-    longform.foreach { f =>
-      f(longFormDetails)
+  def fillLongFormDetails(longFormDetails: LongFormDetails): Unit =
+    if (
+      vXExperiencesRequired ||
+      vXBehavioursRequired ||
+      vXTechSkillsRequired ||
+      vXUploadAttachmentRequired ||
+      vXGiveLocationPreference ||
+      vXAnyAdditionalQuestions
+    ) {
+      clickOn(continueApplicationName)
+      longform.foreach { f =>
+        f(longFormDetails)
+      }
+      clickOn(longFormSubmission)
+      confirmLongFormCompletion()
+      extractApplicationId()
     }
-    clickOn(longFormSubmission)
-    confirmLongFormCompletion()
-    extractApplicationId()
-  }
 }

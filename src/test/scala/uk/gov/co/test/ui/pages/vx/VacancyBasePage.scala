@@ -6,8 +6,8 @@ import org.scalatest.concurrent.Eventually.eventually
 import org.scalatest.matchers.should.Matchers
 import uk.gov.co.test.ui.conf.TestConfiguration
 import uk.gov.co.test.ui.conf.TestConfiguration.readProperty
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.vXApplicationClosingDate
-import uk.gov.co.test.ui.data.vx.{RECRUITER, RecruiterDetails}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.vXApplicationClosingDate
+import uk.gov.co.test.ui.data.vx.recruiters.{RECRUITER, RecruiterDetails}
 import uk.gov.co.test.ui.driver.BrowserDriver
 import uk.gov.co.test.ui.flows.v9.RegisterCandidateFlow.checkV9LogoutState
 import uk.gov.co.test.ui.flows.vx.RecruiterLoginFlow.loginWithRecruiterDetails
@@ -22,6 +22,7 @@ import uk.gov.co.test.ui.pages.vx.vacancytabs.SummaryTab.confirmAndActivateVacan
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util
+import scala.collection.mutable.ListBuffer
 
 trait VacancyBasePage extends Matchers with BasePage with BrowserDriver {
 
@@ -82,6 +83,9 @@ trait VacancyBasePage extends Matchers with BasePage with BrowserDriver {
 
   def waitForDropdownOptionByText(option: String): WebElement =
     waitForVisibilityOfElementByPath(s".//li[@role='option' and text()='$option']")
+
+  def waitForDropdownHistoryOptionByText(id: String): WebElement =
+    waitForVisibilityOfElementByPath(s".//*[@id='$id']")
 
   def selectActionLocator(value: String): Unit = {
     action().moveToElement(waitForDropdownOptionByText(value)).perform()
@@ -145,6 +149,12 @@ trait VacancyBasePage extends Matchers with BasePage with BrowserDriver {
   }
 
   def enterRoles(value: List[String], inputId: String): Unit = {
+    clearField(inputId)
+    for (role <- value)
+      selectTypeOfRoles(role, inputId)
+  }
+
+  def enterTypeRoles(value: ListBuffer[String], inputId: String): Unit = {
     clearField(inputId)
     for (role <- value)
       selectTypeOfRoles(role, inputId)

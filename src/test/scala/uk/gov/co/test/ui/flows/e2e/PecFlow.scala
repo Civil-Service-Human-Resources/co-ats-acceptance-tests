@@ -2,7 +2,7 @@ package uk.gov.co.test.ui.flows.e2e
 
 import uk.gov.co.test.ui.data.v9.pecform.MASTER_PEC_FORM_DATA
 import uk.gov.co.test.ui.data.v9.shortform.MASTER_SHORT_FORM_DATA
-import uk.gov.co.test.ui.data.vx.APPLICATION_DATA
+import uk.gov.co.test.ui.data.vx.application.APPLICATION_DATA
 import uk.gov.co.test.ui.flows.v9.PecFormFlow.fillPecFormDetailsOnly
 import uk.gov.co.test.ui.flows.v9.ShortFormFlow.fillShortFormDetails
 import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.{candidateAcceptsOffer, confirmOfferAcceptedState, confirmPecSubmissionState, confirmShortFormCompletionNoLongForm}

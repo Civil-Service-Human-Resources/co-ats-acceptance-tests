@@ -77,7 +77,7 @@ class BrowserFactory extends LazyLogging {
         defaultOptions.addArguments("--no-sandbox")
         defaultOptions.addArguments("--disable-dev-shm-usage")
         defaultOptions.addArguments("--incognito")
-//        defaultOptions.addArguments("window-size=1920,1080")
+        defaultOptions.addArguments("window-size=2560,1440")
 
         defaultOptions.setExperimentalOption("excludeSwitches", List("enable-automation").asJava)
 //        defaultOptions.setExperimentalOption("useAutomationExtension", false)

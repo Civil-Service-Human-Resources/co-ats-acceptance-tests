@@ -3,7 +3,7 @@ package uk.gov.co.test.ui.pages.v9
 import org.openqa.selenium.support.ui.Select
 import org.openqa.selenium.{By, WebElement}
 import org.scalatest.concurrent.Eventually.eventually
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{randomFirstName, vXInstructionsForCandidates, vXInterviewLocation, vXInterviewNumber, vXInterviewRoom, vXInterviewScheduleTitle, vXSlotOneStartTime, vXSlotTwoStartTime}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{randomFirstName, vXInstructionsForCandidates, vXInterviewLocation, vXInterviewNumber, vXInterviewRoom, vXInterviewScheduleTitle, vXSlotOneStartTime, vXSlotTwoStartTime}
 import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.scheduleInterviewFunction
 
 import scala.collection.mutable

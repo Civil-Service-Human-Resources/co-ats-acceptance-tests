@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.pages.vx
 
 import org.scalatest.concurrent.Eventually.eventually
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vacancyId, vacancyName}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{vacancyId, vacancyName}
 
 object DashboardPage extends VacancyBasePage {
 

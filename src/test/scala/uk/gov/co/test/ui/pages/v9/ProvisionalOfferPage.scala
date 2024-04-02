@@ -2,7 +2,7 @@ package uk.gov.co.test.ui.pages.v9
 
 import org.openqa.selenium.By
 import org.scalatest.concurrent.Eventually.eventually
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{civilServant, homeDepartment, vacancyName}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{v9CivilServant, v9HomeDepartment, vacancyName}
 
 object ProvisionalOfferPage extends CivilServiceJobsBasePage {
 
@@ -38,9 +38,9 @@ object ProvisionalOfferPage extends CivilServiceJobsBasePage {
     selectDropdownOption(offerDecisionOptionId, decision)
 
   private def acceptOffer(): Unit =
-    if (civilServant) {
+    if (v9CivilServant) {
       radioSelect(isCivilServantYesId)
-      selectDropdownOption(homeDepartmentId, homeDepartment)
+      selectDropdownOption(homeDepartmentId, v9HomeDepartment)
     } else radioSelect(isCivilServantNoId)
 
   private def declineOffer(): Unit = {

@@ -2,8 +2,8 @@ package uk.gov.co.test.ui.pages.v9.shortform
 
 import org.openqa.selenium.By
 import org.scalatest.concurrent.Eventually.eventually
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{preferredFirstName, randomEmail, randomFirstName, randomLastName, v9AdjustmentsForTests, v9CivilServant, v9HomeDepartment, v9ReasonableAdjustments, vXAnyOnlineTests, vXGreatForVeterans, vXJobInfoDepartment}
 import uk.gov.co.test.ui.data.v9.shortform.ShortFormDetails
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{civilServant, preferredFirstName, randomEmail, randomFirstName, randomLastName, v9AdjustmentsForTests, v9ReasonableAdjustments, vXAnyOnlineTests, vXGreatForVeterans}
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
 import uk.gov.co.test.ui.pages.v9.shortform.ApplicationGuidancePage.shortFormId
 
@@ -107,7 +107,7 @@ object PersonalInfoPage extends CivilServiceJobsBasePage {
     }
 
   private def selectAreYouVeteran(personalInfoDetails: PersonalInfoDetails): Unit =
-    if (vXGreatForVeterans) {
+    if (vXGreatForVeterans && !v9CivilServant) {
       personalInfoDetails.areYouAVeteran match {
         case "Yes"                    =>
           radioSelect(areYouAVeteranYesId)
@@ -120,7 +120,19 @@ object PersonalInfoPage extends CivilServiceJobsBasePage {
     }
 
   private def enterRedeploymentScheme(personalInfoDetails: PersonalInfoDetails): Unit =
-    if (civilServant) {
+    if (
+      v9CivilServant && (vXJobInfoDepartment == "Department for Energy Security & Net Zero" ||
+        vXJobInfoDepartment == "Department for Science, Innovation and Technology" ||
+        vXJobInfoDepartment == "Government Equalities Office" ||
+        vXJobInfoDepartment == "Revenue Scotland" ||
+        vXJobInfoDepartment == "Scottish Fiscal Commission" ||
+        vXJobInfoDepartment == "Transport Scotland") && (v9HomeDepartment == "Department for Energy Security & Net Zero" ||
+        v9HomeDepartment == "Department for Science, Innovation and Technology" ||
+        v9HomeDepartment == "Government Equalities Office" ||
+        v9HomeDepartment == "Revenue Scotland" ||
+        v9HomeDepartment == "Scottish Fiscal Commission" ||
+        v9HomeDepartment == "Transport Scotland")
+    ) {
       scrollToElement(By.id(redeploymentSchemeId))
       if (personalInfoDetails.redeploymentScheme.get) radioSelect(redeploymentSchemeYesId)
       else radioSelect(redeploymentSchemeNoId)

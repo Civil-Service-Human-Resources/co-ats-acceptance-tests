@@ -1,8 +1,8 @@
 package uk.gov.co.test.ui.pages.vx.createvacancypage
 
 import org.openqa.selenium.By
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.vacancyFormId
-import uk.gov.co.test.ui.data.vx.NewVacancyDetails
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXBudgetaryApproval, vXCostCentre, vacancyFormId}
+import uk.gov.co.test.ui.data.vx.vacancy.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 
 case class ApprovalDetails(
@@ -35,13 +35,15 @@ object ApprovalSection extends VacancyBasePage {
 
   private def selectApproval(approvalDetails: ApprovalDetails): Unit = {
     scrollToElement(By.id(approvalId))
-    if (approvalDetails.approval) {
+    vXBudgetaryApproval = approvalDetails.approval
+    vXCostCentre = approvalDetails.costCentre
+    if (vXBudgetaryApproval) {
       clickOnRadioButton(approvalYesId)
       budgetaryInfo(approvalDetails.budgetaryAuthInfo)
     } else {
       clickOnRadioButton(approvalNoId)
     }
-    costCentre(approvalDetails.costCentre)
+    costCentre(vXCostCentre)
     uploadApprovalFile(approvalDetails.fileToUpload)
   }
 

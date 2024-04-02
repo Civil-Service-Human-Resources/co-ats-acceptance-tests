@@ -24,6 +24,7 @@ object ExternalPostingsTab extends VacancyBasePage {
   private lazy val destinationType         = "PostingDestination::ExternalVx"
   private lazy val postingSubHeaderPath    = ".//*[@id='externalpostings_container']/h2"
   private lazy val externalPostLiveDateId  = "external_posting_form_live_date"
+  private lazy val externalPostLiveHourId  = "external_posting_form_live_date_hh"
 
   private def newPostingHeader: String = {
     val header = waitForVisibilityOfElementByPath(postingSubHeaderPath).getText
@@ -118,8 +119,8 @@ object ExternalPostingsTab extends VacancyBasePage {
 
   private def confirmPostingDetails(): Unit = {
     destinationValue()       shouldEqual "Post to Civil Service Jobs"
-//    postingLiveDateValue()    shouldEqual "22 November 2023 at 22:55:00 GMT"
-//    postingClosingDateValue() shouldEqual "22 December 2023 at 22:55:00 GMT"
+    //    postingLiveDateValue()    shouldEqual "22 November 2023 at 22:55:00 GMT"
+    //    postingClosingDateValue() shouldEqual "22 December 2023 at 22:55:00 GMT"
     postingStatusDateValue() shouldEqual "Online"
   }
 
@@ -136,7 +137,7 @@ object ExternalPostingsTab extends VacancyBasePage {
   def changeLiveDate(newLiveDate: String, status: String): Unit = {
     waitForVisibilityOfElementById(externalPostLiveDateId).clear()
     waitForVisibilityOfElementById(externalPostLiveDateId).sendKeys(newLiveDate)
-    waitForVisibilityOfElementById(externalPostLiveDateId).sendKeys(Keys.ENTER)
+    waitForVisibilityOfElementById(externalPostLiveDateId).sendKeys(Keys.TAB)
     waitForVisibilityOfElementById(nextStep2PostingId).click()
     eventually(postingStatusDateValue() shouldEqual status)
   }
@@ -145,16 +146,20 @@ object ExternalPostingsTab extends VacancyBasePage {
     val formatter     = DateTimeFormatter.ofPattern("dd/MM/uuuu")
     val todayDate     = LocalDate.now().format(formatter)
     val yesterdayDate = LocalDate.now().minusDays(1).format(formatter)
+    val tomorrowDate  = LocalDate.now().plusDays(2).format(formatter)
     selectExternalPostingsTab()
     editPosting()
     val liveDate      = waitForVisibilityOfElementById(externalPostLiveDateId).getAttribute("value")
-    if (liveDate <= todayDate) {
-      val tomorrowDate = LocalDate.now().plusDays(2).format(formatter)
+    if (liveDate < todayDate) {
       changeLiveDate(tomorrowDate, "Offline")
       editPosting()
       changeLiveDate(yesterdayDate, "Online")
     } else if (liveDate > todayDate) {
       changeLiveDate(yesterdayDate, "Online")
+    } else {
+      changeLiveDate(tomorrowDate, "Offline")
+      editPosting()
+      changeLiveDate(todayDate, "Online")
     }
   }
 }

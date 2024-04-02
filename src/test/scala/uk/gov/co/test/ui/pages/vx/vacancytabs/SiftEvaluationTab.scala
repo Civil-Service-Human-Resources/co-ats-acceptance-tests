@@ -1,9 +1,9 @@
 package uk.gov.co.test.ui.pages.vx.vacancytabs
 
 import org.openqa.selenium.By
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXBehavioursRequired, vXHowManyBehaviours, vXHowManySkills, vXListOfChosenBehaviours, vXListOfTechSkills, vXTechSkillsRequired, vacancyFormId}
-import uk.gov.co.test.ui.data.vx.{ApplicationDetails, Outcome}
-import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.applicationBeingReviewedState
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXAnyOnlineTests, vXBehavioursRequired, vXExperiencesRequired, vXHowManyBehaviours, vXHowManySkills, vXListOfChosenBehaviours, vXListOfTechSkills, vXPreSiftRequired, vXTechSkillsRequired, vacancyFormId}
+import uk.gov.co.test.ui.data.vx.application.{ApplicationDetails, Outcome}
+import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.{applicationBeingReviewedState, successfulAtSiftState}
 import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.{availableBarItems, completeSiftBarId, confirmCandidateSummary, progressBarAfterPreSiftId, siftEvaluation, withdrawBarId}
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 
@@ -40,8 +40,8 @@ object SiftEvaluationTab extends VacancyBasePage {
   val siftEvaluationStatus                    = "Sift application"
   var vXBehavioursTotalScore: ListBuffer[Int] = ListBuffer()
   var vXTechSkillsTotalScore: ListBuffer[Int] = ListBuffer()
-  var vXCVAssessmentScore: Int                = 7
-  var vXPersonalStatementScore: Int           = 7
+  var vXCVAssessmentScore: Int                = 0
+  var vXPersonalStatementScore: Int           = 0
   def siftEvaluationHeaderId                  = s"${vacancyFormId}_label_153018_1"
   def behaviourAssessmentHeaderId             = s"${vacancyFormId}_label_65762_1"
   def behaviourScoringGuideId                 = s"${vacancyFormId}_label_153583_1"
@@ -128,7 +128,7 @@ object SiftEvaluationTab extends VacancyBasePage {
   }
 
   private def moveSiftEvaluationForm(): Unit = {
-    waitForVisibilityOfElementById(progressBarAfterPreSiftId).click()
+    if (vXPreSiftRequired) waitForVisibilityOfElementById(progressBarAfterPreSiftId).click()
     checkForNewValuePath(vacancyStatusPath, siftEvaluationStatus)
     confirmCandidateSummary(siftEvaluationStatus, Some("restricted"))
     moveVacancyOnViaTopBar(completeSiftBarId, siftEvaluationTabPath)
@@ -385,29 +385,31 @@ object SiftEvaluationTab extends VacancyBasePage {
       ).getText shouldEqual s"Technical skill total score\n  ${totalScore(vXTechSkillsTotalScore)}"
     }
 
-  private def enterCVAssessmentOutcome(siftDetails: SiftDetails): Unit = {
-    enterOutcome(
-      cvAssessmentTitleId,
-      "CV assessment",
-      cvAssessmentScoreId,
-      siftDetails.cvAssessment.score,
-      cvAssessmentCommentsId,
-      siftDetails.cvAssessment.comment
-    )
-    vXCVAssessmentScore = siftDetails.cvAssessment.score
-  }
+  private def enterCVAssessmentOutcome(siftDetails: SiftDetails): Unit =
+    if (vXExperiencesRequired) {
+      enterOutcome(
+        cvAssessmentTitleId,
+        "CV assessment",
+        cvAssessmentScoreId,
+        siftDetails.cvAssessment.score,
+        cvAssessmentCommentsId,
+        siftDetails.cvAssessment.comment
+      )
+      vXCVAssessmentScore = siftDetails.cvAssessment.score
+    }
 
-  private def enterPersonalStatementOutcome(siftDetails: SiftDetails): Unit = {
-    enterOutcome(
-      personalStatementTitleId,
-      "Personal statement",
-      personalStatementScoreId,
-      siftDetails.personalStatement.score,
-      personalStatementCommentsId,
-      siftDetails.personalStatement.comment
-    )
-    vXPersonalStatementScore = siftDetails.personalStatement.score
-  }
+  private def enterPersonalStatementOutcome(siftDetails: SiftDetails): Unit =
+    if (vXExperiencesRequired) {
+      enterOutcome(
+        personalStatementTitleId,
+        "Personal statement",
+        personalStatementScoreId,
+        siftDetails.personalStatement.score,
+        personalStatementCommentsId,
+        siftDetails.personalStatement.comment
+      )
+      vXPersonalStatementScore = siftDetails.personalStatement.score
+    }
 
   private def enterOverallScore(siftDetails: SiftDetails): Unit = {
     waitForVisibilityOfElementById(overallScoreTitleId).getText shouldEqual "Overall score"
@@ -442,6 +444,8 @@ object SiftEvaluationTab extends VacancyBasePage {
     }
     clickOn(submitForm)
     siftEvaluation()
-    applicationBeingReviewedState()
+    if (vXAnyOnlineTests) {
+      successfulAtSiftState()
+    } else applicationBeingReviewedState()
   }
 }

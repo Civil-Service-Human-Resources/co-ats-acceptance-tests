@@ -3,7 +3,7 @@ package uk.gov.co.test.ui.pages.v9.longform
 import org.openqa.selenium.By
 import org.scalatest.concurrent.Eventually.eventually
 import uk.gov.co.test.ui.data.v9.longform.LongFormDetails
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{sortedListOfTechSkills, sortedListOfTechSkillsDescription, vXListOfTechSkills, vXListOfTechSkillsDescription, vXNoOfApplicationStage, vXTechSkillsRequired}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{sortedListOfTechSkills, sortedListOfTechSkillsDescription, vXListOfTechSkills, vXListOfTechSkillsDescription, vXNoOfApplicationStage, vXTechSkillsRequired}
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
 import uk.gov.co.test.ui.pages.v9.longform.DiversityMonitoringPage.longFormId
 
@@ -52,7 +52,9 @@ object TechnicalSkillsPage extends CivilServiceJobsBasePage {
     val testInfoOne = waitForVisibilityOfElementById(techSkillOneHeaderId).getText
     if (vXListOfTechSkills.isEmpty) {
       testInfoOne shouldEqual s"${sortedListOfTechSkills.head}\nDescription: ${sortedListOfTechSkillsDescription.head}"
-    } else testInfoOne shouldEqual s"${vXListOfTechSkills.head}\nDescription: ${vXListOfTechSkillsDescription.head}"
+    } else testInfoOne shouldEqual s"""${vXListOfTechSkills.head}
+                                        |
+                                        |Description: ${sortedListOfTechSkillsDescription.head}""".stripMargin
     enterDetails(techSkillOneInputId, techSkillsDetails.techSkillOne)
   }
 

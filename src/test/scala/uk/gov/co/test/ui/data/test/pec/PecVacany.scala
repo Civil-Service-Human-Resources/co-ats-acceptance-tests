@@ -1,5 +1,6 @@
-package uk.gov.co.test.ui.data.vx
+package uk.gov.co.test.ui.data.test.pec
 
+import uk.gov.co.test.ui.data.vx.vacancy.NewVacancyDetails
 import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.{contactEmailVxConfig, contactNameVxConfig}
 import uk.gov.co.test.ui.pages.v9.SignInPage.generateRandomJobPosition
 import uk.gov.co.test.ui.pages.vx.createvacancypage._
@@ -44,7 +45,7 @@ object PEC_JOB_INFORMATION
       true,
       "Prawf awtomeiddio",
       "",
-      typeOfRole = List(
+      typeOfRole = ListBuffer(
         "Accountancy"
       ),
       "Other",
@@ -71,7 +72,8 @@ object PEC_RESERVE_LIST
     extends ReserveListDetails(
       false,
       "12 Months",
-      false
+      false,
+      "6 Months"
     )
 
 object PEC_LOCATIONS

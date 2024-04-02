@@ -3,7 +3,7 @@ package uk.gov.co.test.ui.pages.v9.pecform
 import org.openqa.selenium.By
 import org.scalatest.concurrent.Eventually.eventually
 import uk.gov.co.test.ui.data.v9.pecform.PecFormDetails
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{randomFirstName, randomLastName}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{randomFirstName, randomLastName}
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
 
 case class YourDetails(

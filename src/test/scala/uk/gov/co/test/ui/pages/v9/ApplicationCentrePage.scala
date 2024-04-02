@@ -2,8 +2,8 @@ package uk.gov.co.test.ui.pages.v9
 
 import org.openqa.selenium.{By, WebElement}
 import org.scalatest.concurrent.Eventually.eventually
-import uk.gov.co.test.ui.data.vx.ApplicationDetails
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{randomFirstName, randomLastName, v9AdjustmentsForTests, v9ReasonableAdjustments, vXAnyOnlineTests, vXInterviewExpectedRounds, vXInterviewFourType, vXInterviewLocation, vXInterviewLongDate, vXInterviewNumber, vXInterviewOneType, vXInterviewThreeType, vXInterviewTwoType, vXSlotTwoStartTime, vacancyName}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{randomFirstName, randomLastName, v9AdjustmentsForTests, v9ReasonableAdjustments, vXAnyOnlineTests, vXInterviewExpectedRounds, vXInterviewFourType, vXInterviewLocation, vXInterviewLongDate, vXInterviewNumber, vXInterviewOneType, vXInterviewThreeType, vXInterviewTwoType, vXSlotTwoStartTime, vacancyName}
+import uk.gov.co.test.ui.data.vx.application.ApplicationDetails
 import uk.gov.co.test.ui.pages.v9.ApplicationsPage.{confirmStatusOnApplicationPage, reviewUpdateOnApplicationPage}
 import uk.gov.co.test.ui.pages.vx.DashboardPage.contactEmailVxConfig
 import uk.gov.co.test.ui.pages.vx.vacancytabs.ReserveListsTab.reserveExpiryDateMonths
@@ -217,6 +217,21 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
     getApplicationState        shouldEqual s"Application status: $status"
     getApplicationConfirmation shouldEqual """The selection panel are reviewing your application.
                                              |We'll email you updates on the progress of your application or you can check the progress here in your account.""".stripMargin
+    switchToOtherWindow
+  }
+
+  def successfulAtSiftState(): Unit = {
+    val status = "Successful at Interview"
+    changeSystem("candidate")
+    confirmStatusOnApplicationPage(status)
+    feedbackFunction().isEnabled
+    advertDetailsFunction().isEnabled
+    withdrawApplicationFunction().isEnabled
+    applicationForVacancyText shouldEqual s"Application For $vacancyName"
+    getApplicationState shouldEqual s"Application status: $status"
+    getApplicationConfirmation shouldEqual
+      """Congratulations you have been successful at sift.
+        |We will be in contact shortly with more information about the next steps.""".stripMargin
     switchToOtherWindow
   }
 

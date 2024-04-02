@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.pages.vx.vacancytabs
 
 import org.openqa.selenium.By
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{applicationId, preferredFirstName, randomEmail, vXReserveExtendLength, vXReserveExtendRequired, vXReserveListLength, vXReserveListTotalLength, vacancyId, vacancyName}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{applicationId, preferredFirstName, randomEmail, vXReserveExtendLength, vXReserveExtendRequired, vXReserveListLength, vXReserveListTotalLength, vacancyId, vacancyName}
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 import uk.gov.co.test.ui.pages.vx.vacancytabs.HistoryTab.{historyTabPath, reserveEmailDetails, reserveScheduleDetails}
 

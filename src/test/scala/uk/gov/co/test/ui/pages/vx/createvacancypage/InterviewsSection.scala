@@ -1,8 +1,10 @@
 package uk.gov.co.test.ui.pages.vx.createvacancypage
 
-import uk.gov.co.test.ui.data.vx.MasterVacancyDetails.{vXInterviewExpectedRounds, vXInterviewFourType, vXInterviewOneType, vXInterviewThreeType, vXInterviewTwoType, vacancyFormId}
-import uk.gov.co.test.ui.data.vx.NewVacancyDetails
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXInterviewExpectedRounds, vXInterviewFourType, vXInterviewNumber, vXInterviewOneType, vXInterviewThreeType, vXInterviewTwoType, vacancyFormId}
+import uk.gov.co.test.ui.data.vx.vacancy.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
+
+import scala.collection.mutable.ListBuffer
 
 case class InterviewsDetails(
   expectedRounds: String,
@@ -46,10 +48,18 @@ object InterviewsSection extends VacancyBasePage {
       clickOnRadioButton(noInterviewsId)
     } else {
       vXInterviewExpectedRounds.toInt match {
-        case 1 => clickOnRadioButton(oneInterviewId)
-        case 2 => clickOnRadioButton(twoInterviewId)
-        case 3 => clickOnRadioButton(threeInterviewId)
-        case 4 => clickOnRadioButton(fourInterviewId)
+        case 1 =>
+          clickOnRadioButton(oneInterviewId)
+          vXInterviewNumber = ListBuffer("1")
+        case 2 =>
+          clickOnRadioButton(twoInterviewId)
+          vXInterviewNumber = ListBuffer("1", "2")
+        case 3 =>
+          clickOnRadioButton(threeInterviewId)
+          vXInterviewNumber = ListBuffer("1", "2", "3")
+        case 4 =>
+          clickOnRadioButton(fourInterviewId)
+          vXInterviewNumber = ListBuffer("1", "2", "3", "4")
       }
       interviewsTypes(interviews, vXInterviewExpectedRounds.toInt)
     }

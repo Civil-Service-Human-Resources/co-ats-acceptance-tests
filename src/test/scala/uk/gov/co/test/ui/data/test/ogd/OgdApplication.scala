@@ -1,25 +1,26 @@
-package uk.gov.co.test.ui.data.vx
+package uk.gov.co.test.ui.data.test.ogd
 
+import uk.gov.co.test.ui.data.vx.application.{ApplicationDetails, AssessmentOutcome, Outcome}
 import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.contactEmailVxConfig
 import uk.gov.co.test.ui.pages.vx.vacancytabs._
 import uk.gov.co.test.ui.pages.vx.{CalenderScheduleDetails, InterviewScheduleDetails}
 
 import java.time.LocalDate
 
-object APPLICATION_DATA
+object OGD_APPLICATION_DATA
     extends ApplicationDetails(
-      APPLICATION_EMPLOYMENT_HISTORY,
-      APPLICATION_PRE_SIFT_EVALUATION,
-      APPLICATION_SIFT_EVALUATION,
-      APPLICATION_INTERVIEW_SCHEDULE,
-      APPLICATION_CALENDER_SCHEDULE,
-      APPLICATION_INTERVIEW_ONE_EVALUATION,
-      APPLICATION_INTERVIEW_TWO_EVALUATION,
-      APPLICATION_INTERVIEW_THREE_EVALUATION,
-      APPLICATION_INTERVIEW_FOUR_EVALUATION
+      OGD_APPLICATION_EMPLOYMENT_HISTORY,
+      OGD_APPLICATION_PRE_SIFT_EVALUATION,
+      OGD_APPLICATION_SIFT_EVALUATION,
+      OGD_APPLICATION_INTERVIEW_SCHEDULE,
+      OGD_APPLICATION_CALENDER_SCHEDULE,
+      OGD_APPLICATION_INTERVIEW_ONE_EVALUATION,
+      OGD_APPLICATION_INTERVIEW_TWO_EVALUATION,
+      OGD_APPLICATION_INTERVIEW_THREE_EVALUATION,
+      OGD_APPLICATION_INTERVIEW_FOUR_EVALUATION
     )
 
-object APPLICATION_EMPLOYMENT_HISTORY
+object OGD_APPLICATION_EMPLOYMENT_HISTORY
     extends HistoryDetails(
       false,
       historyCheckStarted = LocalDate.now(),
@@ -40,7 +41,7 @@ object APPLICATION_EMPLOYMENT_HISTORY
       internalNotes = "Autotest - internal notes (optional)"
     )
 
-object APPLICATION_PRE_SIFT_EVALUATION
+object OGD_APPLICATION_PRE_SIFT_EVALUATION
     extends PreSiftDetails(
       "A",
       "Autotest - CV assessment comments",
@@ -52,7 +53,7 @@ object APPLICATION_PRE_SIFT_EVALUATION
       "Autotest - Overall comments"
     )
 
-object APPLICATION_SIFT_EVALUATION
+object OGD_APPLICATION_SIFT_EVALUATION
     extends SiftDetails(
       """Scoring guide:
         |Not demonstrated -No positive evidence and/or substantial negative evidence demonstrated
@@ -85,7 +86,7 @@ object APPLICATION_SIFT_EVALUATION
       "Declaration\n\nBy submitting this form you are agreeing to and accepting that you have no conflict of interest with this applicant and the evaluation reflects the views of all the selection panel members."
     )
 
-object APPLICATION_INTERVIEW_SCHEDULE
+object OGD_APPLICATION_INTERVIEW_SCHEDULE
     extends InterviewScheduleDetails(
       false,
       Some("Copy From Template"),
@@ -110,7 +111,7 @@ object APPLICATION_INTERVIEW_SCHEDULE
       false
     )
 
-object APPLICATION_CALENDER_SCHEDULE
+object OGD_APPLICATION_CALENDER_SCHEDULE
     extends CalenderScheduleDetails(
       "09:00",
       60,
@@ -123,7 +124,7 @@ object APPLICATION_CALENDER_SCHEDULE
       None
     )
 
-object APPLICATION_INTERVIEW_ONE_EVALUATION
+object OGD_APPLICATION_INTERVIEW_ONE_EVALUATION
     extends InterviewOneDetails(
       scoringGuide = """Scoring guide:
           |Not demonstrated - No positive evidence and/or substantial negative evidence demonstrated
@@ -185,14 +186,14 @@ object APPLICATION_INTERVIEW_ONE_EVALUATION
       experience = Outcome(91, Some("Autotest - I1 - experience comments")),
       false,
       101,
-      "Progress",
+      "Hold",
       "Test-T&Cs.pdf",
       declarationStatement = """Declaration
           |
           |By submitting this form you are agreeing to and accepting that you have no conflict of interest with this applicant and the evaluation reflects the views of all the selection panel members.""".stripMargin
     )
 
-object APPLICATION_INTERVIEW_TWO_EVALUATION
+object OGD_APPLICATION_INTERVIEW_TWO_EVALUATION
     extends InterviewTwoDetails(
       scoringGuide = """Scoring guide:
                      |Not demonstrated - No positive evidence and/or substantial negative evidence demonstrated
@@ -261,7 +262,7 @@ object APPLICATION_INTERVIEW_TWO_EVALUATION
                              |By submitting this form you are agreeing to and accepting that you have no conflict of interest with this applicant and the evaluation reflects the views of all the selection panel members.""".stripMargin
     )
 
-object APPLICATION_INTERVIEW_THREE_EVALUATION
+object OGD_APPLICATION_INTERVIEW_THREE_EVALUATION
     extends InterviewThreeDetails(
       scoringGuide = """Scoring guide:
                      |Not demonstrated - No positive evidence and/or substantial negative evidence demonstrated
@@ -330,7 +331,7 @@ object APPLICATION_INTERVIEW_THREE_EVALUATION
                              |By submitting this form you are agreeing to and accepting that you have no conflict of interest with this applicant and the evaluation reflects the views of all the selection panel members.""".stripMargin
     )
 
-object APPLICATION_INTERVIEW_FOUR_EVALUATION
+object OGD_APPLICATION_INTERVIEW_FOUR_EVALUATION
     extends InterviewFourDetails(
       scoringGuide = """Scoring guide:
                      |Not demonstrated - No positive evidence and/or substantial negative evidence demonstrated
