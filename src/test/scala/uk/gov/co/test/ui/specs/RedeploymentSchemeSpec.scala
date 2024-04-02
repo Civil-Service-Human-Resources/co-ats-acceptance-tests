@@ -79,7 +79,7 @@ class RedeploymentSchemeSpec extends BaseFeatureSpec {
       fillShortFormDetails(REDEPLOYMENT_SHORT_FORM_DATA)
     }
 
-    Scenario("VX: Candidate Selects Non-Eligible Home Department - HMICFRS", RunInVX) {
+    Scenario("VX: Candidate Selects Ineligible Home Department - HMICFRS", RunInVX) {
       Given("a vacancy is included in the redeployment scheme")
       v9HomeDepartment = "His Majesty's Inspectorate of Constabulary and Fire & Rescue Services"
 
@@ -90,7 +90,7 @@ class RedeploymentSchemeSpec extends BaseFeatureSpec {
       fillShortFormDetails(REDEPLOYMENT_SHORT_FORM_DATA)
     }
 
-    Scenario("VX: Candidate Selects Non-Eligible Home Department - MRC", RunInVX) {
+    Scenario("VX: Candidate Selects Ineligible Home Department - MRC", RunInVX) {
       Given("a vacancy is included in the redeployment scheme")
       v9HomeDepartment = "Medical Research Council"
 
@@ -101,7 +101,7 @@ class RedeploymentSchemeSpec extends BaseFeatureSpec {
       fillShortFormDetails(REDEPLOYMENT_SHORT_FORM_DATA)
     }
 
-    Scenario("VX: Candidate Selects Non-Eligible Home Department - OSCR", RunInVX) {
+    Scenario("VX: Candidate Selects Ineligible Home Department - OSCR", RunInVX) {
       Given("a vacancy is included in the redeployment scheme")
       v9HomeDepartment = "Office of the Scottish Charity Regulator"
       vacancyId = "9667"
@@ -114,7 +114,7 @@ class RedeploymentSchemeSpec extends BaseFeatureSpec {
       fillShortFormDetails(REDEPLOYMENT_SHORT_FORM_DATA)
     }
 
-    Scenario("VX: Candidate Selects Non-Eligible Home Department - RBGK", RunInVX) {
+    Scenario("VX: Candidate Selects Ineligible Home Department - RBGK", RunInVX) {
       Given("a vacancy is included in the redeployment scheme")
       v9HomeDepartment = "Royal Botanic Gardens Kew"
 
@@ -125,7 +125,7 @@ class RedeploymentSchemeSpec extends BaseFeatureSpec {
       fillShortFormDetails(REDEPLOYMENT_SHORT_FORM_DATA)
     }
 
-    Scenario("VX: Candidate Selects Non-Eligible Home Department - MI6 - SIS", RunInVX) {
+    Scenario("VX: Candidate Selects Ineligible Home Department - MI6 - SIS", RunInVX) {
       Given("a vacancy is included in the redeployment scheme")
       v9HomeDepartment = "MI6 - Secret Intelligence Service"
 
@@ -136,7 +136,7 @@ class RedeploymentSchemeSpec extends BaseFeatureSpec {
       fillShortFormDetails(REDEPLOYMENT_SHORT_FORM_DATA)
     }
 
-    Scenario("VX: Candidate Selects Non-Eligible Home Department - UKRI", RunInVX) {
+    Scenario("VX: Candidate Selects Ineligible Home Department - UKRI", RunInVX) {
       Given("a vacancy is included in the redeployment scheme")
       v9HomeDepartment = "UK Research and Innovation"
 
@@ -147,7 +147,7 @@ class RedeploymentSchemeSpec extends BaseFeatureSpec {
       fillShortFormDetails(REDEPLOYMENT_SHORT_FORM_DATA)
     }
 
-    Scenario("VX: Candidate Selects Non-Eligible Home Department - VTS", RunInVX) {
+    Scenario("VX: Candidate Selects Ineligible Home Department - VTS", RunInVX) {
       Given("a vacancy is included in the redeployment scheme")
       v9HomeDepartment = "Valuation Tribunal Service"
 
@@ -158,7 +158,7 @@ class RedeploymentSchemeSpec extends BaseFeatureSpec {
       fillShortFormDetails(REDEPLOYMENT_SHORT_FORM_DATA)
     }
 
-    Scenario("VX: Candidate Selects DESNZ Home Department For Non-Eligible Vacancy", RunInVX) {
+    Scenario("VX: Candidate Selects DESNZ Home Department For Ineligible Vacancy", RunInVX) {
       Given("a vacancy is not included in the redeployment scheme")
       fillNewVacancyForm(NON_REDEPLOYMENT_VACANCY_DATA)
       v9HomeDepartment = "Department for Energy Security & Net Zero"
@@ -171,7 +171,7 @@ class RedeploymentSchemeSpec extends BaseFeatureSpec {
       fillShortFormDetails(REDEPLOYMENT_SHORT_FORM_DATA)
     }
 
-    Scenario("VX: Candidate Selects DSIT Home Department For Non-Eligible Vacancy", RunInVX) {
+    Scenario("VX: Candidate Selects DSIT Home Department For Ineligible Vacancy", RunInVX) {
       Given("a vacancy is not included in the redeployment scheme")
       v9HomeDepartment = "Department for Science, Innovation and Technology"
 
@@ -182,7 +182,7 @@ class RedeploymentSchemeSpec extends BaseFeatureSpec {
       fillShortFormDetails(REDEPLOYMENT_SHORT_FORM_DATA)
     }
 
-    Scenario("VX: Candidate Selects GEO Home Department For Non-Eligible Vacancy", RunInVX) {
+    Scenario("VX: Candidate Selects GEO Home Department For Ineligible Vacancy", RunInVX) {
       Given("a vacancy is not included in the redeployment scheme")
       v9HomeDepartment = "Government Equalities Office"
 
@@ -193,7 +193,7 @@ class RedeploymentSchemeSpec extends BaseFeatureSpec {
       fillShortFormDetails(REDEPLOYMENT_SHORT_FORM_DATA)
     }
 
-    Scenario("VX: Candidate Selects RS Home Department For Non-Eligible Vacancy", RunInVX) {
+    Scenario("VX: Candidate Selects RS Home Department For Ineligible Vacancy", RunInVX) {
       Given("a vacancy is not included in the redeployment scheme")
       v9HomeDepartment = "Revenue Scotland"
 
@@ -204,7 +204,7 @@ class RedeploymentSchemeSpec extends BaseFeatureSpec {
       fillShortFormDetails(REDEPLOYMENT_SHORT_FORM_DATA)
     }
 
-    Scenario("VX: Candidate Selects SFC Home Department For Non-Eligible Vacancy", RunInVX) {
+    Scenario("VX: Candidate Selects SFC Home Department For Ineligible Vacancy", RunInVX) {
       Given("a vacancy is not included in the redeployment scheme")
       v9HomeDepartment = "Scottish Fiscal Commission"
 
@@ -215,7 +215,7 @@ class RedeploymentSchemeSpec extends BaseFeatureSpec {
       fillShortFormDetails(REDEPLOYMENT_SHORT_FORM_DATA)
     }
 
-    Scenario("VX: Candidate Selects TS Home Department For Non-Eligible Vacancy", RunInVX) {
+    Scenario("VX: Candidate Selects TS Home Department For Ineligible Vacancy", RunInVX) {
       Given("a vacancy is not included in the redeployment scheme")
       v9HomeDepartment = "Transport Scotland"
 
@@ -227,7 +227,7 @@ class RedeploymentSchemeSpec extends BaseFeatureSpec {
     }
 
     Scenario(
-      "VX: Candidate Selects Non-Eligible Home Department With Vacancy Not Included In Scheme - HMICFRS",
+      "VX: Candidate Selects Ineligible Home Department With Vacancy Not Included In Scheme - HMICFRS",
       RunInVX
     ) {
       Given("a vacancy is not included in the redeployment scheme")
@@ -240,7 +240,7 @@ class RedeploymentSchemeSpec extends BaseFeatureSpec {
       fillShortFormDetails(REDEPLOYMENT_SHORT_FORM_DATA)
     }
 
-    Scenario("VX: Candidate Selects Non-Eligible Home Department With Vacancy Not Included In Scheme - MRC", RunInVX) {
+    Scenario("VX: Candidate Selects Ineligible Home Department With Vacancy Not Included In Scheme - MRC", RunInVX) {
       Given("a vacancy is not included in the redeployment scheme")
       v9HomeDepartment = "Medical Research Council"
 
@@ -251,7 +251,7 @@ class RedeploymentSchemeSpec extends BaseFeatureSpec {
       fillShortFormDetails(REDEPLOYMENT_SHORT_FORM_DATA)
     }
 
-    Scenario("VX: Candidate Selects Non-Eligible Home Department With Vacancy Not Included In Scheme - OSCR", RunInVX) {
+    Scenario("VX: Candidate Selects Ineligible Home Department With Vacancy Not Included In Scheme - OSCR", RunInVX) {
       Given("a vacancy is not included in the redeployment scheme")
       v9HomeDepartment = "Office of the Scottish Charity Regulator"
 
@@ -262,7 +262,7 @@ class RedeploymentSchemeSpec extends BaseFeatureSpec {
       fillShortFormDetails(REDEPLOYMENT_SHORT_FORM_DATA)
     }
 
-    Scenario("VX: Candidate Selects Non-Eligible Home Department With Vacancy Not Included In Scheme - RBGK", RunInVX) {
+    Scenario("VX: Candidate Selects Ineligible Home Department With Vacancy Not Included In Scheme - RBGK", RunInVX) {
       Given("a vacancy is not included in the redeployment scheme")
       v9HomeDepartment = "Royal Botanic Gardens Kew"
 
@@ -274,7 +274,7 @@ class RedeploymentSchemeSpec extends BaseFeatureSpec {
     }
 
     Scenario(
-      "VX: Candidate Selects Non-Eligible Home Department With Vacancy Not Included In Scheme - MI6 - SIS",
+      "VX: Candidate Selects Ineligible Home Department With Vacancy Not Included In Scheme - MI6 - SIS",
       RunInVX
     ) {
       Given("a vacancy is not included in the redeployment scheme")
@@ -287,7 +287,7 @@ class RedeploymentSchemeSpec extends BaseFeatureSpec {
       fillShortFormDetails(REDEPLOYMENT_SHORT_FORM_DATA)
     }
 
-    Scenario("VX: Candidate Selects Non-Eligible Home Department With Vacancy Not Included In Scheme - UKRI", RunInVX) {
+    Scenario("VX: Candidate Selects Ineligible Home Department With Vacancy Not Included In Scheme - UKRI", RunInVX) {
       Given("a vacancy is not included in the redeployment scheme")
       v9HomeDepartment = "UK Research and Innovation"
 
@@ -298,7 +298,7 @@ class RedeploymentSchemeSpec extends BaseFeatureSpec {
       fillShortFormDetails(REDEPLOYMENT_SHORT_FORM_DATA)
     }
 
-    Scenario("VX: Candidate Selects Non-Eligible Home Department With Vacancy Not Included In Scheme - VTS", RunInVX) {
+    Scenario("VX: Candidate Selects Ineligible Home Department With Vacancy Not Included In Scheme - VTS", RunInVX) {
       Given("a vacancy is not included in the redeployment scheme")
       v9HomeDepartment = "Valuation Tribunal Service"
 
