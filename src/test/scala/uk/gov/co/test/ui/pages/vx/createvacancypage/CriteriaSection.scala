@@ -149,7 +149,6 @@ object CriteriaSection extends VacancyBasePage {
   }
 
   private val criteria: Seq[CriteriaDetails => Unit] = Seq(
-    enterCampaignID,
     selectRejectIfProbationIncomplete,
     selectRejectIfApplyingOnPromotion,
     selectRejectIfMisconductIsLive,

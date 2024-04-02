@@ -9,7 +9,7 @@ import uk.gov.co.test.ui.pages.vx.VacancyDetailsPage.extractVacancySummary
 object SummaryTab extends VacancyBasePage {
 
   val saveVacancyId                 = "edit_opp_form_form_create"
-  private lazy val isActivePath     = "//*[@id='details_form_is_active']/span"
+  private lazy val isActivePath     = "//*[@id='details_form_is_active']"
   private lazy val editVacancy      = "//*[@class='ajax_form_edit btn btn-default btn-sm']"
   private lazy val previewAdvert    = ".//a[@aria-label='Preview advert Details Summary']"
   private lazy val activateVacancy  = "details_form_is_active"
@@ -27,12 +27,12 @@ object SummaryTab extends VacancyBasePage {
   }
 
   def vacancyActive(): String = {
-    val active = waitForVisibilityOfElementByPath(isActivePath).getAttribute("aria-label")
+    val active = waitForVisibilityOfElementByPath(isActivePath).getText
     active
   }
 
   private def setVacancyToActive(): Unit =
-    if (vacancyActive() == "Set to FALSE") {
+    if (vacancyActive() == "Is Active: Set to FALSE") {
       waitForElementClickableByPath(editVacancy).click()
       if (waitForVisibilityOfElementByPath(previewAdvert).isDisplayed) {
         val editForm = waitForVisibilityOfElementById(activateVacancy)

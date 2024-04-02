@@ -44,6 +44,8 @@ object ManagementSection extends VacancyBasePage {
   def grsPecBauId                    = s"${vacancyFormId}_datafield_118309_1_1_17449"
   def grsToSiftYesId                 = s"${vacancyFormId}_datafield_142798_1_1_1"
   def grsToSiftNoId                  = s"${vacancyFormId}_datafield_142798_1_1_2"
+  def managedByGrsYesId              = s"${vacancyFormId}_datafield_141868_1_1_1"
+  def managedByGrsNoId               = s"${vacancyFormId}_datafield_141868_1_1_2"
   def grsToAssessAndInterviewYesId   = s"${vacancyFormId}_datafield_142802_1_1_1"
   def grsToAssessAndInterviewNoId    = s"${vacancyFormId}_datafield_142802_1_1_2"
   def linkToProjectYesId             = s"${vacancyFormId}_datafield_105092_1_1_1"
@@ -94,6 +96,7 @@ object ManagementSection extends VacancyBasePage {
 
   private def grsQuestions(managementDetails: ManagementDetails): Unit = {
     vXGrsVacancy = managementDetails.grsVacancy
+    selectManagedByGrs(managementDetails)
     if (vXGrsVacancy) {
       grsRecruitmentStageType(managementDetails)
       selectGrsPecCheckingType(managementDetails)
@@ -101,6 +104,10 @@ object ManagementSection extends VacancyBasePage {
       selectGrsToAssessAndInterview(managementDetails)
     }
   }
+
+  private def selectManagedByGrs(managementDetails: ManagementDetails): Unit =
+    if (managementDetails.grsVacancy) clickOnRadioButton(managedByGrsYesId)
+    else clickOnRadioButton(managedByGrsNoId)
 
   private def grsRecruitmentStageType(managementDetails: ManagementDetails): Unit = {
     val stageType = managementDetails.grsJobStageType

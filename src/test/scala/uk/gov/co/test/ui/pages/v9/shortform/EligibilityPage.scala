@@ -49,9 +49,6 @@ object EligibilityPage extends CivilServiceJobsBasePage {
         selectDropdownOption(homeDepartmentSelectId, "Attorney General's Office")
       } else {
         selectDropdownOption(homeDepartmentSelectId, v9HomeDepartment)
-        println(v9HomeDepartment)
-        println(vacancyId)
-        println(vacancyName)
       }
     } else radioSelect(currentCivilServantNoId)
   }
