@@ -104,8 +104,6 @@ class RedeploymentSchemeSpec extends BaseFeatureSpec {
     Scenario("VX: Candidate Selects Ineligible Home Department - OSCR", RunInVX) {
       Given("a vacancy is included in the redeployment scheme")
       v9HomeDepartment = "Office of the Scottish Charity Regulator"
-      vacancyId = "9667"
-      extractAllVacancyDetails(vacancyId)
 
       When("a candidate selects an ineligible home department")
       fillNewCandidateDetails(REGISTER_CANDIDATE_REDEPLOYMENT_SCHEME_9)

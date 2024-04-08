@@ -39,9 +39,12 @@ object ManagementSection extends VacancyBasePage {
   def assignToId                     = s"select2-${vacancyFormId}_datafield_101084_1_1-container"
   def assignTo2Id                    = s"select2-${vacancyFormId}_datafield_168380_1_1-container"
   def grsJobStageTypeId              = s"select2-${vacancyFormId}_datafield_104968_1_1-container"
+  def grsPecBauId                    = s"${vacancyFormId}_datafield_118309_1_1_17449"
+  def grsPecCrAndHistoryId           = s"${vacancyFormId}_datafield_118309_1_1_53369"
+  def grsPecEmploymentHistoryId      = s"${vacancyFormId}_datafield_118309_1_1_53368"
+  def grsPecFullPecChecksId          = s"${vacancyFormId}_datafield_118309_1_1_53367"
   def grsPecMenuId                   = s"${vacancyFormId}_datafield_118309_1_1_17450"
   def grsPecEUExitId                 = s"${vacancyFormId}_datafield_118309_1_1_17451"
-  def grsPecBauId                    = s"${vacancyFormId}_datafield_118309_1_1_17449"
   def grsToSiftYesId                 = s"${vacancyFormId}_datafield_142798_1_1_1"
   def grsToSiftNoId                  = s"${vacancyFormId}_datafield_142798_1_1_2"
   def managedByGrsYesId              = s"${vacancyFormId}_datafield_141868_1_1_1"
@@ -130,9 +133,11 @@ object ManagementSection extends VacancyBasePage {
 
   private def selectGrsPecCheckingType(managementDetails: ManagementDetails): Unit =
     managementDetails.grsPecCheckingType match {
-      case "Menu"    => clickOnRadioButton(grsPecMenuId)
-      case "EU Exit" => clickOnRadioButton(grsPecEUExitId)
-      case "BAU"     => clickOnRadioButton(grsPecBauId)
+      case "BAU"                                    => clickOnRadioButton(grsPecBauId)
+      case "Criminal record and employment history" => clickOnRadioButton(grsPecCrAndHistoryId)
+      case "Employment history only"                => clickOnRadioButton(grsPecEmploymentHistoryId)
+      case "Full pre-employment checks"             => clickOnRadioButton(grsPecFullPecChecksId)
+      case "Menu"                                   => clickOnRadioButton(grsPecMenuId)
     }
 
   private def selectGrsToSift(managementDetails: ManagementDetails): Unit =
