@@ -2,6 +2,7 @@ package uk.gov.co.test.ui.pages.vx.createvacancypage
 
 import org.openqa.selenium.By
 import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXBusinessAreaDetail, vXJobInfoDepartment, vXNoOfJobsAvailable, vXProfession, vXTypeOfRole, vacancyFormId}
+import uk.gov.co.test.ui.data.TestData.eventually
 import uk.gov.co.test.ui.data.vx.vacancy.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 
@@ -48,6 +49,7 @@ object JobInfoSection extends VacancyBasePage {
   private def selectBusinessArea(jobInfoDetails: JobInfoDetails): Unit = {
     val area            = jobInfoDetails.businessArea
     scrollToElement(By.id(businessAreaId))
+    eventually(waitForVisibilityOfElementById(businessAreaId).getText shouldEqual "Choose one...")
     waitForVisibilityOfElementById(businessAreaId).click()
     val noOfListOptions = driver.findElements(By.xpath(listOptionsPath)).size()
     if (noOfListOptions < 3) {

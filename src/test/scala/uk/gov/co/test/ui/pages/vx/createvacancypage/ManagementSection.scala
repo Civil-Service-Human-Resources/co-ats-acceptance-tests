@@ -96,7 +96,7 @@ object ManagementSection extends VacancyBasePage {
 
   private def grsQuestions(managementDetails: ManagementDetails): Unit = {
     vXGrsVacancy = managementDetails.grsVacancy
-    selectManagedByGrs(managementDetails)
+//    selectManagedByGrs(managementDetails)
     if (vXGrsVacancy) {
       grsRecruitmentStageType(managementDetails)
       selectGrsPecCheckingType(managementDetails)

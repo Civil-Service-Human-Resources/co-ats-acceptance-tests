@@ -31,7 +31,7 @@ object MASTER_VACANCY_DATA
 object MASTER_BASIC_DETAILS
     extends BasicDetails(
       "DO NOT USE- Automation Test Template",
-      s"DWP - " + generateRandomJobPosition(),
+      s"HMRC - " + generateRandomJobPosition(),
       true,
       "Prawf awtomeiddio",
       32
