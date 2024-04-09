@@ -138,6 +138,7 @@ object ManagementSection extends VacancyBasePage {
       case "Employment history only"                => clickOnRadioButton(grsPecEmploymentHistoryId)
       case "Full pre-employment checks"             => clickOnRadioButton(grsPecFullPecChecksId)
       case "Menu"                                   => clickOnRadioButton(grsPecMenuId)
+      case _                                        => throw new IllegalStateException("GRS pecking checking type does not exist!")
     }
 
   private def selectGrsToSift(managementDetails: ManagementDetails): Unit =

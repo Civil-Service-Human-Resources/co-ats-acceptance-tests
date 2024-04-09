@@ -63,7 +63,7 @@ object MasterVacancyDetails extends VacancyBasePage {
   )
 
   //vx VACANCY criteria section
-  var vXCandidateInstructions: String     = "Autotest - Instructions for candidate"
+  var vXCandidateInstructions: String     = "Autotest - Instructions for candidate \nDocuments must be uploaded in .doc, .docx or .pdf file format, with a maximum file size of 512 KB.\nOnce you have attached a file, you will be able to remove and attach another as many times as required before you submit your application."
   var vXUploadAttachmentRequired: Boolean = true
   var vXProbationIncomplete: Boolean      = true
   var vXPromotionApply: Boolean           = true

@@ -2,8 +2,8 @@ package uk.gov.co.test.ui.pages.v9.longform
 
 import org.openqa.selenium.By
 import org.scalatest.concurrent.Eventually.eventually
-import uk.gov.co.test.ui.data.v9.longform.LongFormDetails
 import uk.gov.co.test.ui.data.MasterVacancyDetails.{sortedListOfTechSkills, sortedListOfTechSkillsDescription, vXListOfTechSkills, vXListOfTechSkillsDescription, vXNoOfApplicationStage, vXTechSkillsRequired}
+import uk.gov.co.test.ui.data.v9.longform.LongFormDetails
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
 import uk.gov.co.test.ui.pages.v9.longform.DiversityMonitoringPage.longFormId
 
@@ -51,68 +51,65 @@ object TechnicalSkillsPage extends CivilServiceJobsBasePage {
   private def enterTechSkillOne(techSkillsDetails: TechSkillsDetails): Unit = {
     val testInfoOne = waitForVisibilityOfElementById(techSkillOneHeaderId).getText
     if (vXListOfTechSkills.isEmpty) {
-      testInfoOne shouldEqual s"${sortedListOfTechSkills.head}\nDescription: ${sortedListOfTechSkillsDescription.head}"
-    } else testInfoOne shouldEqual s"""${vXListOfTechSkills.head}
-                                        |
-                                        |Description: ${sortedListOfTechSkillsDescription.head}""".stripMargin
+      testInfoOne shouldEqual s"${sortedListOfTechSkills.head}\n\nDescription: ${sortedListOfTechSkillsDescription.head}"
+    } else
+      testInfoOne shouldEqual s"${vXListOfTechSkills.head}\n\nDescription: ${sortedListOfTechSkillsDescription.head}"
     enterDetails(techSkillOneInputId, techSkillsDetails.techSkillOne)
   }
 
   private def enterTechSkillTwo(techSkillsDetails: TechSkillsDetails): Unit = {
     val testInfoTwo = waitForVisibilityOfElementById(techSkillTwoHeaderId).getText
     if (vXListOfTechSkills.isEmpty) {
-      testInfoTwo shouldEqual s"${sortedListOfTechSkills(1)}\nDescription: ${sortedListOfTechSkillsDescription(1)}"
-    } else testInfoTwo shouldEqual s"${vXListOfTechSkills(1)}\nDescription: ${vXListOfTechSkillsDescription(1)}"
+      testInfoTwo shouldEqual s"${sortedListOfTechSkills(1)}\n\nDescription: ${sortedListOfTechSkillsDescription(1)}"
+    } else testInfoTwo shouldEqual s"${vXListOfTechSkills(1)}\n\nDescription: ${vXListOfTechSkillsDescription(1)}"
     enterDetails(techSkillTwoInputId, techSkillsDetails.techSkillTwo)
   }
 
   private def enterTechSkillThree(techSkillsDetails: TechSkillsDetails): Unit = {
     val testInfoThree = waitForVisibilityOfElementById(techSkillThreeHeaderId).getText
     if (vXListOfTechSkills.isEmpty) {
-      testInfoThree shouldEqual s"${sortedListOfTechSkills(2)}\nDescription: ${sortedListOfTechSkillsDescription(2)}"
-    } else testInfoThree shouldEqual s"${vXListOfTechSkills(2)}\nDescription: ${vXListOfTechSkillsDescription(2)}"
+      testInfoThree shouldEqual s"${sortedListOfTechSkills(2)}\n\nDescription: ${sortedListOfTechSkillsDescription(2)}"
+    } else testInfoThree shouldEqual s"${vXListOfTechSkills(2)}\n\nDescription: ${vXListOfTechSkillsDescription(2)}"
     enterDetails(techSkillThreeInputId, techSkillsDetails.techSkillThree)
   }
 
   private def enterTechSkillFour(techSkillsDetails: TechSkillsDetails): Unit = {
     val testInfoFour = waitForVisibilityOfElementById(techSkillFourHeaderId).getText
     if (vXListOfTechSkills.isEmpty) {
-      testInfoFour shouldEqual s"${sortedListOfTechSkills(3)}\nDescription: ${sortedListOfTechSkillsDescription(3)}"
-    } else testInfoFour shouldEqual s"${vXListOfTechSkills(3)}\nDescription: ${vXListOfTechSkillsDescription(3)}"
+      testInfoFour shouldEqual s"${sortedListOfTechSkills(3)}\n\nDescription: ${sortedListOfTechSkillsDescription(3)}"
+    } else testInfoFour shouldEqual s"${vXListOfTechSkills(3)}\n\nDescription: ${vXListOfTechSkillsDescription(3)}"
     enterDetails(techSkillFourInputId, techSkillsDetails.techSkillFour)
   }
 
   private def enterTechSkillFive(techSkillsDetails: TechSkillsDetails): Unit = {
     val testInfoFive = waitForVisibilityOfElementById(techSkillFiveHeaderId).getText
     if (vXListOfTechSkills.isEmpty) {
-      testInfoFive shouldEqual s"${sortedListOfTechSkills(4)}\nDescription: ${sortedListOfTechSkillsDescription(4)}"
-    } else testInfoFive shouldEqual s"${vXListOfTechSkills(4)}\nDescription: ${vXListOfTechSkillsDescription(4)}"
+      testInfoFive shouldEqual s"${sortedListOfTechSkills(4)}\n\nDescription: ${sortedListOfTechSkillsDescription(4)}"
+    } else testInfoFive shouldEqual s"${vXListOfTechSkills(4)}\n\nDescription: ${vXListOfTechSkillsDescription(4)}"
     enterDetails(techSkillFiveInputId, techSkillsDetails.techSkillFive)
   }
 
   private def enterTechSkillSix(techSkillsDetails: TechSkillsDetails): Unit = {
     val testInfoSix = waitForVisibilityOfElementById(techSkillSixHeaderId).getText
     if (vXListOfTechSkills.isEmpty) {
-      testInfoSix shouldEqual s"${sortedListOfTechSkills(5)}\nDescription: ${sortedListOfTechSkillsDescription(5)}"
-    } else testInfoSix shouldEqual s"${vXListOfTechSkills(5)}\nDescription: ${vXListOfTechSkillsDescription(5)}"
+      testInfoSix shouldEqual s"${sortedListOfTechSkills(5)}\n\nDescription: ${sortedListOfTechSkillsDescription(5)}"
+    } else testInfoSix shouldEqual s"${vXListOfTechSkills(5)}\n\nDescription: ${vXListOfTechSkillsDescription(5)}"
     enterDetails(techSkillSixInputId, techSkillsDetails.techSkillSix)
   }
 
-  //TODO Cosmetic issue requires Oleeo to fix and align with other fields
   private def enterTechSkillSeven(techSkillsDetails: TechSkillsDetails): Unit = {
     val testInfoSeven = waitForVisibilityOfElementById(techSkillSevenHeaderId).getText
     if (vXListOfTechSkills.isEmpty) {
-      testInfoSeven shouldEqual s"${sortedListOfTechSkills(6)}\nDescription:${sortedListOfTechSkillsDescription(6)}"
-    } else testInfoSeven shouldEqual s"${vXListOfTechSkills(6)}\nDescription:${vXListOfTechSkillsDescription(6)}"
+      testInfoSeven shouldEqual s"${sortedListOfTechSkills(6)}\n\nDescription: ${sortedListOfTechSkillsDescription(6)}"
+    } else testInfoSeven shouldEqual s"${vXListOfTechSkills(6)}\n\nDescription: ${vXListOfTechSkillsDescription(6)}"
     enterDetails(techSkillSevenInputId, techSkillsDetails.techSkillSeven)
   }
 
-  //TODO Cosmetic issue requires Oleeo to fix and align with other fields
   private def enterTechSkillEight(techSkillsDetails: TechSkillsDetails): Unit = {
     val testInfoEight = waitForVisibilityOfElementById(techSkillEightHeaderId).getText
     if (vXListOfTechSkills.isEmpty) {
-      testInfoEight shouldEqual s"${sortedListOfTechSkills(7)}\nDescription:${sortedListOfTechSkillsDescription(7)}"
-    } else testInfoEight shouldEqual s"${vXListOfTechSkills(7)}\nDescription:${vXListOfTechSkillsDescription(7)}"
+      testInfoEight shouldEqual s"${sortedListOfTechSkills(7)}\n\nDescription: ${sortedListOfTechSkillsDescription(7)}"
+    } else testInfoEight shouldEqual s"${vXListOfTechSkills(7)}\n\nDescription: ${vXListOfTechSkillsDescription(7)}"
     enterDetails(techSkillEightInputId, techSkillsDetails.techSkillEight)
   }
 

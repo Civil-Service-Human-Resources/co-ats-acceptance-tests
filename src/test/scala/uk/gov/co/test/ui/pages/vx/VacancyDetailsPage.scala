@@ -113,7 +113,7 @@ object VacancyDetailsPage extends VacancyBasePage {
   }
 
   def extractVacancySummary(): Unit =
-    if (vacancyActive() == "Set to TRUE") {
+    if (vacancyActive() == "Is Active: Set to TRUE") {
       val liveDate    = waitForVisibilityOfElementById(vacancyLiveDateId).getText.replaceAll(""" at.*""", "")
       val closingDate = waitForVisibilityOfElementById(vacancyClosingDateId).getText.replaceAll(""" at.*""", "")
       vXApplicationLiveDate = liveDate
