@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.pages.vx.createvacancypage
 
 import org.openqa.selenium.By
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXApproach, vXGreatForVeterans, vXGrsVacancy, vacancyFormId}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXApproach, vXGreatForVeterans, vXGrsVacancy, vXJobInfoDepartment, vacancyFormId}
 import uk.gov.co.test.ui.data.vx.vacancy.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 
@@ -97,20 +97,76 @@ object ManagementSection extends VacancyBasePage {
     selectOptionFromList(username2, assignTo2Id, s" $contactNameVxConfig - $username2")
   }
 
-  private def grsQuestions(managementDetails: ManagementDetails): Unit = {
-    vXGrsVacancy = managementDetails.grsVacancy
-    selectManagedByGrs(managementDetails)
-    if (vXGrsVacancy) {
-      grsRecruitmentStageType(managementDetails)
-      selectGrsPecCheckingType(managementDetails)
-      selectGrsToSift(managementDetails)
-      selectGrsToAssessAndInterview(managementDetails)
-    }
-  }
-
   private def selectManagedByGrs(managementDetails: ManagementDetails): Unit =
     if (managementDetails.grsVacancy) clickOnRadioButton(managedByGrsYesId)
     else clickOnRadioButton(managedByGrsNoId)
+
+  private def grsQuestions(managementDetails: ManagementDetails): Unit = {
+    grsRecruitmentStageType(managementDetails)
+    selectGrsPecCheckingType(managementDetails)
+    selectGrsToSift(managementDetails)
+    selectGrsToAssessAndInterview(managementDetails)
+  }
+
+  private def grsVacancy(managementDetails: ManagementDetails): Unit =
+    if (
+      vXJobInfoDepartment == "Foreign, Commonwealth & Development Office" ||
+      vXJobInfoDepartment == "Food Standards Agency" ||
+      vXJobInfoDepartment == "Commission for Tertiary Education and Research" ||
+      vXJobInfoDepartment == "Disclosure & Barring Service" ||
+      vXJobInfoDepartment == "Government Legal Department" ||
+      vXJobInfoDepartment == "HM Treasury" ||
+      vXJobInfoDepartment == "HM Revenue and Customs" ||
+      vXJobInfoDepartment == "Consumer Scotland" ||
+      vXJobInfoDepartment == "Environmental Standards Scotland" ||
+      vXJobInfoDepartment == "Government Commercial Function" ||
+      vXJobInfoDepartment == "Central Digital and Data Office" ||
+      vXJobInfoDepartment == "Government Digital Service" ||
+      vXJobInfoDepartment == "Office for Environmental Protection"
+    ) {
+      selectManagedByGrs(managementDetails)
+      vXGrsVacancy = managementDetails.grsVacancy
+      if (vXGrsVacancy) grsQuestions(managementDetails)
+    } else if (
+      vXJobInfoDepartment == "Department of Health and Social Care" ||
+      vXJobInfoDepartment == "Department for Business and Trade" ||
+      vXJobInfoDepartment == "Department for Work and Pensions" ||
+      vXJobInfoDepartment == "Forestry Commission" ||
+      vXJobInfoDepartment == "Home Office" ||
+      vXJobInfoDepartment == "Insolvency Service" ||
+      vXJobInfoDepartment == "UK Space Agency" ||
+      vXJobInfoDepartment == "Valuation Office Agency" ||
+      vXJobInfoDepartment == "Animal and Plant Health Agency" ||
+      vXJobInfoDepartment == "Centre for Environment, Fisheries and Aquaculture Science" ||
+      vXJobInfoDepartment == "Marine Management Organisation" ||
+      vXJobInfoDepartment == "Rural Payments Agency" ||
+      vXJobInfoDepartment == "Veterinary Medicines Directorate" ||
+      vXJobInfoDepartment == "Independent Inquiry into Child Sexual Abuse" ||
+      vXJobInfoDepartment == "National Crime Agency" ||
+      vXJobInfoDepartment == "His Majesty's Inspectorate of Constabulary and Fire & Rescue Services" ||
+      vXJobInfoDepartment == "Government Operational Research Service" ||
+      vXJobInfoDepartment == "Department for Business, Energy & Industrial Strategy" ||
+      vXJobInfoDepartment == "Department for Transport" ||
+      vXJobInfoDepartment == "Driver and Vehicle Licensing Agency" ||
+      vXJobInfoDepartment == "Driver and Vehicle Standards Agency" ||
+      vXJobInfoDepartment == "Vehicle Certification Agency" ||
+      vXJobInfoDepartment == "Maritime and Coastguard Agency" ||
+      vXJobInfoDepartment == "Student Loans Company" ||
+      vXJobInfoDepartment == "Government Property Agency" ||
+      vXJobInfoDepartment == "Institute for Apprenticeships and Technical Education" ||
+      vXJobInfoDepartment == "Government Office for Science" ||
+      vXJobInfoDepartment == "Charity Commission" ||
+      vXJobInfoDepartment == "Cabinet Office" ||
+      vXJobInfoDepartment == "Trade Remedies Authority" ||
+      vXJobInfoDepartment == "Fast Stream and Emerging Talent" ||
+      vXJobInfoDepartment == "Building Digital UK (BDUK)" ||
+      vXJobInfoDepartment == "Active Travel England" ||
+      vXJobInfoDepartment == "Department for Energy Security & Net Zero" ||
+      vXJobInfoDepartment == "Department for Science, Innovation and Technology"
+    ) {
+      vXGrsVacancy = true
+      grsQuestions(managementDetails)
+    }
 
   private def grsRecruitmentStageType(managementDetails: ManagementDetails): Unit = {
     val stageType = managementDetails.grsJobStageType
@@ -166,7 +222,7 @@ object ManagementSection extends VacancyBasePage {
     selectRemoveCSRPrinciples,
     enterAssignTo,
     enterAssignTo2,
-    grsQuestions,
+    grsVacancy,
     selectLinkToProject,
     enterComplaintsProcess,
     enterVacancyComments

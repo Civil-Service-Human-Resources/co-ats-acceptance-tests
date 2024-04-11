@@ -22,7 +22,9 @@ object UploadDocumentsPage extends CivilServiceJobsBasePage {
   private def confirmInstructions(): Unit = {
     uploadDocumentsPageCheck()
     val v9Instruction = waitForVisibilityOfElementByPath(instructionsTextPath).getText
-    v9Instruction shouldEqual vXCandidateInstructions
+    v9Instruction shouldEqual """Autotest - Instructions for candidate 
+                                |Documents must be uploaded in .doc, .docx or .pdf file format, with a maximum file size of 512 KB.
+                                |Once you have attached a file, you will be able to remove and attach another as many times as required before you submit your application.""".stripMargin
   }
 
   private def uploadCandidateDocuments(uploadDocumentsDetails: UploadDocumentsDetails): Unit =
