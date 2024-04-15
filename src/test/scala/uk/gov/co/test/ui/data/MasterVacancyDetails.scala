@@ -9,21 +9,7 @@ object MasterVacancyDetails extends VacancyBasePage {
   //vx VACANCY formId
   var vacancyFormId = ""
 
-  //vx VACANCY additionalQuestions section
-  var vXAnyAdditionalQuestions = true
-  var vXHowManyQuestions       = 3
-  var vXQuestionOne            = "Autotest - Question 1"
-  var vXQuestionTwo            = "Autotest - Question 2"
-  var vXQuestionThree          = "Autotest - Question 3"
-
-  //vx VACANCY approach section
-  var vXApproach = ""
-
-  //vX VACANCY approval
-  var vXBudgetaryApproval = true
-  var vXCostCentre        = ""
-
-  //vx VACANCY basicDetails section
+  //vx VACANCY basic details
   var vacancyName                       = ""
   var vacancyId                         = ""
   var vXApplicationLiveDate: String     = ""
@@ -34,14 +20,7 @@ object MasterVacancyDetails extends VacancyBasePage {
   var vXConvertedLiveDateTime           = ""
   var vXConvertedClosingDateTime        = ""
 
-  //vX VACANCY reserve list
-  var vXReserveListRequired    = true
-  var vXReserveListLength      = ""
-  var vXReserveExtendRequired  = false
-  var vXReserveExtendLength    = ""
-  var vXReserveListTotalLength = ""
-
-  //vx VACANCY job information section
+  //vx VACANCY job information
   var vXJobInfoDepartment  = ""
   var vXBusinessArea       = ""
   var vXBusinessAreaDetail = ""
@@ -49,36 +28,46 @@ object MasterVacancyDetails extends VacancyBasePage {
   var vXProfession         = ""
   var vXNoOfJobsAvailable  = ""
 
-  //vx VACANCY behaviours section
-  var vXHowManyBehaviours: Int                     = 8
-  var vXListOfChosenBehaviours: ListBuffer[String] = ListBuffer(
-    "Changing and Improving",
-    "Communicating and Influencing",
-    "Delivering at Pace",
-    "Developing Self and Others",
-    "Leadership",
-    "Making Effective Decisions",
-    "Managing a Quality Service",
-    "Working Together"
-  )
+  //vx VACANCY approach
+  var vXApproach = ""
 
-  //vx VACANCY criteria section
-  var vXRejectProbation: Boolean             = true
-  var vXRejectApplyingOnPromotion: Boolean   = true
-  var vXRejectLiveMisconduct: Boolean        = true
-  var vXRejectPoorPerformance: Boolean       = true
-  var vXRejectPoorAttendance: Boolean        = true
-  var vXRejectNationalityReq: Boolean        = true
-  var vXRejectNoRightToRemain: Boolean       = true
-  var vXRejectLicencesNotHeld: Boolean       = true
-  var vXRejectMembershipsNotHeld: Boolean    = true
-  var vXRejectLanguagesNotHeld: Boolean      = true
-  var vXRejectQualificationsNotHeld: Boolean = true
-  var vXPreSiftRequired: Boolean             = true
-  var vXAttachmentRequired: Boolean          = true
-  var vXCandidateInstructions: String        = ""
+  //vX VACANCY approval
+  var vXBudgetaryApproval = true
+  var vXCostCentre        = ""
 
-  //vx VACANCY experience section
+  //vX VACANCY reserve list
+  var vXReserveListRequired: Boolean   = _
+  var vXReserveListLength              = ""
+  var vXReserveExtendRequired: Boolean = _
+  var vXReserveExtendLength            = ""
+  var vXReserveListTotalLength         = ""
+
+  //vx VACANCY locations
+  var vXLocationType                    = ""
+  var vXLocationDisplay                 = ""
+  var vXVacanciesInNIR                  = true
+  var vXCommunitiesInNIR                = ""
+  var vXAvailableOutsideInNI            = false
+  var vXGiveLocationPreference: Boolean = true
+  var vXMaxLocations: String            = ""
+  var vXOtherLocations                  = new ListBuffer[String]()
+
+  //vx VACANCY contract details TODO
+  //vx VACANCY advert TODO
+  //vx VACANCY contact details TODO
+  //vx VACANCY checking and vetting TODO
+  //vx VACANCY interviews TODO
+
+  //vx VACANCY success profiles section
+  var vXAbilitiesRequired: Boolean   = _
+  var vXBehavioursRequired: Boolean  = _
+  var vXExperiencesRequired: Boolean = _
+  var vXStrengthsRequired: Boolean   = _
+  var vXTechSkillsRequired: Boolean  = _
+
+  //vx VACANCY abilities TODO
+
+  //vx VACANCY experience
   var vXJobHistory: Boolean              = false
   var vXFullQualification: Boolean       = false
   var vXPreviousExperiences: Boolean     = false
@@ -97,28 +86,20 @@ object MasterVacancyDetails extends VacancyBasePage {
   var vXQualificationsMandatory: Boolean = false
   var vXSpecificQualifications: String   = ""
 
-  //vx VACANCY location section
-  var vXLocationType                    = ""
-  var vXLocationDisplay                 = ""
-  var vXVacanciesInNIR                  = true
-  var vXCommunitiesInNIR                = ""
-  var vXAvailableOutsideInNI            = false
-  var vXGiveLocationPreference: Boolean = true
-  var vXMaxLocations: String            = ""
-  var vXOtherLocations                  = new ListBuffer[String]()
+  //vx VACANCY behaviours
+  var vXHowManyBehaviours: Int                     = 8
+  var vXListOfChosenBehaviours: ListBuffer[String] = ListBuffer(
+    "Changing and Improving",
+    "Communicating and Influencing",
+    "Delivering at Pace",
+    "Developing Self and Others",
+    "Leadership",
+    "Making Effective Decisions",
+    "Managing a Quality Service",
+    "Working Together"
+  )
 
-  //vx VACANCY management section
-  var vXGreatForVeterans: Boolean = false
-  var vXGrsVacancy: Boolean       = true
-
-  //vx VACANCY success profiles section
-  var vXAbilitiesRequired: Boolean   = _
-  var vXBehavioursRequired: Boolean  = _
-  var vXExperiencesRequired: Boolean = _
-  var vXStrengthsRequired: Boolean   = _
-  var vXTechSkillsRequired: Boolean  = _
-
-  //vx VACANCY technical skills section
+  //vx VACANCY technical skills
   var vXHowManySkills: Int                              = 8
   var vXListOfTechSkills: ListBuffer[String]            = ListBuffer(
     "Autotest - technical skills 1",
@@ -156,10 +137,39 @@ object MasterVacancyDetails extends VacancyBasePage {
     "Service Focussed"
   )
 
-  //vx VACANCY tests section
+  //vx VACANCY online tests
   var vXAnyOnlineTests: Boolean = _
 
-  //vx PEC FORM checks
+  //vx VACANCY additional questions
+  var vXAnyAdditionalQuestions = true
+  var vXHowManyQuestions       = 3
+  var vXQuestionOne            = "Autotest - Question 1"
+  var vXQuestionTwo            = "Autotest - Question 2"
+  var vXQuestionThree          = "Autotest - Question 3"
+
+  //vx VACANCY eligibility and rejection criteria
+  var vXRejectProbation: Boolean             = true
+  var vXRejectApplyingOnPromotion: Boolean   = true
+  var vXRejectLiveMisconduct: Boolean        = true
+  var vXRejectPoorPerformance: Boolean       = true
+  var vXRejectPoorAttendance: Boolean        = true
+  var vXRejectNationalityReq: Boolean        = true
+  var vXRejectNoRightToRemain: Boolean       = true
+  var vXRejectLicencesNotHeld: Boolean       = true
+  var vXRejectMembershipsNotHeld: Boolean    = true
+  var vXRejectLanguagesNotHeld: Boolean      = true
+  var vXRejectQualificationsNotHeld: Boolean = true
+  var vXPreSiftRequired: Boolean             = true
+  var vXAttachmentRequired: Boolean          = true
+  var vXCandidateInstructions: String        = ""
+
+  //vx VACANCY vacancy management
+  var vXGreatForVeterans: Boolean = false
+  var vXGrsVacancy: Boolean       = true
+
+  //vx VACANCY online pre-employment check forms TODO
+
+  //vx VACANCY pre-employment check forms
   var vXRtwChecks: List[String] =
     List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates")
   var vXWhenRtwChecks           = "Before pre employment checks"

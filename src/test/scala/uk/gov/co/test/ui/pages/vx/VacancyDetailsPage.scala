@@ -93,6 +93,7 @@ object VacancyDetailsPage extends VacancyBasePage {
   def rejectPreSiftRequiredId           = s"${vacancyFormId}_datafield_62541_1_1_fieldset"
   def rejectAttachmentRequiredId        = s"${vacancyFormId}_datafield_61333_1_1_fieldset"
   def instructionsForCandidateId        = s"${vacancyFormId}_datafield_61355_1_1_en-GB"
+  def additionalQuestionsId        = s"${vacancyFormId}_datafield_56152_1_1_fieldset"
 
   private def dashboardPageCheck(): Unit =
     eventually(onPage(dashboardPageTitle))
@@ -546,6 +547,13 @@ object VacancyDetailsPage extends VacancyBasePage {
   private def extractOnlineTests(): Unit = {
     val tests = waitForVisibilityOfElementById(onlineTestsId).findElement(By.xpath(checkLabelPath))
     if (tests.getText == "Yes") {
+      vXAnyOnlineTests = true
+    } else vXAnyOnlineTests = false
+  }
+
+  private def extractAdditionalQuestions(): Unit = {
+    val questions = waitForVisibilityOfElementById(additionalQuestionsId).findElement(By.xpath(checkLabelPath))
+    if (questions.getText == "Yes") {
       vXAnyOnlineTests = true
     } else vXAnyOnlineTests = false
   }
