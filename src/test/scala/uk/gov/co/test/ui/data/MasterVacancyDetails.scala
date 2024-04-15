@@ -141,11 +141,11 @@ object MasterVacancyDetails extends VacancyBasePage {
   var vXAnyOnlineTests: Boolean = _
 
   //vx VACANCY additional questions
-  var vXAnyAdditionalQuestions = true
-  var vXHowManyQuestions       = 3
-  var vXQuestionOne            = "Autotest - Question 1"
-  var vXQuestionTwo            = "Autotest - Question 2"
-  var vXQuestionThree          = "Autotest - Question 3"
+  var vXAnyAdditionalQuestions: Boolean = _
+  var vXHowManyQuestions: Int           = _
+  var vXQuestionOne                     = ""
+  var vXQuestionTwo                     = ""
+  var vXQuestionThree                   = ""
 
   //vx VACANCY eligibility and rejection criteria
   var vXRejectProbation: Boolean             = true

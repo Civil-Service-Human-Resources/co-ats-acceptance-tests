@@ -2,7 +2,7 @@ package uk.gov.co.test.ui.pages.vx
 
 import org.openqa.selenium.{By, WebElement}
 import org.scalatest.concurrent.Eventually.eventually
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXAbilitiesRequired, vXAnyOnlineTests, vXApplicationClosingDate, vXApplicationLiveDate, vXApproach, vXAttachmentRequired, vXAvailableOutsideInNI, vXBehavioursRequired, vXBudgetaryApproval, vXBusinessArea, vXBusinessAreaDetail, vXCandidateInstructions, vXCommunitiesInNIR, vXCostCentre, vXDesirablePastExperience, vXExperiencesRequired, vXFullQualification, vXGiveLocationPreference, vXGreatForVeterans, vXGuidanceText, vXInterviewExpectedRounds, vXInterviewFourType, vXInterviewNumber, vXInterviewOneType, vXInterviewThreeType, vXInterviewTwoType, vXJobHistory, vXJobInfoDepartment, vXLanguagesMandatory, vXLicencesMandatory, vXLocationDisplay, vXLocationType, vXMaxLocations, vXMembershipsMandatory, vXNoOfJobsAvailable, vXOtherLocations, vXPersonalStatement, vXPreSiftRequired, vXPreviousExperiences, vXProfession, vXQualificationsMandatory, vXRejectApplyingOnPromotion, vXRejectLanguagesNotHeld, vXRejectLicencesNotHeld, vXRejectLiveMisconduct, vXRejectMembershipsNotHeld, vXRejectNationalityReq, vXRejectNoRightToRemain, vXRejectPoorAttendance, vXRejectPoorPerformance, vXRejectProbation, vXRejectQualificationsNotHeld, vXReserveExtendLength, vXReserveExtendRequired, vXReserveListLength, vXReserveListRequired, vXSpecificLanguages, vXSpecificLicences, vXSpecificMemberships, vXSpecificPastExperience, vXSpecificQualifications, vXSpecifyGuidance, vXStatementWordLimit, vXStrengthsRequired, vXTechSkillsRequired, vXTypeOfRole, vXVacanciesInNIR, vacancyFormId, vacancyId, vacancyName}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXAbilitiesRequired, vXAnyAdditionalQuestions, vXAnyOnlineTests, vXApplicationClosingDate, vXApplicationLiveDate, vXApproach, vXAttachmentRequired, vXAvailableOutsideInNI, vXBehavioursRequired, vXBudgetaryApproval, vXBusinessArea, vXBusinessAreaDetail, vXCandidateInstructions, vXCommunitiesInNIR, vXCostCentre, vXDesirablePastExperience, vXExperiencesRequired, vXFullQualification, vXGiveLocationPreference, vXGreatForVeterans, vXGuidanceText, vXHowManyQuestions, vXInterviewExpectedRounds, vXInterviewFourType, vXInterviewNumber, vXInterviewOneType, vXInterviewThreeType, vXInterviewTwoType, vXJobHistory, vXJobInfoDepartment, vXLanguagesMandatory, vXLicencesMandatory, vXLocationDisplay, vXLocationType, vXMaxLocations, vXMembershipsMandatory, vXNoOfJobsAvailable, vXOtherLocations, vXPersonalStatement, vXPreSiftRequired, vXPreviousExperiences, vXProfession, vXQualificationsMandatory, vXQuestionOne, vXQuestionThree, vXQuestionTwo, vXRejectApplyingOnPromotion, vXRejectLanguagesNotHeld, vXRejectLicencesNotHeld, vXRejectLiveMisconduct, vXRejectMembershipsNotHeld, vXRejectNationalityReq, vXRejectNoRightToRemain, vXRejectPoorAttendance, vXRejectPoorPerformance, vXRejectProbation, vXRejectQualificationsNotHeld, vXReserveExtendLength, vXReserveExtendRequired, vXReserveListLength, vXReserveListRequired, vXSpecificLanguages, vXSpecificLicences, vXSpecificMemberships, vXSpecificPastExperience, vXSpecificQualifications, vXSpecifyGuidance, vXStatementWordLimit, vXStrengthsRequired, vXTechSkillsRequired, vXTypeOfRole, vXVacanciesInNIR, vacancyFormId, vacancyId, vacancyName}
 import uk.gov.co.test.ui.pages.vx.vacancytabs.SummaryTab.{vacancyActive, vacancyClosingDateId, vacancyLiveDateId}
 
 import scala.collection.mutable
@@ -93,7 +93,11 @@ object VacancyDetailsPage extends VacancyBasePage {
   def rejectPreSiftRequiredId           = s"${vacancyFormId}_datafield_62541_1_1_fieldset"
   def rejectAttachmentRequiredId        = s"${vacancyFormId}_datafield_61333_1_1_fieldset"
   def instructionsForCandidateId        = s"${vacancyFormId}_datafield_61355_1_1_en-GB"
-  def additionalQuestionsId        = s"${vacancyFormId}_datafield_56152_1_1_fieldset"
+  def additionalQuestionsId             = s"${vacancyFormId}_datafield_56152_1_1_fieldset"
+  def howManyQuestionsId                = s"${vacancyFormId}_datafield_56156_1_1_fieldset"
+  def questionOneId                     = s"${vacancyFormId}_datafield_56159_1_1_en-GB"
+  def questionOTwoId                    = s"${vacancyFormId}_datafield_56165_1_1_en-GB"
+  def questionThreeId                   = s"${vacancyFormId}_datafield_56171_1_1_en-GB"
 
   private def dashboardPageCheck(): Unit =
     eventually(onPage(dashboardPageTitle))
@@ -554,8 +558,24 @@ object VacancyDetailsPage extends VacancyBasePage {
   private def extractAdditionalQuestions(): Unit = {
     val questions = waitForVisibilityOfElementById(additionalQuestionsId).findElement(By.xpath(checkLabelPath))
     if (questions.getText == "Yes") {
-      vXAnyOnlineTests = true
-    } else vXAnyOnlineTests = false
+      vXAnyAdditionalQuestions = true
+    } else vXAnyAdditionalQuestions = false
+  }
+
+  private def extractHowManyQuestions(): Unit = {
+    val howMany = waitForVisibilityOfElementById(howManyQuestionsId).findElement(By.xpath(checkLabelPath))
+    vXHowManyQuestions = howMany.getText.toInt
+    vXHowManyQuestions match {
+      case 1 =>
+        vXQuestionOne = waitForVisibilityOfElementById(questionOneId).getText
+      case 2 =>
+        vXQuestionOne = waitForVisibilityOfElementById(questionOneId).getText
+        vXQuestionTwo = waitForVisibilityOfElementById(questionOTwoId).getText
+      case 3 =>
+        vXQuestionOne = waitForVisibilityOfElementById(questionOneId).getText
+        vXQuestionTwo = waitForVisibilityOfElementById(questionOTwoId).getText
+        vXQuestionThree = waitForVisibilityOfElementById(questionThreeId).getText
+    }
   }
 
   private def jobInformationDetails(): Unit = {
@@ -613,6 +633,11 @@ object VacancyDetailsPage extends VacancyBasePage {
   private def onlineTests(): Unit =
     extractOnlineTests()
 
+  private def additionalQuestions(): Unit = {
+    extractAdditionalQuestions()
+    extractHowManyQuestions()
+  }
+
   private def eligibilityAndRejectionCriteria(): Unit = {
     //internal or across government campaigns
     extractRejectProbation()
@@ -649,7 +674,7 @@ object VacancyDetailsPage extends VacancyBasePage {
     interviews()
     successProfiles()
     onlineTests()
-//    additionalQuestions() TODO
+    additionalQuestions()
     eligibilityAndRejectionCriteria()
     vacancyManagement()
 //    onlinePreEmploymentCheckForms() TODO
