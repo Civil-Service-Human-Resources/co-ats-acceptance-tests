@@ -1,8 +1,8 @@
 package uk.gov.co.test.ui.pages.v9.longform
 
 import org.scalatest.concurrent.Eventually.eventually
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXAttachmentRequired, vXCandidateInstructions}
 import uk.gov.co.test.ui.data.v9.longform.LongFormDetails
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXCandidateInstructions, vXUploadAttachmentRequired}
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
 import uk.gov.co.test.ui.pages.v9.longform.DiversityMonitoringPage.longFormId
 
@@ -22,9 +22,7 @@ object UploadDocumentsPage extends CivilServiceJobsBasePage {
   private def confirmInstructions(): Unit = {
     uploadDocumentsPageCheck()
     val v9Instruction = waitForVisibilityOfElementByPath(instructionsTextPath).getText
-    v9Instruction shouldEqual """Autotest - Instructions for candidate 
-                                |Documents must be uploaded in .doc, .docx or .pdf file format, with a maximum file size of 512 KB.
-                                |Once you have attached a file, you will be able to remove and attach another as many times as required before you submit your application.""".stripMargin
+    v9Instruction shouldEqual s"$vXCandidateInstructions \nDocuments must be uploaded in .doc, .docx or .pdf file format, with a maximum file size of 512 KB.\nOnce you have attached a file, you will be able to remove and attach another as many times as required before you submit your application."
   }
 
   private def uploadCandidateDocuments(uploadDocumentsDetails: UploadDocumentsDetails): Unit =
@@ -35,7 +33,7 @@ object UploadDocumentsPage extends CivilServiceJobsBasePage {
   )
 
   def uploadDocumentsPage(longFormDetails: LongFormDetails): Unit =
-    if (vXUploadAttachmentRequired) {
+    if (vXAttachmentRequired) {
       confirmInstructions()
       document.foreach { f =>
         f(longFormDetails.uploadDocumentsDetails)

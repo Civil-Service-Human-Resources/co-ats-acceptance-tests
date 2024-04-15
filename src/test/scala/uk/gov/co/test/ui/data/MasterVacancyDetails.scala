@@ -63,15 +63,20 @@ object MasterVacancyDetails extends VacancyBasePage {
   )
 
   //vx VACANCY criteria section
-  var vXCandidateInstructions: String     = "Autotest - Instructions for candidate \nDocuments must be uploaded in .doc, .docx or .pdf file format, with a maximum file size of 512 KB.\nOnce you have attached a file, you will be able to remove and attach another as many times as required before you submit your application."
-  var vXUploadAttachmentRequired: Boolean = true
-  var vXProbationIncomplete: Boolean      = true
-  var vXPromotionApply: Boolean           = true
-  var vXMisconductLive: Boolean           = true
-  var vXPerformanceReview: Boolean        = true
-  var vXAttendancePoor: Boolean           = true
-  var vXNationalityRequirements: Boolean  = true
-  var vXRightToRemainUK: Boolean          = true
+  var vXRejectProbation: Boolean             = true
+  var vXRejectApplyingOnPromotion: Boolean   = true
+  var vXRejectLiveMisconduct: Boolean        = true
+  var vXRejectPoorPerformance: Boolean       = true
+  var vXRejectPoorAttendance: Boolean        = true
+  var vXRejectNationalityReq: Boolean        = true
+  var vXRejectNoRightToRemain: Boolean       = true
+  var vXRejectLicencesNotHeld: Boolean       = true
+  var vXRejectMembershipsNotHeld: Boolean    = true
+  var vXRejectLanguagesNotHeld: Boolean      = true
+  var vXRejectQualificationsNotHeld: Boolean = true
+  var vXPreSiftRequired: Boolean             = true
+  var vXAttachmentRequired: Boolean          = true
+  var vXCandidateInstructions: String        = ""
 
   //vx VACANCY experience section
   var vXJobHistory: Boolean              = false
@@ -83,7 +88,6 @@ object MasterVacancyDetails extends VacancyBasePage {
   var vXDesirablePastExperience: Boolean = false
   var vXSpecificPastExperience: String   = ""
   var vXStatementWordLimit: Int          = 250
-  var vXPreSiftRequired: Boolean         = true
   var vXLicencesMandatory: Boolean       = false
   var vXSpecificLicences: String         = ""
   var vXMembershipsMandatory: Boolean    = false
