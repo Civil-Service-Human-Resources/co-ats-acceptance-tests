@@ -128,7 +128,6 @@ object VacancyDetailsPage extends VacancyBasePage {
     extractVacancyId()
     extractVacancyName()
     extractVacancySummary()
-    println(s"$vacancyId - $vacancyName")
   }
 
   def extractVacancySummary(): Unit =
@@ -210,7 +209,12 @@ object VacancyDetailsPage extends VacancyBasePage {
       vXReserveListRequired = true
       extractReserveLength()
       extractReserveExtendRequired()
-    } else vXReserveListRequired = false
+    } else {
+      vXReserveListRequired = false
+      vXReserveListLength = ""
+      vXReserveExtendRequired = false
+      vXReserveExtendLength = ""
+    }
   }
 
   private def extractReserveLength(): Unit =
@@ -222,6 +226,9 @@ object VacancyDetailsPage extends VacancyBasePage {
       if (extendRequired.isDisplayed && extendRequired.getText == "Yes") {
         vXReserveExtendRequired = true
         extractReserveExtendLength()
+      } else {
+        vXReserveExtendRequired = false
+        vXReserveExtendLength = ""
       }
     } else {
       vXReserveExtendRequired = false

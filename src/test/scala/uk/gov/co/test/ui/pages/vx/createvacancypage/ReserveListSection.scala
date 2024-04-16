@@ -3,7 +3,6 @@ package uk.gov.co.test.ui.pages.vx.createvacancypage
 import org.openqa.selenium.By
 import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXReserveExtendLength, vXReserveExtendRequired, vXReserveListLength, vXReserveListRequired, vXReserveListTotalLength, vacancyFormId, vacancyId}
 import uk.gov.co.test.ui.data.vx.vacancy.NewVacancyDetails
-import uk.gov.co.test.ui.pages.vx.DashboardPage.previewJobPath
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 import uk.gov.co.test.ui.pages.vx.VacancyDetailsPage.{extractAllVacancyDetails, navigateToVacancyForms, reserveList, searchForVacancy}
 
@@ -16,14 +15,14 @@ case class ReserveListDetails(
 
 object ReserveListSection extends VacancyBasePage {
 
-  def reserveListId         = s"${vacancyFormId}_field_154633_1"
-  def reserveListYesId      = s"${vacancyFormId}_datafield_154633_1_1_1"
-  def reserveListNoId       = s"${vacancyFormId}_datafield_154633_1_1_2"
-  def reserveListLengthId   = s"select2-${vacancyFormId}_datafield_154637_1_1-container"
-  def approvalToExtendYesId = s"${vacancyFormId}_datafield_177141_1_1_1"
-  def approvalToExtendNoId  = s"${vacancyFormId}_datafield_177141_1_1_2"
-  def extendLengthId        = s"select2-${vacancyFormId}_datafield_177145_1_1-container"
-  def approveForPublicationMessageId        = s"${vacancyFormId}_label_72537_1"
+  def reserveListId                  = s"${vacancyFormId}_field_154633_1"
+  def reserveListYesId               = s"${vacancyFormId}_datafield_154633_1_1_1"
+  def reserveListNoId                = s"${vacancyFormId}_datafield_154633_1_1_2"
+  def reserveListLengthId            = s"select2-${vacancyFormId}_datafield_154637_1_1-container"
+  def approvalToExtendYesId          = s"${vacancyFormId}_datafield_177141_1_1_1"
+  def approvalToExtendNoId           = s"${vacancyFormId}_datafield_177141_1_1_2"
+  def extendLengthId                 = s"select2-${vacancyFormId}_datafield_177145_1_1-container"
+  def approveForPublicationMessageId = s"${vacancyFormId}_label_72537_1"
 
   def selectReserveList(reserveListDetails: ReserveListDetails): Unit = {
     scrollToElement(By.id(reserveListId))
@@ -83,38 +82,17 @@ object ReserveListSection extends VacancyBasePage {
       clickOnRadioButton(reserveListYesId)
       lengthOfReserveList(reserveLength)
       if (reserveLength == "12 Months") {
-        if (extendRequired.get) {
+        if (extendRequired.isDefined && extendRequired.get.equals(true)) {
           clickOnRadioButton(approvalToExtendYesId)
           waitForVisibilityOfElementById(extendLengthId).click()
-          action().moveToElement(waitForDropdownOption(extendLength.get)).perform()
-          waitForDropdownOption(extendLength.get).click()
+          action().moveToElement(waitForDropdownOption(extendLength.getOrElse(""))).perform()
+          waitForDropdownOption(extendLength.getOrElse("")).click()
         } else clickOnRadioButton(approvalToExtendNoId)
       }
       scrollToElement(By.id(submitForm))
       clickOn(submitForm)
       waitForVisibilityOfElementById(approveForPublicationMessageId).isDisplayed
     }
-    extractAllVacancyDetails(vacancyId)
-    totalReserveExpiryLength()
-  }
-
-  def changeReserveListDetails2(
-    reserveLength: String,
-    extendRequired: Option[Boolean] = None,
-    extendLength: Option[String] = None
-  ): Unit = {
-    searchForVacancy(vacancyId)
-    navigateToVacancyForms()
-    scrollToElement(By.id(reserveListId))
-    clickOnRadioButton(reserveListYesId)
-    lengthOfReserveList(reserveLength)
-    if (reserveLength == "12 Months" && extendRequired.get) {
-      clickOnRadioButton(approvalToExtendYesId)
-      extendLengthOfReserveList(extendLength.get)
-    } else clickOnRadioButton(approvalToExtendNoId)
-    scrollToElement(By.id(submitForm))
-    clickOn(submitForm)
-    waitForVisibilityOfElementById(previewJobPath).isDisplayed
     extractAllVacancyDetails(vacancyId)
     totalReserveExpiryLength()
   }
@@ -126,10 +104,5 @@ object ReserveListSection extends VacancyBasePage {
       val totalLength         = baseReserveLength + reserveExtendLength
       vXReserveListTotalLength = s"${totalLength.toString} Months"
     } else vXReserveListTotalLength = s"${baseReserveLength.toString} Months"
-    println(s"1. The length required is: $vXReserveListRequired")
-    println(s"2. The list length is: $vXReserveListLength")
-    println(s"3. The extend length required is: $vXReserveExtendRequired")
-    println(s"4. The extend length is: $vXReserveExtendLength")
-    println(s"5. The total length is: $vXReserveListTotalLength")
   }
 }
