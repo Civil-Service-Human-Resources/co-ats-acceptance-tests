@@ -5,7 +5,6 @@ import org.openqa.selenium.{By, WebDriver}
 import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXBusinessAreaDetail, vXJobInfoDepartment, vXNoOfJobsAvailable, vXProfession, vXTypeOfRole, vacancyFormId}
 import uk.gov.co.test.ui.data.vx.vacancy.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
-import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.selectTemplatePath
 
 import scala.collection.mutable.ListBuffer
 
@@ -52,11 +51,7 @@ object JobInfoSection extends VacancyBasePage {
     scrollToElement(By.id(businessAreaId))
     val businessArea    = waitForVisibilityOfElementById(businessAreaId)
     businessArea.click()
-    if (
-      !waitForVisibilityOfElementByPath(selectTemplatePath)
-        .getAttribute("title")
-        .equals("DO NOT USE- Automation Test Template")
-    ) {
+    if (vXJobInfoDepartment != "HM Revenue and Customs") {
       val wait = new WebDriverWait(driver, 210, 3000)
       wait.until { (d: WebDriver) =>
         d.findElement(By.id(businessAreaId)).getAttribute("title").equals("Choose one...")
