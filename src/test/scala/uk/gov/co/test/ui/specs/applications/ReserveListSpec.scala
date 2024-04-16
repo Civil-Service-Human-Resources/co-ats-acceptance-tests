@@ -1,4 +1,4 @@
-package uk.gov.co.test.ui.specs
+package uk.gov.co.test.ui.specs.applications
 
 import uk.gov.co.test.ui.data.test.reserve.RESERVE_VACANCY_DATA
 import uk.gov.co.test.ui.data.v9.applicants._
@@ -9,6 +9,7 @@ import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.reserveExpiryList
 import uk.gov.co.test.ui.pages.vx.createvacancypage.ReserveListSection.changeReserveListDetails
 import uk.gov.co.test.ui.pages.vx.vacancytabs.ExternalPostingsTab.repostExternalPosting
 import uk.gov.co.test.ui.pages.vx.vacancytabs.ReserveListsTab.{reserveExpiryListChecks, reserveListEmailChecks, reserveListHistoryChecks}
+import uk.gov.co.test.ui.specs.BaseFeatureSpec
 import uk.gov.co.test.ui.tags.RunInVX
 
 class ReserveListSpec extends BaseFeatureSpec {

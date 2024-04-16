@@ -28,7 +28,7 @@ trait BaseFeatureSpec
 
   OncePerSuiteRun.register("deleteScreenshots", () => SingletonScreenshotReport.clearReportDirectory())
 
-  override protected def beforeEach(testData: TestData): Unit = {
+  override protected def beforeEach(testData: TestData): Unit =
 //    driver.manage().window().maximize()
     if (testData.name.contains("V9")) {
       generateCandidateDetails()
@@ -40,7 +40,6 @@ trait BaseFeatureSpec
       generateCandidateDetails()
       loginWithRecruiterDetails(RECRUITER)
     } else throw new IllegalStateException("Change test name in order to start up correct system")
-  }
 
   override protected def afterEach(testData: TestData): Unit =
     if (testData.name.contains("Candidate")) {

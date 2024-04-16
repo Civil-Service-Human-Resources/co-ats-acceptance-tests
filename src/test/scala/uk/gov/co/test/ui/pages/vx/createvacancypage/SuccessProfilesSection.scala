@@ -24,18 +24,17 @@ case class SuccessProfilesDetails(
 
 object SuccessProfilesSection extends VacancyBasePage {
 
-  def abilitiesId       = s"${vacancyFormId}_datafield_154245_1_1_12685"
-  def behavioursId      = s"${vacancyFormId}_datafield_154245_1_1_12686"
-  def experienceId      = s"${vacancyFormId}_datafield_154245_1_1_12687"
-  def strengthsId       = s"${vacancyFormId}_datafield_154245_1_1_12689"
-  def technicalSkillsId = s"${vacancyFormId}_datafield_154245_1_1_12688"
-  private lazy val checkLabelPath          = ".//input[@checked='checked']"
+  def abilitiesId                 = s"${vacancyFormId}_datafield_154245_1_1_12685"
+  def behavioursId                = s"${vacancyFormId}_datafield_154245_1_1_12686"
+  def experienceId                = s"${vacancyFormId}_datafield_154245_1_1_12687"
+  def strengthsId                 = s"${vacancyFormId}_datafield_154245_1_1_12689"
+  def technicalSkillsId           = s"${vacancyFormId}_datafield_154245_1_1_12688"
+  private lazy val checkLabelPath = ".//input[@checked='checked']"
 
-  private def checkboxCheck(successRequired: Boolean, checkId: String): Unit = {
+  private def checkboxCheck(successRequired: Boolean, checkId: String): Unit =
     if (!successRequired && waitForVisibilityOfElementById(checkId).isSelected) {
       waitForVisibilityOfElementById(checkId).click()
     }
-  }
 
   private def whichSuccessProfiles(successProfilesDetails: SuccessProfilesDetails): Unit = {
     if (successProfilesDetails.abilities) {
