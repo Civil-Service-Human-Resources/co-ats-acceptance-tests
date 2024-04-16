@@ -14,7 +14,6 @@ class RedeploymentSchemeSpec extends BaseFeatureSpec {
     Scenario("VX: Candidate Selects DESNZ Home Department For Redeployment Scheme", RunInVX) {
       Given("a vacancy is included in the redeployment scheme")
       vacancyId = "9667"
-//      fillNewVacancyForm(REDEPLOYMENT_VACANCY_DATA)
       v9HomeDepartment = "Department for Energy Security & Net Zero"
       extractAllVacancyDetails(vacancyId)
 

@@ -442,7 +442,7 @@ object REDEPLOYMENT_CRITERIA
 object REDEPLOYMENT_MANAGEMENT
     extends ManagementDetails(
       true,
-      false,
+      true,
       "Other",
       true,
       assignTo = Option(s"$contactEmailVxConfig"),

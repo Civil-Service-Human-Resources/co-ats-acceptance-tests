@@ -121,7 +121,8 @@ object PersonalInfoPage extends CivilServiceJobsBasePage {
 
   private def enterRedeploymentScheme(personalInfoDetails: PersonalInfoDetails): Unit =
     if (
-      v9CivilServant && (vXJobInfoDepartment == "Department for Energy Security & Net Zero" ||
+      v9CivilServant && (
+        vXJobInfoDepartment == "Department for Energy Security & Net Zero" ||
         vXJobInfoDepartment == "Department for Science, Innovation and Technology" ||
         vXJobInfoDepartment == "Government Equalities Office" ||
         vXJobInfoDepartment == "Revenue Scotland" ||
