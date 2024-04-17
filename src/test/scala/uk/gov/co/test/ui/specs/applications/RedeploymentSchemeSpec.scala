@@ -1,4 +1,4 @@
-package uk.gov.co.test.ui.specs
+package uk.gov.co.test.ui.specs.applications
 
 import uk.gov.co.test.ui.data.MasterVacancyDetails.{v9HomeDepartment, vacancyId}
 import uk.gov.co.test.ui.data.test.redeployment.{NON_REDEPLOYMENT_VACANCY_DATA, REDEPLOYMENT_SHORT_FORM_DATA}
@@ -7,6 +7,7 @@ import uk.gov.co.test.ui.flows.v9.RegisterCandidateFlow.fillNewCandidateDetails
 import uk.gov.co.test.ui.flows.v9.ShortFormFlow.fillShortFormDetails
 import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.fillNewVacancyForm
 import uk.gov.co.test.ui.pages.vx.VacancyDetailsPage.extractAllVacancyDetails
+import uk.gov.co.test.ui.specs.BaseFeatureSpec
 import uk.gov.co.test.ui.tags.RunInVX
 
 class RedeploymentSchemeSpec extends BaseFeatureSpec {
@@ -104,8 +105,6 @@ class RedeploymentSchemeSpec extends BaseFeatureSpec {
     Scenario("VX: Candidate Selects Ineligible Home Department - OSCR", RunInVX) {
       Given("a vacancy is included in the redeployment scheme")
       v9HomeDepartment = "Office of the Scottish Charity Regulator"
-      vacancyId = "9667"
-      extractAllVacancyDetails(vacancyId)
 
       When("a candidate selects an ineligible home department")
       fillNewCandidateDetails(REGISTER_CANDIDATE_REDEPLOYMENT_SCHEME_9)
@@ -162,7 +161,6 @@ class RedeploymentSchemeSpec extends BaseFeatureSpec {
       Given("a vacancy is not included in the redeployment scheme")
       fillNewVacancyForm(NON_REDEPLOYMENT_VACANCY_DATA)
       v9HomeDepartment = "Department for Energy Security & Net Zero"
-      extractAllVacancyDetails(vacancyId)
 
       When("a candidate selects an eligible home department")
       fillNewCandidateDetails(REGISTER_CANDIDATE_REDEPLOYMENT_SCHEME_14)

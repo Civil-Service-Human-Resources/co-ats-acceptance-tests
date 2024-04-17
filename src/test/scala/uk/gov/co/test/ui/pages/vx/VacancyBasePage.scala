@@ -41,7 +41,7 @@ trait VacancyBasePage extends Matchers with BasePage with BrowserDriver {
   val userProfilePath: String      = "//*[@class='user_link']"
   lazy val generalInput            = "//input[@class='select2-search__field']"
   val applicationCentrePageTitle   = "Your account details - Civil Service Jobs - GOV.UK"
-  val vacancyStatusPath            = ".//*[@id='collapse_panel']/span[1]"
+  val vacancyStatusPath            = ".//*[@id='collapse_panel']//span[1]"
   val submitForm                   = "submit_button"
 
   def candidateSummaryId(noEle: String)        = s"candidate_summary_entry_cand_summary_col_$noEle"

@@ -1,8 +1,8 @@
 package uk.gov.co.test.ui.pages.vx.createvacancypage
 
-import org.openqa.selenium.By
+import org.openqa.selenium.support.ui.WebDriverWait
+import org.openqa.selenium.{By, WebDriver}
 import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXBusinessAreaDetail, vXJobInfoDepartment, vXNoOfJobsAvailable, vXProfession, vXTypeOfRole, vacancyFormId}
-import uk.gov.co.test.ui.data.TestData.eventually
 import uk.gov.co.test.ui.data.vx.vacancy.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 
@@ -49,8 +49,14 @@ object JobInfoSection extends VacancyBasePage {
   private def selectBusinessArea(jobInfoDetails: JobInfoDetails): Unit = {
     val area            = jobInfoDetails.businessArea
     scrollToElement(By.id(businessAreaId))
-    eventually(waitForVisibilityOfElementById(businessAreaId).getText shouldEqual "Choose one...")
-    waitForVisibilityOfElementById(businessAreaId).click()
+    val businessArea    = waitForVisibilityOfElementById(businessAreaId)
+    businessArea.click()
+    if (vXJobInfoDepartment != "HM Revenue and Customs") {
+      val wait = new WebDriverWait(driver, 210, 3000)
+      wait.until { (d: WebDriver) =>
+        d.findElement(By.id(businessAreaId)).getAttribute("title").equals("Choose one...")
+      }
+    }
     val noOfListOptions = driver.findElements(By.xpath(listOptionsPath)).size()
     if (noOfListOptions < 3) {
       action().moveToElement(waitForDropdownOption(area)).perform()
