@@ -1,6 +1,6 @@
 package uk.gov.co.test.ui.pages.vx.vacancytabs
 
-import org.openqa.selenium.{By, Keys, WebElement}
+import org.openqa.selenium.{By, WebElement}
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 
 import scala.collection.{Seq, mutable}
@@ -114,7 +114,7 @@ object HistoryTab extends VacancyBasePage {
 
   def emailChecks(i: String): Unit = {
     val subjectSummary = "(//*[@class='detail-grid-tl'])"
-    val subject = driver.findElement(By.xpath(s"$subjectSummary[$i]")).getText
+    val subject        = driver.findElement(By.xpath(s"$subjectSummary[$i]")).getText
     println(subject)
   }
 

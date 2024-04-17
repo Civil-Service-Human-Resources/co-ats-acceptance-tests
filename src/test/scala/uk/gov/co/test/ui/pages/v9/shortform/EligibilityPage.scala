@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.pages.v9.shortform
 
 import org.scalatest.concurrent.Eventually.eventually
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{v9CivilServant, v9HomeDepartment, vXExperiencesRequired, vXLanguagesMandatory, vXLicencesMandatory, vXMembershipsMandatory, vXNationalityRequirements, vXQualificationsMandatory, vXRightToRemainUK, vacancyId, vacancyName}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{v9CivilServant, v9HomeDepartment, vXExperiencesRequired, vXLanguagesMandatory, vXLicencesMandatory, vXMembershipsMandatory, vXQualificationsMandatory, vXRejectNationalityReq, vXRejectNoRightToRemain}
 import uk.gov.co.test.ui.data.v9.shortform.ShortFormDetails
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
 import uk.gov.co.test.ui.pages.v9.shortform.ApplicationGuidancePage.shortFormId
@@ -54,13 +54,13 @@ object EligibilityPage extends CivilServiceJobsBasePage {
   }
 
   private def selectNationalityReqMet(eligibilityDetails: EligibilityDetails): Unit =
-    if (vXNationalityRequirements) {
+    if (vXRejectNationalityReq) {
       if (eligibilityDetails.nationalityReqMet) radioSelect(nationalityReqMetYesId)
       else radioSelect(nationalityReqMetNoId)
     }
 
   private def selectRightToRemain(eligibilityDetails: EligibilityDetails): Unit =
-    if (vXRightToRemainUK) {
+    if (vXRejectNoRightToRemain) {
       if (eligibilityDetails.rightToRemain) radioSelect(rightToRemainYesId)
       else radioSelect(rightToRemainNoId)
     }

@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.pages.vx.createvacancypage
 
 import org.openqa.selenium.By
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXAttendancePoor, vXCandidateInstructions, vXExperiencesRequired, vXLanguagesMandatory, vXLicencesMandatory, vXMembershipsMandatory, vXMisconductLive, vXNationalityRequirements, vXPerformanceReview, vXPreSiftRequired, vXProbationIncomplete, vXPromotionApply, vXQualificationsMandatory, vXRightToRemainUK, vXUploadAttachmentRequired, vacancyFormId}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXAttachmentRequired, vXCandidateInstructions, vXExperiencesRequired, vXLanguagesMandatory, vXLicencesMandatory, vXMembershipsMandatory, vXPreSiftRequired, vXQualificationsMandatory, vXRejectApplyingOnPromotion, vXRejectLanguagesNotHeld, vXRejectLicencesNotHeld, vXRejectLiveMisconduct, vXRejectMembershipsNotHeld, vXRejectNationalityReq, vXRejectNoRightToRemain, vXRejectPoorAttendance, vXRejectPoorPerformance, vXRejectProbation, vXRejectQualificationsNotHeld, vacancyFormId}
 import uk.gov.co.test.ui.data.vx.vacancy.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 
@@ -60,78 +60,74 @@ object CriteriaSection extends VacancyBasePage {
   }
 
   private def selectRejectIfProbationIncomplete(criteriaDetails: CriteriaDetails): Unit = {
-    vXProbationIncomplete = criteriaDetails.probationIncomplete
-    if (vXProbationIncomplete) clickOnRadioButton(probationCompleteYesId)
+    vXRejectProbation = criteriaDetails.probationIncomplete
+    if (vXRejectProbation) clickOnRadioButton(probationCompleteYesId)
     else clickOnRadioButton(probationCompleteNoId)
   }
 
   private def selectRejectIfApplyingOnPromotion(criteriaDetails: CriteriaDetails): Unit = {
-    vXPromotionApply = criteriaDetails.promotionApply
-    if (vXPromotionApply) clickOnRadioButton(promotionApplyYesId)
+    vXRejectApplyingOnPromotion = criteriaDetails.promotionApply
+    if (vXRejectApplyingOnPromotion) clickOnRadioButton(promotionApplyYesId)
     else clickOnRadioButton(promotionApplyNoId)
   }
 
   private def selectRejectIfMisconductIsLive(criteriaDetails: CriteriaDetails): Unit = {
-    vXMisconductLive = criteriaDetails.misconductLive
-    if (vXMisconductLive) clickOnRadioButton(misconductLiveYesId)
+    vXRejectLiveMisconduct = criteriaDetails.misconductLive
+    if (vXRejectLiveMisconduct) clickOnRadioButton(misconductLiveYesId)
     else clickOnRadioButton(misconductLiveNoId)
   }
 
   private def selectRejectIfPerformanceReview(criteriaDetails: CriteriaDetails): Unit = {
-    vXPerformanceReview = criteriaDetails.performanceReview
-    if (vXPerformanceReview) clickOnRadioButton(performancePoorYesId)
+    vXRejectPoorPerformance = criteriaDetails.performanceReview
+    if (vXRejectPoorPerformance) clickOnRadioButton(performancePoorYesId)
     else clickOnRadioButton(performancePoorNoId)
   }
 
   private def selectRejectIfAttendancePoor(criteriaDetails: CriteriaDetails): Unit = {
-    vXAttendancePoor = criteriaDetails.attendancePoor
-    if (vXAttendancePoor) clickOnRadioButton(attendancePoorYesId)
+    vXRejectPoorAttendance = criteriaDetails.attendancePoor
+    if (vXRejectPoorAttendance) clickOnRadioButton(attendancePoorYesId)
     else clickOnRadioButton(attendancePoorNoId)
   }
 
   private def selectRejectIfNoMeetNationality(criteriaDetails: CriteriaDetails): Unit = {
-    vXNationalityRequirements = criteriaDetails.nationalityRequirements
-    if (vXNationalityRequirements) clickOnRadioButton(nationalityRequirementsYesId)
+    vXRejectNationalityReq = criteriaDetails.nationalityRequirements
+    if (vXRejectNationalityReq) clickOnRadioButton(nationalityRequirementsYesId)
     else clickOnRadioButton(nationalityRequirementsNoId)
   }
 
   private def selectRejectIfNoRightToRemain(criteriaDetails: CriteriaDetails): Unit = {
-    vXRightToRemainUK = criteriaDetails.rightToRemainUK
-    if (vXRightToRemainUK) clickOnRadioButton(rightToRemainUKYesId)
+    vXRejectNoRightToRemain = criteriaDetails.rightToRemainUK
+    if (vXRejectNoRightToRemain) clickOnRadioButton(rightToRemainUKYesId)
     else clickOnRadioButton(rightToRemainUKNoId)
   }
 
-  private def selectRejectIfLicencesNotHeld(criteriaDetails: CriteriaDetails): Unit = {
-    vXLicencesMandatory = criteriaDetails.licencesNotHeld
+  private def selectRejectIfLicencesNotHeld(criteriaDetails: CriteriaDetails): Unit =
     if (vXLicencesMandatory && vXExperiencesRequired) {
-      if (vXLicencesMandatory) clickOnRadioButton(licencesNotHeldYesId)
+      vXRejectLicencesNotHeld = criteriaDetails.licencesNotHeld
+      if (vXRejectLicencesNotHeld) clickOnRadioButton(licencesNotHeldYesId)
       else clickOnRadioButton(licencesNotHeldNoId)
     }
-  }
 
-  private def selectRejectIfMembershipsNotHeld(criteriaDetails: CriteriaDetails): Unit = {
-    vXMembershipsMandatory = criteriaDetails.membershipsNotHeld
+  private def selectRejectIfMembershipsNotHeld(criteriaDetails: CriteriaDetails): Unit =
     if (vXMembershipsMandatory && vXExperiencesRequired) {
-      if (vXMembershipsMandatory) clickOnRadioButton(membershipsNotHeldYesId)
+      vXRejectMembershipsNotHeld = criteriaDetails.licencesNotHeld
+      if (vXRejectMembershipsNotHeld) clickOnRadioButton(membershipsNotHeldYesId)
       else clickOnRadioButton(membershipsNotHeldNoId)
     }
-  }
 
-  private def selectRejectIfLanguageSkillsNotHeld(criteriaDetails: CriteriaDetails): Unit = {
-    vXLanguagesMandatory = criteriaDetails.languagesSkillsNotHeld
+  private def selectRejectIfLanguageSkillsNotHeld(criteriaDetails: CriteriaDetails): Unit =
     if (vXLanguagesMandatory && vXExperiencesRequired) {
-      if (vXLanguagesMandatory) clickOnRadioButton(languagesSkillsYesId)
+      vXRejectLanguagesNotHeld = criteriaDetails.licencesNotHeld
+      if (vXRejectLanguagesNotHeld) clickOnRadioButton(languagesSkillsYesId)
       else clickOnRadioButton(languagesSkillsNoId)
     }
-  }
 
-  private def selectRejectIfQualificationsNotHeld(criteriaDetails: CriteriaDetails): Unit = {
-    vXQualificationsMandatory = criteriaDetails.qualificationsHeld
+  private def selectRejectIfQualificationsNotHeld(criteriaDetails: CriteriaDetails): Unit =
     if (vXQualificationsMandatory && vXExperiencesRequired) {
-      if (vXQualificationsMandatory) clickOnRadioButton(qualificationsHeldYesId)
+      vXRejectQualificationsNotHeld = criteriaDetails.qualificationsHeld
+      if (vXRejectQualificationsNotHeld) clickOnRadioButton(qualificationsHeldYesId)
       else clickOnRadioButton(qualificationsHeldNoId)
     }
-  }
 
   private def selectIsPreSiftRequired(criteriaDetails: CriteriaDetails): Unit = {
     vXPreSiftRequired = criteriaDetails.preSiftRequired
@@ -140,9 +136,9 @@ object CriteriaSection extends VacancyBasePage {
   }
 
   private def selectRequiredCandidateUploadAttachment(criteriaDetails: CriteriaDetails): Unit = {
-    vXUploadAttachmentRequired = criteriaDetails.uploadAttachment
+    vXAttachmentRequired = criteriaDetails.uploadAttachment
     vXCandidateInstructions = criteriaDetails.candidateInstructions
-    if (vXUploadAttachmentRequired) {
+    if (vXAttachmentRequired) {
       clickOnRadioButton(uploadAttachmentYesId)
       selectOptionWithId(candidateInstructionsInputId, vXCandidateInstructions)
     } else clickOnRadioButton(uploadAttachmentNoId)

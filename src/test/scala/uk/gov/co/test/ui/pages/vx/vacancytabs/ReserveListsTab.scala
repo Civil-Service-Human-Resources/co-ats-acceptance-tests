@@ -48,7 +48,7 @@ object ReserveListsTab extends VacancyBasePage {
     checkReserveHeader(reserveListLengthHeaderPath, "Reserve list length")
     checkReserveHeader(
       reserveExpiryListHeaderPath,
-      "Reserve list expiry dates (auto-populated when candidate enters Reserve List status)"
+      "Reserve list expiry dates (auto-populated when the candidate first enters the Reserve List status)"
     )
     checkReserveValue(currentReserveListLengthId, s"Current reserve list length  \n$vXReserveListLength")
     if (vXReserveExtendRequired) {
