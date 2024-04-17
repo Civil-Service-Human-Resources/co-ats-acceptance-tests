@@ -34,21 +34,21 @@ object MASTER_PEC_RIGHT_TO_WORK
     extends RtwDetails(
       "British citizen, Briton",
       "British citizen, Briton",
-      false,
+      true,
       "Egyptian",
-      true,
+      false,
       true,
       true,
       false,
-      "I have settled status",
+      "I have applied for the settlement scheme and await confirmation of my status",
       "Autotest-certificate/application number",
       "Autotest-shareCode",
       true,
-      "Autotest-statusCode",
+      "Autotest- 'View and Prove' code",
       "Test-T&Cs.pdf",
-      false,
       true,
-      false
+      true,
+      true
     )
 
 object MASTER_PEC_FORM_EMPLOYMENT_HISTORY

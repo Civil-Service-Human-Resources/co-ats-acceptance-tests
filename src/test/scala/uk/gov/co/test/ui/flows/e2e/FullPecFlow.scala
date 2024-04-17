@@ -18,8 +18,6 @@ import uk.gov.co.test.ui.pages.vx.vacancytabs.SiftEvaluationTab.SiftEvaluationFl
 object FullPecFlow extends CivilServiceJobsBasePage {
 
   def completeFullPecFlow(): Unit = {
-    fillShortFormDetails(MASTER_SHORT_FORM_DATA)
-    fillLongFormDetails(MASTER_LONG_FORM_DATA)
     PreSiftEvaluationFlow(APPLICATION_DATA)
     SiftEvaluationFlow(APPLICATION_DATA)
     completeAllInterviews(APPLICATION_DATA)

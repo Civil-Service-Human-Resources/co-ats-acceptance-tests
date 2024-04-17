@@ -31,8 +31,8 @@ object PEC_VACANCY_DATA
 
 object PEC_BASIC_DETAILS
     extends BasicDetails(
-      "Crown Prosecution Service - Apply online",
-      s"AUTOA8PEC - " + generateRandomJobPosition(),
+      "DO NOT USE- Automation Test Template",
+      s"Insolvency - " + generateRandomJobPosition(),
       true,
       "Prawf awtomeiddio",
       32
@@ -40,13 +40,18 @@ object PEC_BASIC_DETAILS
 object PEC_JOB_INFORMATION
     extends JobInfoDetails(
       true,
-      "Crown Prosecution Service",
-      "Other",
+      "Insolvency Service",
+      "Insolvency - Information and Technology Directorate",
       true,
       "Prawf awtomeiddio",
-      "",
+      "Autotest - Business area detail",
       typeOfRole = ListBuffer(
-        "Accountancy"
+        "Accountancy",
+        "Analytical",
+        "Audit",
+        "Corporate Finance",
+        "Engineering",
+        "Tax Profession"
       ),
       "Other",
       "1"
@@ -54,23 +59,24 @@ object PEC_JOB_INFORMATION
 object PEC_APPROACH
     extends ApproachDetails(
       "External",
-      false,
+      true,
       "Autotest - Eligibility statement",
-      false,
+      true,
       "Prawf awtomeiddio",
       "This vacancy is open to employees who already hold the substantive grade for the post and were appointed to the Civil Service on merit following a fair and open competition; or were appointed to a permanent Civil Service post through an exception in the Civil Service Commissioners’ rules."
     )
+
 object PEC_APPROVAL
     extends ApprovalDetails(
       true,
       "Autotest - budgetary authorisation info",
-      "",
+      "Autotest - Cost centre (optional)",
       "Test-T&Cs.pdf"
     )
 
 object PEC_RESERVE_LIST
     extends ReserveListDetails(
-      false,
+      true,
       "12 Months",
       false,
       "6 Months"
@@ -78,12 +84,12 @@ object PEC_RESERVE_LIST
 
 object PEC_LOCATIONS
     extends LocationsDetails(
-      "Towns",
+      "Postcodes",
       "M1 4RJ",
-      "Cardiff",
+      "Manchester",
       "North West",
       "Germany",
-      "",
+      "Newcastle, Liverpool, Cardiff",
       false,
       true,
       "All communities",
@@ -99,13 +105,13 @@ object PEC_CONTRACT_DETAILS
       true,
       "Prawf awtomeiddio",
       List("Full-time"),
-      "Administrative Officer",
-      "",
+      "Executive Officer",
+      "Grade 7",
       "GBP (£)",
       25000,
-      10000,
-      "",
-      false,
+      95000,
+      "Can agree on the higher bracket",
+      true,
       18750
     )
 
@@ -131,25 +137,25 @@ object PEC_CONTACT_DETAILS
 object PEC_VETTING_DETAILS
     extends VettingDetails(
       true,
-      "Standard",
+      "Basic",
       "Disclosure barring service (DBS)",
-      "None",
-      false
+      "Security check",
+      true
     )
 
 object PEC_INTERVIEWS_DETAILS
     extends InterviewsDetails(
       "1",
-      "Video",
+      "Interview",
       "Assessment",
       "Telephone",
-      "Interview",
+      "Video",
       false
     )
 
 object PEC_SUCCESS_PROFILES
     extends SuccessProfilesDetails(
-      true,
+      false,
       true,
       true,
       true,
@@ -175,9 +181,9 @@ object PEC_BEHAVIOURS
           |Civil Service Management Judgement Test""".stripMargin,
       8,
       behaviourOne =
-        Some(Behaviours(chosenBehaviour = "Changing and Improving", stageApplication = true, stageInterview = false)),
+        Some(Behaviours(chosenBehaviour = "Changing and Improving", stageApplication = true, stageInterview = true)),
       behaviourTwo = Some(
-        Behaviours(chosenBehaviour = "Communicating and Influencing", stageApplication = true, stageInterview = false)
+        Behaviours(chosenBehaviour = "Communicating and Influencing", stageApplication = true, stageInterview = true)
       ),
       behaviourThree =
         Some(Behaviours(chosenBehaviour = "Delivering at Pace", stageApplication = true, stageInterview = true)),
@@ -186,7 +192,7 @@ object PEC_BEHAVIOURS
       ),
       behaviourFive = Some(Behaviours(chosenBehaviour = "Leadership", stageApplication = true, stageInterview = true)),
       behaviourSix = Some(
-        Behaviours(chosenBehaviour = "Making Effective Decisions", stageApplication = true, stageInterview = false)
+        Behaviours(chosenBehaviour = "Making Effective Decisions", stageApplication = true, stageInterview = true)
       ),
       behaviourSeven = Some(
         Behaviours(chosenBehaviour = "Managing a Quality Service", stageApplication = true, stageInterview = true)
@@ -199,13 +205,13 @@ object PEC_BEHAVIOURS
 object PEC_EXPERIENCES
     extends ExperienceDetails(
       true,
-      "0 - 7",
+      "0 - 100",
       true,
       true,
       true,
       true,
       "0 - 7",
-      750,
+      500,
       true,
       "Autotest - Enter guidance text for the candidate",
       true,
@@ -228,12 +234,12 @@ object PEC_STRENGTHS
       8,
       "Adaptable",
       "Analytical",
-      "Authentic",
-      "Catalyst",
+      "Improver",
+      "Relationship Builder",
       "Challenger",
       "Change Agent",
-      "Confident",
-      "Focussed"
+      "Team Leader",
+      "Service Focussed"
     )
 
 object PEC_TECH_SKILLS
@@ -252,7 +258,7 @@ object PEC_TECH_SKILLS
           techSkill = "Autotest - technical skills 2",
           description = "Autotest - technical skills 2 description",
           techInterview = true,
-          techApplication = false
+          techApplication = true
         )
       ),
       Some(
@@ -260,7 +266,7 @@ object PEC_TECH_SKILLS
           techSkill = "Autotest - technical skills 3",
           description = "Autotest - technical skills 3 description",
           techInterview = true,
-          techApplication = false
+          techApplication = true
         )
       ),
       Some(
@@ -268,7 +274,7 @@ object PEC_TECH_SKILLS
           techSkill = "Autotest - technical skills 4",
           description = "Autotest - technical skills 4 description",
           techInterview = true,
-          techApplication = false
+          techApplication = true
         )
       ),
       Some(
@@ -276,7 +282,7 @@ object PEC_TECH_SKILLS
           techSkill = "Autotest - technical skills 5",
           description = "Autotest - technical skills 5 description",
           techInterview = true,
-          techApplication = false
+          techApplication = true
         )
       ),
       Some(
@@ -284,7 +290,7 @@ object PEC_TECH_SKILLS
           techSkill = "Autotest - technical skills 6",
           description = "Autotest - technical skills 6 description",
           techInterview = true,
-          techApplication = false
+          techApplication = true
         )
       ),
       Some(
@@ -292,7 +298,7 @@ object PEC_TECH_SKILLS
           techSkill = "Autotest - technical skills 7",
           description = "Autotest - technical skills 7 description",
           techInterview = true,
-          techApplication = false
+          techApplication = true
         )
       ),
       Some(
@@ -300,7 +306,7 @@ object PEC_TECH_SKILLS
           techSkill = "Autotest - technical skills 8",
           description = "Autotest - technical skills 8 description",
           techInterview = true,
-          techApplication = false
+          techApplication = true
         )
       )
     )
@@ -408,7 +414,7 @@ object PEC_GROUP_C_TESTS
 
 object PEC_ADDITIONAL_QUESTIONS
     extends AdditionalQuestionsDetails(
-      false,
+      true,
       3,
       "Autotest - Question 1",
       "Autotest - Question 2",
@@ -418,19 +424,19 @@ object PEC_ADDITIONAL_QUESTIONS
 object PEC_CRITERIA
     extends CriteriaDetails(
       campaignID = Some("Autotest - If this vacancy is linked to a campaign, enter the campaign ID (optional)"),
-      probationIncomplete = false,
-      promotionApply = false,
-      misconductLive = false,
-      performanceReview = false,
-      attendancePoor = false,
+      probationIncomplete = true,
+      promotionApply = true,
+      misconductLive = true,
+      performanceReview = true,
+      attendancePoor = true,
       nationalityRequirements = true,
-      rightToRemainUK = false,
-      licencesNotHeld = false,
-      membershipsNotHeld = false,
-      languagesSkillsNotHeld = false,
-      qualificationsHeld = false,
-      preSiftRequired = false,
-      uploadAttachment = false,
+      rightToRemainUK = true,
+      licencesNotHeld = true,
+      membershipsNotHeld = true,
+      languagesSkillsNotHeld = true,
+      qualificationsHeld = true,
+      preSiftRequired = true,
+      uploadAttachment = true,
       candidateInstructions = "Autotest - Instructions for candidate"
     )
 
@@ -439,16 +445,16 @@ object PEC_MANAGEMENT
       true,
       true,
       "Other",
-      false,
+      true,
       assignTo = Option(s"$contactEmailVxConfig"),
       assignTo2 = Option(s"$contactEmailVxConfig"),
-      false,
+      true,
       "Business As Usual (BAU)",
       "Menu",
       true,
       true,
-      linkToProject = Option(false),
-      projectName = Option(""),
+      linkToProject = Option(true),
+      projectName = Option("Autotest - Project name"),
       deptComplaintsProcess = Option("Autotest - Your department's complaints process"),
       vacancyComments = Option("Autotest - Comments on this vacancy")
     )
@@ -456,14 +462,13 @@ object PEC_MANAGEMENT
 object PEC_ONLINE_PEC_CHECK_FORMS
     extends OnlinePecCheckFormsDetails(
       true,
-      false,
+      true,
       s"$contactEmailVxConfig"
     )
 
 object PEC_PEC_CHECK_FORMS
     extends PecCheckFormsDetails(
-      rtwCheck =
-        List("Not Applicable", "Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      rtwCheck = List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
       "Before pre employment checks",
       "Right to work and criminal record check",
       true,
@@ -483,12 +488,12 @@ object PEC_PEC_CHECK_FORMS
       previousCsJobCheck = List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
       internalFraudCheck = List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
       selfEmploymentCheck = List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
-      false,
+      true,
       true,
       "Autotest - Name of check",
-      additionalCheck = List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
-      nenOnboarding = List("Not Applicable"),
+      additionalCheck = List("Not Applicable"),
+      nenOnboarding = List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
       s"$contactEmailVxConfig",
-      pnOnboarding = List("Not Applicable"),
+      pnOnboarding = List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
       s"$contactEmailVxConfig"
     )
