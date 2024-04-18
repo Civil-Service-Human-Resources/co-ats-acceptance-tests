@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.pages.vx.createvacancypage
 
 import org.openqa.selenium.By
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXRtwChecks, vacancyFormId}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXRtwChecks, vXWhenRtwChecks, vXWhichIdentityChecks, vacancyFormId}
 import uk.gov.co.test.ui.data.vx.vacancy.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 
@@ -80,7 +80,8 @@ object PecCheckFormsSection extends VacancyBasePage {
     vXRtwChecks = pecCheckFormsDetails.rtwCheck
     if (vXRtwChecks.contains("Not Applicable")) {
       if (vXRtwChecks.size >= 2) {
-        pecCheckFormsDetails.whenCompleteRtwCheck match {
+        vXWhenRtwChecks = pecCheckFormsDetails.whenCompleteRtwCheck
+        vXWhenRtwChecks match {
           case "Before pre employment checks"              => clickOnRadioButton(beforePecChecksId)
           case "At the same time as pre employment checks" => clickOnRadioButton(sameTimeAsPecChecksId)
           case _                                           => throw new IllegalStateException("Please enter valid 'RTW Check' completion option")
@@ -89,13 +90,15 @@ object PecCheckFormsSection extends VacancyBasePage {
     }
   }
 
-  private def selectWhichIdentityChecks(pecCheckFormsDetails: PecCheckFormsDetails): Unit =
-    pecCheckFormsDetails.whichIdentityChecks match {
+  private def selectWhichIdentityChecks(pecCheckFormsDetails: PecCheckFormsDetails): Unit = {
+    vXWhichIdentityChecks = pecCheckFormsDetails.whichIdentityChecks
+    vXWhichIdentityChecks match {
       case "No digital checks"                       => clickOnRadioButton(noIdentityChecksId)
       case "Right to work only"                      => clickOnRadioButton(rtwOnlyId)
       case "Right to work and criminal record check" => clickOnRadioButton(rtwAndCrcId)
       case _                                         => throw new IllegalStateException("Please enter valid 'which identity checks' option")
     }
+  }
 
   private def selectUploadIdentityDocs(pecCheckFormsDetails: PecCheckFormsDetails): Unit =
     if (pecCheckFormsDetails.uploadIdentityDocs) {

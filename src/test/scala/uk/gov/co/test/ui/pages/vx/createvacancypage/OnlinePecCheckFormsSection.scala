@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.pages.vx.createvacancypage
 
 import org.openqa.selenium.{By, Keys}
-import uk.gov.co.test.ui.data.MasterVacancyDetails.vacancyFormId
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXHavePecMailbox, vXPecMailbox, vXUseOnlinePecForms, vacancyFormId}
 import uk.gov.co.test.ui.data.vx.vacancy.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 
@@ -21,10 +21,12 @@ object OnlinePecCheckFormsSection extends VacancyBasePage {
   private def enterOnlinePecFormsCheckFlow(onlinePecCheckFormsDetails: OnlinePecCheckFormsDetails): Unit = {
     scrollToElement(By.id(onlinePecCheckFormsSectionId))
     waitForVisibilityOfElementById(useOnlinePecCheckFormsId).click()
-    if (onlinePecCheckFormsDetails.useOnlinePecCheckForms) {
+    vXUseOnlinePecForms = onlinePecCheckFormsDetails.useOnlinePecCheckForms
+    if (vXUseOnlinePecForms) {
       selectActionLocator("Yes")
       waitForVisibilityOfElementById(haveTeamMailboxId).click()
-      if (onlinePecCheckFormsDetails.haveTeamMailbox) {
+      vXHavePecMailbox = onlinePecCheckFormsDetails.haveTeamMailbox
+      if (vXHavePecMailbox) {
         selectActionLocator("Yes")
         enterOnlinePecCheckFormsTeamEmail(onlinePecCheckFormsDetails)
       } else selectActionLocator("No")
@@ -42,7 +44,8 @@ object OnlinePecCheckFormsSection extends VacancyBasePage {
       }
       pecTeamEmailField.sendKeys(Keys.BACK_SPACE)
     }
-    pecTeamEmailField.sendKeys(pecCheckFormsDetails.pecCheckFormsTeamEmail)
+    vXPecMailbox = pecCheckFormsDetails.pecCheckFormsTeamEmail
+    pecTeamEmailField.sendKeys(vXPecMailbox)
   }
 
   private val onlinePecCheckForms: Seq[OnlinePecCheckFormsDetails => Unit] = Seq(

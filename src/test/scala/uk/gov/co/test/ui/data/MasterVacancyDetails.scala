@@ -167,12 +167,16 @@ object MasterVacancyDetails extends VacancyBasePage {
   var vXGreatForVeterans: Boolean = false
   var vXGrsVacancy: Boolean       = true
 
-  //vx VACANCY online pre-employment check forms TODO
+  //vx VACANCY online pre-employment check forms
+  var vXUseOnlinePecForms: Boolean = _
+  var vXHavePecMailbox: Boolean    = _
+  var vXPecMailbox                 = ""
 
   //vx VACANCY pre-employment check forms
   var vXRtwChecks: List[String] =
     List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates")
   var vXWhenRtwChecks           = "Before pre employment checks"
+  var vXWhichIdentityChecks     = "Right to work and criminal record check"
 
   //v9 candidate details
   var randomFirstName: String    = ""
@@ -215,16 +219,16 @@ object MasterVacancyDetails extends VacancyBasePage {
   var applicationId: String = ""
 
   //v9 PEC FORM employment history
-  var v9EmployedWithin3Years   = true
-  var v9FirstEmployerName      = ""
-  var v9FirstEmployerFromDate  = ""
-  var v9FirstEmployerToDate    = ""
-  var v9SecondEmployerName     = ""
-  var v9SecondEmployerFromDate = ""
-  var v9SecondEmployerToDate   = ""
-  var v9ThirdEmployerName      = ""
-  var v9ThirdEmployerFromDate  = ""
-  var v9ThirdEmployerToDate    = ""
+  var v9EmployedWithin3Years: Boolean = _
+  var v9FirstEmployerName             = ""
+  var v9FirstEmployerFromDate         = ""
+  var v9FirstEmployerToDate           = ""
+  var v9SecondEmployerName            = ""
+  var v9SecondEmployerFromDate        = ""
+  var v9SecondEmployerToDate          = ""
+  var v9ThirdEmployerName             = ""
+  var v9ThirdEmployerFromDate         = ""
+  var v9ThirdEmployerToDate           = ""
 
   //vX APPLICATION calender schedule
   var vXSlotOneStartTime  = ""
