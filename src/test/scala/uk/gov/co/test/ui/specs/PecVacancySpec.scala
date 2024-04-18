@@ -19,8 +19,8 @@ class PecVacancySpec extends BaseFeatureSpec {
   Feature("Candidate & Recruiter Complete The PEC Form") {
     Scenario("VX: A Candidate Completes The PEC Form; Full Application Process", RunInVX) {
       Given("candidate registers for new job application")
-      extractAllVacancyDetails("9707")
-//      fillNewVacancyForm(PEC_VACANCY_DATA)
+//      extractAllVacancyDetails("9707")
+      fillNewVacancyForm(PEC_VACANCY_DATA)
       fillNewCandidateDetails(REGISTER_CANDIDATE_PEC)
 
       When("candidate completes the short & long forms")
