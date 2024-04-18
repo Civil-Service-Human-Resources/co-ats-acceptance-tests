@@ -173,10 +173,34 @@ object MasterVacancyDetails extends VacancyBasePage {
   var vXPecMailbox                 = ""
 
   //vx VACANCY pre-employment check forms
-  var vXRtwChecks: List[String] =
-    List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates")
-  var vXWhenRtwChecks           = "Before pre employment checks"
-  var vXWhichIdentityChecks     = "Right to work and criminal record check"
+  var vXRtwChecks                            = new ListBuffer[String]()
+  var vXWhenRtwChecks                        = ""
+  var vXWhichIdentityChecks                  = ""
+  var vXCandidateUploadIdentityDocs: Boolean = _
+  var vXDetailsForUploadIdentityDocs         = ""
+  var vXManuallyCheckIdentityDocs: Boolean   = _
+  var vXPecGeneralInfo                       = new ListBuffer[String]()
+  var vXPecReferenceCheck                    = new ListBuffer[String]()
+  var vXPecBankruptcyCheck                   = new ListBuffer[String]()
+  var vXPecCrcCheck                          = new ListBuffer[String]()
+  var vXPecNsvCheck                          = new ListBuffer[String]()
+  var vXPecNsvDisplayOptions                 = ""
+  var vXPecEmploymentHistoryCheck            = new ListBuffer[String]()
+  var vXPecHealthRefCheck                    = new ListBuffer[String]()
+  var vXPecHealthDisplayOptions              = ""
+  var vXPecOverseasCheck                     = new ListBuffer[String]()
+  var vXPecPensionsCheck                     = new ListBuffer[String]()
+  var vXPecPreviousCivilEmploymentCheck      = new ListBuffer[String]()
+  var vXPecFraudCheck                        = new ListBuffer[String]()
+  var vXPecSelfEmploymentCheck               = new ListBuffer[String]()
+  var vXPecOgdCandidates: Boolean            = _
+  var vXPecIncludeAdditionalCheck: Boolean   = _
+  var vXPecNameOfAdditionalCheck             = ""
+  var vXPecAdditionalCheck                   = new ListBuffer[String]()
+  var vXPecNen                               = new ListBuffer[String]()
+  var vXPecHrEmailForNen                     = ""
+  var vXPecPn                                = new ListBuffer[String]()
+  var vXPecHrEmailForPn                      = ""
 
   //v9 candidate details
   var randomFirstName: String    = ""
