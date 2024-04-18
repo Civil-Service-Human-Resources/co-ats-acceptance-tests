@@ -182,8 +182,8 @@ object MasterVacancyDetails extends VacancyBasePage {
   var vXPecGeneralInfo                       = new ListBuffer[String]()
   var vXPecReferenceCheck                    = new ListBuffer[String]()
   var vXPecBankruptcyCheck                   = new ListBuffer[String]()
-  var vXPecCrcCheck                          = new ListBuffer[String]()
-  var vXPecNsvCheck                          = new ListBuffer[String]()
+  var vXPecCrc                               = new ListBuffer[String]()
+  var vXPecNsv                               = new ListBuffer[String]()
   var vXPecNsvDisplayOptions                 = ""
   var vXPecEmploymentHistoryCheck            = new ListBuffer[String]()
   var vXPecHealthRefCheck                    = new ListBuffer[String]()

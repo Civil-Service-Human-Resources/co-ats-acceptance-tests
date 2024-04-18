@@ -2,7 +2,7 @@ package uk.gov.co.test.ui.pages.vx
 
 import org.openqa.selenium.{By, WebElement}
 import org.scalatest.concurrent.Eventually.eventually
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXAbilitiesRequired, vXAnyAdditionalQuestions, vXAnyOnlineTests, vXApplicationClosingDate, vXApplicationLiveDate, vXApproach, vXAttachmentRequired, vXAvailableOutsideInNI, vXBehavioursRequired, vXBudgetaryApproval, vXBusinessArea, vXBusinessAreaDetail, vXCandidateInstructions, vXCandidateUploadIdentityDocs, vXCommunitiesInNIR, vXCostCentre, vXDesirablePastExperience, vXDetailsForUploadIdentityDocs, vXExperiencesRequired, vXFullQualification, vXGiveLocationPreference, vXGreatForVeterans, vXGuidanceText, vXHavePecMailbox, vXHowManyQuestions, vXInterviewExpectedRounds, vXInterviewFourType, vXInterviewNumber, vXInterviewOneType, vXInterviewThreeType, vXInterviewTwoType, vXJobHistory, vXJobInfoDepartment, vXLanguagesMandatory, vXLicencesMandatory, vXLocationDisplay, vXLocationType, vXManuallyCheckIdentityDocs, vXMaxLocations, vXMembershipsMandatory, vXNoOfJobsAvailable, vXOtherLocations, vXPecMailbox, vXPersonalStatement, vXPreSiftRequired, vXPreviousExperiences, vXProfession, vXQualificationsMandatory, vXQuestionOne, vXQuestionThree, vXQuestionTwo, vXRejectApplyingOnPromotion, vXRejectLanguagesNotHeld, vXRejectLicencesNotHeld, vXRejectLiveMisconduct, vXRejectMembershipsNotHeld, vXRejectNationalityReq, vXRejectNoRightToRemain, vXRejectPoorAttendance, vXRejectPoorPerformance, vXRejectProbation, vXRejectQualificationsNotHeld, vXReserveExtendLength, vXReserveExtendRequired, vXReserveListLength, vXReserveListRequired, vXRtwChecks, vXSpecificLanguages, vXSpecificLicences, vXSpecificMemberships, vXSpecificPastExperience, vXSpecificQualifications, vXSpecifyGuidance, vXStatementWordLimit, vXStrengthsRequired, vXTechSkillsRequired, vXTypeOfRole, vXUseOnlinePecForms, vXVacanciesInNIR, vXWhenRtwChecks, vXWhichIdentityChecks, vacancyFormId, vacancyId, vacancyName}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXAbilitiesRequired, vXAnyAdditionalQuestions, vXAnyOnlineTests, vXApplicationClosingDate, vXApplicationLiveDate, vXApproach, vXAttachmentRequired, vXAvailableOutsideInNI, vXBehavioursRequired, vXBudgetaryApproval, vXBusinessArea, vXBusinessAreaDetail, vXCandidateInstructions, vXCandidateUploadIdentityDocs, vXCommunitiesInNIR, vXCostCentre, vXDesirablePastExperience, vXDetailsForUploadIdentityDocs, vXExperiencesRequired, vXFullQualification, vXGiveLocationPreference, vXGreatForVeterans, vXGuidanceText, vXHavePecMailbox, vXHowManyQuestions, vXInterviewExpectedRounds, vXInterviewFourType, vXInterviewNumber, vXInterviewOneType, vXInterviewThreeType, vXInterviewTwoType, vXJobHistory, vXJobInfoDepartment, vXLanguagesMandatory, vXLicencesMandatory, vXLocationDisplay, vXLocationType, vXManuallyCheckIdentityDocs, vXMaxLocations, vXMembershipsMandatory, vXNoOfJobsAvailable, vXOtherLocations, vXPecAdditionalCheck, vXPecBankruptcyCheck, vXPecCrc, vXPecEmploymentHistoryCheck, vXPecFraudCheck, vXPecGeneralInfo, vXPecHealthDisplayOptions, vXPecHealthRefCheck, vXPecHrEmailForNen, vXPecHrEmailForPn, vXPecIncludeAdditionalCheck, vXPecMailbox, vXPecNameOfAdditionalCheck, vXPecNen, vXPecNsv, vXPecNsvDisplayOptions, vXPecOgdCandidates, vXPecOverseasCheck, vXPecPensionsCheck, vXPecPn, vXPecPreviousCivilEmploymentCheck, vXPecReferenceCheck, vXPecSelfEmploymentCheck, vXPersonalStatement, vXPreSiftRequired, vXPreviousExperiences, vXProfession, vXQualificationsMandatory, vXQuestionOne, vXQuestionThree, vXQuestionTwo, vXRejectApplyingOnPromotion, vXRejectLanguagesNotHeld, vXRejectLicencesNotHeld, vXRejectLiveMisconduct, vXRejectMembershipsNotHeld, vXRejectNationalityReq, vXRejectNoRightToRemain, vXRejectPoorAttendance, vXRejectPoorPerformance, vXRejectProbation, vXRejectQualificationsNotHeld, vXReserveExtendLength, vXReserveExtendRequired, vXReserveListLength, vXReserveListRequired, vXRtwChecks, vXSpecificLanguages, vXSpecificLicences, vXSpecificMemberships, vXSpecificPastExperience, vXSpecificQualifications, vXSpecifyGuidance, vXStatementWordLimit, vXStrengthsRequired, vXTechSkillsRequired, vXTypeOfRole, vXUseOnlinePecForms, vXVacanciesInNIR, vXWhenRtwChecks, vXWhichIdentityChecks, vacancyFormId, vacancyId, vacancyName}
 import uk.gov.co.test.ui.pages.vx.vacancytabs.SummaryTab.{vacancyActive, vacancyClosingDateId, vacancyLiveDateId}
 
 import scala.collection.mutable
@@ -107,6 +107,27 @@ object VacancyDetailsPage extends VacancyBasePage {
   def pecUploadIdentityDocsId           = s"${vacancyFormId}_datafield_159069_1_1_fieldset"
   def pecDetailsOfUploadId              = s"${vacancyFormId}_datafield_159299_1_1_en-GB"
   def pecManuallyUploadId               = s"${vacancyFormId}_datafield_181577_1_1_fieldset"
+  def pecGeneralInfoId                  = s"select2-${vacancyFormId}_datafield_94582_1_1-container"
+  def pecReferenceCheckId               = s"select2-${vacancyFormId}_datafield_94578_1_1-container"
+  def pecBankruptcyCheckId              = s"select2-${vacancyFormId}_datafield_87979_1_1-container"
+  def pecCrcId                          = s"select2-${vacancyFormId}_datafield_87982_1_1-container"
+  def pecNsvId                          = s"select2-${vacancyFormId}_datafield_100822_1_1-container"
+  def pecEmploymentHistoryCheckId       = s"select2-${vacancyFormId}_datafield_87985_1_1-container"
+  def pecHealthRefCheckId               = s"select2-${vacancyFormId}_datafield_87988_1_1-container"
+  def pecHealthDisplayOptionsId         = s"${vacancyFormId}_datafield_107079_1_1_fieldset"
+  def pecOverseasCheckId                = s"select2-${vacancyFormId}_datafield_87975_1_1-container"
+  def pecPensionsCheckId                = s"select2-${vacancyFormId}_datafield_87994_1_1-container"
+  def pecPreviousCivilJobCheckId        = s"select2-${vacancyFormId}_datafield_88000_1_1-container"
+  def pecFraudCheckId                   = s"select2-${vacancyFormId}_datafield_121741_1_1-container"
+  def pecSelfEmploymentCheckId          = s"select2-${vacancyFormId}_datafield_88003_1_1-container"
+  def pecOgdTransferProcessId           = s"${vacancyFormId}_datafield_127230_1_1_fieldset"
+  def pecIncludeAdditionalCheckId       = s"${vacancyFormId}_datafield_168748_1_1_fieldset"
+  def pecNameOfAdditionalCheckId        = s"${vacancyFormId}_datafield_176558_1_1_en-GB"
+  def pecAdditionalCheckId              = s"select2-${vacancyFormId}_datafield_168766_1_1-container"
+  def pecNenId                          = s"select2-${vacancyFormId}_datafield_87991_1_1-container"
+  def pecNenHrEmailId                   = s"${vacancyFormId}_datafield_141090_1_1"
+  def pecPnId                           = s"select2-${vacancyFormId}_datafield_87997_1_1-container"
+  def pecPnHrEmailId                    = s"${vacancyFormId}_datafield_141267_1_1"
 
   private def dashboardPageCheck(): Unit =
     eventually(onPage(dashboardPageTitle))
@@ -657,6 +678,127 @@ object VacancyDetailsPage extends VacancyBasePage {
     } else vXManuallyCheckIdentityDocs = false
   }
 
+  private def extractGeneralInfoTypes(): Unit = {
+    vXPecGeneralInfo.clear()
+    extractValues(pecGeneralInfoId, vXPecGeneralInfo)
+  }
+
+  private def extractReferenceCheckTypes(): Unit = {
+    vXPecReferenceCheck.clear()
+    extractValues(pecReferenceCheckId, vXPecReferenceCheck)
+  }
+
+  private def extractBankruptcyCheckTypes(): Unit = {
+    vXPecBankruptcyCheck.clear()
+    extractValues(pecBankruptcyCheckId, vXPecBankruptcyCheck)
+  }
+
+  private def extractCrcTypes(): Unit = {
+    vXPecCrc.clear()
+    extractValues(pecCrcId, vXPecCrc)
+  }
+
+  private def extractNsvTypes(): Unit = {
+    vXPecNsv.clear()
+    extractValues(pecNsvId, vXPecNsv)
+    if (!vXPecNsv.equals(ListBuffer("Not Applicable"))) {
+      extractNsvDisplayOptions()
+    } else vXPecNsvDisplayOptions = ""
+  }
+
+  private def extractNsvDisplayOptions(): Unit = {
+    val displayOptions = waitForVisibilityOfElementById(pecWhenRtwId).findElement(By.xpath(checkLabelPath))
+    vXPecNsvDisplayOptions = displayOptions.getText
+  }
+
+  private def extractEmploymentHistoryCheckTypes(): Unit = {
+    vXPecEmploymentHistoryCheck.clear()
+    extractValues(pecEmploymentHistoryCheckId, vXPecEmploymentHistoryCheck)
+  }
+
+  private def extractHealthCheckTypes(): Unit = {
+    vXPecHealthRefCheck.clear()
+    extractValues(pecHealthRefCheckId, vXPecHealthRefCheck)
+    if (!vXPecHealthRefCheck.equals(ListBuffer("Not Applicable"))) {
+      extractHealthDisplayOptions()
+    } else vXPecHealthDisplayOptions = ""
+  }
+
+  private def extractHealthDisplayOptions(): Unit = {
+    val displayOptions = waitForVisibilityOfElementById(pecHealthDisplayOptionsId).findElement(By.xpath(checkLabelPath))
+    vXPecHealthDisplayOptions = displayOptions.getText
+  }
+
+  private def extractOverseasCheckTypes(): Unit = {
+    vXPecOverseasCheck.clear()
+    extractValues(pecOverseasCheckId, vXPecOverseasCheck)
+  }
+
+  private def extractPensionsCheckTypes(): Unit = {
+    vXPecPensionsCheck.clear()
+    extractValues(pecPensionsCheckId, vXPecPensionsCheck)
+  }
+
+  private def extractPreviousCivilEmploymentCheckTypes(): Unit = {
+    vXPecPreviousCivilEmploymentCheck.clear()
+    extractValues(pecPreviousCivilJobCheckId, vXPecPreviousCivilEmploymentCheck)
+  }
+
+  private def extractFraudCheckTypes(): Unit = {
+    vXPecFraudCheck.clear()
+    extractValues(pecFraudCheckId, vXPecFraudCheck)
+  }
+
+  private def extractSelfEmploymentCheckTypes(): Unit = {
+    vXPecSelfEmploymentCheck.clear()
+    extractValues(pecSelfEmploymentCheckId, vXPecSelfEmploymentCheck)
+  }
+
+  private def extractOgdTransferProcess(): Unit = {
+    val ogdTransfer = waitForVisibilityOfElementById(pecOgdTransferProcessId).findElement(By.xpath(checkLabelPath))
+    if (ogdTransfer.getText == "Yes") {
+      vXPecOgdCandidates = true
+    } else vXPecOgdCandidates = false
+  }
+
+  private def extractIncludeAdditionalCheck(): Unit = {
+    val additionalCheck =
+      waitForVisibilityOfElementById(pecIncludeAdditionalCheckId).findElement(By.xpath(checkLabelPath))
+    if (additionalCheck.getText == "Yes") {
+      vXPecIncludeAdditionalCheck = true
+      extractNameOfAdditionalCheck()
+      extractAdditionalCheckTypes()
+    } else {
+      vXPecIncludeAdditionalCheck = false
+      vXPecNameOfAdditionalCheck = ""
+      vXPecAdditionalCheck = ListBuffer("")
+    }
+  }
+
+  private def extractNameOfAdditionalCheck(): Unit =
+    vXPecNameOfAdditionalCheck = waitForVisibilityOfElementById(pecNameOfAdditionalCheckId).getAttribute("value")
+
+  private def extractAdditionalCheckTypes(): Unit = {
+    vXPecAdditionalCheck.clear()
+    extractValues(pecAdditionalCheckId, vXPecAdditionalCheck)
+  }
+
+  private def extractNenTypes(): Unit = {
+    vXPecNen.clear()
+    extractValues(pecNenId, vXPecNen)
+  }
+
+  private def extractNenHrEmail(): Unit =
+    vXPecHrEmailForNen = waitForVisibilityOfElementById(pecNenHrEmailId).getAttribute("value")
+
+  private def extractPnTypes(): Unit = {
+    vXPecPn.clear()
+    extractValues(pecPnId, vXPecPn)
+  }
+
+  private def extractPnHrEmail(): Unit =
+    vXPecHrEmailForPn = waitForVisibilityOfElementById(pecPnHrEmailId).getAttribute("value")
+
   private def jobInformationDetails(): Unit = {
     extractDepartment()
     extractBusinessArea()
@@ -744,6 +886,24 @@ object VacancyDetailsPage extends VacancyBasePage {
   private def preEmploymentCheckForms(): Unit = {
     extractRtwCandidateTypes()
     extractDigitalIdentityChecks()
+    extractGeneralInfoTypes()
+    extractReferenceCheckTypes()
+    extractBankruptcyCheckTypes()
+    extractCrcTypes()
+    extractNsvTypes()
+    extractEmploymentHistoryCheckTypes()
+    extractHealthCheckTypes()
+    extractOverseasCheckTypes()
+    extractPensionsCheckTypes()
+    extractPreviousCivilEmploymentCheckTypes()
+    extractFraudCheckTypes()
+    extractSelfEmploymentCheckTypes()
+    extractOgdTransferProcess()
+    extractIncludeAdditionalCheck()
+    extractNenTypes()
+    extractNenHrEmail()
+    extractPnTypes()
+    extractPnHrEmail()
   }
 
   def extractAllVacancyDetails(vacancyToExtract: String): Unit = {

@@ -105,7 +105,7 @@ object RightToWorkPage extends CivilServiceJobsBasePage {
     if (rtwDetails.liveInUK) radioSelect(liveInUKYesId)
     else radioSelect(liveInUKNoId)
 
-  private def selectEUOrSwissCitizen(rtwDetails: RtwDetails): Unit = {
+  private def selectEUOrSwissCitizen(rtwDetails: RtwDetails): Unit =
     if (rtwDetails.euOrSwissCitizen) {
       radioSelect(euOrSwissCitizenYesId)
       selectEUSSStatus(rtwDetails)
@@ -113,9 +113,8 @@ object RightToWorkPage extends CivilServiceJobsBasePage {
       radioSelect(euOrSwissCitizenNoId)
       selectMemberEUOrSwiss(rtwDetails)
     }
-  }
 
-  private def selectMemberEUOrSwiss(rtwDetails: RtwDetails): Unit = {
+  private def selectMemberEUOrSwiss(rtwDetails: RtwDetails): Unit =
     if (rtwDetails.memberEUOrSwiss) {
       radioSelect(memberOfEUOrSwissYesId)
       selectEUSSStatus(rtwDetails)
@@ -123,7 +122,6 @@ object RightToWorkPage extends CivilServiceJobsBasePage {
       radioSelect(memberOfEUOrSwissNoId)
       selectBiometricResidenceCard(rtwDetails)
     }
-  }
 
   private def selectAreYouBritishCitizen(rtwDetails: RtwDetails): Unit =
     if (rtwDetails.britishCitizen) {
