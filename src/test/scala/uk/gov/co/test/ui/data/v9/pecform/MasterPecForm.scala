@@ -9,6 +9,7 @@ object MASTER_PEC_FORM_DATA
       MASTER_PEC_RIGHT_TO_WORK,
       MASTER_PEC_FORM_EMPLOYMENT_HISTORY,
       MASTER_PEC_FORM_VERIFYING_HISTORY,
+      MASTER_PEC_FORM_PENSION_QUESTIONNAIRE,
       MASTER_PEC_FORM_DECLARATION
     )
 
@@ -80,6 +81,35 @@ object MASTER_PEC_FORM_VERIFYING_HISTORY
       "Autotest3 - relation to referee",
       "Other3 Test3",
       s"$v9RefereeEmail"
+    )
+
+object MASTER_PEC_FORM_PENSION_QUESTIONNAIRE
+    extends PensionDetails(
+      "Your answers will allow us to work out which of the Civil Service Pension schemes you can join.",
+      "Have you ever been a member of public service pension scheme?\nAnswer this question with your latest period of pension scheme membership. Public services employers include the Civil Service, judiciary workers, teachers, members of the armed forces, fire and rescue services, the police, health service workers and local government employees. *By-analogy schemes are almost identical to the main Civil Service arrangements, but may have slightly different terms or rules.",
+      "Civil Service Pension arrangements",
+      "HMRC",
+      "Classic plus",
+      "01/06/2021",
+      "Resigned with more than 2 years service - You built up pension rights; you may have received a preserved pension",
+      false,
+      false,
+      true,
+      "Autotest - pension transfer details",
+      "Autotest - name of employer of latest pension",
+      "Autotest - pension scheme member of",
+      "Autotest - pension normal pension age",
+      "1234",
+      "01/06/2018",
+      "31/12/2020",
+      true,
+      paymentReceived = Option(true),
+      transferToOtherPension = Option(true),
+      schemeTransferredTo = Option("Autotest - what scheme did you transfer your pension to?"),
+      true,
+      "31/07/2020",
+      true,
+      false
     )
 
 object MASTER_PEC_FORM_DECLARATION

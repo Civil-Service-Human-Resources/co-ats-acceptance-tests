@@ -5,6 +5,7 @@ import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.{changeSystem, pecStartF
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
 import uk.gov.co.test.ui.pages.v9.pecform.DeclarationPage.{declarationPage, pecFormSubmission}
 import uk.gov.co.test.ui.pages.v9.pecform.EmploymentHistoryPage.employmentHistoryPage
+import uk.gov.co.test.ui.pages.v9.pecform.PensionQuestionnairePage.pensionQuestionnairePage
 import uk.gov.co.test.ui.pages.v9.pecform.RightToWorkPage.rightToWorkPage
 import uk.gov.co.test.ui.pages.v9.pecform.VerifyingHistoryPage.verifyingHistoryPage
 import uk.gov.co.test.ui.pages.v9.pecform.YourDetailsPage.yourDetailsPage
@@ -16,6 +17,7 @@ object PecFormFlow extends CivilServiceJobsBasePage {
     rightToWorkPage,
     employmentHistoryPage,
     verifyingHistoryPage,
+    pensionQuestionnairePage,
     declarationPage
   )
 
