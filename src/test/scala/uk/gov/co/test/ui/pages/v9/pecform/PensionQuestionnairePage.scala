@@ -154,31 +154,6 @@ object PensionQuestionnairePage extends CivilServiceJobsBasePage {
       case "Premium"                                  => radioSelect(schemePremiumId)
     }
 
-  private def civilServicePensionFlow(pensionDetails: PensionDetails): Unit = {
-    enterNameOfEmployer(pensionDetails)
-    selectWhatMemberScheme(pensionDetails)
-    enterWhatDateDidYouLeave(pensionDetails)
-    selectWhyDidYouLeave(pensionDetails)
-    selectEarlyExitReservedRights(pensionDetails)
-    selectReceivingCSPayments(pensionDetails)
-    selectTransferCSPension(pensionDetails)
-  }
-
-  private def otherPublicPensionFlow(pensionDetails: PensionDetails): Unit = {
-    enterNameOfEmployerLatestPension(pensionDetails)
-    enterWhatSchemeMemberOf(pensionDetails)
-    enterSchemeNPA(pensionDetails)
-    enterSchemeMemberNo(pensionDetails)
-    enterMembershipStart(pensionDetails)
-    enterMembershipFinish(pensionDetails)
-    selectRefundReceived(pensionDetails)
-    selectPaymentReceived(pensionDetails)
-    selectTransferToOtherPension(pensionDetails)
-    selectOfferedEnrolmentDate(pensionDetails)
-    selectOfferedFullProtection(pensionDetails)
-    selectAnyOtherPensionsAfter(pensionDetails)
-  }
-
   private def enterNameOfEmployer(pensionDetails: PensionDetails): Unit =
     if (pensionDetails.everBeenPensionMember != "No - I have never been a public service pension member") {
       enterDetails(nameOfPreviousEmployerId, pensionDetails.nameOfEmployerPensionHeld)
@@ -244,6 +219,41 @@ object PensionQuestionnairePage extends CivilServiceJobsBasePage {
     if (pensionDetails.anyOtherPensionsAfter) {
       radioSelect(anyOtherPensionsAfterYesId)
     } else radioSelect(anyOtherPensionsAfterNoId)
+
+  private val csPension: Seq[PensionDetails => Unit] = Seq(
+    enterNameOfEmployer,
+    selectWhatMemberScheme,
+    enterWhatDateDidYouLeave,
+    selectWhyDidYouLeave,
+    selectEarlyExitReservedRights,
+    selectReceivingCSPayments,
+    selectTransferCSPension
+  )
+
+  private val otherPension: Seq[PensionDetails => Unit] = Seq(
+    enterNameOfEmployerLatestPension,
+    enterWhatSchemeMemberOf,
+    enterSchemeNPA,
+    enterSchemeMemberNo,
+    enterMembershipStart,
+    enterMembershipFinish,
+    selectRefundReceived,
+    selectPaymentReceived,
+    selectTransferToOtherPension,
+    selectOfferedEnrolmentDate,
+    selectOfferedFullProtection,
+    selectAnyOtherPensionsAfter
+  )
+
+  def civilServicePensionFlow(pensionDetails: PensionDetails): Unit =
+    csPension.foreach { f =>
+      f(pensionDetails)
+    }
+
+  def otherPublicPensionFlow(pensionDetails: PensionDetails): Unit =
+    otherPension.foreach { f =>
+      f(pensionDetails)
+    }
 
   private val pension: Seq[PensionDetails => Unit] = Seq(
     pensionPageCheck,
