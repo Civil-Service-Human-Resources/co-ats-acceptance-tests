@@ -103,6 +103,10 @@ object ReserveListSection extends VacancyBasePage {
       val reserveExtendLength = vXReserveExtendLength.replaceAll("[A-Za-z ]", "").filterNot(_.isWhitespace).toInt
       val totalLength         = baseReserveLength + reserveExtendLength
       vXReserveListTotalLength = s"${totalLength.toString} Months"
-    } else vXReserveListTotalLength = s"${baseReserveLength.toString} Months"
+    } else { vXReserveListTotalLength = s"${baseReserveLength.toString} Months" }
+    println(s"1. Reserve list length is: $vXReserveListLength")
+    println(s"2. Reserve extend required is: $vXReserveExtendLength")
+    println(s"3. Reserve extend length is: $vXReserveExtendLength")
+    println(s"4. Reserve list total length is: $vXReserveListTotalLength")
   }
 }

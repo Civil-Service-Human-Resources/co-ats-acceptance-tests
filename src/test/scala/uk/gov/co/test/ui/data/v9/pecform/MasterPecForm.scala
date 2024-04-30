@@ -10,6 +10,7 @@ object MASTER_PEC_FORM_DATA
       MASTER_PEC_FORM_EMPLOYMENT_HISTORY,
       MASTER_PEC_FORM_VERIFYING_HISTORY,
       MASTER_PEC_FORM_PENSION_QUESTIONNAIRE,
+      PEC_FORM_OVERSEAS,
       MASTER_PEC_FORM_DECLARATION
     )
 
@@ -110,6 +111,42 @@ object MASTER_PEC_FORM_PENSION_QUESTIONNAIRE
       "31/07/2020",
       true,
       false
+    )
+
+object PEC_FORM_OVERSEAS
+    extends OverseasDetails(
+      "Have you resided outside the UK within the past 3 years for 6 months or more?",
+      true,
+      "Where it is not possible to carry out meaningful checks in the UK because of a lack of UK residence, prospective employees are required to give a reasonable account of any significant periods of time living abroad.",
+      "Please provide a list of all countries you have visited with date and reasons for travel.",
+      "Canada",
+      "01/01/2020",
+      "28/02/2021",
+      "Adventure junkie!",
+      true,
+      "Autotest - employer's name",
+      "autotest.employers.email@example.com",
+      "01100000000",
+      "01/07/2022",
+      "31/07/2022",
+      false,
+      "Autotest - Provide details about why we cannot contact your overseas employer",
+      true,
+      "Autotest - institute name",
+      "autotest.institute.email@example.com",
+      "01100000001",
+      "01/07/2021",
+      "31/12/2023",
+      false,
+      "Autotest - Provide details about why we cannot contact your fellow UK traveller",
+      true,
+      "Autotest - fellow traveller's name",
+      "autotest.traveller.email@example.com",
+      "01100000003",
+      "01/02/2020",
+      "22/05/2020",
+      false,
+      "Autotest - Provide details about why we cannot contact your fellow UK traveller"
     )
 
 object MASTER_PEC_FORM_DECLARATION
