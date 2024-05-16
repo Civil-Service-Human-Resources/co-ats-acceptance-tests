@@ -102,7 +102,7 @@ object ReserveListSection extends VacancyBasePage {
       vXReserveListTotalLength = s"$vXReserveListLength + $vXReserveExtendLength"
     } else { vXReserveListTotalLength = s"$vXReserveListLength" }
     println(s"1. Reserve list length is: $vXReserveListLength")
-    println(s"2. Reserve extend required is: $vXReserveExtendLength")
+    println(s"2. Reserve extend required is: $vXReserveExtendRequired")
     println(s"3. Reserve extend length is: $vXReserveExtendLength")
     println(s"4. Reserve list total length is: $vXReserveListTotalLength")
   }
