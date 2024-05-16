@@ -6,8 +6,9 @@ import scala.collection.mutable.ListBuffer
 
 object MasterVacancyDetails extends VacancyBasePage {
 
-  //vx VACANCY formId
-  var vacancyFormId = ""
+  //vx VACANCY details
+  var vacancyFormId         = ""
+  var vXNoLongForm: Boolean = _
 
   //vx VACANCY basic details
   var vacancyName                       = ""
@@ -55,7 +56,14 @@ object MasterVacancyDetails extends VacancyBasePage {
   //vx VACANCY contract details TODO
   //vx VACANCY advert TODO
   //vx VACANCY contact details TODO
-  //vx VACANCY checking and vetting TODO
+
+  //vx VACANCY checking and vetting
+  var vXNonReserved: Boolean     = _
+  var vXCrcLevel: String         = ""
+  var vXCrcCheckProvider: String = ""
+  var vXVettingLevel: String     = ""
+  var vXMedicalRequired: Boolean = _
+
   //vx VACANCY interviews TODO
 
   //vx VACANCY success profiles section
@@ -100,7 +108,7 @@ object MasterVacancyDetails extends VacancyBasePage {
   )
 
   //vx VACANCY technical skills
-  var vXHowManySkills: Int                              = 8
+  var vXHowManySkills: Int                              = 0
   var vXListOfTechSkills: ListBuffer[String]            = ListBuffer(
     "Autotest - technical skills 1",
     "Autotest - technical skills 2",
@@ -232,7 +240,7 @@ object MasterVacancyDetails extends VacancyBasePage {
   )
 
   //v9 SHORT FORM eligibility page
-  var v9CivilServant: Boolean  = true
+  var v9CivilServant: Boolean  = _
   var v9HomeDepartment: String = "Independent Parliamentary Standards Authority"
 
   //v9 SHORT FORM personal info page
@@ -241,6 +249,9 @@ object MasterVacancyDetails extends VacancyBasePage {
 
   //v9 SHORT FORM applications page
   var applicationId: String = ""
+
+  //v9 PEC FORM rtw
+  var v9RtwHoldPassport: Boolean = true
 
   //v9 PEC FORM employment history
   var v9EmployedWithin3Years: Boolean = _

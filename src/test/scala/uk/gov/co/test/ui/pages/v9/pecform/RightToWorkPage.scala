@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.pages.v9.pecform
 
 import org.scalatest.concurrent.Eventually.eventually
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXApproach, vXRtwChecks, vXWhenRtwChecks}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{v9RtwHoldPassport, vXApproach, vXRtwChecks, vXWhenRtwChecks}
 import uk.gov.co.test.ui.data.v9.pecform.PecFormDetails
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
 import uk.gov.co.test.ui.pages.v9.pecform.YourDetailsPage.pecFormId
@@ -97,9 +97,11 @@ object RightToWorkPage extends CivilServiceJobsBasePage {
     if (rtwDetails.retainedNationality) radioSelect(retainedNationalityYesId)
     else radioSelect(retainedNationalityNoId)
 
-  private def selectHoldBritishPassport(rtwDetails: RtwDetails): Unit =
+  private def selectHoldBritishPassport(rtwDetails: RtwDetails): Unit = {
+    v9RtwHoldPassport = rtwDetails.holdBritishPassport
     if (rtwDetails.holdBritishPassport) radioSelect(holdBritishPassportYesId)
     else radioSelect(holdBritishPassportNoId)
+  }
 
   private def selectLiveInUK(rtwDetails: RtwDetails): Unit =
     if (rtwDetails.liveInUK) radioSelect(liveInUKYesId)
@@ -162,8 +164,7 @@ object RightToWorkPage extends CivilServiceJobsBasePage {
   def rightToWorkPage(pecFormDetails: PecFormDetails): Unit =
     if (
       !vXRtwChecks.contains("Not Applicable") &&
-      vXRtwChecks.contains(s"$vXApproach Candidates") &&
-      vXWhenRtwChecks == "Before pre employment checks"
+      vXRtwChecks.contains(s"$vXApproach Candidates")
     ) {
       rtwPageCheck()
       rtw.foreach { f =>

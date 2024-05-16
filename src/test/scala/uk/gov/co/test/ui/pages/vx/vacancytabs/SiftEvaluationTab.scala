@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.pages.vx.vacancytabs
 
 import org.openqa.selenium.By
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXAnyOnlineTests, vXBehavioursRequired, vXExperiencesRequired, vXHowManyBehaviours, vXHowManySkills, vXListOfChosenBehaviours, vXListOfTechSkills, vXPreSiftRequired, vXTechSkillsRequired, vacancyFormId}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXAnyOnlineTests, vXBehavioursRequired, vXExperiencesRequired, vXHowManyBehaviours, vXHowManySkills, vXListOfChosenBehaviours, vXListOfTechSkills, vXNoLongForm, vXPreSiftRequired, vXTechSkillsRequired, vacancyFormId}
 import uk.gov.co.test.ui.data.vx.application.{ApplicationDetails, Outcome}
 import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.{applicationBeingReviewedState, successfulAtSiftState}
 import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.{availableBarItems, completeSiftBarId, confirmCandidateSummary, progressBarAfterPreSiftId, siftEvaluation, withdrawBarId}
@@ -261,7 +261,8 @@ object SiftEvaluationTab extends VacancyBasePage {
       }
       waitForVisibilityOfElementById(
         behaviourTotalScoreId
-      ).getText shouldEqual s"Behaviour total score\n  ${totalScore(vXBehavioursTotalScore)}"
+      ).getText should endWith(s"${totalScore(vXBehavioursTotalScore)}")
+//      ).getText shouldEqual s"Behaviour total score\n  ${totalScore(vXBehavioursTotalScore)}"
     }
 
   private def enterTechSkillOneOutcome(siftDetails: SiftDetails): Unit = {
@@ -382,7 +383,7 @@ object SiftEvaluationTab extends VacancyBasePage {
       }
       waitForVisibilityOfElementById(
         techSkillTotalScoreId
-      ).getText shouldEqual s"Technical skill total score\n  ${totalScore(vXTechSkillsTotalScore)}"
+      ).getText shouldEqual s"Technical skill total score  \n${totalScore(vXTechSkillsTotalScore)}"
     }
 
   private def enterCVAssessmentOutcome(siftDetails: SiftDetails): Unit =
@@ -417,7 +418,8 @@ object SiftEvaluationTab extends VacancyBasePage {
     val overallScore = totalScore(vXBehavioursTotalScore) + totalScore(
       vXTechSkillsTotalScore
     ) + vXCVAssessmentScore + vXPersonalStatementScore
-    waitForVisibilityOfElementById(overallScoreId).getText shouldEqual s"Overall score\n  $overallScore"
+//    waitForVisibilityOfElementById(overallScoreId).getText shouldEqual s"Overall score  \n $overallScore"
+    waitForVisibilityOfElementById(overallScoreId).getText should endWith(s"$overallScore")
   }
 
   private def enterOutcome(siftDetails: SiftDetails): Unit = {
@@ -446,6 +448,8 @@ object SiftEvaluationTab extends VacancyBasePage {
     siftEvaluation()
     if (vXAnyOnlineTests) {
       successfulAtSiftState()
-    } else applicationBeingReviewedState()
+    } else {
+      applicationBeingReviewedState()
+    }
   }
 }

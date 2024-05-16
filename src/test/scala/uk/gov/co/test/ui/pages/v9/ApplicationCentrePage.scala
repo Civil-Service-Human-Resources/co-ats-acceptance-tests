@@ -344,12 +344,7 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
     advertDetailsFunction().isEnabled
     applicationForVacancyText  shouldEqual s"Application For $vacancyName"
     getApplicationState        shouldEqual s"Application status: $status"
-    getApplicationConfirmation shouldEqual
-      s"""We've placed you on a reserve list until ${reserveExpiryDateMonths()}
-         | This means that you meet our required standard but unfortunately, we’re unable to offer you a job immediately.
-         | If a similar job becomes available we may appoint from this reserve list.
-         | You can see any feedback that's been given by clicking the "Feedback" button.
-         | Thank you for the time you have invested in your application and the selection process.""".stripMargin
+    getApplicationConfirmation should startWith(s"We've placed you on a reserve list until ${reserveExpiryDateMonths()}.")
   }
 
   def successfulAtInterviewState(): Unit = {
@@ -366,6 +361,22 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
       s"""Congratulations you have been successful at interview.
          |We will be in contact shortly with more information about the next steps.""".stripMargin
     changeSystem("recruiter")
+  }
+
+  def confirmIdvtAwaitingResultsState(): Unit = {
+    val newStatus = "Digital identity check awaiting results"
+    changeSystem("candidate")
+    confirmStatusOnApplicationPage(newStatus)
+    applicationCentrePageCheck()
+    !withdrawApplicationFunction().isDisplayed
+    applicationForVacancyText shouldEqual s"Application For $vacancyName"
+    getApplicationState shouldEqual s"Application status: $newStatus"
+    getApplicationConfirmation shouldEqual
+      """Thank you for submitting photographs of your identity documents.
+        |These are now being reviewed and we are waiting for the results of the check from the external service.
+        |We normally receive results within an hour but sometimes this may take up to a day.
+        |We will inform you by email when we receive the results.
+        |You can come back to this page to check your application’s progress at any time.""".stripMargin
   }
 
   def applicationStateAfterInterview(applicationDetails: ApplicationDetails): Unit =

@@ -1,19 +1,25 @@
 package uk.gov.co.test.ui.pages.v9.pecform
 
 import org.scalatest.concurrent.Eventually.eventually
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXCrcCheckProvider, vXCrcLevel}
 import uk.gov.co.test.ui.data.v9.pecform.PecFormDetails
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
 import uk.gov.co.test.ui.pages.v9.pecform.YourDetailsPage.pecFormId
 
 case class DeclarationDetails(
-  acceptLongFormTAndCs: Boolean
+  acceptLongFormTAndCs: Boolean,
+  acceptDbsTermsOne: Boolean,
+  acceptDbsTermsTwo: Boolean,
+  acceptDbsTermsThree: Boolean
 )
 
 object DeclarationPage extends CivilServiceJobsBasePage {
 
   private lazy val declarationTitle   = "Declaration - Civil Service Jobs - GOV.UK"
   def declarationTermsAndConditionsId = s"${pecFormId}_datafield_22499_1_1_804_label"
-  val submitButtonPath                = ".//input[@value='Submit']"
+  def dbsTermsOneId                   = s"${pecFormId}_datafield_72275_1_1_15120_label"
+  def dbsTermsTwoId                   = s"${pecFormId}_datafield_89002_1_1_15120_label"
+  def dbsTermsThreeId                 = s"${pecFormId}_datafield_89006_1_1_15120_label"
   val pecFormSubmission               = "submit_button"
 
   private def declarationPageCheck(): Unit =
@@ -28,7 +34,15 @@ object DeclarationPage extends CivilServiceJobsBasePage {
 //    } else throw new IllegalStateException("Submit button should be available before accepting terms & conditions!")
   }
 
+  private def acceptDbsTerms(declarationDetails: DeclarationDetails): Unit =
+    if (vXCrcLevel != "None" && vXCrcCheckProvider.contains("DBS")) {
+      if (declarationDetails.acceptDbsTermsOne) radioSelect(dbsTermsOneId)
+      if (declarationDetails.acceptDbsTermsTwo) radioSelect(dbsTermsTwoId)
+      if (declarationDetails.acceptDbsTermsThree) radioSelect(dbsTermsThreeId)
+    }
+
   private val declaration: Seq[DeclarationDetails => Unit] = Seq(
+    acceptDbsTerms,
     acceptDeclarationTermsAndConditions
   )
 
@@ -37,5 +51,6 @@ object DeclarationPage extends CivilServiceJobsBasePage {
     declaration.foreach { f =>
       f(pecFormDetails.declarationDetails)
     }
+    clickOn(pecFormSubmission)
   }
 }

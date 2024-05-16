@@ -32,7 +32,7 @@ object RESERVE_VACANCY_DATA
 object RESERVE_BASIC_DETAILS
     extends BasicDetails(
       "DO NOT USE- Automation Test Template",
-      s"Reserve - " + generateRandomJobPosition(),
+      s"CRX760: Reserve list - automation tests",
       true,
       "Prawf awtomeiddio",
       32
@@ -76,23 +76,23 @@ object RESERVE_APPROVAL
 object RESERVE_RESERVE_LIST
     extends ReserveListDetails(
       true,
-      "6 Months",
+      "3 Months",
       false,
-      "6 Months"
+      "8 weeks"
     )
 
 object RESERVE_LOCATIONS
     extends LocationsDetails(
-      "Postcodes",
+      "Remote (anywhere in the UK)",
       "M1 4RJ",
       "Manchester",
       "North West",
       "Germany",
       "Newcastle, Liverpool, Cardiff",
-      true,
-      true,
+      false,
+      false,
       "All communities",
-      true,
+      false,
       "3",
       otherLocations = ListBuffer("London", "Southampton", "Manchester")
     )
@@ -110,7 +110,7 @@ object RESERVE_CONTRACT_DETAILS
       75000,
       95000,
       "Can agree on the higher bracket",
-      true,
+      false,
       18750
     )
 
@@ -135,11 +135,11 @@ object RESERVE_CONTACT_DETAILS
 
 object RESERVE_VETTING_DETAILS
     extends VettingDetails(
-      true,
-      "Basic",
+      false,
+      "Standard",
       "Disclosure barring service (DBS)",
-      "Security check",
-      true
+      "None",
+      false
     )
 
 object RESERVE_INTERVIEWS_DETAILS
@@ -154,11 +154,11 @@ object RESERVE_INTERVIEWS_DETAILS
 
 object RESERVE_SUCCESS_PROFILES
     extends SuccessProfilesDetails(
-      true,
-      true,
-      true,
-      true,
-      true,
+      false,
+      false,
+      false,
+      false,
+      false,
       Some(RESERVE_ABILITIES),
       Some(RESERVE_BEHAVIOURS),
       Some(RESERVE_EXPERIENCES),
@@ -413,7 +413,7 @@ object RESERVE_GROUP_C_TESTS
 
 object RESERVE_ADDITIONAL_QUESTIONS
     extends AdditionalQuestionsDetails(
-      true,
+      false,
       3,
       "Autotest - Question 1",
       "Autotest - Question 2",
@@ -423,36 +423,36 @@ object RESERVE_ADDITIONAL_QUESTIONS
 object RESERVE_CRITERIA
     extends CriteriaDetails(
       campaignID = Some("Autotest - If this vacancy is linked to a campaign, enter the campaign ID (optional)"),
-      probationIncomplete = true,
-      promotionApply = true,
-      misconductLive = true,
-      performanceReview = true,
-      attendancePoor = true,
+      probationIncomplete = false,
+      promotionApply = false,
+      misconductLive = false,
+      performanceReview = false,
+      attendancePoor = false,
       nationalityRequirements = true,
-      rightToRemainUK = true,
-      licencesNotHeld = true,
-      membershipsNotHeld = true,
-      languagesSkillsNotHeld = true,
-      qualificationsHeld = true,
-      preSiftRequired = true,
-      uploadAttachment = true,
+      rightToRemainUK = false,
+      licencesNotHeld = false,
+      membershipsNotHeld = false,
+      languagesSkillsNotHeld = false,
+      qualificationsHeld = false,
+      preSiftRequired = false,
+      uploadAttachment = false,
       candidateInstructions = "Autotest - Instructions for candidate"
     )
 
 object RESERVE_MANAGEMENT
     extends ManagementDetails(
-      true,
       false,
-      "Other",
-      true,
+      false,
+      "Nature of the role",
+      false,
       assignTo = Option(s"$contactEmailVxConfig"),
       assignTo2 = Option(s"$contactEmailVxConfig"),
       true,
-      "Business As Usual (BAU)",
+      "SCS - Cross government campaign",
       "Menu",
-      true,
-      true,
-      linkToProject = Option(true),
+      false,
+      false,
+      linkToProject = Option(false),
       projectName = Option("Autotest - Project name"),
       deptComplaintsProcess = Option("Autotest - Your department's complaints process"),
       vacancyComments = Option("Autotest - Comments on this vacancy")
@@ -467,32 +467,32 @@ object RESERVE_ONLINE_PEC_CHECK_FORMS
 
 object RESERVE_PEC_CHECK_FORMS
     extends PecCheckFormsDetails(
-      rtwCheck = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      rtwCheck = ListBuffer("External Candidates", "OGD Candidates", "NDPB Candidates"),
       "Before pre employment checks",
       "Right to work and criminal record check",
-      true,
+      false,
       "Autotest - Details of the identity documents the candidate needs to provide",
       false,
-      generalInfo = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
-      referenceChecks = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
-      bankruptcyChecks = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      generalInfo = ListBuffer("External Candidates", "OGD Candidates", "NDPB Candidates"),
+      referenceChecks = ListBuffer("Not Applicable"),
+      bankruptcyChecks = ListBuffer("Not Applicable"),
       crcChecks = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
-      nsvChecks = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      nsvChecks = ListBuffer("Not Applicable"),
       "Show recruiter and candidate forms",
-      jobHistoryChecks = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
-      healthRefChecks = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      jobHistoryChecks = ListBuffer("Not Applicable"),
+      healthRefChecks = ListBuffer("Not Applicable"),
       "Show recruiter and candidate forms",
-      overseasCheck = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
-      pensionsCheck = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
-      previousCsJobCheck = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
-      internalFraudCheck = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
-      selfEmploymentCheck = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
-      true,
-      true,
+      overseasCheck = ListBuffer("Not Applicable"),
+      pensionsCheck = ListBuffer("Not Applicable"),
+      previousCsJobCheck = ListBuffer("Not Applicable"),
+      internalFraudCheck = ListBuffer("Not Applicable"),
+      selfEmploymentCheck = ListBuffer("Not Applicable"),
+      false,
+      false,
       "Autotest - Name of check",
       additionalCheck = ListBuffer("Not Applicable"),
-      nenOnboarding = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      nenOnboarding = ListBuffer("Not Applicable"),
       s"$contactEmailVxConfig",
-      pnOnboarding = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      pnOnboarding = ListBuffer("Not Applicable"),
       s"$contactEmailVxConfig"
     )

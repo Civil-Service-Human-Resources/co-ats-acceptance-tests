@@ -8,6 +8,10 @@ object PEC_FORM_DATA
     extends PecFormDetails(
       PEC_FORM_YOUR_DETAILS,
       PEC_RIGHT_TO_WORK,
+      PEC_FORM_UPLOAD_IDENTITY_DOCS,
+      PEC_FORM_DBS_PERSONAL_INFO,
+      PEC_FORM_DBS_ADDRESS_DETAILS,
+      PEC_FORM_DIGITAL_IDENTITY_CHECK,
       PEC_FORM_EMPLOYMENT_HISTORY,
       PEC_FORM_VERIFYING_HISTORY,
       PEC_FORM_PENSION_QUESTIONNAIRE,
@@ -37,9 +41,9 @@ object PEC_RIGHT_TO_WORK
     extends RtwDetails(
       "British citizen, Briton",
       "British citizen, Briton",
-      true,
-      "Egyptian",
       false,
+      "Egyptian",
+      true,
       true,
       true,
       false,
@@ -51,6 +55,69 @@ object PEC_RIGHT_TO_WORK
       "Test-T&Cs.pdf",
       true,
       true,
+      true
+    )
+
+object PEC_FORM_UPLOAD_IDENTITY_DOCS
+    extends IdentityDocDetails(
+      "Test-T&Cs.pdf"
+    )
+
+object PEC_FORM_DBS_PERSONAL_INFO
+    extends DbsPersonalInfoDetails(
+      "Mr",
+      "Marie",
+      false,
+      "TestMiddleName",
+      "Jallow",
+      "Jallow",
+      "03/11/1975",
+      false,
+      "Croydon",
+      "United Kingdom",
+      "+7752999000",
+      "Female",
+      false,
+      "JA112233D",
+      false,
+      "533324428",
+      "United Kingdom",
+      "03/11/1975",
+      "28/09/2015",
+      false,
+      "JALLO761035M99TS",
+      "03/11/1975",
+      "Photo",
+      "28/09/2015",
+      "United Kingdom",
+      false,
+      "TestProfileId",
+      false,
+      true,
+      false
+    )
+
+object PEC_FORM_DBS_ADDRESS_DETAILS
+    extends DbsAddressDetails(
+      "40 Cromwell Road",
+      Some(""),
+      "Ely",
+      "Cambridgeshire",
+      "United Kingdom",
+      "CB6 1AS",
+      "03/11/1975"
+    )
+
+object PEC_FORM_DIGITAL_IDENTITY_CHECK
+    extends DigitalIdentityDetails(
+      "As part of checking your right to work in the UK, we would like to process your biometric data for digital identity validation. We will ask for your passport or passport card, and a photo of your face.\n\nIf you consent to this processing, we will share your personal data with our checking provider TrustID and their supply chain. Please see our privacy notice (opens in new window) for more detail.\n\nIf you choose not to consent, you will need to present your original ID documents in person.",
+      "I consent to my data being processed for digital identity checks",
+      true,
+      "Do you have access to a smartphone or tablet with a camera?",
+      true,
+      "Do you have an in-date biometric passport or biometric ID card?",
+      true,
+      "Do you have an in-date photocard driving licence?",
       true
     )
 
@@ -152,5 +219,8 @@ object PEC_FORM_OVERSEAS
 
 object PEC_FORM_DECLARATION
     extends DeclarationDetails(
+      true,
+      true,
+      true,
       true
     )

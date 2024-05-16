@@ -142,12 +142,15 @@ object LocationsSection extends VacancyBasePage {
     vXLocationType = locationsDetails.locationType
     locationType(vXLocationType)
     vXLocationType match {
-      case "Postcodes" => enterPostcodes(locationsDetails.postcodes)
-      case "Towns"     => selectCityOrTown(locationsDetails.cityOrTown)
-      case "Regions"   => selectRegion(locationsDetails.region)
-      case "Overseas"  => selectOverseas(locationsDetails.overseas)
+      case "Postcodes"                   => enterPostcodes(locationsDetails.postcodes)
+      case "Towns"                       => selectCityOrTown(locationsDetails.cityOrTown)
+      case "Regions"                     => selectRegion(locationsDetails.region)
+      case "Overseas"                    => selectOverseas(locationsDetails.overseas)
+      case "Remote (anywhere in the UK)" =>
     }
-    locationOverride(locationsDetails.locationOverride)
+    if (vXLocationType == "Postcodes" || vXLocationType == "Towns" || vXLocationType == "Overseas") {
+      locationOverride(locationsDetails.locationOverride)
+    }
   }
 
   private val locations: Seq[LocationsDetails => Unit] = Seq(

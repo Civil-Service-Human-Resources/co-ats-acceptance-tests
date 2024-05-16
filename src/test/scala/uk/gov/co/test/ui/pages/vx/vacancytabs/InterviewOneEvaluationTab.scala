@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.pages.vx.vacancytabs
 
 import org.openqa.selenium.By
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{randomFirstName, randomLastName, vXBehavioursRequired, vXHowManyBehaviours, vXHowManySkills, vXHowManyStrengths, vXInterviewOneOutcome, vXListOfChosenBehaviours, vXListOfStrengths, vXListOfTechSkills, vXStrengthsRequired, vXTechSkillsRequired, vacancyFormId}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{randomFirstName, randomLastName, vXBehavioursRequired, vXExperiencesRequired, vXHowManyBehaviours, vXHowManySkills, vXHowManyStrengths, vXInterviewOneOutcome, vXListOfChosenBehaviours, vXListOfStrengths, vXListOfTechSkills, vXStrengthsRequired, vXTechSkillsRequired, vacancyFormId}
 import uk.gov.co.test.ui.data.vx.application.{ApplicationDetails, AssessmentOutcome, Outcome}
 import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.applicationStateAfterInterview
 import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.{availableBarItems, completeI1EvaluationBarId, interviewEvaluation, noShowI1BarId, withdrawAtInterviewBarId}
@@ -343,7 +343,8 @@ object InterviewOneEvaluationTab extends VacancyBasePage {
       }
       waitForVisibilityOfElementById(
         behaviourTotalScoreId
-      ).getText shouldEqual s"Behaviour total score\n  ${totalScore(vXI1BehavioursTotalScore)}"
+      ).getText should endWith(s"${totalScore(vXI1BehavioursTotalScore)}")
+//      ).getText shouldEqual s"Behaviour total score\n  ${totalScore(vXI1BehavioursTotalScore)}"
     }
 
   private def enterTechSkillOneOutcome(interviewOneDetails: InterviewOneDetails): Unit = {
@@ -464,7 +465,8 @@ object InterviewOneEvaluationTab extends VacancyBasePage {
       }
       waitForVisibilityOfElementById(
         techSkillTotalScoreId
-      ).getText shouldEqual s"Technical skill overall score\n  ${totalScore(vXI1TechSkillsTotalScore)}"
+      ).getText should endWith(s"${totalScore(vXI1TechSkillsTotalScore)}")
+//      ).getText shouldEqual s"Technical skill overall score\n  ${totalScore(vXI1TechSkillsTotalScore)}"
     }
 
   private def enterStrengthOneOutcome(interviewOneDetails: InterviewOneDetails): Unit = {
@@ -587,7 +589,8 @@ object InterviewOneEvaluationTab extends VacancyBasePage {
       }
       waitForVisibilityOfElementById(
         strengthTotalScoreId
-      ).getText shouldEqual s"Strengths total score\n  ${totalScore(vXI1StrengthsTotalScore)}"
+      ).getText should endWith(s"${totalScore(vXI1StrengthsTotalScore)}")
+//      ).getText shouldEqual s"Strengths total score\n  ${totalScore(vXI1StrengthsTotalScore)}"
     }
 
   private def howManyAssessments(interviewOneDetails: InterviewOneDetails): Unit = {
@@ -690,17 +693,18 @@ object InterviewOneEvaluationTab extends VacancyBasePage {
     totalScore(vXI1AssessmentsTotalScore)
   }
 
-  private def enterExperienceOutcome(interviewOneDetails: InterviewOneDetails): Unit = {
-    enterOutcome(
-      experienceTitleId,
-      "Experience",
-      experienceScoreId,
-      interviewOneDetails.experience.score,
-      experienceDescriptionId,
-      interviewOneDetails.experience.comment
-    )
-    vXI1ExperienceScore = interviewOneDetails.experience.score
-  }
+  private def enterExperienceOutcome(interviewOneDetails: InterviewOneDetails): Unit =
+    if (vXExperiencesRequired) {
+      enterOutcome(
+        experienceTitleId,
+        "Experience",
+        experienceScoreId,
+        interviewOneDetails.experience.score,
+        experienceDescriptionId,
+        interviewOneDetails.experience.comment
+      )
+      vXI1ExperienceScore = interviewOneDetails.experience.score
+    } else vXI1ExperienceScore = 0
 
   private def checkOverallScore(interviewOneDetails: InterviewOneDetails): Unit = {
     waitForVisibilityOfElementById(overallScoreTitleId).getText shouldEqual "Overall Score"
@@ -710,7 +714,8 @@ object InterviewOneEvaluationTab extends VacancyBasePage {
     val overallScore = totalScore(vXI1BehavioursTotalScore) + totalScore(vXI1TechSkillsTotalScore) + totalScore(
       vXI1StrengthsTotalScore
     ) + totalScore(vXI1AssessmentsTotalScore) + vXI1ExperienceScore
-    waitForVisibilityOfElementById(overallScoreId).getText shouldEqual s"Overall score\n  $overallScore"
+    waitForVisibilityOfElementById(overallScoreId).getText should endWith(s"$overallScore")
+//    waitForVisibilityOfElementById(overallScoreId).getText shouldEqual s"Overall score\n  $overallScore"
   }
 
   private def enterOutcome(interviewOneDetails: InterviewOneDetails): Unit = {

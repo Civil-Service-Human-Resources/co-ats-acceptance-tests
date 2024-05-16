@@ -21,7 +21,7 @@ object ReserveListSection extends VacancyBasePage {
   def reserveListLengthId            = s"select2-${vacancyFormId}_datafield_154637_1_1-container"
   def approvalToExtendYesId          = s"${vacancyFormId}_datafield_177141_1_1_1"
   def approvalToExtendNoId           = s"${vacancyFormId}_datafield_177141_1_1_2"
-  def extendLengthId                 = s"select2-${vacancyFormId}_datafield_177145_1_1-container"
+  def extendLengthId                 = s"select2-${vacancyFormId}_datafield_205583_1_1-container"
   def approveForPublicationMessageId = s"${vacancyFormId}_label_72537_1"
 
   def selectReserveList(reserveListDetails: ReserveListDetails): Unit = {
@@ -98,12 +98,9 @@ object ReserveListSection extends VacancyBasePage {
   }
 
   def totalReserveExpiryLength(): Unit = {
-    val baseReserveLength = vXReserveListLength.replaceAll("[A-Za-z ]", "").filterNot(_.isWhitespace).toInt
     if (vXReserveExtendRequired) {
-      val reserveExtendLength = vXReserveExtendLength.replaceAll("[A-Za-z ]", "").filterNot(_.isWhitespace).toInt
-      val totalLength         = baseReserveLength + reserveExtendLength
-      vXReserveListTotalLength = s"${totalLength.toString} Months"
-    } else { vXReserveListTotalLength = s"${baseReserveLength.toString} Months" }
+      vXReserveListTotalLength = s"$vXReserveListLength + $vXReserveExtendLength"
+    } else { vXReserveListTotalLength = s"$vXReserveListLength" }
     println(s"1. Reserve list length is: $vXReserveListLength")
     println(s"2. Reserve extend required is: $vXReserveExtendLength")
     println(s"3. Reserve extend length is: $vXReserveExtendLength")
