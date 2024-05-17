@@ -61,7 +61,7 @@ object ReserveListsTab extends VacancyBasePage {
         s"Length of reserve list extension (beyond 12 months)  \n$vXReserveExtendLength "
       )
     }
-    checkReserveValue(reserveList3MonthsExpiryId, s"3 month expiry date  \n${calculatedExpiryDates(3)}")
+    checkReserveValue(reserveList3MonthsExpiryId, s"3 months expiry date  \n${calculatedExpiryDates(3)}")
     checkReserveValue(reserveList6MonthsExpiryId, s"6 months expiry date  \n${calculatedExpiryDates(6)}")
     checkReserveValue(reserveList9MonthsExpiryId, s"9 months expiry date  \n${calculatedExpiryDates(9)}")
     checkReserveValue(reserveList12MonthsExpiryId, s"12 months expiry date  \n${calculatedExpiryDates(12)}")
