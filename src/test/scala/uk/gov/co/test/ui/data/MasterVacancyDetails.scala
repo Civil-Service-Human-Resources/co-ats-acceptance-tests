@@ -64,7 +64,23 @@ object MasterVacancyDetails extends VacancyBasePage {
   var vXVettingLevel: String     = ""
   var vXMedicalRequired: Boolean = _
 
-  //vx VACANCY interviews TODO
+  //vX VACANCY -interview schedule
+  var vXInterviewNumber: ListBuffer[String] = ListBuffer("")
+  var vXInterviewExpectedRounds             = ""
+  var vXInterviewOneType                    = ""
+  var vXInterviewTwoType                    = ""
+  var vXInterviewThreeType                  = ""
+  var vXInterviewFourType                   = ""
+  var vXInterviewDate                       = ""
+  var vXInterviewLongDate                   = ""
+  var vXInterviewShortDate                  = ""
+  var vXInterviewLocation                   = ""
+  var vXInterviewScheduleTitle              = ""
+  var vXInstructionsForCandidates           = ""
+  var vXInterviewOneOutcome                 = ""
+  var vXInterviewTwoOutcome                 = ""
+  var vXInterviewThreeOutcome               = ""
+  var vXInterviewFourOutcome                = ""
 
   //vx VACANCY success profiles section
   var vXAbilitiesRequired: Boolean   = _
@@ -272,23 +288,5 @@ object MasterVacancyDetails extends VacancyBasePage {
   var vXSlotTwoFinishTime = ""
   var vXInterviewRoom     = ""
   var vXInterviewID       = ""
-
-  //vX APPLICATION -interview schedule
-  var vXInterviewNumber: ListBuffer[String] = ListBuffer("")
-  var vXInterviewExpectedRounds             = ""
-  var vXInterviewOneType                    = ""
-  var vXInterviewTwoType                    = ""
-  var vXInterviewThreeType                  = ""
-  var vXInterviewFourType                   = ""
-  var vXInterviewDate                       = ""
-  var vXInterviewLongDate                   = ""
-  var vXInterviewShortDate                  = ""
-  var vXInterviewLocation                   = ""
-  var vXInterviewScheduleTitle              = ""
-  var vXInstructionsForCandidates           = ""
-  var vXInterviewOneOutcome                 = ""
-  var vXInterviewTwoOutcome                 = ""
-  var vXInterviewThreeOutcome               = ""
-  var vXInterviewFourOutcome                = ""
 
 }

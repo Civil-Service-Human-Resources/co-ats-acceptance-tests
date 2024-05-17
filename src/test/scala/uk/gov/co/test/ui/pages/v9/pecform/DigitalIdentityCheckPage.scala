@@ -67,7 +67,7 @@ object DigitalIdentityCheckPage extends CivilServiceJobsBasePage {
   private def selectBiometricPassportOrId(digitalIdentityDetails: DigitalIdentityDetails): Unit = {
     println(s"CRC Level is: $vXCrcLevel")
     println(s"Identity Check Level is: $vXWhichIdentityChecks")
-    if (vXCrcLevel != "None" && vXWhichIdentityChecks != "Right to work only") {
+    if (vXCrcLevel != "None" && vXWhichIdentityChecks != "No digital checks" && vXRtwChecks.contains("Not Applicable")) {
       waitForVisibilityOfElementById(
         biometricPassportOrIdQuestionId
       ).getText shouldEqual digitalIdentityDetails.biometricPassportOrIdQuestion
@@ -78,7 +78,7 @@ object DigitalIdentityCheckPage extends CivilServiceJobsBasePage {
   }
 
   private def selectInDateDrivingLicence(digitalIdentityDetails: DigitalIdentityDetails): Unit =
-    if (vXCrcLevel != "Basic") {
+    if (vXCrcLevel == "Standard" || vXCrcLevel == "Enhanced") {
       waitForVisibilityOfElementById(
         inDateDrivingLicenceQuestionId
       ).getText shouldEqual digitalIdentityDetails.inDateDrivingLicenceQuestion
@@ -93,7 +93,7 @@ object DigitalIdentityCheckPage extends CivilServiceJobsBasePage {
   )
 
   def digitalIdentityCheckPage(pecFormDetails: PecFormDetails): Unit =
-    if (vXCrcLevel != "None" && vXCrcCheckProvider.contains("DBS") && v9RtwHoldPassport) {
+    if (vXWhichIdentityChecks != "No digital checks" && v9RtwHoldPassport) {
       digitalIdentityPageCheck()
       idvt.foreach { f =>
         f(pecFormDetails.digitalIdentityDetails)

@@ -334,9 +334,10 @@ object VacancyDetailsPage extends VacancyBasePage {
   }
 
   private def extractCrcCheckProvider(): Unit = {
-    vXCrcCheckProvider =
-      waitForVisibilityOfElementById(crcCheckProviderId).findElement(By.xpath(checkLabelPath)).getText
-    if (vXCrcCheckProvider.contains("DBS")) vXCrcCheckProvider = "DBS"
+    if (vXCrcLevel != "None") {
+      vXCrcCheckProvider = waitForVisibilityOfElementById(crcCheckProviderId).findElement(By.xpath(checkLabelPath)).getText
+      if (vXCrcCheckProvider.contains("DBS")) vXCrcCheckProvider = "DBS"
+    } else vXCrcCheckProvider = ""
   }
 
   private def extractVettingLevel(): Unit =

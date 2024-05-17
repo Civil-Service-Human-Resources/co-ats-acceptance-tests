@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.pages.vx.vacancytabs
 
 import org.openqa.selenium.By
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXAnyOnlineTests, vXBehavioursRequired, vXExperiencesRequired, vXHowManyBehaviours, vXHowManySkills, vXListOfChosenBehaviours, vXListOfTechSkills, vXNoLongForm, vXPreSiftRequired, vXTechSkillsRequired, vacancyFormId}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXAnyOnlineTests, vXBehavioursRequired, vXExperiencesRequired, vXHowManyBehaviours, vXHowManySkills, vXInterviewExpectedRounds, vXListOfChosenBehaviours, vXListOfTechSkills, vXNoLongForm, vXPreSiftRequired, vXTechSkillsRequired, vacancyFormId}
 import uk.gov.co.test.ui.data.vx.application.{ApplicationDetails, Outcome}
 import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.{applicationBeingReviewedState, successfulAtSiftState}
 import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.{availableBarItems, completeSiftBarId, confirmCandidateSummary, progressBarAfterPreSiftId, siftEvaluation, withdrawBarId}
@@ -446,7 +446,7 @@ object SiftEvaluationTab extends VacancyBasePage {
     }
     clickOn(submitForm)
     siftEvaluation()
-    if (vXAnyOnlineTests || vXNoLongForm) {
+    if (vXAnyOnlineTests || vXInterviewExpectedRounds == "No interviews") {
       successfulAtSiftState()
     } else {
       applicationBeingReviewedState()

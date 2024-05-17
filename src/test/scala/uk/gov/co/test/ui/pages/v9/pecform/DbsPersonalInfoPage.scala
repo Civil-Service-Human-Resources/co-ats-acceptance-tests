@@ -113,7 +113,7 @@ object DbsPersonalInfoPage extends CivilServiceJobsBasePage {
     enterDetails(lastNameId, dbsPersonalInfoDetails.lastName)
 
   private def enterLastNameAtBirth(dbsPersonalInfoDetails: DbsPersonalInfoDetails): Unit =
-    if (vXCrcLevel != "Basic") {
+    if (vXCrcLevel == "Standard" || vXCrcLevel == "Enhanced") {
       enterDetails(lastNameAtBirthId, dbsPersonalInfoDetails.lastNameAtBirth)
     }
 
@@ -220,7 +220,7 @@ object DbsPersonalInfoPage extends CivilServiceJobsBasePage {
     }
 
   private def selectHaveConvictions(dbsPersonalInfoDetails: DbsPersonalInfoDetails): Unit =
-    if ((vXCrcLevel == "Standard" || vXCrcLevel == "Enhanced") && vXCrcCheckProvider.contains("DBS")) {
+    if (vXCrcLevel == "Standard" || vXCrcLevel == "Enhanced") {
       if (dbsPersonalInfoDetails.haveConvictions) {
         radioSelect(convictionsYesId)
       } else {

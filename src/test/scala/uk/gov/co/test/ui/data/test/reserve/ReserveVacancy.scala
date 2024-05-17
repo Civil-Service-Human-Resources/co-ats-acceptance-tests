@@ -144,7 +144,7 @@ object RESERVE_VETTING_DETAILS
 
 object RESERVE_INTERVIEWS_DETAILS
     extends InterviewsDetails(
-      "1",
+      "No interviews",
       "Interview",
       "Assessment",
       "Video",
