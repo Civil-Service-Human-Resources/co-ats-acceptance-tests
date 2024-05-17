@@ -445,3 +445,14 @@ object REGISTER_CANDIDATE_REDEPLOYMENT_SCHEME_26
       false,
       true
     )
+
+object REGISTER_CANDIDATE_IDVT_01
+  extends CandidateDetails(
+    firstname = s"$randomFirstName",
+    lastname = s"$randomLastName",
+    preferredFirstName = s"$preferredFirstName",
+    email = s"$randomEmail",
+    s"$passwordCandidate",
+    false,
+    true
+  )
