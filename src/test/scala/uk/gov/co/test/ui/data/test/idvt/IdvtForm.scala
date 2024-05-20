@@ -112,13 +112,13 @@ object IDVT_FORM_DIGITAL_IDENTITY_CHECK
     extends DigitalIdentityDetails(
       "As part of checking your right to work in the UK, we would like to process your biometric data for digital identity validation. We will ask for your passport or passport card, and a photo of your face.\n\nIf you consent to this processing, we will share your personal data with our checking provider TrustID and their supply chain. Please see our privacy notice (opens in new window) for more detail.\n\nIf you choose not to consent, you will need to present your original ID documents in person.",
       "I consent to my data being processed for digital identity checks",
-      true,
+      false,
       "Do you have access to a smartphone or tablet with a camera?",
-      true,
+      false,
       "Do you have an in-date biometric passport or biometric ID card?",
-      true,
+      false,
       "Do you have an in-date photocard driving licence?",
-      true
+      false
     )
 
 object IDVT_FORM_EMPLOYMENT_HISTORY

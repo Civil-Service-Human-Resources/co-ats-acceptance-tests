@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.pages.v9.pecform
 
 import org.scalatest.concurrent.Eventually.eventually
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{v9RtwHoldPassport, vXApproach, vXCrcCheckProvider, vXCrcLevel, vXRtwChecks, vXWhichIdentityChecks}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{v9BiometricPassportOrId, v9IdvtDataConsent, v9InDateDrivingLicence, v9RtwHoldPassport, v9SmartphoneAccess, vXCrcLevel, vXRtwChecks, vXWhichIdentityChecks}
 import uk.gov.co.test.ui.data.v9.pecform.PecFormDetails
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
 import uk.gov.co.test.ui.pages.v9.pecform.YourDetailsPage.pecFormId
@@ -44,20 +44,22 @@ object DigitalIdentityCheckPage extends CivilServiceJobsBasePage {
   }
 
   private def selectIdvtDataConsent(digitalIdentityDetails: DigitalIdentityDetails): Unit = {
+    v9IdvtDataConsent = digitalIdentityDetails.idvtDataConsent
     waitForVisibilityOfElementById(
       idvtDataConsentQuestionId
     ).getText shouldEqual digitalIdentityDetails.idvtDataConsentQuestion
-    if (digitalIdentityDetails.idvtDataConsent) {
+    if (v9IdvtDataConsent) {
       radioSelect(idvtDataConsentYesId)
       selectSmartPhoneAccess(digitalIdentityDetails)
     } else radioSelect(idvtDataConsentNoId)
   }
 
   private def selectSmartPhoneAccess(digitalIdentityDetails: DigitalIdentityDetails): Unit = {
+    v9SmartphoneAccess = digitalIdentityDetails.smartphoneAccess
     waitForVisibilityOfElementById(
       smartphoneAccessQuestionId
     ).getText shouldEqual digitalIdentityDetails.smartphoneAccessQuestion
-    if (digitalIdentityDetails.smartphoneAccess) {
+    if (v9SmartphoneAccess) {
       radioSelect(smartphoneAccessYesId)
       selectBiometricPassportOrId(digitalIdentityDetails)
       selectInDateDrivingLicence(digitalIdentityDetails)
@@ -67,25 +69,30 @@ object DigitalIdentityCheckPage extends CivilServiceJobsBasePage {
   private def selectBiometricPassportOrId(digitalIdentityDetails: DigitalIdentityDetails): Unit = {
     println(s"CRC Level is: $vXCrcLevel")
     println(s"Identity Check Level is: $vXWhichIdentityChecks")
-    if (vXCrcLevel != "None" && vXWhichIdentityChecks != "No digital checks" && vXRtwChecks.contains("Not Applicable")) {
+    v9BiometricPassportOrId = digitalIdentityDetails.biometricPassportOrId
+    if (
+      vXCrcLevel != "None" && vXWhichIdentityChecks != "No digital checks" && vXRtwChecks.contains("Not Applicable")
+    ) {
       waitForVisibilityOfElementById(
         biometricPassportOrIdQuestionId
       ).getText shouldEqual digitalIdentityDetails.biometricPassportOrIdQuestion
-      if (digitalIdentityDetails.biometricPassportOrId) {
+      if (v9BiometricPassportOrId) {
         radioSelect(biometricPassportOrIdYesId)
       } else radioSelect(biometricPassportOrIdNoId)
     }
   }
 
-  private def selectInDateDrivingLicence(digitalIdentityDetails: DigitalIdentityDetails): Unit =
+  private def selectInDateDrivingLicence(digitalIdentityDetails: DigitalIdentityDetails): Unit = {
+    v9InDateDrivingLicence = digitalIdentityDetails.inDateDrivingLicence
     if (vXCrcLevel == "Standard" || vXCrcLevel == "Enhanced") {
       waitForVisibilityOfElementById(
         inDateDrivingLicenceQuestionId
       ).getText shouldEqual digitalIdentityDetails.inDateDrivingLicenceQuestion
-      if (digitalIdentityDetails.inDateDrivingLicence) {
+      if (v9InDateDrivingLicence) {
         radioSelect(inDateDrivingLicenceYesId)
       } else radioSelect(inDateDrivingLicenceNoId)
     }
+  }
 
   private val idvt: Seq[DigitalIdentityDetails => Unit] = Seq(
     confirmHeaderAndInfo,

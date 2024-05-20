@@ -269,6 +269,12 @@ object MasterVacancyDetails extends VacancyBasePage {
   //v9 PEC FORM rtw
   var v9RtwHoldPassport: Boolean = true
 
+  //v9 PEC FORM digital identity checks
+  var v9IdvtDataConsent: Boolean       = _
+  var v9SmartphoneAccess: Boolean      = _
+  var v9BiometricPassportOrId: Boolean = _
+  var v9InDateDrivingLicence: Boolean  = _
+
   //v9 PEC FORM employment history
   var v9EmployedWithin3Years: Boolean = _
   var v9FirstEmployerName             = ""
