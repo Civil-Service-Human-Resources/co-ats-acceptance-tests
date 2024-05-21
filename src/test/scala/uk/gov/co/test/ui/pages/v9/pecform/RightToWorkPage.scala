@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.pages.v9.pecform
 
 import org.scalatest.concurrent.Eventually.eventually
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{v9RtwHoldPassport, vXApproach, vXRtwChecks, vXWhenRtwChecks}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{v9RtwBritishCitizen, v9RtwHoldPassport, vXApproach, vXRtwChecks, vXWhenRtwChecks}
 import uk.gov.co.test.ui.data.v9.pecform.PecFormDetails
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
 import uk.gov.co.test.ui.pages.v9.pecform.YourDetailsPage.pecFormId
@@ -98,8 +98,7 @@ object RightToWorkPage extends CivilServiceJobsBasePage {
     else radioSelect(retainedNationalityNoId)
 
   private def selectHoldBritishPassport(rtwDetails: RtwDetails): Unit = {
-    v9RtwHoldPassport = rtwDetails.holdBritishPassport
-    if (rtwDetails.holdBritishPassport) radioSelect(holdBritishPassportYesId)
+    if (rtwDetails.holdBritishPassport && v9RtwHoldPassport) radioSelect(holdBritishPassportYesId)
     else radioSelect(holdBritishPassportNoId)
   }
 
@@ -125,15 +124,17 @@ object RightToWorkPage extends CivilServiceJobsBasePage {
       selectBiometricResidenceCard(rtwDetails)
     }
 
-  private def selectAreYouBritishCitizen(rtwDetails: RtwDetails): Unit =
-    if (rtwDetails.britishCitizen) {
+  private def selectAreYouBritishCitizen(rtwDetails: RtwDetails): Unit = {
+    if (rtwDetails.britishCitizen && v9RtwBritishCitizen) {
       radioSelect(britishCitizenYesId)
       selectHoldBritishPassport(rtwDetails)
     } else {
+      v9RtwHoldPassport = false
       radioSelect(britishCitizenNoId)
       selectLiveInUK(rtwDetails)
       selectEUOrSwissCitizen(rtwDetails)
     }
+  }
 
   private def selectEUSSStatus(rtwDetails: RtwDetails): Unit =
     rtwDetails.eussStatus match {

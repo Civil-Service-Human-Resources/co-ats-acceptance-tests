@@ -19,6 +19,7 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
   val completionTextPath            = ".//*[@class='app-status-desc']"
   val applicationStatePath          = ".//*[@id='main-content']/div/div[1]/h3"
   val advertDetailsButtonPath       = ".//input[@value='Advert Details']"
+  val startCheckButtonPath       = ".//input[@value='Start check']"
   val withdrawApplicationButtonPath = ".//input[@value='Withdraw Application']"
   val continueApplicationButtonPath = ".//input[@value='Continue application']"
   val offerDecisionButtonPath       = ".//input[@value='Offer Decision']"
@@ -59,6 +60,9 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
 
   def feedbackFunction(): WebElement =
     waitForVisibilityOfElementByPath(feedbackButtonPath)
+
+  def startCheckFunction(): WebElement =
+    waitForVisibilityOfElementByPath(startCheckButtonPath)
 
   def offerDecisionFunction(): WebElement =
     waitForVisibilityOfElementByPath(offerDecisionButtonPath)
@@ -190,6 +194,69 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
     applicationForVacancyText  shouldEqual s"Application For $vacancyName"
     getApplicationState        shouldEqual s"Application status: $status"
     getApplicationConfirmation shouldEqual "Great news, you've accepted your provisional offer and your pre-employment checks are underway.\nWe are still checking:\nyour employment history, including any gaps\nwhether you have any convictions\n\n\nWe will send an email notification to you once all pre-employment checks are complete."
+  }
+
+  def confirmPecRtwBeforeManualIdCheckState(): Unit = {
+    val status = "Pre-employment checks"
+    changeSystem("candidate")
+    confirmStatusOnApplicationPage(status)
+    applicationCentrePageCheck()
+    advertDetailsFunction().isEnabled
+    feedbackFunction().isEnabled
+    withdrawApplicationFunction().isEnabled
+    applicationForVacancyText shouldEqual s"Application For $vacancyName"
+    getApplicationState shouldEqual s"Application status: $status"
+    getApplicationConfirmation shouldEqual "Great news, you've accepted your provisional offer and your pre-employment checks are underway.\nWe will send an email notification to you once all pre-employment checks are complete."
+  }
+
+  def confirmPecRtwOnlyState(): Unit = {
+    val status = "Pre-employment checks"
+    changeSystem("candidate")
+    confirmStatusOnApplicationPage(status)
+    applicationCentrePageCheck()
+    advertDetailsFunction().isEnabled
+    feedbackFunction().isEnabled
+    withdrawApplicationFunction().isEnabled
+    applicationForVacancyText shouldEqual s"Application For $vacancyName"
+    getApplicationState shouldEqual s"Application status: $status"
+    getApplicationConfirmation shouldEqual "Great news, you've accepted your provisional offer and your pre-employment checks are underway.\nWe are still checking:\nyour identity and right to work in the Civil Service\n\n\nWe will send an email notification to you once all pre-employment checks are complete."
+  }
+
+  def confirmPecRtwAndDbsBasicState(): Unit = {
+    val status = "Pre-employment checks"
+    changeSystem("candidate")
+    confirmStatusOnApplicationPage(status)
+    applicationCentrePageCheck()
+    advertDetailsFunction().isEnabled
+    feedbackFunction().isEnabled
+    withdrawApplicationFunction().isEnabled
+    applicationForVacancyText shouldEqual s"Application For $vacancyName"
+    getApplicationState shouldEqual s"Application status: $status"
+    getApplicationConfirmation shouldEqual "Great news, you've accepted your provisional offer and your pre-employment checks are underway.\nWe are still checking:\nyour identity and right to work in the Civil Service\nwhether you have any convictions\n\n\nWe will send an email notification to you once all pre-employment checks are complete."
+  }
+
+  def confirmPecRtwOnlyStartCheckState(): Unit = {
+    val status = "Confirm your identity"
+    changeSystem("candidate")
+    confirmStatusOnApplicationPage(status)
+    applicationCentrePageCheck()
+    startCheckFunction().isEnabled
+    withdrawApplicationFunction().isEnabled
+    applicationForVacancyText shouldEqual s"Application For $vacancyName"
+    getApplicationState shouldEqual s"Application status: $status"
+    getApplicationConfirmation shouldEqual "To complete the following check you will need:\n • an in date British or Irish passport, or an in date Irish passport card \n • to take a ‘selfie’ photograph of yourself\nStarting your ID check\nYou'll need access to a smartphone or tablet with a camera to complete the ID check. \nWhen you are ready, select the \"Start check\" button. You will be directed to the external service.\nNext steps\nWhen you've submitted your identity documents, you'll be sent an email when we receive the results back from the external service.\nYou can come back to this page to check the status of your application.\nIf you need help using the external service\nIf you are not able to use this external service for any reason contact ryan.hobbs@cabinetoffice.gov.uk\nWhat we will do with your data (opens in a new window)"
+  }
+
+  def confirmPecRtwAndDBSEnhancedStartCheckState(): Unit = {
+    val status = "Confirm your identity"
+    changeSystem("candidate")
+    confirmStatusOnApplicationPage(status)
+    applicationCentrePageCheck()
+    startCheckFunction().isEnabled
+    withdrawApplicationFunction().isEnabled
+    applicationForVacancyText shouldEqual s"Application For $vacancyName"
+    getApplicationState shouldEqual s"Application status: $status"
+    getApplicationConfirmation shouldEqual "To complete the following check you will need:\n• your photographic identity documents with you\n• to take a ‘selfie’ photograph of yourself\nYou will need to photograph one of the following proof of address documents. Only photographs of original documents are accepted. Screenshots or copies printed from the internet cannot be used.\nDocuments issued within 3 months:\n• Bank statement\n• Bank or building society account opening confirmation letter \n• Benefit statement, for example Child Benefit, pension\n• Credit card statement\n• Utility bill \nDocuments issued within 6 months:\n• Mortgage statement or letter\n• Documents issued within 12 months:\n• Council Tax statement\n• Financial statement, for example pension or endowment\n• P45 or P60 statement \nStarting your ID check\nYou'll need access to a smartphone or tablet with a camera to complete the ID check. \nWhen you are ready, select the \"Start check\" button. You will be directed to the external service.\nNext steps\nWhen you've submitted your identity documents, you'll be sent an email when we receive the results back from the external service.\nYou can come back to this page to check the status of your application.\nIf you need help using the external service\nIf you are not able to use this external service for any reason contact ryan.hobbs@cabinetoffice.gov.uk\nWhat we will do with your data (opens in a new window)"
   }
 
   def applicationBeingReviewedPreSiftState(): Unit = {

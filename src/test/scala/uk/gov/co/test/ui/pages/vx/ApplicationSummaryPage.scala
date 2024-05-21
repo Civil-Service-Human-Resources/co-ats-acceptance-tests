@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.pages.vx
 
 import org.openqa.selenium.By
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{applicationId, randomFirstName, randomLastName, v9CivilServant, v9HomeDepartment, vXInterviewNumber, vXJobInfoDepartment, vacancyId, vacancyName}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{applicationId, randomFirstName, randomLastName, v9CivilServant, v9HomeDepartment, vXCandidateUploadIdentityDocs, vXInterviewNumber, vXJobInfoDepartment, vacancyId, vacancyName}
 import uk.gov.co.test.ui.data.TestData.eventually
 import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.{candidateAcceptsOffer, confirmOfferAcceptedState}
 import uk.gov.co.test.ui.pages.v9.ProvisionalOfferPage.offerDecisionFlow
@@ -60,6 +60,10 @@ object ApplicationSummaryPage extends VacancyBasePage {
   val progressI4EvaluationBarId          = "process_rule_but_1086"
   val withdrawAtInterviewBarId           = "process_rule_but_511"
   val launchFullPecRecruiterFormBarId    = "process_rule_but_731"
+  val rtwChecksFormBarId                 = "process_rule_but_733"
+  val idvtNotCompletedBarId                 = "process_rule_but_3220"
+  val confirmIdDocumentsBarId            = "process_rule_but_2070"
+  val furtherIdRequiredBarId            = "process_rule_but_2071"
   val scheduleI2BarId                    = "process_rule_but_34"
   val offerDecisionBarId                 = "process_rule_but_564"
   val allBarItemsId                      = "process_rules_bar"
@@ -145,6 +149,58 @@ object ApplicationSummaryPage extends VacancyBasePage {
         uploadIDOnOfferBarId,
         updateApplicantTypeBarId,
         emailVacancyHolderBarId
+      )
+    )
+    confirmCandidateSummary(newStatus)
+  }
+
+  def manualIdCheck(): Unit = {
+    val newStatus = "ID verification required"
+    changeSystem("recruiter")
+    checkForNewValuePath(vacancyStatusPath, newStatus)
+    availableBarItems(
+      List(
+        confirmIdDocumentsBarId,
+        furtherIdRequiredBarId,
+        withdrawApplicationOnOfferBarId
+      )
+    )
+    confirmCandidateSummary(newStatus)
+  }
+
+  def rtwCheckAvailable(): Unit = {
+    val newStatus = "Right to Work Check Available"
+    changeSystem("recruiter")
+    if (vXCandidateUploadIdentityDocs) {
+      if (!driver.findElements(By.id(confirmIdDocumentsBarId)).isEmpty) {
+        waitForVisibilityOfElementById(confirmIdDocumentsBarId).click()
+      }
+    }
+    checkForNewValuePath(vacancyStatusPath, newStatus)
+    availableBarItems(
+      List(
+        rtwChecksFormBarId,
+        withdrawApplicationOnOfferBarId,
+        updateApplicantTypeBarId,
+        emailVacancyHolderBarId
+      )
+    )
+    confirmCandidateSummary(newStatus)
+  }
+
+  def invitedToDigitalIdentityCheck(): Unit = {
+    val newStatus = "Invited to digital identity check"
+    changeSystem("recruiter")
+    if (vXCandidateUploadIdentityDocs) {
+      if (!driver.findElements(By.id(confirmIdDocumentsBarId)).isEmpty) {
+        waitForVisibilityOfElementById(confirmIdDocumentsBarId).click()
+      }
+    }
+    checkForNewValuePath(vacancyStatusPath, newStatus)
+    availableBarItems(
+      List(
+        idvtNotCompletedBarId,
+        withdrawApplicationOnOfferBarId
       )
     )
     confirmCandidateSummary(newStatus)

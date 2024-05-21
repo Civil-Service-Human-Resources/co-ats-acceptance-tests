@@ -46,10 +46,10 @@ object IDVT_RIGHT_TO_WORK
       true,
       true,
       true,
-      false,
-      "I have applied for the settlement scheme and await confirmation of my status",
+      true,
+      "I have settled status",
       "Autotest-certificate/application number",
-      "Autotest-shareCode",
+      "12038297844",
       true,
       "Autotest- 'View and Prove' code",
       "Test-T&Cs.pdf",
@@ -112,13 +112,13 @@ object IDVT_FORM_DIGITAL_IDENTITY_CHECK
     extends DigitalIdentityDetails(
       "As part of checking your right to work in the UK, we would like to process your biometric data for digital identity validation. We will ask for your passport or passport card, and a photo of your face.\n\nIf you consent to this processing, we will share your personal data with our checking provider TrustID and their supply chain. Please see our privacy notice (opens in new window) for more detail.\n\nIf you choose not to consent, you will need to present your original ID documents in person.",
       "I consent to my data being processed for digital identity checks",
-      false,
+      true,
       "Do you have access to a smartphone or tablet with a camera?",
-      false,
+      true,
       "Do you have an in-date biometric passport or biometric ID card?",
-      false,
+      true,
       "Do you have an in-date photocard driving licence?",
-      false
+      true
     )
 
 object IDVT_FORM_EMPLOYMENT_HISTORY

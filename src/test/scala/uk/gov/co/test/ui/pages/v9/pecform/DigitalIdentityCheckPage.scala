@@ -44,22 +44,20 @@ object DigitalIdentityCheckPage extends CivilServiceJobsBasePage {
   }
 
   private def selectIdvtDataConsent(digitalIdentityDetails: DigitalIdentityDetails): Unit = {
-    v9IdvtDataConsent = digitalIdentityDetails.idvtDataConsent
     waitForVisibilityOfElementById(
       idvtDataConsentQuestionId
     ).getText shouldEqual digitalIdentityDetails.idvtDataConsentQuestion
-    if (v9IdvtDataConsent) {
+    if (digitalIdentityDetails.idvtDataConsent && v9IdvtDataConsent) {
       radioSelect(idvtDataConsentYesId)
       selectSmartPhoneAccess(digitalIdentityDetails)
     } else radioSelect(idvtDataConsentNoId)
   }
 
   private def selectSmartPhoneAccess(digitalIdentityDetails: DigitalIdentityDetails): Unit = {
-    v9SmartphoneAccess = digitalIdentityDetails.smartphoneAccess
     waitForVisibilityOfElementById(
       smartphoneAccessQuestionId
     ).getText shouldEqual digitalIdentityDetails.smartphoneAccessQuestion
-    if (v9SmartphoneAccess) {
+    if (digitalIdentityDetails.smartphoneAccess && v9SmartphoneAccess) {
       radioSelect(smartphoneAccessYesId)
       selectBiometricPassportOrId(digitalIdentityDetails)
       selectInDateDrivingLicence(digitalIdentityDetails)

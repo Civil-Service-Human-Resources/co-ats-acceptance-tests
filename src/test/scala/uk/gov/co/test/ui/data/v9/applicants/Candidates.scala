@@ -456,3 +456,102 @@ object REGISTER_CANDIDATE_IDVT_01
     false,
     true
   )
+
+object REGISTER_CANDIDATE_IDVT_02
+  extends CandidateDetails(
+    firstname = s"$randomFirstName",
+    lastname = s"$randomLastName",
+    preferredFirstName = s"$preferredFirstName",
+    email = s"$randomEmail",
+    s"$passwordCandidate",
+    false,
+    true
+  )
+
+object REGISTER_CANDIDATE_IDVT_03
+  extends CandidateDetails(
+    firstname = s"$randomFirstName",
+    lastname = s"$randomLastName",
+    preferredFirstName = s"$preferredFirstName",
+    email = s"$randomEmail",
+    s"$passwordCandidate",
+    false,
+    true
+  )
+
+object REGISTER_CANDIDATE_IDVT_04
+  extends CandidateDetails(
+    firstname = s"$randomFirstName",
+    lastname = s"$randomLastName",
+    preferredFirstName = s"$preferredFirstName",
+    email = s"$randomEmail",
+    s"$passwordCandidate",
+    false,
+    true
+  )
+
+object REGISTER_CANDIDATE_IDVT_05
+  extends CandidateDetails(
+    firstname = s"$randomFirstName",
+    lastname = s"$randomLastName",
+    preferredFirstName = s"$preferredFirstName",
+    email = s"$randomEmail",
+    s"$passwordCandidate",
+    false,
+    true
+  )
+
+object REGISTER_CANDIDATE_IDVT_06
+  extends CandidateDetails(
+    firstname = s"$randomFirstName",
+    lastname = s"$randomLastName",
+    preferredFirstName = s"$preferredFirstName",
+    email = s"$randomEmail",
+    s"$passwordCandidate",
+    false,
+    true
+  )
+
+object REGISTER_CANDIDATE_IDVT_07
+  extends CandidateDetails(
+    firstname = s"$randomFirstName",
+    lastname = s"$randomLastName",
+    preferredFirstName = s"$preferredFirstName",
+    email = s"$randomEmail",
+    s"$passwordCandidate",
+    false,
+    true
+  )
+
+object REGISTER_CANDIDATE_IDVT_08
+  extends CandidateDetails(
+    firstname = s"$randomFirstName",
+    lastname = s"$randomLastName",
+    preferredFirstName = s"$preferredFirstName",
+    email = s"$randomEmail",
+    s"$passwordCandidate",
+    false,
+    true
+  )
+
+object REGISTER_CANDIDATE_IDVT_09
+  extends CandidateDetails(
+    firstname = s"$randomFirstName",
+    lastname = s"$randomLastName",
+    preferredFirstName = s"$preferredFirstName",
+    email = s"$randomEmail",
+    s"$passwordCandidate",
+    false,
+    true
+  )
+
+object REGISTER_CANDIDATE_IDVT_10
+  extends CandidateDetails(
+    firstname = s"$randomFirstName",
+    lastname = s"$randomLastName",
+    preferredFirstName = s"$preferredFirstName",
+    email = s"$randomEmail",
+    s"$passwordCandidate",
+    false,
+    true
+  )

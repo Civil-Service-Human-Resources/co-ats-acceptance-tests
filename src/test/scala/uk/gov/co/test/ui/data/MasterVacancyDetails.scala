@@ -267,13 +267,14 @@ object MasterVacancyDetails extends VacancyBasePage {
   var applicationId: String = ""
 
   //v9 PEC FORM rtw
-  var v9RtwHoldPassport: Boolean = true
+  var v9RtwBritishCitizen: Boolean = true
+  var v9RtwHoldPassport: Boolean   = true
 
   //v9 PEC FORM digital identity checks
-  var v9IdvtDataConsent: Boolean       = _
-  var v9SmartphoneAccess: Boolean      = _
-  var v9BiometricPassportOrId: Boolean = _
-  var v9InDateDrivingLicence: Boolean  = _
+  var v9IdvtDataConsent: Boolean       = true
+  var v9SmartphoneAccess: Boolean      = true
+  var v9BiometricPassportOrId: Boolean = true
+  var v9InDateDrivingLicence: Boolean  = true
 
   //v9 PEC FORM employment history
   var v9EmployedWithin3Years: Boolean = _

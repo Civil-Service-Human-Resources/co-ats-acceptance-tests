@@ -20,19 +20,11 @@ object DeclarationPage extends CivilServiceJobsBasePage {
   def dbsTermsOneId                   = s"${pecFormId}_datafield_72275_1_1_15120_label"
   def dbsTermsTwoId                   = s"${pecFormId}_datafield_89002_1_1_15120_label"
   def dbsTermsThreeId                 = s"${pecFormId}_datafield_89006_1_1_15120_label"
+  def pecDeclarationTAndCsId          = s"${pecFormId}_datafield_205986_1_1_804_label"
   val pecFormSubmission               = "submit_button"
 
   private def declarationPageCheck(): Unit =
     eventually(onPage(declarationTitle))
-
-  private def acceptDeclarationTermsAndConditions(declarationDetails: DeclarationDetails): Unit = {
-//    val submitButton = driver.findElement(By.xpath(submitButtonPath))
-//    if (submitButton.isDisplayed && !submitButton.isEnabled) {
-//      if (declarationDetails.acceptLongFormTAndCs) {
-//        clickOn(declarationTermsAndConditionsId)
-//      } else throw new IllegalStateException("You must accept longform terms and condition to proceed!")
-//    } else throw new IllegalStateException("Submit button should be available before accepting terms & conditions!")
-  }
 
   private def acceptDbsTerms(declarationDetails: DeclarationDetails): Unit =
     if (vXCrcLevel != "None" && vXCrcCheckProvider.contains("DBS")) {
@@ -40,6 +32,11 @@ object DeclarationPage extends CivilServiceJobsBasePage {
       if (declarationDetails.acceptDbsTermsTwo) radioSelect(dbsTermsTwoId)
       if (declarationDetails.acceptDbsTermsThree) radioSelect(dbsTermsThreeId)
     }
+
+  private def acceptDeclarationTermsAndConditions(declarationDetails: DeclarationDetails): Unit =
+    if (declarationDetails.acceptLongFormTAndCs) {
+      clickOn(pecDeclarationTAndCsId)
+    } else throw new IllegalStateException("You must accept pec form terms and condition to proceed!")
 
   private val declaration: Seq[DeclarationDetails => Unit] = Seq(
     acceptDbsTerms,
@@ -51,6 +48,5 @@ object DeclarationPage extends CivilServiceJobsBasePage {
     declaration.foreach { f =>
       f(pecFormDetails.declarationDetails)
     }
-    clickOn(pecFormSubmission)
   }
 }
