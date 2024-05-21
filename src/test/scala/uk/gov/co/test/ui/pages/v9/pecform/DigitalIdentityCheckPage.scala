@@ -82,7 +82,7 @@ object DigitalIdentityCheckPage extends CivilServiceJobsBasePage {
 
   private def selectInDateDrivingLicence(digitalIdentityDetails: DigitalIdentityDetails): Unit = {
     v9InDateDrivingLicence = digitalIdentityDetails.inDateDrivingLicence
-    if (vXCrcLevel == "Standard" || vXCrcLevel == "Enhanced") {
+    if (vXCrcLevel == "Standard" || vXCrcLevel == "Enhanced" && vXWhichIdentityChecks == "Right to work and criminal record check") {
       waitForVisibilityOfElementById(
         inDateDrivingLicenceQuestionId
       ).getText shouldEqual digitalIdentityDetails.inDateDrivingLicenceQuestion

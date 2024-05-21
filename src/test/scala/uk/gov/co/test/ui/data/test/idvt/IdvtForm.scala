@@ -50,7 +50,7 @@ object IDVT_RIGHT_TO_WORK
       "I have settled status",
       "Autotest-certificate/application number",
       "12038297844",
-      true,
+      false,
       "Autotest- 'View and Prove' code",
       "Test-T&Cs.pdf",
       true,

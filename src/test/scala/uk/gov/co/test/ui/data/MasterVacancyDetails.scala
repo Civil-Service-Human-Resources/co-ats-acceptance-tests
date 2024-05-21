@@ -269,6 +269,7 @@ object MasterVacancyDetails extends VacancyBasePage {
   //v9 PEC FORM rtw
   var v9RtwBritishCitizen: Boolean = true
   var v9RtwHoldPassport: Boolean   = true
+  var v9EussStatus: String         = ""
 
   //v9 PEC FORM digital identity checks
   var v9IdvtDataConsent: Boolean       = true
