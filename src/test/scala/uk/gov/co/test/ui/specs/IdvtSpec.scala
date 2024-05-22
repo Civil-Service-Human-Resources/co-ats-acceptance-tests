@@ -4,7 +4,7 @@ import uk.gov.co.test.ui.data.MasterVacancyDetails.{v9EussStatus, v9IdvtDataCons
 import uk.gov.co.test.ui.data.v9.applicants._
 import uk.gov.co.test.ui.flows.e2e.IdvtFlow.idvtFlow
 import uk.gov.co.test.ui.flows.v9.RegisterCandidateFlow.fillNewCandidateDetails
-import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.{confirmPecRtwAndDbsAnyState, confirmPecRtwBeforeManualIdCheckState, confirmPecRtwOnlyAndDBSEnhancedStartCheck, confirmPecRtwOnlyStartCheckState, confirmPecRtwOnlyState, confirmTrustIdQrCode}
+import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.{confirmPecRtwAndDbsAnyState, confirmPecRtwOnlyCrcNoneNotApplicable, confirmPecRtwOnlyAndDBSEnhancedStartCheck, confirmPecRtwOnlyStartCheckState, confirmPecRtwOnlyState, confirmTrustIdQrCode}
 import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.{digitalIdentityCheckInProgress, invitedToDigitalIdentityCheck, manualIdCheck, manualIdCheckWithIdvt, rtwCheckAvailable, rtwCheckAvailableWithIdvt}
 import uk.gov.co.test.ui.pages.vx.VacancyDetailsPage.extractAllVacancyDetails
 import uk.gov.co.test.ui.tags.RunInVX
@@ -76,7 +76,7 @@ class IdvtSpec extends BaseFeatureSpec {
       idvtFlow()
 
       Then("the application is at rtw checks position")
-      confirmPecRtwBeforeManualIdCheckState()
+      confirmPecRtwOnlyCrcNoneNotApplicable()
       manualIdCheck()
       rtwCheckAvailable()
       confirmPecRtwOnlyState()
@@ -88,7 +88,7 @@ class IdvtSpec extends BaseFeatureSpec {
       fillNewCandidateDetails(REGISTER_CANDIDATE_IDVT_06)
 
       When("candidate completes pec form and enters rtw euss status")
-      v9EussStatus = "What is your European Union Settlement Scheme (EUSS) status?"
+      v9EussStatus = "I did not apply for the EU Settlement Scheme"
       v9RtwBritishCitizen = false
       idvtFlow()
 
@@ -150,7 +150,7 @@ class IdvtSpec extends BaseFeatureSpec {
       idvtFlow()
 
       Then("the application is at idvt checks with manual id checks")
-      confirmPecRtwBeforeManualIdCheckState()
+      confirmPecRtwOnlyCrcNoneNotApplicable()
       manualIdCheckWithIdvt()
       rtwCheckAvailableWithIdvt()
       confirmPecRtwAndDbsAnyState()
@@ -174,6 +174,21 @@ class IdvtSpec extends BaseFeatureSpec {
       Then("the application is at rtw checks position")
       rtwCheckAvailable()
       confirmPecRtwOnlyState()
+    }
+
+    Scenario("VX: (IDVT: RTW Only; CRC: DBS Enhanced) - No Digital RTW Available", RunInVX) {
+      Given("candidate registers for new job application")
+      extractAllVacancyDetails("10038")
+      fillNewCandidateDetails(REGISTER_CANDIDATE_IDVT_12)
+
+      When("candidate completes pec form and enters rtw euss status")
+      v9EussStatus = "I did not apply for the EU Settlement Scheme"
+      v9RtwBritishCitizen = false
+      idvtFlow()
+
+      Then("the application is at rtw checks position")
+      confirmPecRtwOnlyCrcNoneNotApplicable()
+      rtwCheckAvailable()
     }
   }
 }

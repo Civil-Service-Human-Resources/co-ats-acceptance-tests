@@ -196,7 +196,7 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
     getApplicationConfirmation shouldEqual "Great news, you've accepted your provisional offer and your pre-employment checks are underway.\nWe are still checking:\nyour employment history, including any gaps\nwhether you have any convictions\n\n\nWe will send an email notification to you once all pre-employment checks are complete."
   }
 
-  def confirmPecRtwBeforeManualIdCheckState(): Unit = {
+  def confirmPecRtwOnlyCrcNoneNotApplicable(): Unit = {
     val status = "Pre-employment checks"
     changeSystem("candidate")
     confirmStatusOnApplicationPage(status)

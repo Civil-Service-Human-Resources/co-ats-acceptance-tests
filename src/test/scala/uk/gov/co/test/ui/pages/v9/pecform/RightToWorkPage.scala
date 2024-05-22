@@ -136,7 +136,7 @@ object RightToWorkPage extends CivilServiceJobsBasePage {
 
   private def selectEussStatus(rtwDetails: RtwDetails): Unit =
     v9EussStatus match {
-      case "What is your European Union Settlement Scheme (EUSS) status?"                 =>
+      case "I did not apply for the EU Settlement Scheme"                 =>
         radioSelect(eussStatusDidNotApplyId)
         selectBiometricResidenceCard(rtwDetails)
       case "I have applied for the settlement scheme and await confirmation of my status" =>
