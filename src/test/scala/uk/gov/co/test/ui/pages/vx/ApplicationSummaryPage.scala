@@ -33,6 +33,7 @@ object ApplicationSummaryPage extends VacancyBasePage {
   val withdrawBarId                      = "process_rule_but_509"
   val withdrawApplicationOnOfferBarId    = "process_rule_but_570"
   val updateApplicantTypeBarId           = "process_rule_but_2008"
+  val inviteCandidateToIdvtBarId         = "process_rule_but_3213"
   val crcBarId                           = "process_rule_but_776"
   val inviteToI1BarId                    = "process_rule_but_162"
   val inviteToI2BarId                    = "process_rule_but_164"
@@ -61,9 +62,9 @@ object ApplicationSummaryPage extends VacancyBasePage {
   val withdrawAtInterviewBarId           = "process_rule_but_511"
   val launchFullPecRecruiterFormBarId    = "process_rule_but_731"
   val rtwChecksFormBarId                 = "process_rule_but_733"
-  val idvtNotCompletedBarId                 = "process_rule_but_3220"
+  val idvtNotCompletedBarId              = "process_rule_but_3220"
   val confirmIdDocumentsBarId            = "process_rule_but_2070"
-  val furtherIdRequiredBarId            = "process_rule_but_2071"
+  val furtherIdRequiredBarId             = "process_rule_but_2071"
   val scheduleI2BarId                    = "process_rule_but_34"
   val offerDecisionBarId                 = "process_rule_but_564"
   val allBarItemsId                      = "process_rules_bar"
@@ -168,6 +169,21 @@ object ApplicationSummaryPage extends VacancyBasePage {
     confirmCandidateSummary(newStatus)
   }
 
+  def manualIdCheckWithIdvt(): Unit = {
+    val newStatus = "ID verification required"
+    changeSystem("recruiter")
+    checkForNewValuePath(vacancyStatusPath, newStatus)
+    availableBarItems(
+      List(
+        confirmIdDocumentsBarId,
+        furtherIdRequiredBarId,
+        withdrawApplicationOnOfferBarId,
+        inviteCandidateToIdvtBarId
+      )
+    )
+    confirmCandidateSummary(newStatus)
+  }
+
   def rtwCheckAvailable(): Unit = {
     val newStatus = "Right to Work Check Available"
     changeSystem("recruiter")
@@ -188,6 +204,27 @@ object ApplicationSummaryPage extends VacancyBasePage {
     confirmCandidateSummary(newStatus)
   }
 
+  def rtwCheckAvailableWithIdvt(): Unit = {
+    val newStatus = "Right to Work Check Available"
+    changeSystem("recruiter")
+    if (vXCandidateUploadIdentityDocs) {
+      if (!driver.findElements(By.id(confirmIdDocumentsBarId)).isEmpty) {
+        waitForVisibilityOfElementById(confirmIdDocumentsBarId).click()
+      }
+    }
+    checkForNewValuePath(vacancyStatusPath, newStatus)
+    availableBarItems(
+      List(
+        rtwChecksFormBarId,
+        withdrawApplicationOnOfferBarId,
+        inviteCandidateToIdvtBarId,
+        updateApplicantTypeBarId,
+        emailVacancyHolderBarId
+      )
+    )
+    confirmCandidateSummary(newStatus)
+  }
+
   def invitedToDigitalIdentityCheck(): Unit = {
     val newStatus = "Invited to digital identity check"
     changeSystem("recruiter")
@@ -196,6 +233,22 @@ object ApplicationSummaryPage extends VacancyBasePage {
         waitForVisibilityOfElementById(confirmIdDocumentsBarId).click()
       }
     }
+    if (!driver.findElements(By.id(inviteCandidateToIdvtBarId)).isEmpty) {
+      waitForVisibilityOfElementById(inviteCandidateToIdvtBarId).click()
+    }
+    checkForNewValuePath(vacancyStatusPath, newStatus)
+    availableBarItems(
+      List(
+        idvtNotCompletedBarId,
+        withdrawApplicationOnOfferBarId
+      )
+    )
+    confirmCandidateSummary(newStatus)
+  }
+
+  def digitalIdentityCheckInProgress(): Unit = {
+    val newStatus = "Digital identity check in progress"
+    changeSystem("recruiter")
     checkForNewValuePath(vacancyStatusPath, newStatus)
     availableBarItems(
       List(

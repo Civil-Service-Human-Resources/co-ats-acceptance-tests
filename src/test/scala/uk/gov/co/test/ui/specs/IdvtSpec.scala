@@ -1,11 +1,11 @@
 package uk.gov.co.test.ui.specs
 
 import uk.gov.co.test.ui.data.MasterVacancyDetails.{v9EussStatus, v9IdvtDataConsent, v9RtwBritishCitizen, v9RtwHoldPassport, v9SmartphoneAccess}
-import uk.gov.co.test.ui.data.v9.applicants.{REGISTER_CANDIDATE_IDVT_01, REGISTER_CANDIDATE_IDVT_02, REGISTER_CANDIDATE_IDVT_03, REGISTER_CANDIDATE_IDVT_04, REGISTER_CANDIDATE_IDVT_05, REGISTER_CANDIDATE_IDVT_06, REGISTER_CANDIDATE_IDVT_07, REGISTER_CANDIDATE_IDVT_08, REGISTER_CANDIDATE_IDVT_09, REGISTER_CANDIDATE_IDVT_10}
+import uk.gov.co.test.ui.data.v9.applicants._
 import uk.gov.co.test.ui.flows.e2e.IdvtFlow.idvtFlow
 import uk.gov.co.test.ui.flows.v9.RegisterCandidateFlow.fillNewCandidateDetails
-import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.{confirmPecRtwAndDBSEnhancedStartCheckState, confirmPecRtwAndDbsBasicState, confirmPecRtwBeforeManualIdCheckState, confirmPecRtwOnlyStartCheckState, confirmPecRtwOnlyState}
-import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.{invitedToDigitalIdentityCheck, manualIdCheck, rtwCheckAvailable}
+import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.{confirmPecRtwAndDbsAnyState, confirmPecRtwBeforeManualIdCheckState, confirmPecRtwOnlyAndDBSEnhancedStartCheck, confirmPecRtwOnlyStartCheckState, confirmPecRtwOnlyState, confirmTrustIdQrCode}
+import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.{digitalIdentityCheckInProgress, invitedToDigitalIdentityCheck, manualIdCheck, manualIdCheckWithIdvt, rtwCheckAvailable, rtwCheckAvailableWithIdvt}
 import uk.gov.co.test.ui.pages.vx.VacancyDetailsPage.extractAllVacancyDetails
 import uk.gov.co.test.ui.tags.RunInVX
 
@@ -109,7 +109,7 @@ class IdvtSpec extends BaseFeatureSpec {
       idvtFlow()
 
       Then("the application is at rtw checks position")
-      confirmPecRtwAndDbsBasicState()
+      confirmPecRtwAndDbsAnyState()
       rtwCheckAvailable()
     }
 
@@ -123,7 +123,7 @@ class IdvtSpec extends BaseFeatureSpec {
       idvtFlow()
 
       Then("the application is at rtw checks position")
-      confirmPecRtwAndDbsBasicState()
+      confirmPecRtwAndDbsAnyState()
       rtwCheckAvailable()
     }
 
@@ -137,11 +137,11 @@ class IdvtSpec extends BaseFeatureSpec {
       idvtFlow()
 
       Then("the application is at rtw checks position")
-      confirmPecRtwAndDbsBasicState()
+      confirmPecRtwAndDbsAnyState()
       rtwCheckAvailable()
     }
 
-    Scenario("VX: RTW Only (IDVT: RTW & DBS Standard) - Start IDVT Check With Manual ID Check", RunInVX) {
+    Scenario("VX: RTW Only (IDVT: RTW & DBS Enhanced) - Manual ID Check And Start IDVT Check", RunInVX) {
       Given("candidate registers for new job application")
       extractAllVacancyDetails("10038")
       fillNewCandidateDetails(REGISTER_CANDIDATE_IDVT_10)
@@ -151,9 +151,15 @@ class IdvtSpec extends BaseFeatureSpec {
 
       Then("the application is at idvt checks position")
       confirmPecRtwBeforeManualIdCheckState()
-      manualIdCheck()
-      confirmPecRtwAndDBSEnhancedStartCheckState()//TODO needs fix
+      manualIdCheckWithIdvt()
+      rtwCheckAvailableWithIdvt()
+      confirmPecRtwAndDbsAnyState()
       invitedToDigitalIdentityCheck()
+      confirmPecRtwOnlyAndDBSEnhancedStartCheck()
+
+      And("trustId QR code is displayed and idvt in progress")
+      confirmTrustIdQrCode()
+      digitalIdentityCheckInProgress()
     }
 
 //    Scenario("VX: RTW Only (IDVT: RTW & DBS Enhanced) - Share Code & Manual ID Check", RunInVX) {

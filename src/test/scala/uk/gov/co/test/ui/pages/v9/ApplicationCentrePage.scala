@@ -222,7 +222,7 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
     getApplicationConfirmation shouldEqual "Great news, you've accepted your provisional offer and your pre-employment checks are underway.\nWe are still checking:\nyour identity and right to work in the Civil Service\n\n\nWe will send an email notification to you once all pre-employment checks are complete."
   }
 
-  def confirmPecRtwAndDbsBasicState(): Unit = {
+  def confirmPecRtwAndDbsAnyState(): Unit = {
     val status = "Pre-employment checks"
     changeSystem("candidate")
     confirmStatusOnApplicationPage(status)
@@ -247,7 +247,7 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
     getApplicationConfirmation shouldEqual "To complete the following check you will need:\n • an in date British or Irish passport, or an in date Irish passport card \n • to take a ‘selfie’ photograph of yourself\nStarting your ID check\nYou'll need access to a smartphone or tablet with a camera to complete the ID check. \nWhen you are ready, select the \"Start check\" button. You will be directed to the external service.\nNext steps\nWhen you've submitted your identity documents, you'll be sent an email when we receive the results back from the external service.\nYou can come back to this page to check the status of your application.\nIf you need help using the external service\nIf you are not able to use this external service for any reason contact ryan.hobbs@cabinetoffice.gov.uk\nWhat we will do with your data (opens in a new window)"
   }
 
-  def confirmPecRtwAndDBSEnhancedStartCheckState(): Unit = {
+  def confirmPecRtwOnlyAndDBSEnhancedStartCheck(): Unit = {
     val status = "Confirm your identity"
     changeSystem("candidate")
     confirmStatusOnApplicationPage(status)
@@ -256,7 +256,14 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
     withdrawApplicationFunction().isEnabled
     applicationForVacancyText shouldEqual s"Application For $vacancyName"
     getApplicationState shouldEqual s"Application status: $status"
-    getApplicationConfirmation shouldEqual "To complete the following check you will need:\n• your photographic identity documents with you\n• to take a ‘selfie’ photograph of yourself\nYou will need to photograph one of the following proof of address documents. Only photographs of original documents are accepted. Screenshots or copies printed from the internet cannot be used.\nDocuments issued within 3 months:\n• Bank statement\n• Bank or building society account opening confirmation letter \n• Benefit statement, for example Child Benefit, pension\n• Credit card statement\n• Utility bill \nDocuments issued within 6 months:\n• Mortgage statement or letter\n• Documents issued within 12 months:\n• Council Tax statement\n• Financial statement, for example pension or endowment\n• P45 or P60 statement \nStarting your ID check\nYou'll need access to a smartphone or tablet with a camera to complete the ID check. \nWhen you are ready, select the \"Start check\" button. You will be directed to the external service.\nNext steps\nWhen you've submitted your identity documents, you'll be sent an email when we receive the results back from the external service.\nYou can come back to this page to check the status of your application.\nIf you need help using the external service\nIf you are not able to use this external service for any reason contact ryan.hobbs@cabinetoffice.gov.uk\nWhat we will do with your data (opens in a new window)"
+    getApplicationConfirmation shouldEqual "To complete the following check you will need:\n • an in date British or Irish passport, or an in date Irish passport card \n • to take a ‘selfie’ photograph of yourself\nStarting your ID check\nYou'll need access to a smartphone or tablet with a camera to complete the ID check. \nWhen you are ready, select the \"Start check\" button. You will be directed to the external service.\nNext steps\nWhen you've submitted your identity documents, you'll be sent an email when we receive the results back from the external service.\nYou can come back to this page to check the status of your application.\nIf you need help using the external service\nIf you are not able to use this external service for any reason contact ryan.hobbs@cabinetoffice.gov.uk\nWhat we will do with your data (opens in a new window)"
+  }
+
+  def confirmTrustIdQrCode(): Unit = {
+    startCheckFunction().click()
+    waitForVisibilityOfElementByPath(".//p[@class='sc-eqUAAy dPUdmr mb-0 text-center']").getText shouldEqual "Scan the QR with your mobile camera"
+    waitForVisibilityOfElementByPath(".//img[@alt='QR code for scanning with your mobile device']").isDisplayed
+    waitForVisibilityOfElementById("emailAddress").isDisplayed
   }
 
   def applicationBeingReviewedPreSiftState(): Unit = {
