@@ -10,8 +10,8 @@ import uk.gov.co.test.ui.pages.vx.VacancyDetailsPage.extractAllVacancyDetails
 import uk.gov.co.test.ui.tags.RunInVX
 
 class IdvtSpec extends BaseFeatureSpec {
-  Feature("Candidate & Recruiter IDVT Checks - RTW Only (IDVT: RTW)") {
-    Scenario("VX: RTW Only (IDVT: RTW) - No Passport", RunInVX) {
+  Feature("IDVT Checks - IDVT: RTW Only") {
+    Scenario("VX: (IDVT: RTW Only; CRC: None) - No Passport", RunInVX) {
       Given("candidate registers for new job application")
       extractAllVacancyDetails("9922")
       fillNewCandidateDetails(REGISTER_CANDIDATE_IDVT_01)
@@ -25,7 +25,7 @@ class IdvtSpec extends BaseFeatureSpec {
       rtwCheckAvailable()
     }
 
-    Scenario("VX: RTW Only (IDVT: RTW) - No Consent", RunInVX) {
+    Scenario("VX: (IDVT: RTW Only; CRC: None) - No Consent", RunInVX) {
       Given("candidate registers for new job application")
       extractAllVacancyDetails("9922")
       fillNewCandidateDetails(REGISTER_CANDIDATE_IDVT_02)
@@ -39,7 +39,7 @@ class IdvtSpec extends BaseFeatureSpec {
       rtwCheckAvailable()
     }
 
-    Scenario("VX: RTW Only (IDVT: RTW) - No Smartphone", RunInVX) {
+    Scenario("VX: (IDVT: RTW Only; CRC: None) - No Smartphone", RunInVX) {
       Given("candidate registers for new job application")
       extractAllVacancyDetails("9922")
       fillNewCandidateDetails(REGISTER_CANDIDATE_IDVT_03)
@@ -53,7 +53,7 @@ class IdvtSpec extends BaseFeatureSpec {
       rtwCheckAvailable()
     }
 
-    Scenario("VX: RTW Only (IDVT: RTW) - Start IDVT Check", RunInVX) {
+    Scenario("VX: (IDVT: RTW Only; CRC: None) - Start IDVT Check", RunInVX) {
       Given("candidate registers for new job application")
       extractAllVacancyDetails("9922")
       fillNewCandidateDetails(REGISTER_CANDIDATE_IDVT_04)
@@ -66,7 +66,7 @@ class IdvtSpec extends BaseFeatureSpec {
       invitedToDigitalIdentityCheck()
     }
 
-    Scenario("VX: RTW Only (IDVT: RTW) - Share Code & Manual ID Check", RunInVX) {
+    Scenario("VX: (IDVT: RTW Only; CRC: None and Not Applicable) - Share Code & Manual ID Check", RunInVX) {
       Given("candidate registers for new job application")
       extractAllVacancyDetails("9988")
       fillNewCandidateDetails(REGISTER_CANDIDATE_IDVT_05)
@@ -82,7 +82,7 @@ class IdvtSpec extends BaseFeatureSpec {
       confirmPecRtwOnlyState()
     }
 
-    Scenario("VX: RTW Only (IDVT: RTW) - No Digital RTW Available", RunInVX) {
+    Scenario("VX: (IDVT: RTW Only; CRC: None) - No Digital RTW Available", RunInVX) {
       Given("candidate registers for new job application")
       extractAllVacancyDetails("9922")
       fillNewCandidateDetails(REGISTER_CANDIDATE_IDVT_06)
@@ -98,8 +98,8 @@ class IdvtSpec extends BaseFeatureSpec {
     }
   }
 
-  Feature("Candidate & Recruiter IDVT Checks - RTW Only (IDVT: RTW & DBS)") {
-    Scenario("VX: RTW Only (IDVT: RTW & DBS Basic) - No Passport", RunInVX) {
+  Feature("IDVT Checks - IDVT: RTW Only; CRC: DBS Any)") {
+    Scenario("VX: (IDVT: RTW Only; CRC: DBS Basic) - No Passport", RunInVX) {
       Given("candidate registers for new job application")
       extractAllVacancyDetails("10036")
       fillNewCandidateDetails(REGISTER_CANDIDATE_IDVT_07)
@@ -113,7 +113,7 @@ class IdvtSpec extends BaseFeatureSpec {
       rtwCheckAvailable()
     }
 
-    Scenario("VX: RTW Only (IDVT: RTW & DBS Basic) - No Consent", RunInVX) {
+    Scenario("VX: (IDVT: RTW Only; CRC: DBS Basic) - No Consent", RunInVX) {
       Given("candidate registers for new job application")
       extractAllVacancyDetails("10036")
       fillNewCandidateDetails(REGISTER_CANDIDATE_IDVT_08)
@@ -127,7 +127,7 @@ class IdvtSpec extends BaseFeatureSpec {
       rtwCheckAvailable()
     }
 
-    Scenario("VX: RTW Only (IDVT: RTW & DBS Basic) - No Smartphone", RunInVX) {
+    Scenario("VX: (IDVT: RTW Only; CRC: DBS Basic) - No Smartphone", RunInVX) {
       Given("candidate registers for new job application")
       extractAllVacancyDetails("10036")
       fillNewCandidateDetails(REGISTER_CANDIDATE_IDVT_09)
@@ -141,7 +141,7 @@ class IdvtSpec extends BaseFeatureSpec {
       rtwCheckAvailable()
     }
 
-    Scenario("VX: RTW Only (IDVT: RTW & DBS Enhanced) - Manual ID Check And Start IDVT Check", RunInVX) {
+    Scenario("VX: (IDVT: RTW Only; CRC: DBS Enhanced) - Manual ID Check And Start IDVT Check", RunInVX) {
       Given("candidate registers for new job application")
       extractAllVacancyDetails("10038")
       fillNewCandidateDetails(REGISTER_CANDIDATE_IDVT_10)
@@ -149,7 +149,7 @@ class IdvtSpec extends BaseFeatureSpec {
       When("candidate completes pec form with rtw completed")
       idvtFlow()
 
-      Then("the application is at idvt checks position")
+      Then("the application is at idvt checks with manual id checks")
       confirmPecRtwBeforeManualIdCheckState()
       manualIdCheckWithIdvt()
       rtwCheckAvailableWithIdvt()
@@ -162,42 +162,18 @@ class IdvtSpec extends BaseFeatureSpec {
       digitalIdentityCheckInProgress()
     }
 
-//    Scenario("VX: RTW Only (IDVT: RTW & DBS Enhanced) - Share Code & Manual ID Check", RunInVX) {
-//      Given("candidate registers for new job application")
-//      extractAllVacancyDetails("10029")
-//      fillNewCandidateDetails(REGISTER_CANDIDATE_IDVT_10)
-//
-//      When("candidate completes pec form and enters rtw share code & uploads id")
-//      v9RtwBritishCitizen = false
-//      idvtFlow()
-//
-//      Then("the application is at rtw checks position")
-//      confirmPecRtwBeforeManualIdCheckState()
-//      manualIdCheck()
-//      rtwCheckAvailable()
-//      confirmPecRtwOnlyState()
-//    }
+    Scenario("VX: (IDVT: RTW Only; CRC: None and Not Applicable) - Share Code", RunInVX) {
+      Given("candidate registers for new job application")
+      extractAllVacancyDetails("10040")
+      fillNewCandidateDetails(REGISTER_CANDIDATE_IDVT_11)
 
-    //rtw only with rtw idvt setting>manual ID check>share code given
-//    Scenario("VX: A Candidate Completes The IDVT; Full Application Process", RunInVX) {
-//      Given("candidate registers for new job application")
-//      v9IdvtDataConsent = true
-//      //      v9SmartphoneAccess = false
-//      //      v9BiometricPassportOrId = true
-//      //      v9InDateDrivingLicence = true
-//      extractAllVacancyDetails("9922")
-//      //      fillNewVacancyForm(IDVT_VACANCY_DATA)
-//      fillNewCandidateDetails(REGISTER_CANDIDATE_IDVT_01)
-//
-//      When("candidate completes all forms and idvt questions")
-//      v9RtwHoldPassport = false
-//      idvtFlow()
-//
-//      Then("the candidate is able to fully complete the pec form")
-//      confirmPecRtwBeforeManualIdCheckState()
-//      manualIdCheck()
-//      rtwCheckAvailable()
-//      confirmPecRtwOnlyState()
-//    }
+      When("candidate completes pec form and enters rtw share code")
+      v9RtwBritishCitizen = false
+      idvtFlow()
+
+      Then("the application is at rtw checks position")
+      rtwCheckAvailable()
+      confirmPecRtwOnlyState()
+    }
   }
 }
