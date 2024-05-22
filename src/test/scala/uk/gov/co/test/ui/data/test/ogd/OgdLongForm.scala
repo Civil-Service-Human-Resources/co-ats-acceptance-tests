@@ -1,9 +1,9 @@
 package uk.gov.co.test.ui.data.test.ogd
 
 import uk.gov.co.test.ui.data.Characters.{valid250Characters, valid500Characters}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.vXOtherLocations
 import uk.gov.co.test.ui.data.v9.longform.LongFormDetails
 import uk.gov.co.test.ui.pages.v9.longform._
-import uk.gov.co.test.ui.data.MasterVacancyDetails.vXOtherLocations
 
 object OGD_LONG_FORM_DATA
     extends LongFormDetails(

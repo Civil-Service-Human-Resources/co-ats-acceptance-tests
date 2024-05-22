@@ -463,6 +463,7 @@ object IDVT_ONLINE_IDVT_CHECK_FORMS
     extends OnlinePecCheckFormsDetails(
       true,
       true,
+      true,
       s"$contactEmailVxConfig"
     )
 

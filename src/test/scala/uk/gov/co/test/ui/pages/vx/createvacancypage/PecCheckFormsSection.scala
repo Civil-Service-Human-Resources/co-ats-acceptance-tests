@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.pages.vx.createvacancypage
 
 import org.openqa.selenium.By
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXCandidateUploadIdentityDocs, vXDetailsForUploadIdentityDocs, vXManuallyCheckIdentityDocs, vXPecAdditionalCheck, vXPecBankruptcyCheck, vXPecCrc, vXPecEmploymentHistoryCheck, vXPecFraudCheck, vXPecGeneralInfo, vXPecHealthDisplayOptions, vXPecHealthRefCheck, vXPecIncludeAdditionalCheck, vXPecNameOfAdditionalCheck, vXPecNen, vXPecNsv, vXPecNsvDisplayOptions, vXPecOgdCandidates, vXPecOverseasCheck, vXPecPensionsCheck, vXPecPn, vXPecPreviousCivilEmploymentCheck, vXPecReferenceCheck, vXPecSelfEmploymentCheck, vXRtwChecks, vXWhenRtwChecks, vXWhichIdentityChecks, vacancyFormId}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXCandidateUploadIdentityDocs, vXDetailsForUploadIdentityDocs, vXManuallyCheckIdentityDocs, vXPecAdditionalCheck, vXPecBankruptcyCheck, vXPecCrc, vXPecEmploymentHistoryCheck, vXPecFraudCheck, vXPecGeneralInfo, vXPecHealthDisplayOptions, vXPecHealthRefCheck, vXPecIncludeAdditionalCheck, vXPecNameOfAdditionalCheck, vXPecNen, vXPecNsv, vXPecNsvDisplayOptions, vXPecOgdCandidates, vXPecOverseasCheck, vXPecPensionsCheck, vXPecPn, vXPecPreviousCivilEmploymentCheck, vXPecReferenceCheck, vXPecSelfEmploymentCheck, vXRtwChecks, vXUseOnlinePecForms, vXWhenRtwChecks, vXWhichIdentityChecks, vacancyFormId}
 import uk.gov.co.test.ui.data.vx.vacancy.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 
@@ -78,7 +78,7 @@ object PecCheckFormsSection extends VacancyBasePage {
   def nenHrEmailId                     = s"${vacancyFormId}_datafield_141090_1_1"
   def pnHrEmailId                      = s"${vacancyFormId}_datafield_141267_1_1"
 
-  private def selectWhenCompleteRtwCheck(pecCheckFormsDetails: PecCheckFormsDetails): Unit = {
+  private def selectWhenCompleteRtwCheck(pecCheckFormsDetails: PecCheckFormsDetails): Unit =
     if (!vXRtwChecks.contains("Not Applicable")) {
       vXWhenRtwChecks = pecCheckFormsDetails.whenCompleteRtwCheck
       vXWhenRtwChecks match {
@@ -87,7 +87,6 @@ object PecCheckFormsSection extends VacancyBasePage {
         case _                                           => throw new IllegalStateException("Please enter valid 'RTW Check' completion option")
       }
     } else vXWhenRtwChecks = ""
-  }
 
   private def selectWhichIdentityChecks(pecCheckFormsDetails: PecCheckFormsDetails): Unit = {
     vXWhichIdentityChecks = pecCheckFormsDetails.whichIdentityChecks
@@ -211,8 +210,10 @@ object PecCheckFormsSection extends VacancyBasePage {
   )
 
   def pecCheckFormsSection(newVacancyDetails: NewVacancyDetails): Unit =
-    pecCheckForms.foreach { f =>
-      f(newVacancyDetails.pecCheckFormsDetails)
+    if (vXUseOnlinePecForms) {
+      pecCheckForms.foreach { f =>
+        f(newVacancyDetails.pecCheckFormsDetails)
+      }
     }
 
 }

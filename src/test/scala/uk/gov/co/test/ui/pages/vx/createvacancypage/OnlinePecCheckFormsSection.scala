@@ -1,12 +1,13 @@
 package uk.gov.co.test.ui.pages.vx.createvacancypage
 
 import org.openqa.selenium.{By, Keys}
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXHavePecMailbox, vXPecMailbox, vXUseOnlinePecForms, vacancyFormId}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXHavePecMailbox, vXNoPecOgdTransfer, vXPecMailbox, vXUseOnlinePecForms, vacancyFormId}
 import uk.gov.co.test.ui.data.vx.vacancy.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 
 case class OnlinePecCheckFormsDetails(
   useOnlinePecCheckForms: Boolean,
+  useOgdTransfer: Boolean,
   haveTeamMailbox: Boolean,
   pecCheckFormsTeamEmail: String
 )
@@ -15,6 +16,7 @@ object OnlinePecCheckFormsSection extends VacancyBasePage {
 
   def onlinePecCheckFormsSectionId = s"${vacancyFormId}_section_154278_col_0"
   def useOnlinePecCheckFormsId     = s"select2-${vacancyFormId}_datafield_154299_1_1-container"
+  def useOgdTransferId             = s"select2-${vacancyFormId}_datafield_201092_1_1-container"
   def haveTeamMailboxId            = s"select2-${vacancyFormId}_datafield_154310_1_1-container"
   def pecFormsTeamEmailInputId     = s"${vacancyFormId}_datafield_154303_1_1"
 
@@ -30,6 +32,17 @@ object OnlinePecCheckFormsSection extends VacancyBasePage {
         selectActionLocator("Yes")
         enterOnlinePecCheckFormsTeamEmail(onlinePecCheckFormsDetails)
       } else selectActionLocator("No")
+    } else {
+      selectActionLocator("No")
+      enterUsingOgdTransfer(onlinePecCheckFormsDetails)
+    }
+  }
+
+  private def enterUsingOgdTransfer(onlinePecCheckFormsDetails: OnlinePecCheckFormsDetails): Unit = {
+    vXNoPecOgdTransfer = onlinePecCheckFormsDetails.useOgdTransfer
+    if (vXNoPecOgdTransfer) {
+      waitForVisibilityOfElementById(useOgdTransferId).click()
+      selectActionLocator("Yes")
     } else selectActionLocator("No")
   }
 

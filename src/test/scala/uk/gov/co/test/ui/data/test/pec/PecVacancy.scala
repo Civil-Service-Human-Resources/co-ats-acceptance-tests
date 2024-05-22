@@ -32,7 +32,7 @@ object PEC_VACANCY_DATA
 object PEC_BASIC_DETAILS
     extends BasicDetails(
       "DO NOT USE- Automation Test Template",
-      s"Insolvency - " + generateRandomJobPosition(),
+      s"CRX827: OGD Transfer - " + generateRandomJobPosition(),
       true,
       "Prawf awtomeiddio",
       32
@@ -40,8 +40,8 @@ object PEC_BASIC_DETAILS
 object PEC_JOB_INFORMATION
     extends JobInfoDetails(
       true,
-      "Insolvency Service",
-      "Insolvency - Information and Technology Directorate",
+      "Ministry of Defence",
+      "MOD - Air",
       true,
       "Prawf awtomeiddio",
       "Autotest - Business area detail",
@@ -461,6 +461,7 @@ object PEC_MANAGEMENT
 
 object PEC_ONLINE_PEC_CHECK_FORMS
     extends OnlinePecCheckFormsDetails(
+      true,
       true,
       true,
       s"$contactEmailVxConfig"

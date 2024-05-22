@@ -193,6 +193,7 @@ object MasterVacancyDetails extends VacancyBasePage {
 
   //vx VACANCY online pre-employment check forms
   var vXUseOnlinePecForms: Boolean = _
+  var vXNoPecOgdTransfer: Boolean  = _
   var vXHavePecMailbox: Boolean    = _
   var vXPecMailbox                 = ""
 
@@ -227,11 +228,12 @@ object MasterVacancyDetails extends VacancyBasePage {
   var vXPecHrEmailForPn                      = ""
 
   //v9 candidate details
-  var randomFirstName: String    = ""
-  var randomLastName: String     = ""
-  var preferredFirstName: String = ""
-  var randomEmail: String        = ""
-  var randomJobPosition: String  = ""
+  var randomFirstName: String     = ""
+  var randomLastName: String      = ""
+  var preferredFirstName: String  = ""
+  var randomEmail: String         = ""
+  var randomJobPosition: String   = ""
+  var preferredTeleNumber: String = ""
 
   //v9 SHORT FORM technical skills
   val sortedListOfTechSkills: Seq[String]            = List(

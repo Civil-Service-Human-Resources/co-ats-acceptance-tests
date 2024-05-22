@@ -462,6 +462,7 @@ object REDEPLOYMENT_ONLINE_PEC_CHECK_FORMS
     extends OnlinePecCheckFormsDetails(
       true,
       true,
+      true,
       s"$contactEmailVxConfig"
     )
 

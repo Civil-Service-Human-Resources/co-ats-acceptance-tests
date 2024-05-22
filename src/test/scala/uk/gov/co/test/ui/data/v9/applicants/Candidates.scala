@@ -149,7 +149,7 @@ object REGISTER_CANDIDATE_PEC
       true
     )
 
-object REGISTER_CANDIDATE_MENU_OGD
+object REGISTER_CANDIDATE_OGD_HMRC
     extends CandidateDetails(
       firstname = s"$randomFirstName",
       lastname = s"$randomLastName",
@@ -159,6 +159,17 @@ object REGISTER_CANDIDATE_MENU_OGD
       false,
       true
     )
+
+object REGISTER_CANDIDATE_OGD_DEFRA
+  extends CandidateDetails(
+    firstname = s"$randomFirstName",
+    lastname = s"$randomLastName",
+    preferredFirstName = s"$preferredFirstName",
+    email = s"$randomEmail",
+    s"$passwordCandidate",
+    false,
+    true
+  )
 
 object REGISTER_CANDIDATE_REDEPLOYMENT_SCHEME_1
     extends CandidateDetails(

@@ -1,6 +1,8 @@
 package uk.gov.co.test.ui.pages.vx.vacancytabs
 
 import org.openqa.selenium.{By, WebElement}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{preferredFirstName, preferredTeleNumber, randomEmail, randomFirstName, randomLastName, v9HomeDepartment, vXJobInfoDepartment, vacancyId}
+import uk.gov.co.test.ui.data.TestData.exist
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 
 import scala.collection.{Seq, mutable}
@@ -10,6 +12,7 @@ import scala.util.control.Breaks.{break, breakable}
 object HistoryTab extends VacancyBasePage {
 
   val historyTabPath = ".//span[@class='main-label' and text() = 'History']"
+  val emailSubjectPath = ".//table[@class='display email_information']/tbody/tr[1]/td"
 
   def reserveScheduleDetails(): String = {
     val reserveSchedulePath = s"(//*[@class='detail-grid-tl'])[1]"
@@ -127,5 +130,58 @@ object HistoryTab extends VacancyBasePage {
     action().moveToElement(waitForDropdownHistoryOptionByText("a41f1fe7ade6-6")).perform()
     waitForDropdownHistoryOptionByText("a41f1fe7ade6-6").click()
     for (i <- 1 to 5) emailChecks(i.toString) should not be "Subject: Start Civil Service Employee Transfer Process"
+  }
+
+  def ogdTransferHistoryChecks(): Unit = {
+    waitForVisibilityOfElementByPath(historyTabPath).click()
+    waitForVisibilityOfElementById("summary_tabs_history_tab").isDisplayed
+    waitForVisibilityOfElementByPath(
+      "(//*[@class='detail-grid-tl'])[16]"
+    ).getText shouldEqual s"Subject: Start Civil Service Employee Transfer Process"
+    waitForVisibilityOfElementByPath("(//*[@class='detail-grid-tr'])[16]//a").isDisplayed
+    action().moveToElement(waitForVisibilityOfElementByPath("(//*[@class='detail-grid-tr'])[16]//a")).perform()
+    waitForElementToBeClickableByPath("(//*[@class='detail-grid-tr'])[16]//a").click()
+  }
+
+  def ogdTransferEmailChecks(): Unit = {
+    Thread.sleep(1000)
+    scrollToElement(By.xpath(emailSubjectPath))
+    val templateId   = ogdEmailDetails("1")
+    val destination  = ogdEmailDetails("2")
+    val subject      = ogdEmailDetails("3")
+    val status       = ogdEmailDetails("4")
+    val emailPreview = waitForVisibilityOfElementByPath("//*[@class='email_preview ']").getText
+    templateId   shouldEqual "410"
+    destination  shouldEqual "cstransfertest@service-now.com"
+    subject      shouldEqual "Start Civil Service Employee Transfer Process"
+    status       shouldEqual "cstransfertest@service-now.com: Not sent yet"
+    emailPreview shouldEqual
+      s"""Candidate information
+         |First name: $randomFirstName
+         |Surname: $randomLastName
+         |Preferred name: $preferredFirstName
+         |Exporting/home department: $v9HomeDepartment
+         |Telephone number: $preferredTeleNumber
+         |Primary email address: $randomEmail
+         |Vacancy information
+         |Advertising department: $vXJobInfoDepartment
+         |Vacancy reference number: $vacancyId
+         |Grade advertised: Administrative Officer, Grade 7
+         |Additional grade information: Grade 6
+         |Vacancy holder’s email address: $contactEmailVxConfig""".stripMargin
+  }
+
+  def ogdEmailDetails(position: String): String = {
+    val ogdEmailDestinationPath = s"//table[@class='display email_information']/tbody/tr[$position]/td"
+    val emailValue              = waitForVisibilityOfElementByPath(ogdEmailDestinationPath).getText
+    emailValue
+  }
+
+  def ogdTransferHistoryChecksNoEmail(): Unit = {
+    waitForVisibilityOfElementByPath(historyTabPath).click()
+    waitForVisibilityOfElementById("summary_tabs_history_tab").isDisplayed
+    waitForVisibilityOfElementByPath(
+      "(//*[@class='detail-grid-tl'])[16]"
+    ).getText should not be s"Subject: Start Civil Service Employee Transfer Process"
   }
 }

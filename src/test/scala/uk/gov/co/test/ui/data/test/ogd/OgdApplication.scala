@@ -184,10 +184,10 @@ object OGD_APPLICATION_INTERVIEW_ONE_EVALUATION
       assessmentSix =
         AssessmentOutcome("Cognitive ability", 5, Some("Autotest - I1 - Cognitive ability - assessment six comments")),
       experience = Outcome(91, Some("Autotest - I1 - experience comments")),
-      false,
-      101,
-      "Hold",
-      "Test-T&Cs.pdf",
+      overrideScore = false,
+      overallOverrideScore = 101,
+      finalOutcome = "Progress",
+      uploadDocs = "Test-T&Cs.pdf",
       declarationStatement = """Declaration
           |
           |By submitting this form you are agreeing to and accepting that you have no conflict of interest with this applicant and the evaluation reflects the views of all the selection panel members.""".stripMargin

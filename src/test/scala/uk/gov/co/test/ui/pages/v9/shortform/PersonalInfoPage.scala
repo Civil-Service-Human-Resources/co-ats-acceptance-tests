@@ -2,7 +2,7 @@ package uk.gov.co.test.ui.pages.v9.shortform
 
 import org.openqa.selenium.By
 import org.scalatest.concurrent.Eventually.eventually
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{preferredFirstName, randomEmail, randomFirstName, randomLastName, v9AdjustmentsForTests, v9CivilServant, v9HomeDepartment, v9ReasonableAdjustments, vXAnyOnlineTests, vXGreatForVeterans, vXJobInfoDepartment}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{preferredFirstName, preferredTeleNumber, randomEmail, randomFirstName, randomLastName, v9AdjustmentsForTests, v9CivilServant, v9HomeDepartment, v9ReasonableAdjustments, vXAnyOnlineTests, vXGreatForVeterans, vXJobInfoDepartment}
 import uk.gov.co.test.ui.data.v9.shortform.ShortFormDetails
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
 import uk.gov.co.test.ui.pages.v9.shortform.ApplicationGuidancePage.shortFormId
@@ -74,8 +74,9 @@ object PersonalInfoPage extends CivilServiceJobsBasePage {
   private def enterPreferredTeleNo(personalInfoDetails: PersonalInfoDetails): Unit = {
     scrollToElement(By.id(preferredTeleNoInputId))
     if (extractValue(preferredTeleNoInputId).isEmpty) {
-      enterDetails(preferredTeleNoInputId, personalInfoDetails.preferredTeleNo)
-    } else extractValue(preferredTeleNoInputId) shouldEqual personalInfoDetails.preferredTeleNo
+      preferredTeleNumber = personalInfoDetails.preferredTeleNo
+      enterDetails(preferredTeleNoInputId, preferredTeleNumber)
+    } else extractValue(preferredTeleNoInputId) shouldEqual preferredTeleNumber
   }
 
   private def enterSecondaryContactNo(personalInfoDetails: PersonalInfoDetails): Unit =

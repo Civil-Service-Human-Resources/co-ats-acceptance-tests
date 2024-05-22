@@ -1,9 +1,9 @@
 package uk.gov.co.test.ui.pages.vx
 
 import org.openqa.selenium.By
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{applicationId, randomFirstName, randomLastName, v9CivilServant, v9HomeDepartment, vXCandidateUploadIdentityDocs, vXInterviewNumber, vXJobInfoDepartment, vacancyId, vacancyName}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{applicationId, randomFirstName, randomLastName, v9CivilServant, v9HomeDepartment, vXCandidateUploadIdentityDocs, vXInterviewNumber, vXJobInfoDepartment, vXNoPecOgdTransfer, vXPecOgdCandidates, vacancyId, vacancyName}
 import uk.gov.co.test.ui.data.TestData.eventually
-import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.{candidateAcceptsOffer, confirmOfferAcceptedState}
+import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.{candidateAcceptsOffer, confirmOfferAcceptedOgdTransfer, confirmOfferAcceptedState}
 import uk.gov.co.test.ui.pages.v9.ProvisionalOfferPage.offerDecisionFlow
 import uk.gov.co.test.ui.pages.vx.DashboardPage.matchCriteria
 
@@ -32,6 +32,7 @@ object ApplicationSummaryPage extends VacancyBasePage {
   val rejectBarAfterPreSiftId            = "process_rule_but_154"
   val withdrawBarId                      = "process_rule_but_509"
   val withdrawApplicationOnOfferBarId    = "process_rule_but_570"
+  val sendNenToHrBarId                   = "process_rule_but_2018"
   val updateApplicantTypeBarId           = "process_rule_but_2008"
   val inviteCandidateToIdvtBarId         = "process_rule_but_3213"
   val crcBarId                           = "process_rule_but_776"
@@ -61,6 +62,9 @@ object ApplicationSummaryPage extends VacancyBasePage {
   val progressI4EvaluationBarId          = "process_rule_but_1086"
   val withdrawAtInterviewBarId           = "process_rule_but_511"
   val launchFullPecRecruiterFormBarId    = "process_rule_but_731"
+  val firstDayArrangementsBarId          = "process_rule_but_1200"
+  val firstDayArrangementsOfflineBarId   = "process_rule_but_991"
+  val formalOfferOnlineBarId             = "process_rule_but_526"
   val rtwChecksFormBarId                 = "process_rule_but_733"
   val idvtNotCompletedBarId              = "process_rule_but_3220"
   val confirmIdDocumentsBarId            = "process_rule_but_2070"
@@ -116,8 +120,13 @@ object ApplicationSummaryPage extends VacancyBasePage {
     progressApplicationToOffer()
     candidateAcceptsOffer()
     offerDecisionFlow("Accept")
-    confirmOfferAcceptedState()
-    provisionalOfferAccepted()
+    if (vXNoPecOgdTransfer || vXPecOgdCandidates) {
+      confirmOfferAcceptedOgdTransfer()
+      agreeStartDate()
+    } else {
+      confirmOfferAcceptedState()
+      provisionalOfferAccepted()
+    }
   }
 
   def progressApplicationToOffer(): Unit = {
@@ -150,6 +159,23 @@ object ApplicationSummaryPage extends VacancyBasePage {
         uploadIDOnOfferBarId,
         updateApplicantTypeBarId,
         emailVacancyHolderBarId
+      )
+    )
+    confirmCandidateSummary(newStatus)
+  }
+
+  def agreeStartDate(): Unit = {
+    val newStatus = "Agree Start Date"
+    changeSystem("recruiter")
+    checkForNewValuePath(vacancyStatusPath, newStatus)
+    availableBarItems(
+      List(
+        firstDayArrangementsBarId,
+        firstDayArrangementsOfflineBarId,
+        formalOfferOnlineBarId,
+        withdrawApplicationOnOfferBarId,
+        sendNenToHrBarId,
+        updateApplicantBarId
       )
     )
     confirmCandidateSummary(newStatus)

@@ -13,7 +13,7 @@ object OGD_VACANCY_DATA
       OGD_JOB_INFORMATION,
       OGD_APPROACH,
       OGD_APPROVAL,
-      OGD_OGD_LIST,
+      OGD_RESERVE_LIST,
       OGD_LOCATIONS,
       OGD_CONTRACT_DETAILS,
       OGD_ADVERT,
@@ -25,41 +25,47 @@ object OGD_VACANCY_DATA
       OGD_ADDITIONAL_QUESTIONS,
       OGD_CRITERIA,
       OGD_MANAGEMENT,
-      OGD_ONLINE_PEC_CHECK_FORMS,
-      OGD_PEC_CHECK_FORMS
+      OGD_ONLINE_OGD_CHECK_FORMS,
+      OGD_OGD_CHECK_FORMS
     )
 
 object OGD_BASIC_DETAILS
     extends BasicDetails(
-      "Veterinary Medicines Directorate - Apply Online",
-      s"OGD VetMed - " + generateRandomJobPosition(),
-      false,
+      "DO NOT USE- Automation Test Template",
+      s"CRX827: OGD Transfer - " + generateRandomJobPosition(),
+      true,
       "Prawf awtomeiddio",
       32
     )
 object OGD_JOB_INFORMATION
     extends JobInfoDetails(
-      false,
-      "Veterinary Medicines Directorate",
-      "Other",
-      false,
+      true,
+      "Cabinet Office",
+      "CO - Central Digital & Data Office",
+      true,
       "Prawf awtomeiddio",
       "Autotest - Business area detail",
       typeOfRole = ListBuffer(
-        "Analytical"
+        "Accountancy",
+        "Analytical",
+        "Audit",
+        "Corporate Finance",
+        "Engineering",
+        "Tax Profession"
       ),
       "Other",
-      "1"
+      "3"
     )
 object OGD_APPROACH
     extends ApproachDetails(
       "External",
       true,
       "Autotest - Eligibility statement",
-      false,
+      true,
       "Prawf awtomeiddio",
-      "Autotest"
+      "This vacancy is open to employees who already hold the substantive grade for the post and were appointed to the Civil Service on merit following a fair and open competition; or were appointed to a permanent Civil Service post through an exception in the Civil Service Commissioners’ rules."
     )
+
 object OGD_APPROVAL
     extends ApprovalDetails(
       true,
@@ -68,10 +74,10 @@ object OGD_APPROVAL
       "Test-T&Cs.pdf"
     )
 
-object OGD_OGD_LIST
+object OGD_RESERVE_LIST
     extends ReserveListDetails(
       false,
-      "6 Months",
+      "12 Months",
       false,
       "6 Months"
     )
@@ -94,28 +100,28 @@ object OGD_LOCATIONS
 
 object OGD_CONTRACT_DETAILS
     extends ContractDetails(
-      List("Permanent", "Temporary", "Loan", "Secondment", "Returner"),
+      List("Permanent"),
       "Autotest - Maximum characters: 255. Any text over this limit will not show on the advert.",
       true,
       "Prawf awtomeiddio",
-      List("Full-time", "Part-time", "Compressed Hours", "Flexible working", "Homeworking"),
-      "Senior Executive Officer",
-      "Grade 7",
+      List("Full-time"),
+      "Executive Officer",
+      "Grade 6",
       "GBP (£)",
-      75000,
+      25000,
       95000,
       "Can agree on the higher bracket",
-      true,
+      false,
       18750
     )
 
 object OGD_ADVERT
     extends AdvertDetails(
-      "Autotest",
-      "Autotest",
-      "Autotest",
-      "Autotest",
-      "Autotest"
+      "Autotest - Job summary",
+      "Autotest - Job description",
+      "Autotest - Person specification",
+      "• Learning and development tailored to your role\n• An environment with flexible working options\n• A culture encouraging inclusion and diversity\n• A Civil Service pension",
+      "Autotest - Selection process details"
     )
 
 object OGD_CONTACT_DETAILS
@@ -130,8 +136,8 @@ object OGD_CONTACT_DETAILS
 
 object OGD_VETTING_DETAILS
     extends VettingDetails(
-      true,
-      "Standard",
+      false,
+      "None",
       "Disclosure barring service (DBS)",
       "None",
       false
@@ -142,8 +148,8 @@ object OGD_INTERVIEWS_DETAILS
       "No interviews",
       "Interview",
       "Assessment",
-      "Video",
       "Telephone",
+      "Video",
       false
     )
 
@@ -205,7 +211,7 @@ object OGD_EXPERIENCES
       true,
       true,
       "0 - 7",
-      250,
+      500,
       true,
       "Autotest - Enter guidance text for the candidate",
       true,
@@ -307,7 +313,7 @@ object OGD_TECH_SKILLS
 
 object OGD_VACANCY_TESTS
     extends VacancyTestsDetails(
-      false, //only part on master vacancy set to false!
+      false,
       "Online Tests",
       "Executive Officer",
       testName = Map(
@@ -361,7 +367,7 @@ object OGD_VACANCY_TESTS
           "Civil Service Work Strengths Test"
         )
       ),
-      true,
+      false,
       "Autotest - Additional details for the recruitment team",
       Some(OGD_RECRUITER_TESTS),
       Some(OGD_GROUP_A_TESTS),
@@ -423,8 +429,8 @@ object OGD_CRITERIA
       misconductLive = false,
       performanceReview = false,
       attendancePoor = false,
-      nationalityRequirements = true,
-      rightToRemainUK = true,
+      nationalityRequirements = false,
+      rightToRemainUK = false,
       licencesNotHeld = false,
       membershipsNotHeld = false,
       languagesSkillsNotHeld = false,
@@ -438,56 +444,57 @@ object OGD_MANAGEMENT
     extends ManagementDetails(
       false,
       false,
-      "Nature of the role",
+      "Other",
       false,
       assignTo = Option(s"$contactEmailVxConfig"),
       assignTo2 = Option(s"$contactEmailVxConfig"),
       true,
-      "Menu",
-      "Menu",
-      false,
-      false,
-      linkToProject = Option(true),
+      "Business As Usual (BAU)",
+      "Full pre-employment checks",
+      true,
+      true,
+      linkToProject = Option(false),
       projectName = Option("Autotest - Project name"),
       deptComplaintsProcess = Option("Autotest - Your department's complaints process"),
       vacancyComments = Option("Autotest - Comments on this vacancy")
     )
 
-object OGD_ONLINE_PEC_CHECK_FORMS
+object OGD_ONLINE_OGD_CHECK_FORMS
     extends OnlinePecCheckFormsDetails(
+      false,
       true,
       true,
       s"$contactEmailVxConfig"
     )
 
-object OGD_PEC_CHECK_FORMS
+object OGD_OGD_CHECK_FORMS
     extends PecCheckFormsDetails(
-      rtwCheck = ListBuffer("External Candidates", "OGD Candidates", "NDPB Candidates"),
+      rtwCheck = ListBuffer("Not Applicable"),
       "Before pre employment checks",
       "No digital checks",
       false,
       "Autotest - Details of the identity documents the candidate needs to provide",
       false,
-      generalInfo = ListBuffer("External Candidates", "OGD Candidates", "NDPB Candidates"),
-      referenceChecks = ListBuffer("External Candidates", "NDPB Candidates"),
+      generalInfo = ListBuffer("Not Applicable"),
+      referenceChecks = ListBuffer("Not Applicable"),
       bankruptcyChecks = ListBuffer("Not Applicable"),
-      crcChecks = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
-      nsvChecks = ListBuffer("External Candidates", "OGD Candidates", "NDPB Candidates"),
+      crcChecks = ListBuffer("Not Applicable"),
+      nsvChecks = ListBuffer("Not Applicable"),
       "Show recruiter and candidate forms",
-      jobHistoryChecks = ListBuffer("External Candidates", "NDPB Candidates"),
-      healthRefChecks = ListBuffer("External Candidates", "OGD Candidates", "NDPB Candidates"),
+      jobHistoryChecks = ListBuffer("Not Applicable"),
+      healthRefChecks = ListBuffer("Not Applicable"),
       "Show recruiter and candidate forms",
-      overseasCheck = ListBuffer("External Candidates", "OGD Candidates", "NDPB Candidates"),
-      pensionsCheck = ListBuffer("External Candidates"),
-      previousCsJobCheck = ListBuffer("External Candidates", "OGD Candidates", "NDPB Candidates"),
-      internalFraudCheck = ListBuffer("External Candidates", "NDPB Candidates"),
-      selfEmploymentCheck = ListBuffer("External Candidates", "OGD Candidates", "NDPB Candidates"),
-      false,
-      false,
+      overseasCheck = ListBuffer("Not Applicable"),
+      pensionsCheck = ListBuffer("Not Applicable"),
+      previousCsJobCheck = ListBuffer("Not Applicable"),
+      internalFraudCheck = ListBuffer("Not Applicable"),
+      selfEmploymentCheck = ListBuffer("Not Applicable"),
+      true,
+      true,
       "Autotest - Name of check",
       additionalCheck = ListBuffer("Not Applicable"),
-      nenOnboarding = ListBuffer("Not Applicable"),
+      nenOnboarding = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
       s"$contactEmailVxConfig",
-      pnOnboarding = ListBuffer("Not Applicable"),
+      pnOnboarding = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
       s"$contactEmailVxConfig"
     )
