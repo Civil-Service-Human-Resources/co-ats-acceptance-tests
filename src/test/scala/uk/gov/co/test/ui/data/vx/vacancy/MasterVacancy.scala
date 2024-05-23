@@ -103,7 +103,7 @@ object MASTER_CONTRACT_DETAILS
       true,
       "Prawf awtomeiddio",
       List("Full-time", "Part-time", "Compressed Hours", "Flexible working", "Homeworking"),
-      "Senior Executive Officer",
+      ListBuffer("Senior Executive Officer"),
       "Grade 7",
       "GBP (£)",
       75000,
@@ -484,9 +484,13 @@ object MASTER_PEC_CHECK_FORMS
       "Show recruiter and candidate forms",
       overseasCheck = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
       pensionsCheck = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
-      previousCsJobCheck = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
-      internalFraudCheck = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
-      selfEmploymentCheck = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      previousCsJobCheck =
+        ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      internalFraudCheck =
+        ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      selfEmploymentCheck =
+        ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      true,
       true,
       true,
       "Autotest - Name of check",

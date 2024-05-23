@@ -183,7 +183,23 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
                                              |As part of the onboarding process we require additional information.""".stripMargin
   }
 
-  def confirmOfferAcceptedOgdTransfer(): Unit = {
+  def confirmOfferAcceptedNoPecFunction(): Unit = {
+    val newStatus = "Offer accepted"
+    changeSystem("candidate")
+    confirmStatusOnApplicationPage(newStatus)
+    applicationCentrePageCheck()
+    feedbackFunction().isEnabled
+    advertDetailsFunction().isEnabled
+    withdrawApplicationFunction().isEnabled
+    applicationForVacancyText shouldEqual s"Application For $vacancyName"
+    getApplicationState shouldEqual s"Application status: $newStatus"
+    getApplicationConfirmation shouldEqual
+      """We're delighted that you have accepted our job offer.
+        |As part of the onboarding process we may require further information.
+        |We will contact you with updates about next steps.""".stripMargin
+  }
+
+  def confirmApplicationUpdateState(): Unit = {
     val newStatus = "Application Update"
     changeSystem("candidate")
     confirmStatusOnApplicationPage(newStatus)

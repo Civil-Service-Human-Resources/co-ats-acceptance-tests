@@ -2,7 +2,6 @@ package uk.gov.co.test.ui.data.test.reserve
 
 import uk.gov.co.test.ui.data.vx.vacancy.NewVacancyDetails
 import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.{contactEmailVxConfig, contactNameVxConfig}
-import uk.gov.co.test.ui.pages.v9.SignInPage.generateRandomJobPosition
 import uk.gov.co.test.ui.pages.vx.createvacancypage._
 
 import scala.collection.mutable.ListBuffer
@@ -104,7 +103,7 @@ object RESERVE_CONTRACT_DETAILS
       true,
       "Prawf awtomeiddio",
       List("Full-time", "Part-time", "Compressed Hours", "Flexible working", "Homeworking"),
-      "Senior Executive Officer",
+      ListBuffer("Senior Executive Officer"),
       "Grade 7",
       "GBP (£)",
       75000,
@@ -488,6 +487,7 @@ object RESERVE_PEC_CHECK_FORMS
       previousCsJobCheck = ListBuffer("Not Applicable"),
       internalFraudCheck = ListBuffer("Not Applicable"),
       selfEmploymentCheck = ListBuffer("Not Applicable"),
+      false,
       false,
       false,
       "Autotest - Name of check",

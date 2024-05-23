@@ -1,11 +1,13 @@
 package uk.gov.co.test.ui.pages.vx
 
 import org.openqa.selenium.By
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{applicationId, randomFirstName, randomLastName, v9CivilServant, v9HomeDepartment, vXCandidateUploadIdentityDocs, vXInterviewNumber, vXJobInfoDepartment, vXNoPecOgdTransfer, vXPecOgdCandidates, vacancyId, vacancyName}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{applicationId, randomFirstName, randomLastName, v9CivilServant, v9HomeDepartment, vXCandidateUploadIdentityDocs, vXInterviewNumber, vXJobInfoDepartment, vXNoPecOgdTransfer, vXPecCrc, vXPecNsv, vXPecOgdSecurityCheck, vXUseOnlinePecForms, vacancyId, vacancyName}
 import uk.gov.co.test.ui.data.TestData.eventually
-import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.{candidateAcceptsOffer, confirmOfferAcceptedOgdTransfer, confirmOfferAcceptedState}
+import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.{candidateAcceptsOffer, confirmApplicationUpdateState, confirmOfferAcceptedNoPecFunction, confirmOfferAcceptedState}
 import uk.gov.co.test.ui.pages.v9.ProvisionalOfferPage.offerDecisionFlow
 import uk.gov.co.test.ui.pages.vx.DashboardPage.matchCriteria
+
+import scala.collection.mutable.ListBuffer
 
 object ApplicationSummaryPage extends VacancyBasePage {
 
@@ -62,6 +64,7 @@ object ApplicationSummaryPage extends VacancyBasePage {
   val progressI4EvaluationBarId          = "process_rule_but_1086"
   val withdrawAtInterviewBarId           = "process_rule_but_511"
   val launchFullPecRecruiterFormBarId    = "process_rule_but_731"
+  val completeSecurityChecksFormBarId    = "process_rule_but_1482"
   val firstDayArrangementsBarId          = "process_rule_but_1200"
   val firstDayArrangementsOfflineBarId   = "process_rule_but_991"
   val formalOfferOnlineBarId             = "process_rule_but_526"
@@ -120,9 +123,12 @@ object ApplicationSummaryPage extends VacancyBasePage {
     progressApplicationToOffer()
     candidateAcceptsOffer()
     offerDecisionFlow("Accept")
-    if (vXNoPecOgdTransfer || vXPecOgdCandidates) {
-      confirmOfferAcceptedOgdTransfer()
+    if (!vXUseOnlinePecForms) {
+      confirmApplicationUpdateState()
       agreeStartDate()
+    } else if (vXPecCrc.contains("OGD Candidates") || vXPecNsv.contains("OGD Candidates") ) {
+      confirmOfferAcceptedNoPecFunction()
+      securityChecksRequired()
     } else {
       confirmOfferAcceptedState()
       provisionalOfferAccepted()
@@ -159,6 +165,19 @@ object ApplicationSummaryPage extends VacancyBasePage {
         uploadIDOnOfferBarId,
         updateApplicantTypeBarId,
         emailVacancyHolderBarId
+      )
+    )
+    confirmCandidateSummary(newStatus)
+  }
+
+  def securityChecksRequired(): Unit = {
+    val newStatus = "Security checks required"
+    changeSystem("recruiter")
+    checkForNewValuePath(vacancyStatusPath, newStatus)
+    availableBarItems(
+      List(
+        completeSecurityChecksFormBarId,
+        withdrawApplicationOnOfferBarId
       )
     )
     confirmCandidateSummary(newStatus)

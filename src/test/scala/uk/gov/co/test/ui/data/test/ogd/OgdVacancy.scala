@@ -32,7 +32,7 @@ object OGD_VACANCY_DATA
 object OGD_BASIC_DETAILS
     extends BasicDetails(
       "DO NOT USE- Automation Test Template",
-      s"CRX827: OGD Transfer - " + generateRandomJobPosition(),
+      s"CRX827: CO-OGD Automation - " + generateRandomJobPosition(),
       true,
       "Prawf awtomeiddio",
       32
@@ -105,7 +105,7 @@ object OGD_CONTRACT_DETAILS
       true,
       "Prawf awtomeiddio",
       List("Full-time"),
-      "Executive Officer",
+      ListBuffer("Executive Officer"),
       "Grade 6",
       "GBP (£)",
       25000,
@@ -450,9 +450,9 @@ object OGD_MANAGEMENT
       assignTo2 = Option(s"$contactEmailVxConfig"),
       true,
       "Business As Usual (BAU)",
-      "Full pre-employment checks",
-      true,
-      true,
+      "BAU",
+      false,
+      false,
       linkToProject = Option(false),
       projectName = Option("Autotest - Project name"),
       deptComplaintsProcess = Option("Autotest - Your department's complaints process"),
@@ -461,9 +461,9 @@ object OGD_MANAGEMENT
 
 object OGD_ONLINE_OGD_CHECK_FORMS
     extends OnlinePecCheckFormsDetails(
+      true,
+      true,
       false,
-      true,
-      true,
       s"$contactEmailVxConfig"
     )
 
@@ -475,11 +475,11 @@ object OGD_OGD_CHECK_FORMS
       false,
       "Autotest - Details of the identity documents the candidate needs to provide",
       false,
-      generalInfo = ListBuffer("Not Applicable"),
+      generalInfo = ListBuffer("External Candidates"),
       referenceChecks = ListBuffer("Not Applicable"),
       bankruptcyChecks = ListBuffer("Not Applicable"),
-      crcChecks = ListBuffer("Not Applicable"),
-      nsvChecks = ListBuffer("Not Applicable"),
+      crcChecks = ListBuffer("External Candidates", "OGD Candidates"),
+      nsvChecks = ListBuffer("External Candidates", "OGD Candidates"),
       "Show recruiter and candidate forms",
       jobHistoryChecks = ListBuffer("Not Applicable"),
       healthRefChecks = ListBuffer("Not Applicable"),
@@ -491,10 +491,11 @@ object OGD_OGD_CHECK_FORMS
       selfEmploymentCheck = ListBuffer("Not Applicable"),
       true,
       true,
+      false,
       "Autotest - Name of check",
       additionalCheck = ListBuffer("Not Applicable"),
-      nenOnboarding = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      nenOnboarding = ListBuffer("Not Applicable"),
       s"$contactEmailVxConfig",
-      pnOnboarding = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      pnOnboarding = ListBuffer("Not Applicable"),
       s"$contactEmailVxConfig"
     )

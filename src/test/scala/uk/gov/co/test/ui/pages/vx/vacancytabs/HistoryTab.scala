@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.pages.vx.vacancytabs
 
 import org.openqa.selenium.{By, WebElement}
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{preferredFirstName, preferredTeleNumber, randomEmail, randomFirstName, randomLastName, v9HomeDepartment, vXJobInfoDepartment, vacancyId}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{preferredFirstName, preferredTeleNumber, randomEmail, randomFirstName, randomLastName, v9HomeDepartment, vXJobGradeEquivalent, vXJobGrades, vXJobInfoDepartment, vacancyId}
 import uk.gov.co.test.ui.data.TestData.exist
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 
@@ -132,15 +132,15 @@ object HistoryTab extends VacancyBasePage {
     for (i <- 1 to 5) emailChecks(i.toString) should not be "Subject: Start Civil Service Employee Transfer Process"
   }
 
-  def ogdTransferHistoryChecks(): Unit = {
+  def ogdTransferHistoryChecks(emailPosition: String): Unit = {
     waitForVisibilityOfElementByPath(historyTabPath).click()
     waitForVisibilityOfElementById("summary_tabs_history_tab").isDisplayed
     waitForVisibilityOfElementByPath(
-      "(//*[@class='detail-grid-tl'])[16]"
+      s"(//*[@class='detail-grid-tl'])[$emailPosition]"
     ).getText shouldEqual s"Subject: Start Civil Service Employee Transfer Process"
-    waitForVisibilityOfElementByPath("(//*[@class='detail-grid-tr'])[16]//a").isDisplayed
-    action().moveToElement(waitForVisibilityOfElementByPath("(//*[@class='detail-grid-tr'])[16]//a")).perform()
-    waitForElementToBeClickableByPath("(//*[@class='detail-grid-tr'])[16]//a").click()
+    waitForVisibilityOfElementByPath(s"(//*[@class='detail-grid-tr'])[$emailPosition]//a").isDisplayed
+    action().moveToElement(waitForVisibilityOfElementByPath(s"(//*[@class='detail-grid-tr'])[$emailPosition]//a")).perform()
+    waitForElementToBeClickableByPath(s"(//*[@class='detail-grid-tr'])[$emailPosition]//a").click()
   }
 
   def ogdTransferEmailChecks(): Unit = {
@@ -166,8 +166,8 @@ object HistoryTab extends VacancyBasePage {
          |Vacancy information
          |Advertising department: $vXJobInfoDepartment
          |Vacancy reference number: $vacancyId
-         |Grade advertised: Administrative Officer, Grade 7
-         |Additional grade information: Grade 6
+         |Grade advertised: $vXJobGrades
+         |Additional grade information: $vXJobGradeEquivalent
          |Vacancy holder’s email address: $contactEmailVxConfig""".stripMargin
   }
 

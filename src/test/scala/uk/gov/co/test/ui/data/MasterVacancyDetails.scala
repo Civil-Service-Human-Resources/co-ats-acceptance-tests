@@ -53,7 +53,10 @@ object MasterVacancyDetails extends VacancyBasePage {
   var vXMaxLocations: String               = ""
   var vXOtherLocations: ListBuffer[String] = ListBuffer("London", "Southampton", "Manchester")
 
-  //vx VACANCY contract details TODO
+  //vx VACANCY contract details TODO finish off
+  var vXJobGrades                  = new ListBuffer[String]()
+  var vXJobGradeEquivalent: String = ""
+
   //vx VACANCY advert TODO
   //vx VACANCY contact details TODO
 
@@ -218,7 +221,8 @@ object MasterVacancyDetails extends VacancyBasePage {
   var vXPecPreviousCivilEmploymentCheck      = new ListBuffer[String]()
   var vXPecFraudCheck                        = new ListBuffer[String]()
   var vXPecSelfEmploymentCheck               = new ListBuffer[String]()
-  var vXPecOgdCandidates: Boolean            = _
+  var vXPecOgdSecurityCheck: Boolean         = _
+  var vXPecUseOgdProcess: Boolean            = _
   var vXPecIncludeAdditionalCheck: Boolean   = _
   var vXPecNameOfAdditionalCheck             = ""
   var vXPecAdditionalCheck                   = new ListBuffer[String]()

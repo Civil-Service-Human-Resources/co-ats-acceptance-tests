@@ -1,9 +1,11 @@
 package uk.gov.co.test.ui.pages.vx.createvacancypage
 
 import org.openqa.selenium.By
-import uk.gov.co.test.ui.data.MasterVacancyDetails.vacancyFormId
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXJobGradeEquivalent, vXJobGrades, vacancyFormId}
 import uk.gov.co.test.ui.data.vx.vacancy.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
+
+import scala.collection.mutable.ListBuffer
 
 case class ContractDetails(
   contractType: List[String],
@@ -11,7 +13,7 @@ case class ContractDetails(
   addWelshEmploymentLength: Boolean,
   welshEmploymentLengthText: String,
   workingPattern: List[String],
-  jobGrade: String,
+  jobGrade: ListBuffer[String],
   equivalentGrade: String,
   currency: String,
   minimumSalary: Int,
@@ -68,11 +70,13 @@ object ContractDetailsSection extends VacancyBasePage {
 
   private def selectJobGrade(contractDetails: ContractDetails): Unit = {
     scrollToElement(By.id(jobGradeId))
-    selectOptionFromList(jobGradeInput, contractDetails.jobGrade)
+    vXJobGrades = contractDetails.jobGrade
+    enterTypeRoles(vXJobGrades, jobGradeInput)
   }
   private def enterEquivalentGrade(contractDetails: ContractDetails): Unit = {
+    vXJobGradeEquivalent = contractDetails.equivalentGrade
     val equivalentGrade = textField(equivalentGradeId)
-    equivalentGrade.value = contractDetails.equivalentGrade
+    equivalentGrade.value = vXJobGradeEquivalent
   }
 
   def selectCurrency(contractDetails: ContractDetails): Unit = {

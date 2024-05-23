@@ -121,14 +121,19 @@ object PersonalInfoPage extends CivilServiceJobsBasePage {
     }
 
   private def enterRedeploymentScheme(personalInfoDetails: PersonalInfoDetails): Unit =
-    if (
-      v9CivilServant && (vXJobInfoDepartment == "Department for Energy Security & Net Zero" ||
+    if (v9CivilServant
+        &&
+        (vXJobInfoDepartment == "Department for Energy Security & Net Zero" ||
         vXJobInfoDepartment == "Department for Science, Innovation and Technology" ||
         vXJobInfoDepartment == "Government Equalities Office" ||
         vXJobInfoDepartment == "Revenue Scotland" ||
         vXJobInfoDepartment == "Scottish Fiscal Commission" ||
-        vXJobInfoDepartment == "Transport Scotland") && (v9HomeDepartment == "Department for Energy Security & Net Zero" ||
+        vXJobInfoDepartment == "Cabinet Office" ||
+        vXJobInfoDepartment == "Transport Scotland")
+        &&
+        (v9HomeDepartment == "Department for Energy Security & Net Zero" ||
         v9HomeDepartment == "Department for Science, Innovation and Technology" ||
+        v9HomeDepartment == "Department for Environment, Food and Rural Affairs" ||
         v9HomeDepartment == "Government Equalities Office" ||
         v9HomeDepartment == "Revenue Scotland" ||
         v9HomeDepartment == "Scottish Fiscal Commission" ||
