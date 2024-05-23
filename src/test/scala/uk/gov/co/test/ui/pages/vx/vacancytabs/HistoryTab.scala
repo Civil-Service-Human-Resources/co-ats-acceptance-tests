@@ -1,8 +1,8 @@
 package uk.gov.co.test.ui.pages.vx.vacancytabs
 
-import org.openqa.selenium.{By, WebElement}
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{preferredFirstName, preferredTeleNumber, randomEmail, randomFirstName, randomLastName, v9HomeDepartment, vXJobGradeEquivalent, vXJobGrades, vXJobInfoDepartment, vacancyId}
-import uk.gov.co.test.ui.data.TestData.exist
+import org.openqa.selenium.{By, Keys, WebElement}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{preferredFirstName, preferredTeleNumber, randomEmail, randomFirstName, randomLastName, v9HomeDepartment, vXJobGradeEquivalent, vXJobGrades, vXJobInfoDepartment, vXVacancyHolderEmail, vacancyId}
+import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.progressApplicationToOffer
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 
 import scala.collection.{Seq, mutable}
@@ -11,8 +11,25 @@ import scala.util.control.Breaks.{break, breakable}
 
 object HistoryTab extends VacancyBasePage {
 
-  val historyTabPath = ".//span[@class='main-label' and text() = 'History']"
-  val emailSubjectPath = ".//table[@class='display email_information']/tbody/tr[1]/td"
+  val historyTabPath    = ".//span[@class='main-label' and text() = 'History']"
+  val emailSubjectPath  = ".//table[@class='display email_information']/tbody/tr[1]/td"
+  val administrationId  = "drop_cat_6"
+  val otherStatusLinkId = "actiontab6"
+  val selectStatusId  = "select2-status_value_select-container"
+  val enterStatusPath   = ".//input[@class='select2-search__field']"
+  val changeStatusId    = "select_status_value-submit"
+
+  private def statusSelect: WebElement = waitForVisibilityOfElementById(selectStatusId)
+
+  private def enterStatus: WebElement = waitForVisibilityOfElementByPath(enterStatusPath)
+
+  def selectStatus(statusOption: String): Unit = {
+    Thread.sleep(1000)
+    statusSelect.click()
+    enterStatus.sendKeys(statusOption)
+    enterStatus.sendKeys(Keys.ENTER)
+    waitForVisibilityOfElementById(changeStatusId).click()
+  }
 
   def reserveScheduleDetails(): String = {
     val reserveSchedulePath = s"(//*[@class='detail-grid-tl'])[1]"
@@ -124,12 +141,12 @@ object HistoryTab extends VacancyBasePage {
   def emailHistoryChecks(): Unit = {
     waitForVisibilityOfElementByPath(historyTabPath).click()
     waitForVisibilityOfElementById("summary_tabs_history_tab").isDisplayed
-//    waitForVisibilityOfElementByPath("//*[@class='ng-input']").sendKeys("Email")
+//    waitForVisibilityOfElementByPath("//*[@class='ng-input']")click()
 //    waitForVisibilityOfElementByPath("//*[@class='ng-input']").sendKeys(Keys.ENTER)
-    waitForVisibilityOfElementByPath("//*[@class='ng-input']").click()
-    action().moveToElement(waitForDropdownHistoryOptionByText("a41f1fe7ade6-6")).perform()
-    waitForDropdownHistoryOptionByText("a41f1fe7ade6-6").click()
-    for (i <- 1 to 5) emailChecks(i.toString) should not be "Subject: Start Civil Service Employee Transfer Process"
+//    waitForVisibilityOfElementByPath("//*[@class='ng-input']").click()
+//    action().moveToElement(waitForDropdownHistoryOptionByText("a41f1fe7ade6-6")).perform()
+//    waitForDropdownHistoryOptionByText("a41f1fe7ade6-6").click()
+    for (i <- 1 to 21) emailChecks(i.toString) should not be "Subject: Start Civil Service Employee Transfer Process"
   }
 
   def ogdTransferHistoryChecks(emailPosition: String): Unit = {
@@ -139,7 +156,10 @@ object HistoryTab extends VacancyBasePage {
       s"(//*[@class='detail-grid-tl'])[$emailPosition]"
     ).getText shouldEqual s"Subject: Start Civil Service Employee Transfer Process"
     waitForVisibilityOfElementByPath(s"(//*[@class='detail-grid-tr'])[$emailPosition]//a").isDisplayed
-    action().moveToElement(waitForVisibilityOfElementByPath(s"(//*[@class='detail-grid-tr'])[$emailPosition]//a")).perform()
+    action()
+      .moveToElement(waitForVisibilityOfElementByPath(s"(//*[@class='detail-grid-tr'])[$emailPosition]//a"))
+      .perform()
+    Thread.sleep(1000)
     waitForElementToBeClickableByPath(s"(//*[@class='detail-grid-tr'])[$emailPosition]//a").click()
   }
 
@@ -166,9 +186,9 @@ object HistoryTab extends VacancyBasePage {
          |Vacancy information
          |Advertising department: $vXJobInfoDepartment
          |Vacancy reference number: $vacancyId
-         |Grade advertised: $vXJobGrades
+         |Grade advertised: ${vXJobGrades.toString().replaceFirst("ListBuffer", "").filterNot("[]()".contains(_))}
          |Additional grade information: $vXJobGradeEquivalent
-         |Vacancy holder’s email address: $contactEmailVxConfig""".stripMargin
+         |Vacancy holder’s email address: $vXVacancyHolderEmail""".stripMargin
   }
 
   def ogdEmailDetails(position: String): String = {
@@ -183,5 +203,11 @@ object HistoryTab extends VacancyBasePage {
     waitForVisibilityOfElementByPath(
       "(//*[@class='detail-grid-tl'])[16]"
     ).getText should not be s"Subject: Start Civil Service Employee Transfer Process"
+  }
+
+  def setBackToProvisionalOfferOnline(): Unit = {
+    action().moveToElement(waitForVisibilityOfElementById(administrationId)).perform()
+    waitForVisibilityOfElementById(otherStatusLinkId).click()
+    selectStatus("Provisional Offer - Online")
   }
 }

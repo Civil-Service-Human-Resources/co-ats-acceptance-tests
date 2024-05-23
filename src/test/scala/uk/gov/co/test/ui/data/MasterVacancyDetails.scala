@@ -58,7 +58,13 @@ object MasterVacancyDetails extends VacancyBasePage {
   var vXJobGradeEquivalent: String = ""
 
   //vx VACANCY advert TODO
-  //vx VACANCY contact details TODO
+
+  //vx VACANCY contact details
+  var vXContactName: String        = ""
+  var vXEmailForQuestions: String  = ""
+  var vXVacancyHolderEmail: String = ""
+  var vXVacancyHolderName: String  = ""
+  var vXTeamEmail: String          = ""
 
   //vx VACANCY checking and vetting
   var vXNonReserved: Boolean     = _

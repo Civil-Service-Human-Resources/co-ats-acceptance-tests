@@ -1,13 +1,11 @@
 package uk.gov.co.test.ui.pages.vx
 
 import org.openqa.selenium.By
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{applicationId, randomFirstName, randomLastName, v9CivilServant, v9HomeDepartment, vXCandidateUploadIdentityDocs, vXInterviewNumber, vXJobInfoDepartment, vXNoPecOgdTransfer, vXPecCrc, vXPecNsv, vXPecOgdSecurityCheck, vXUseOnlinePecForms, vacancyId, vacancyName}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{applicationId, randomFirstName, randomLastName, v9CivilServant, v9HomeDepartment, vXCandidateUploadIdentityDocs, vXInterviewNumber, vXJobInfoDepartment, vXPecCrc, vXPecNsv, vXUseOnlinePecForms, vacancyId, vacancyName}
 import uk.gov.co.test.ui.data.TestData.eventually
 import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.{candidateAcceptsOffer, confirmApplicationUpdateState, confirmOfferAcceptedNoPecFunction, confirmOfferAcceptedState}
 import uk.gov.co.test.ui.pages.v9.ProvisionalOfferPage.offerDecisionFlow
 import uk.gov.co.test.ui.pages.vx.DashboardPage.matchCriteria
-
-import scala.collection.mutable.ListBuffer
 
 object ApplicationSummaryPage extends VacancyBasePage {
 
@@ -126,7 +124,22 @@ object ApplicationSummaryPage extends VacancyBasePage {
     if (!vXUseOnlinePecForms) {
       confirmApplicationUpdateState()
       agreeStartDate()
-    } else if (vXPecCrc.contains("OGD Candidates") || vXPecNsv.contains("OGD Candidates") ) {
+    } else if (vXPecCrc.contains("OGD Candidates") || vXPecNsv.contains("OGD Candidates")) {
+      confirmOfferAcceptedNoPecFunction()
+      securityChecksRequired()
+    } else {
+      confirmOfferAcceptedState()
+      provisionalOfferAccepted()
+    }
+  }
+
+  def acceptsOfferAgain(): Unit = {
+    candidateAcceptsOffer()
+    offerDecisionFlow("Accept")
+    if (!vXUseOnlinePecForms) {
+      confirmApplicationUpdateState()
+      agreeStartDate()
+    } else if (vXPecCrc.contains("OGD Candidates") || vXPecNsv.contains("OGD Candidates")) {
       confirmOfferAcceptedNoPecFunction()
       securityChecksRequired()
     } else {

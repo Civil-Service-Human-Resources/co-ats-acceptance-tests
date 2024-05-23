@@ -137,6 +137,17 @@ object PersonalInfoPage extends CivilServiceJobsBasePage {
         v9HomeDepartment == "Government Equalities Office" ||
         v9HomeDepartment == "Revenue Scotland" ||
         v9HomeDepartment == "Scottish Fiscal Commission" ||
+        v9HomeDepartment == "Ministry of Defence" ||
+        v9HomeDepartment == "Government Commercial Function" ||
+        v9HomeDepartment == "Central Digital and Data Office" ||
+        v9HomeDepartment == "Government Digital Services" ||
+        v9HomeDepartment == "Government Property Agency" ||
+        v9HomeDepartment == "Veterinary Medicines Directorate" ||
+        v9HomeDepartment == "Rural Payments Agency" ||
+        v9HomeDepartment == "Health and Safety Executive" ||
+        v9HomeDepartment == "Department for Work and Pensions" ||
+        v9HomeDepartment == "UK Hydrographic Office" ||
+        v9HomeDepartment == "Animal and Plant Health Agency" ||
         v9HomeDepartment == "Transport Scotland")
     ) {
       scrollToElement(By.id(redeploymentSchemeId))

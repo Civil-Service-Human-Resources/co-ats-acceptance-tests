@@ -2,7 +2,7 @@ package uk.gov.co.test.ui.pages.vx
 
 import org.openqa.selenium.{By, WebElement}
 import org.scalatest.concurrent.Eventually.eventually
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXAbilitiesRequired, vXAnyAdditionalQuestions, vXAnyOnlineTests, vXApplicationClosingDate, vXApplicationLiveDate, vXApproach, vXAttachmentRequired, vXAvailableOutsideInNI, vXBehavioursRequired, vXBudgetaryApproval, vXBusinessArea, vXBusinessAreaDetail, vXCandidateInstructions, vXCandidateUploadIdentityDocs, vXCommunitiesInNIR, vXCostCentre, vXCrcCheckProvider, vXCrcLevel, vXDesirablePastExperience, vXDetailsForUploadIdentityDocs, vXExperiencesRequired, vXFullQualification, vXGiveLocationPreference, vXGreatForVeterans, vXGuidanceText, vXHavePecMailbox, vXHowManyQuestions, vXInterviewExpectedRounds, vXInterviewFourType, vXInterviewNumber, vXInterviewOneType, vXInterviewThreeType, vXInterviewTwoType, vXJobGradeEquivalent, vXJobGrades, vXJobHistory, vXJobInfoDepartment, vXLanguagesMandatory, vXLicencesMandatory, vXLocationDisplay, vXLocationType, vXManuallyCheckIdentityDocs, vXMaxLocations, vXMedicalRequired, vXMembershipsMandatory, vXNoOfJobsAvailable, vXNoPecOgdTransfer, vXNonReserved, vXOtherLocations, vXPecAdditionalCheck, vXPecBankruptcyCheck, vXPecCrc, vXPecEmploymentHistoryCheck, vXPecFraudCheck, vXPecGeneralInfo, vXPecHealthDisplayOptions, vXPecHealthRefCheck, vXPecHrEmailForNen, vXPecHrEmailForPn, vXPecIncludeAdditionalCheck, vXPecMailbox, vXPecNameOfAdditionalCheck, vXPecNen, vXPecNsv, vXPecNsvDisplayOptions, vXPecOgdSecurityCheck, vXPecOverseasCheck, vXPecPensionsCheck, vXPecPn, vXPecPreviousCivilEmploymentCheck, vXPecReferenceCheck, vXPecSelfEmploymentCheck, vXPecUseOgdProcess, vXPersonalStatement, vXPreSiftRequired, vXPreviousExperiences, vXProfession, vXQualificationsMandatory, vXQuestionOne, vXQuestionThree, vXQuestionTwo, vXRejectApplyingOnPromotion, vXRejectLanguagesNotHeld, vXRejectLicencesNotHeld, vXRejectLiveMisconduct, vXRejectMembershipsNotHeld, vXRejectNationalityReq, vXRejectNoRightToRemain, vXRejectPoorAttendance, vXRejectPoorPerformance, vXRejectProbation, vXRejectQualificationsNotHeld, vXReserveExtendLength, vXReserveExtendRequired, vXReserveListLength, vXReserveListRequired, vXRtwChecks, vXSpecificLanguages, vXSpecificLicences, vXSpecificMemberships, vXSpecificPastExperience, vXSpecificQualifications, vXSpecifyGuidance, vXStatementWordLimit, vXStrengthsRequired, vXTechSkillsRequired, vXTypeOfRole, vXUseOnlinePecForms, vXVacanciesInNIR, vXVettingLevel, vXWhenRtwChecks, vXWhichIdentityChecks, vacancyFormId, vacancyId, vacancyName}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXAbilitiesRequired, vXAnyAdditionalQuestions, vXAnyOnlineTests, vXApplicationClosingDate, vXApplicationLiveDate, vXApproach, vXAttachmentRequired, vXAvailableOutsideInNI, vXBehavioursRequired, vXBudgetaryApproval, vXBusinessArea, vXBusinessAreaDetail, vXCandidateInstructions, vXCandidateUploadIdentityDocs, vXCommunitiesInNIR, vXContactName, vXCostCentre, vXCrcCheckProvider, vXCrcLevel, vXDesirablePastExperience, vXDetailsForUploadIdentityDocs, vXEmailForQuestions, vXExperiencesRequired, vXFullQualification, vXGiveLocationPreference, vXGreatForVeterans, vXGuidanceText, vXHavePecMailbox, vXHowManyQuestions, vXInterviewExpectedRounds, vXInterviewFourType, vXInterviewNumber, vXInterviewOneType, vXInterviewThreeType, vXInterviewTwoType, vXJobGradeEquivalent, vXJobGrades, vXJobHistory, vXJobInfoDepartment, vXLanguagesMandatory, vXLicencesMandatory, vXLocationDisplay, vXLocationType, vXManuallyCheckIdentityDocs, vXMaxLocations, vXMedicalRequired, vXMembershipsMandatory, vXNoOfJobsAvailable, vXNoPecOgdTransfer, vXNonReserved, vXOtherLocations, vXPecAdditionalCheck, vXPecBankruptcyCheck, vXPecCrc, vXPecEmploymentHistoryCheck, vXPecFraudCheck, vXPecGeneralInfo, vXPecHealthDisplayOptions, vXPecHealthRefCheck, vXPecHrEmailForNen, vXPecHrEmailForPn, vXPecIncludeAdditionalCheck, vXPecMailbox, vXPecNameOfAdditionalCheck, vXPecNen, vXPecNsv, vXPecNsvDisplayOptions, vXPecOgdSecurityCheck, vXPecOverseasCheck, vXPecPensionsCheck, vXPecPn, vXPecPreviousCivilEmploymentCheck, vXPecReferenceCheck, vXPecSelfEmploymentCheck, vXPecUseOgdProcess, vXPersonalStatement, vXPreSiftRequired, vXPreviousExperiences, vXProfession, vXQualificationsMandatory, vXQuestionOne, vXQuestionThree, vXQuestionTwo, vXRejectApplyingOnPromotion, vXRejectLanguagesNotHeld, vXRejectLicencesNotHeld, vXRejectLiveMisconduct, vXRejectMembershipsNotHeld, vXRejectNationalityReq, vXRejectNoRightToRemain, vXRejectPoorAttendance, vXRejectPoorPerformance, vXRejectProbation, vXRejectQualificationsNotHeld, vXReserveExtendLength, vXReserveExtendRequired, vXReserveListLength, vXReserveListRequired, vXRtwChecks, vXSpecificLanguages, vXSpecificLicences, vXSpecificMemberships, vXSpecificPastExperience, vXSpecificQualifications, vXSpecifyGuidance, vXStatementWordLimit, vXStrengthsRequired, vXTeamEmail, vXTechSkillsRequired, vXTypeOfRole, vXUseOnlinePecForms, vXVacanciesInNIR, vXVacancyHolderEmail, vXVacancyHolderName, vXVettingLevel, vXWhenRtwChecks, vXWhichIdentityChecks, vacancyFormId, vacancyId, vacancyName}
 import uk.gov.co.test.ui.pages.v9.ApplicationDetailsPage.resetApplicationDetails
 import uk.gov.co.test.ui.pages.vx.vacancytabs.SummaryTab.{vacancyActive, vacancyClosingDateId, vacancyLiveDateId}
 
@@ -106,6 +106,11 @@ object VacancyDetailsPage extends VacancyBasePage {
   def pecRtwCheckId                     = s"select2-${vacancyFormId}_datafield_98824_1_1-container"
   def jobGradeId                        = s"select2-${vacancyFormId}_datafield_154973_1_1-container"
   def jobGradeEquivalentId              = s"${vacancyFormId}_datafield_154981_1_1_en-GB"
+  def vacancyHolderNameId               = s"${vacancyFormId}_datafield_115926_1_1"
+  def contactNameId               = s"${vacancyFormId}_datafield_59444_1_1"
+  def emailForQuestionsId               = s"${vacancyFormId}_datafield_59457_1_1"
+  def vacancyHolderEmailId              = s"${vacancyFormId}_datafield_115708_1_1"
+  def teamEmailId                       = s"${vacancyFormId}_datafield_59450_1_1"
   def pecWhenRtwId                      = s"${vacancyFormId}_datafield_106424_1_1_fieldset"
   def pecWhichIdentityId                = s"${vacancyFormId}_datafield_184419_1_1_fieldset"
   def pecUploadIdentityDocsId           = s"${vacancyFormId}_datafield_159069_1_1_fieldset"
@@ -334,6 +339,21 @@ object VacancyDetailsPage extends VacancyBasePage {
 
   private def extractJobGradeEquivalent(): Unit =
     vXJobGradeEquivalent = waitForVisibilityOfElementById(jobGradeEquivalentId).getAttribute("value")
+
+  private def extractContactName(): Unit =
+    vXContactName = waitForVisibilityOfElementById(contactNameId).getAttribute("value")
+
+  private def extractEmailForCandidateQuestions(): Unit =
+    vXEmailForQuestions = waitForVisibilityOfElementById(emailForQuestionsId).getAttribute("value")
+
+  private def extractVacancyHolderName(): Unit =
+    vXVacancyHolderName = waitForVisibilityOfElementById(vacancyHolderNameId).getAttribute("value")
+
+  private def extractVacancyHolderEmail(): Unit =
+    vXVacancyHolderEmail = waitForVisibilityOfElementById(vacancyHolderEmailId).getAttribute("value")
+
+  private def extractTeamEmail(): Unit =
+    vXTeamEmail = waitForVisibilityOfElementById(teamEmailId).getAttribute("value")
 
   private def extractReservedStatus(): Unit = {
     val status = waitForVisibilityOfElementById(reservedStatusId).findElement(By.xpath(checkLabelPath))
@@ -905,6 +925,14 @@ object VacancyDetailsPage extends VacancyBasePage {
     extractJobGradeEquivalent()
   }
 
+  private def contactDetails(): Unit = {
+    extractContactName()
+    extractEmailForCandidateQuestions()
+    extractVacancyHolderName()
+    extractVacancyHolderEmail()
+    extractTeamEmail()
+  }
+
   private def checkingAndVetting(): Unit = {
     extractReservedStatus()
     extractCrcLevel()
@@ -1004,7 +1032,7 @@ object VacancyDetailsPage extends VacancyBasePage {
     locations()
     contractDetails() //TODO not all things covered
 //    theAdvert() TODO
-//    contactDetails() TODO
+    contactDetails()
     checkingAndVetting()
     interviews()
     successProfiles()
