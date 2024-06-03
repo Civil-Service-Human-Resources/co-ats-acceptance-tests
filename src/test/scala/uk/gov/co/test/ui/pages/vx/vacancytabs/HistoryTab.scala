@@ -172,9 +172,9 @@ object HistoryTab extends VacancyBasePage {
     val status       = ogdEmailDetails("4")
     val emailPreview = waitForVisibilityOfElementByPath("//*[@class='email_preview ']").getText
     templateId   shouldEqual "410"
-    destination  shouldEqual "cstransfertest@service-now.com"
+    destination  shouldEqual "civilservicetransfers@service-now.com"
     subject      shouldEqual "Start Civil Service Employee Transfer Process"
-    status       shouldEqual "cstransfertest@service-now.com: Not sent yet"
+    status       shouldEqual "civilservicetransfers@service-now.com: Not sent yet"
     emailPreview shouldEqual
       s"""Candidate information
          |First name: $randomFirstName
