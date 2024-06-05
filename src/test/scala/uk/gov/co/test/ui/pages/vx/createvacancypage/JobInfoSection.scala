@@ -2,7 +2,7 @@ package uk.gov.co.test.ui.pages.vx.createvacancypage
 
 import org.openqa.selenium.support.ui.WebDriverWait
 import org.openqa.selenium.{By, WebDriver}
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXBusinessAreaDetail, vXJobInfoDepartment, vXNoOfJobsAvailable, vXProfession, vXTypeOfRole, vacancyFormId}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXBusinessAreaDetail, vXJobInfoDepartment, vXLineManagerDuties, vXNoOfJobsAvailable, vXPositionIdentifier, vXProfession, vXTypeOfRole, vacancyFormId}
 import uk.gov.co.test.ui.data.vx.vacancy.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 
@@ -15,9 +15,11 @@ case class JobInfoDetails(
   addWelshBusinessArea: Boolean,
   welshBusinessArea: String,
   businessAreaDetail: String,
+  positionIdentifier: String,
   typeOfRole: ListBuffer[String],
   whichProfession: String,
-  noOfJobs: String
+  noOfJobs: String,
+  lineManagerDuties: Boolean
 )
 
 object JobInfoSection extends VacancyBasePage {
@@ -30,7 +32,11 @@ object JobInfoSection extends VacancyBasePage {
   def noOfJobsId                  = s"${vacancyFormId}_datafield_155332_1_1"
   def typeOfRoleId                = s"select2-${vacancyFormId}_datafield_155369_1_1-container"
   def welshRequiredCheck          = s"${vacancyFormId}_datafield_179408_1_1"
+  def positionIdentifierId        = s"${vacancyFormId}_datafield_155449_1_1"
   def businessAreaDetailId        = s"${vacancyFormId}_datafield_155206_1_1_en-GB"
+  def lineManagerDutiesId         = s"${vacancyFormId}_datafield_206297_1_1_fieldset"
+  def lineManagerDutiesYesId      = s"${vacancyFormId}_datafield_206297_1_1_1"
+  def lineManagerDutiesNoId       = s"${vacancyFormId}_datafield_206297_1_1_2"
   def typeOfRoleInput             = s".//*[@aria-describedby='$typeOfRoleId']"
   def listOptionsPath             = ".//li[@role='option']"
   def addWelshBusinessAreaId()    = "clicky_155206"
@@ -78,6 +84,18 @@ object JobInfoSection extends VacancyBasePage {
     )
   }
 
+  private def positionIdentifier(jobInfoDetails: JobInfoDetails): Unit =
+    if (
+      vXJobInfoDepartment == "Ministry of Defence" ||
+      vXJobInfoDepartment == "Office for National Statistics" ||
+      vXJobInfoDepartment == "UK Statistics Authority" ||
+      vXJobInfoDepartment == "Government Statistical Service"
+    ) {
+      val positionIdentifier = textField(positionIdentifierId)
+      vXPositionIdentifier = jobInfoDetails.positionIdentifier
+      positionIdentifier.value = vXPositionIdentifier
+    }
+
   private def selectTypeOfRole(jobInfoDetails: JobInfoDetails): Unit = {
     scrollToElement(By.id(typeOfRoleId))
     vXTypeOfRole = jobInfoDetails.typeOfRole
@@ -97,14 +115,23 @@ object JobInfoSection extends VacancyBasePage {
     noOfJobsInput.value = vXNoOfJobsAvailable
   }
 
+  def selectLineManagerDuties(jobInfoDetails: JobInfoDetails): Unit = {
+    vXLineManagerDuties = jobInfoDetails.lineManagerDuties
+    if (vXLineManagerDuties) {
+      clickOnRadioButton(lineManagerDutiesYesId)
+    } else clickOnRadioButton(lineManagerDutiesNoId)
+  }
+
   private val jobInfo: Seq[JobInfoDetails => Unit] = Seq(
     selectWelshVersion,
     selectDepartment,
     selectBusinessArea,
     enterBusinessAreaDetail,
+    positionIdentifier,
     selectTypeOfRole,
     whichProfessionIsJob,
-    noOfJobsAvailable
+    noOfJobsAvailable,
+    selectLineManagerDuties
   )
 
   def jobInformationSection(newVacancyDetails: NewVacancyDetails): Unit =

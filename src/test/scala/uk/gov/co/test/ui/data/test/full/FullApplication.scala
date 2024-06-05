@@ -1,25 +1,26 @@
-package uk.gov.co.test.ui.data.vx.application
+package uk.gov.co.test.ui.data.test.full
 
+import uk.gov.co.test.ui.data.vx.application.{ApplicationDetails, AssessmentOutcome, Outcome}
 import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.contactEmailVxConfig
 import uk.gov.co.test.ui.pages.vx.vacancytabs._
 import uk.gov.co.test.ui.pages.vx.{CalenderScheduleDetails, InterviewScheduleDetails}
 
 import java.time.LocalDate
 
-object MASTER_APPLICATION_DATA
+object FULL_APPLICATION_DATA
     extends ApplicationDetails(
-      MASTER_APPLICATION_EMPLOYMENT_HISTORY,
-      MASTER_APPLICATION_PRE_SIFT_EVALUATION,
-      MASTER_APPLICATION_SIFT_EVALUATION,
-      MASTER_APPLICATION_INTERVIEW_SCHEDULE,
-      MASTER_APPLICATION_CALENDER_SCHEDULE,
-      MASTER_APPLICATION_INTERVIEW_ONE_EVALUATION,
-      MASTER_APPLICATION_INTERVIEW_TWO_EVALUATION,
-      MASTER_APPLICATION_INTERVIEW_THREE_EVALUATION,
-      MASTER_APPLICATION_INTERVIEW_FOUR_EVALUATION
+      FULL_APPLICATION_EMPLOYMENT_HISTORY,
+      FULL_APPLICATION_PRE_SIFT_EVALUATION,
+      FULL_APPLICATION_SIFT_EVALUATION,
+      FULL_APPLICATION_INTERVIEW_SCHEDULE,
+      FULL_APPLICATION_CALENDER_SCHEDULE,
+      FULL_APPLICATION_INTERVIEW_ONE_EVALUATION,
+      FULL_APPLICATION_INTERVIEW_TWO_EVALUATION,
+      FULL_APPLICATION_INTERVIEW_THREE_EVALUATION,
+      FULL_APPLICATION_INTERVIEW_FOUR_EVALUATION
     )
 
-object MASTER_APPLICATION_EMPLOYMENT_HISTORY
+object FULL_APPLICATION_EMPLOYMENT_HISTORY
     extends HistoryDetails(
       false,
       historyCheckStarted = LocalDate.now(),
@@ -40,7 +41,7 @@ object MASTER_APPLICATION_EMPLOYMENT_HISTORY
       internalNotes = "Autotest - internal notes (optional)"
     )
 
-object MASTER_APPLICATION_PRE_SIFT_EVALUATION
+object FULL_APPLICATION_PRE_SIFT_EVALUATION
     extends PreSiftDetails(
       "A",
       "Autotest - CV assessment comments",
@@ -52,16 +53,16 @@ object MASTER_APPLICATION_PRE_SIFT_EVALUATION
       "Autotest - Overall comments"
     )
 
-object MASTER_APPLICATION_SIFT_EVALUATION
+object FULL_APPLICATION_SIFT_EVALUATION
     extends SiftDetails(
       """Scoring guide:
-        |Not demonstrated -No positive evidence and/or substantial negative evidence demonstrated
-        |Minimal demonstration -Limited positive evidence and/or mainly negative evidence demonstrated
-        |Moderate demonstration -Moderate positive evidence but some negative evidence demonstrated
-        |Acceptable demonstration - Adequate positive evidence and any negative evidence would not cause concern
-        |Good demonstration - Substantial positive evidence of the competency or behaviour
-        |Strong demonstration - Substantial positive evidence; includes some evidence of exceeding expectations at this level
-        |Outstanding demonstration - The evidence provided wholly exceeds expectation at this level""".stripMargin,
+      |Not demonstrated -No positive evidence and/or substantial negative evidence demonstrated
+      |Minimal demonstration -Limited positive evidence and/or mainly negative evidence demonstrated
+      |Moderate demonstration -Moderate positive evidence but some negative evidence demonstrated
+      |Acceptable demonstration - Adequate positive evidence and any negative evidence would not cause concern
+      |Good demonstration - Substantial positive evidence of the competency or behaviour
+      |Strong demonstration - Substantial positive evidence; includes some evidence of exceeding expectations at this level
+      |Outstanding demonstration - The evidence provided wholly exceeds expectation at this level""".stripMargin,
       behaviourOne = Outcome(6, Some("Autotest - Changing and Improving - behaviour one comments")),
       behaviourTwo = Outcome(7, Some("Autotest - Changing and Improving - behaviour one comments")),
       behaviourThree = Outcome(7, Some("Autotest - Delivering at Pace - behaviour three comments")),
@@ -85,7 +86,7 @@ object MASTER_APPLICATION_SIFT_EVALUATION
       "Declaration\n\nBy submitting this form you are agreeing to and accepting that you have no conflict of interest with this applicant and the evaluation reflects the views of all the selection panel members."
     )
 
-object MASTER_APPLICATION_INTERVIEW_SCHEDULE
+object FULL_APPLICATION_INTERVIEW_SCHEDULE
     extends InterviewScheduleDetails(
       false,
       Some("Copy From Template"),
@@ -110,7 +111,7 @@ object MASTER_APPLICATION_INTERVIEW_SCHEDULE
       false
     )
 
-object MASTER_APPLICATION_CALENDER_SCHEDULE
+object FULL_APPLICATION_CALENDER_SCHEDULE
     extends CalenderScheduleDetails(
       "09:00",
       60,
@@ -123,16 +124,16 @@ object MASTER_APPLICATION_CALENDER_SCHEDULE
       None
     )
 
-object MASTER_APPLICATION_INTERVIEW_ONE_EVALUATION
+object FULL_APPLICATION_INTERVIEW_ONE_EVALUATION
     extends InterviewOneDetails(
       scoringGuide = """Scoring guide:
-          |Not demonstrated - No positive evidence and/or substantial negative evidence demonstrated
-          |Minimal demonstration - Limited positive evidence and/or mainly negative evidence demonstrated
-          |Moderate demonstration - Moderate positive evidence but some negative evidence demonstrated
-          |Acceptable demonstration - Adequate positive evidence and any negative evidence would not cause concern
-          |Good demonstration - Substantial positive evidence of the competency or behaviour
-          |Strong demonstration - Substantial positive evidence; includes some evidence of exceeding expectations at this level
-          |Outstanding demonstration - The evidence provided wholly exceeds expectation at this level""".stripMargin,
+                     |Not demonstrated - No positive evidence and/or substantial negative evidence demonstrated
+                     |Minimal demonstration - Limited positive evidence and/or mainly negative evidence demonstrated
+                     |Moderate demonstration - Moderate positive evidence but some negative evidence demonstrated
+                     |Acceptable demonstration - Adequate positive evidence and any negative evidence would not cause concern
+                     |Good demonstration - Substantial positive evidence of the competency or behaviour
+                     |Strong demonstration - Substantial positive evidence; includes some evidence of exceeding expectations at this level
+                     |Outstanding demonstration - The evidence provided wholly exceeds expectation at this level""".stripMargin,
       behaviourOne = Outcome(7, Some("Autotest - I1 - Changing and Improving - behaviour one comments")),
       behaviourTwo = Outcome(5, Some("Autotest - I1 - Changing and Improving - behaviour one comments")),
       behaviourThree = Outcome(6, Some("Autotest - I1 - Delivering at Pace - behaviour three comments")),
@@ -150,11 +151,11 @@ object MASTER_APPLICATION_INTERVIEW_ONE_EVALUATION
       techSkillSeven = Outcome(7, Some("Autotest - I1 - Tech Skill Seven - tech skill seven comments")),
       techSkillEight = Outcome(7, Some("Autotest - I1 - Tech Skill Eight - tech skill eight comments")),
       strengthScoringGuide = """Scoring guide:
-          |Please score the candidates using the following scoring guidelines:
-          |Weakness - Lower engagement, lower capability, lower use
-          |Learned Behaviour - Lower engagement, higher capability, some use
-          |Potential Strength - Higher engagement, some capability, some use
-          |Strength - higher engagement, higher capability, higher use""".stripMargin,
+                             |Please score the candidates using the following scoring guidelines:
+                             |Weakness - Lower engagement, lower capability, lower use
+                             |Learned Behaviour - Lower engagement, higher capability, some use
+                             |Potential Strength - Higher engagement, some capability, some use
+                             |Strength - higher engagement, higher capability, higher use""".stripMargin,
       strengthOne = Outcome(3, Some("Autotest - I1 - Adaptable - strength one comments")),
       strengthTwo = Outcome(4, Some("Autotest - I1 - Analytical - strength two comments")),
       strengthThree = Outcome(4, Some("Autotest - I1 - Improver  - strength three comments")),
@@ -188,11 +189,11 @@ object MASTER_APPLICATION_INTERVIEW_ONE_EVALUATION
       "Progress",
       "Test-T&Cs.pdf",
       declarationStatement = """Declaration
-          |
-          |By submitting this form you are agreeing to and accepting that you have no conflict of interest with this applicant and the evaluation reflects the views of all the selection panel members.""".stripMargin
+                             |
+                             |By submitting this form you are agreeing to and accepting that you have no conflict of interest with this applicant and the evaluation reflects the views of all the selection panel members.""".stripMargin
     )
 
-object MASTER_APPLICATION_INTERVIEW_TWO_EVALUATION
+object FULL_APPLICATION_INTERVIEW_TWO_EVALUATION
     extends InterviewTwoDetails(
       scoringGuide = """Scoring guide:
                      |Not demonstrated - No positive evidence and/or substantial negative evidence demonstrated
@@ -261,7 +262,7 @@ object MASTER_APPLICATION_INTERVIEW_TWO_EVALUATION
                              |By submitting this form you are agreeing to and accepting that you have no conflict of interest with this applicant and the evaluation reflects the views of all the selection panel members.""".stripMargin
     )
 
-object MASTER_APPLICATION_INTERVIEW_THREE_EVALUATION
+object FULL_APPLICATION_INTERVIEW_THREE_EVALUATION
     extends InterviewThreeDetails(
       scoringGuide = """Scoring guide:
                      |Not demonstrated - No positive evidence and/or substantial negative evidence demonstrated
@@ -330,7 +331,7 @@ object MASTER_APPLICATION_INTERVIEW_THREE_EVALUATION
                              |By submitting this form you are agreeing to and accepting that you have no conflict of interest with this applicant and the evaluation reflects the views of all the selection panel members.""".stripMargin
     )
 
-object MASTER_APPLICATION_INTERVIEW_FOUR_EVALUATION
+object FULL_APPLICATION_INTERVIEW_FOUR_EVALUATION
     extends InterviewFourDetails(
       scoringGuide = """Scoring guide:
                      |Not demonstrated - No positive evidence and/or substantial negative evidence demonstrated

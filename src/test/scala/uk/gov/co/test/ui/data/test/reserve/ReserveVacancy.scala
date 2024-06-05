@@ -44,6 +44,7 @@ object RESERVE_JOB_INFORMATION
       true,
       "Prawf awtomeiddio",
       "Autotest - Business area detail",
+      "Autotest - Position identifier",
       typeOfRole = ListBuffer(
         "Accountancy",
         "Analytical",
@@ -53,7 +54,8 @@ object RESERVE_JOB_INFORMATION
         "Tax Profession"
       ),
       "Other",
-      "3"
+      "3",
+      true
     )
 object RESERVE_APPROACH
     extends ApproachDetails(

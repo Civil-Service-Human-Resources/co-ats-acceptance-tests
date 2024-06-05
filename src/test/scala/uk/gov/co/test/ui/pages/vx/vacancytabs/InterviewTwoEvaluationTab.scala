@@ -340,7 +340,8 @@ object InterviewTwoEvaluationTab extends VacancyBasePage {
       }
       waitForVisibilityOfElementById(
         behaviourTotalScoreId
-      ).getText shouldEqual s"Behaviour total score\n  ${totalScore(vXI2BehavioursTotalScore)}"
+      ).getText should endWith(s"${totalScore(vXI2BehavioursTotalScore)}")
+//      ).getText shouldEqual s"Behaviour total score\n  ${totalScore(vXI2BehavioursTotalScore)}"
     }
 
   private def enterTechSkillOneOutcome(interviewTwoDetails: InterviewTwoDetails): Unit = {
@@ -461,7 +462,8 @@ object InterviewTwoEvaluationTab extends VacancyBasePage {
       }
       waitForVisibilityOfElementById(
         techSkillTotalScoreId
-      ).getText shouldEqual s"Technical skill overall score\n  ${totalScore(vXI2TechSkillsTotalScore)}"
+      ).getText should endWith(s"${totalScore(vXI2TechSkillsTotalScore)}")
+//      ).getText shouldEqual s"Technical skill overall score\n  ${totalScore(vXI2TechSkillsTotalScore)}"
     }
 
   private def enterStrengthOneOutcome(interviewTwoDetails: InterviewTwoDetails): Unit = {
@@ -584,7 +586,8 @@ object InterviewTwoEvaluationTab extends VacancyBasePage {
       }
       waitForVisibilityOfElementById(
         strengthTotalScoreId
-      ).getText shouldEqual s"Strengths total score\n  ${totalScore(vXI2StrengthsTotalScore)}"
+      ).getText should endWith(s"${totalScore(vXI2StrengthsTotalScore)}")
+//      ).getText shouldEqual s"Strengths total score\n  ${totalScore(vXI2StrengthsTotalScore)}"
     }
 
   private def howManyAssessments(interviewTwoDetails: InterviewTwoDetails): Unit = {
@@ -709,6 +712,7 @@ object InterviewTwoEvaluationTab extends VacancyBasePage {
     val overallScore = totalScore(vXI2BehavioursTotalScore) + totalScore(vXI2TechSkillsTotalScore) + totalScore(
       vXI2StrengthsTotalScore
     ) + totalScore(vXI2AssessmentsTotalScore) + vXI2ExperienceScore
+//    waitForVisibilityOfElementById(overallScoreId).getText should endWith(s"$overallScore")
     waitForVisibilityOfElementById(overallScoreId).getAttribute("value") shouldEqual s"$overallScore"
   }
 

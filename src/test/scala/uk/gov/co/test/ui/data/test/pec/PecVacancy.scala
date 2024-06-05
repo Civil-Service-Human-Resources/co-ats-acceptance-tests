@@ -32,7 +32,7 @@ object PEC_VACANCY_DATA
 object PEC_BASIC_DETAILS
     extends BasicDetails(
       "DO NOT USE- Automation Test Template",
-      s"CRX827: OGD Transfer - " + generateRandomJobPosition(),
+      s"PEC - " + generateRandomJobPosition(),
       true,
       "Prawf awtomeiddio",
       32
@@ -45,6 +45,7 @@ object PEC_JOB_INFORMATION
       true,
       "Prawf awtomeiddio",
       "Autotest - Business area detail",
+      "Autotest - Position identifier",
       typeOfRole = ListBuffer(
         "Accountancy",
         "Analytical",
@@ -54,7 +55,8 @@ object PEC_JOB_INFORMATION
         "Tax Profession"
       ),
       "Other",
-      "1"
+      "1",
+      false
     )
 object PEC_APPROACH
     extends ApproachDetails(
@@ -99,21 +101,21 @@ object PEC_LOCATIONS
     )
 
 object PEC_CONTRACT_DETAILS
-    extends ContractDetails(
-      List("Permanent"),
-      "Autotest - Maximum characters: 255. Any text over this limit will not show on the advert.",
-      true,
-      "Prawf awtomeiddio",
-      List("Full-time"),
-      ListBuffer("Executive Officer"),
-      "Grade 7",
-      "GBP (£)",
-      25000,
-      95000,
-      "Can agree on the higher bracket",
-      true,
-      18750
-    )
+  extends ContractDetails(
+    List("Permanent", "Temporary", "Loan", "Secondment", "Returner"),
+    "Autotest - Maximum characters: 255. Any text over this limit will not show on the advert.",
+    true,
+    "Prawf awtomeiddio",
+    List("Full-time", "Part-time", "Compressed Hours", "Flexible working", "Homeworking"),
+    ListBuffer("Senior Executive Officer"),
+    "Grade 7",
+    "GBP (£)",
+    75000,
+    95000,
+    "Can agree on the higher bracket",
+    true,
+    18750
+  )
 
 object PEC_ADVERT
     extends AdvertDetails(
@@ -145,7 +147,7 @@ object PEC_VETTING_DETAILS
 
 object PEC_INTERVIEWS_DETAILS
     extends InterviewsDetails(
-      "1",
+      "2",
       "Interview",
       "Assessment",
       "Telephone",
@@ -155,7 +157,7 @@ object PEC_INTERVIEWS_DETAILS
 
 object PEC_SUCCESS_PROFILES
     extends SuccessProfilesDetails(
-      false,
+      true,
       true,
       true,
       true,

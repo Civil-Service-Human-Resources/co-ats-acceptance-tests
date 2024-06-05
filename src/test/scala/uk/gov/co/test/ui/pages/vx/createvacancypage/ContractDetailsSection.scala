@@ -34,7 +34,7 @@ object ContractDetailsSection extends VacancyBasePage {
   def addWelshEmploymentLengthId() = "clicky_154962"
   def welshEmploymentLengthInput   = "datafield_154962_1_1_cy"
   def updateWelshLengthId()        = "lbledit_datafield_154962_1_1-update"
-  def jobGradeInput                = s".//*[@aria-describedby='$jobGradeId']"
+//  def jobGradeInput                = s".//*[@aria-describedby='$jobGradeId']"
   def equivalentGradeId            = s"${vacancyFormId}_datafield_154981_1_1_en-GB"
   def minimumSalaryId              = s"${vacancyFormId}_datafield_155044_1_1"
   def maximumSalaryId              = s"${vacancyFormId}_datafield_155051_1_1"
@@ -71,8 +71,9 @@ object ContractDetailsSection extends VacancyBasePage {
   private def selectJobGrade(contractDetails: ContractDetails): Unit = {
     scrollToElement(By.id(jobGradeId))
     vXJobGrades = contractDetails.jobGrade
-    enterTypeRoles(vXJobGrades, jobGradeInput)
+    enterTypeRoles(vXJobGrades, jobGradeId)
   }
+
   private def enterEquivalentGrade(contractDetails: ContractDetails): Unit = {
     vXJobGradeEquivalent = contractDetails.equivalentGrade
     val equivalentGrade = textField(equivalentGradeId)

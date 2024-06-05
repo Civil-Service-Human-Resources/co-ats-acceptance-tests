@@ -45,6 +45,7 @@ object CSJT_JOB_INFORMATION
       true,
       "Prawf awtomeiddio",
       "Autotest - Business area detail",
+      "Autotest - Position identifier",
       typeOfRole = ListBuffer(
         "Accountancy",
         "Analytical",
@@ -54,7 +55,8 @@ object CSJT_JOB_INFORMATION
         "Tax Profession"
       ),
       "Other",
-      "3"
+      "3",
+      false
     )
 object CSJT_APPROACH
     extends ApproachDetails(

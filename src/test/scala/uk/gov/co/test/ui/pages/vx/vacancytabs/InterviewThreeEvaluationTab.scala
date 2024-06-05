@@ -344,7 +344,7 @@ object InterviewThreeEvaluationTab extends VacancyBasePage {
       }
       waitForVisibilityOfElementById(
         behaviourTotalScoreId
-      ).getText shouldEqual s"Behaviour Total Score\n  ${totalScore(vXI3BehavioursTotalScore)}" //TODO I2 is different, no Pascal Case
+      ).getText shouldEqual s"Behaviour Total Score  \n${totalScore(vXI3BehavioursTotalScore)}" //TODO I2 is different, no Pascal Case
     }
 
   private def enterTechSkillOneOutcome(interviewThreeDetails: InterviewThreeDetails): Unit = {
@@ -467,7 +467,7 @@ object InterviewThreeEvaluationTab extends VacancyBasePage {
       }
       waitForVisibilityOfElementById(
         techSkillTotalScoreId
-      ).getText shouldEqual s"Technical Skill Overall Score\n  ${totalScore(vXI3TechSkillsTotalScore)}" //TODO I2 different wording case
+      ).getText shouldEqual s"Technical Skill Overall Score  \n${totalScore(vXI3TechSkillsTotalScore)}" //TODO I2 different wording case
     }
 
   private def enterStrengthOneOutcome(interviewThreeDetails: InterviewThreeDetails): Unit = {
@@ -590,7 +590,7 @@ object InterviewThreeEvaluationTab extends VacancyBasePage {
       }
       waitForVisibilityOfElementById(
         strengthTotalScoreId
-      ).getText shouldEqual s"Strengths Total Score\n  ${totalScore(vXI3StrengthsTotalScore)}" //TODO I2 has different casing
+      ).getText shouldEqual s"Strengths Total Score  \n${totalScore(vXI3StrengthsTotalScore)}" //TODO I2 has different casing
     }
 
   private def howManyAssessments(interviewThreeDetails: InterviewThreeDetails): Unit = {

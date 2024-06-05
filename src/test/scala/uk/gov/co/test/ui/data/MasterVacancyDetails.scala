@@ -22,12 +22,14 @@ object MasterVacancyDetails extends VacancyBasePage {
   var vXConvertedClosingDateTime        = ""
 
   //vx VACANCY job information
-  var vXJobInfoDepartment  = ""
-  var vXBusinessArea       = ""
-  var vXBusinessAreaDetail = ""
-  var vXTypeOfRole         = new ListBuffer[String]()
-  var vXProfession         = ""
-  var vXNoOfJobsAvailable  = ""
+  var vXJobInfoDepartment          = ""
+  var vXBusinessArea               = ""
+  var vXBusinessAreaDetail         = ""
+  var vXPositionIdentifier         = ""
+  var vXTypeOfRole                 = new ListBuffer[String]()
+  var vXProfession                 = ""
+  var vXNoOfJobsAvailable          = ""
+  var vXLineManagerDuties: Boolean = _
 
   //vx VACANCY approach
   var vXApproach = ""

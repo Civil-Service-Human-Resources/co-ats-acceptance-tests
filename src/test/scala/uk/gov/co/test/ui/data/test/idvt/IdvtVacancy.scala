@@ -45,6 +45,7 @@ object IDVT_JOB_INFORMATION
       true,
       "Prawf awtomeiddio",
       "Autotest - Business area detail",
+      "Autotest - Position identifier",
       typeOfRole = ListBuffer(
         "Accountancy",
         "Analytical",
@@ -54,7 +55,8 @@ object IDVT_JOB_INFORMATION
         "Tax Profession"
       ),
       "Other",
-      "1"
+      "1",
+      false
     )
 object IDVT_APPROACH
     extends ApproachDetails(
