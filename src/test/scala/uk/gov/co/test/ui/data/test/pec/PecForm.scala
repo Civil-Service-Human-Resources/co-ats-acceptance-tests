@@ -8,14 +8,18 @@ object PEC_FORM_DATA
     extends PecFormDetails(
       PEC_FORM_YOUR_DETAILS,
       PEC_RIGHT_TO_WORK,
-      PEC_FORM_UPLOAD_IDENTITY_DOCS,
-      PEC_FORM_DBS_PERSONAL_INFO,
-      PEC_FORM_DBS_ADDRESS_DETAILS,
-      PEC_FORM_DIGITAL_IDENTITY_CHECK,
       PEC_FORM_EMPLOYMENT_HISTORY,
       PEC_FORM_VERIFYING_HISTORY,
       PEC_FORM_PENSION_QUESTIONNAIRE,
       PEC_FORM_OVERSEAS,
+      PEC_FORM_BANKRUPTCY_DETAILS,
+      PEC_FORM_HEALTH_DECLARATION,
+      PEC_FORM_SELF_EMPLOYMENT,
+      PEC_FORM_PREVIOUS_CS_EMPLOYMENT,
+      PEC_FORM_UPLOAD_IDENTITY_DOCS,
+      PEC_FORM_DBS_PERSONAL_INFO,
+      PEC_FORM_DBS_ADDRESS_DETAILS,
+      PEC_FORM_DIGITAL_IDENTITY_CHECK,
       PEC_FORM_DECLARATION
     )
 
@@ -215,6 +219,29 @@ object PEC_FORM_OVERSEAS
       "22/05/2020",
       false,
       "Autotest - Provide details about why we cannot contact your fellow UK traveller"
+    )
+
+object PEC_FORM_BANKRUPTCY_DETAILS
+    extends BankruptcyDetails(
+      false,
+      false,
+      false,
+      false
+    )
+
+object PEC_FORM_HEALTH_DECLARATION
+    extends HealthDeclarationDetails(
+      false, false, false, false, false, false, false
+    )
+
+object PEC_FORM_SELF_EMPLOYMENT
+    extends SelfEmploymentDetails(
+      false
+    )
+
+object PEC_FORM_PREVIOUS_CS_EMPLOYMENT
+    extends PreviousCSEmploymentDetails(
+      false
     )
 
 object PEC_FORM_DECLARATION

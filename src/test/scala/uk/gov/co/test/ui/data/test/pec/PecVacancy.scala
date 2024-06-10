@@ -481,7 +481,7 @@ object PEC_PEC_CHECK_FORMS
       referenceChecks = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
       bankruptcyChecks = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
       crcChecks = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
-      nsvChecks = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      nsvChecks = ListBuffer("Not Applicable"),
       "Show recruiter and candidate forms",
       jobHistoryChecks = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
       healthRefChecks = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
@@ -496,8 +496,8 @@ object PEC_PEC_CHECK_FORMS
       true,
       "Autotest - Name of check",
       additionalCheck = ListBuffer("Not Applicable"),
-      nenOnboarding = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      nenOnboarding = ListBuffer("External Candidates", "OGD Candidates", "NDPB Candidates"),
       s"$contactEmailVxConfig",
-      pnOnboarding = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      pnOnboarding = ListBuffer("Internal Candidates"),
       s"$contactEmailVxConfig"
     )

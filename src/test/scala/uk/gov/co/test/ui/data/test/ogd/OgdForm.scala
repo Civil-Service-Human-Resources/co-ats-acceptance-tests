@@ -8,14 +8,18 @@ object OGD_FORM_DATA
     extends PecFormDetails(
       OGD_FORM_YOUR_DETAILS,
       OGD_RIGHT_TO_WORK,
-      OGD_FORM_UPLOAD_IDENTITY_DOCS,
-      OGD_FORM_DBS_PERSONAL_INFO,
-      OGD_FORM_DBS_ADDRESS_DETAILS,
-      OGD_FORM_DIGITAL_IDENTITY_CHECK,
       OGD_FORM_EMPLOYMENT_HISTORY,
       OGD_FORM_VERIFYING_HISTORY,
       OGD_FORM_PENSION_QUESTIONNAIRE,
       OGD_FORM_OVERSEAS,
+      OGD_FORM_BANKRUPTCY_DETAILS,
+      OGD_FORM_HEALTH_DECLARATION,
+      OGD_FORM_SELF_EMPLOYMENT,
+      OGD_FORM_PREVIOUS_CS_EMPLOYMENT,
+      OGD_FORM_UPLOAD_IDENTITY_DOCS,
+      OGD_FORM_DBS_PERSONAL_INFO,
+      OGD_FORM_DBS_ADDRESS_DETAILS,
+      OGD_FORM_DIGITAL_IDENTITY_CHECK,
       OGD_FORM_DECLARATION
     )
 
@@ -56,6 +60,29 @@ object OGD_RIGHT_TO_WORK
       true,
       true,
       true
+    )
+
+object OGD_FORM_BANKRUPTCY_DETAILS
+    extends BankruptcyDetails(
+      false,
+      false,
+      false,
+      false
+    )
+
+object OGD_FORM_HEALTH_DECLARATION
+    extends HealthDeclarationDetails(
+      false, false, false, false, false, false, false
+    )
+
+object OGD_FORM_SELF_EMPLOYMENT
+    extends SelfEmploymentDetails(
+      false
+    )
+
+object OGD_FORM_PREVIOUS_CS_EMPLOYMENT
+    extends PreviousCSEmploymentDetails(
+      false
     )
 
 object OGD_FORM_UPLOAD_IDENTITY_DOCS

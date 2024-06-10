@@ -8,14 +8,18 @@ object FULL_PEC_FORM_DATA
     extends PecFormDetails(
       FULL_PEC_FORM_YOUR_DETAILS,
       FULL_PEC_RIGHT_TO_WORK,
+      FULL_PEC_FORM_EMPLOYMENT_HISTORY,
+      FULL_PEC_FORM_VERIFYING_HISTORY,
+      FULL_PEC_FORM_PENSION_QUESTIONNAIRE,
+      FULL_PEC_FORM_OVERSEAS,
+      FULL_PEC_FORM_BANKRUPTCY_DETAILS,
+      FULL_PEC_FORM_HEALTH_DECLARATION,
+      FULL_PEC_FORM_SELF_EMPLOYMENT,
+      FULL_PEC_FORM_PREVIOUS_CS_EMPLOYMENT,
       FULL_PEC_FORM_UPLOAD_IDENTITY_DOCS,
       FULL_PEC_FORM_DBS_PERSONAL_INFO,
       FULL_PEC_FORM_DBS_ADDRESS_DETAILS,
       FULL_PEC_FORM_DIGITAL_IDENTITY_CHECK,
-      FULL_PEC_FORM_EMPLOYMENT_HISTORY,
-      FULL_PEC_FORM_VERIFYING_HISTORY,
-      FULL_PEC_FORM_PENSION_QUESTIONNAIRE,
-      PEC_FORM_OVERSEAS,
       FULL_PEC_FORM_DECLARATION
     )
 
@@ -181,7 +185,7 @@ object FULL_PEC_FORM_PENSION_QUESTIONNAIRE
       false
     )
 
-object PEC_FORM_OVERSEAS
+object FULL_PEC_FORM_OVERSEAS
     extends OverseasDetails(
       "Have you resided outside the UK within the past 3 years for 6 months or more?",
       true,
@@ -215,6 +219,29 @@ object PEC_FORM_OVERSEAS
       "22/05/2020",
       false,
       "Autotest - Provide details about why we cannot contact your fellow UK traveller"
+    )
+
+object FULL_PEC_FORM_BANKRUPTCY_DETAILS
+    extends BankruptcyDetails(
+      false,
+      false,
+      false,
+      false
+    )
+
+object FULL_PEC_FORM_HEALTH_DECLARATION
+    extends HealthDeclarationDetails(
+      false, false, false, false, false, false, false
+    )
+
+object FULL_PEC_FORM_SELF_EMPLOYMENT
+    extends SelfEmploymentDetails(
+      false
+    )
+
+object FULL_PEC_FORM_PREVIOUS_CS_EMPLOYMENT
+    extends PreviousCSEmploymentDetails(
+      false
     )
 
 object FULL_PEC_FORM_DECLARATION

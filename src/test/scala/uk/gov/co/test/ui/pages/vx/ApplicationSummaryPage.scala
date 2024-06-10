@@ -124,9 +124,6 @@ object ApplicationSummaryPage extends VacancyBasePage {
     if (!vXUseOnlinePecForms) {
       confirmApplicationUpdateState()
       agreeStartDate()
-    } else if (vXPecCrc.contains("OGD Candidates") || vXPecNsv.contains("OGD Candidates")) {
-      confirmOfferAcceptedNoPecFunction()
-      securityChecksRequired()
     } else {
       confirmOfferAcceptedState()
       provisionalOfferAccepted()

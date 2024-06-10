@@ -1,9 +1,11 @@
 package uk.gov.co.test.ui.specs
 
 import uk.gov.co.test.ui.data.MasterVacancyDetails.v9HomeDepartment
+import uk.gov.co.test.ui.data.test.ogd.OGD_VACANCY_DATA
 import uk.gov.co.test.ui.data.v9.applicants._
 import uk.gov.co.test.ui.flows.e2e.OgdFlow.ogdFlow
 import uk.gov.co.test.ui.flows.v9.RegisterCandidateFlow.fillNewCandidateDetails
+import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.fillNewVacancyForm
 import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.acceptsOfferAgain
 import uk.gov.co.test.ui.pages.vx.VacancyDetailsPage.extractAllVacancyDetails
 import uk.gov.co.test.ui.pages.vx.vacancytabs.HistoryTab.{emailHistoryChecks, ogdTransferEmailChecks, ogdTransferHistoryChecks, ogdTransferHistoryChecksNoEmail, setBackToProvisionalOfferOnline}
@@ -41,12 +43,12 @@ class OgdEmailSpec extends BaseFeatureSpec {
 
     Scenario("VX: Email Sent For OGD Transfer Department (DEFRA)", RunInVX) {
       Given("a vacancy is created with grs recruitment stage type set to bau")
-//      fillNewVacancyForm(OGD_VACANCY_DATA)
-      extractAllVacancyDetails("10053")
+      fillNewVacancyForm(OGD_VACANCY_DATA)
+//      extractAllVacancyDetails("10053")
       fillNewCandidateDetails(REGISTER_CANDIDATE_OGD_DEFRA)
 
       When("candidate selects ogd on offer")
-      v9HomeDepartment = "Department for Environment, Food and Rural Affairs"
+      v9HomeDepartment = "Office for Environmental Protection"
       ogdFlow()
 
       Then("the email is sent for ogd transfer departments")

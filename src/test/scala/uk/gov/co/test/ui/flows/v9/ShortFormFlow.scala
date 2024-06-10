@@ -1,6 +1,6 @@
 package uk.gov.co.test.ui.flows.v9
 
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXAnyOnlineTests, vXApproach, vXHowManyQuestions, vXHowManySkills, vXNoLongForm, vacancyId, vacancyName}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXAbilitiesRequired, vXAnyAdditionalQuestions, vXAnyOnlineTests, vXApproach, vXAttachmentRequired, vXBehavioursRequired, vXExperiencesRequired, vXGiveLocationPreference, vXHowManyQuestions, vXHowManySkills, vXNoLongForm, vXStrengthsRequired, vXTechSkillsRequired, vacancyId, vacancyName}
 import uk.gov.co.test.ui.data.v9.shortform.ShortFormDetails
 import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.{confirmShortFormCompletion, confirmShortFormCompletionNoLongForm}
 import uk.gov.co.test.ui.pages.v9.ApplicationsPage.{extractApplicationId, navigateToApplicationCentrePage}
@@ -30,8 +30,21 @@ object ShortFormFlow extends CivilServiceJobsBasePage {
       }
       clickOn(submitForm)
     } else println(s"Vacancy is not open for '$vXApproach' candidates!")
-    if (vXHowManySkills > 0 || vXAnyOnlineTests || vXHowManyQuestions > 0) {
+    if (
+      vXHowManySkills > 0 ||
+      vXAnyOnlineTests ||
+      vXHowManyQuestions > 0 ||
+      vXAbilitiesRequired ||
+      vXBehavioursRequired ||
+      vXExperiencesRequired ||
+      vXStrengthsRequired ||
+      vXTechSkillsRequired ||
+      vXGiveLocationPreference ||
+      vXAttachmentRequired ||
+      vXAnyAdditionalQuestions
+    ) {
       confirmShortFormCompletion()
+      vXNoLongForm = false
     } else {
       confirmShortFormCompletionNoLongForm()
       vXNoLongForm = true

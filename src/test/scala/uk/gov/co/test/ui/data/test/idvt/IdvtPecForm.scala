@@ -8,14 +8,18 @@ object IDVT_FORM_DATA
     extends PecFormDetails(
       IDVT_FORM_YOUR_DETAILS,
       IDVT_RIGHT_TO_WORK,
-      IDVT_FORM_UPLOAD_IDENTITY_DOCS,
-      IDVT_FORM_DBS_PERSONAL_INFO,
-      IDVT_FORM_DBS_ADDRESS_DETAILS,
-      IDVT_FORM_DIGITAL_IDENTITY_CHECK,
       IDVT_FORM_EMPLOYMENT_HISTORY,
       IDVT_FORM_VERIFYING_HISTORY,
       IDVT_FORM_PENSION_QUESTIONNAIRE,
       IDVT_FORM_OVERSEAS,
+      IDVT_FORM_BANKRUPTCY_DETAILS,
+      IDVT_FORM_HEALTH_DECLARATION,
+      IDVT_FORM_SELF_EMPLOYMENT,
+      IDVT_FORM_PREVIOUS_CS_EMPLOYMENT,
+      IDVT_FORM_UPLOAD_IDENTITY_DOCS,
+      IDVT_FORM_DBS_PERSONAL_INFO,
+      IDVT_FORM_DBS_ADDRESS_DETAILS,
+      IDVT_FORM_DIGITAL_IDENTITY_CHECK,
       IDVT_FORM_DECLARATION
     )
 
@@ -56,6 +60,29 @@ object IDVT_RIGHT_TO_WORK
       true,
       true,
       true
+    )
+
+object IDVT_FORM_BANKRUPTCY_DETAILS
+    extends BankruptcyDetails(
+      false,
+      false,
+      false,
+      false
+    )
+
+object IDVT_FORM_HEALTH_DECLARATION
+    extends HealthDeclarationDetails(
+      false, false, false, false, false, false, false
+    )
+
+object IDVT_FORM_SELF_EMPLOYMENT
+    extends SelfEmploymentDetails(
+      false
+    )
+
+object IDVT_FORM_PREVIOUS_CS_EMPLOYMENT
+    extends PreviousCSEmploymentDetails(
+      false
     )
 
 object IDVT_FORM_UPLOAD_IDENTITY_DOCS

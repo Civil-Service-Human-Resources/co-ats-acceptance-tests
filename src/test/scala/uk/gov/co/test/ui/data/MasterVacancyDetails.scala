@@ -48,10 +48,10 @@ object MasterVacancyDetails extends VacancyBasePage {
   //vx VACANCY locations
   var vXLocationType                       = ""
   var vXLocationDisplay                    = ""
-  var vXVacanciesInNIR                     = true
+  var vXVacanciesInNIR: Boolean            = _
   var vXCommunitiesInNIR                   = ""
-  var vXAvailableOutsideInNI               = false
-  var vXGiveLocationPreference: Boolean    = true
+  var vXAvailableOutsideInNI: Boolean      = _
+  var vXGiveLocationPreference: Boolean    = _
   var vXMaxLocations: String               = ""
   var vXOtherLocations: ListBuffer[String] = ListBuffer("London", "Southampton", "Manchester")
 

@@ -56,7 +56,7 @@ object OGD_JOB_INFORMATION
       ),
       "Other",
       "3",
-      false
+      true
     )
 object OGD_APPROACH
     extends ApproachDetails(
