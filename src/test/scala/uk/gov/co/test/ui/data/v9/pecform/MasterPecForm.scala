@@ -181,9 +181,9 @@ object MASTER_PEC_FORM_SELF_EMPLOYMENT
     )
 
 object MASTER_PEC_FORM_PREVIOUS_CS_EMPLOYMENT
-  extends PreviousCSEmploymentDetails(
-    false
-  )
+    extends PreviousCSEmploymentDetails(
+      false
+    )
 
 object MASTER_PEC_FORM_DBS_PERSONAL_INFO
     extends DbsPersonalInfoDetails(
@@ -245,8 +245,5 @@ object MASTER_PEC_FORM_DIGITAL_IDENTITY_CHECK
 
 object MASTER_PEC_FORM_DECLARATION
     extends DeclarationDetails(
-      true,
-      true,
-      true,
-      true
+      true, true, true, true, true, true, true, true
     )

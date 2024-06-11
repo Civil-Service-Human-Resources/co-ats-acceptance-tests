@@ -26,7 +26,7 @@ object HealthDeclarationPage extends CivilServiceJobsBasePage {
   def healthIssuesAffectingJobAdvertYesId       = s"${pecFormId}_datafield_78796_1_1_1_label"
   def healthIssuesAffectingJobAdvertNoId        = s"${pecFormId}_datafield_78796_1_1_2_label"
   def ongoingTreatmentsOrInvestigationsYesId    = s"${pecFormId}_datafield_78809_1_1_1_label"
-  def ongoingTreatmentsOrInvestigationsNoId     = s"${pecFormId}_datafield_78809_1_1_1_label"
+  def ongoingTreatmentsOrInvestigationsNoId     = s"${pecFormId}_datafield_78809_1_1_2_label"
   def healthIssuesCausedByWorkMayAffectNowYesId = s"${pecFormId}_datafield_78822_1_1_1_label"
   def healthIssuesCausedByWorkMayAffectNowNoId  = s"${pecFormId}_datafield_78822_1_1_2_label"
   def healthRelatedAbsenceYesId                 = s"${pecFormId}_datafield_78832_1_1_1_label"

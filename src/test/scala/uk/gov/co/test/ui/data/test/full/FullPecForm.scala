@@ -246,8 +246,5 @@ object FULL_PEC_FORM_PREVIOUS_CS_EMPLOYMENT
 
 object FULL_PEC_FORM_DECLARATION
     extends DeclarationDetails(
-      true,
-      true,
-      true,
-      true
+      true, true, true, true, true, true, true, true
     )

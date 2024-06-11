@@ -246,8 +246,5 @@ object IDVT_FORM_OVERSEAS
 
 object IDVT_FORM_DECLARATION
     extends DeclarationDetails(
-      true,
-      true,
-      true,
-      true
+      true, true, true, true, true, true, true, true
     )

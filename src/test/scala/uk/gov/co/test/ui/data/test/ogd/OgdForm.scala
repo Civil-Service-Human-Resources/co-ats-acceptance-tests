@@ -246,8 +246,5 @@ object OGD_FORM_OVERSEAS
 
 object OGD_FORM_DECLARATION
     extends DeclarationDetails(
-      true,
-      true,
-      true,
-      true
+      true, true, true, true, true, true, true, true
     )
