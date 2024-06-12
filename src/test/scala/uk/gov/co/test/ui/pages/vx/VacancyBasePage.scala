@@ -103,20 +103,26 @@ trait VacancyBasePage extends Matchers with BasePage with BrowserDriver {
 
   def enterDateFields(date: String, dayId: String, monthId: String, yearId: String): Unit = {
     val (_day, _month, _year) = splitDate(date)
-    enterTimeDate(dayId, _day)
-    enterTimeDate(monthId, _month)
-    enterTimeDate(yearId, _year)
+    enterDate(dayId, _day)
+    enterDate(monthId, _month)
+    enterDate(yearId, _year)
   }
 
-  def enterTimeDate(id: String, value: String): Unit = {
+  def enterDate(id: String, value: String): Unit = {
     val dateValue = new Select(waitForVisibilityOfElementById(id))
     dateValue.selectByValue(value)
   }
 
+  def enterStartTime(id: String, value: String): Unit = {
+    waitForVisibilityOfElementById(id).click()
+    val timeValue = new Select(waitForVisibilityOfElementById(id))
+    timeValue.selectByValue(value)
+  }
+
   def enterTimeFields(time: String, hourId: String, minId: String): Unit = {
     val (_hour, _min) = splitStartTime(time)
-    enterTimeDate(hourId, _hour)
-    enterTimeDate(minId, _min)
+    enterStartTime(hourId, _hour)
+    enterStartTime(minId, _min)
   }
 
   def splitStartTime(timeField: String): (String, String) = {

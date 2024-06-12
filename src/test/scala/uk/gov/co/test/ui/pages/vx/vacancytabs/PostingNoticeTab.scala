@@ -1,9 +1,9 @@
 package uk.gov.co.test.ui.pages.vx.vacancytabs
 
-import org.openqa.selenium.By
+import org.openqa.selenium.{By, Keys}
 import uk.gov.co.test.ui.data.MasterVacancyDetails.{preferredFirstName, preferredTeleNumber, randomFirstName, randomLastName, vXJobGradeEquivalent, vXJobGrades, vXJobInfoDepartment, vXProfession, vXTypeOfRole, vacancyFormId, vacancyId, vacancyName}
 import uk.gov.co.test.ui.data.vx.application.ApplicationDetails
-import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.{completePostingNoticeFormBarId, navigateToApplicationSummary}
+import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.completePostingNoticeFormBarId
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 
 import java.time.LocalDate
@@ -135,15 +135,21 @@ object PostingNoticeTab extends VacancyBasePage {
     ).getText                                                     shouldEqual "This form must be completed in full - changes cannot be saved unless all mandatory fields are complete."
   }
 
+  def enterPnValue(inputId: String, text: String): Unit = {
+    val enterOption = waitForVisibilityOfElementById(inputId)
+    enterOption.clear()
+    enterOption.sendKeys(text)
+  }
+
   private def vacancyInfoSection(postingNoticeDetails: PostingNoticeDetails): Unit = {
     waitForVisibilityOfElementById(pnVacancyInfoHeaderId).getText shouldEqual "Vacancy Information"
     waitForVisibilityOfElementById(vacancyRefId).getText               should endWith(vacancyId)
     waitForVisibilityOfElementById(vacancyTitleId).getText             should endWith(vacancyName)
     waitForVisibilityOfElementById(vacancyDeptId).getText              should endWith(vXJobInfoDepartment)
-    enterValue(costCentreId, postingNoticeDetails.costCentre)
-    enterValue(sopOrgId, postingNoticeDetails.sopOrg)
-    enterValue(sopPositionId, postingNoticeDetails.sopPosition)
-    enterValue(businessUnitId, postingNoticeDetails.businessUnit)
+    enterPnValue(costCentreId, postingNoticeDetails.costCentre)
+    enterPnValue(sopOrgId, postingNoticeDetails.sopOrg)
+    enterPnValue(sopPositionId, postingNoticeDetails.sopPosition)
+    enterPnValue(businessUnitId, postingNoticeDetails.businessUnit)
   }
 
   private def newEntrantInfoSection(postingNoticeDetails: PostingNoticeDetails): Unit = {
@@ -152,33 +158,33 @@ object PostingNoticeTab extends VacancyBasePage {
     waitForVisibilityOfElementById(preferredNameId).getText          should endWith(preferredFirstName)
     waitForVisibilityOfElementById(surnameId).getText                should endWith(randomLastName)
     waitForVisibilityOfElementById(preferredContactNumberId).getText should endWith(preferredTeleNumber)
-    enterValue(currentStaffNumberId, postingNoticeDetails.currentStaffNo)
-    enterValue(ninoId, postingNoticeDetails.nino)
+    enterPnValue(currentStaffNumberId, postingNoticeDetails.currentStaffNo)
+    enterPnValue(ninoId, postingNoticeDetails.nino)
   }
 
   private def postingInfoSection(postingNoticeDetails: PostingNoticeDetails): Unit = {
     waitForVisibilityOfElementById(postingInfoHeaderId).getText shouldEqual "Posting Information"
     enterStartDate(postingNoticeDetails)
     enterStartTimeFirstDay(postingNoticeDetails)
-    enterValue(premOfficeAddressId, postingNoticeDetails.premOfficeAddress)
+    enterPnValue(premOfficeAddressId, postingNoticeDetails.premOfficeAddress)
     selectDualLocation(postingNoticeDetails)
     selectEmploymentType(postingNoticeDetails)
     selectTypeOfTransfer(postingNoticeDetails)
-    waitForVisibilityOfElementById(gradeId).getText                  should endWith(vXJobGrades.head)
+    waitForVisibilityOfElementById(gradeId).getText                  should endWith(vXJobGrades.mkString(", "))
     waitForVisibilityOfElementById(equivalentGradeId).getText        should endWith(vXJobGradeEquivalent)
-    waitForVisibilityOfElementById(jobCategoryId).getText            should endWith(vXTypeOfRole.head)
+    waitForVisibilityOfElementById(jobCategoryId).getText            should endWith(vXTypeOfRole.mkString(", "))
     waitForVisibilityOfElementById(professionId).getText             should endWith(vXProfession)
     selectWorkingPattern(postingNoticeDetails)
-    enterValue(weeklyWorkingHoursId, postingNoticeDetails.weeklyWorkingHours)
-    enterValue(hoursWorkedMonId, postingNoticeDetails.monHours)
-    enterValue(hoursWorkedTuesId, postingNoticeDetails.tuesHours)
-    enterValue(hoursWorkedWedId, postingNoticeDetails.wedHours)
-    enterValue(hoursWorkedThursId, postingNoticeDetails.thursHours)
-    enterValue(hoursWorkedFriId, postingNoticeDetails.friHours)
-    enterValue(hoursWorkedSatId, postingNoticeDetails.satHours)
-    enterValue(hoursWorkedSunId, postingNoticeDetails.sunHours)
+    enterPnValue(weeklyWorkingHoursId, postingNoticeDetails.weeklyWorkingHours)
+    enterPnValue(hoursWorkedMonId, postingNoticeDetails.monHours)
+    enterPnValue(hoursWorkedTuesId, postingNoticeDetails.tuesHours)
+    enterPnValue(hoursWorkedWedId, postingNoticeDetails.wedHours)
+    enterPnValue(hoursWorkedThursId, postingNoticeDetails.thursHours)
+    enterPnValue(hoursWorkedFriId, postingNoticeDetails.friHours)
+    enterPnValue(hoursWorkedSatId, postingNoticeDetails.satHours)
+    enterPnValue(hoursWorkedSunId, postingNoticeDetails.sunHours)
     selectPayZone(postingNoticeDetails)
-    enterValue(annualSalaryId, postingNoticeDetails.annualSalary)
+    enterPnValue(annualSalaryId, postingNoticeDetails.annualSalary)
     selectNegotiatedSalary(postingNoticeDetails)
     selectAllowancesRequired(postingNoticeDetails)
     selectModernisedTAndCs(postingNoticeDetails)
@@ -187,10 +193,10 @@ object PostingNoticeTab extends VacancyBasePage {
 
   private def lineManagerDetailsSection(postingNoticeDetails: PostingNoticeDetails): Unit = {
     waitForVisibilityOfElementById(lineManagerDetailsHeaderId).getText shouldEqual "Line Manager Details"
-    enterValue(lineManagersFullNameId, postingNoticeDetails.lineManagersFullName)
-    enterValue(lineManagersTelNoId, postingNoticeDetails.lineManagersTeleNo)
-    enterValue(lineManagersEmailId, postingNoticeDetails.lineManagersEmail)
-    enterValue(lineManagersStaffNoId, postingNoticeDetails.lineManagersStaffNo)
+    enterPnValue(lineManagersFullNameId, postingNoticeDetails.lineManagersFullName)
+    enterPnValue(lineManagersTelNoId, postingNoticeDetails.lineManagersTeleNo)
+    enterPnValue(lineManagersEmailId, postingNoticeDetails.lineManagersEmail)
+    enterPnValue(lineManagersStaffNoId, postingNoticeDetails.lineManagersStaffNo)
   }
 
   private def enterStartDate(postingNoticeDetails: PostingNoticeDetails): Unit =
@@ -213,7 +219,7 @@ object PostingNoticeTab extends VacancyBasePage {
   private def selectDualLocation(postingNoticeDetails: PostingNoticeDetails): Unit =
     if (postingNoticeDetails.dualLocation) {
       clickOnRadioButton(dualLocationYesId)
-      enterValue(secondLocationId, postingNoticeDetails.secondLocation)
+      enterPnValue(secondLocationId, postingNoticeDetails.secondLocation)
     } else {
       clickOnRadioButton(dualLocationNoId)
     }
@@ -232,7 +238,7 @@ object PostingNoticeTab extends VacancyBasePage {
       employmentType == "Internship"
     ) {
       selectReasonForHire(postingNoticeDetails)
-      enterValue(keyResponsibilitiesId, postingNoticeDetails.keyResponsibilities)
+      enterPnValue(keyResponsibilitiesId, postingNoticeDetails.keyResponsibilities)
       enterContractEndDate(postingNoticeDetails)
     }
   }
@@ -288,7 +294,7 @@ object PostingNoticeTab extends VacancyBasePage {
   private def selectAllowancesRequired(postingNoticeDetails: PostingNoticeDetails): Unit =
     if (postingNoticeDetails.allowancesRequired) {
       clickOnRadioButton(allowancesRequiredYesId)
-      enterValue(allowancesNameAndAccountId, postingNoticeDetails.allowancesNameAndAccount)
+      enterPnValue(allowancesNameAndAccountId, postingNoticeDetails.allowancesNameAndAccount)
     } else {
       clickOnRadioButton(allowancesRequiredNoId)
     }
