@@ -1,6 +1,6 @@
 package uk.gov.co.test.ui.flows.e2e
 
-import uk.gov.co.test.ui.data.test.ogd.{OGD_APPLICATION_DATA, OGD_FORM_DATA, OGD_LONG_FORM_DATA, OGD_SHORT_FORM_DATA}
+import uk.gov.co.test.ui.data.test.ogd.{OGD_APPLICATION_DATA, OGD_PEC_FORM_DATA, OGD_LONG_FORM_DATA, OGD_SHORT_FORM_DATA}
 import uk.gov.co.test.ui.flows.e2e.InterviewFlow.completeAllInterviews
 import uk.gov.co.test.ui.flows.v9.LongFormFlow.fillLongFormDetails
 import uk.gov.co.test.ui.flows.v9.PecFormFlow.fillPecFormDetailsOnly

@@ -2,7 +2,7 @@ package uk.gov.co.test.ui.pages.vx.createvacancypage
 
 import org.openqa.selenium.support.ui.WebDriverWait
 import org.openqa.selenium.{By, WebDriver}
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXBusinessAreaDetail, vXJobInfoDepartment, vXLineManagerDuties, vXNoOfJobsAvailable, vXPositionIdentifier, vXProfession, vXTypeOfRole, vacancyFormId}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXBusinessArea, vXBusinessAreaDetail, vXJobInfoDepartment, vXLineManagerDuties, vXNoOfJobsAvailable, vXPositionIdentifier, vXProfession, vXTypeOfRole, vacancyFormId}
 import uk.gov.co.test.ui.data.vx.vacancy.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 
@@ -53,7 +53,7 @@ object JobInfoSection extends VacancyBasePage {
   }
 
   private def selectBusinessArea(jobInfoDetails: JobInfoDetails): Unit = {
-    val area            = jobInfoDetails.businessArea
+    vXBusinessArea           = jobInfoDetails.businessArea
     scrollToElement(By.id(businessAreaId))
     val businessArea    = waitForVisibilityOfElementById(businessAreaId)
     businessArea.click()
@@ -65,9 +65,9 @@ object JobInfoSection extends VacancyBasePage {
     }
     val noOfListOptions = driver.findElements(By.xpath(listOptionsPath)).size()
     if (noOfListOptions < 3) {
-      action().moveToElement(waitForDropdownOption(area)).perform()
-      waitForDropdownOption(area).click()
-    } else selectOption(generalInput, area)
+      action().moveToElement(waitForDropdownOption(vXBusinessArea)).perform()
+      waitForDropdownOption(vXBusinessArea).click()
+    } else selectOption(generalInput, vXBusinessArea)
   }
 
   private def enterBusinessAreaDetail(jobInfoDetails: JobInfoDetails): Unit = {

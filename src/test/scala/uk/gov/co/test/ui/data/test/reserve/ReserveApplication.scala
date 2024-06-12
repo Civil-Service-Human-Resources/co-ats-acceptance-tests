@@ -1,11 +1,12 @@
 package uk.gov.co.test.ui.data.test.reserve
 
 import uk.gov.co.test.ui.data.vx.application.{ApplicationDetails, AssessmentOutcome, Outcome}
-import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.contactEmailVxConfig
+import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.{contactEmailVxConfig, contactNameVxConfig}
 import uk.gov.co.test.ui.pages.vx.vacancytabs._
 import uk.gov.co.test.ui.pages.vx.{CalenderScheduleDetails, InterviewScheduleDetails}
 
 import java.time.LocalDate
+import scala.collection.mutable.ListBuffer
 
 object RESERVE_APPLICATION_DATA
     extends ApplicationDetails(
@@ -17,7 +18,8 @@ object RESERVE_APPLICATION_DATA
       RESERVE_APPLICATION_INTERVIEW_ONE_EVALUATION,
       RESERVE_APPLICATION_INTERVIEW_TWO_EVALUATION,
       RESERVE_APPLICATION_INTERVIEW_THREE_EVALUATION,
-      RESERVE_APPLICATION_INTERVIEW_FOUR_EVALUATION
+      RESERVE_APPLICATION_INTERVIEW_FOUR_EVALUATION,
+      RESERVE_APPLICATION_POSTING_NOTICE
     )
 
 object RESERVE_APPLICATION_EMPLOYMENT_HISTORY
@@ -398,4 +400,45 @@ object RESERVE_APPLICATION_INTERVIEW_FOUR_EVALUATION
       declarationStatement = """Declaration
                              |
                              |By submitting this form you are agreeing to and accepting that you have no conflict of interest with this applicant and the evaluation reflects the views of all the selection panel members.""".stripMargin
+    )
+
+object RESERVE_APPLICATION_POSTING_NOTICE
+    extends PostingNoticeDetails(
+      "1234",
+      "autotest-sop org",
+      "autotest-sop position",
+      "autotest-business unit",
+      "123456",
+      "JA448800D",
+      startDate = LocalDate.now(),
+      "09:30",
+      "Autotest address",
+      true,
+      "autotest - 2nd location",
+      "Temporary",
+      "The post is time limited and is being advertised as an apprenticeship for the advertised period. The fixed-term will end when the apprenticeship has completed.",
+      "autotest - key responsibilities",
+      contractEndDate = LocalDate.now(),
+      "Level Transfer",
+      workingPattern = ListBuffer("Annualised hours", "Full Time", "Part Time"),
+      "40",
+      "8",
+      "8",
+      "8",
+      "8",
+      "8",
+      "0",
+      "0",
+      payZone = ListBuffer("London", "National"),
+      "45000",
+      true,
+      negotiatedSalaryDate = LocalDate.now(),
+      true,
+      "autotest - allowances name and account",
+      true,
+      true,
+      s"$contactNameVxConfig",
+      "01520000000",
+      s"$contactEmailVxConfig",
+      "12345"
     )

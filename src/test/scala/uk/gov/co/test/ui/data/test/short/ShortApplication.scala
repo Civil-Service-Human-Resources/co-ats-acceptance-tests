@@ -1,29 +1,28 @@
-package uk.gov.co.test.ui.data.test.full
+package uk.gov.co.test.ui.data.test.short
 
 import uk.gov.co.test.ui.data.vx.application.{ApplicationDetails, AssessmentOutcome, Outcome}
-import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.contactEmailVxConfig
-import uk.gov.co.test.ui.pages.vx.DashboardPage.contactNameVxConfig
+import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.{contactEmailVxConfig, contactNameVxConfig}
 import uk.gov.co.test.ui.pages.vx.vacancytabs._
 import uk.gov.co.test.ui.pages.vx.{CalenderScheduleDetails, InterviewScheduleDetails}
 
 import java.time.LocalDate
 import scala.collection.mutable.ListBuffer
 
-object FULL_APPLICATION_DATA
+object SHORT_APPLICATION_DATA
     extends ApplicationDetails(
-      FULL_APPLICATION_EMPLOYMENT_HISTORY,
-      FULL_APPLICATION_PRE_SIFT_EVALUATION,
-      FULL_APPLICATION_SIFT_EVALUATION,
-      FULL_APPLICATION_INTERVIEW_SCHEDULE,
-      FULL_APPLICATION_CALENDER_SCHEDULE,
-      FULL_APPLICATION_INTERVIEW_ONE_EVALUATION,
-      FULL_APPLICATION_INTERVIEW_TWO_EVALUATION,
-      FULL_APPLICATION_INTERVIEW_THREE_EVALUATION,
-      FULL_APPLICATION_INTERVIEW_FOUR_EVALUATION,
-      FULL_APPLICATION_POSTING_NOTICE
+      SHORT_APPLICATION_EMPLOYMENT_HISTORY,
+      SHORT_APPLICATION_PRE_SIFT_EVALUATION,
+      SHORT_APPLICATION_SIFT_EVALUATION,
+      SHORT_APPLICATION_INTERVIEW_SCHEDULE,
+      SHORT_APPLICATION_CALENDER_SCHEDULE,
+      SHORT_APPLICATION_INTERVIEW_ONE_EVALUATION,
+      SHORT_APPLICATION_INTERVIEW_TWO_EVALUATION,
+      SHORT_APPLICATION_INTERVIEW_THREE_EVALUATION,
+      SHORT_APPLICATION_INTERVIEW_FOUR_EVALUATION,
+      SHORT_APPLICATION_POSTING_NOTICE
     )
 
-object FULL_APPLICATION_EMPLOYMENT_HISTORY
+object SHORT_APPLICATION_EMPLOYMENT_HISTORY
     extends HistoryDetails(
       false,
       historyCheckStarted = LocalDate.now(),
@@ -44,7 +43,7 @@ object FULL_APPLICATION_EMPLOYMENT_HISTORY
       internalNotes = "Autotest - internal notes (optional)"
     )
 
-object FULL_APPLICATION_PRE_SIFT_EVALUATION
+object SHORT_APPLICATION_PRE_SIFT_EVALUATION
     extends PreSiftDetails(
       "A",
       "Autotest - CV assessment comments",
@@ -56,7 +55,7 @@ object FULL_APPLICATION_PRE_SIFT_EVALUATION
       "Autotest - Overall comments"
     )
 
-object FULL_APPLICATION_SIFT_EVALUATION
+object SHORT_APPLICATION_SIFT_EVALUATION
     extends SiftDetails(
       """Scoring guide:
       |Not demonstrated -No positive evidence and/or substantial negative evidence demonstrated
@@ -89,7 +88,7 @@ object FULL_APPLICATION_SIFT_EVALUATION
       "Declaration\n\nBy submitting this form you are agreeing to and accepting that you have no conflict of interest with this applicant and the evaluation reflects the views of all the selection panel members."
     )
 
-object FULL_APPLICATION_INTERVIEW_SCHEDULE
+object SHORT_APPLICATION_INTERVIEW_SCHEDULE
     extends InterviewScheduleDetails(
       false,
       Some("Copy From Template"),
@@ -114,7 +113,7 @@ object FULL_APPLICATION_INTERVIEW_SCHEDULE
       false
     )
 
-object FULL_APPLICATION_CALENDER_SCHEDULE
+object SHORT_APPLICATION_CALENDER_SCHEDULE
     extends CalenderScheduleDetails(
       "09:00",
       60,
@@ -127,7 +126,7 @@ object FULL_APPLICATION_CALENDER_SCHEDULE
       None
     )
 
-object FULL_APPLICATION_INTERVIEW_ONE_EVALUATION
+object SHORT_APPLICATION_INTERVIEW_ONE_EVALUATION
     extends InterviewOneDetails(
       scoringGuide = """Scoring guide:
                      |Not demonstrated - No positive evidence and/or substantial negative evidence demonstrated
@@ -196,7 +195,7 @@ object FULL_APPLICATION_INTERVIEW_ONE_EVALUATION
                              |By submitting this form you are agreeing to and accepting that you have no conflict of interest with this applicant and the evaluation reflects the views of all the selection panel members.""".stripMargin
     )
 
-object FULL_APPLICATION_INTERVIEW_TWO_EVALUATION
+object SHORT_APPLICATION_INTERVIEW_TWO_EVALUATION
     extends InterviewTwoDetails(
       scoringGuide = """Scoring guide:
                      |Not demonstrated - No positive evidence and/or substantial negative evidence demonstrated
@@ -265,7 +264,7 @@ object FULL_APPLICATION_INTERVIEW_TWO_EVALUATION
                              |By submitting this form you are agreeing to and accepting that you have no conflict of interest with this applicant and the evaluation reflects the views of all the selection panel members.""".stripMargin
     )
 
-object FULL_APPLICATION_INTERVIEW_THREE_EVALUATION
+object SHORT_APPLICATION_INTERVIEW_THREE_EVALUATION
     extends InterviewThreeDetails(
       scoringGuide = """Scoring guide:
                      |Not demonstrated - No positive evidence and/or substantial negative evidence demonstrated
@@ -334,7 +333,7 @@ object FULL_APPLICATION_INTERVIEW_THREE_EVALUATION
                              |By submitting this form you are agreeing to and accepting that you have no conflict of interest with this applicant and the evaluation reflects the views of all the selection panel members.""".stripMargin
     )
 
-object FULL_APPLICATION_INTERVIEW_FOUR_EVALUATION
+object SHORT_APPLICATION_INTERVIEW_FOUR_EVALUATION
     extends InterviewFourDetails(
       scoringGuide = """Scoring guide:
                      |Not demonstrated - No positive evidence and/or substantial negative evidence demonstrated
@@ -403,7 +402,7 @@ object FULL_APPLICATION_INTERVIEW_FOUR_EVALUATION
                              |By submitting this form you are agreeing to and accepting that you have no conflict of interest with this applicant and the evaluation reflects the views of all the selection panel members.""".stripMargin
     )
 
-object FULL_APPLICATION_POSTING_NOTICE
+object SHORT_APPLICATION_POSTING_NOTICE
     extends PostingNoticeDetails(
       "1234",
       "autotest-sop org",

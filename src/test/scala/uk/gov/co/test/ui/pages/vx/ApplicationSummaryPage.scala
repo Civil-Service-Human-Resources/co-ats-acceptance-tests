@@ -1,9 +1,9 @@
 package uk.gov.co.test.ui.pages.vx
 
 import org.openqa.selenium.By
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{applicationId, randomFirstName, randomLastName, v9CivilServant, v9HomeDepartment, vXCandidateUploadIdentityDocs, vXInterviewNumber, vXJobInfoDepartment, vXPecCrc, vXPecNsv, vXUseOnlinePecForms, vacancyId, vacancyName}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{applicationId, randomFirstName, randomLastName, v9CivilServant, v9HomeDepartment, v9RtwHoldPassport, vXApproach, vXCandidateUploadIdentityDocs, vXCrcCheckProvider, vXCrcLevel, vXInterviewNumber, vXJobInfoDepartment, vXPecBankruptcyCheck, vXPecCrc, vXPecEmploymentHistoryCheck, vXPecHealthRefCheck, vXPecNsv, vXPecOverseasCheck, vXPecPensionsCheck, vXPecPreviousCivilEmploymentCheck, vXPecSelfEmploymentCheck, vXRtwChecks, vXUseOnlinePecForms, vXWhichIdentityChecks, vacancyId, vacancyName}
 import uk.gov.co.test.ui.data.TestData.eventually
-import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.{candidateAcceptsOffer, confirmApplicationUpdateState, confirmOfferAcceptedNoPecFunction, confirmOfferAcceptedState}
+import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.{candidateAcceptsOffer, confirmApplicationUpdateNoPecNenPn, confirmApplicationUpdateState, confirmOfferAcceptedNoPecFunction, confirmOfferAcceptedState}
 import uk.gov.co.test.ui.pages.v9.ProvisionalOfferPage.offerDecisionFlow
 import uk.gov.co.test.ui.pages.vx.DashboardPage.matchCriteria
 
@@ -62,6 +62,7 @@ object ApplicationSummaryPage extends VacancyBasePage {
   val progressI4EvaluationBarId          = "process_rule_but_1086"
   val withdrawAtInterviewBarId           = "process_rule_but_511"
   val launchFullPecRecruiterFormBarId    = "process_rule_but_731"
+  val completePostingNoticeFormBarId     = "process_rule_but_910"
   val completeSecurityChecksFormBarId    = "process_rule_but_1482"
   val firstDayArrangementsBarId          = "process_rule_but_1200"
   val firstDayArrangementsOfflineBarId   = "process_rule_but_991"
@@ -124,6 +125,26 @@ object ApplicationSummaryPage extends VacancyBasePage {
     if (!vXUseOnlinePecForms) {
       confirmApplicationUpdateState()
       agreeStartDate()
+    } else if (
+      vXUseOnlinePecForms && ((!vXRtwChecks
+        .contains("Not Applicable") && vXRtwChecks.contains(s"$vXApproach Candidates")) ||
+        (!vXPecEmploymentHistoryCheck
+          .contains("Not Applicable") && vXPecEmploymentHistoryCheck.contains(s"$vXApproach Candidates")) ||
+        (!vXPecPensionsCheck.contains("Not Applicable") && vXPecPensionsCheck.contains(s"$vXApproach Candidates")) ||
+        (!vXPecOverseasCheck.contains("Not Applicable") && vXPecOverseasCheck.contains(s"$vXApproach Candidates")) ||
+        (!vXPecBankruptcyCheck
+          .contains("Not Applicable") && vXPecBankruptcyCheck.contains(s"$vXApproach Candidates")) ||
+        (!vXPecHealthRefCheck.contains("Not Applicable") && vXPecHealthRefCheck.contains(s"$vXApproach Candidates")) ||
+        (!vXPecPreviousCivilEmploymentCheck
+          .contains("Not Applicable") && vXPecPreviousCivilEmploymentCheck.contains(s"$vXApproach Candidates")) ||
+        (!vXPecSelfEmploymentCheck
+          .contains("Not Applicable") && vXPecSelfEmploymentCheck.contains(s"$vXApproach Candidates")) ||
+        vXCandidateUploadIdentityDocs ||
+        (vXCrcLevel != "None" && vXCrcCheckProvider.contains("DBS")) ||
+        (vXWhichIdentityChecks != "No digital checks" && v9RtwHoldPassport))
+    ) {
+      confirmApplicationUpdateNoPecNenPn()
+      postingNoticeRequested()
     } else {
       confirmOfferAcceptedState()
       provisionalOfferAccepted()
@@ -175,6 +196,19 @@ object ApplicationSummaryPage extends VacancyBasePage {
         uploadIDOnOfferBarId,
         updateApplicantTypeBarId,
         emailVacancyHolderBarId
+      )
+    )
+    confirmCandidateSummary(newStatus)
+  }
+
+  def postingNoticeRequested(): Unit = {
+    val newStatus = "Posting Notice Requested"
+    changeSystem("recruiter")
+    checkForNewValuePath(vacancyStatusPath, newStatus)
+    availableBarItems(
+      List(
+        completePostingNoticeFormBarId,
+        updateApplicantTypeBarId
       )
     )
     confirmCandidateSummary(newStatus)

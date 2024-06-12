@@ -29,7 +29,7 @@ case class PecCheckFormsDetails(
   internalFraudCheck: ListBuffer[String],
   selfEmploymentCheck: ListBuffer[String],
   ogdTransferProcessCheck: Boolean,
-  useOgdTransferProcess: Boolean,
+  useOgdDigitalTransferProcess: Boolean,
   includeAdditionalCheck: Boolean,
   nameOfCheck: String,
   additionalCheck: ListBuffer[String],
@@ -156,7 +156,7 @@ object PecCheckFormsSection extends VacancyBasePage {
   }
 
   private def selectUseOGDTransferProcessCheck(pecCheckFormsDetails: PecCheckFormsDetails): Unit = {
-    vXPecUseOgdProcess = pecCheckFormsDetails.useOgdTransferProcess
+    vXPecUseOgdProcess = pecCheckFormsDetails.useOgdDigitalTransferProcess
     if (vXPecUseOgdProcess) clickOnRadioButton(useOgdTransferProcessYesId)
     else clickOnRadioButton(useOgdTransferProcessNoId)
   }

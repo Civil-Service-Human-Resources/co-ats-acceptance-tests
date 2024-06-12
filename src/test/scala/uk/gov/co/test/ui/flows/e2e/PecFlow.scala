@@ -10,7 +10,7 @@ import uk.gov.co.test.ui.pages.v9.ApplicationsPage.extractApplicationId
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
 import uk.gov.co.test.ui.pages.v9.ProvisionalOfferPage.offerDecisionFlow
 import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.{navigateToApplicationSummary, progressApplicationToOffer}
-import uk.gov.co.test.ui.pages.vx.vacancytabs.EmploymentHistoryTab.{EmploymentHistoryVXFlow, completeVXEmploymentHistory}
+import uk.gov.co.test.ui.pages.vx.vacancytabs.EmploymentHistoryTab.{employmentHistoryFlow, completeVXEmploymentHistory}
 
 object PecFlow extends CivilServiceJobsBasePage {
 
@@ -27,7 +27,7 @@ object PecFlow extends CivilServiceJobsBasePage {
     confirmPecSubmissionState(),
     navigateToApplicationSummary(),
     completeVXEmploymentHistory(),
-    EmploymentHistoryVXFlow(MASTER_APPLICATION_DATA)
+    employmentHistoryFlow(MASTER_APPLICATION_DATA)
   )
 
   def completePecFlow(): Unit =

@@ -4,26 +4,26 @@ import uk.gov.co.test.ui.data.v9.pecform.PecFormDetails
 import uk.gov.co.test.ui.pages.v9.pecform._
 import uk.gov.co.test.ui.pages.vx.DashboardPage.v9RefereeEmail
 
-object OGD_FORM_DATA
+object OGD_PEC_FORM_DATA
     extends PecFormDetails(
-      OGD_FORM_YOUR_DETAILS,
-      OGD_RIGHT_TO_WORK,
-      OGD_FORM_EMPLOYMENT_HISTORY,
-      OGD_FORM_VERIFYING_HISTORY,
-      OGD_FORM_PENSION_QUESTIONNAIRE,
-      OGD_FORM_OVERSEAS,
-      OGD_FORM_BANKRUPTCY_DETAILS,
-      OGD_FORM_HEALTH_DECLARATION,
-      OGD_FORM_SELF_EMPLOYMENT,
-      OGD_FORM_PREVIOUS_CS_EMPLOYMENT,
-      OGD_FORM_UPLOAD_IDENTITY_DOCS,
-      OGD_FORM_DBS_PERSONAL_INFO,
-      OGD_FORM_DBS_ADDRESS_DETAILS,
-      OGD_FORM_DIGITAL_IDENTITY_CHECK,
-      OGD_FORM_DECLARATION
+      OGD_PEC_FORM_YOUR_DETAILS,
+      OGD_PEC_FORM_RIGHT_TO_WORK,
+      OGD_PEC_FORM_EMPLOYMENT_HISTORY,
+      OGD_PEC_FORM_VERIFYING_HISTORY,
+      OGD_PEC_FORM_PENSION_QUESTIONNAIRE,
+      OGD_PEC_FORM_OVERSEAS,
+      OGD_PEC_FORM_BANKRUPTCY_DETAILS,
+      OGD_PEC_FORM_HEALTH_DECLARATION,
+      OGD_PEC_FORM_SELF_EMPLOYMENT,
+      OGD_PEC_FORM_PREVIOUS_CS_EMPLOYMENT,
+      OGD_PEC_FORM_UPLOAD_IDENTITY_DOCS,
+      OGD_PEC_FORM_DBS_PERSONAL_INFO,
+      OGD_PEC_FORM_DBS_ADDRESS_DETAILS,
+      OGD_PEC_FORM_DIGITAL_IDENTITY_CHECK,
+      OGD_PEC_FORM_DECLARATION
     )
 
-object OGD_FORM_YOUR_DETAILS
+object OGD_PEC_FORM_YOUR_DETAILS
     extends YourDetails(
       "Mr",
       true,
@@ -41,7 +41,7 @@ object OGD_FORM_YOUR_DETAILS
       "00110000001"
     )
 
-object OGD_RIGHT_TO_WORK
+object OGD_PEC_FORM_RIGHT_TO_WORK
     extends RtwDetails(
       "British citizen, Briton",
       "British citizen, Briton",
@@ -62,7 +62,7 @@ object OGD_RIGHT_TO_WORK
       true
     )
 
-object OGD_FORM_BANKRUPTCY_DETAILS
+object OGD_PEC_FORM_BANKRUPTCY_DETAILS
     extends BankruptcyDetails(
       false,
       false,
@@ -70,27 +70,27 @@ object OGD_FORM_BANKRUPTCY_DETAILS
       false
     )
 
-object OGD_FORM_HEALTH_DECLARATION
+object OGD_PEC_FORM_HEALTH_DECLARATION
     extends HealthDeclarationDetails(
       false, false, false, false, false, false, false
     )
 
-object OGD_FORM_SELF_EMPLOYMENT
+object OGD_PEC_FORM_SELF_EMPLOYMENT
     extends SelfEmploymentDetails(
       false
     )
 
-object OGD_FORM_PREVIOUS_CS_EMPLOYMENT
+object OGD_PEC_FORM_PREVIOUS_CS_EMPLOYMENT
     extends PreviousCSEmploymentDetails(
       false
     )
 
-object OGD_FORM_UPLOAD_IDENTITY_DOCS
+object OGD_PEC_FORM_UPLOAD_IDENTITY_DOCS
     extends IdentityDocDetails(
       "Test-T&Cs.pdf"
     )
 
-object OGD_FORM_DBS_PERSONAL_INFO
+object OGD_PEC_FORM_DBS_PERSONAL_INFO
     extends DbsPersonalInfoDetails(
       "Mr",
       "Marie",
@@ -124,7 +124,7 @@ object OGD_FORM_DBS_PERSONAL_INFO
       false
     )
 
-object OGD_FORM_DBS_ADDRESS_DETAILS
+object OGD_PEC_FORM_DBS_ADDRESS_DETAILS
     extends DbsAddressDetails(
       "40 Cromwell Road",
       Some(""),
@@ -135,7 +135,7 @@ object OGD_FORM_DBS_ADDRESS_DETAILS
       "03/11/1975"
     )
 
-object OGD_FORM_DIGITAL_IDENTITY_CHECK
+object OGD_PEC_FORM_DIGITAL_IDENTITY_CHECK
     extends DigitalIdentityDetails(
       "As part of checking your right to work in the UK, we would like to process your biometric data for digital identity validation. We will ask for your passport or passport card, and a photo of your face.\n\nIf you consent to this processing, we will share your personal data with our checking provider TrustID and their supply chain. Please see our privacy notice (opens in new window) for more detail.\n\nIf you choose not to consent, you will need to present your original ID documents in person.",
       "I consent to my data being processed for digital identity checks",
@@ -148,7 +148,7 @@ object OGD_FORM_DIGITAL_IDENTITY_CHECK
       true
     )
 
-object OGD_FORM_EMPLOYMENT_HISTORY
+object OGD_PEC_FORM_EMPLOYMENT_HISTORY
     extends EmploymentHistoryDetails(
       true,
       "Employer Test One",
@@ -162,7 +162,7 @@ object OGD_FORM_EMPLOYMENT_HISTORY
       "01/06/2021"
     )
 
-object OGD_FORM_VERIFYING_HISTORY
+object OGD_PEC_FORM_VERIFYING_HISTORY
     extends VerifyingHistoryDetails(
       true,
       "Autotest1 - relation to referee",
@@ -179,7 +179,7 @@ object OGD_FORM_VERIFYING_HISTORY
       s"$v9RefereeEmail"
     )
 
-object OGD_FORM_PENSION_QUESTIONNAIRE
+object OGD_PEC_FORM_PENSION_QUESTIONNAIRE
     extends PensionDetails(
       "Your answers will allow us to work out which of the Civil Service Pension schemes you can join.",
       "Have you ever been a member of public service pension scheme?\nAnswer this question with your latest period of pension scheme membership. Public services employers include the Civil Service, judiciary workers, teachers, members of the armed forces, fire and rescue services, the police, health service workers and local government employees. *By-analogy schemes are almost identical to the main Civil Service arrangements, but may have slightly different terms or rules.",
@@ -208,7 +208,7 @@ object OGD_FORM_PENSION_QUESTIONNAIRE
       false
     )
 
-object OGD_FORM_OVERSEAS
+object OGD_PEC_FORM_OVERSEAS
     extends OverseasDetails(
       "Have you resided outside the UK within the past 3 years for 6 months or more?",
       true,
@@ -244,7 +244,7 @@ object OGD_FORM_OVERSEAS
       "Autotest - Provide details about why we cannot contact your fellow UK traveller"
     )
 
-object OGD_FORM_DECLARATION
+object OGD_PEC_FORM_DECLARATION
     extends DeclarationDetails(
       true, true, true, true, true, true, true, true
     )

@@ -588,3 +588,14 @@ object REGISTER_CANDIDATE_IDVT_12
       false,
       true
     )
+
+object REGISTER_CANDIDATE_NEN_DEFRA
+  extends CandidateDetails(
+    firstname = s"$randomFirstName",
+    lastname = s"$randomLastName",
+    preferredFirstName = s"$preferredFirstName",
+    email = s"$randomEmail",
+    s"$passwordCandidate",
+    false,
+    true
+  )

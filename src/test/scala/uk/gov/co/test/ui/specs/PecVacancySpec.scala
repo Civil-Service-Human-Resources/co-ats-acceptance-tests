@@ -9,7 +9,6 @@ import uk.gov.co.test.ui.flows.v9.RegisterCandidateFlow.fillNewCandidateDetails
 import uk.gov.co.test.ui.flows.v9.ShortFormFlow.fillShortFormDetails
 import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.fillNewVacancyForm
 import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.moveAndAcceptOffer
-import uk.gov.co.test.ui.pages.vx.VacancyDetailsPage.extractAllVacancyDetails
 import uk.gov.co.test.ui.pages.vx.vacancytabs.PreSiftEvaluationTab.PreSiftEvaluationFlow
 import uk.gov.co.test.ui.pages.vx.vacancytabs.SiftEvaluationTab.SiftEvaluationFlow
 import uk.gov.co.test.ui.tags.RunInVX
