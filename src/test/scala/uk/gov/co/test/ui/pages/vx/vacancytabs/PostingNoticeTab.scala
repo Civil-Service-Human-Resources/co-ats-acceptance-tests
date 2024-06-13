@@ -1,9 +1,9 @@
 package uk.gov.co.test.ui.pages.vx.vacancytabs
 
-import org.openqa.selenium.{By, Keys}
+import org.openqa.selenium.By
 import uk.gov.co.test.ui.data.MasterVacancyDetails.{preferredFirstName, preferredTeleNumber, randomFirstName, randomLastName, vXJobGradeEquivalent, vXJobGrades, vXJobInfoDepartment, vXProfession, vXTypeOfRole, vacancyFormId, vacancyId, vacancyName}
 import uk.gov.co.test.ui.data.vx.application.ApplicationDetails
-import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.completePostingNoticeFormBarId
+import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.{completePostingNoticeFormBarId, firstDayArrangementsAfterPnBarId}
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 
 import java.time.LocalDate
@@ -125,6 +125,8 @@ object PostingNoticeTab extends VacancyBasePage {
   def lineManagersTelNoId               = s"${vacancyFormId}_datafield_84245_1_1"
   def lineManagersEmailId               = s"${vacancyFormId}_datafield_84253_1_1"
   def lineManagersStaffNoId             = s"${vacancyFormId}_datafield_84261_1_1"
+  def completedById                     = s"${vacancyFormId}_label_96044_1"
+  def dateAndTimeUpdatedId              = s"${vacancyFormId}_label_96049_1"
 
   def enterPostingNoticeForm(): Unit = {
     checkVacancyStatus("Posting Notice Requested")
@@ -197,6 +199,12 @@ object PostingNoticeTab extends VacancyBasePage {
     enterPnValue(lineManagersTelNoId, postingNoticeDetails.lineManagersTeleNo)
     enterPnValue(lineManagersEmailId, postingNoticeDetails.lineManagersEmail)
     enterPnValue(lineManagersStaffNoId, postingNoticeDetails.lineManagersStaffNo)
+  }
+
+  private def timeRecord(): Unit = {
+    waitForVisibilityOfElementById(completedById).getText        should startWith("Completed By -")
+    waitForVisibilityOfElementById(dateAndTimeUpdatedId).getText should startWith("Date and time updated - ")
+    scrollToElement(By.id(submitForm))
   }
 
   private def enterStartDate(postingNoticeDetails: PostingNoticeDetails): Unit =
@@ -319,6 +327,8 @@ object PostingNoticeTab extends VacancyBasePage {
     postingNotice.foreach { f =>
       f(applicationDetails.postingNoticeDetails)
     }
+    timeRecord()
     clickOn(submitForm)
+    if (waitForVisibilityOfElementById(firstDayArrangementsAfterPnBarId).isDisplayed) println("Done")
   }
 }

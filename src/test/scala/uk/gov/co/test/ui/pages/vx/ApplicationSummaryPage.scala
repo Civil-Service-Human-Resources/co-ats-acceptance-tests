@@ -6,6 +6,7 @@ import uk.gov.co.test.ui.data.TestData.eventually
 import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.{candidateAcceptsOffer, confirmApplicationUpdateNoPecNenPn, confirmApplicationUpdateState, confirmOfferAcceptedNoPecFunction, confirmOfferAcceptedState}
 import uk.gov.co.test.ui.pages.v9.ProvisionalOfferPage.offerDecisionFlow
 import uk.gov.co.test.ui.pages.vx.DashboardPage.matchCriteria
+import uk.gov.co.test.ui.pages.vx.vacancytabs.PostingNoticeTab.{clickOn, submitForm}
 
 object ApplicationSummaryPage extends VacancyBasePage {
 
@@ -73,6 +74,10 @@ object ApplicationSummaryPage extends VacancyBasePage {
   val furtherIdRequiredBarId             = "process_rule_but_2071"
   val scheduleI2BarId                    = "process_rule_but_34"
   val offerDecisionBarId                 = "process_rule_but_564"
+  val requestUpdatedPostingNoticeBarId   = "process_rule_but_1607"
+  val firstDayArrangementsAfterPnBarId   = "process_rule_but_911"
+  val readyToHireBarId                   = "process_rule_but_965"
+  val sendPnToHrBarId                    = "process_rule_but_2014"
   val allBarItemsId                      = "process_rules_bar"
   val preSiftActionButtonsPath           = ".//*[@aria-label='Action Buttons']"
   val siftEvaluationTabPath              = ".//span[@class='main-label' and text() = 'Sift evaluation']"
@@ -208,6 +213,22 @@ object ApplicationSummaryPage extends VacancyBasePage {
     availableBarItems(
       List(
         completePostingNoticeFormBarId,
+        updateApplicantTypeBarId
+      )
+    )
+    confirmCandidateSummary(newStatus)
+  }
+
+  def postingNoticeCompleted(): Unit = {
+    val newStatus = "Posting Notice Form Complete"
+    changeSystem("recruiter")
+    checkForNewValuePath(vacancyStatusPath, newStatus)
+    availableBarItems(
+      List(
+        requestUpdatedPostingNoticeBarId,
+        firstDayArrangementsAfterPnBarId,
+        readyToHireBarId,
+        sendPnToHrBarId,
         updateApplicantTypeBarId
       )
     )

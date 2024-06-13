@@ -113,10 +113,10 @@ trait VacancyBasePage extends Matchers with BasePage with BrowserDriver {
     dateValue.selectByValue(value)
   }
 
-  def enterStartTime(id: String, value: String): Unit = {
-    waitForVisibilityOfElementById(id).click()
-    val timeValue = new Select(waitForVisibilityOfElementById(id))
-    timeValue.selectByValue(value)
+  def enterStartTime(timeId: String, value: String): Unit = {
+    val selectOption = waitForVisibilityOfElementById(timeId)
+    selectOption.click()
+    selectOption.sendKeys(value)
   }
 
   def enterTimeFields(time: String, hourId: String, minId: String): Unit = {
