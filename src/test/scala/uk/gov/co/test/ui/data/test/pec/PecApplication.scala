@@ -20,7 +20,8 @@ object PEC_APPLICATION_DATA
       PEC_APPLICATION_INTERVIEW_TWO_EVALUATION,
       PEC_APPLICATION_INTERVIEW_THREE_EVALUATION,
       PEC_APPLICATION_INTERVIEW_FOUR_EVALUATION,
-      PEC_APPLICATION_POSTING_NOTICE
+      PEC_APPLICATION_POSTING_NOTICE,
+      PEC_APPLICATION_NEW_ENTRANT_NOTICE
     )
 
 object PEC_APPLICATION_EMPLOYMENT_HISTORY
@@ -440,6 +441,53 @@ object PEC_APPLICATION_POSTING_NOTICE
       true,
       s"$contactNameVxConfig",
       "01520000000",
+      s"$contactEmailVxConfig",
+      "12345"
+    )
+
+object PEC_APPLICATION_NEW_ENTRANT_NOTICE
+    extends NewEntrantNoticeDetails(
+      "1234",
+      "autotest-sop org",
+      "autotest-sop position",
+      "autotest-business unit",
+      "OGD",
+      true,
+      false,
+      "Exception 1: Temporary appointments",
+      LocalDate.now().plusDays(1),
+      "09:30",
+      "Autotest address",
+      true,
+      "autotest - 2nd location",
+      "Fixed Term Appointment",
+      true,
+      "90%",
+      "Up to 18",
+      contractEndDate = LocalDate.now().plusMonths(3),
+      "The post is permanent and requires temporary cover, for no more than 12 months,  whilst permanent recruitment activity has commenced and needs time to complete. The fixed-term will end when the permanent recruitment completes.",
+      "autotest - key responsibilities",
+      "Homeworking",
+      "40",
+      "8",
+      "8",
+      "8",
+      "8",
+      "8",
+      "0",
+      "0",
+      payZone = ListBuffer("London", "National"),
+      "55000",
+      true,
+      negotiatedSalaryDate = LocalDate.now().minusDays(2),
+      true,
+      "autotest - allowances name and account",
+      true,
+      true,
+      LocalDate.now(),
+      s"$contactNameVxConfig",
+      "United Kingdom +44",
+      "7711234123",
       s"$contactEmailVxConfig",
       "12345"
     )

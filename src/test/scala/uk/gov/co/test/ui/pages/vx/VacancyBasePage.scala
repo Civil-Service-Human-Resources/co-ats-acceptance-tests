@@ -244,6 +244,12 @@ trait VacancyBasePage extends Matchers with BasePage with BrowserDriver {
     extractTabFormId()
   }
 
+  def moveVacancyOnAndSendEmail(barId: String, tabPath: String, sendEMail: String): Unit = {
+    clickOn(barId)
+    waitForVisibilityOfElementByPath(tabPath).isDisplayed
+    waitForVisibilityOfElementById(sendEMail).click()
+  }
+
   def selectDropdownOption(selectId: String, selectOption: String): Unit = {
     waitForVisibilityOfElementById(selectId).click()
     action().moveToElement(waitForDropdownOption(selectOption)).perform()

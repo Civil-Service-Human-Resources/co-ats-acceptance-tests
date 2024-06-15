@@ -1,12 +1,11 @@
 package uk.gov.co.test.ui.pages.vx
 
 import org.openqa.selenium.By
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{applicationId, randomFirstName, randomLastName, v9CivilServant, v9HomeDepartment, v9RtwHoldPassport, vXApproach, vXCandidateUploadIdentityDocs, vXCrcCheckProvider, vXCrcLevel, vXInterviewNumber, vXJobInfoDepartment, vXPecBankruptcyCheck, vXPecCrc, vXPecEmploymentHistoryCheck, vXPecHealthRefCheck, vXPecNsv, vXPecOverseasCheck, vXPecPensionsCheck, vXPecPreviousCivilEmploymentCheck, vXPecSelfEmploymentCheck, vXRtwChecks, vXUseOnlinePecForms, vXWhichIdentityChecks, vacancyId, vacancyName}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{applicationId, randomFirstName, randomLastName, v9CivilServant, v9HomeDepartment, v9RtwHoldPassport, vXApproach, vXCandidateUploadIdentityDocs, vXCrcCheckProvider, vXCrcLevel, vXInterviewNumber, vXJobInfoDepartment, vXPecBankruptcyCheck, vXPecCrc, vXPecEmploymentHistoryCheck, vXPecHealthRefCheck, vXPecNen, vXPecNsv, vXPecOverseasCheck, vXPecPensionsCheck, vXPecPn, vXPecPreviousCivilEmploymentCheck, vXPecSelfEmploymentCheck, vXRtwChecks, vXUseOnlinePecForms, vXWhichIdentityChecks, vacancyId, vacancyName}
 import uk.gov.co.test.ui.data.TestData.eventually
-import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.{candidateAcceptsOffer, confirmApplicationUpdateNoPecNenPn, confirmApplicationUpdateState, confirmOfferAcceptedNoPecFunction, confirmOfferAcceptedState}
+import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.{candidateAcceptsOffer, confirmApplicationUpdateNoPecNen, confirmApplicationUpdateNoPecPn, confirmApplicationUpdateState, confirmOfferAcceptedNoPecFunction, confirmOfferAcceptedState}
 import uk.gov.co.test.ui.pages.v9.ProvisionalOfferPage.offerDecisionFlow
 import uk.gov.co.test.ui.pages.vx.DashboardPage.matchCriteria
-import uk.gov.co.test.ui.pages.vx.vacancytabs.PostingNoticeTab.{clickOn, submitForm}
 
 object ApplicationSummaryPage extends VacancyBasePage {
 
@@ -32,8 +31,10 @@ object ApplicationSummaryPage extends VacancyBasePage {
   val progressBarAfterPreSiftId          = "process_rule_but_155"
   val rejectBarAfterPreSiftId            = "process_rule_but_154"
   val withdrawBarId                      = "process_rule_but_509"
+  val completeNewEntrantFormBarId        = "process_rule_but_765"
   val withdrawApplicationOnOfferBarId    = "process_rule_but_570"
   val sendNenToHrBarId                   = "process_rule_but_2018"
+  val sendNenToHrBarAfterNenId                   = "process_rule_but_2012"
   val updateApplicantTypeBarId           = "process_rule_but_2008"
   val inviteCandidateToIdvtBarId         = "process_rule_but_3213"
   val crcBarId                           = "process_rule_but_776"
@@ -64,10 +65,13 @@ object ApplicationSummaryPage extends VacancyBasePage {
   val withdrawAtInterviewBarId           = "process_rule_but_511"
   val launchFullPecRecruiterFormBarId    = "process_rule_but_731"
   val completePostingNoticeFormBarId     = "process_rule_but_910"
+  val requestUpdatedNenBarId             = "process_rule_but_1608"
+  val finaliseNenBarId                   = "process_rule_but_944"
   val completeSecurityChecksFormBarId    = "process_rule_but_1482"
   val firstDayArrangementsBarId          = "process_rule_but_1200"
   val firstDayArrangementsOfflineBarId   = "process_rule_but_991"
   val formalOfferOnlineBarId             = "process_rule_but_526"
+  val formalOfferOfflineBarId             = "process_rule_but_766"
   val rtwChecksFormBarId                 = "process_rule_but_733"
   val idvtNotCompletedBarId              = "process_rule_but_3220"
   val confirmIdDocumentsBarId            = "process_rule_but_2070"
@@ -76,8 +80,12 @@ object ApplicationSummaryPage extends VacancyBasePage {
   val offerDecisionBarId                 = "process_rule_but_564"
   val requestUpdatedPostingNoticeBarId   = "process_rule_but_1607"
   val firstDayArrangementsAfterPnBarId   = "process_rule_but_911"
+  val firstDayArrangementsAfterNenBarId   = "process_rule_but_938"
   val readyToHireBarId                   = "process_rule_but_965"
   val sendPnToHrBarId                    = "process_rule_but_2014"
+  val passChecksBarId                    = "process_rule_but_999"
+  val failChecksBarId                    = "process_rule_but_750"
+  val referToVhForRiskBarId              = "process_rule_but_751"
   val allBarItemsId                      = "process_rules_bar"
   val preSiftActionButtonsPath           = ".//*[@aria-label='Action Buttons']"
   val siftEvaluationTabPath              = ".//span[@class='main-label' and text() = 'Sift evaluation']"
@@ -146,10 +154,34 @@ object ApplicationSummaryPage extends VacancyBasePage {
           .contains("Not Applicable") && vXPecSelfEmploymentCheck.contains(s"$vXApproach Candidates")) ||
         vXCandidateUploadIdentityDocs ||
         (vXCrcLevel != "None" && vXCrcCheckProvider.contains("DBS")) ||
-        (vXWhichIdentityChecks != "No digital checks" && v9RtwHoldPassport))
+        (vXWhichIdentityChecks != "No digital checks" && v9RtwHoldPassport)) &&
+      (vXPecPn.contains("Internal Candidates") && (v9CivilServant && vXJobInfoDepartment == v9HomeDepartment))
     ) {
-      confirmApplicationUpdateNoPecNenPn()
+      confirmApplicationUpdateNoPecPn()
       postingNoticeRequested()
+    } else if (
+      vXUseOnlinePecForms && ((!vXRtwChecks
+        .contains("Not Applicable") && vXRtwChecks.contains(s"$vXApproach Candidates")) ||
+        (!vXPecEmploymentHistoryCheck
+          .contains("Not Applicable") && vXPecEmploymentHistoryCheck.contains(s"$vXApproach Candidates")) ||
+        (!vXPecPensionsCheck.contains("Not Applicable") && vXPecPensionsCheck.contains(s"$vXApproach Candidates")) ||
+        (!vXPecOverseasCheck.contains("Not Applicable") && vXPecOverseasCheck.contains(s"$vXApproach Candidates")) ||
+        (!vXPecBankruptcyCheck
+          .contains("Not Applicable") && vXPecBankruptcyCheck.contains(s"$vXApproach Candidates")) ||
+        (!vXPecHealthRefCheck.contains("Not Applicable") && vXPecHealthRefCheck.contains(s"$vXApproach Candidates")) ||
+        (!vXPecPreviousCivilEmploymentCheck
+          .contains("Not Applicable") && vXPecPreviousCivilEmploymentCheck.contains(s"$vXApproach Candidates")) ||
+        (!vXPecSelfEmploymentCheck
+          .contains("Not Applicable") && vXPecSelfEmploymentCheck.contains(s"$vXApproach Candidates")) ||
+        vXCandidateUploadIdentityDocs ||
+        (vXCrcLevel != "None" && vXCrcCheckProvider.contains("DBS")) ||
+        (vXWhichIdentityChecks != "No digital checks" && v9RtwHoldPassport)) &&
+      ((vXPecNen.contains("External Candidates") || vXPecNen.contains("OGD Candidates") || vXPecNen.contains(
+        "NDPB Candidates"
+      )) && (v9CivilServant && vXJobInfoDepartment != v9HomeDepartment))
+    ) {
+      confirmApplicationUpdateNoPecNen()
+      checksCompleteDecisionRequired()
     } else {
       confirmOfferAcceptedState()
       provisionalOfferAccepted()
@@ -219,6 +251,51 @@ object ApplicationSummaryPage extends VacancyBasePage {
     confirmCandidateSummary(newStatus)
   }
 
+  def onboardingFinaliseNen(): Unit = {
+    val newStatus = "Onboarding - Finalise NEN"
+    changeSystem("recruiter")
+    checkForNewValuePath(vacancyStatusPath, newStatus)
+    availableBarItems(
+      List(
+        requestUpdatedNenBarId,
+        finaliseNenBarId,
+        withdrawApplicationOnOfferBarId,
+        updateApplicantTypeBarId
+      )
+    )
+    confirmCandidateSummary(newStatus)
+  }
+
+  def checksCompleteDecisionRequired(): Unit = {
+    val newStatus = "Checks Complete – Decision Required"
+    changeSystem("recruiter")
+    checkForNewValuePath(vacancyStatusPath, newStatus)
+    availableBarItems(
+      List(
+        passChecksBarId,
+        failChecksBarId,
+        referToVhForRiskBarId,
+        withdrawApplicationOnOfferBarId,
+        updateApplicantTypeBarId
+      )
+    )
+    confirmCandidateSummary(newStatus)
+  }
+
+  def onboardingCompleteNen(): Unit = {
+    val newStatus = "Onboarding - Complete NEN"
+    changeSystem("recruiter")
+    checkForNewValuePath(vacancyStatusPath, newStatus)
+    availableBarItems(
+      List(
+        completeNewEntrantFormBarId,
+        withdrawApplicationOnOfferBarId,
+        updateApplicantTypeBarId
+      )
+    )
+    confirmCandidateSummary(newStatus)
+  }
+
   def postingNoticeCompleted(): Unit = {
     val newStatus = "Posting Notice Form Complete"
     changeSystem("recruiter")
@@ -229,6 +306,23 @@ object ApplicationSummaryPage extends VacancyBasePage {
         firstDayArrangementsAfterPnBarId,
         readyToHireBarId,
         sendPnToHrBarId,
+        updateApplicantTypeBarId
+      )
+    )
+    confirmCandidateSummary(newStatus)
+  }
+
+  def onboardingNenComplete(): Unit = {
+    val newStatus = "Onboarding - NEN Complete"
+    changeSystem("recruiter")
+    checkForNewValuePath(vacancyStatusPath, newStatus)
+    availableBarItems(
+      List(
+        firstDayArrangementsAfterNenBarId,
+        formalOfferOnlineBarId,
+        formalOfferOfflineBarId,
+        withdrawApplicationOnOfferBarId,
+        sendNenToHrBarAfterNenId,
         updateApplicantTypeBarId
       )
     )

@@ -183,7 +183,7 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
                                              |As part of the onboarding process we require additional information.""".stripMargin
   }
 
-  def confirmApplicationUpdateNoPecNenPn(): Unit = {
+  def confirmApplicationUpdateNoPecPn(): Unit = {
     val newStatus = "Application Update"
     changeSystem("candidate")
     confirmStatusOnApplicationPage(newStatus)
@@ -195,6 +195,21 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
     getApplicationConfirmation shouldEqual
       """We're finalising all documentation regarding your application.
         |You'll be contacted shortly to advise what will happen next.""".stripMargin
+  }
+
+  def confirmApplicationUpdateNoPecNen(): Unit = {
+    val newStatus = "Pre-employment checks"
+    changeSystem("candidate")
+    confirmStatusOnApplicationPage(newStatus)
+    applicationCentrePageCheck()
+    feedbackFunction().isEnabled
+    withdrawApplicationFunction().isEnabled
+    advertDetailsFunction().isEnabled
+    applicationForVacancyText shouldEqual s"Application For $vacancyName"
+    getApplicationState shouldEqual s"Application status: $newStatus"
+    getApplicationConfirmation shouldEqual
+      """We are reviewing the outcomes of your pre-employment checks.
+        |We will contact you as soon as a decision has been made. Please do not resign from your current position at this time.""".stripMargin
   }
 
   def confirmOfferAcceptedNoPecFunction(): Unit = {
