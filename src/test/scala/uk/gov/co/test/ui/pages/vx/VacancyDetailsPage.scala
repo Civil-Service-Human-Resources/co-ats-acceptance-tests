@@ -194,6 +194,7 @@ object VacancyDetailsPage extends VacancyBasePage {
   def extractTabFormId(): Unit = {
     val formId = waitForVisibilityOfElementByPath(".//form[@class='form-horizontal']")
     vacancyFormId = formId.getAttribute("id")
+    println(vacancyFormId)
   }
 
   def matchCriteria(criteria: String): Unit =

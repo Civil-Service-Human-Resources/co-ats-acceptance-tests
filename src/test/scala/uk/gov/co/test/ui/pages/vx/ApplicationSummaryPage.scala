@@ -6,6 +6,7 @@ import uk.gov.co.test.ui.data.TestData.eventually
 import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.{candidateAcceptsOffer, confirmApplicationUpdateNoPecNen, confirmApplicationUpdateNoPecPn, confirmApplicationUpdateState, confirmOfferAcceptedNoPecFunction, confirmOfferAcceptedState}
 import uk.gov.co.test.ui.pages.v9.ProvisionalOfferPage.offerDecisionFlow
 import uk.gov.co.test.ui.pages.vx.DashboardPage.matchCriteria
+import uk.gov.co.test.ui.pages.vx.vacancytabs.NewEntrantNoticeTab.newEntrantNoticeTabPath
 
 object ApplicationSummaryPage extends VacancyBasePage {
 
@@ -252,8 +253,14 @@ object ApplicationSummaryPage extends VacancyBasePage {
   }
 
   def onboardingFinaliseNen(): Unit = {
+//    val oldStatus = "Onboarding - Complete NEN"
     val newStatus = "Onboarding - Finalise NEN"
     changeSystem("recruiter")
+//    if (waitForVisibilityOfElementByPath(vacancyStatusPath).getText endsWith oldStatus) {
+//      waitForVisibilityOfElementById(completeNewEntrantFormBarId).click()
+//      waitForVisibilityOfElementByPath(newEntrantNoticeTabPath).isDisplayed
+//      waitForVisibilityOfElementById(submitForm).click()
+//    }
     checkForNewValuePath(vacancyStatusPath, newStatus)
     availableBarItems(
       List(

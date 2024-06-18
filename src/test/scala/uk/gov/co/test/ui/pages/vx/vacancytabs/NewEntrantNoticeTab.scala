@@ -3,8 +3,11 @@ package uk.gov.co.test.ui.pages.vx.vacancytabs
 import org.openqa.selenium.By
 import uk.gov.co.test.ui.data.MasterVacancyDetails.{preferredFirstName, randomEmail, randomFirstName, randomLastName, vXJobGradeEquivalent, vXJobGrades, vXJobInfoDepartment, vXProfession, vXTypeOfRole, vacancyFormId, vacancyId, vacancyName}
 import uk.gov.co.test.ui.data.vx.application.ApplicationDetails
-import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.{completeNewEntrantFormBarId, finaliseNenBarId, onboardingCompleteNen, onboardingFinaliseNen, passChecksBarId}
+import uk.gov.co.test.ui.pages.v9.ApplicationsPage.extractApplicationId
+import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.{completeNewEntrantFormBarId, finaliseNenBarId, firstDayArrangementsAfterPnBarId, onboardingCompleteNen, onboardingFinaliseNen, passChecksBarId, requestUpdatedNenBarId}
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
+import uk.gov.co.test.ui.pages.vx.VacancyDetailsPage.extractTabFormId
+import uk.gov.co.test.ui.pages.vx.vacancytabs.PostingNoticeTab.waitForVisibilityOfElementById
 
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -59,7 +62,7 @@ case class NewEntrantNoticeDetails(
 object NewEntrantNoticeTab extends VacancyBasePage {
 
   private lazy val emailChecksClearPath    = ".//span[@title='Generate Communication : VH - Checks Clear']"
-  private lazy val newEntrantNoticeTabPath = ".//span[@class='main-label' and text() = 'New Entrant Notification']"
+  val newEntrantNoticeTabPath = ".//span[@class='main-label' and text() = 'New Entrant Notification']"
   def correspondenceSendId                 = "correspondence_form_form_submit"
   def newEntrantNotificationHeaderId       = s"${vacancyFormId}_label_146446_1"
   def newEntrantNoticeInfoId               = s"${vacancyFormId}_label_140309_1"
@@ -243,9 +246,12 @@ object NewEntrantNoticeTab extends VacancyBasePage {
   }
 
   private def timeRecord(): Unit = {
-    waitForVisibilityOfElementById(completedById).getText   shouldEqual "Completed By  \nAutomation ServiceAcc"
-    waitForVisibilityOfElementById(dateAndTimeUpdatedId).getText should startWith("Date and time last updated")
+    waitForVisibilityOfElementById(submitForm)
     scrollToElement(By.id(submitForm))
+    extractTabFormId()
+    waitForVisibilityOfElementById(completedById).getText   should endWith("Automation ServiceAcc")
+    waitForVisibilityOfElementById(dateAndTimeUpdatedId).getText should startWith("Date and time last updated")
+    clickOn(submitForm)
   }
 
   private def selectNewEntrantType(newEntrantNoticeDetails: NewEntrantNoticeDetails): Unit =
@@ -432,7 +438,7 @@ object NewEntrantNoticeTab extends VacancyBasePage {
       f(applicationDetails.newEntrantNoticeDetails)
     }
     clickOn(submitForm)
-    onboardingFinaliseNen()
+    if (waitForVisibilityOfElementById(requestUpdatedNenBarId).isDisplayed) onboardingFinaliseNen()
     waitForVisibilityOfElementById(finaliseNenBarId).click()
     timeRecord()
   }
