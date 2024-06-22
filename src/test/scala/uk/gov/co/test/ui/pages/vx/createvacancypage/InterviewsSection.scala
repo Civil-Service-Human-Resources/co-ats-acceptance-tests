@@ -1,6 +1,6 @@
 package uk.gov.co.test.ui.pages.vx.createvacancypage
 
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXInterviewExpectedRounds, vXInterviewFourType, vXInterviewNumber, vXInterviewOneType, vXInterviewThreeType, vXInterviewTwoType, vacancyFormId}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXInterviewExpectedRounds, vXInterviewFourType, vXInterviewNumber, vXInterviewOneType, vXInterviewThreeType, vXInterviewTwoType, vXProfile, vacancyFormId}
 import uk.gov.co.test.ui.data.vx.vacancy.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 
@@ -106,9 +106,12 @@ object InterviewsSection extends VacancyBasePage {
     }
   }
 
-  private def selectAvailableOffline(interviewsDetails: InterviewsDetails): Unit =
-    if (interviewsDetails.availableOffline) clickOnRadioButton(availableOfflineYesId)
-    else clickOnRadioButton(availableOfflineNoId)
+  private def selectAvailableOffline(interviewsDetails: InterviewsDetails): Unit = {
+    if (vXProfile != "Vacancy Holder 1") {
+      if (interviewsDetails.availableOffline) clickOnRadioButton(availableOfflineYesId)
+      else clickOnRadioButton(availableOfflineNoId)
+    }
+  }
 
   private val interviews: Seq[InterviewsDetails => Unit] = Seq(
     selectInterviewRoundOneType,

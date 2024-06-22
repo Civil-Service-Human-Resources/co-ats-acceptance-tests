@@ -1,30 +1,30 @@
-package uk.gov.co.test.ui.data.test.short
+package uk.gov.co.test.ui.data.test.pnnen
 
 import uk.gov.co.test.ui.data.Characters.{valid250Characters, valid500Characters}
 import uk.gov.co.test.ui.data.MasterVacancyDetails.vXOtherLocations
 import uk.gov.co.test.ui.data.v9.longform.LongFormDetails
 import uk.gov.co.test.ui.pages.v9.longform._
 
-object SHORT_LONG_FORM_DATA
+object PN_NEN_LONG_FORM_DATA
     extends LongFormDetails(
-      SHORT_LONG_FORM_EXPERIENCE_SKILLS,
-      SHORT_LONG_FORM_CV,
-      SHORT_LONG_FORM_PERSONAL_STATEMENT,
-      SHORT_LONG_FORM_BEHAVIOURS,
-      SHORT_LONG_FORM_TECHNICAL_SKILLS,
-      SHORT_LONG_FORM_UPLOAD_DOCUMENTS,
-      SHORT_LONG_FORM_PREFERENCES,
-      SHORT_LONG_FORM_ROLE_QUESTIONS,
-      SHORT_LONG_FORM_DECLARATION
+      PN_NEN_LONG_FORM_EXPERIENCE_SKILLS,
+      PN_NEN_LONG_FORM_CV,
+      PN_NEN_LONG_FORM_PERSONAL_STATEMENT,
+      PN_NEN_LONG_FORM_BEHAVIOURS,
+      PN_NEN_LONG_FORM_TECHNICAL_SKILLS,
+      PN_NEN_LONG_FORM_UPLOAD_DOCUMENTS,
+      PN_NEN_LONG_FORM_PREFERENCES,
+      PN_NEN_LONG_FORM_ROLE_QUESTIONS,
+      PN_NEN_LONG_FORM_DECLARATION
     )
 
-object SHORT_LONG_FORM_EXPERIENCE_SKILLS
+object PN_NEN_LONG_FORM_EXPERIENCE_SKILLS
     extends ExperienceAndSkillsDetails(
       true,
       s"$valid250Characters"
     )
 
-object SHORT_LONG_FORM_CV
+object PN_NEN_LONG_FORM_CV
     extends CVDetails(
       s"$valid250Characters",
       s"$valid250Characters",
@@ -73,13 +73,13 @@ object SHORT_LONG_FORM_CV
       true
     )
 
-object SHORT_LONG_FORM_PERSONAL_STATEMENT
+object PN_NEN_LONG_FORM_PERSONAL_STATEMENT
     extends StatementDetails(
       s"$valid250Characters",
       true
     )
 
-object SHORT_LONG_FORM_BEHAVIOURS
+object PN_NEN_LONG_FORM_BEHAVIOURS
     extends BehavioursDetails(
       s"$valid250Characters",
       s"$valid250Characters",
@@ -91,7 +91,7 @@ object SHORT_LONG_FORM_BEHAVIOURS
       s"$valid250Characters"
     )
 
-object SHORT_LONG_FORM_TECHNICAL_SKILLS
+object PN_NEN_LONG_FORM_TECHNICAL_SKILLS
     extends TechSkillsDetails(
       s"$valid250Characters",
       s"$valid250Characters",
@@ -103,12 +103,12 @@ object SHORT_LONG_FORM_TECHNICAL_SKILLS
       s"$valid250Characters"
     )
 
-object SHORT_LONG_FORM_UPLOAD_DOCUMENTS
+object PN_NEN_LONG_FORM_UPLOAD_DOCUMENTS
     extends UploadDocumentsDetails(
       "Test-T&Cs.pdf"
     )
 
-object SHORT_LONG_FORM_PREFERENCES
+object PN_NEN_LONG_FORM_PREFERENCES
     extends PreferencesDetails(
       s"${vXOtherLocations.head}",
       secondChoiceLocation = Option(s"${vXOtherLocations.tail.head}"),
@@ -116,14 +116,14 @@ object SHORT_LONG_FORM_PREFERENCES
       furtherLocationPreferences = Option("Autotest - Further location preferences (optional)")
     )
 
-object SHORT_LONG_FORM_ROLE_QUESTIONS
+object PN_NEN_LONG_FORM_ROLE_QUESTIONS
     extends RoleQuestionsDetails(
       s"$valid500Characters",
       s"$valid500Characters",
       s"$valid500Characters"
     )
 
-object SHORT_LONG_FORM_DECLARATION
+object PN_NEN_LONG_FORM_DECLARATION
     extends DeclarationDetails(
       true
     )

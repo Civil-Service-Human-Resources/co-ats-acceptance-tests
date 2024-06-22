@@ -6,7 +6,7 @@ import org.scalatest.concurrent.Eventually.eventually
 import org.scalatest.matchers.should.Matchers
 import uk.gov.co.test.ui.conf.TestConfiguration
 import uk.gov.co.test.ui.conf.TestConfiguration.readProperty
-import uk.gov.co.test.ui.data.MasterVacancyDetails.vXApplicationClosingDate
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXApplicationClosingDate, vacancyId}
 import uk.gov.co.test.ui.data.vx.recruiters.{RECRUITER, RecruiterDetails}
 import uk.gov.co.test.ui.driver.BrowserDriver
 import uk.gov.co.test.ui.flows.v9.RegisterCandidateFlow.checkV9LogoutState
@@ -216,6 +216,7 @@ trait VacancyBasePage extends Matchers with BasePage with BrowserDriver {
     searchOn()
     confirmAndActivateVacancy()
     addExternalPosting()
+    println(s"Vacancy ID: $vacancyId")
   }
 
   def repostVacancy(): Unit = {}

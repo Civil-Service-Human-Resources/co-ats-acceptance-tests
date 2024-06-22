@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.pages.vx.createvacancypage
 
 import org.openqa.selenium.By
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXCrcCheckProvider, vXCrcLevel, vXMedicalRequired, vXNonReserved, vXVettingLevel, vacancyFormId}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXCrcCheckProvider, vXCrcLevel, vXMedicalRequired, vXNonReserved, vXProfile, vXVettingLevel, vacancyFormId}
 import uk.gov.co.test.ui.data.vx.vacancy.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 
@@ -51,10 +51,12 @@ object CheckingVettingSection extends VacancyBasePage {
 
   private def checkWhichProvider(vettingDetails: VettingDetails): Unit = {
     vXCrcCheckProvider = vettingDetails.whichProvider
-    vXCrcCheckProvider match {
-      case "Disclosure barring service (DBS)" => checkbox(dbsProviderId).select()
-      case "Disclosure Scotland"              => checkbox(disclosureScotlandProviderId).select()
-      case "Access NI"                        => checkbox(accessNIProviderId).select()
+    if (vXProfile != "Vacancy Holder 1") {
+      vXCrcCheckProvider match {
+        case "Disclosure barring service (DBS)" => checkbox(dbsProviderId).select()
+        case "Disclosure Scotland" => checkbox(disclosureScotlandProviderId).select()
+        case "Access NI" => checkbox(accessNIProviderId).select()
+      }
     }
   }
 

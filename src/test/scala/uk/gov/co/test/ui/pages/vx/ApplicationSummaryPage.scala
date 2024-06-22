@@ -6,7 +6,6 @@ import uk.gov.co.test.ui.data.TestData.eventually
 import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.{candidateAcceptsOffer, confirmApplicationUpdateNoPecNen, confirmApplicationUpdateNoPecPn, confirmApplicationUpdateState, confirmOfferAcceptedNoPecFunction, confirmOfferAcceptedState}
 import uk.gov.co.test.ui.pages.v9.ProvisionalOfferPage.offerDecisionFlow
 import uk.gov.co.test.ui.pages.vx.DashboardPage.matchCriteria
-import uk.gov.co.test.ui.pages.vx.vacancytabs.NewEntrantNoticeTab.newEntrantNoticeTabPath
 
 object ApplicationSummaryPage extends VacancyBasePage {
 
@@ -35,7 +34,7 @@ object ApplicationSummaryPage extends VacancyBasePage {
   val completeNewEntrantFormBarId        = "process_rule_but_765"
   val withdrawApplicationOnOfferBarId    = "process_rule_but_570"
   val sendNenToHrBarId                   = "process_rule_but_2018"
-  val sendNenToHrBarAfterNenId                   = "process_rule_but_2012"
+  val sendNenToHrBarAfterNenId           = "process_rule_but_2012"
   val updateApplicantTypeBarId           = "process_rule_but_2008"
   val inviteCandidateToIdvtBarId         = "process_rule_but_3213"
   val crcBarId                           = "process_rule_but_776"
@@ -72,7 +71,7 @@ object ApplicationSummaryPage extends VacancyBasePage {
   val firstDayArrangementsBarId          = "process_rule_but_1200"
   val firstDayArrangementsOfflineBarId   = "process_rule_but_991"
   val formalOfferOnlineBarId             = "process_rule_but_526"
-  val formalOfferOfflineBarId             = "process_rule_but_766"
+  val formalOfferOfflineBarId            = "process_rule_but_766"
   val rtwChecksFormBarId                 = "process_rule_but_733"
   val idvtNotCompletedBarId              = "process_rule_but_3220"
   val confirmIdDocumentsBarId            = "process_rule_but_2070"
@@ -81,7 +80,7 @@ object ApplicationSummaryPage extends VacancyBasePage {
   val offerDecisionBarId                 = "process_rule_but_564"
   val requestUpdatedPostingNoticeBarId   = "process_rule_but_1607"
   val firstDayArrangementsAfterPnBarId   = "process_rule_but_911"
-  val firstDayArrangementsAfterNenBarId   = "process_rule_but_938"
+  val firstDayArrangementsAfterNenBarId  = "process_rule_but_938"
   val readyToHireBarId                   = "process_rule_but_965"
   val sendPnToHrBarId                    = "process_rule_but_2014"
   val passChecksBarId                    = "process_rule_but_999"
@@ -253,14 +252,8 @@ object ApplicationSummaryPage extends VacancyBasePage {
   }
 
   def onboardingFinaliseNen(): Unit = {
-//    val oldStatus = "Onboarding - Complete NEN"
     val newStatus = "Onboarding - Finalise NEN"
     changeSystem("recruiter")
-//    if (waitForVisibilityOfElementByPath(vacancyStatusPath).getText endsWith oldStatus) {
-//      waitForVisibilityOfElementById(completeNewEntrantFormBarId).click()
-//      waitForVisibilityOfElementByPath(newEntrantNoticeTabPath).isDisplayed
-//      waitForVisibilityOfElementById(submitForm).click()
-//    }
     checkForNewValuePath(vacancyStatusPath, newStatus)
     availableBarItems(
       List(

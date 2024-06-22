@@ -1,29 +1,29 @@
-package uk.gov.co.test.ui.data.test.short
+package uk.gov.co.test.ui.data.test.pnnen
 
 import uk.gov.co.test.ui.data.v9.pecform.PecFormDetails
 import uk.gov.co.test.ui.pages.v9.pecform._
 import uk.gov.co.test.ui.pages.vx.DashboardPage.v9RefereeEmail
 
-object SHORT_PEC_FORM_DATA
+object PN_NEN_PEC_FORM_DATA
     extends PecFormDetails(
-      SHORT_PEC_FORM_YOUR_DETAILS,
-      SHORT_PEC_RIGHT_TO_WORK,
-      SHORT_PEC_FORM_EMPLOYMENT_HISTORY,
-      SHORT_PEC_FORM_VERIFYING_HISTORY,
-      SHORT_PEC_FORM_PENSION_QUESTIONNAIRE,
-      SHORT_PEC_FORM_OVERSEAS,
-      SHORT_PEC_FORM_BANKRUPTCY_DETAILS,
-      SHORT_PEC_FORM_HEALTH_DECLARATION,
-      SHORT_PEC_FORM_SELF_EMPLOYMENT,
-      SHORT_PEC_FORM_PREVIOUS_CS_EMPLOYMENT,
-      SHORT_PEC_FORM_UPLOAD_IDENTITY_DOCS,
-      SHORT_PEC_FORM_DBS_PERSONAL_INFO,
-      SHORT_PEC_FORM_DBS_ADDRESS_DETAILS,
-      SHORT_PEC_FORM_DIGITAL_IDENTITY_CHECK,
-      SHORT_PEC_FORM_DECLARATION
+      PN_NEN_PEC_FORM_YOUR_DETAILS,
+      PN_NEN_PEC_RIGHT_TO_WORK,
+      PN_NEN_PEC_FORM_EMPLOYMENT_HISTORY,
+      PN_NEN_PEC_FORM_VERIFYING_HISTORY,
+      PN_NEN_PEC_FORM_PENSION_QUESTIONNAIRE,
+      PN_NEN_PEC_FORM_OVERSEAS,
+      PN_NEN_PEC_FORM_BANKRUPTCY_DETAILS,
+      PN_NEN_PEC_FORM_HEALTH_DECLARATION,
+      PN_NEN_PEC_FORM_SELF_EMPLOYMENT,
+      PN_NEN_PEC_FORM_PREVIOUS_CS_EMPLOYMENT,
+      PN_NEN_PEC_FORM_UPLOAD_IDENTITY_DOCS,
+      PN_NEN_PEC_FORM_DBS_PERSONAL_INFO,
+      PN_NEN_PEC_FORM_DBS_ADDRESS_DETAILS,
+      PN_NEN_PEC_FORM_DIGITAL_IDENTITY_CHECK,
+      PN_NEN_PEC_FORM_DECLARATION
     )
 
-object SHORT_PEC_FORM_YOUR_DETAILS
+object PN_NEN_PEC_FORM_YOUR_DETAILS
     extends YourDetails(
       "Mr",
       true,
@@ -41,12 +41,12 @@ object SHORT_PEC_FORM_YOUR_DETAILS
       "00110000001"
     )
 
-object SHORT_PEC_FORM_UPLOAD_IDENTITY_DOCS
+object PN_NEN_PEC_FORM_UPLOAD_IDENTITY_DOCS
     extends IdentityDocDetails(
       "Test-T&Cs.pdf"
     )
 
-object SHORT_PEC_RIGHT_TO_WORK
+object PN_NEN_PEC_RIGHT_TO_WORK
     extends RtwDetails(
       "British citizen, Briton",
       "British citizen, Briton",
@@ -67,7 +67,7 @@ object SHORT_PEC_RIGHT_TO_WORK
       true
     )
 
-object SHORT_PEC_FORM_DBS_PERSONAL_INFO
+object PN_NEN_PEC_FORM_DBS_PERSONAL_INFO
     extends DbsPersonalInfoDetails(
       "Mr",
       "Marie",
@@ -101,7 +101,7 @@ object SHORT_PEC_FORM_DBS_PERSONAL_INFO
       false
     )
 
-object SHORT_PEC_FORM_DBS_ADDRESS_DETAILS
+object PN_NEN_PEC_FORM_DBS_ADDRESS_DETAILS
     extends DbsAddressDetails(
       "40 Cromwell Road",
       Some(""),
@@ -112,7 +112,7 @@ object SHORT_PEC_FORM_DBS_ADDRESS_DETAILS
       "03/11/1975"
     )
 
-object SHORT_PEC_FORM_DIGITAL_IDENTITY_CHECK
+object PN_NEN_PEC_FORM_DIGITAL_IDENTITY_CHECK
     extends DigitalIdentityDetails(
       "As part of checking your right to work in the UK, we would like to process your biometric data for digital identity validation. We will ask for your passport or passport card, and a photo of your face.\n\nIf you consent to this processing, we will share your personal data with our checking provider TrustID and their supply chain. Please see our privacy notice (opens in new window) for more detail.\n\nIf you choose not to consent, you will need to present your original ID documents in person.",
       "I consent to my data being processed for digital identity checks",
@@ -125,7 +125,7 @@ object SHORT_PEC_FORM_DIGITAL_IDENTITY_CHECK
       true
     )
 
-object SHORT_PEC_FORM_EMPLOYMENT_HISTORY
+object PN_NEN_PEC_FORM_EMPLOYMENT_HISTORY
     extends EmploymentHistoryDetails(
       true,
       "Employer Test One",
@@ -139,7 +139,7 @@ object SHORT_PEC_FORM_EMPLOYMENT_HISTORY
       "01/06/2021"
     )
 
-object SHORT_PEC_FORM_VERIFYING_HISTORY
+object PN_NEN_PEC_FORM_VERIFYING_HISTORY
     extends VerifyingHistoryDetails(
       true,
       "Autotest1 - relation to referee",
@@ -156,7 +156,7 @@ object SHORT_PEC_FORM_VERIFYING_HISTORY
       s"$v9RefereeEmail"
     )
 
-object SHORT_PEC_FORM_PENSION_QUESTIONNAIRE
+object PN_NEN_PEC_FORM_PENSION_QUESTIONNAIRE
     extends PensionDetails(
       "Your answers will allow us to work out which of the Civil Service Pension schemes you can join.",
       "Have you ever been a member of public service pension scheme?\nAnswer this question with your latest period of pension scheme membership. Public services employers include the Civil Service, judiciary workers, teachers, members of the armed forces, fire and rescue services, the police, health service workers and local government employees. *By-analogy schemes are almost identical to the main Civil Service arrangements, but may have slightly different terms or rules.",
@@ -185,7 +185,7 @@ object SHORT_PEC_FORM_PENSION_QUESTIONNAIRE
       false
     )
 
-object SHORT_PEC_FORM_OVERSEAS
+object PN_NEN_PEC_FORM_OVERSEAS
     extends OverseasDetails(
       "Have you resided outside the UK within the past 3 years for 6 months or more?",
       true,
@@ -221,7 +221,7 @@ object SHORT_PEC_FORM_OVERSEAS
       "Autotest - Provide details about why we cannot contact your fellow UK traveller"
     )
 
-object SHORT_PEC_FORM_BANKRUPTCY_DETAILS
+object PN_NEN_PEC_FORM_BANKRUPTCY_DETAILS
     extends BankruptcyDetails(
       false,
       false,
@@ -229,22 +229,22 @@ object SHORT_PEC_FORM_BANKRUPTCY_DETAILS
       false
     )
 
-object SHORT_PEC_FORM_HEALTH_DECLARATION
+object PN_NEN_PEC_FORM_HEALTH_DECLARATION
     extends HealthDeclarationDetails(
       false, false, false, false, false, false, false
     )
 
-object SHORT_PEC_FORM_SELF_EMPLOYMENT
+object PN_NEN_PEC_FORM_SELF_EMPLOYMENT
     extends SelfEmploymentDetails(
       false
     )
 
-object SHORT_PEC_FORM_PREVIOUS_CS_EMPLOYMENT
+object PN_NEN_PEC_FORM_PREVIOUS_CS_EMPLOYMENT
     extends PreviousCSEmploymentDetails(
       false
     )
 
-object SHORT_PEC_FORM_DECLARATION
+object PN_NEN_PEC_FORM_DECLARATION
     extends DeclarationDetails(
       true, true, true, true, true, true, true, true
     )

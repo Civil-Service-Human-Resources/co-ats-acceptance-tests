@@ -1,6 +1,6 @@
 package uk.gov.co.test.ui.specs
 
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{v9EussStatus, v9IdvtDataConsent, v9RtwBritishCitizen, v9RtwHoldPassport, v9SmartphoneAccess}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{v9EussStatus, v9HomeDepartment, v9IdvtDataConsent, v9RtwBritishCitizen, v9RtwHoldPassport, v9SmartphoneAccess}
 import uk.gov.co.test.ui.data.v9.applicants._
 import uk.gov.co.test.ui.flows.e2e.IdvtFlow.idvtFlow
 import uk.gov.co.test.ui.flows.v9.RegisterCandidateFlow.fillNewCandidateDetails
@@ -68,7 +68,8 @@ class IdvtSpec extends BaseFeatureSpec {
 
     Scenario("VX: (IDVT: RTW Only; CRC: None and Not Applicable) - Share Code & Manual ID Check", RunInVX) {
       Given("candidate registers for new job application")
-      extractAllVacancyDetails("9988")
+//      extractAllVacancyDetails("9988")
+      extractAllVacancyDetails("10184")
       fillNewCandidateDetails(REGISTER_CANDIDATE_IDVT_05)
 
       When("candidate completes pec form and enters rtw share code & uploads id")
@@ -143,7 +144,7 @@ class IdvtSpec extends BaseFeatureSpec {
 
     Scenario("VX: (IDVT: RTW Only; CRC: DBS Enhanced) - Manual ID Check And Start IDVT Check", RunInVX) {
       Given("candidate registers for new job application")
-      extractAllVacancyDetails("10038")
+      extractAllVacancyDetails("10192")
       fillNewCandidateDetails(REGISTER_CANDIDATE_IDVT_10)
 
       When("candidate completes pec form with rtw completed")

@@ -2,7 +2,7 @@ package uk.gov.co.test.ui.pages.vx
 
 import org.openqa.selenium.{By, WebElement}
 import org.scalatest.concurrent.Eventually.eventually
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXAbilitiesRequired, vXAnyAdditionalQuestions, vXAnyOnlineTests, vXApplicationClosingDate, vXApplicationLiveDate, vXApproach, vXAttachmentRequired, vXAvailableOutsideInNI, vXBehavioursRequired, vXBudgetaryApproval, vXBusinessArea, vXBusinessAreaDetail, vXCandidateInstructions, vXCandidateUploadIdentityDocs, vXCommunitiesInNIR, vXContactName, vXCostCentre, vXCrcCheckProvider, vXCrcLevel, vXDesirablePastExperience, vXDetailsForUploadIdentityDocs, vXEmailForQuestions, vXExperiencesRequired, vXFullQualification, vXGiveLocationPreference, vXGreatForVeterans, vXGuidanceText, vXHavePecMailbox, vXHowManyQuestions, vXInterviewExpectedRounds, vXInterviewFourType, vXInterviewNumber, vXInterviewOneType, vXInterviewThreeType, vXInterviewTwoType, vXJobGradeEquivalent, vXJobGrades, vXJobHistory, vXJobInfoDepartment, vXLanguagesMandatory, vXLicencesMandatory, vXLocationDisplay, vXLocationType, vXManuallyCheckIdentityDocs, vXMaxLocations, vXMedicalRequired, vXMembershipsMandatory, vXNoOfJobsAvailable, vXNoPecOgdTransfer, vXNonReserved, vXOtherLocations, vXPecAdditionalCheck, vXPecBankruptcyCheck, vXPecCrc, vXPecEmploymentHistoryCheck, vXPecFraudCheck, vXPecGeneralInfo, vXPecHealthDisplayOptions, vXPecHealthRefCheck, vXPecHrEmailForNen, vXPecHrEmailForPn, vXPecIncludeAdditionalCheck, vXPecMailbox, vXPecNameOfAdditionalCheck, vXPecNen, vXPecNsv, vXPecNsvDisplayOptions, vXPecOgdSecurityCheck, vXPecOverseasCheck, vXPecPensionsCheck, vXPecPn, vXPecPreviousCivilEmploymentCheck, vXPecReferenceCheck, vXPecSelfEmploymentCheck, vXPecUseOgdProcess, vXPersonalStatement, vXPreSiftRequired, vXPreviousExperiences, vXProfession, vXQualificationsMandatory, vXQuestionOne, vXQuestionThree, vXQuestionTwo, vXRejectApplyingOnPromotion, vXRejectLanguagesNotHeld, vXRejectLicencesNotHeld, vXRejectLiveMisconduct, vXRejectMembershipsNotHeld, vXRejectNationalityReq, vXRejectNoRightToRemain, vXRejectPoorAttendance, vXRejectPoorPerformance, vXRejectProbation, vXRejectQualificationsNotHeld, vXReserveExtendLength, vXReserveExtendRequired, vXReserveListLength, vXReserveListRequired, vXRtwChecks, vXSpecificLanguages, vXSpecificLicences, vXSpecificMemberships, vXSpecificPastExperience, vXSpecificQualifications, vXSpecifyGuidance, vXStatementWordLimit, vXStrengthsRequired, vXTeamEmail, vXTechSkillsRequired, vXTypeOfRole, vXUseOnlinePecForms, vXVacanciesInNIR, vXVacancyHolderEmail, vXVacancyHolderName, vXVettingLevel, vXWhenRtwChecks, vXWhichIdentityChecks, vacancyFormId, vacancyId, vacancyName}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXAbilitiesRequired, vXAnyAdditionalQuestions, vXAnyOnlineTests, vXApplicationClosingDate, vXApplicationLiveDate, vXApproach, vXAttachmentRequired, vXAvailableOutsideInNI, vXBehavioursRequired, vXBudgetaryApproval, vXBusinessArea, vXBusinessAreaDetail, vXCandidateInstructions, vXCandidateUploadIdentityDocs, vXCommunitiesInNIR, vXContactName, vXCostCentre, vXCrcCheckProvider, vXCrcLevel, vXDesirablePastExperience, vXDetailsForUploadIdentityDocs, vXEmailForQuestions, vXExperiencesRequired, vXFullQualification, vXGiveLocationPreference, vXGreatForVeterans, vXGuidanceText, vXHavePecMailbox, vXHowManyQuestions, vXInterviewExpectedRounds, vXInterviewFourType, vXInterviewNumber, vXInterviewOneType, vXInterviewThreeType, vXInterviewTwoType, vXJobGradeEquivalent, vXJobGrades, vXJobHistory, vXJobInfoDepartment, vXLanguagesMandatory, vXLicencesMandatory, vXLocationDisplay, vXLocationType, vXManuallyCheckIdentityDocs, vXMaxLocations, vXMedicalRequired, vXMembershipsMandatory, vXNoOfJobsAvailable, vXNoPecOgdTransfer, vXNonReserved, vXOtherLocations, vXPecAdditionalCheck, vXPecBankruptcyCheck, vXPecCrc, vXPecEmploymentHistoryCheck, vXPecFraudCheck, vXPecGeneralInfo, vXPecHealthDisplayOptions, vXPecHealthRefCheck, vXPecHrEmailForNen, vXPecHrEmailForPn, vXPecIncludeAdditionalCheck, vXPecMailbox, vXPecNameOfAdditionalCheck, vXPecNen, vXPecNsv, vXPecNsvDisplayOptions, vXPecOgdSecurityCheck, vXPecOverseasCheck, vXPecPensionsCheck, vXPecPn, vXPecPreviousCivilEmploymentCheck, vXPecReferenceCheck, vXPecSelfEmploymentCheck, vXPecUseOgdProcess, vXPersonalStatement, vXPreSiftRequired, vXPreviousExperiences, vXProfession, vXProfile, vXQualificationsMandatory, vXQuestionOne, vXQuestionThree, vXQuestionTwo, vXRejectApplyingOnPromotion, vXRejectLanguagesNotHeld, vXRejectLicencesNotHeld, vXRejectLiveMisconduct, vXRejectMembershipsNotHeld, vXRejectNationalityReq, vXRejectNoRightToRemain, vXRejectPoorAttendance, vXRejectPoorPerformance, vXRejectProbation, vXRejectQualificationsNotHeld, vXReserveExtendLength, vXReserveExtendRequired, vXReserveListLength, vXReserveListRequired, vXRtwChecks, vXSpecificLanguages, vXSpecificLicences, vXSpecificMemberships, vXSpecificPastExperience, vXSpecificQualifications, vXSpecifyGuidance, vXStatementWordLimit, vXStrengthsRequired, vXTeamEmail, vXTechSkillsRequired, vXTypeOfRole, vXUseOnlinePecForms, vXVacanciesInNIR, vXVacancyHolderEmail, vXVacancyHolderName, vXVettingLevel, vXWhenRtwChecks, vXWhichIdentityChecks, vacancyFormId, vacancyId, vacancyName}
 import uk.gov.co.test.ui.pages.v9.ApplicationDetailsPage.resetApplicationDetails
 import uk.gov.co.test.ui.pages.vx.vacancytabs.SummaryTab.{vacancyActive, vacancyClosingDateId, vacancyLiveDateId}
 
@@ -107,7 +107,7 @@ object VacancyDetailsPage extends VacancyBasePage {
   def jobGradeId                        = s"select2-${vacancyFormId}_datafield_154973_1_1-container"
   def jobGradeEquivalentId              = s"${vacancyFormId}_datafield_154981_1_1_en-GB"
   def vacancyHolderNameId               = s"${vacancyFormId}_datafield_115926_1_1"
-  def contactNameId               = s"${vacancyFormId}_datafield_59444_1_1"
+  def contactNameId                     = s"${vacancyFormId}_datafield_59444_1_1"
   def emailForQuestionsId               = s"${vacancyFormId}_datafield_59457_1_1"
   def vacancyHolderEmailId              = s"${vacancyFormId}_datafield_115708_1_1"
   def teamEmailId                       = s"${vacancyFormId}_datafield_59450_1_1"
@@ -151,6 +151,7 @@ object VacancyDetailsPage extends VacancyBasePage {
 
   def extractVacancyId(): String = {
     vacancyId = waitForVisibilityOfElementByPath(appIdPath).getText
+    println(s"Vacancy ID: $vacancyId")
     vacancyId
   }
 
@@ -194,7 +195,6 @@ object VacancyDetailsPage extends VacancyBasePage {
   def extractTabFormId(): Unit = {
     val formId = waitForVisibilityOfElementByPath(".//form[@class='form-horizontal']")
     vacancyFormId = formId.getAttribute("id")
-    println(vacancyFormId)
   }
 
   def matchCriteria(criteria: String): Unit =
@@ -354,7 +354,9 @@ object VacancyDetailsPage extends VacancyBasePage {
     vXVacancyHolderEmail = waitForVisibilityOfElementById(vacancyHolderEmailId).getAttribute("value")
 
   private def extractTeamEmail(): Unit =
-    vXTeamEmail = waitForVisibilityOfElementById(teamEmailId).getAttribute("value")
+    if (vXProfile != "Vacancy Holder 1") {
+      vXTeamEmail = waitForVisibilityOfElementById(teamEmailId).getAttribute("value")
+    }
 
   private def extractReservedStatus(): Unit = {
     val status = waitForVisibilityOfElementById(reservedStatusId).findElement(By.xpath(checkLabelPath))
@@ -363,17 +365,17 @@ object VacancyDetailsPage extends VacancyBasePage {
     } else vXNonReserved = false
   }
 
-  private def extractCrcLevel(): Unit = {
+  private def extractCrcLevel(): Unit =
     vXCrcLevel = waitForVisibilityOfElementById(crcLevelId).findElement(By.xpath(checkLabelPath)).getText
-    println(vXCrcLevel)
-  }
 
   private def extractCrcCheckProvider(): Unit =
-    if (vXCrcLevel != "None") {
-      vXCrcCheckProvider =
-        waitForVisibilityOfElementById(crcCheckProviderId).findElement(By.xpath(checkLabelPath)).getText
-      if (vXCrcCheckProvider.contains("DBS")) vXCrcCheckProvider = "DBS"
-    } else vXCrcCheckProvider = ""
+    if (vXProfile != "Vacancy Holder 1") {
+      if (vXCrcLevel != "None") {
+        vXCrcCheckProvider =
+          waitForVisibilityOfElementById(crcCheckProviderId).findElement(By.xpath(checkLabelPath)).getText
+        if (vXCrcCheckProvider.contains("DBS")) vXCrcCheckProvider = "DBS"
+      } else vXCrcCheckProvider = ""
+    }
 
   private def extractVettingLevel(): Unit =
     vXVettingLevel = waitForVisibilityOfElementById(vettingLevelId).findElement(By.xpath(checkLabelPath)).getText
@@ -842,6 +844,7 @@ object VacancyDetailsPage extends VacancyBasePage {
     val ogdSecurity = waitForVisibilityOfElementById(pecOgdTransferProcessId).findElement(By.xpath(checkLabelPath))
     if (ogdSecurity.getText == "Yes") {
       vXPecOgdSecurityCheck = true
+      extractUseOgdTransferProcess()
     } else vXPecOgdSecurityCheck = false
   }
 
@@ -1014,7 +1017,6 @@ object VacancyDetailsPage extends VacancyBasePage {
       extractFraudCheckTypes()
       extractSelfEmploymentCheckTypes()
       extractOgdSecurityProcess()
-      extractUseOgdTransferProcess()
       extractIncludeAdditionalCheck()
       extractNenTypes()
       extractNenHrEmail()

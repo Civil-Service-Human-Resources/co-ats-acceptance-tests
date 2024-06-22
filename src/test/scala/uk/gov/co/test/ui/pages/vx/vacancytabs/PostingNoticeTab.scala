@@ -329,6 +329,6 @@ object PostingNoticeTab extends VacancyBasePage {
     }
     timeRecord()
     clickOn(submitForm)
-    if (waitForVisibilityOfElementById(firstDayArrangementsAfterPnBarId).isDisplayed) println("Done")
+    if (waitForVisibilityOfElementById(firstDayArrangementsAfterPnBarId).isDisplayed) println("PN Form Complete")
   }
 }

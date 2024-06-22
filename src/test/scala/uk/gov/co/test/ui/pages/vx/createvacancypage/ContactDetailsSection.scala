@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.pages.vx.createvacancypage
 
 import org.openqa.selenium.{By, Keys}
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXContactName, vXEmailForQuestions, vXTeamEmail, vXVacancyHolderEmail, vXVacancyHolderName, vacancyFormId}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXContactName, vXEmailForQuestions, vXProfile, vXTeamEmail, vXVacancyHolderEmail, vXVacancyHolderName, vacancyFormId}
 import uk.gov.co.test.ui.data.vx.vacancy.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 
@@ -58,17 +58,19 @@ object ContactDetailsSection extends VacancyBasePage {
 
   private def enterVacancyTeamEmail(contactDetails: ContactDetails): Unit = {
     vXTeamEmail = contactDetails.vacancyTeamEmail
-    val teamEmailField = driver.findElement(By.id(vacancyTeamEmailInput))
-    val teamEmailValue = teamEmailField.getAttribute("value")
-    if (teamEmailValue.nonEmpty) {
-      if (!getOs.contains("mac")) {
-        teamEmailField.sendKeys(Keys.CONTROL, "a")
-      } else {
-        teamEmailField.sendKeys(Keys.COMMAND, "a")
+    if (vXProfile != "Vacancy Holder 1") {
+      val teamEmailField = driver.findElement(By.id(vacancyTeamEmailInput))
+      val teamEmailValue = teamEmailField.getAttribute("value")
+      if (teamEmailValue.nonEmpty) {
+        if (!getOs.contains("mac")) {
+          teamEmailField.sendKeys(Keys.CONTROL, "a")
+        } else {
+          teamEmailField.sendKeys(Keys.COMMAND, "a")
+        }
+        teamEmailField.sendKeys(Keys.BACK_SPACE)
       }
-      teamEmailField.sendKeys(Keys.BACK_SPACE)
+      teamEmailField.sendKeys(vXTeamEmail)
     }
-    teamEmailField.sendKeys(vXTeamEmail)
   }
 
   private val contactInfo: Seq[ContactDetails => Unit] = Seq(

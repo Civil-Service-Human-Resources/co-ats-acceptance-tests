@@ -1,4 +1,4 @@
-package uk.gov.co.test.ui.data.test.short
+package uk.gov.co.test.ui.data.test.pnnen
 
 import uk.gov.co.test.ui.data.vx.vacancy.NewVacancyDetails
 import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.{contactEmailVxConfig, contactNameVxConfig}
@@ -7,29 +7,29 @@ import uk.gov.co.test.ui.pages.vx.createvacancypage._
 
 import scala.collection.mutable.ListBuffer
 
-object SHORT_VACANCY_DATA
+object PN_NEN_VACANCY_DATA
     extends NewVacancyDetails(
-      SHORT_BASIC_DETAILS,
-      SHORT_JOB_INFORMATION,
-      SHORT_APPROACH,
-      SHORT_APPROVAL,
-      SHORT_RESERVE_LIST,
-      SHORT_LOCATIONS,
-      SHORT_CONTRACT_DETAILS,
-      SHORT_ADVERT,
-      SHORT_CONTACT_DETAILS,
-      SHORT_VETTING_DETAILS,
-      SHORT_INTERVIEWS_DETAILS,
-      SHORT_SUCCESS_PROFILES,
-      SHORT_VACANCY_TESTS,
-      SHORT_ADDITIONAL_QUESTIONS,
-      SHORT_CRITERIA,
-      SHORT_MANAGEMENT,
-      SHORT_ONLINE_PEC_CHECK_FORMS,
-      SHORT_PEC_CHECK_FORMS
+      PN_NEN_BASIC_DETAILS,
+      PN_NEN_JOB_INFORMATION,
+      PN_NEN_APPROACH,
+      PN_NEN_APPROVAL,
+      PN_NEN_RESERVE_LIST,
+      PN_NEN_LOCATIONS,
+      PN_NEN_CONTRACT_DETAILS,
+      PN_NEN_ADVERT,
+      PN_NEN_CONTACT_DETAILS,
+      PN_NEN_VETTING_DETAILS,
+      PN_NEN_INTERVIEWS_DETAILS,
+      PN_NEN_SUCCESS_PROFILES,
+      PN_NEN_VACANCY_TESTS,
+      PN_NEN_ADDITIONAL_QUESTIONS,
+      PN_NEN_CRITERIA,
+      PN_NEN_MANAGEMENT,
+      PN_NEN_ONLINE_PEC_CHECK_FORMS,
+      PN_NEN_PEC_CHECK_FORMS
     )
 
-object SHORT_BASIC_DETAILS
+object PN_NEN_BASIC_DETAILS
     extends BasicDetails(
       "DO NOT USE- Automation Test Template",
       s"DEFRA - " + generateRandomJobPosition(),
@@ -37,7 +37,7 @@ object SHORT_BASIC_DETAILS
       "Prawf awtomeiddio",
       32
     )
-object SHORT_JOB_INFORMATION
+object PN_NEN_JOB_INFORMATION
     extends JobInfoDetails(
       true,
       "Department for Environment, Food and Rural Affairs",
@@ -58,7 +58,7 @@ object SHORT_JOB_INFORMATION
       "3",
       true
     )
-object SHORT_APPROACH
+object PN_NEN_APPROACH
     extends ApproachDetails(
       "External",
       false,
@@ -67,7 +67,7 @@ object SHORT_APPROACH
       "Prawf awtomeiddio",
       "This vacancy is open to employees who already hold the substantive grade for the post and were appointed to the Civil Service on merit following a fair and open competition; or were appointed to a permanent Civil Service post through an exception in the Civil Service Commissioners’ rules."
     )
-object SHORT_APPROVAL
+object PN_NEN_APPROVAL
     extends ApprovalDetails(
       true,
       "Autotest - budgetary authorisation info",
@@ -75,7 +75,7 @@ object SHORT_APPROVAL
       "Test-T&Cs.pdf"
     )
 
-object SHORT_RESERVE_LIST
+object PN_NEN_RESERVE_LIST
     extends ReserveListDetails(
       false,
       "12 Months",
@@ -83,7 +83,7 @@ object SHORT_RESERVE_LIST
       "6 Months"
     )
 
-object SHORT_LOCATIONS
+object PN_NEN_LOCATIONS
     extends LocationsDetails(
       "Postcodes",
       "M1 4RJ",
@@ -99,7 +99,7 @@ object SHORT_LOCATIONS
       otherLocations = ListBuffer("London", "Southampton", "Manchester")
     )
 
-object SHORT_CONTRACT_DETAILS
+object PN_NEN_CONTRACT_DETAILS
     extends ContractDetails(
       List("Permanent", "Temporary", "Loan", "Secondment", "Returner"),
       "Autotest - Maximum characters: 255. Any text over this limit will not show on the advert.",
@@ -116,7 +116,7 @@ object SHORT_CONTRACT_DETAILS
       18750
     )
 
-object SHORT_ADVERT
+object PN_NEN_ADVERT
     extends AdvertDetails(
       "Autotest - Have you got experience logging antiques, artwork, and artefacts?  \n\nDo you care about building conservation?  \n\nAre you comfortable leading on Heritage open days? \n\nThis is unique, but if you’ve answered yes, then maybe you should think about the position of Heritage Lead with HMRC. \n\nWe are looking for someone to join our Estates team in Liverpool as our Heritage Lead. We need someone who will protect the integrity of listed features and ensure maintenance and proposed changes are delivered in accordance with the conservation management plan.\n\nAlthough this role is within HMRC, this role means you’ll build relationships with, and work alongside local Council Heritage Officers, you’ll be working with Historic England, and you’ll be leading on Heritage Open days. The open days are unique in that they raise the profile of HMRC, but they also demonstrate our conservation credentials and where we work.\n\nSee what it’s like to work at HMRC: find out more about us or ask our colleagues a question. Questions relating to an individual application must be emailed as detailed later in this advert.",
       "Autotest - Our Heritage Lead interacts with a breadth of individuals across the business and externally, these can include projects teams within HMRC, external suppliers, Health and Safety Managers and Council Officers. \n\nWe are looking for you to be a key decision maker within our estate team, not only able to identify any risks but also manage any mitigating actions to resolve them. We also ask you to contribute to the planning and delivery of any targets and objectives in order to meet HMRC estates targets and priorities that ensure the preservation of heritage features. \n\nCustomer Service is at the heart of everything we do. You’ll be collaborating with the other parts of our Estates team as well as the Local Council to ensure we are providing a seamless service to our customers. The service we provide also relies on our supplier performance, and you’ll be assessing their performance against the agreed KPI’s and Conservation Management Plan. We want you to ensure SMART development and compliance of current and future FM service delivery plans in relation to heritage commitments.",
@@ -125,7 +125,7 @@ object SHORT_ADVERT
       "Autotest - How to Apply\n\nAs part of the application process you will be asked to complete a CV and 500-word Personal Statement.\n\nFurther details around what this will entail are listed on the application form.\n\nYour CV will be used for information only and will not be scored.\n\nYour Personal Statement should be used to describe how your skills and experience would be suitable for the advertised role, making reference to the essential criteria and person specification outlined in the advert.\n\nThe sift will be carried out against the Personal Statement, with the successful candidates being invited to interview.\n\nDuring the panel interview, your experience will be assessed and you will be asked behaviour-based questions to explore in detail what you are capable of. You will also be asked strength-based questions to explore what you enjoy and your motivations relevant to the job role.\n\nA Technical presentation will be required on GPP Professional technical expertise.\n\nWe reserve the right to raise the score required at any stage of the process in order to manage numbers.\n\nInterview dates to be confirmed.\n\nA reserve list may be held for a period of up to 12 months from which further appointments may be made for the same or similar roles – if this applies to you, we’ll let you know via your Civil Service Jobs account.\n\nEligibility\n\nTo check that you are eligible to apply, review this eligibility information\n\nDue to operational needs, these posts are full-time; however applicants who need to work a more flexible arrangement are welcome to apply. We can’t guarantee that we can meet all requests to work flexibly, as agreement will be subject to business ability to accommodate, and any request to work a more flexible arrangement should be made prior to your acceptance of the provisional offer.\n\nImportant information for existing HMRC contractual homeworkers\n\nPlease note that this role is unsuitable for contractual homeworkers due to the nature and/or requirements of the role.\n\nReasonable Adjustments \n\nWe want to make sure no one is put at a disadvantage during our recruitment process because of a disability, condition, or impairment. To assist you with this, we will reduce or remove any barriers where possible and provide additional support where appropriate. \n\nIf you need a reasonable adjustment or a change to be made so that you can make your application, review this information on reasonable adjustments, and contact hmrcrecruitment.grs@cabinetoffice.gov.uk as soon as possible.\n\nDiversity and Inclusion\n\nAt HMRC we are committed to creating a great place to work for all our colleagues and creating an inclusive and respectful environment that reflects the diversity of the society we serve.\n\nDiverse perspectives and experiences are critical to our success and we welcome applications from all people from all backgrounds with the experience and skills needed to perform this role. We’re committed to creating a great place to work for all our colleagues here at HMRC. We want everyone to feel valued and supported to achieve their potential at HMRC.\n\nFor more information on how we make this happen, review this information on our culture and values\n\nApplications received from candidates with a criminal record are considered fairly in accordance with the DBS Code of Practice and the Recruitment of ex-offenders Policy.\n\nWe welcome applications from those who need to work a more flexible arrangement and will agree to requests where possible after considering operational and customer service needs. We can’t guarantee that we can meet all requests to work flexibly, as agreement will be subject to business ability to accommodate, and any request to work a more flexible arrangement should be made prior to your acceptance of the provisional offer.\n\nCustomer facing roles in HMRC require the ability to converse at ease with members of the public and provide advice in accurate spoken English and/or Welsh where required. Where this is an essential requirement, this will be tested as part of the selection process. \n\nThe Civil Service runs a Disability Confident Scheme (DCS) for candidates with disabilities who meet the minimum selection criteria.\n\nThe Civil Service also offers a Redeployment Interview Scheme to civil servants who are at risk of redundancy, and who meet the minimum requirements for the advertised vacancy. \n\nLocations \n\nHMRC has a presence in every region of the UK. For more information on where you might be working, review this information on our locations.\n\nSecurity Update\n\nFor more information on the level of security checks we will carry out, review this information on security checks\n\nPlease note: in addition to the standard pre-employment checks for appointment into the Civil Service, all candidates must also obtain National Security Vetting at Security Check (SC) clearance level for this vacancy. You will normally need to meet the minimum UK residency period as determined by the level of vetting being undertaken, which for SC is 5 years UK residency prior to your vetting application. If you have any questions about this residency requirement, please speak to the vacancy holder for this post.\n\nFurther Information\n\nThe Civil Service values honesty and integrity and expects all candidates to abide by these principles. The evidence you provide in your application must relate to your own experiences.\n\nAny instances of plagiarism or other forms of cheating will be investigated and, if proven, the relevant application/s will be withdrawn from the process. \n\nDuplicate applications for the same vacancy will also be withdrawn.\n\nTransferring into HMRC from Civil Service If you are currently working for an ‘Other Government Department’ (OGD) and would like to consider the impact on your pay when joining HMRC, please see the attached document \"Combined T&C and OGD Pay English”, found at the bottom of this advert. Further information on staff transfers can be found on gov.uk\n\nProblems during the application process \n\nIf you experience accessibility problems with any attachments on this advert, please contact the email address in the 'Contact point for applicants' section. \n\nIf you think you’ve made a mistake on a short application form (e.g. you’ve ticked the incorrect eligibility box), please contact hmrcrecruitment.grs@cabinetoffice.gov.uk at least two working days before the vacancy closes. After this, we won’t be able to reopen your application.   \n\nPlease use the subject line to insert appropriate wording e.g. Please re-open my application - 330023 & vacancy closing date 20/12/23. Please note that we cannot amend or re-open your application if you have submitted your full application in the interests of fair and open recruitment.\n\nFor reasonable adjustments queries or requests, please see details within reasonable adjustments section above."
     )
 
-object SHORT_CONTACT_DETAILS
+object PN_NEN_CONTACT_DETAILS
     extends ContactDetails(
       s"$contactNameVxConfig",
       s"$contactEmailVxConfig",
@@ -135,7 +135,7 @@ object SHORT_CONTACT_DETAILS
       s"$contactEmailVxConfig"
     )
 
-object SHORT_VETTING_DETAILS
+object PN_NEN_VETTING_DETAILS
     extends VettingDetails(
       true,
       "None",
@@ -144,7 +144,7 @@ object SHORT_VETTING_DETAILS
       false
     )
 
-object SHORT_INTERVIEWS_DETAILS
+object PN_NEN_INTERVIEWS_DETAILS
   extends InterviewsDetails(
     "No interviews",
     "Interview",
@@ -154,28 +154,28 @@ object SHORT_INTERVIEWS_DETAILS
     false
   )
 
-object SHORT_SUCCESS_PROFILES
+object PN_NEN_SUCCESS_PROFILES
     extends SuccessProfilesDetails(
       false,
       false,
       false,
       false,
       false,
-      Some(SHORT_ABILITIES),
-      Some(SHORT_BEHAVIOURS),
-      Some(SHORT_EXPERIENCES),
-      Some(SHORT_STRENGTHS),
-      Some(SHORT_TECH_SKILLS)
+      Some(PN_NEN_ABILITIES),
+      Some(PN_NEN_BEHAVIOURS),
+      Some(PN_NEN_EXPERIENCES),
+      Some(PN_NEN_STRENGTHS),
+      Some(PN_NEN_TECH_SKILLS)
     )
 
-object SHORT_ABILITIES
+object PN_NEN_ABILITIES
     extends AbilitiesDetails(
       """The following online tests can be used to assess abilities:
       |Civil Service Numerical Test
       |Civil Service Verbal Test""".stripMargin
     )
 
-object SHORT_BEHAVIOURS
+object PN_NEN_BEHAVIOURS
     extends BehavioursDetails(
       assessBehaviours = """The following online tests can be used to assess behaviours:
                          |Civil Service Judgement Test
@@ -203,7 +203,7 @@ object SHORT_BEHAVIOURS
       )
     )
 
-object SHORT_EXPERIENCES
+object PN_NEN_EXPERIENCES
     extends ExperienceDetails(
       false,
       "0 - 100",
@@ -230,7 +230,7 @@ object SHORT_EXPERIENCES
       )
     )
 
-object SHORT_STRENGTHS
+object PN_NEN_STRENGTHS
     extends StrengthsDetails(
       8,
       "Adaptable",
@@ -243,7 +243,7 @@ object SHORT_STRENGTHS
       "Service Focussed"
     )
 
-object SHORT_TECH_SKILLS
+object PN_NEN_TECH_SKILLS
     extends TechSkillsDetails(
       8,
       Some(
@@ -312,7 +312,7 @@ object SHORT_TECH_SKILLS
       )
     )
 
-object SHORT_VACANCY_TESTS
+object PN_NEN_VACANCY_TESTS
     extends VacancyTestsDetails(
       false, //only part on master vacancy set to false!
       "Online Tests",
@@ -370,13 +370,13 @@ object SHORT_VACANCY_TESTS
       ),
       true,
       "Autotest - Additional details for the recruitment team",
-      Some(SHORT_RECRUITER_TESTS),
-      Some(SHORT_GROUP_A_TESTS),
-      Some(SHORT_GROUP_B_TESTS),
-      Some(SHORT_GROUP_C_TESTS)
+      Some(PN_NEN_RECRUITER_TESTS),
+      Some(PN_NEN_GROUP_A_TESTS),
+      Some(PN_NEN_GROUP_B_TESTS),
+      Some(PN_NEN_GROUP_C_TESTS)
     )
 
-object SHORT_RECRUITER_TESTS
+object PN_NEN_RECRUITER_TESTS
     extends RecruiterTestsDetails(
       "After the tests",
       "Auto-progress after each test",
@@ -385,7 +385,7 @@ object SHORT_RECRUITER_TESTS
       "Autotest - Online test instructions"
     )
 
-object SHORT_GROUP_A_TESTS
+object PN_NEN_GROUP_A_TESTS
     extends GroupATestsDetails(
       "First",
       "Three",
@@ -395,7 +395,7 @@ object SHORT_GROUP_A_TESTS
       7
     )
 
-object SHORT_GROUP_B_TESTS
+object PN_NEN_GROUP_B_TESTS
     extends GroupBTestsDetails(
       "Second",
       "Two",
@@ -404,7 +404,7 @@ object SHORT_GROUP_B_TESTS
       5
     )
 
-object SHORT_GROUP_C_TESTS
+object PN_NEN_GROUP_C_TESTS
     extends GroupCTestsDetails(
       "Third",
       "Two",
@@ -413,7 +413,7 @@ object SHORT_GROUP_C_TESTS
       3
     )
 
-object SHORT_ADDITIONAL_QUESTIONS
+object PN_NEN_ADDITIONAL_QUESTIONS
     extends AdditionalQuestionsDetails(
       false,
       3,
@@ -422,7 +422,7 @@ object SHORT_ADDITIONAL_QUESTIONS
       "Autotest - Question 3"
     )
 
-object SHORT_CRITERIA
+object PN_NEN_CRITERIA
     extends CriteriaDetails(
       campaignID = Some("Autotest - If this vacancy is linked to a campaign, enter the campaign ID (optional)"),
       probationIncomplete = true,
@@ -441,7 +441,7 @@ object SHORT_CRITERIA
       candidateInstructions = "Autotest - Instructions for candidate"
     )
 
-object SHORT_MANAGEMENT
+object PN_NEN_MANAGEMENT
     extends ManagementDetails(
       false,
       false,
@@ -460,7 +460,7 @@ object SHORT_MANAGEMENT
       vacancyComments = Option("Autotest - Comments on this vacancy")
     )
 
-object SHORT_ONLINE_PEC_CHECK_FORMS
+object PN_NEN_ONLINE_PEC_CHECK_FORMS
     extends OnlinePecCheckFormsDetails(
       true,
       false,
@@ -468,7 +468,7 @@ object SHORT_ONLINE_PEC_CHECK_FORMS
       s"$contactEmailVxConfig"
     )
 
-object SHORT_PEC_CHECK_FORMS
+object PN_NEN_PEC_CHECK_FORMS
     extends PecCheckFormsDetails(
       rtwCheck = ListBuffer("Not Applicable"),
       "Before pre employment checks",

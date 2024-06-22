@@ -1,23 +1,23 @@
-package uk.gov.co.test.ui.data.test.short
+package uk.gov.co.test.ui.data.test.pnnen
 
 import uk.gov.co.test.ui.data.v9.shortform.ShortFormDetails
 import uk.gov.co.test.ui.pages.v9.shortform._
 
-object SHORT_SHORT_FORM_DATA
+object PN_NEN_SHORT_FORM_DATA
     extends ShortFormDetails(
-      SHORT_SHORT_FORM_APP_GUIDANCE,
-      SHORT_SHORT_FORM_ELIGIBILITY,
-      SHORT_SHORT_FORM_PERSONAL_INFO,
-      SHORT_SHORT_FORM_DIVERSITY_MONITORING,
-      SHORT_SHORT_FORM_DECLARATION
+      PN_NEN_SHORT_FORM_APP_GUIDANCE,
+      PN_NEN_SHORT_FORM_ELIGIBILITY,
+      PN_NEN_SHORT_FORM_PERSONAL_INFO,
+      PN_NEN_SHORT_FORM_DIVERSITY_MONITORING,
+      PN_NEN_SHORT_FORM_DECLARATION
     )
 
-object SHORT_SHORT_FORM_APP_GUIDANCE
+object PN_NEN_SHORT_FORM_APP_GUIDANCE
     extends AppGuidanceDetails(
       true
     )
 
-object SHORT_SHORT_FORM_ELIGIBILITY
+object PN_NEN_SHORT_FORM_ELIGIBILITY
     extends EligibilityDetails(
       true,
       true,
@@ -28,7 +28,7 @@ object SHORT_SHORT_FORM_ELIGIBILITY
       "Yes"
     )
 
-object SHORT_SHORT_FORM_PERSONAL_INFO
+object PN_NEN_SHORT_FORM_PERSONAL_INFO
     extends PersonalInfoDetails(
       "01520000000",
       secondaryNo = Option("07770000000"),
@@ -42,7 +42,7 @@ object SHORT_SHORT_FORM_PERSONAL_INFO
       redeploymentScheme = Option(false)
     )
 
-object SHORT_SHORT_FORM_DIVERSITY_MONITORING
+object PN_NEN_SHORT_FORM_DIVERSITY_MONITORING
     extends DiversityDetails(
       "No",
       "Man",
@@ -93,7 +93,7 @@ object SHORT_SHORT_FORM_DIVERSITY_MONITORING
       "Protestant"
     )
 
-object SHORT_SHORT_FORM_DECLARATION
+object PN_NEN_SHORT_FORM_DECLARATION
     extends DeclarationDetails(
       true
     )

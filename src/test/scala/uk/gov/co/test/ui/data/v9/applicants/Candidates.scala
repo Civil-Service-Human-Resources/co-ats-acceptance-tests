@@ -161,15 +161,15 @@ object REGISTER_CANDIDATE_OGD_HMRC
     )
 
 object REGISTER_CANDIDATE_OGD_DEFRA
-  extends CandidateDetails(
-    firstname = s"$randomFirstName",
-    lastname = s"$randomLastName",
-    preferredFirstName = s"$preferredFirstName",
-    email = s"$randomEmail",
-    s"$passwordCandidate",
-    false,
-    true
-  )
+    extends CandidateDetails(
+      firstname = s"$randomFirstName",
+      lastname = s"$randomLastName",
+      preferredFirstName = s"$preferredFirstName",
+      email = s"$randomEmail",
+      s"$passwordCandidate",
+      false,
+      true
+    )
 
 object REGISTER_CANDIDATE_REDEPLOYMENT_SCHEME_1
     extends CandidateDetails(
@@ -589,13 +589,24 @@ object REGISTER_CANDIDATE_IDVT_12
       true
     )
 
+object REGISTER_CANDIDATE_PN_DEFRA
+    extends CandidateDetails(
+      firstname = s"$randomFirstName",
+      lastname = s"$randomLastName",
+      preferredFirstName = s"$preferredFirstName",
+      email = s"$randomEmail",
+      s"$passwordCandidate",
+      false,
+      true
+    )
+
 object REGISTER_CANDIDATE_NEN_DEFRA
-  extends CandidateDetails(
-    firstname = s"$randomFirstName",
-    lastname = s"$randomLastName",
-    preferredFirstName = s"$preferredFirstName",
-    email = s"$randomEmail",
-    s"$passwordCandidate",
-    false,
-    true
-  )
+    extends CandidateDetails(
+      firstname = s"$randomFirstName",
+      lastname = s"$randomLastName",
+      preferredFirstName = s"$preferredFirstName",
+      email = s"$randomEmail",
+      s"$passwordCandidate",
+      false,
+      true
+    )

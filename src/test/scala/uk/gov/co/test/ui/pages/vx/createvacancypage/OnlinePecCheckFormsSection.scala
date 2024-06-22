@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.pages.vx.createvacancypage
 
 import org.openqa.selenium.{By, Keys}
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXHavePecMailbox, vXNoPecOgdTransfer, vXPecMailbox, vXUseOnlinePecForms, vacancyFormId}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXHavePecMailbox, vXNoPecOgdTransfer, vXPecMailbox, vXProfile, vXUseOnlinePecForms, vacancyFormId}
 import uk.gov.co.test.ui.data.vx.vacancy.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 
@@ -66,8 +66,10 @@ object OnlinePecCheckFormsSection extends VacancyBasePage {
   )
 
   def onlinePecCheckFormsSection(newVacancyDetails: NewVacancyDetails): Unit =
-    onlinePecCheckForms.foreach { f =>
-      f(newVacancyDetails.onlinePecCheckFormsDetails)
+    if (vXProfile != "Vacancy Holder 1") {
+      onlinePecCheckForms.foreach { f =>
+        f(newVacancyDetails.onlinePecCheckFormsDetails)
+      }
     }
 
 }

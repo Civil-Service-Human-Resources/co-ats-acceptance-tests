@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.pages.vx.createvacancypage
 
 import org.openqa.selenium.By
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXAttachmentRequired, vXCandidateInstructions, vXExperiencesRequired, vXLanguagesMandatory, vXLicencesMandatory, vXMembershipsMandatory, vXPreSiftRequired, vXQualificationsMandatory, vXRejectApplyingOnPromotion, vXRejectLanguagesNotHeld, vXRejectLicencesNotHeld, vXRejectLiveMisconduct, vXRejectMembershipsNotHeld, vXRejectNationalityReq, vXRejectNoRightToRemain, vXRejectPoorAttendance, vXRejectPoorPerformance, vXRejectProbation, vXRejectQualificationsNotHeld, vacancyFormId}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXAttachmentRequired, vXCandidateInstructions, vXExperiencesRequired, vXLanguagesMandatory, vXLicencesMandatory, vXMembershipsMandatory, vXPreSiftRequired, vXProfile, vXQualificationsMandatory, vXRejectApplyingOnPromotion, vXRejectLanguagesNotHeld, vXRejectLicencesNotHeld, vXRejectLiveMisconduct, vXRejectMembershipsNotHeld, vXRejectNationalityReq, vXRejectNoRightToRemain, vXRejectPoorAttendance, vXRejectPoorPerformance, vXRejectProbation, vXRejectQualificationsNotHeld, vacancyFormId}
 import uk.gov.co.test.ui.data.vx.vacancy.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 
@@ -161,8 +161,10 @@ object CriteriaSection extends VacancyBasePage {
   )
 
   def criteriaSection(newVacancyDetails: NewVacancyDetails): Unit =
-    criteria.foreach { f =>
-      f(newVacancyDetails.criteriaDetails)
+    if (vXProfile != "Vacancy Holder 1") {
+      criteria.foreach { f =>
+        f(newVacancyDetails.criteriaDetails)
+      }
     }
 
 }
