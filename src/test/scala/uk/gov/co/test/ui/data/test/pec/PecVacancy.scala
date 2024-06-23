@@ -183,24 +183,24 @@ object PEC_BEHAVIOURS
           |Civil Service Management Judgement Test""".stripMargin,
       8,
       behaviourOne =
-        Some(Behaviours(chosenBehaviour = "Changing and Improving", stageApplication = false, stageInterview = true)),
+        Some(Behaviours(chosenBehaviour = "Changing and Improving", stageApplication = true, stageInterview = true)),
       behaviourTwo = Some(
         Behaviours(chosenBehaviour = "Communicating and Influencing", stageApplication = true, stageInterview = true)
       ),
       behaviourThree =
         Some(Behaviours(chosenBehaviour = "Delivering at Pace", stageApplication = true, stageInterview = true)),
       behaviourFour = Some(
-        Behaviours(chosenBehaviour = "Developing Self and Others", stageApplication = false, stageInterview = true)
+        Behaviours(chosenBehaviour = "Developing Self and Others", stageApplication = true, stageInterview = true)
       ),
       behaviourFive = Some(Behaviours(chosenBehaviour = "Leadership", stageApplication = true, stageInterview = true)),
       behaviourSix = Some(
-        Behaviours(chosenBehaviour = "Making Effective Decisions", stageApplication = false, stageInterview = true)
+        Behaviours(chosenBehaviour = "Making Effective Decisions", stageApplication = true, stageInterview = true)
       ),
       behaviourSeven = Some(
         Behaviours(chosenBehaviour = "Managing a Quality Service", stageApplication = true, stageInterview = true)
       ),
       behaviourEight = Some(
-        Behaviours(chosenBehaviour = "Working Together", stageApplication = true, stageInterview = false)
+        Behaviours(chosenBehaviour = "Working Together", stageApplication = true, stageInterview = true)
       )
     )
 
