@@ -81,13 +81,6 @@ object PEC_LONG_FORM_PERSONAL_STATEMENT
 
 object PEC_LONG_FORM_BEHAVIOURS
     extends BehavioursDetails(
-      s"$valid250Characters",
-      s"$valid250Characters",
-      s"$valid250Characters",
-      s"$valid250Characters",
-      s"$valid250Characters",
-      s"$valid250Characters",
-      s"$valid250Characters",
       s"$valid250Characters"
     )
 

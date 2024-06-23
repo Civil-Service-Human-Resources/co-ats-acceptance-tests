@@ -81,13 +81,6 @@ object IDVT_LONG_FORM_PERSONAL_STATEMENT
 
 object IDVT_LONG_FORM_BEHAVIOURS
     extends BehavioursDetails(
-      s"$valid250Characters",
-      s"$valid250Characters",
-      s"$valid250Characters",
-      s"$valid250Characters",
-      s"$valid250Characters",
-      s"$valid250Characters",
-      s"$valid250Characters",
       s"$valid250Characters"
     )
 

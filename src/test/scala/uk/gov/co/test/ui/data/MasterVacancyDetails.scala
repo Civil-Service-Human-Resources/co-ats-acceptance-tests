@@ -125,8 +125,8 @@ object MasterVacancyDetails extends VacancyBasePage {
   //vx VACANCY behaviours
   var vXHowManyBehaviours: Int                            = _
   var vXListOfChosenBehaviours: ListBuffer[String]        = ListBuffer()
-  var vXBehaviourApplicationRequired: ListBuffer[Boolean] = new ListBuffer()
-  var vXBehaviourInterviewRequired: ListBuffer[Boolean]   = new ListBuffer()
+  var vXBehaviourApplicationRequired: ListBuffer[Boolean] = ListBuffer()
+  var vXBehaviourInterviewRequired: ListBuffer[Boolean]   = ListBuffer()
 
   //vx VACANCY technical skills
   var vXHowManySkills: Int                              = 0
