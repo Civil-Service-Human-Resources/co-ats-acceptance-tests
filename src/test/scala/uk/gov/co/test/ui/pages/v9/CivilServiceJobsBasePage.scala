@@ -7,7 +7,7 @@ import org.scalatest.concurrent.Eventually.eventually
 import org.scalatest.matchers.should.Matchers
 import uk.gov.co.test.ui.conf.TestConfiguration
 import uk.gov.co.test.ui.conf.TestConfiguration.readProperty
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{preferredFirstName, randomEmail, randomFirstName, randomJobPosition, randomLastName}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{preferredFirstName, randomEmail, randomFirstName, randomJobPosition, randomLastName, randomPassword}
 import uk.gov.co.test.ui.driver.BrowserDriver
 import uk.gov.co.test.ui.pages.BasePage
 import uk.gov.co.test.ui.pages.v9.SearchJobsPage.civilServiceJobsPageTitle
@@ -44,6 +44,17 @@ trait CivilServiceJobsBasePage extends Matchers with BasePage with BrowserDriver
     val fake = new Faker()
     randomLastName = fake.name().lastName()
     randomLastName
+  }
+
+  def generateRandomPassword(): String = {
+    val fake = new Faker()
+    randomPassword = s"${fake.color().name()}${fake.cat().breed()}${Random.between(10, 99)}"
+    randomPassword
+  }
+
+  def generatedDacTestEmail(): String = {
+    randomEmail = s"dac24_${randomFirstName.toLowerCase}.${randomLastName.toLowerCase}@example.com"
+    randomEmail
   }
 
   def generatedEmail(): String = {
@@ -87,6 +98,14 @@ trait CivilServiceJobsBasePage extends Matchers with BasePage with BrowserDriver
     generateRandomLastName()
     generatePreferredFirstName()
     generatedEmail()
+  }
+
+  def generateTestCandidateDetails(): Unit = {
+    generateRandomFirstName()
+    generateRandomLastName()
+    generateRandomPassword()
+    generatePreferredFirstName()
+    generatedDacTestEmail()
   }
 
   def generateCandidateDetailsIterator(i: Int): Unit = {

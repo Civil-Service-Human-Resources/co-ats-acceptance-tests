@@ -123,8 +123,8 @@ object MasterVacancyDetails extends VacancyBasePage {
   var vXSpecificQualifications: String   = ""
 
   //vx VACANCY behaviours
-  var vXHowManyBehaviours: Int                     = 8
-  var vXListOfChosenBehaviours: ListBuffer[String] = ListBuffer(
+  var vXHowManyBehaviours: Int                            = 8
+  var vXListOfChosenBehaviours: ListBuffer[String]        = ListBuffer(
     "Changing and Improving",
     "Communicating and Influencing",
     "Delivering at Pace",
@@ -134,6 +134,8 @@ object MasterVacancyDetails extends VacancyBasePage {
     "Managing a Quality Service",
     "Working Together"
   )
+  var vXBehaviourApplicationRequired: ListBuffer[Boolean] = new ListBuffer()
+  var vXBehaviourInterviewRequired: ListBuffer[Boolean]   = new ListBuffer()
 
   //vx VACANCY technical skills
   var vXHowManySkills: Int                              = 0
@@ -243,6 +245,7 @@ object MasterVacancyDetails extends VacancyBasePage {
   //v9 candidate details
   var randomFirstName: String     = ""
   var randomLastName: String      = ""
+  var randomPassword: String      = ""
   var preferredFirstName: String  = ""
   var randomEmail: String         = ""
   var randomJobPosition: String   = ""
