@@ -626,35 +626,56 @@ object VacancyDetailsPage extends VacancyBasePage {
   private def extractBehaviourEight(): Unit =
     extractBehaviourValues(behaviourEightNameId, behaviourEightApplicationId, behaviourEightInterviewId)
 
-  private lazy val behaviours: Seq[Unit] = Seq(
-    extractBehaviourOne(),
-    extractBehaviourTwo(),
-    extractBehaviourThree(),
-    extractBehaviourFour(),
-    extractBehaviourFive(),
-    extractBehaviourSix(),
-    extractBehaviourSeven(),
-    extractBehaviourEight()
-  )
-
-  private def behavioursSection(behavioursAssessed: Int): Unit =
-    behaviours.take(behavioursAssessed).foreach { f =>
-      f
-    }
 
   private def extractAssessedBehaviours(): Unit = {
     vXListOfChosenBehaviours.clear()
     vXBehaviourApplicationRequired.clear()
     vXBehaviourInterviewRequired.clear()
     vXHowManyBehaviours match {
-      case 1 => behavioursSection(1)
-      case 2 => behavioursSection(2)
-      case 3 => behavioursSection(3)
-      case 4 => behavioursSection(4)
-      case 5 => behavioursSection(5)
-      case 6 => behavioursSection(6)
-      case 7 => behavioursSection(7)
-      case 8 => behavioursSection(8)
+      case 1 =>
+        extractBehaviourOne()
+      case 2 =>
+        extractBehaviourOne()
+        extractBehaviourTwo()
+      case 3 =>
+        extractBehaviourOne()
+        extractBehaviourTwo()
+        extractBehaviourThree()
+      case 4 =>
+        extractBehaviourOne()
+        extractBehaviourTwo()
+        extractBehaviourThree()
+        extractBehaviourFour()
+      case 5 =>
+        extractBehaviourOne()
+        extractBehaviourTwo()
+        extractBehaviourThree()
+        extractBehaviourFour()
+        extractBehaviourFive()
+      case 6 =>
+        extractBehaviourOne()
+        extractBehaviourTwo()
+        extractBehaviourThree()
+        extractBehaviourFour()
+        extractBehaviourFive()
+        extractBehaviourSix()
+      case 7 =>
+        extractBehaviourOne()
+        extractBehaviourTwo()
+        extractBehaviourThree()
+        extractBehaviourFour()
+        extractBehaviourFive()
+        extractBehaviourSix()
+        extractBehaviourSeven()
+      case 8 =>
+        extractBehaviourOne()
+        extractBehaviourTwo()
+        extractBehaviourThree()
+        extractBehaviourFour()
+        extractBehaviourFive()
+        extractBehaviourSix()
+        extractBehaviourSeven()
+        extractBehaviourEight()
     }
     println(vXListOfChosenBehaviours)
     println(vXBehaviourApplicationRequired)
