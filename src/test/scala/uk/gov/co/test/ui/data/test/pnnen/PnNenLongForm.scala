@@ -85,16 +85,9 @@ object PN_NEN_LONG_FORM_BEHAVIOURS
     )
 
 object PN_NEN_LONG_FORM_TECHNICAL_SKILLS
-    extends TechSkillsDetails(
-      s"$valid250Characters",
-      s"$valid250Characters",
-      s"$valid250Characters",
-      s"$valid250Characters",
-      s"$valid250Characters",
-      s"$valid250Characters",
-      s"$valid250Characters",
-      s"$valid250Characters"
-    )
+  extends TechSkillsDetails(
+    s"$valid250Characters"
+  )
 
 object PN_NEN_LONG_FORM_UPLOAD_DOCUMENTS
     extends UploadDocumentsDetails(

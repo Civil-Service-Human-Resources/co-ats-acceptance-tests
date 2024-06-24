@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.pages.vx.vacancytabs
 
 import org.openqa.selenium.{By, Keys, WebElement}
-import uk.gov.co.test.ui.data.TestData.eventually
+import org.scalatest.concurrent.Eventually.eventually
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 
 import java.time.LocalDate

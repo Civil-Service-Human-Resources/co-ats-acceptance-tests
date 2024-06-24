@@ -2,7 +2,7 @@ package uk.gov.co.test.ui.pages.vx
 
 import org.openqa.selenium.{By, WebElement}
 import org.scalatest.concurrent.Eventually.eventually
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXAbilitiesRequired, vXAnyAdditionalQuestions, vXAnyOnlineTests, vXApplicationClosingDate, vXApplicationLiveDate, vXApproach, vXAttachmentRequired, vXAvailableOutsideInNI, vXBehaviourApplicationRequired, vXBehaviourInterviewRequired, vXBehavioursRequired, vXBudgetaryApproval, vXBusinessArea, vXBusinessAreaDetail, vXCandidateInstructions, vXCandidateUploadIdentityDocs, vXCommunitiesInNIR, vXContactName, vXCostCentre, vXCrcCheckProvider, vXCrcLevel, vXDesirablePastExperience, vXDetailsForUploadIdentityDocs, vXEmailForQuestions, vXExperiencesRequired, vXFullQualification, vXGiveLocationPreference, vXGreatForVeterans, vXGuidanceText, vXHavePecMailbox, vXHowManyBehaviours, vXHowManyQuestions, vXInterviewExpectedRounds, vXInterviewFourType, vXInterviewNumber, vXInterviewOneType, vXInterviewThreeType, vXInterviewTwoType, vXJobGradeEquivalent, vXJobGrades, vXJobHistory, vXJobInfoDepartment, vXLanguagesMandatory, vXLicencesMandatory, vXListOfChosenBehaviours, vXLocationDisplay, vXLocationType, vXManuallyCheckIdentityDocs, vXMaxLocations, vXMedicalRequired, vXMembershipsMandatory, vXNoOfJobsAvailable, vXNoPecOgdTransfer, vXNonReserved, vXOtherLocations, vXPecAdditionalCheck, vXPecBankruptcyCheck, vXPecCrc, vXPecEmploymentHistoryCheck, vXPecFraudCheck, vXPecGeneralInfo, vXPecHealthDisplayOptions, vXPecHealthRefCheck, vXPecHrEmailForNen, vXPecHrEmailForPn, vXPecIncludeAdditionalCheck, vXPecMailbox, vXPecNameOfAdditionalCheck, vXPecNen, vXPecNsv, vXPecNsvDisplayOptions, vXPecOgdSecurityCheck, vXPecOverseasCheck, vXPecPensionsCheck, vXPecPn, vXPecPreviousCivilEmploymentCheck, vXPecReferenceCheck, vXPecSelfEmploymentCheck, vXPecUseOgdProcess, vXPersonalStatement, vXPreSiftRequired, vXPreviousExperiences, vXProfession, vXProfile, vXQualificationsMandatory, vXQuestionOne, vXQuestionThree, vXQuestionTwo, vXRejectApplyingOnPromotion, vXRejectLanguagesNotHeld, vXRejectLicencesNotHeld, vXRejectLiveMisconduct, vXRejectMembershipsNotHeld, vXRejectNationalityReq, vXRejectNoRightToRemain, vXRejectPoorAttendance, vXRejectPoorPerformance, vXRejectProbation, vXRejectQualificationsNotHeld, vXReserveExtendLength, vXReserveExtendRequired, vXReserveListLength, vXReserveListRequired, vXRtwChecks, vXSpecificLanguages, vXSpecificLicences, vXSpecificMemberships, vXSpecificPastExperience, vXSpecificQualifications, vXSpecifyGuidance, vXStatementWordLimit, vXStrengthsRequired, vXTeamEmail, vXTechSkillsRequired, vXTypeOfRole, vXUseOnlinePecForms, vXVacanciesInNIR, vXVacancyHolderEmail, vXVacancyHolderName, vXVettingLevel, vXWhenRtwChecks, vXWhichIdentityChecks, vacancyFormId, vacancyId, vacancyName}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXAbilitiesRequired, vXAnyAdditionalQuestions, vXAnyOnlineTests, vXApplicationClosingDate, vXApplicationLiveDate, vXApproach, vXAttachmentRequired, vXAvailableOutsideInNI, vXBehaviourApplicationRequired, vXBehaviourInterviewRequired, vXBehavioursRequired, vXBudgetaryApproval, vXBusinessArea, vXBusinessAreaDetail, vXCandidateInstructions, vXCandidateUploadIdentityDocs, vXCommunitiesInNIR, vXContactName, vXCostCentre, vXCrcCheckProvider, vXCrcLevel, vXDesirablePastExperience, vXDetailsForUploadIdentityDocs, vXEmailForQuestions, vXExperiencesRequired, vXFullQualification, vXGiveLocationPreference, vXGreatForVeterans, vXGuidanceText, vXHavePecMailbox, vXHowManyBehaviours, vXHowManyQuestions, vXHowManySkills, vXInterviewExpectedRounds, vXInterviewFourType, vXInterviewNumber, vXInterviewOneType, vXInterviewThreeType, vXInterviewTwoType, vXJobGradeEquivalent, vXJobGrades, vXJobHistory, vXJobInfoDepartment, vXLanguagesMandatory, vXLicencesMandatory, vXListOfChosenBehaviours, vXListOfSkillsApplicationRequired, vXListOfSkillsInterviewRequired, vXListOfTechSkills, vXListOfTechSkillsDescription, vXLocationDisplay, vXLocationType, vXManuallyCheckIdentityDocs, vXMaxLocations, vXMedicalRequired, vXMembershipsMandatory, vXNoOfJobsAvailable, vXNoPecOgdTransfer, vXNonReserved, vXOtherLocations, vXPecAdditionalCheck, vXPecBankruptcyCheck, vXPecCrc, vXPecEmploymentHistoryCheck, vXPecFraudCheck, vXPecGeneralInfo, vXPecHealthDisplayOptions, vXPecHealthRefCheck, vXPecHrEmailForNen, vXPecHrEmailForPn, vXPecIncludeAdditionalCheck, vXPecMailbox, vXPecNameOfAdditionalCheck, vXPecNen, vXPecNsv, vXPecNsvDisplayOptions, vXPecOgdSecurityCheck, vXPecOverseasCheck, vXPecPensionsCheck, vXPecPn, vXPecPreviousCivilEmploymentCheck, vXPecReferenceCheck, vXPecSelfEmploymentCheck, vXPecUseOgdProcess, vXPersonalStatement, vXPreSiftRequired, vXPreviousExperiences, vXProfession, vXProfile, vXQualificationsMandatory, vXQuestionOne, vXQuestionThree, vXQuestionTwo, vXRejectApplyingOnPromotion, vXRejectLanguagesNotHeld, vXRejectLicencesNotHeld, vXRejectLiveMisconduct, vXRejectMembershipsNotHeld, vXRejectNationalityReq, vXRejectNoRightToRemain, vXRejectPoorAttendance, vXRejectPoorPerformance, vXRejectProbation, vXRejectQualificationsNotHeld, vXReserveExtendLength, vXReserveExtendRequired, vXReserveListLength, vXReserveListRequired, vXRtwChecks, vXSpecificLanguages, vXSpecificLicences, vXSpecificMemberships, vXSpecificPastExperience, vXSpecificQualifications, vXSpecifyGuidance, vXStatementWordLimit, vXStrengthsRequired, vXTeamEmail, vXTechSkillsRequired, vXTypeOfRole, vXUseOnlinePecForms, vXVacanciesInNIR, vXVacancyHolderEmail, vXVacancyHolderName, vXVettingLevel, vXWhenRtwChecks, vXWhichIdentityChecks, vacancyFormId, vacancyId, vacancyName}
 import uk.gov.co.test.ui.pages.v9.ApplicationDetailsPage.resetApplicationDetails
 import uk.gov.co.test.ui.pages.vx.vacancytabs.SummaryTab.{vacancyActive, vacancyClosingDateId, vacancyLiveDateId}
 
@@ -105,6 +105,39 @@ object VacancyDetailsPage extends VacancyBasePage {
   def experienceId                      = s"${vacancyFormId}_datafield_154245_1_1_12687"
   def strengthsId                       = s"${vacancyFormId}_datafield_154245_1_1_12689"
   def technicalSkillsId                 = s"${vacancyFormId}_datafield_154245_1_1_12688"
+  def howManySkillsId                   = s"select2-${vacancyFormId}_datafield_60774_1_1-container"
+  def techSkillsOneNameId               = s"${vacancyFormId}_datafield_60779_1_1_en-GB"
+  def techSkillsOneDescriptionId        = s"${vacancyFormId}_datafield_60785_1_1_en-GB"
+  def techSkillsOneApplicationId        = s"${vacancyFormId}_datafield_65039_1_1_12683"
+  def techSkillsOneInterviewId          = s"${vacancyFormId}_datafield_65039_1_1_12684"
+  def techSkillsTwoNameId               = s"${vacancyFormId}_datafield_60791_1_1_en-GB"
+  def techSkillsTwoDescriptionId        = s"${vacancyFormId}_datafield_60797_1_1_en-GB"
+  def techSkillsTwoApplicationId        = s"${vacancyFormId}_datafield_65043_1_1_12683"
+  def techSkillsTwoInterviewId          = s"${vacancyFormId}_datafield_65043_1_1_12684"
+  def techSkillsThreeNameId             = s"${vacancyFormId}_datafield_60803_1_1_en-GB"
+  def techSkillsThreeDescriptionId      = s"${vacancyFormId}_datafield_60809_1_1_en-GB"
+  def techSkillsThreeApplicationId      = s"${vacancyFormId}_datafield_65047_1_1_12683"
+  def techSkillsThreeInterviewId        = s"${vacancyFormId}_datafield_65047_1_1_12684"
+  def techSkillsFourNameId              = s"${vacancyFormId}_datafield_60815_1_1_en-GB"
+  def techSkillsFourDescriptionId       = s"${vacancyFormId}_datafield_60821_1_1_en-GB"
+  def techSkillsFourApplicationId       = s"${vacancyFormId}_datafield_65051_1_1_12683"
+  def techSkillsFourInterviewId         = s"${vacancyFormId}_datafield_65051_1_1_12684"
+  def techSkillsFiveNameId              = s"${vacancyFormId}_datafield_60827_1_1_en-GB"
+  def techSkillsFiveDescriptionId       = s"${vacancyFormId}_datafield_60833_1_1_en-GB"
+  def techSkillsFiveApplicationId       = s"${vacancyFormId}_datafield_65055_1_1_12683"
+  def techSkillsFiveInterviewId         = s"${vacancyFormId}_datafield_65055_1_1_12684"
+  def techSkillsSixNameId               = s"${vacancyFormId}_datafield_60839_1_1_en-GB"
+  def techSkillsSixDescriptionId        = s"${vacancyFormId}_datafield_60845_1_1_en-GB"
+  def techSkillsSixApplicationId        = s"${vacancyFormId}_datafield_65059_1_1_12683"
+  def techSkillsSixInterviewId          = s"${vacancyFormId}_datafield_65059_1_1_12684"
+  def techSkillsSevenNameId             = s"${vacancyFormId}_datafield_60874_1_1_en-GB"
+  def techSkillsSevenDescriptionId      = s"${vacancyFormId}_datafield_60880_1_1_en-GB"
+  def techSkillsSevenApplicationId      = s"${vacancyFormId}_datafield_65063_1_1_12683"
+  def techSkillsSevenInterviewId        = s"${vacancyFormId}_datafield_65063_1_1_12684"
+  def techSkillsEightNameId             = s"${vacancyFormId}_datafield_60886_1_1_en-GB"
+  def techSkillsEightDescriptionId      = s"${vacancyFormId}_datafield_60892_1_1_en-GB"
+  def techSkillsEightApplicationId      = s"${vacancyFormId}_datafield_65067_1_1_12683"
+  def techSkillsEightInterviewId        = s"${vacancyFormId}_datafield_65067_1_1_12684"
   def onlineTestsId                     = s"${vacancyFormId}_datafield_129689_1_1_fieldset"
   def rejectProbationId                 = s"${vacancyFormId}_datafield_61145_1_1_fieldset"
   def rejectApplyingOnPromotionId       = s"${vacancyFormId}_datafield_61177_1_1_fieldset"
@@ -626,7 +659,6 @@ object VacancyDetailsPage extends VacancyBasePage {
   private def extractBehaviourEight(): Unit =
     extractBehaviourValues(behaviourEightNameId, behaviourEightApplicationId, behaviourEightInterviewId)
 
-
   private def extractAssessedBehaviours(): Unit = {
     vXListOfChosenBehaviours.clear()
     vXBehaviourApplicationRequired.clear()
@@ -677,10 +709,6 @@ object VacancyDetailsPage extends VacancyBasePage {
         extractBehaviourSeven()
         extractBehaviourEight()
     }
-    println(vXListOfChosenBehaviours)
-    println(vXBehaviourApplicationRequired)
-    println(vXBehaviourInterviewRequired)
-    println("Done")
   }
 
   private def extractExperience(): Unit = {
@@ -702,7 +730,165 @@ object VacancyDetailsPage extends VacancyBasePage {
     val skills = waitForVisibilityOfElementById(technicalSkillsId).getAttribute("checked")
     if (skills != null) {
       vXTechSkillsRequired = true
+      extractHowManyTechSkills()
+      extractAssessedTechSkills()
     } else vXTechSkillsRequired = false
+  }
+
+  private def extractHowManyTechSkills(): Unit =
+    vXHowManySkills = waitForVisibilityOfElementById(howManySkillsId).getText.toInt
+
+  private def extractSkillsName(skillsNameId: String): Unit = {
+    val skill = waitForVisibilityOfElementById(skillsNameId).getText
+    vXListOfTechSkills += skill
+  }
+
+  private def extractTechSkillsDescription(skillsDescriptionId: String): Unit = {
+    val description = waitForVisibilityOfElementById(skillsDescriptionId).getText
+    vXListOfTechSkillsDescription += description
+  }
+
+  private def extractTechSkillsApplication(skillsApplicationId: String): Unit = {
+    val application = waitForVisibilityOfElementById(skillsApplicationId).getAttribute("checked")
+    if (application != null) {
+      vXListOfSkillsApplicationRequired += true
+    } else vXListOfSkillsApplicationRequired += false
+  }
+
+  private def extractTechSkillsInterview(skillsInterviewId: String): Unit = {
+    val interview = waitForVisibilityOfElementById(skillsInterviewId).getAttribute("checked")
+    if (interview != null) {
+      vXListOfSkillsInterviewRequired += true
+    } else vXListOfSkillsInterviewRequired += false
+  }
+
+  private def extractTechSkillsValues(
+    skillsNameId: String,
+    skillsDescriptionId: String,
+    skillsApplicationId: String,
+    skillsInterviewId: String
+  ): Unit = {
+    extractSkillsName(skillsNameId)
+    extractTechSkillsDescription(skillsDescriptionId)
+    extractTechSkillsApplication(skillsApplicationId)
+    extractTechSkillsInterview(skillsInterviewId)
+  }
+
+  private def extractTechSkillOne(): Unit =
+    extractTechSkillsValues(
+      techSkillsOneNameId,
+      techSkillsOneDescriptionId,
+      techSkillsOneApplicationId,
+      techSkillsOneInterviewId
+    )
+
+  private def extractTechSkillTwo(): Unit =
+    extractTechSkillsValues(
+      techSkillsTwoNameId,
+      techSkillsTwoDescriptionId,
+      techSkillsTwoApplicationId,
+      techSkillsTwoInterviewId
+    )
+
+  private def extractTechSkillThree(): Unit =
+    extractTechSkillsValues(
+      techSkillsThreeNameId,
+      techSkillsThreeDescriptionId,
+      techSkillsThreeApplicationId,
+      techSkillsThreeInterviewId
+    )
+
+  private def extractTechSkillFour(): Unit =
+    extractTechSkillsValues(
+      techSkillsFourNameId,
+      techSkillsFourDescriptionId,
+      techSkillsFourApplicationId,
+      techSkillsFourInterviewId
+    )
+
+  private def extractTechSkillFive(): Unit =
+    extractTechSkillsValues(
+      techSkillsFiveNameId,
+      techSkillsFiveDescriptionId,
+      techSkillsFiveApplicationId,
+      techSkillsFiveInterviewId
+    )
+
+  private def extractTechSkillSix(): Unit =
+    extractTechSkillsValues(
+      techSkillsSixNameId,
+      techSkillsSixDescriptionId,
+      techSkillsSixApplicationId,
+      techSkillsSixInterviewId
+    )
+
+  private def extractTechSkillSeven(): Unit =
+    extractTechSkillsValues(
+      techSkillsSevenNameId,
+      techSkillsSevenDescriptionId,
+      techSkillsSevenApplicationId,
+      techSkillsSevenInterviewId
+    )
+
+  private def extractTechSkillEight(): Unit =
+    extractTechSkillsValues(
+      techSkillsEightNameId,
+      techSkillsEightDescriptionId,
+      techSkillsEightApplicationId,
+      techSkillsEightInterviewId
+    )
+
+  private def extractAssessedTechSkills(): Unit = {
+    vXListOfTechSkills.clear()
+    vXListOfTechSkillsDescription.clear()
+    vXListOfSkillsApplicationRequired.clear()
+    vXListOfSkillsInterviewRequired.clear()
+    vXHowManySkills match {
+      case 1 =>
+        extractTechSkillOne()
+      case 2 =>
+        extractTechSkillOne()
+        extractTechSkillTwo()
+      case 3 =>
+        extractTechSkillOne()
+        extractTechSkillTwo()
+        extractTechSkillThree()
+      case 4 =>
+        extractTechSkillOne()
+        extractTechSkillTwo()
+        extractTechSkillThree()
+        extractTechSkillFour()
+      case 5 =>
+        extractTechSkillOne()
+        extractTechSkillTwo()
+        extractTechSkillThree()
+        extractTechSkillFour()
+        extractTechSkillFive()
+      case 6 =>
+        extractTechSkillOne()
+        extractTechSkillTwo()
+        extractTechSkillThree()
+        extractTechSkillFour()
+        extractTechSkillFive()
+        extractTechSkillSix()
+      case 7 =>
+        extractTechSkillOne()
+        extractTechSkillTwo()
+        extractTechSkillThree()
+        extractTechSkillFour()
+        extractTechSkillFive()
+        extractTechSkillSix()
+        extractTechSkillSeven()
+      case 8 =>
+        extractTechSkillOne()
+        extractTechSkillTwo()
+        extractTechSkillThree()
+        extractTechSkillFour()
+        extractTechSkillFive()
+        extractTechSkillSix()
+        extractTechSkillSeven()
+        extractTechSkillEight()
+    }
   }
 
   private def extractRejectProbation(): Unit = {

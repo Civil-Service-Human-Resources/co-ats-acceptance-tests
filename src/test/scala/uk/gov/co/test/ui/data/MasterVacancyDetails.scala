@@ -129,29 +129,12 @@ object MasterVacancyDetails extends VacancyBasePage {
   var vXBehaviourInterviewRequired: ListBuffer[Boolean]   = ListBuffer()
 
   //vx VACANCY technical skills
-  var vXHowManySkills: Int                              = 0
-  var vXListOfTechSkills: ListBuffer[String]            = ListBuffer(
-    "Autotest - technical skills 1",
-    "Autotest - technical skills 2",
-    "Autotest - technical skills 3",
-    "Autotest - technical skills 4",
-    "Autotest - technical skills 5",
-    "Autotest - technical skills 6",
-    "Autotest - technical skills 7",
-    "Autotest - technical skills 8"
-  )
-  var vXListOfTechSkillsDescription: ListBuffer[String] = ListBuffer(
-    "Autotest - technical skills 1 description",
-    "Autotest - technical skills 2 description",
-    "Autotest - technical skills 3 description",
-    "Autotest - technical skills 4 description",
-    "Autotest - technical skills 5 description",
-    "Autotest - technical skills 6 description",
-    "Autotest - technical skills 7 description",
-    "Autotest - technical skills 8 description"
-  )
-  var vXListOfApplicationStage                          = new ListBuffer[Boolean]()
-  var vXNoOfApplicationStage: Int                       = 8
+  var vXHowManySkills: Int                                   = _
+  var vXListOfTechSkills: ListBuffer[String]                 = ListBuffer()
+  var vXListOfTechSkillsDescription: ListBuffer[String]      = ListBuffer()
+  var vXListOfSkillsApplicationRequired: ListBuffer[Boolean] = ListBuffer()
+  var vXListOfSkillsInterviewRequired: ListBuffer[Boolean]   = ListBuffer()
+  var vXNoOfApplicationStage: Int                            = 8
 
   //vX strengths
   var vXHowManyStrengths: Int               = 8

@@ -85,16 +85,9 @@ object RESERVE_LONG_FORM_BEHAVIOURS
     )
 
 object RESERVE_LONG_FORM_TECHNICAL_SKILLS
-    extends TechSkillsDetails(
-      s"$valid250Characters",
-      s"$valid250Characters",
-      s"$valid250Characters",
-      s"$valid250Characters",
-      s"$valid250Characters",
-      s"$valid250Characters",
-      s"$valid250Characters",
-      s"$valid250Characters"
-    )
+  extends TechSkillsDetails(
+    s"$valid250Characters"
+  )
 
 object RESERVE_LONG_FORM_UPLOAD_DOCUMENTS
     extends UploadDocumentsDetails(

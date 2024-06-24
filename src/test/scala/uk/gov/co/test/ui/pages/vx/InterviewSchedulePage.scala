@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.pages.vx
 
 import org.openqa.selenium.{By, WebElement}
-import uk.gov.co.test.ui.data.TestData.eventually
+import org.scalatest.concurrent.Eventually.eventually
 import uk.gov.co.test.ui.data.MasterVacancyDetails.{randomFirstName, randomLastName, vXInstructionsForCandidates, vXInterviewDate, vXInterviewLocation, vXInterviewLongDate, vXInterviewNumber, vXInterviewScheduleTitle, vXInterviewShortDate, vacancyId}
 import uk.gov.co.test.ui.data.vx.application.ApplicationDetails
 import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.{availableBarItems, confirmCandidateSummary, inviteToI1BarId, inviteToI2BarId, inviteToI3BarId, inviteToI4BarId, scheduleOfflineI1BarId, scheduleOfflineI2BarId, scheduleOfflineI3BarId, scheduleOfflineI4BarId, withdrawAtInterviewBarId}

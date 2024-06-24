@@ -86,13 +86,6 @@ object FULL_LONG_FORM_BEHAVIOURS
 
 object FULL_LONG_FORM_TECHNICAL_SKILLS
     extends TechSkillsDetails(
-      s"$valid250Characters",
-      s"$valid250Characters",
-      s"$valid250Characters",
-      s"$valid250Characters",
-      s"$valid250Characters",
-      s"$valid250Characters",
-      s"$valid250Characters",
       s"$valid250Characters"
     )
 
