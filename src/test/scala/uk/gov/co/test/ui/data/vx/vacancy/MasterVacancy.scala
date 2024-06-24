@@ -477,12 +477,12 @@ object MASTER_PEC_CHECK_FORMS
       selfEmploymentCheck =
         ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
       true,
-      true,
+      false,
       true,
       "Autotest - Name of check",
-      additionalCheck = ListBuffer("Not Applicable"),
-      nenOnboarding = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      additionalCheck = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      nenOnboarding = ListBuffer("External Candidates", "OGD Candidates", "NDPB Candidates"),
       s"$contactEmailVxConfig",
-      pnOnboarding = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      pnOnboarding = ListBuffer("Internal Candidates"),
       s"$contactEmailVxConfig"
     )
