@@ -137,11 +137,9 @@ object SiftEvaluationTab extends VacancyBasePage {
   }
 
   private def enterBehaviourOneOutcome(siftDetails: SiftDetails): Unit = {
-    waitForVisibilityOfElementById(behaviourAssessmentHeaderId).getText shouldEqual "Behaviour assessment"
-    waitForVisibilityOfElementById(behaviourScoringGuideId).getText          should include(siftDetails.scoringGuide)
     enterOutcome(
       behaviourOneTitleId,
-      vXListOfChosenBehaviours.head,
+      vXListOfChosenBehaviours.headOption.get,
       behaviourOneScoreId,
       siftDetails.behaviourOne.score,
       behaviourOneCommentsId,
@@ -256,6 +254,8 @@ object SiftEvaluationTab extends VacancyBasePage {
 
   private def behavioursOutcome(siftDetails: SiftDetails): Unit =
     if (vXBehavioursRequired) {
+      waitForVisibilityOfElementById(behaviourAssessmentHeaderId).getText shouldEqual "Behaviour assessment"
+      waitForVisibilityOfElementById(behaviourScoringGuideId).getText should include(siftDetails.scoringGuide)
       behaviourOutcome.take(vXHowManyBehaviours).foreach { f =>
         f(siftDetails)
       }

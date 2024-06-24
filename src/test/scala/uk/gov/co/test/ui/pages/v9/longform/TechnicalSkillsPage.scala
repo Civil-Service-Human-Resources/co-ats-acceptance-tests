@@ -2,7 +2,7 @@ package uk.gov.co.test.ui.pages.v9.longform
 
 import org.openqa.selenium.By
 import org.scalatest.concurrent.Eventually.eventually
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{sortedListOfTechSkillsDescription, vXHowManySkills, vXListOfSkillsApplicationRequired, vXListOfTechSkills, vXTechSkillsRequired}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXHowManySkills, vXListOfSkillsApplicationRequired, vXListOfTechSkills, vXListOfTechSkillsDescription, vXTechSkillsRequired}
 import uk.gov.co.test.ui.data.v9.longform.LongFormDetails
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
 import uk.gov.co.test.ui.pages.v9.longform.DiversityMonitoringPage.longFormId
@@ -56,129 +56,167 @@ object TechnicalSkillsPage extends CivilServiceJobsBasePage {
   }
 
   private def checkAndEnterTechSkillOne(techSkillsDetails: TechSkillsDetails): Unit = {
-    val expectedHeader      =
-      s"${vXListOfTechSkills.headOption.get}\n\nDescription: ${sortedListOfTechSkillsDescription.headOption.get}"
-    val applicationRequired = vXListOfSkillsApplicationRequired.headOption.get
+    val expectedHeader                   =
+      s"${vXListOfTechSkills.headOption.get}\n\nDescription: ${vXListOfTechSkillsDescription.headOption.get}"
+    val expectedHeaderWithoutDescription = s"${vXListOfTechSkills.headOption.get}"
+    val applicationRequired              = vXListOfSkillsApplicationRequired.headOption.get
     if (applicationRequired) {
       val actualHeader = waitForVisibilityOfElementById(techSkillOneHeaderId).getText
-      expectedHeader shouldEqual actualHeader
+      if (vXListOfTechSkillsDescription.headOption.get.isEmpty) {
+        expectedHeaderWithoutDescription shouldEqual actualHeader
+      } else { expectedHeader shouldEqual actualHeader }
       enterDetails(techSkillOneInputId, techSkillsDetails.techSkillText)
       eventually(
         waitForVisibilityOfElementById(
           techSkillOneWordLimitId
-        ).getText    shouldEqual "Maximum Word Count 250 of  250 words"
+        ).getText shouldEqual "Maximum Word Count 250 of  250 words"
       )
     }
   }
 
   private def checkAndEnterTechSkillTwo(techSkillsDetails: TechSkillsDetails): Unit = {
-    val expectedHeader      =
-      s"${vXListOfTechSkills.lift(1).get}\n\nDescription: ${sortedListOfTechSkillsDescription.lift(1).get}"
-    val applicationRequired = vXListOfSkillsApplicationRequired.lift(1).get
+    val expectedHeader                   =
+      s"${vXListOfTechSkills.lift(1).get}\n\nDescription: ${vXListOfTechSkillsDescription.lift(1).get}"
+    val expectedHeaderWithoutDescription = s"${vXListOfTechSkills.lift(1).get}"
+    val applicationRequired              = vXListOfSkillsApplicationRequired.lift(1).get
     if (applicationRequired) {
       val actualHeader = waitForVisibilityOfElementById(techSkillTwoHeaderId).getText
-      expectedHeader shouldEqual actualHeader
+      if (vXListOfTechSkillsDescription.lift(1).get.isEmpty) {
+        expectedHeaderWithoutDescription shouldEqual actualHeader
+      } else {
+        expectedHeader shouldEqual actualHeader
+      }
       enterDetails(techSkillTwoInputId, techSkillsDetails.techSkillText)
       eventually(
         waitForVisibilityOfElementById(
           techSkillTwoWordLimitId
-        ).getText    shouldEqual "Maximum Word Count 250 of  250 words"
+        ).getText shouldEqual "Maximum Word Count 250 of  250 words"
       )
     }
   }
 
   private def checkAndEnterTechSkillThree(techSkillsDetails: TechSkillsDetails): Unit = {
-    val expectedHeader      =
-      s"${vXListOfTechSkills.lift(2).get}\n\nDescription: ${sortedListOfTechSkillsDescription.lift(2).get}"
-    val applicationRequired = vXListOfSkillsApplicationRequired.lift(2).get
+    val expectedHeader                   =
+      s"${vXListOfTechSkills.lift(2).get}\n\nDescription: ${vXListOfTechSkillsDescription.lift(2).get}"
+    val expectedHeaderWithoutDescription = s"${vXListOfTechSkills.lift(2).get}"
+    val applicationRequired              = vXListOfSkillsApplicationRequired.lift(2).get
     if (applicationRequired) {
       val actualHeader = waitForVisibilityOfElementById(techSkillThreeHeaderId).getText
-      expectedHeader shouldEqual actualHeader
+      if (vXListOfTechSkillsDescription.lift(2).get.isEmpty) {
+        expectedHeaderWithoutDescription shouldEqual actualHeader
+      } else {
+        expectedHeader shouldEqual actualHeader
+      }
       enterDetails(techSkillThreeInputId, techSkillsDetails.techSkillText)
       eventually(
         waitForVisibilityOfElementById(
           techSkillThreeWordLimitId
-        ).getText    shouldEqual "Maximum Word Count 250 of  250 words"
+        ).getText shouldEqual "Maximum Word Count 250 of  250 words"
       )
     }
   }
 
   private def checkAndEnterTechSkillFour(techSkillsDetails: TechSkillsDetails): Unit = {
-    val expectedHeader      =
-      s"${vXListOfTechSkills.lift(3).get}\n\nDescription: ${sortedListOfTechSkillsDescription.lift(3).get}"
-    val applicationRequired = vXListOfSkillsApplicationRequired.lift(3).get
+    val expectedHeader                   =
+      s"${vXListOfTechSkills.lift(3).get}\n\nDescription: ${vXListOfTechSkillsDescription.lift(3).get}"
+    val expectedHeaderWithoutDescription = s"${vXListOfTechSkills.lift(3).get}"
+    val applicationRequired              = vXListOfSkillsApplicationRequired.lift(3).get
     if (applicationRequired) {
       val actualHeader = waitForVisibilityOfElementById(techSkillFourHeaderId).getText
-      expectedHeader shouldEqual actualHeader
+      if (vXListOfTechSkillsDescription.lift(3).get.isEmpty) {
+        expectedHeaderWithoutDescription shouldEqual actualHeader
+      } else {
+        expectedHeader shouldEqual actualHeader
+      }
       enterDetails(techSkillFourInputId, techSkillsDetails.techSkillText)
       eventually(
         waitForVisibilityOfElementById(
           techSkillFourWordLimitId
-        ).getText    shouldEqual "Maximum Word Count 250 of  250 words"
+        ).getText shouldEqual "Maximum Word Count 250 of  250 words"
       )
     }
   }
 
   private def checkAndEnterTechSkillFive(techSkillsDetails: TechSkillsDetails): Unit = {
-    val expectedHeader      =
-      s"${vXListOfTechSkills.lift(4).get}\n\nDescription: ${sortedListOfTechSkillsDescription.lift(4).get}"
-    val applicationRequired = vXListOfSkillsApplicationRequired.lift(4).get
+    val expectedHeader                   =
+      s"${vXListOfTechSkills.lift(4).get}\n\nDescription: ${vXListOfTechSkillsDescription.lift(4).get}"
+    val expectedHeaderWithoutDescription = s"${vXListOfTechSkills.lift(4).get}"
+    val applicationRequired              = vXListOfSkillsApplicationRequired.lift(4).get
     if (applicationRequired) {
       val actualHeader = waitForVisibilityOfElementById(techSkillFiveHeaderId).getText
-      expectedHeader shouldEqual actualHeader
+      if (vXListOfTechSkillsDescription.lift(4).get.isEmpty) {
+        expectedHeaderWithoutDescription shouldEqual actualHeader
+      } else {
+        expectedHeader shouldEqual actualHeader
+      }
       enterDetails(techSkillFiveInputId, techSkillsDetails.techSkillText)
       eventually(
         waitForVisibilityOfElementById(
           techSkillFiveWordLimitId
-        ).getText    shouldEqual "Maximum Word Count 250 of  250 words"
+        ).getText shouldEqual "Maximum Word Count 250 of  250 words"
       )
     }
   }
 
   private def checkAndEnterTechSkillSix(techSkillsDetails: TechSkillsDetails): Unit = {
-    val expectedHeader      =
-      s"${vXListOfTechSkills.lift(5).get}\n\nDescription: ${sortedListOfTechSkillsDescription.lift(5).get}"
-    val applicationRequired = vXListOfSkillsApplicationRequired.lift(5).get
+    val expectedHeader                   =
+      s"${vXListOfTechSkills.lift(5).get}\n\nDescription: ${vXListOfTechSkillsDescription.lift(5).get}"
+    val expectedHeaderWithoutDescription = s"${vXListOfTechSkills.lift(5).get}"
+    val applicationRequired              = vXListOfSkillsApplicationRequired.lift(5).get
     if (applicationRequired) {
       val actualHeader = waitForVisibilityOfElementById(techSkillSixHeaderId).getText
-      expectedHeader shouldEqual actualHeader
+      if (vXListOfTechSkillsDescription.lift(5).get.isEmpty) {
+        expectedHeaderWithoutDescription shouldEqual actualHeader
+      } else {
+        expectedHeader shouldEqual actualHeader
+      }
       enterDetails(techSkillSixInputId, techSkillsDetails.techSkillText)
       eventually(
         waitForVisibilityOfElementById(
           techSkillSixWordLimitId
-        ).getText    shouldEqual "Maximum Word Count 250 of  250 words"
+        ).getText shouldEqual "Maximum Word Count 250 of  250 words"
       )
     }
   }
 
   private def checkAndEnterTechSkillSeven(techSkillsDetails: TechSkillsDetails): Unit = {
-    val expectedHeader      =
-      s"${vXListOfTechSkills.lift(6).get}\n\nDescription: ${sortedListOfTechSkillsDescription.lift(6).get}"
-    val applicationRequired = vXListOfSkillsApplicationRequired.lift(6).get
+    val expectedHeader                   =
+      s"${vXListOfTechSkills.lift(6).get}\n\nDescription: ${vXListOfTechSkillsDescription.lift(6).get}"
+    val expectedHeaderWithoutDescription = s"${vXListOfTechSkills.lift(6).get}"
+    val applicationRequired              = vXListOfSkillsApplicationRequired.lift(6).get
     if (applicationRequired) {
       val actualHeader = waitForVisibilityOfElementById(techSkillSevenHeaderId).getText
-      expectedHeader shouldEqual actualHeader
+      if (vXListOfTechSkillsDescription.lift(6).get.isEmpty) {
+        expectedHeaderWithoutDescription shouldEqual actualHeader
+      } else {
+        expectedHeader shouldEqual actualHeader
+      }
       enterDetails(techSkillSevenInputId, techSkillsDetails.techSkillText)
       eventually(
         waitForVisibilityOfElementById(
           techSkillSevenWordLimitId
-        ).getText    shouldEqual "Maximum Word Count 250 of  250 words"
+        ).getText shouldEqual "Maximum Word Count 250 of  250 words"
       )
     }
   }
 
   private def checkAndEnterTechSkillEight(techSkillsDetails: TechSkillsDetails): Unit = {
-    val expectedHeader      =
-      s"${vXListOfTechSkills.lift(7).get}\n\nDescription: ${sortedListOfTechSkillsDescription.lift(7).get}"
-    val applicationRequired = vXListOfSkillsApplicationRequired.lift(7).get
+    val expectedHeader                   =
+      s"${vXListOfTechSkills.lift(7).get}\n\nDescription: ${vXListOfTechSkillsDescription.lift(7).get}"
+    val expectedHeaderWithoutDescription = s"${vXListOfTechSkills.lift(7).get}"
+    val applicationRequired              = vXListOfSkillsApplicationRequired.lift(7).get
     if (applicationRequired) {
       val actualHeader = waitForVisibilityOfElementById(techSkillEightHeaderId).getText
-      expectedHeader shouldEqual actualHeader
+      if (vXListOfTechSkillsDescription.lift(7).get.isEmpty) {
+        expectedHeaderWithoutDescription shouldEqual actualHeader
+      } else {
+        expectedHeader shouldEqual actualHeader
+      }
       enterDetails(techSkillEightInputId, techSkillsDetails.techSkillText)
       eventually(
         waitForVisibilityOfElementById(
           techSkillEightWordLimitId
-        ).getText    shouldEqual "Maximum Word Count 250 of  250 words"
+        ).getText shouldEqual "Maximum Word Count 250 of  250 words"
       )
     }
   }

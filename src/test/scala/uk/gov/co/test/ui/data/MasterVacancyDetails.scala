@@ -134,7 +134,6 @@ object MasterVacancyDetails extends VacancyBasePage {
   var vXListOfTechSkillsDescription: ListBuffer[String]      = ListBuffer()
   var vXListOfSkillsApplicationRequired: ListBuffer[Boolean] = ListBuffer()
   var vXListOfSkillsInterviewRequired: ListBuffer[Boolean]   = ListBuffer()
-  var vXNoOfApplicationStage: Int                            = 8
 
   //vX strengths
   var vXHowManyStrengths: Int               = 8
@@ -224,28 +223,6 @@ object MasterVacancyDetails extends VacancyBasePage {
   var randomEmail: String         = ""
   var randomJobPosition: String   = ""
   var preferredTeleNumber: String = ""
-
-  //v9 SHORT FORM technical skills
-  val sortedListOfTechSkills: Seq[String]            = List(
-    "Autotest - technical skills 1",
-    "Autotest - technical skills 2",
-    "Autotest - technical skills 3",
-    "Autotest - technical skills 4",
-    "Autotest - technical skills 5",
-    "Autotest - technical skills 6",
-    "Autotest - technical skills 7",
-    "Autotest - technical skills 8"
-  )
-  val sortedListOfTechSkillsDescription: Seq[String] = List(
-    "Autotest - technical skills 1 description",
-    "Autotest - technical skills 2 description",
-    "Autotest - technical skills 3 description",
-    "Autotest - technical skills 4 description",
-    "Autotest - technical skills 5 description",
-    "Autotest - technical skills 6 description",
-    "Autotest - technical skills 7 description",
-    "Autotest - technical skills 8 description"
-  )
 
   //v9 SHORT FORM eligibility page
   var v9CivilServant: Boolean  = _

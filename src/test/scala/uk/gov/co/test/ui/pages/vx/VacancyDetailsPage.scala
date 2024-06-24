@@ -733,6 +733,11 @@ object VacancyDetailsPage extends VacancyBasePage {
       extractHowManyTechSkills()
       extractAssessedTechSkills()
     } else vXTechSkillsRequired = false
+    println(vXTechSkillsRequired)
+    println(vXListOfTechSkills)
+    println(vXListOfTechSkillsDescription)
+    println(vXListOfSkillsApplicationRequired)
+    println(vXListOfSkillsInterviewRequired)
   }
 
   private def extractHowManyTechSkills(): Unit =

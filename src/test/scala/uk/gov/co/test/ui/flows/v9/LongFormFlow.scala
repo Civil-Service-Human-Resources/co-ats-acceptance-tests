@@ -2,7 +2,7 @@ package uk.gov.co.test.ui.flows.v9
 
 import uk.gov.co.test.ui.data.MasterVacancyDetails.vXNoLongForm
 import uk.gov.co.test.ui.data.v9.longform.LongFormDetails
-import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.{confirmLongFormCompletion, continueApplicationName}
+import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.{confirmLongFormCompletion, confirmLongFormPECCompletion, continueApplicationName}
 import uk.gov.co.test.ui.pages.v9.ApplicationsPage.extractApplicationId
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
 import uk.gov.co.test.ui.pages.v9.longform.BehavioursPage.behavioursPage
@@ -36,7 +36,8 @@ object LongFormFlow extends CivilServiceJobsBasePage {
         f(longFormDetails)
       }
       clickOn(longFormSubmission)
-      confirmLongFormCompletion()
+//      confirmLongFormCompletion()
+      confirmLongFormPECCompletion()
       extractApplicationId()
     }
 }

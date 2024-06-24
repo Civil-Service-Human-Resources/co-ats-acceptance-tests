@@ -247,69 +247,53 @@ object IDVT_STRENGTHS
 object IDVT_TECH_SKILLS
     extends TechSkillsDetails(
       8,
-      Some(
-        TechSkills(
-          techSkill = "Autotest - technical skills 1",
-          description = "Autotest - technical skills 1 description",
-          techInterview = true,
-          techApplication = true
-        )
+      TechSkill(
+        skillName = "Autotest - technical skills 1",
+        skillDescription = Some("Autotest - technical skills 1 description"),
+        applicationRequired = true,
+        interviewRequired = true
       ),
-      Some(
-        TechSkills(
-          techSkill = "Autotest - technical skills 2",
-          description = "Autotest - technical skills 2 description",
-          techInterview = true,
-          techApplication = true
-        )
+      TechSkill(
+        skillName = "Autotest - technical skills 2",
+        skillDescription = Some("Autotest - technical skills 2 description"),
+        applicationRequired = true,
+        interviewRequired = true
       ),
-      Some(
-        TechSkills(
-          techSkill = "Autotest - technical skills 3",
-          description = "Autotest - technical skills 3 description",
-          techInterview = true,
-          techApplication = true
-        )
+      TechSkill(
+        skillName = "Autotest - technical skills 3",
+        skillDescription = Some("Autotest - technical skills 3 description"),
+        applicationRequired = true,
+        interviewRequired = true
       ),
-      Some(
-        TechSkills(
-          techSkill = "Autotest - technical skills 4",
-          description = "Autotest - technical skills 4 description",
-          techInterview = true,
-          techApplication = true
-        )
+      TechSkill(
+        skillName = "Autotest - technical skills 4",
+        skillDescription = Some("Autotest - technical skills 4 description"),
+        applicationRequired = true,
+        interviewRequired = true
       ),
-      Some(
-        TechSkills(
-          techSkill = "Autotest - technical skills 5",
-          description = "Autotest - technical skills 5 description",
-          techInterview = true,
-          techApplication = true
-        )
+      TechSkill(
+        skillName = "Autotest - technical skills 5",
+        skillDescription = Some("Autotest - technical skills 5 description"),
+        applicationRequired = true,
+        interviewRequired = true
       ),
-      Some(
-        TechSkills(
-          techSkill = "Autotest - technical skills 6",
-          description = "Autotest - technical skills 6 description",
-          techInterview = true,
-          techApplication = true
-        )
+      TechSkill(
+        skillName = "Autotest - technical skills 6",
+        skillDescription = Some("Autotest - technical skills 6 description"),
+        applicationRequired = true,
+        interviewRequired = true
       ),
-      Some(
-        TechSkills(
-          techSkill = "Autotest - technical skills 7",
-          description = "Autotest - technical skills 7 description",
-          techInterview = true,
-          techApplication = true
-        )
+      TechSkill(
+        skillName = "Autotest - technical skills 7",
+        skillDescription = Some("Autotest - technical skills 7 description"),
+        applicationRequired = true,
+        interviewRequired = true
       ),
-      Some(
-        TechSkills(
-          techSkill = "Autotest - technical skills 8",
-          description = "Autotest - technical skills 8 description",
-          techInterview = true,
-          techApplication = true
-        )
+      TechSkill(
+        skillName = "Autotest - technical skills 8",
+        skillDescription = Some("Autotest - technical skills 8 description"),
+        applicationRequired = true,
+        interviewRequired = true
       )
     )
 
@@ -488,9 +472,12 @@ object IDVT_IDVT_CHECK_FORMS
       "Show recruiter and candidate forms",
       overseasCheck = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
       pensionsCheck = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
-      previousCsJobCheck = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
-      internalFraudCheck = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
-      selfEmploymentCheck = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      previousCsJobCheck =
+        ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      internalFraudCheck =
+        ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      selfEmploymentCheck =
+        ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
       true,
       true,
       true,
