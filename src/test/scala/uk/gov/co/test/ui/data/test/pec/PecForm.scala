@@ -222,12 +222,16 @@ object PEC_FORM_OVERSEAS
     )
 
 object PEC_FORM_BANKRUPTCY_DETAILS
-    extends BankruptcyDetails(
-      false,
-      false,
-      false,
-      false
-    )
+  extends BankruptcyDetails(
+    true,
+    "Autotest - bankruptcy status",
+    true,
+    "Autotest - insolvency status",
+    true,
+    "Autotest - details about the receiving order in effect on your property",
+    true,
+    "Autotest - details on any penalties imposed in relation to late filing on your tax affairs within the last 5 years"
+  )
 
 object PEC_FORM_HEALTH_DECLARATION
     extends HealthDeclarationDetails(

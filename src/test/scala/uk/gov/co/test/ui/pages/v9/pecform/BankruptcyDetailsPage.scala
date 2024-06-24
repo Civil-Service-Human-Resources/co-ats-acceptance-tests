@@ -8,9 +8,13 @@ import uk.gov.co.test.ui.pages.v9.pecform.YourDetailsPage.pecFormId
 
 case class BankruptcyDetails(
   undischargedBankrupt: Boolean,
+  bankruptcyStatus: String,
   insolvent: Boolean,
+  insolvencyStatus: String,
   receivingOrderOnProperty: Boolean,
-  penaltyForLateFiling: Boolean
+  receivingOrderOnPropertyInfo: String,
+  penaltyForLateFiling: Boolean,
+  penaltyForLateFilingInfo: String
 )
 
 object BankruptcyDetailsPage extends CivilServiceJobsBasePage {
@@ -18,12 +22,16 @@ object BankruptcyDetailsPage extends CivilServiceJobsBasePage {
   private lazy val bankruptcyDetailsPageTitle = "Bankruptcy Details - Civil Service Jobs - GOV.UK"
   def undischargedBankruptYesId               = s"${pecFormId}_datafield_79628_1_1_1_label"
   def undischargedBankruptNoId                = s"${pecFormId}_datafield_79628_1_1_2_label"
+  def bankruptcyStatusInputId                 = s"${pecFormId}_datafield_79632_1_1"
   def insolventYesId                          = s"${pecFormId}_datafield_79639_1_1_1_label"
   def insolventNoId                           = s"${pecFormId}_datafield_79639_1_1_2_label"
+  def insolvencyStatusInputId                 = s"${pecFormId}_datafield_79643_1_1"
   def receivingOrderOnPropertyYesId           = s"${pecFormId}_datafield_79650_1_1_1_label"
   def receivingOrderOnPropertyNoId            = s"${pecFormId}_datafield_79650_1_1_2_label"
+  def receivingOrderOnPropertyInputId         = s"${pecFormId}_datafield_79654_1_1"
   def penaltyForLateFilingYesId               = s"${pecFormId}_datafield_79661_1_1_1_label"
   def penaltyForLateFilingNoId                = s"${pecFormId}_datafield_79661_1_1_2_label"
+  def penaltyForLateFilingInputId             = s"${pecFormId}_datafield_79665_1_1"
 
   private def bankruptcyDetailsPageCheck(): Unit =
     eventually(onPage(bankruptcyDetailsPageTitle))
@@ -31,6 +39,7 @@ object BankruptcyDetailsPage extends CivilServiceJobsBasePage {
   private def selectUndischargedBankrupt(bankruptcyDetails: BankruptcyDetails): Unit =
     if (bankruptcyDetails.undischargedBankrupt) {
       radioSelect(undischargedBankruptYesId)
+      enterDetails(bankruptcyStatusInputId, bankruptcyDetails.bankruptcyStatus)
     } else {
       radioSelect(undischargedBankruptNoId)
     }
@@ -38,6 +47,7 @@ object BankruptcyDetailsPage extends CivilServiceJobsBasePage {
   private def selectInsolvent(bankruptcyDetails: BankruptcyDetails): Unit =
     if (bankruptcyDetails.insolvent) {
       radioSelect(insolventYesId)
+      enterDetails(insolvencyStatusInputId, bankruptcyDetails.insolvencyStatus)
     } else {
       radioSelect(insolventNoId)
     }
@@ -45,6 +55,7 @@ object BankruptcyDetailsPage extends CivilServiceJobsBasePage {
   private def selectReceivingOrderOnProperty(bankruptcyDetails: BankruptcyDetails): Unit =
     if (bankruptcyDetails.receivingOrderOnProperty) {
       radioSelect(receivingOrderOnPropertyYesId)
+      enterDetails(receivingOrderOnPropertyInputId, bankruptcyDetails.receivingOrderOnPropertyInfo)
     } else {
       radioSelect(receivingOrderOnPropertyNoId)
     }
@@ -52,6 +63,7 @@ object BankruptcyDetailsPage extends CivilServiceJobsBasePage {
   private def selectPenaltyForLateFiling(bankruptcyDetails: BankruptcyDetails): Unit =
     if (bankruptcyDetails.penaltyForLateFiling) {
       radioSelect(penaltyForLateFilingYesId)
+      enterDetails(penaltyForLateFilingInputId, bankruptcyDetails.penaltyForLateFilingInfo)
     } else {
       radioSelect(penaltyForLateFilingNoId)
     }

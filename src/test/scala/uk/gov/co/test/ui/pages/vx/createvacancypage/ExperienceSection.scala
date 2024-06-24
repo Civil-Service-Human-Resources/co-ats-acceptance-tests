@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.pages.vx.createvacancypage
 
 import org.openqa.selenium.By
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXCvScoreRange, vXGuidanceText, vXLanguagesMandatory, vXLicencesMandatory, vXMembershipsMandatory, vXQualificationsMandatory, vXStatementWordLimit, vacancyFormId}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXCvScoreRange, vXLanguagesMandatory, vXLicencesMandatory, vXMembershipsMandatory, vXPersonalStatement, vXQualificationsMandatory, vXStatementGuidance, vXStatementGuidanceText, vXStatementScoreRange, vXStatementWordLimit, vacancyFormId}
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 
 case class MandatoryRequirements(requirements: Boolean, requirementsInfo: String)
@@ -94,9 +94,11 @@ object ExperienceSection extends VacancyBasePage {
 
   private def selectProvideStatement(successProfilesDetails: SuccessProfilesDetails): Unit = {
     val statement = successProfilesDetails.experienceSection
-    if (statement.map(_.provideStatement).get) {
+    vXPersonalStatement = statement.map(_.provideStatement).get
+    if (vXPersonalStatement) {
       clickOnRadioButton(personalStatementYesId)
-      statement.map(_.statementScoreRange).get match {
+      vXStatementScoreRange = statement.map(_.statementScoreRange).get
+      vXStatementScoreRange match {
         case "0 - 100" => clickOnRadioButton(statementScore0to100Id)
         case "0 - 7"   => clickOnRadioButton(statementScore0to7Id)
         case _         => throw new IllegalStateException("Personal Statement score not correct")
@@ -116,7 +118,8 @@ object ExperienceSection extends VacancyBasePage {
 
   private def selectStatementGuidanceText(successProfilesDetails: SuccessProfilesDetails): Unit = {
     val guidance = successProfilesDetails.experienceSection
-    if (guidance.map(_.statementGuidance).get) {
+    vXStatementGuidance = guidance.map(_.statementGuidance).get
+    if (vXStatementGuidance) {
       clickOnRadioButton(guidanceTextYesId)
       enterGuidanceText(successProfilesDetails)
     } else clickOnRadioButton(guidanceTextNoId)
@@ -124,10 +127,10 @@ object ExperienceSection extends VacancyBasePage {
 
   private def enterGuidanceText(successProfilesDetails: SuccessProfilesDetails): Unit = {
     val text         = successProfilesDetails.experienceSection
-    vXGuidanceText = text.map(_.statementGuidanceText).get
+    vXStatementGuidanceText = text.map(_.statementGuidanceText).get
     val guidanceText = waitForVisibilityOfElementById(guidanceTextInputId)
     guidanceText.clear()
-    guidanceText.sendKeys(vXGuidanceText)
+    guidanceText.sendKeys(vXStatementGuidanceText)
   }
 
   private def selectPastExperiences(successProfilesDetails: SuccessProfilesDetails): Unit = {

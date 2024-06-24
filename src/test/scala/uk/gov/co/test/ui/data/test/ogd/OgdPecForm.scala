@@ -63,12 +63,16 @@ object OGD_PEC_FORM_RIGHT_TO_WORK
     )
 
 object OGD_PEC_FORM_BANKRUPTCY_DETAILS
-    extends BankruptcyDetails(
-      false,
-      false,
-      false,
-      false
-    )
+  extends BankruptcyDetails(
+    false,
+    "Autotest - bankruptcy status",
+    false,
+    "Autotest - insolvency status",
+    false,
+    "Autotest - details about the receiving order in effect on your property",
+    false,
+    "Autotest - details on any penalties imposed in relation to late filing on your tax affairs within the last 5 years"
+  )
 
 object OGD_PEC_FORM_HEALTH_DECLARATION
     extends HealthDeclarationDetails(

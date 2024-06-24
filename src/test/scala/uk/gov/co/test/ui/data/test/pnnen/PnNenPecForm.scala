@@ -224,9 +224,13 @@ object PN_NEN_PEC_FORM_OVERSEAS
 object PN_NEN_PEC_FORM_BANKRUPTCY_DETAILS
     extends BankruptcyDetails(
       false,
+      "Autotest - bankruptcy status",
       false,
+      "Autotest - insolvency status",
       false,
-      false
+      "Autotest - details about the receiving order in effect on your property",
+      false,
+      "Autotest - details on any penalties imposed in relation to late filing on your tax affairs within the last 5 years"
     )
 
 object PN_NEN_PEC_FORM_HEALTH_DECLARATION

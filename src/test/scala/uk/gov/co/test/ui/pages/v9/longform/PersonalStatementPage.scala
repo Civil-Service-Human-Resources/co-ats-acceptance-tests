@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.pages.v9.longform
 
 import org.scalatest.concurrent.Eventually.eventually
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXExperiencesRequired, vXGuidanceText, vXSpecifyGuidance, vXStatementWordLimit}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXExperiencesRequired, vXStatementGuidanceText, vXStatementGuidance, vXStatementWordLimit}
 import uk.gov.co.test.ui.data.v9.longform.LongFormDetails
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
 import uk.gov.co.test.ui.pages.v9.longform.DiversityMonitoringPage.longFormId
@@ -47,9 +47,9 @@ object PersonalStatementPage extends CivilServiceJobsBasePage {
     if (statementDetails.detailsRemoved) radioSelect(personalDetailsRemovedId)
 
   private def confirmGuidanceText(): Unit =
-    if (vXSpecifyGuidance) {
+    if (vXStatementGuidance) {
       val v9GuidanceText = waitForVisibilityOfElementByPath(guidanceTextPath).getText
-      v9GuidanceText shouldEqual vXGuidanceText
+      v9GuidanceText shouldEqual vXStatementGuidanceText
     }
 
   private val statement: Seq[StatementDetails => Unit] = Seq(

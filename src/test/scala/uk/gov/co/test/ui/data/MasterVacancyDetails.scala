@@ -104,23 +104,24 @@ object MasterVacancyDetails extends VacancyBasePage {
   //vx VACANCY abilities TODO
 
   //vx VACANCY experience
-  var vXJobHistory: Boolean              = false
-  var vXFullQualification: Boolean       = false
+  var vXJobHistory: Boolean              = _
+  var vXFullQualification: Boolean       = _
   var vXCvScoreRange: String             = ""
-  var vXPreviousExperiences: Boolean     = false
-  var vXPersonalStatement: Boolean       = false
-  var vXSpecifyGuidance: Boolean         = false
-  var vXGuidanceText: String             = ""
-  var vXDesirablePastExperience: Boolean = false
-  var vXSpecificPastExperience: String   = ""
+  var vXPreviousExperiences: Boolean     = _
+  var vXPersonalStatement: Boolean       = _
+  var vXStatementScoreRange: String      = ""
+  var vXStatementGuidance: Boolean       = _
+  var vXStatementGuidanceText: String    = ""
   var vXStatementWordLimit: Int          = 250
-  var vXLicencesMandatory: Boolean       = false
+  var vXDesirablePastExperience: Boolean = _
+  var vXSpecificPastExperience: String   = ""
+  var vXLicencesMandatory: Boolean       = _
   var vXSpecificLicences: String         = ""
-  var vXMembershipsMandatory: Boolean    = false
+  var vXMembershipsMandatory: Boolean    = _
   var vXSpecificMemberships: String      = ""
-  var vXLanguagesMandatory: Boolean      = false
+  var vXLanguagesMandatory: Boolean      = _
   var vXSpecificLanguages: String        = ""
-  var vXQualificationsMandatory: Boolean = false
+  var vXQualificationsMandatory: Boolean = _
   var vXSpecificQualifications: String   = ""
 
   //vx VACANCY behaviours
@@ -137,17 +138,8 @@ object MasterVacancyDetails extends VacancyBasePage {
   var vXListOfSkillsInterviewRequired: ListBuffer[Boolean]   = ListBuffer()
 
   //vX strengths
-  var vXHowManyStrengths: Int               = 8
-  var vXListOfStrengths: ListBuffer[String] = ListBuffer(
-    "Adaptable",
-    "Analytical",
-    "Improver",
-    "Relationship Builder",
-    "Challenger",
-    "Change Agent",
-    "Team Leader",
-    "Service Focussed"
-  )
+  var vXHowManyStrengths: Int               = _
+  var vXListOfStrengths: ListBuffer[String] = ListBuffer()
 
   //vx VACANCY online tests
   var vXAnyOnlineTests: Boolean = _
