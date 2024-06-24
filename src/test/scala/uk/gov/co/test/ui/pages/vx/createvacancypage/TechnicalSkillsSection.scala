@@ -219,14 +219,8 @@ object TechnicalSkillsSection extends VacancyBasePage {
     selectTechSkillsEight
   )
 
-  private def techSkillsRequired(successProfilesDetails: SuccessProfilesDetails): Unit = {
+  private def techSkillsRequired(successProfilesDetails: SuccessProfilesDetails): Unit =
     techSkills.take(vXHowManySkills).foreach { f =>
       f(successProfilesDetails)
     }
-    println(vXListOfTechSkills)
-    println(vXListOfTechSkillsDescription)
-    println(vXListOfSkillsApplicationRequired)
-    println(vXListOfSkillsInterviewRequired)
-    println("Done tech skills")
-  }
 }

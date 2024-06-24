@@ -71,6 +71,16 @@ trait BasePage extends Matchers with Page with WebBrowser with PatienceConfigura
     }
   }
 
+  def checkForTotalValueId(valueId: String, endsWithExpectedScore: String)(implicit driver: WebDriver): Unit = {
+    val wait = new WebDriverWait(driver, 25, 200)
+    scrollToElement(By.id(valueId))
+    try wait.until { (d: WebDriver) =>
+      d.findElement(By.id(valueId)).getText.endsWith(endsWithExpectedScore)
+    } catch {
+      case staleError: StaleElementReferenceException => println(staleError)
+    }
+  }
+
   def waitForVisibilityOfElementByPathLast(pathway: String)(implicit webDriver: WebDriver): WebElement =
     eventually {
       webDriver.findElements(By.xpath(pathway)).asScala.last

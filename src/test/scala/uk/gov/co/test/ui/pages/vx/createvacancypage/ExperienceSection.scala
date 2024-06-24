@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.pages.vx.createvacancypage
 
 import org.openqa.selenium.By
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXGuidanceText, vXLanguagesMandatory, vXLicencesMandatory, vXMembershipsMandatory, vXQualificationsMandatory, vXStatementWordLimit, vacancyFormId}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXCvScoreRange, vXGuidanceText, vXLanguagesMandatory, vXLicencesMandatory, vXMembershipsMandatory, vXQualificationsMandatory, vXStatementWordLimit, vacancyFormId}
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 
 case class MandatoryRequirements(requirements: Boolean, requirementsInfo: String)
@@ -67,8 +67,8 @@ object ExperienceSection extends VacancyBasePage {
   }
 
   private def selectCVScoreRange(successProfilesDetails: SuccessProfilesDetails): Unit = {
-    val score = successProfilesDetails.experienceSection
-    score.map(_.cvScoreRange).get match {
+    vXCvScoreRange = successProfilesDetails.experienceSection.map(_.cvScoreRange).get
+    vXCvScoreRange match {
       case "0 - 100" => clickOnRadioButton(cvScore0to100Id)
       case "0 - 7"   => clickOnRadioButton(cvScore0to7Id)
       case _         => throw new IllegalStateException("CV Score not correct")

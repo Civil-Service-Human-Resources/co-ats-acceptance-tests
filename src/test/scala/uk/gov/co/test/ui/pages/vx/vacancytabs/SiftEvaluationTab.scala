@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.pages.vx.vacancytabs
 
 import org.openqa.selenium.By
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXAnyOnlineTests, vXBehavioursRequired, vXExperiencesRequired, vXHowManyBehaviours, vXHowManySkills, vXInterviewExpectedRounds, vXListOfChosenBehaviours, vXListOfTechSkills, vXPreSiftRequired, vXTechSkillsRequired, vacancyFormId}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXAnyOnlineTests, vXBehaviourApplicationRequired, vXBehavioursRequired, vXCvScoreRange, vXExperiencesRequired, vXHowManyBehaviours, vXHowManySkills, vXInterviewExpectedRounds, vXListOfChosenBehaviours, vXListOfSkillsApplicationRequired, vXListOfTechSkills, vXPreSiftRequired, vXTechSkillsRequired, vacancyFormId}
 import uk.gov.co.test.ui.data.vx.application.{ApplicationDetails, Outcome}
 import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.{applicationBeingReviewedState, successfulAtSiftState}
 import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.{availableBarItems, completeSiftBarId, confirmCandidateSummary, progressBarAfterPreSiftId, siftEvaluation, withdrawBarId}
@@ -98,7 +98,9 @@ object SiftEvaluationTab extends VacancyBasePage {
   def techSkillEightCommentsId                = s"${vacancyFormId}_datafield_66567_1_1"
   def techSkillTotalScoreId                   = s"${vacancyFormId}_field_66891_1"
   def cvAssessmentTitleId                     = s"${vacancyFormId}_label_66191_1"
-  def cvAssessmentScoreId                     = s"select2-${vacancyFormId}_datafield_109033_1_1-container"
+//  def cvAssessmentScoreId                     = s"select2-${vacancyFormId}_datafield_109033_1_1-container"
+  def cvAssessment100ScoreId                     = s"select2-${vacancyFormId}_datafield_109033_1_1-container"
+  def cvAssessment7ScoreId                     = s"select2-${vacancyFormId}_datafield_187906_1_1-container"
   def cvAssessmentCommentsId                  = s"${vacancyFormId}_datafield_66204_1_1"
   def personalStatementTitleId                = s"${vacancyFormId}_label_66211_1"
   def personalStatementScoreId                = s"select2-${vacancyFormId}_datafield_187935_1_1-container"
@@ -137,102 +139,125 @@ object SiftEvaluationTab extends VacancyBasePage {
   }
 
   private def enterBehaviourOneOutcome(siftDetails: SiftDetails): Unit = {
-    enterOutcome(
-      behaviourOneTitleId,
-      vXListOfChosenBehaviours.headOption.get,
-      behaviourOneScoreId,
-      siftDetails.behaviourOne.score,
-      behaviourOneCommentsId,
-      siftDetails.behaviourOne.comment
-    )
-    vXBehavioursTotalScore.clear()
-    vXBehavioursTotalScore += siftDetails.behaviourOne.score
+    val applicationRequired = vXBehaviourApplicationRequired.headOption.get
+    if (applicationRequired) {
+      enterOutcome(
+        behaviourOneTitleId,
+        vXListOfChosenBehaviours.headOption.get,
+        behaviourOneScoreId,
+        siftDetails.behaviourOne.score,
+        behaviourOneCommentsId,
+        siftDetails.behaviourOne.comment
+      )
+      vXBehavioursTotalScore += siftDetails.behaviourOne.score
+    }
   }
 
   private def enterBehaviourTwoOutcome(siftDetails: SiftDetails): Unit = {
-    enterOutcome(
-      behaviourTwoTitleId,
-      vXListOfChosenBehaviours(1),
-      behaviourTwoScoreId,
-      siftDetails.behaviourTwo.score,
-      behaviourTwoCommentsId,
-      siftDetails.behaviourTwo.comment
-    )
-    vXBehavioursTotalScore += siftDetails.behaviourTwo.score
+    val applicationRequired = vXBehaviourApplicationRequired.lift(1).get
+    if (applicationRequired) {
+      enterOutcome(
+        behaviourTwoTitleId,
+        vXListOfChosenBehaviours(1),
+        behaviourTwoScoreId,
+        siftDetails.behaviourTwo.score,
+        behaviourTwoCommentsId,
+        siftDetails.behaviourTwo.comment
+      )
+      vXBehavioursTotalScore += siftDetails.behaviourTwo.score
+    }
   }
 
   private def enterBehaviourThreeOutcome(siftDetails: SiftDetails): Unit = {
-    enterOutcome(
-      behaviourThreeTitleId,
-      vXListOfChosenBehaviours(2),
-      behaviourThreeScoreId,
-      siftDetails.behaviourThree.score,
-      behaviourThreeCommentsId,
-      siftDetails.behaviourThree.comment
-    )
-    vXBehavioursTotalScore += siftDetails.behaviourThree.score
+    val applicationRequired = vXBehaviourApplicationRequired.lift(2).get
+    if (applicationRequired) {
+      enterOutcome(
+        behaviourThreeTitleId,
+        vXListOfChosenBehaviours(2),
+        behaviourThreeScoreId,
+        siftDetails.behaviourThree.score,
+        behaviourThreeCommentsId,
+        siftDetails.behaviourThree.comment
+      )
+      vXBehavioursTotalScore += siftDetails.behaviourThree.score
+    }
   }
 
   private def enterBehaviourFourOutcome(siftDetails: SiftDetails): Unit = {
-    scrollToElement(By.id(behaviourFourTitleId))
-    enterOutcome(
-      behaviourFourTitleId,
-      vXListOfChosenBehaviours(3),
-      behaviourFourScoreId,
-      siftDetails.behaviourFour.score,
-      behaviourFourCommentsId,
-      siftDetails.behaviourFour.comment
-    )
-    vXBehavioursTotalScore += siftDetails.behaviourFour.score
+    val applicationRequired = vXBehaviourApplicationRequired.lift(3).get
+    if (applicationRequired) {
+      scrollToElement(By.id(behaviourFourTitleId))
+      enterOutcome(
+        behaviourFourTitleId,
+        vXListOfChosenBehaviours(3),
+        behaviourFourScoreId,
+        siftDetails.behaviourFour.score,
+        behaviourFourCommentsId,
+        siftDetails.behaviourFour.comment
+      )
+      vXBehavioursTotalScore += siftDetails.behaviourFour.score
+    }
   }
 
   private def enterBehaviourFiveOutcome(siftDetails: SiftDetails): Unit = {
-    enterOutcome(
-      behaviourFiveTitleId,
-      vXListOfChosenBehaviours(4),
-      behaviourFiveScoreId,
-      siftDetails.behaviourFive.score,
-      behaviourFiveCommentsId,
-      siftDetails.behaviourFive.comment
-    )
-    vXBehavioursTotalScore += siftDetails.behaviourFive.score
+    val applicationRequired = vXBehaviourApplicationRequired.lift(4).get
+    if (applicationRequired) {
+      enterOutcome(
+        behaviourFiveTitleId,
+        vXListOfChosenBehaviours(4),
+        behaviourFiveScoreId,
+        siftDetails.behaviourFive.score,
+        behaviourFiveCommentsId,
+        siftDetails.behaviourFive.comment
+      )
+      vXBehavioursTotalScore += siftDetails.behaviourFive.score
+    }
   }
 
   private def enterBehaviourSixOutcome(siftDetails: SiftDetails): Unit = {
-    scrollToElement(By.id(behaviourSixTitleId))
-    enterOutcome(
-      behaviourSixTitleId,
-      vXListOfChosenBehaviours(5),
-      behaviourSixScoreId,
-      siftDetails.behaviourSix.score,
-      behaviourSixCommentsId,
-      siftDetails.behaviourSix.comment
-    )
-    vXBehavioursTotalScore += siftDetails.behaviourSix.score
+    val applicationRequired = vXBehaviourApplicationRequired.lift(5).get
+    if (applicationRequired) {
+      scrollToElement(By.id(behaviourSixTitleId))
+      enterOutcome(
+        behaviourSixTitleId,
+        vXListOfChosenBehaviours(5),
+        behaviourSixScoreId,
+        siftDetails.behaviourSix.score,
+        behaviourSixCommentsId,
+        siftDetails.behaviourSix.comment
+      )
+      vXBehavioursTotalScore += siftDetails.behaviourSix.score
+    }
   }
 
   private def enterBehaviourSevenOutcome(siftDetails: SiftDetails): Unit = {
-    enterOutcome(
-      behaviourSevenTitleId,
-      vXListOfChosenBehaviours(6),
-      behaviourSevenScoreId,
-      siftDetails.behaviourSeven.score,
-      behaviourSevenCommentsId,
-      siftDetails.behaviourSeven.comment
-    )
-    vXBehavioursTotalScore += siftDetails.behaviourSeven.score
+    val applicationRequired = vXBehaviourApplicationRequired.lift(6).get
+    if (applicationRequired) {
+      enterOutcome(
+        behaviourSevenTitleId,
+        vXListOfChosenBehaviours(6),
+        behaviourSevenScoreId,
+        siftDetails.behaviourSeven.score,
+        behaviourSevenCommentsId,
+        siftDetails.behaviourSeven.comment
+      )
+      vXBehavioursTotalScore += siftDetails.behaviourSeven.score
+    }
   }
 
   private def enterBehaviourEightOutcome(siftDetails: SiftDetails): Unit = {
-    enterOutcome(
-      behaviourEightTitleId,
-      vXListOfChosenBehaviours(7),
-      behaviourEightScoreId,
-      siftDetails.behaviourEight.score,
-      behaviourEightCommentsId,
-      siftDetails.behaviourEight.comment
-    )
-    vXBehavioursTotalScore += siftDetails.behaviourEight.score
+    val applicationRequired = vXBehaviourApplicationRequired.lift(7).get
+    if (applicationRequired) {
+      enterOutcome(
+        behaviourEightTitleId,
+        vXListOfChosenBehaviours(7),
+        behaviourEightScoreId,
+        siftDetails.behaviourEight.score,
+        behaviourEightCommentsId,
+        siftDetails.behaviourEight.comment
+      )
+      vXBehavioursTotalScore += siftDetails.behaviourEight.score
+    }
   }
 
   private def totalScore(runningScore: ListBuffer[Int]): Int = {
@@ -255,114 +280,132 @@ object SiftEvaluationTab extends VacancyBasePage {
   private def behavioursOutcome(siftDetails: SiftDetails): Unit =
     if (vXBehavioursRequired) {
       waitForVisibilityOfElementById(behaviourAssessmentHeaderId).getText shouldEqual "Behaviour assessment"
-      waitForVisibilityOfElementById(behaviourScoringGuideId).getText should include(siftDetails.scoringGuide)
+      waitForVisibilityOfElementById(behaviourScoringGuideId).getText          should include(siftDetails.scoringGuide)
+      vXBehavioursTotalScore.clear()
       behaviourOutcome.take(vXHowManyBehaviours).foreach { f =>
         f(siftDetails)
       }
-      waitForVisibilityOfElementById(
-        behaviourTotalScoreId
-      ).getText should endWith(s"${totalScore(vXBehavioursTotalScore)}")
-//      ).getText shouldEqual s"Behaviour total score\n  ${totalScore(vXBehavioursTotalScore)}"
+      checkForTotalValueId(behaviourTotalScoreId, s"${totalScore(vXBehavioursTotalScore)}")
     }
 
   private def enterTechSkillOneOutcome(siftDetails: SiftDetails): Unit = {
-    scrollToElement(By.id(techSkillsHeaderId))
-    waitForVisibilityOfElementById(techSkillsHeaderId).getText  shouldEqual "Technical skills"
-    waitForVisibilityOfElementById(techSkillsScoringGuideId).getText should include(siftDetails.scoringGuide)
-    enterOutcome(
-      techSkillOneTitleId,
-      vXListOfTechSkills.head,
-      techSkillOneScoreId,
-      siftDetails.techSkillOne.score,
-      techSkillOneCommentsId,
-      siftDetails.techSkillOne.comment
-    )
-    vXTechSkillsTotalScore.clear()
-    vXTechSkillsTotalScore += siftDetails.techSkillOne.score
+    val applicationRequired = vXListOfSkillsApplicationRequired.headOption.get
+    if (applicationRequired) {
+      enterOutcome(
+        techSkillOneTitleId,
+        vXListOfTechSkills.head,
+        techSkillOneScoreId,
+        siftDetails.techSkillOne.score,
+        techSkillOneCommentsId,
+        siftDetails.techSkillOne.comment
+      )
+      vXTechSkillsTotalScore += siftDetails.techSkillOne.score
+    }
   }
 
   private def enterTechSkillTwoOutcome(siftDetails: SiftDetails): Unit = {
-    enterOutcome(
-      techSkillTwoTitleId,
-      vXListOfTechSkills(1),
-      techSkillTwoScoreId,
-      siftDetails.techSkillTwo.score,
-      techSkillTwoCommentsId,
-      siftDetails.techSkillTwo.comment
-    )
-    vXTechSkillsTotalScore += siftDetails.techSkillTwo.score
+    val applicationRequired = vXListOfSkillsApplicationRequired.lift(1).get
+    if (applicationRequired) {
+      enterOutcome(
+        techSkillTwoTitleId,
+        vXListOfTechSkills(1),
+        techSkillTwoScoreId,
+        siftDetails.techSkillTwo.score,
+        techSkillTwoCommentsId,
+        siftDetails.techSkillTwo.comment
+      )
+      vXTechSkillsTotalScore += siftDetails.techSkillTwo.score
+    }
   }
 
   private def enterTechSkillThreeOutcome(siftDetails: SiftDetails): Unit = {
-    enterOutcome(
-      techSkillThreeTitleId,
-      vXListOfTechSkills(2),
-      techSkillThreeScoreId,
-      siftDetails.techSkillThree.score,
-      techSkillThreeCommentsId,
-      siftDetails.techSkillThree.comment
-    )
-    vXTechSkillsTotalScore += siftDetails.techSkillThree.score
+    val applicationRequired = vXListOfSkillsApplicationRequired.lift(2).get
+    if (applicationRequired) {
+      enterOutcome(
+        techSkillThreeTitleId,
+        vXListOfTechSkills(2),
+        techSkillThreeScoreId,
+        siftDetails.techSkillThree.score,
+        techSkillThreeCommentsId,
+        siftDetails.techSkillThree.comment
+      )
+      vXTechSkillsTotalScore += siftDetails.techSkillThree.score
+    }
   }
 
   private def enterTechSkillFourOutcome(siftDetails: SiftDetails): Unit = {
-    enterOutcome(
-      techSkillFourTitleId,
-      vXListOfTechSkills(3),
-      techSkillFourScoreId,
-      siftDetails.techSkillFour.score,
-      techSkillFourCommentsId,
-      siftDetails.techSkillFour.comment
-    )
-    vXTechSkillsTotalScore += siftDetails.techSkillFour.score
+    val applicationRequired = vXListOfSkillsApplicationRequired.lift(3).get
+    if (applicationRequired) {
+      enterOutcome(
+        techSkillFourTitleId,
+        vXListOfTechSkills(3),
+        techSkillFourScoreId,
+        siftDetails.techSkillFour.score,
+        techSkillFourCommentsId,
+        siftDetails.techSkillFour.comment
+      )
+      vXTechSkillsTotalScore += siftDetails.techSkillFour.score
+    }
   }
 
   private def enterTechSkillFiveOutcome(siftDetails: SiftDetails): Unit = {
-    enterOutcome(
-      techSkillFiveTitleId,
-      vXListOfTechSkills(4),
-      techSkillFiveScoreId,
-      siftDetails.techSkillFive.score,
-      techSkillFiveCommentsId,
-      siftDetails.techSkillFive.comment
-    )
-    vXTechSkillsTotalScore += siftDetails.techSkillFive.score
+    val applicationRequired = vXListOfSkillsApplicationRequired.lift(4).get
+    if (applicationRequired) {
+      enterOutcome(
+        techSkillFiveTitleId,
+        vXListOfTechSkills(4),
+        techSkillFiveScoreId,
+        siftDetails.techSkillFive.score,
+        techSkillFiveCommentsId,
+        siftDetails.techSkillFive.comment
+      )
+      vXTechSkillsTotalScore += siftDetails.techSkillFive.score
+    }
   }
 
   private def enterTechSkillSixOutcome(siftDetails: SiftDetails): Unit = {
-    enterOutcome(
-      techSkillSixTitleId,
-      vXListOfTechSkills(5),
-      techSkillSixScoreId,
-      siftDetails.techSkillSix.score,
-      techSkillSixCommentsId,
-      siftDetails.techSkillSix.comment
-    )
-    vXTechSkillsTotalScore += siftDetails.techSkillSix.score
+    val applicationRequired = vXListOfSkillsApplicationRequired.lift(5).get
+    if (applicationRequired) {
+      enterOutcome(
+        techSkillSixTitleId,
+        vXListOfTechSkills(5),
+        techSkillSixScoreId,
+        siftDetails.techSkillSix.score,
+        techSkillSixCommentsId,
+        siftDetails.techSkillSix.comment
+      )
+      vXTechSkillsTotalScore += siftDetails.techSkillSix.score
+    }
   }
 
   private def enterTechSkillSevenOutcome(siftDetails: SiftDetails): Unit = {
-    enterOutcome(
-      techSkillSevenTitleId,
-      vXListOfTechSkills(6),
-      techSkillSevenScoreId,
-      siftDetails.techSkillSeven.score,
-      techSkillSevenCommentsId,
-      siftDetails.techSkillSeven.comment
-    )
-    vXTechSkillsTotalScore += siftDetails.techSkillSeven.score
+    val applicationRequired = vXListOfSkillsApplicationRequired.lift(6).get
+    if (applicationRequired) {
+      enterOutcome(
+        techSkillSevenTitleId,
+        vXListOfTechSkills(6),
+        techSkillSevenScoreId,
+        siftDetails.techSkillSeven.score,
+        techSkillSevenCommentsId,
+        siftDetails.techSkillSeven.comment
+      )
+      vXTechSkillsTotalScore += siftDetails.techSkillSeven.score
+    }
   }
 
   private def enterTechSkillEightOutcome(siftDetails: SiftDetails): Unit = {
-    enterOutcome(
-      techSkillEightTitleId,
-      vXListOfTechSkills(7),
-      techSkillEightScoreId,
-      siftDetails.techSkillEight.score,
-      techSkillEightCommentsId,
-      siftDetails.techSkillEight.comment
-    )
-    vXTechSkillsTotalScore += siftDetails.techSkillEight.score
+    val applicationRequired = vXListOfSkillsApplicationRequired.lift(7).get
+    if (applicationRequired) {
+      enterOutcome(
+        techSkillEightTitleId,
+        vXListOfTechSkills(7),
+        techSkillEightScoreId,
+        siftDetails.techSkillEight.score,
+        techSkillEightCommentsId,
+        siftDetails.techSkillEight.comment
+      )
+      vXTechSkillsTotalScore += siftDetails.techSkillEight.score
+    }
   }
 
   private val skillOutcome: Seq[SiftDetails => Unit] = Seq(
@@ -378,12 +421,14 @@ object SiftEvaluationTab extends VacancyBasePage {
 
   private def techSkillOutcome(siftDetails: SiftDetails): Unit =
     if (vXTechSkillsRequired) {
+      scrollToElement(By.id(techSkillsHeaderId))
+      waitForVisibilityOfElementById(techSkillsHeaderId).getText  shouldEqual "Technical skills"
+      waitForVisibilityOfElementById(techSkillsScoringGuideId).getText should include(siftDetails.scoringGuide)
+      vXTechSkillsTotalScore.clear()
       skillOutcome.take(vXHowManySkills).foreach { f =>
         f(siftDetails)
       }
-      waitForVisibilityOfElementById(
-        techSkillTotalScoreId
-      ).getText shouldEqual s"Technical skill total score  \n${totalScore(vXTechSkillsTotalScore)}"
+      checkForTotalValueId(techSkillTotalScoreId, s"${totalScore(vXTechSkillsTotalScore)}")
     }
 
   private def enterCVAssessmentOutcome(siftDetails: SiftDetails): Unit =
@@ -391,7 +436,7 @@ object SiftEvaluationTab extends VacancyBasePage {
       enterOutcome(
         cvAssessmentTitleId,
         "CV assessment",
-        cvAssessmentScoreId,
+        if (vXCvScoreRange.contains("100")) cvAssessment100ScoreId else cvAssessment7ScoreId,
         siftDetails.cvAssessment.score,
         cvAssessmentCommentsId,
         siftDetails.cvAssessment.comment

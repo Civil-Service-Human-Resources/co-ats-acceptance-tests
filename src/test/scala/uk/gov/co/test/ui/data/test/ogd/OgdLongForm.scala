@@ -1,6 +1,6 @@
 package uk.gov.co.test.ui.data.test.ogd
 
-import uk.gov.co.test.ui.data.Characters.{valid250Characters, valid500Characters}
+import uk.gov.co.test.ui.data.Characters.{valid250Characters, valid500Characters, valid750Characters}
 import uk.gov.co.test.ui.data.MasterVacancyDetails.vXOtherLocations
 import uk.gov.co.test.ui.data.v9.longform.LongFormDetails
 import uk.gov.co.test.ui.pages.v9.longform._
@@ -76,6 +76,8 @@ object OGD_LONG_FORM_CV
 object OGD_LONG_FORM_PERSONAL_STATEMENT
     extends StatementDetails(
       s"$valid250Characters",
+      s"$valid500Characters",
+      s"$valid750Characters",
       true
     )
 
@@ -85,9 +87,9 @@ object OGD_LONG_FORM_BEHAVIOURS
     )
 
 object OGD_LONG_FORM_TECHNICAL_SKILLS
-  extends TechSkillsDetails(
-    s"$valid250Characters"
-  )
+    extends TechSkillsDetails(
+      s"$valid250Characters"
+    )
 
 object OGD_LONG_FORM_UPLOAD_DOCUMENTS
     extends UploadDocumentsDetails(

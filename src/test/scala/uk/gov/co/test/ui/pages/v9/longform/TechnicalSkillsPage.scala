@@ -62,15 +62,11 @@ object TechnicalSkillsPage extends CivilServiceJobsBasePage {
     val applicationRequired              = vXListOfSkillsApplicationRequired.headOption.get
     if (applicationRequired) {
       val actualHeader = waitForVisibilityOfElementById(techSkillOneHeaderId).getText
-      if (vXListOfTechSkillsDescription.headOption.get.isEmpty) {
+      if (vXListOfTechSkillsDescription.headOption.get.isEmpty)
         expectedHeaderWithoutDescription shouldEqual actualHeader
-      } else { expectedHeader shouldEqual actualHeader }
+      else expectedHeader                shouldEqual actualHeader
       enterDetails(techSkillOneInputId, techSkillsDetails.techSkillText)
-      eventually(
-        waitForVisibilityOfElementById(
-          techSkillOneWordLimitId
-        ).getText shouldEqual "Maximum Word Count 250 of  250 words"
-      )
+      checkForTotalValueId(techSkillOneWordLimitId, "Maximum Word Count 250 of  250 words")
     }
   }
 
@@ -81,17 +77,11 @@ object TechnicalSkillsPage extends CivilServiceJobsBasePage {
     val applicationRequired              = vXListOfSkillsApplicationRequired.lift(1).get
     if (applicationRequired) {
       val actualHeader = waitForVisibilityOfElementById(techSkillTwoHeaderId).getText
-      if (vXListOfTechSkillsDescription.lift(1).get.isEmpty) {
+      if (vXListOfTechSkillsDescription.lift(1).get.isEmpty)
         expectedHeaderWithoutDescription shouldEqual actualHeader
-      } else {
-        expectedHeader shouldEqual actualHeader
-      }
+      else expectedHeader                shouldEqual actualHeader
       enterDetails(techSkillTwoInputId, techSkillsDetails.techSkillText)
-      eventually(
-        waitForVisibilityOfElementById(
-          techSkillTwoWordLimitId
-        ).getText shouldEqual "Maximum Word Count 250 of  250 words"
-      )
+      checkForTotalValueId(techSkillTwoWordLimitId, "Maximum Word Count 250 of  250 words")
     }
   }
 
@@ -102,17 +92,11 @@ object TechnicalSkillsPage extends CivilServiceJobsBasePage {
     val applicationRequired              = vXListOfSkillsApplicationRequired.lift(2).get
     if (applicationRequired) {
       val actualHeader = waitForVisibilityOfElementById(techSkillThreeHeaderId).getText
-      if (vXListOfTechSkillsDescription.lift(2).get.isEmpty) {
+      if (vXListOfTechSkillsDescription.lift(2).get.isEmpty)
         expectedHeaderWithoutDescription shouldEqual actualHeader
-      } else {
-        expectedHeader shouldEqual actualHeader
-      }
+      else expectedHeader                shouldEqual actualHeader
       enterDetails(techSkillThreeInputId, techSkillsDetails.techSkillText)
-      eventually(
-        waitForVisibilityOfElementById(
-          techSkillThreeWordLimitId
-        ).getText shouldEqual "Maximum Word Count 250 of  250 words"
-      )
+      checkForTotalValueId(techSkillThreeWordLimitId, "Maximum Word Count 250 of  250 words")
     }
   }
 
@@ -123,17 +107,11 @@ object TechnicalSkillsPage extends CivilServiceJobsBasePage {
     val applicationRequired              = vXListOfSkillsApplicationRequired.lift(3).get
     if (applicationRequired) {
       val actualHeader = waitForVisibilityOfElementById(techSkillFourHeaderId).getText
-      if (vXListOfTechSkillsDescription.lift(3).get.isEmpty) {
+      if (vXListOfTechSkillsDescription.lift(3).get.isEmpty)
         expectedHeaderWithoutDescription shouldEqual actualHeader
-      } else {
-        expectedHeader shouldEqual actualHeader
-      }
+      else expectedHeader                shouldEqual actualHeader
       enterDetails(techSkillFourInputId, techSkillsDetails.techSkillText)
-      eventually(
-        waitForVisibilityOfElementById(
-          techSkillFourWordLimitId
-        ).getText shouldEqual "Maximum Word Count 250 of  250 words"
-      )
+      checkForTotalValueId(techSkillFourWordLimitId, "Maximum Word Count 250 of  250 words")
     }
   }
 
@@ -144,17 +122,11 @@ object TechnicalSkillsPage extends CivilServiceJobsBasePage {
     val applicationRequired              = vXListOfSkillsApplicationRequired.lift(4).get
     if (applicationRequired) {
       val actualHeader = waitForVisibilityOfElementById(techSkillFiveHeaderId).getText
-      if (vXListOfTechSkillsDescription.lift(4).get.isEmpty) {
+      if (vXListOfTechSkillsDescription.lift(4).get.isEmpty)
         expectedHeaderWithoutDescription shouldEqual actualHeader
-      } else {
-        expectedHeader shouldEqual actualHeader
-      }
+      else expectedHeader                shouldEqual actualHeader
       enterDetails(techSkillFiveInputId, techSkillsDetails.techSkillText)
-      eventually(
-        waitForVisibilityOfElementById(
-          techSkillFiveWordLimitId
-        ).getText shouldEqual "Maximum Word Count 250 of  250 words"
-      )
+      checkForTotalValueId(techSkillFiveWordLimitId, "Maximum Word Count 250 of  250 words")
     }
   }
 
@@ -165,17 +137,11 @@ object TechnicalSkillsPage extends CivilServiceJobsBasePage {
     val applicationRequired              = vXListOfSkillsApplicationRequired.lift(5).get
     if (applicationRequired) {
       val actualHeader = waitForVisibilityOfElementById(techSkillSixHeaderId).getText
-      if (vXListOfTechSkillsDescription.lift(5).get.isEmpty) {
+      if (vXListOfTechSkillsDescription.lift(5).get.isEmpty)
         expectedHeaderWithoutDescription shouldEqual actualHeader
-      } else {
-        expectedHeader shouldEqual actualHeader
-      }
+      else expectedHeader                shouldEqual actualHeader
       enterDetails(techSkillSixInputId, techSkillsDetails.techSkillText)
-      eventually(
-        waitForVisibilityOfElementById(
-          techSkillSixWordLimitId
-        ).getText shouldEqual "Maximum Word Count 250 of  250 words"
-      )
+      checkForTotalValueId(techSkillSixWordLimitId, "Maximum Word Count 250 of  250 words")
     }
   }
 
@@ -186,17 +152,11 @@ object TechnicalSkillsPage extends CivilServiceJobsBasePage {
     val applicationRequired              = vXListOfSkillsApplicationRequired.lift(6).get
     if (applicationRequired) {
       val actualHeader = waitForVisibilityOfElementById(techSkillSevenHeaderId).getText
-      if (vXListOfTechSkillsDescription.lift(6).get.isEmpty) {
+      if (vXListOfTechSkillsDescription.lift(6).get.isEmpty)
         expectedHeaderWithoutDescription shouldEqual actualHeader
-      } else {
-        expectedHeader shouldEqual actualHeader
-      }
+      else expectedHeader                shouldEqual actualHeader
       enterDetails(techSkillSevenInputId, techSkillsDetails.techSkillText)
-      eventually(
-        waitForVisibilityOfElementById(
-          techSkillSevenWordLimitId
-        ).getText shouldEqual "Maximum Word Count 250 of  250 words"
-      )
+      checkForTotalValueId(techSkillSevenWordLimitId, "Maximum Word Count 250 of  250 words")
     }
   }
 
@@ -207,17 +167,11 @@ object TechnicalSkillsPage extends CivilServiceJobsBasePage {
     val applicationRequired              = vXListOfSkillsApplicationRequired.lift(7).get
     if (applicationRequired) {
       val actualHeader = waitForVisibilityOfElementById(techSkillEightHeaderId).getText
-      if (vXListOfTechSkillsDescription.lift(7).get.isEmpty) {
+      if (vXListOfTechSkillsDescription.lift(7).get.isEmpty)
         expectedHeaderWithoutDescription shouldEqual actualHeader
-      } else {
-        expectedHeader shouldEqual actualHeader
-      }
+      else expectedHeader                shouldEqual actualHeader
       enterDetails(techSkillEightInputId, techSkillsDetails.techSkillText)
-      eventually(
-        waitForVisibilityOfElementById(
-          techSkillEightWordLimitId
-        ).getText shouldEqual "Maximum Word Count 250 of  250 words"
-      )
+      checkForTotalValueId(techSkillEightWordLimitId, "Maximum Word Count 250 of  250 words")
     }
   }
 

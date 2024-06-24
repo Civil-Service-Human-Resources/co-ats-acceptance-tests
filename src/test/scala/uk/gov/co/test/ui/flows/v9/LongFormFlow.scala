@@ -36,8 +36,7 @@ object LongFormFlow extends CivilServiceJobsBasePage {
         f(longFormDetails)
       }
       clickOn(longFormSubmission)
-//      confirmLongFormCompletion()
-      confirmLongFormPECCompletion()
+      confirmLongFormCompletion()
       extractApplicationId()
     }
 }

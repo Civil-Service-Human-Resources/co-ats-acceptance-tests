@@ -62,11 +62,7 @@ object BehavioursPage extends CivilServiceJobsBasePage {
       val actualHeader = waitForVisibilityOfElementById(behaviourOneHeaderId).getText
       expectedHeader shouldEqual actualHeader
       enterDetails(behaviourOneInputId, behavioursDetails.behaviourText)
-      eventually(
-        waitForVisibilityOfElementById(
-          behaviourOneWordLimitId
-        ).getText    shouldEqual "Maximum Word Count 250 of  250 words"
-      )
+      checkForTotalValueId(behaviourOneWordLimitId, "Maximum Word Count 250 of  250 words")
     }
   }
 
@@ -77,11 +73,7 @@ object BehavioursPage extends CivilServiceJobsBasePage {
       val actualHeader = waitForVisibilityOfElementById(behaviourTwoHeaderId).getText
       expectedHeader shouldEqual actualHeader
       enterDetails(behaviourTwoInputId, behavioursDetails.behaviourText)
-      eventually(
-        waitForVisibilityOfElementById(
-          behaviourTwoWordLimitId
-        ).getText    shouldEqual "Maximum Word Count 250 of  250 words"
-      )
+      checkForTotalValueId(behaviourTwoWordLimitId, "Maximum Word Count 250 of  250 words")
     }
   }
 
@@ -92,11 +84,7 @@ object BehavioursPage extends CivilServiceJobsBasePage {
       val actualHeader = waitForVisibilityOfElementById(behaviourThreeHeaderId).getText
       expectedHeader shouldEqual actualHeader
       enterDetails(behaviourThreeInputId, behavioursDetails.behaviourText)
-      eventually(
-        waitForVisibilityOfElementById(
-          behaviourThreeWordLimitId
-        ).getText    shouldEqual "Maximum Word Count 250 of  250 words"
-      )
+      checkForTotalValueId(behaviourThreeWordLimitId, "Maximum Word Count 250 of  250 words")
     }
   }
 
@@ -107,11 +95,7 @@ object BehavioursPage extends CivilServiceJobsBasePage {
       val actualHeader = waitForVisibilityOfElementById(behaviourFourHeaderId).getText
       expectedHeader shouldEqual actualHeader
       enterDetails(behaviourFourInputId, behavioursDetails.behaviourText)
-      eventually(
-        waitForVisibilityOfElementById(
-          behaviourFourWordLimitId
-        ).getText    shouldEqual "Maximum Word Count 250 of  250 words"
-      )
+      checkForTotalValueId(behaviourFourWordLimitId, "Maximum Word Count 250 of  250 words")
     }
   }
 
@@ -122,11 +106,7 @@ object BehavioursPage extends CivilServiceJobsBasePage {
       val actualHeader = waitForVisibilityOfElementById(behaviourFiveHeaderId).getText
       expectedHeader shouldEqual actualHeader
       enterDetails(behaviourFiveInputId, behavioursDetails.behaviourText)
-      eventually(
-        waitForVisibilityOfElementById(
-          behaviourFiveWordLimitId
-        ).getText    shouldEqual "Maximum Word Count 250 of  250 words"
-      )
+      checkForTotalValueId(behaviourFiveWordLimitId, "Maximum Word Count 250 of  250 words")
     }
   }
 
@@ -137,11 +117,7 @@ object BehavioursPage extends CivilServiceJobsBasePage {
       val actualHeader = waitForVisibilityOfElementById(behaviourSixHeaderId).getText
       expectedHeader shouldEqual actualHeader
       enterDetails(behaviourSixInputId, behavioursDetails.behaviourText)
-      eventually(
-        waitForVisibilityOfElementById(
-          behaviourSixWordLimitId
-        ).getText    shouldEqual "Maximum Word Count 250 of  250 words"
-      )
+      checkForTotalValueId(behaviourSixWordLimitId, "Maximum Word Count 250 of  250 words")
     }
   }
 
@@ -152,11 +128,7 @@ object BehavioursPage extends CivilServiceJobsBasePage {
       val actualHeader = waitForVisibilityOfElementById(behaviourSevenHeaderId).getText
       expectedHeader shouldEqual actualHeader
       enterDetails(behaviourSevenInputId, behavioursDetails.behaviourText)
-      eventually(
-        waitForVisibilityOfElementById(
-          behaviourSevenWordLimitId
-        ).getText    shouldEqual "Maximum Word Count 250 of  250 words"
-      )
+      checkForTotalValueId(behaviourSevenWordLimitId, "Maximum Word Count 250 of  250 words")
     }
   }
 
@@ -167,11 +139,7 @@ object BehavioursPage extends CivilServiceJobsBasePage {
       val actualHeader = waitForVisibilityOfElementById(behaviourEightHeaderId).getText
       expectedHeader shouldEqual actualHeader
       enterDetails(behaviourEightInputId, behavioursDetails.behaviourText)
-      eventually(
-        waitForVisibilityOfElementById(
-          behaviourEightWordLimitId
-        ).getText    shouldEqual "Maximum Word Count 250 of  250 words"
-      )
+      checkForTotalValueId(behaviourEightWordLimitId, "Maximum Word Count 250 of  250 words")
     }
   }
 

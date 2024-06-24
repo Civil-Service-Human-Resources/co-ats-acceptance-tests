@@ -106,6 +106,7 @@ object MasterVacancyDetails extends VacancyBasePage {
   //vx VACANCY experience
   var vXJobHistory: Boolean              = false
   var vXFullQualification: Boolean       = false
+  var vXCvScoreRange: String             = ""
   var vXPreviousExperiences: Boolean     = false
   var vXPersonalStatement: Boolean       = false
   var vXSpecifyGuidance: Boolean         = false

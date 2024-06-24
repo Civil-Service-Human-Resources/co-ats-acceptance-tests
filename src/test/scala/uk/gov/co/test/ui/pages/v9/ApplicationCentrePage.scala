@@ -2,7 +2,7 @@ package uk.gov.co.test.ui.pages.v9
 
 import org.openqa.selenium.{By, WebElement}
 import org.scalatest.concurrent.Eventually.eventually
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{randomFirstName, randomLastName, v9AdjustmentsForTests, v9ReasonableAdjustments, vXAnyOnlineTests, vXInterviewExpectedRounds, vXInterviewFourType, vXInterviewLocation, vXInterviewLongDate, vXInterviewNumber, vXInterviewOneType, vXInterviewThreeType, vXInterviewTwoType, vXSlotTwoStartTime, vacancyName}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{randomFirstName, randomLastName, v9AdjustmentsForTests, v9ReasonableAdjustments, vXAnyOnlineTests, vXInterviewExpectedRounds, vXInterviewFourType, vXInterviewLocation, vXInterviewLongDate, vXInterviewNumber, vXInterviewOneType, vXInterviewThreeType, vXInterviewTwoType, vXPreSiftRequired, vXSlotTwoStartTime, vacancyName}
 import uk.gov.co.test.ui.data.vx.application.ApplicationDetails
 import uk.gov.co.test.ui.pages.v9.ApplicationsPage.{confirmStatusOnApplicationPage, reviewUpdateOnApplicationPage}
 import uk.gov.co.test.ui.pages.vx.DashboardPage.contactEmailVxConfig
@@ -115,10 +115,13 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
         getApplicationConfirmation shouldEqual s"You're now invited to complete the Civil Service Numerical Test.\nThis test must be completed by 12:00AM on 09 January 2024.\nYou’ll need to pass this test in order to progress onto the next stage in your application.\nYou'll receive your results and feedback after you complete your test.\n\nHow to prepare\n\nTo prepare for the test, we strongly recommend that you:\n• Read the test guide (opens in a new window)\n• Take the CSNT Practice test (opens in a new window)\nAnswer the example questions at the beginning of the test.\n\nWhat you need\n\nThe test is not timed, however most people take about an hour to complete it. Although the test works on most devices, we recommend using larger screens (laptop, desktop) over handheld (iPad, mobile phone), and a modern browser. Am I using a modern browser? (opens in a new window) If you don’t have a computer, there are plenty of options - for example your local library.\nYou'll also need:\n• A stable internet connection.\n• A time and place with no interruptions.\nComplete the test alone, with no input from anyone else. Any evidence of receiving help with the tests will be taken seriously and, if found, will lead to your withdrawal from the process.\nPlease contact the Insolvency Service recruitment team at $contactEmailVxConfig if you need further support. They may not be able to help you if you contact them on the final day."
         startTestFunction().isEnabled
       }
-    } else {
+    } else if (vXPreSiftRequired) {
       getApplicationState        shouldEqual "Application status: Application received"
       getApplicationConfirmation shouldEqual """Your application has been received.
                                                |We'll email you updates on the progress of your application or you can check the progress here in your account.""".stripMargin
+    } else {
+      getApplicationState shouldEqual "Application status: Application received"
+      getApplicationConfirmation shouldEqual "Your application has been received.\nWe’ll email you about your application’s progress, or you can check this in your Application Centre."
     }
   }
 
