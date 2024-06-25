@@ -273,7 +273,7 @@ object PEC_FORM_NATIONAL_SECURITY_VETTING
       "MI6",
       "007",
       "31/01/1990",
-      serviceEndDate = Some("10/09/200"),
+      serviceEndDate = Some("10/09/2000"),
       "Contractor",
       true,
       "Enhanced Developed Vetting",

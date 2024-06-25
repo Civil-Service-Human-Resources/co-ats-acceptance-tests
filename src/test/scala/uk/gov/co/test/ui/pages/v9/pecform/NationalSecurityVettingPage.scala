@@ -162,7 +162,7 @@ object NationalSecurityVettingPage extends CivilServiceJobsBasePage {
         nsvDetails.serviceEndDate.get,
         serviceEndDateDayId,
         serviceEndDateMonthId,
-        serviceStartDateYearId
+        serviceEndDateYearId
       )
       selectContractType(nsvDetails)
     } else {

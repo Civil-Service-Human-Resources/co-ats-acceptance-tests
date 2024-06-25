@@ -187,6 +187,7 @@ object InterviewOneEvaluationTab extends VacancyBasePage {
     comment: Option[String] = None
   ): Unit = {
     waitForVisibilityOfElementById(titleId).getText shouldEqual expectedTitle
+    scrollToElement(By.id(scoreId))
     waitForVisibilityOfElementById(scoreId).click()
     action().moveToElement(waitForDropdownOption(score.toString)).perform()
     waitForDropdownOption(score.toString).click()
@@ -521,6 +522,10 @@ object InterviewOneEvaluationTab extends VacancyBasePage {
       interviewOneDetails.strengthOne.comment
     )
     vXI1StrengthsTotalScore += interviewOneDetails.strengthOne.score
+    println(vXListOfStrengths)
+    println(s"Strength 1  \n${vXListOfStrengths.head}")
+    println(vXI1StrengthsTotalScore)
+    println("Done")
   }
 
   private def enterStrengthTwoOutcome(interviewOneDetails: InterviewOneDetails): Unit = {

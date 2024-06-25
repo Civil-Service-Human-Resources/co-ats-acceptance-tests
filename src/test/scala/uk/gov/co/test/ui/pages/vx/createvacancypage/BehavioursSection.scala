@@ -51,7 +51,7 @@ object BehavioursSection extends VacancyBasePage {
   def interviewSevenId         = s"${vacancyFormId}_datafield_60422_1_1_12684"
   def interviewEightId         = s"${vacancyFormId}_datafield_60436_1_1_12684"
 
-  def selectBehavioursProfiles(successProfilesDetails: SuccessProfilesDetails): Unit = {
+  def selectBehaviours(successProfilesDetails: SuccessProfilesDetails): Unit = {
     scrollToElement(By.id(successProfilesSectionId))
     val behaviour = successProfilesDetails.behavioursSection
     if (successProfilesDetails.behaviours) {
