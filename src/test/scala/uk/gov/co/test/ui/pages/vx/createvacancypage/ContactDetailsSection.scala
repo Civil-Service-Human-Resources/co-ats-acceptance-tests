@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.pages.vx.createvacancypage
 
 import org.openqa.selenium.{By, Keys}
-import uk.gov.co.test.ui.data.MasterVacancyDetails.vacancyFormId
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXContactName, vXEmailForQuestions, vXProfile, vXTeamEmail, vXVacancyHolderEmail, vXVacancyHolderName, vacancyFormId}
 import uk.gov.co.test.ui.data.vx.vacancy.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 
@@ -26,14 +26,16 @@ object ContactDetailsSection extends VacancyBasePage {
   def vacancyTeamEmailInput   = s"${vacancyFormId}_datafield_59450_1_1"
 
   private def enterContactName(contactDetails: ContactDetails): Unit = {
+    vXContactName = contactDetails.contactName
     scrollToElement(By.id(contactNameId))
     val name = textField(contactNameInput)
-    name.value = contactDetails.contactName
+    name.value = vXContactName
   }
 
   private def enterContactEmail(contactDetails: ContactDetails): Unit = {
+    vXEmailForQuestions = contactDetails.contactEmail
     val name = textField(contactEmailInput)
-    name.value = contactDetails.contactEmail
+    name.value = vXEmailForQuestions
   }
 
   private def enterContactPhone(contactDetails: ContactDetails): Unit = {
@@ -42,28 +44,33 @@ object ContactDetailsSection extends VacancyBasePage {
   }
 
   private def enterVacancyHolderName(contactDetails: ContactDetails): Unit = {
+    vXVacancyHolderName = contactDetails.vacancyHolderName
     scrollToElement(By.id(vacancyHolderNameId))
     val name = textField(vacancyHolderNameInput)
-    name.value = contactDetails.vacancyHolderName
+    name.value = vXVacancyHolderName
   }
 
   private def enterVacancyHolderEmail(contactDetails: ContactDetails): Unit = {
+    vXVacancyHolderEmail = contactDetails.vacancyHolderEmail
     val name = textField(vacancyHolderEmailInput)
-    name.value = contactDetails.vacancyHolderEmail
+    name.value = vXVacancyHolderEmail
   }
 
   private def enterVacancyTeamEmail(contactDetails: ContactDetails): Unit = {
-    val teamEmailField = driver.findElement(By.id(vacancyTeamEmailInput))
-    val teamEmailValue = teamEmailField.getAttribute("value")
-    if (teamEmailValue.nonEmpty) {
-      if (!getOs.contains("mac")) {
-        teamEmailField.sendKeys(Keys.CONTROL, "a")
-      } else {
-        teamEmailField.sendKeys(Keys.COMMAND, "a")
+    vXTeamEmail = contactDetails.vacancyTeamEmail
+    if (vXProfile != "Vacancy Holder 1") {
+      val teamEmailField = driver.findElement(By.id(vacancyTeamEmailInput))
+      val teamEmailValue = teamEmailField.getAttribute("value")
+      if (teamEmailValue.nonEmpty) {
+        if (!getOs.contains("mac")) {
+          teamEmailField.sendKeys(Keys.CONTROL, "a")
+        } else {
+          teamEmailField.sendKeys(Keys.COMMAND, "a")
+        }
+        teamEmailField.sendKeys(Keys.BACK_SPACE)
       }
-      teamEmailField.sendKeys(Keys.BACK_SPACE)
+      teamEmailField.sendKeys(vXTeamEmail)
     }
-    teamEmailField.sendKeys(contactDetails.vacancyTeamEmail)
   }
 
   private val contactInfo: Seq[ContactDetails => Unit] = Seq(

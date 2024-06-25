@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.pages.vx.createvacancypage
 
 import org.openqa.selenium.By
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXApproach, vXGreatForVeterans, vXGrsVacancy, vXJobInfoDepartment, vacancyFormId}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXApproach, vXGreatForVeterans, vXGrsVacancy, vXJobInfoDepartment, vXProfile, vacancyFormId}
 import uk.gov.co.test.ui.data.vx.vacancy.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 
@@ -224,12 +224,15 @@ object ManagementSection extends VacancyBasePage {
     enterAssignTo2,
     grsVacancy,
     selectLinkToProject,
-    enterComplaintsProcess,
-    enterVacancyComments
+    enterComplaintsProcess
   )
 
-  def managementSection(newVacancyDetails: NewVacancyDetails): Unit =
-    management.foreach { f =>
-      f(newVacancyDetails.managementDetails)
+  def managementSection(newVacancyDetails: NewVacancyDetails): Unit = {
+    if (vXProfile != "Vacancy Holder 1") {
+      management.foreach { f =>
+        f(newVacancyDetails.managementDetails)
+      }
     }
+    enterVacancyComments(newVacancyDetails.managementDetails)
+  }
 }

@@ -1,37 +1,39 @@
 package uk.gov.co.test.ui.specs
 
-import uk.gov.co.test.ui.data.TestData.setPecTestData
+import uk.gov.co.test.ui.data.test.pec._
 import uk.gov.co.test.ui.data.v9.applicants.REGISTER_CANDIDATE_PEC
-import uk.gov.co.test.ui.flows.e2e.FullPecFlow.completeFullPecFlow
-import uk.gov.co.test.ui.flows.e2e.PecFlow.completePecFlow
+import uk.gov.co.test.ui.flows.e2e.InterviewFlow.completeAllInterviews
+import uk.gov.co.test.ui.flows.v9.LongFormFlow.fillLongFormDetails
+import uk.gov.co.test.ui.flows.v9.PecFormFlow.fillPecFormDetailsOnly
 import uk.gov.co.test.ui.flows.v9.RegisterCandidateFlow.fillNewCandidateDetails
+import uk.gov.co.test.ui.flows.v9.ShortFormFlow.fillShortFormDetails
+import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.fillNewVacancyForm
+import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.moveAndAcceptOffer
 import uk.gov.co.test.ui.pages.vx.VacancyDetailsPage.extractAllVacancyDetails
+import uk.gov.co.test.ui.pages.vx.vacancytabs.PreSiftEvaluationTab.PreSiftEvaluationFlow
+import uk.gov.co.test.ui.pages.vx.vacancytabs.SiftEvaluationTab.SiftEvaluationFlow
 import uk.gov.co.test.ui.tags.RunInVX
 
 class PecVacancySpec extends BaseFeatureSpec {
-  Feature("Recruiter Creates A PEC Master Vacancy; Candidate Completes Short & Long Forms") {
-    Scenario("V9: A Recruiter Creates An Insolvency Apply Only Vacancy; Limited Application Process", RunInVX) {
+  Feature("Candidate & Recruiter Complete The PEC Form") {
+    Scenario("VX: A Candidate Completes The PEC Form; Full Application Process", RunInVX) {
       Given("candidate registers for new job application")
-      setPecTestData()
+      fillNewVacancyForm(PEC_VACANCY_DATA)
+//      extractAllVacancyDetails("10216")
       fillNewCandidateDetails(REGISTER_CANDIDATE_PEC)
 
-      When("candidate completes the gors short, long & pec forms")
-      completePecFlow()
+      When("candidate completes the short & long forms")
+      fillShortFormDetails(PEC_SHORT_FORM_DATA)
+      fillLongFormDetails(PEC_LONG_FORM_DATA)
 
-      Then("the candidate is able to confirm insolvency short & long forms are completed")
-      println("WIP...")
-    }
+      And("the application is completed before pec form")
+      PreSiftEvaluationFlow(PEC_APPLICATION_DATA)
+      SiftEvaluationFlow(PEC_APPLICATION_DATA)
+      completeAllInterviews(PEC_APPLICATION_DATA)
+      moveAndAcceptOffer()
 
-    Scenario("VX: A Candidate Applies For The PEC Form; Full Application Process", RunInVX) {
-      Given("candidate registers for new job application")
-      extractAllVacancyDetails("9707")
-      fillNewCandidateDetails(REGISTER_CANDIDATE_PEC)
-
-      When("candidate completes the gors short, long & pec forms")
-      completeFullPecFlow()
-
-      Then("the candidate is able to confirm insolvency short & long forms are completed")
-      println("WIP...")
+      Then("the candidate is able to fully complete the pec form")
+      fillPecFormDetailsOnly(PEC_FORM_DATA)
     }
   }
 }

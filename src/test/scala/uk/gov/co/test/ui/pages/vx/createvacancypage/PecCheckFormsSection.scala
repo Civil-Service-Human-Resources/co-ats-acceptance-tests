@@ -1,38 +1,41 @@
 package uk.gov.co.test.ui.pages.vx.createvacancypage
 
 import org.openqa.selenium.By
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXRtwChecks, vacancyFormId}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXCandidateUploadIdentityDocs, vXDetailsForUploadIdentityDocs, vXManuallyCheckIdentityDocs, vXPecAdditionalCheck, vXPecBankruptcyCheck, vXPecCrc, vXPecEmploymentHistoryCheck, vXPecFraudCheck, vXPecGeneralInfo, vXPecHealthDisplayOptions, vXPecHealthRefCheck, vXPecIncludeAdditionalCheck, vXPecNameOfAdditionalCheck, vXPecNen, vXPecNsv, vXPecNsvDisplayOptions, vXPecOgdSecurityCheck, vXPecOverseasCheck, vXPecPensionsCheck, vXPecPn, vXPecPreviousCivilEmploymentCheck, vXPecReferenceCheck, vXPecSelfEmploymentCheck, vXPecUseOgdProcess, vXRtwChecks, vXUseOnlinePecForms, vXWhenRtwChecks, vXWhichIdentityChecks, vacancyFormId}
 import uk.gov.co.test.ui.data.vx.vacancy.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 
+import scala.collection.mutable.ListBuffer
+
 case class PecCheckFormsDetails(
-  rtwCheck: List[String],
+  rtwCheck: ListBuffer[String],
   whenCompleteRtwCheck: String,
   whichIdentityChecks: String,
   uploadIdentityDocs: Boolean,
   detailsOfIdentityDocs: String,
   manualIdentityDocCheck: Boolean,
-  generalInfo: List[String],
-  referenceChecks: List[String],
-  bankruptcyChecks: List[String],
-  crcChecks: List[String],
-  nsvChecks: List[String],
+  generalInfo: ListBuffer[String],
+  referenceChecks: ListBuffer[String],
+  bankruptcyChecks: ListBuffer[String],
+  crcChecks: ListBuffer[String],
+  nsvChecks: ListBuffer[String],
   nsvDisplayOptions: String,
-  jobHistoryChecks: List[String],
-  healthRefChecks: List[String],
+  jobHistoryChecks: ListBuffer[String],
+  healthRefChecks: ListBuffer[String],
   healthDisplayOptions: String,
-  overseasCheck: List[String],
-  pensionsCheck: List[String],
-  previousCsJobCheck: List[String],
-  internalFraudCheck: List[String],
-  selfEmploymentCheck: List[String],
+  overseasCheck: ListBuffer[String],
+  pensionsCheck: ListBuffer[String],
+  previousCsJobCheck: ListBuffer[String],
+  internalFraudCheck: ListBuffer[String],
+  selfEmploymentCheck: ListBuffer[String],
   ogdTransferProcessCheck: Boolean,
+  useOgdDigitalTransferProcess: Boolean,
   includeAdditionalCheck: Boolean,
   nameOfCheck: String,
-  additionalCheck: List[String],
-  nenOnboarding: List[String],
+  additionalCheck: ListBuffer[String],
+  nenOnboarding: ListBuffer[String],
   nenHrEmail: String,
-  pnOnboarding: List[String],
+  pnOnboarding: ListBuffer[String],
   pnHrEmail: String
 )
 
@@ -59,6 +62,8 @@ object PecCheckFormsSection extends VacancyBasePage {
   def nameOfCheckInputId               = s"${vacancyFormId}_datafield_176558_1_1_en-GB"
   def ogdTransferProcessCheckYesId     = s"${vacancyFormId}_datafield_127230_1_1_1"
   def ogdTransferProcessCheckNoId      = s"${vacancyFormId}_datafield_127230_1_1_2"
+  def useOgdTransferProcessYesId       = s"${vacancyFormId}_datafield_206243_1_1_1"
+  def useOgdTransferProcessNoId        = s"${vacancyFormId}_datafield_206243_1_1_2"
   def includeAdditionalCheckYesId      = s"${vacancyFormId}_datafield_168748_1_1_1"
   def includeAdditionalCheckNoId       = s"${vacancyFormId}_datafield_168748_1_1_2"
   def noIdentityChecksId               = s"${vacancyFormId}_datafield_184419_1_1_50074"
@@ -76,38 +81,46 @@ object PecCheckFormsSection extends VacancyBasePage {
   def nenHrEmailId                     = s"${vacancyFormId}_datafield_141090_1_1"
   def pnHrEmailId                      = s"${vacancyFormId}_datafield_141267_1_1"
 
-  private def selectWhenCompleteRtwCheck(pecCheckFormsDetails: PecCheckFormsDetails): Unit = {
-    vXRtwChecks = pecCheckFormsDetails.rtwCheck
-    if (vXRtwChecks.contains("Not Applicable")) {
-      if (vXRtwChecks.size >= 2) {
-        pecCheckFormsDetails.whenCompleteRtwCheck match {
-          case "Before pre employment checks"              => clickOnRadioButton(beforePecChecksId)
-          case "At the same time as pre employment checks" => clickOnRadioButton(sameTimeAsPecChecksId)
-          case _                                           => throw new IllegalStateException("Please enter valid 'RTW Check' completion option")
-        }
+  private def selectWhenCompleteRtwCheck(pecCheckFormsDetails: PecCheckFormsDetails): Unit =
+    if (!vXRtwChecks.contains("Not Applicable")) {
+      vXWhenRtwChecks = pecCheckFormsDetails.whenCompleteRtwCheck
+      vXWhenRtwChecks match {
+        case "Before pre employment checks"              => clickOnRadioButton(beforePecChecksId)
+        case "At the same time as pre employment checks" => clickOnRadioButton(sameTimeAsPecChecksId)
+        case _                                           => throw new IllegalStateException("Please enter valid 'RTW Check' completion option")
       }
-    }
-  }
+    } else vXWhenRtwChecks = ""
 
-  private def selectWhichIdentityChecks(pecCheckFormsDetails: PecCheckFormsDetails): Unit =
-    pecCheckFormsDetails.whichIdentityChecks match {
+  private def selectWhichIdentityChecks(pecCheckFormsDetails: PecCheckFormsDetails): Unit = {
+    vXWhichIdentityChecks = pecCheckFormsDetails.whichIdentityChecks
+    vXWhichIdentityChecks match {
       case "No digital checks"                       => clickOnRadioButton(noIdentityChecksId)
       case "Right to work only"                      => clickOnRadioButton(rtwOnlyId)
       case "Right to work and criminal record check" => clickOnRadioButton(rtwAndCrcId)
       case _                                         => throw new IllegalStateException("Please enter valid 'which identity checks' option")
     }
+  }
 
-  private def selectUploadIdentityDocs(pecCheckFormsDetails: PecCheckFormsDetails): Unit =
-    if (pecCheckFormsDetails.uploadIdentityDocs) {
+  private def selectUploadIdentityDocs(pecCheckFormsDetails: PecCheckFormsDetails): Unit = {
+    vXCandidateUploadIdentityDocs = pecCheckFormsDetails.uploadIdentityDocs
+    if (vXCandidateUploadIdentityDocs) {
       clickOnRadioButton(uploadIdentityYesId)
-      enterValue(detailsIdentityDocsId, pecCheckFormsDetails.detailsOfIdentityDocs)
-      if (pecCheckFormsDetails.manualIdentityDocCheck) clickOnRadioButton(manualIdentityCheckYesId)
+      vXDetailsForUploadIdentityDocs = pecCheckFormsDetails.detailsOfIdentityDocs
+      enterValue(detailsIdentityDocsId, vXDetailsForUploadIdentityDocs)
+      vXManuallyCheckIdentityDocs = pecCheckFormsDetails.manualIdentityDocCheck
+      if (vXManuallyCheckIdentityDocs) clickOnRadioButton(manualIdentityCheckYesId)
       else clickOnRadioButton(manualIdentityCheckNoId)
-    } else clickOnRadioButton(uploadIdentityNoId)
+    } else {
+      clickOnRadioButton(uploadIdentityNoId)
+      vXDetailsForUploadIdentityDocs = ""
+      vXManuallyCheckIdentityDocs = false
+    }
+  }
 
   private def selectNsvDisplayOptions(pecCheckFormsDetails: PecCheckFormsDetails): Unit =
-    if (!pecCheckFormsDetails.nsvChecks.forall(Set("Not Applicable").contains(_))) {
-      pecCheckFormsDetails.nsvDisplayOptions match {
+    if (!vXPecNsv.contains("Not Applicable")) {
+      vXPecNsvDisplayOptions = pecCheckFormsDetails.nsvDisplayOptions
+      vXPecNsvDisplayOptions match {
         case "Show recruiter and candidate forms" => clickOnRadioButton(nsvShowJobAndCandidateFormsId)
         case "Show recruiter form only"           => clickOnRadioButton(nsvShowJobFormOnlyId)
         case _                                    => throw new IllegalStateException("Please enter valid 'NSV Display' option")
@@ -115,57 +128,96 @@ object PecCheckFormsSection extends VacancyBasePage {
     }
 
   private def selectHealthDisplayOptions(pecCheckFormsDetails: PecCheckFormsDetails): Unit =
-    if (!pecCheckFormsDetails.healthRefChecks.forall(Set("Not Applicable").contains(_))) {
-      pecCheckFormsDetails.healthDisplayOptions match {
+    if (!vXPecHealthRefCheck.contains("Not Applicable")) {
+      vXPecHealthDisplayOptions = pecCheckFormsDetails.healthDisplayOptions
+      vXPecHealthDisplayOptions match {
         case "Show recruiter and candidate forms" => clickOnRadioButton(healthShowJobAndCandidateFormsId)
         case "Show recruiter form only"           => clickOnRadioButton(healthShowJobFormOnlyId)
         case _                                    => throw new IllegalStateException("Please enter valid 'Health Display' option")
       }
     }
 
-  private def enterHrEmail(hrEmailId: String, hrEmail: String): Unit =
+  private def enterHrEmail(hrEmailId: String, hrEmail: String, value: ListBuffer[String]): Unit =
     if (!driver.findElements(By.id(hrEmailId)).isEmpty) {
-      val hrEmailField = waitForVisibilityOfElementById(hrEmailId)
-      hrEmailField.clear()
-      hrEmailField.sendKeys(hrEmail)
+      if (value.contains("Not Applicable")) {
+        val hrEmailField = waitForVisibilityOfElementById(hrEmailId)
+        hrEmailField.clear()
+      } else {
+        val hrEmailField = waitForVisibilityOfElementById(hrEmailId)
+        hrEmailField.clear()
+        hrEmailField.sendKeys(hrEmail)
+      }
     }
 
-  private def selectOGDTransferProcessCheck(pecCheckFormsDetails: PecCheckFormsDetails): Unit =
-    if (pecCheckFormsDetails.ogdTransferProcessCheck) clickOnRadioButton(ogdTransferProcessCheckYesId)
+  private def selectOGDTransferProcessCheck(pecCheckFormsDetails: PecCheckFormsDetails): Unit = {
+    vXPecOgdSecurityCheck = pecCheckFormsDetails.ogdTransferProcessCheck
+    if (vXPecOgdSecurityCheck) clickOnRadioButton(ogdTransferProcessCheckYesId)
     else clickOnRadioButton(ogdTransferProcessCheckNoId)
+  }
 
-  private def selectIncludeAdditionalCheck(pecCheckFormsDetails: PecCheckFormsDetails): Unit =
-    if (pecCheckFormsDetails.includeAdditionalCheck) {
+  private def selectUseOGDTransferProcessCheck(pecCheckFormsDetails: PecCheckFormsDetails): Unit = {
+    vXPecUseOgdProcess = pecCheckFormsDetails.useOgdDigitalTransferProcess
+    if (vXPecUseOgdProcess) clickOnRadioButton(useOgdTransferProcessYesId)
+    else clickOnRadioButton(useOgdTransferProcessNoId)
+  }
+
+  private def selectIncludeAdditionalCheck(pecCheckFormsDetails: PecCheckFormsDetails): Unit = {
+    vXPecIncludeAdditionalCheck = pecCheckFormsDetails.includeAdditionalCheck
+    if (vXPecIncludeAdditionalCheck) {
       clickOnRadioButton(includeAdditionalCheckYesId)
-      enterValue(nameOfCheckInputId, pecCheckFormsDetails.nameOfCheck)
-      enterRoles(pecCheckFormsDetails.additionalCheck, additionalCheckInputId)
-    } else clickOnRadioButton(includeAdditionalCheckNoId)
+      vXPecNameOfAdditionalCheck = pecCheckFormsDetails.nameOfCheck
+      enterValue(nameOfCheckInputId, vXPecNameOfAdditionalCheck)
+      vXPecAdditionalCheck = pecCheckFormsDetails.additionalCheck
+      enterTypeRoles(vXPecAdditionalCheck, additionalCheckInputId)
+    } else {
+      clickOnRadioButton(includeAdditionalCheckNoId)
+      vXPecNameOfAdditionalCheck = ""
+      vXPecAdditionalCheck = ListBuffer("")
+    }
+  }
 
   private def pecCheckFormsFlow(pecCheckFormsDetails: PecCheckFormsDetails): Unit = {
-    enterRoles(pecCheckFormsDetails.rtwCheck, rtwCheckInputId)
+    vXRtwChecks = pecCheckFormsDetails.rtwCheck
+    vXPecGeneralInfo = pecCheckFormsDetails.generalInfo
+    vXPecReferenceCheck = pecCheckFormsDetails.referenceChecks
+    vXPecBankruptcyCheck = pecCheckFormsDetails.bankruptcyChecks
+    vXPecCrc = pecCheckFormsDetails.crcChecks
+    vXPecNsv = pecCheckFormsDetails.nsvChecks
+    vXPecEmploymentHistoryCheck = pecCheckFormsDetails.jobHistoryChecks
+    vXPecHealthRefCheck = pecCheckFormsDetails.healthRefChecks
+    vXPecOverseasCheck = pecCheckFormsDetails.overseasCheck
+    vXPecPensionsCheck = pecCheckFormsDetails.pensionsCheck
+    vXPecPreviousCivilEmploymentCheck = pecCheckFormsDetails.previousCsJobCheck
+    vXPecFraudCheck = pecCheckFormsDetails.internalFraudCheck
+    vXPecSelfEmploymentCheck = pecCheckFormsDetails.selfEmploymentCheck
+    vXPecNen = pecCheckFormsDetails.nenOnboarding
+    vXPecPn = pecCheckFormsDetails.pnOnboarding
+
+    enterTypeRoles(vXRtwChecks, rtwCheckInputId)
     selectWhenCompleteRtwCheck(pecCheckFormsDetails)
     selectWhichIdentityChecks(pecCheckFormsDetails)
     selectUploadIdentityDocs(pecCheckFormsDetails)
-    enterRoles(pecCheckFormsDetails.generalInfo, generalInformationInputId)
-    enterRoles(pecCheckFormsDetails.referenceChecks, referenceCheckInputId)
-    enterRoles(pecCheckFormsDetails.bankruptcyChecks, bankruptcyCheckInputId)
-    enterRoles(pecCheckFormsDetails.crcChecks, crcInputId)
-    enterRoles(pecCheckFormsDetails.nsvChecks, nsvInputId)
+    enterTypeRoles(vXPecGeneralInfo, generalInformationInputId)
+    enterTypeRoles(vXPecReferenceCheck, referenceCheckInputId)
+    enterTypeRoles(vXPecBankruptcyCheck, bankruptcyCheckInputId)
+    enterTypeRoles(vXPecCrc, crcInputId)
+    enterTypeRoles(vXPecNsv, nsvInputId)
     selectNsvDisplayOptions(pecCheckFormsDetails)
-    enterRoles(pecCheckFormsDetails.jobHistoryChecks, jobHistoryCheckInputId)
-    enterRoles(pecCheckFormsDetails.healthRefChecks, healthRefCheckInputId)
+    enterTypeRoles(vXPecEmploymentHistoryCheck, jobHistoryCheckInputId)
+    enterTypeRoles(vXPecHealthRefCheck, healthRefCheckInputId)
     selectHealthDisplayOptions(pecCheckFormsDetails)
-    enterRoles(pecCheckFormsDetails.overseasCheck, overseasCheckInputId)
-    enterRoles(pecCheckFormsDetails.pensionsCheck, pensionsCheckInputId)
-    enterRoles(pecCheckFormsDetails.previousCsJobCheck, previousCsJobCheckInputId)
-    enterRoles(pecCheckFormsDetails.internalFraudCheck, internalFraudCheckInputId)
-    enterRoles(pecCheckFormsDetails.selfEmploymentCheck, selfEmploymentCheckInputId)
+    enterTypeRoles(vXPecOverseasCheck, overseasCheckInputId)
+    enterTypeRoles(vXPecPensionsCheck, pensionsCheckInputId)
+    enterTypeRoles(vXPecPreviousCivilEmploymentCheck, previousCsJobCheckInputId)
+    enterTypeRoles(vXPecFraudCheck, internalFraudCheckInputId)
+    enterTypeRoles(vXPecSelfEmploymentCheck, selfEmploymentCheckInputId)
     selectOGDTransferProcessCheck(pecCheckFormsDetails)
+    selectUseOGDTransferProcessCheck(pecCheckFormsDetails)
     selectIncludeAdditionalCheck(pecCheckFormsDetails)
-    enterRoles(pecCheckFormsDetails.nenOnboarding, nenInputId)
-    enterHrEmail(nenHrEmailId, pecCheckFormsDetails.nenHrEmail)
-    enterRoles(pecCheckFormsDetails.pnOnboarding, pnInputId)
-    enterHrEmail(pnHrEmailId, pecCheckFormsDetails.pnHrEmail)
+    enterTypeRoles(vXPecNen, nenInputId)
+    enterHrEmail(nenHrEmailId, pecCheckFormsDetails.nenHrEmail, vXPecNen)
+    enterTypeRoles(vXPecPn, pnInputId)
+    enterHrEmail(pnHrEmailId, pecCheckFormsDetails.pnHrEmail, vXPecPn)
   }
 
   private val pecCheckForms: Seq[PecCheckFormsDetails => Unit] = Seq(
@@ -173,8 +225,10 @@ object PecCheckFormsSection extends VacancyBasePage {
   )
 
   def pecCheckFormsSection(newVacancyDetails: NewVacancyDetails): Unit =
-    pecCheckForms.foreach { f =>
-      f(newVacancyDetails.pecCheckFormsDetails)
+    if (vXUseOnlinePecForms) {
+      pecCheckForms.foreach { f =>
+        f(newVacancyDetails.pecCheckFormsDetails)
+      }
     }
 
 }

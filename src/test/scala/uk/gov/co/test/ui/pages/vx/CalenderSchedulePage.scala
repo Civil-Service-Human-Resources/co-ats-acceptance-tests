@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.pages.vx
 
 import org.openqa.selenium.{By, WebElement}
-import uk.gov.co.test.ui.data.TestData.eventually
+import org.scalatest.concurrent.Eventually.eventually
 import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXApplicationClosingDate, vXApplicationLiveDate, vXInterviewID, vXInterviewNumber, vXInterviewRoom, vXInterviewScheduleTitle, vXSlotOneFinishTime, vXSlotOneStartTime, vXSlotTwoFinishTime, vXSlotTwoStartTime, vacancyId, vacancyName}
 import uk.gov.co.test.ui.data.vx.application.ApplicationDetails
 

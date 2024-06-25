@@ -1,9 +1,9 @@
 package uk.gov.co.test.ui.data.test.reserve
 
-import uk.gov.co.test.ui.data.Characters.{valid250Characters, valid500Characters}
+import uk.gov.co.test.ui.data.Characters.{valid250Characters, valid500Characters, valid750Characters}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.vXOtherLocations
 import uk.gov.co.test.ui.data.v9.longform.LongFormDetails
 import uk.gov.co.test.ui.pages.v9.longform._
-import uk.gov.co.test.ui.data.MasterVacancyDetails.vXOtherLocations
 
 object RESERVE_LONG_FORM_DATA
     extends LongFormDetails(
@@ -76,30 +76,18 @@ object RESERVE_LONG_FORM_CV
 object RESERVE_LONG_FORM_PERSONAL_STATEMENT
     extends StatementDetails(
       s"$valid250Characters",
+      s"$valid500Characters",
+      s"$valid750Characters",
       true
     )
 
 object RESERVE_LONG_FORM_BEHAVIOURS
     extends BehavioursDetails(
-      s"$valid250Characters",
-      s"$valid250Characters",
-      s"$valid250Characters",
-      s"$valid250Characters",
-      s"$valid250Characters",
-      s"$valid250Characters",
-      s"$valid250Characters",
       s"$valid250Characters"
     )
 
 object RESERVE_LONG_FORM_TECHNICAL_SKILLS
     extends TechSkillsDetails(
-      s"$valid250Characters",
-      s"$valid250Characters",
-      s"$valid250Characters",
-      s"$valid250Characters",
-      s"$valid250Characters",
-      s"$valid250Characters",
-      s"$valid250Characters",
       s"$valid250Characters"
     )
 

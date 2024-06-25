@@ -7,7 +7,8 @@ import org.scalatest.concurrent.Eventually.eventually
 object SearchJobsPage extends CivilServiceJobsBasePage {
 
   val civilServiceJobsPageTitle     = "Civil Service job search - Civil Service Jobs - GOV.UK"
-  val signInCreateAccountText       = "Sign in or create an account"
+//  val signInCreateAccountText       = "Sign in or create an account"
+  val signInCreateAccountText       = "Sign in to your account"
   val cSJobSearchHeader             = "Civil Service job search"
   val accountCreatedSuccessMessage1 = "Success"
   val accountCreatedSuccessMessage2 = "Account created"

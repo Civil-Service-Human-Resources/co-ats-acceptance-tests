@@ -84,6 +84,8 @@ object CreateAccountPage extends CivilServiceJobsBasePage {
   def enterConfirmEmailLoop(ce: String): Unit = confirmEmail().value = ce
   def enterPasswordLoop(): Unit               = createPassword().value = passwordCandidate
   def enterConfirmPasswordLoop(): Unit        = confirmPassword().value = passwordCandidate
+  def enterDacPasswordLoop(p: String): Unit = createPassword().value = p
+  def enterConfirmDacPasswordLoop(p: String): Unit = confirmPassword().value = p
   def selectEmployeeTypeLoop(): Unit          = nonEmployeePublicBody()
   def selectTermsAndConditionsLoop(): Unit    = agreeTermsAndConditions().select()
 

@@ -267,7 +267,7 @@ object EmploymentHistoryTab extends VacancyBasePage {
     enterInternalNotes
   )
 
-  def EmploymentHistoryVXFlow(applicationDetails: ApplicationDetails): Unit = {
+  def employmentHistoryFlow(applicationDetails: ApplicationDetails): Unit = {
     navigateToApplicationSummary()
     completeVXEmploymentHistory()
     history.foreach { f =>

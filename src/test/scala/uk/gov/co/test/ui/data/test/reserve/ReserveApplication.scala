@@ -1,11 +1,12 @@
 package uk.gov.co.test.ui.data.test.reserve
 
 import uk.gov.co.test.ui.data.vx.application.{ApplicationDetails, AssessmentOutcome, Outcome}
-import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.contactEmailVxConfig
+import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.{contactEmailVxConfig, contactNameVxConfig}
 import uk.gov.co.test.ui.pages.vx.vacancytabs._
 import uk.gov.co.test.ui.pages.vx.{CalenderScheduleDetails, InterviewScheduleDetails}
 
 import java.time.LocalDate
+import scala.collection.mutable.ListBuffer
 
 object RESERVE_APPLICATION_DATA
     extends ApplicationDetails(
@@ -17,7 +18,9 @@ object RESERVE_APPLICATION_DATA
       RESERVE_APPLICATION_INTERVIEW_ONE_EVALUATION,
       RESERVE_APPLICATION_INTERVIEW_TWO_EVALUATION,
       RESERVE_APPLICATION_INTERVIEW_THREE_EVALUATION,
-      RESERVE_APPLICATION_INTERVIEW_FOUR_EVALUATION
+      RESERVE_APPLICATION_INTERVIEW_FOUR_EVALUATION,
+      RESERVE_APPLICATION_POSTING_NOTICE,
+      RESERVE_APPLICATION_NEW_ENTRANT_NOTICE
     )
 
 object RESERVE_APPLICATION_EMPLOYMENT_HISTORY
@@ -63,14 +66,14 @@ object RESERVE_APPLICATION_SIFT_EVALUATION
         |Good demonstration - Substantial positive evidence of the competency or behaviour
         |Strong demonstration - Substantial positive evidence; includes some evidence of exceeding expectations at this level
         |Outstanding demonstration - The evidence provided wholly exceeds expectation at this level""".stripMargin,
-      behaviourOne = Outcome(6, Some("Autotest - Changing and Improving - behaviour one comments")),
-      behaviourTwo = Outcome(7, Some("Autotest - Changing and Improving - behaviour one comments")),
-      behaviourThree = Outcome(7, Some("Autotest - Delivering at Pace - behaviour three comments")),
-      behaviourFour = Outcome(7, Some("Autotest - Developing Self and Others - behaviour four comments")),
-      behaviourFive = Outcome(7, Some("Autotest - Leadership - behaviour five comments")),
-      behaviourSix = Outcome(6, Some("Autotest - Making Effective Decisions - behaviour six comments")),
-      behaviourSeven = Outcome(6, Some("Autotest - Managing a Quality Service - behaviour seven comments")),
-      behaviourEight = Outcome(7, Some("Autotest - Working Together - behaviour eight comments")),
+      behaviourOne = Outcome(6, Some("Autotest - behaviour one comments")),
+      behaviourTwo = Outcome(7, Some("Autotest - behaviour two comments")),
+      behaviourThree = Outcome(7, Some("Autotest - behaviour three comments")),
+      behaviourFour = Outcome(7, Some("Autotest - behaviour four comments")),
+      behaviourFive = Outcome(7, Some("Autotest - behaviour five comments")),
+      behaviourSix = Outcome(6, Some("Autotest - behaviour six comments")),
+      behaviourSeven = Outcome(6, Some("Autotest - behaviour seven comments")),
+      behaviourEight = Outcome(7, Some("Autotest - behaviour eight comments")),
       techSkillOne = Outcome(5, Some("Autotest - Tech Skill One - tech skill one  comments")),
       techSkillTwo = Outcome(7, Some("Autotest - Tech Skill Two - tech skill two comments")),
       techSkillThree = Outcome(7, Some("Autotest - Tech Skill Three - tech skill three comments")),
@@ -398,4 +401,92 @@ object RESERVE_APPLICATION_INTERVIEW_FOUR_EVALUATION
       declarationStatement = """Declaration
                              |
                              |By submitting this form you are agreeing to and accepting that you have no conflict of interest with this applicant and the evaluation reflects the views of all the selection panel members.""".stripMargin
+    )
+
+object RESERVE_APPLICATION_POSTING_NOTICE
+    extends PostingNoticeDetails(
+      "1234",
+      "autotest-sop org",
+      "autotest-sop position",
+      "autotest-business unit",
+      "123456",
+      "JA448800D",
+      startDate = LocalDate.now(),
+      "09:30",
+      "Autotest address",
+      true,
+      "autotest - 2nd location",
+      "Temporary",
+      "The post is time limited and is being advertised as an apprenticeship for the advertised period. The fixed-term will end when the apprenticeship has completed.",
+      "autotest - key responsibilities",
+      contractEndDate = LocalDate.now(),
+      "Level Transfer",
+      workingPattern = ListBuffer("Annualised hours", "Full Time", "Part Time"),
+      "40",
+      "8",
+      "8",
+      "8",
+      "8",
+      "8",
+      "0",
+      "0",
+      payZone = ListBuffer("London", "National"),
+      "45000",
+      true,
+      negotiatedSalaryDate = LocalDate.now(),
+      true,
+      "autotest - allowances name and account",
+      true,
+      true,
+      s"$contactNameVxConfig",
+      "01520000000",
+      s"$contactEmailVxConfig",
+      "12345"
+    )
+
+object RESERVE_APPLICATION_NEW_ENTRANT_NOTICE
+    extends NewEntrantNoticeDetails(
+      "1234",
+      "autotest-sop org",
+      "autotest-sop position",
+      "autotest-business unit",
+      "OGD",
+      true,
+      false,
+      "Exception 1: Temporary appointments",
+      LocalDate.now().plusDays(1),
+      "09:30",
+      "Autotest address",
+      true,
+      "autotest - 2nd location",
+      "Fixed Term Appointment",
+      true,
+      "90%",
+      "Up to 18",
+      contractEndDate = LocalDate.now().plusMonths(3),
+      "The post is permanent and requires temporary cover, for no more than 12 months,  whilst permanent recruitment activity has commenced and needs time to complete. The fixed-term will end when the permanent recruitment completes.",
+      "autotest - key responsibilities",
+      "Homeworking",
+      "40",
+      "8",
+      "8",
+      "8",
+      "8",
+      "8",
+      "0",
+      "0",
+      payZone = ListBuffer("London", "National"),
+      "55000",
+      true,
+      negotiatedSalaryDate = LocalDate.now().minusDays(2),
+      true,
+      "autotest - allowances name and account",
+      true,
+      true,
+      LocalDate.now(),
+      s"$contactNameVxConfig",
+      "United Kingdom +44",
+      "7711234123",
+      s"$contactEmailVxConfig",
+      "12345"
     )

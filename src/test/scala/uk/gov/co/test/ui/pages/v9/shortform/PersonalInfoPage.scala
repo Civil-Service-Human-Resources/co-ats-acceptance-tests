@@ -2,7 +2,7 @@ package uk.gov.co.test.ui.pages.v9.shortform
 
 import org.openqa.selenium.By
 import org.scalatest.concurrent.Eventually.eventually
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{preferredFirstName, randomEmail, randomFirstName, randomLastName, v9AdjustmentsForTests, v9CivilServant, v9HomeDepartment, v9ReasonableAdjustments, vXAnyOnlineTests, vXGreatForVeterans, vXJobInfoDepartment}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{preferredFirstName, preferredTeleNumber, randomEmail, randomFirstName, randomLastName, v9AdjustmentsForTests, v9CivilServant, v9HomeDepartment, v9ReasonableAdjustments, vXAnyOnlineTests, vXGreatForVeterans, vXJobInfoDepartment}
 import uk.gov.co.test.ui.data.v9.shortform.ShortFormDetails
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
 import uk.gov.co.test.ui.pages.v9.shortform.ApplicationGuidancePage.shortFormId
@@ -74,8 +74,9 @@ object PersonalInfoPage extends CivilServiceJobsBasePage {
   private def enterPreferredTeleNo(personalInfoDetails: PersonalInfoDetails): Unit = {
     scrollToElement(By.id(preferredTeleNoInputId))
     if (extractValue(preferredTeleNoInputId).isEmpty) {
-      enterDetails(preferredTeleNoInputId, personalInfoDetails.preferredTeleNo)
-    } else extractValue(preferredTeleNoInputId) shouldEqual personalInfoDetails.preferredTeleNo
+      preferredTeleNumber = personalInfoDetails.preferredTeleNo
+      enterDetails(preferredTeleNoInputId, preferredTeleNumber)
+    } else extractValue(preferredTeleNoInputId) shouldEqual preferredTeleNumber
   }
 
   private def enterSecondaryContactNo(personalInfoDetails: PersonalInfoDetails): Unit =
@@ -120,17 +121,34 @@ object PersonalInfoPage extends CivilServiceJobsBasePage {
     }
 
   private def enterRedeploymentScheme(personalInfoDetails: PersonalInfoDetails): Unit =
-    if (
-      v9CivilServant && (vXJobInfoDepartment == "Department for Energy Security & Net Zero" ||
+    if (v9CivilServant
+        &&
+        (vXJobInfoDepartment == "Department for Energy Security & Net Zero" ||
         vXJobInfoDepartment == "Department for Science, Innovation and Technology" ||
+//        vXJobInfoDepartment == "Department for Environment, Food and Rural Affairs" ||
         vXJobInfoDepartment == "Government Equalities Office" ||
         vXJobInfoDepartment == "Revenue Scotland" ||
         vXJobInfoDepartment == "Scottish Fiscal Commission" ||
-        vXJobInfoDepartment == "Transport Scotland") && (v9HomeDepartment == "Department for Energy Security & Net Zero" ||
+        vXJobInfoDepartment == "Cabinet Office" ||
+        vXJobInfoDepartment == "Transport Scotland")
+        &&
+        (v9HomeDepartment == "Department for Energy Security & Net Zero" ||
         v9HomeDepartment == "Department for Science, Innovation and Technology" ||
+        v9HomeDepartment == "Department for Environment, Food and Rural Affairs" ||
         v9HomeDepartment == "Government Equalities Office" ||
         v9HomeDepartment == "Revenue Scotland" ||
         v9HomeDepartment == "Scottish Fiscal Commission" ||
+        v9HomeDepartment == "Ministry of Defence" ||
+        v9HomeDepartment == "Government Commercial Function" ||
+        v9HomeDepartment == "Central Digital and Data Office" ||
+        v9HomeDepartment == "Government Digital Services" ||
+        v9HomeDepartment == "Government Property Agency" ||
+        v9HomeDepartment == "Veterinary Medicines Directorate" ||
+        v9HomeDepartment == "Rural Payments Agency" ||
+        v9HomeDepartment == "Health and Safety Executive" ||
+        v9HomeDepartment == "Department for Work and Pensions" ||
+        v9HomeDepartment == "UK Hydrographic Office" ||
+        v9HomeDepartment == "Animal and Plant Health Agency" ||
         v9HomeDepartment == "Transport Scotland")
     ) {
       scrollToElement(By.id(redeploymentSchemeId))

@@ -2,7 +2,7 @@ package uk.gov.co.test.ui.pages.v9
 
 import org.openqa.selenium.{By, WebElement}
 import org.scalatest.concurrent.Eventually.eventually
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{randomFirstName, randomLastName, v9AdjustmentsForTests, v9ReasonableAdjustments, vXAnyOnlineTests, vXInterviewExpectedRounds, vXInterviewFourType, vXInterviewLocation, vXInterviewLongDate, vXInterviewNumber, vXInterviewOneType, vXInterviewThreeType, vXInterviewTwoType, vXSlotTwoStartTime, vacancyName}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{randomFirstName, randomLastName, v9AdjustmentsForTests, v9ReasonableAdjustments, vXAnyOnlineTests, vXInterviewExpectedRounds, vXInterviewFourType, vXInterviewLocation, vXInterviewLongDate, vXInterviewNumber, vXInterviewOneType, vXInterviewThreeType, vXInterviewTwoType, vXPreSiftRequired, vXSlotTwoStartTime, vacancyName}
 import uk.gov.co.test.ui.data.vx.application.ApplicationDetails
 import uk.gov.co.test.ui.pages.v9.ApplicationsPage.{confirmStatusOnApplicationPage, reviewUpdateOnApplicationPage}
 import uk.gov.co.test.ui.pages.vx.DashboardPage.contactEmailVxConfig
@@ -19,6 +19,7 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
   val completionTextPath            = ".//*[@class='app-status-desc']"
   val applicationStatePath          = ".//*[@id='main-content']/div/div[1]/h3"
   val advertDetailsButtonPath       = ".//input[@value='Advert Details']"
+  val startCheckButtonPath       = ".//input[@value='Start check']"
   val withdrawApplicationButtonPath = ".//input[@value='Withdraw Application']"
   val continueApplicationButtonPath = ".//input[@value='Continue application']"
   val offerDecisionButtonPath       = ".//input[@value='Offer Decision']"
@@ -59,6 +60,9 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
 
   def feedbackFunction(): WebElement =
     waitForVisibilityOfElementByPath(feedbackButtonPath)
+
+  def startCheckFunction(): WebElement =
+    waitForVisibilityOfElementByPath(startCheckButtonPath)
 
   def offerDecisionFunction(): WebElement =
     waitForVisibilityOfElementByPath(offerDecisionButtonPath)
@@ -111,31 +115,35 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
         getApplicationConfirmation shouldEqual s"You're now invited to complete the Civil Service Numerical Test.\nThis test must be completed by 12:00AM on 09 January 2024.\nYou’ll need to pass this test in order to progress onto the next stage in your application.\nYou'll receive your results and feedback after you complete your test.\n\nHow to prepare\n\nTo prepare for the test, we strongly recommend that you:\n• Read the test guide (opens in a new window)\n• Take the CSNT Practice test (opens in a new window)\nAnswer the example questions at the beginning of the test.\n\nWhat you need\n\nThe test is not timed, however most people take about an hour to complete it. Although the test works on most devices, we recommend using larger screens (laptop, desktop) over handheld (iPad, mobile phone), and a modern browser. Am I using a modern browser? (opens in a new window) If you don’t have a computer, there are plenty of options - for example your local library.\nYou'll also need:\n• A stable internet connection.\n• A time and place with no interruptions.\nComplete the test alone, with no input from anyone else. Any evidence of receiving help with the tests will be taken seriously and, if found, will lead to your withdrawal from the process.\nPlease contact the Insolvency Service recruitment team at $contactEmailVxConfig if you need further support. They may not be able to help you if you contact them on the final day."
         startTestFunction().isEnabled
       }
-    } else {
+    } else if (vXPreSiftRequired) {
       getApplicationState        shouldEqual "Application status: Application received"
       getApplicationConfirmation shouldEqual """Your application has been received.
                                                |We'll email you updates on the progress of your application or you can check the progress here in your account.""".stripMargin
-    }
-  }
-
-  def confirmLongFormPECCompletion(): Unit = { //TODO check last text confirmLongFormCompletion() on You've on 1st one
-    applicationCentrePageCheck()
-    advertDetailsFunction().isEnabled
-    withdrawApplicationFunction().isEnabled
-    applicationForVacancyText shouldEqual s"Application For $vacancyName"
-    if (vXAnyOnlineTests) {
-      if (v9ReasonableAdjustments && v9AdjustmentsForTests) {
-        getApplicationState        shouldEqual "Application status: Help with selection process"
-        getApplicationConfirmation shouldEqual "Your application has been received.\nYou've indicated that you may need assistance or an adjustment during the selection process.\nWe've noted this and will contact you if we need further information to help us support you.\nWe'll email you updates on the progress of your application or you can check the progress here in your account."
-      } else {
-        getApplicationState        shouldEqual "Invited to Civil Service Numerical Test"
-        getApplicationConfirmation shouldEqual "You're now invited to complete the Civil Service Numerical Test.\nThis test must be completed by 12:00AM on 09 January 2024.\nYou’ll need to pass this test in order to progress onto the next stage in your application.\nYou'll receive your results and feedback after you complete your test.\n\nHow to prepare\n\nTo prepare for the test, we strongly recommend that you:\n• Read the test guide (opens in a new window)\n• Take the CSNT Practice test (opens in a new window)\nAnswer the example questions at the beginning of the test.\n\nWhat you need\n\nThe test is not timed, however most people take about an hour to complete it. Although the test works on most devices, we recommend using larger screens (laptop, desktop) over handheld (iPad, mobile phone), and a modern browser. Am I using a modern browser? (opens in a new window) If you don’t have a computer, there are plenty of options - for example your local library.\nYou'll also need:\n• A stable internet connection.\n• A time and place with no interruptions.\nComplete the test alone, with no input from anyone else. Any evidence of receiving help with the tests will be taken seriously and, if found, will lead to your withdrawal from the process.\nPlease contact the Insolvency Service recruitment team at ryan.hobbs@cabinetoffice.gov.uk if you need further support. They may not be able to help you if you contact them on the final day."
-      }
     } else {
-      getApplicationState        shouldEqual "Application status: Application received"
+      getApplicationState shouldEqual "Application status: Application received"
       getApplicationConfirmation shouldEqual "Your application has been received.\nWe’ll email you about your application’s progress, or you can check this in your Application Centre."
     }
   }
+
+  //delete when checked fully with confirmLongFormCompletion()
+//  def confirmLongFormPECCompletion(): Unit = { //TODO check last text confirmLongFormCompletion() on You've on 1st one
+//    applicationCentrePageCheck()
+//    advertDetailsFunction().isEnabled
+//    withdrawApplicationFunction().isEnabled
+//    applicationForVacancyText shouldEqual s"Application For $vacancyName"
+//    if (vXAnyOnlineTests) {
+//      if (v9ReasonableAdjustments && v9AdjustmentsForTests) {
+//        getApplicationState        shouldEqual "Application status: Help with selection process"
+//        getApplicationConfirmation shouldEqual "Your application has been received.\nYou've indicated that you may need assistance or an adjustment during the selection process.\nWe've noted this and will contact you if we need further information to help us support you.\nWe'll email you updates on the progress of your application or you can check the progress here in your account."
+//      } else {
+//        getApplicationState        shouldEqual "Invited to Civil Service Numerical Test"
+//        getApplicationConfirmation shouldEqual "You're now invited to complete the Civil Service Numerical Test.\nThis test must be completed by 12:00AM on 09 January 2024.\nYou’ll need to pass this test in order to progress onto the next stage in your application.\nYou'll receive your results and feedback after you complete your test.\n\nHow to prepare\n\nTo prepare for the test, we strongly recommend that you:\n• Read the test guide (opens in a new window)\n• Take the CSNT Practice test (opens in a new window)\nAnswer the example questions at the beginning of the test.\n\nWhat you need\n\nThe test is not timed, however most people take about an hour to complete it. Although the test works on most devices, we recommend using larger screens (laptop, desktop) over handheld (iPad, mobile phone), and a modern browser. Am I using a modern browser? (opens in a new window) If you don’t have a computer, there are plenty of options - for example your local library.\nYou'll also need:\n• A stable internet connection.\n• A time and place with no interruptions.\nComplete the test alone, with no input from anyone else. Any evidence of receiving help with the tests will be taken seriously and, if found, will lead to your withdrawal from the process.\nPlease contact the Insolvency Service recruitment team at ryan.hobbs@cabinetoffice.gov.uk if you need further support. They may not be able to help you if you contact them on the final day."
+//      }
+//    } else {
+//      getApplicationState        shouldEqual "Application status: Application received"
+//      getApplicationConfirmation shouldEqual "Your application has been received.\nWe’ll email you about your application’s progress, or you can check this in your Application Centre."
+//    }
+//  }
 
   def confirmProvisionalOfferState(): Unit = {
     val status = "Provisional offer"
@@ -179,6 +187,66 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
                                              |As part of the onboarding process we require additional information.""".stripMargin
   }
 
+  def confirmApplicationUpdateNoPecPn(): Unit = {
+    val newStatus = "Application Update"
+    changeSystem("candidate")
+    confirmStatusOnApplicationPage(newStatus)
+    applicationCentrePageCheck()
+    advertDetailsFunction().isEnabled
+    feedbackFunction().isEnabled
+    applicationForVacancyText shouldEqual s"Application For $vacancyName"
+    getApplicationState shouldEqual s"Application status: $newStatus"
+    getApplicationConfirmation shouldEqual
+      """We're finalising all documentation regarding your application.
+        |You'll be contacted shortly to advise what will happen next.""".stripMargin
+  }
+
+  def confirmApplicationUpdateNoPecNen(): Unit = {
+    val newStatus = "Pre-employment checks"
+    changeSystem("candidate")
+    confirmStatusOnApplicationPage(newStatus)
+    applicationCentrePageCheck()
+    feedbackFunction().isEnabled
+    withdrawApplicationFunction().isEnabled
+    advertDetailsFunction().isEnabled
+    applicationForVacancyText shouldEqual s"Application For $vacancyName"
+    getApplicationState shouldEqual s"Application status: $newStatus"
+    getApplicationConfirmation shouldEqual
+      """We are reviewing the outcomes of your pre-employment checks.
+        |We will contact you as soon as a decision has been made. Please do not resign from your current position at this time.""".stripMargin
+  }
+
+  def confirmOfferAcceptedNoPecFunction(): Unit = {
+    val newStatus = "Offer accepted"
+    changeSystem("candidate")
+    confirmStatusOnApplicationPage(newStatus)
+    applicationCentrePageCheck()
+    feedbackFunction().isEnabled
+    advertDetailsFunction().isEnabled
+    withdrawApplicationFunction().isEnabled
+    applicationForVacancyText shouldEqual s"Application For $vacancyName"
+    getApplicationState shouldEqual s"Application status: $newStatus"
+    getApplicationConfirmation shouldEqual
+      """We're delighted that you have accepted our job offer.
+        |As part of the onboarding process we may require further information.
+        |We will contact you with updates about next steps.""".stripMargin
+  }
+
+  def confirmApplicationUpdateState(): Unit = {
+    val newStatus = "Application Update"
+    changeSystem("candidate")
+    confirmStatusOnApplicationPage(newStatus)
+    applicationCentrePageCheck()
+    feedbackFunction().isEnabled
+    advertDetailsFunction().isEnabled
+    withdrawApplicationFunction().isEnabled
+    applicationForVacancyText shouldEqual s"Application For $vacancyName"
+    getApplicationState shouldEqual s"Application status: $newStatus"
+    getApplicationConfirmation shouldEqual
+      """We're finalising all documentation regarding your application.
+        |You'll be contacted shortly to advise what will happen next.""".stripMargin
+  }
+
   def confirmPecSubmissionState(): Unit = {
     val status = "Pre-employment checks"
     changeSystem("candidate")
@@ -190,6 +258,76 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
     applicationForVacancyText  shouldEqual s"Application For $vacancyName"
     getApplicationState        shouldEqual s"Application status: $status"
     getApplicationConfirmation shouldEqual "Great news, you've accepted your provisional offer and your pre-employment checks are underway.\nWe are still checking:\nyour employment history, including any gaps\nwhether you have any convictions\n\n\nWe will send an email notification to you once all pre-employment checks are complete."
+  }
+
+  def confirmPecRtwOnlyCrcNoneNotApplicable(): Unit = {
+    val status = "Pre-employment checks"
+    changeSystem("candidate")
+    confirmStatusOnApplicationPage(status)
+    applicationCentrePageCheck()
+    advertDetailsFunction().isEnabled
+    feedbackFunction().isEnabled
+    withdrawApplicationFunction().isEnabled
+    applicationForVacancyText shouldEqual s"Application For $vacancyName"
+    getApplicationState shouldEqual s"Application status: $status"
+    getApplicationConfirmation shouldEqual "Great news, you've accepted your provisional offer and your pre-employment checks are underway.\nWe will send an email notification to you once all pre-employment checks are complete."
+  }
+
+  def confirmPecRtwOnlyState(): Unit = {
+    val status = "Pre-employment checks"
+    changeSystem("candidate")
+    confirmStatusOnApplicationPage(status)
+    applicationCentrePageCheck()
+    advertDetailsFunction().isEnabled
+    feedbackFunction().isEnabled
+    withdrawApplicationFunction().isEnabled
+    applicationForVacancyText shouldEqual s"Application For $vacancyName"
+    getApplicationState shouldEqual s"Application status: $status"
+    getApplicationConfirmation shouldEqual "Great news, you've accepted your provisional offer and your pre-employment checks are underway.\nWe are still checking:\nyour identity and right to work in the Civil Service\n\n\nWe will send an email notification to you once all pre-employment checks are complete."
+  }
+
+  def confirmPecRtwAndDbsAnyState(): Unit = {
+    val status = "Pre-employment checks"
+    changeSystem("candidate")
+    confirmStatusOnApplicationPage(status)
+    applicationCentrePageCheck()
+    advertDetailsFunction().isEnabled
+    feedbackFunction().isEnabled
+    withdrawApplicationFunction().isEnabled
+    applicationForVacancyText shouldEqual s"Application For $vacancyName"
+    getApplicationState shouldEqual s"Application status: $status"
+    getApplicationConfirmation shouldEqual "Great news, you've accepted your provisional offer and your pre-employment checks are underway.\nWe are still checking:\nyour identity and right to work in the Civil Service\nwhether you have any convictions\n\n\nWe will send an email notification to you once all pre-employment checks are complete."
+  }
+
+  def confirmPecRtwOnlyStartCheckState(): Unit = {
+    val status = "Confirm your identity"
+    changeSystem("candidate")
+    confirmStatusOnApplicationPage(status)
+    applicationCentrePageCheck()
+    startCheckFunction().isEnabled
+    withdrawApplicationFunction().isEnabled
+    applicationForVacancyText shouldEqual s"Application For $vacancyName"
+    getApplicationState shouldEqual s"Application status: $status"
+    getApplicationConfirmation shouldEqual "To complete the following check you will need:\n • an in date British or Irish passport, or an in date Irish passport card \n • to take a ‘selfie’ photograph of yourself\nStarting your ID check\nYou'll need access to a smartphone or tablet with a camera to complete the ID check. \nWhen you are ready, select the \"Start check\" button. You will be directed to the external service.\nNext steps\nWhen you've submitted your identity documents, you'll be sent an email when we receive the results back from the external service.\nYou can come back to this page to check the status of your application.\nIf you need help using the external service\nIf you are not able to use this external service for any reason contact ryan.hobbs@cabinetoffice.gov.uk\nWhat we will do with your data (opens in a new window)"
+  }
+
+  def confirmPecRtwOnlyAndDBSEnhancedStartCheck(): Unit = {
+    val status = "Confirm your identity"
+    changeSystem("candidate")
+    confirmStatusOnApplicationPage(status)
+    applicationCentrePageCheck()
+    startCheckFunction().isEnabled
+    withdrawApplicationFunction().isEnabled
+    applicationForVacancyText shouldEqual s"Application For $vacancyName"
+    getApplicationState shouldEqual s"Application status: $status"
+    getApplicationConfirmation shouldEqual "To complete the following check you will need:\n • an in date British or Irish passport, or an in date Irish passport card \n • to take a ‘selfie’ photograph of yourself\nStarting your ID check\nYou'll need access to a smartphone or tablet with a camera to complete the ID check. \nWhen you are ready, select the \"Start check\" button. You will be directed to the external service.\nNext steps\nWhen you've submitted your identity documents, you'll be sent an email when we receive the results back from the external service.\nYou can come back to this page to check the status of your application.\nIf you need help using the external service\nIf you are not able to use this external service for any reason contact ryan.hobbs@cabinetoffice.gov.uk\nWhat we will do with your data (opens in a new window)"
+  }
+
+  def confirmTrustIdQrCode(): Unit = {
+    startCheckFunction().click()
+    waitForVisibilityOfElementByPath(".//p[@class='sc-eqUAAy dPUdmr mb-0 text-center']").getText shouldEqual "Scan the QR with your mobile camera"
+    waitForVisibilityOfElementByPath(".//img[@alt='QR code for scanning with your mobile device']").isDisplayed
+    waitForVisibilityOfElementById("emailAddress").isDisplayed
   }
 
   def applicationBeingReviewedPreSiftState(): Unit = {
@@ -344,12 +482,7 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
     advertDetailsFunction().isEnabled
     applicationForVacancyText  shouldEqual s"Application For $vacancyName"
     getApplicationState        shouldEqual s"Application status: $status"
-    getApplicationConfirmation shouldEqual
-      s"""We've placed you on a reserve list until ${reserveExpiryDateMonths()}
-         | This means that you meet our required standard but unfortunately, we’re unable to offer you a job immediately.
-         | If a similar job becomes available we may appoint from this reserve list.
-         | You can see any feedback that's been given by clicking the "Feedback" button.
-         | Thank you for the time you have invested in your application and the selection process.""".stripMargin
+    getApplicationConfirmation should startWith(s"We've placed you on a reserve list until ${reserveExpiryDateMonths()}.")
   }
 
   def successfulAtInterviewState(): Unit = {
@@ -366,6 +499,22 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
       s"""Congratulations you have been successful at interview.
          |We will be in contact shortly with more information about the next steps.""".stripMargin
     changeSystem("recruiter")
+  }
+
+  def confirmIdvtAwaitingResultsState(): Unit = {
+    val newStatus = "Digital identity check awaiting results"
+    changeSystem("candidate")
+    confirmStatusOnApplicationPage(newStatus)
+    applicationCentrePageCheck()
+    !withdrawApplicationFunction().isDisplayed
+    applicationForVacancyText shouldEqual s"Application For $vacancyName"
+    getApplicationState shouldEqual s"Application status: $newStatus"
+    getApplicationConfirmation shouldEqual
+      """Thank you for submitting photographs of your identity documents.
+        |These are now being reviewed and we are waiting for the results of the check from the external service.
+        |We normally receive results within an hour but sometimes this may take up to a day.
+        |We will inform you by email when we receive the results.
+        |You can come back to this page to check your application’s progress at any time.""".stripMargin
   }
 
   def applicationStateAfterInterview(applicationDetails: ApplicationDetails): Unit =

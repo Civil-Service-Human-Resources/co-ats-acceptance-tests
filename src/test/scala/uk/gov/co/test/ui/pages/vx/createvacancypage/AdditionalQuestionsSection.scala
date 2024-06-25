@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.pages.vx.createvacancypage
 
 import org.openqa.selenium.By
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXAnyAdditionalQuestions, vXHowManyQuestions, vXQuestionOne, vXQuestionThree, vXQuestionTwo, vacancyFormId}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXAnyAdditionalQuestions, vXHowManyQuestions, vXProfile, vXQuestionOne, vXQuestionThree, vXQuestionTwo, vacancyFormId}
 import uk.gov.co.test.ui.data.vx.vacancy.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 
@@ -47,12 +47,13 @@ object AdditionalQuestionsSection extends VacancyBasePage {
     }
   }
 
-  private def moreQuestionsFlow(additionalQuestionsDetails: AdditionalQuestionsDetails): Unit = {
-    selectMoreQuestions(additionalQuestionsDetails)
-    if (additionalQuestionsDetails.anyAdditionalQuestions) {
-      selectHowManyQuestions(additionalQuestionsDetails)
+  private def moreQuestionsFlow(additionalQuestionsDetails: AdditionalQuestionsDetails): Unit =
+    if (vXProfile != "Vacancy Holder 1") {
+      selectMoreQuestions(additionalQuestionsDetails)
+      if (additionalQuestionsDetails.anyAdditionalQuestions) {
+        selectHowManyQuestions(additionalQuestionsDetails)
+      }
     }
-  }
 
   private def questionOneText(additionalQuestionsDetails: AdditionalQuestionsDetails): Unit = {
     vXQuestionOne = additionalQuestionsDetails.questionOne

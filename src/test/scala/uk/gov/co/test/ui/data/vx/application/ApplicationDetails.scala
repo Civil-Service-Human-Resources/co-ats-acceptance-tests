@@ -15,5 +15,7 @@ case class ApplicationDetails(
   interviewOneDetails: InterviewOneDetails,
   interviewTwoDetails: InterviewTwoDetails,
   interviewThreeDetails: InterviewThreeDetails,
-  interviewFourDetails: InterviewFourDetails
+  interviewFourDetails: InterviewFourDetails,
+  postingNoticeDetails: PostingNoticeDetails,
+  newEntrantNoticeDetails: NewEntrantNoticeDetails
 )

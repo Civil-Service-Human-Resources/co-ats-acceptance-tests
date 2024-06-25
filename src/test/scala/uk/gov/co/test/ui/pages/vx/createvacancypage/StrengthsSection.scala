@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.pages.vx.createvacancypage
 
 import org.openqa.selenium.By
-import uk.gov.co.test.ui.data.MasterVacancyDetails.vacancyFormId
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXHowManyStrengths, vXListOfStrengths, vacancyFormId}
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 
 case class StrengthsDetails(
@@ -31,72 +31,73 @@ object StrengthsSection extends VacancyBasePage {
 
   private def selectStrengthsRequired(successProfilesDetails: SuccessProfilesDetails): Unit = {
     val strengths = successProfilesDetails.strengthsSection
+    vXHowManyStrengths = strengths.map(_.strengthsAssessed).get
     waitForVisibilityOfElementById(noOfStrengthsAssessedId).click()
-    selectOption(generalInput, strengths.map(_.strengthsAssessed).get.toString)
+    selectOption(generalInput, vXHowManyStrengths.toString)
   }
 
   private def selectStrengthOne(successProfilesDetails: SuccessProfilesDetails): Unit = {
-    val strength = successProfilesDetails.strengthsSection
+    val strength    = successProfilesDetails.strengthsSection
+    val strengthOne = strength.map(_.strengthOne).get
     waitForVisibilityOfElementById(strengthOneId).click()
-    selectOption(generalInput, strength.map(_.strengthOne).get)
+    selectOption(generalInput, strengthOne)
+    vXListOfStrengths += strengthOne
   }
 
   private def selectStrengthTwo(successProfilesDetails: SuccessProfilesDetails): Unit = {
-    val strength = successProfilesDetails.strengthsSection
+    val strength    = successProfilesDetails.strengthsSection
+    val strengthTwo = strength.map(_.strengthTwo).get
     waitForVisibilityOfElementById(strengthTwoId).click()
-    selectOption(generalInput, strength.map(_.strengthTwo).get)
+    selectOption(generalInput, strengthTwo)
+    vXListOfStrengths += strengthTwo
   }
 
   private def selectStrengthThree(successProfilesDetails: SuccessProfilesDetails): Unit = {
-    val strength = successProfilesDetails.strengthsSection
+    val strength      = successProfilesDetails.strengthsSection
+    val strengthThree = strength.map(_.strengthThree).get
     waitForVisibilityOfElementById(strengthThreeId).click()
-    selectOption(generalInput, strength.map(_.strengthThree).get)
+    selectOption(generalInput, strengthThree)
+    vXListOfStrengths += strengthThree
   }
 
   private def selectStrengthFour(successProfilesDetails: SuccessProfilesDetails): Unit = {
-    val strength = successProfilesDetails.strengthsSection
+    val strength     = successProfilesDetails.strengthsSection
+    val strengthFour = strength.map(_.strengthFour).get
     waitForVisibilityOfElementById(strengthFourId).click()
-    selectOption(generalInput, strength.map(_.strengthFour).get)
+    selectOption(generalInput, strengthFour)
+    vXListOfStrengths += strengthFour
   }
 
   private def selectStrengthFive(successProfilesDetails: SuccessProfilesDetails): Unit = {
-    val strength = successProfilesDetails.strengthsSection
+    val strength     = successProfilesDetails.strengthsSection
+    val strengthFive = strength.map(_.strengthFive).get
     waitForVisibilityOfElementById(strengthFiveId).click()
-    selectOption(generalInput, strength.map(_.strengthFive).get)
+    selectOption(generalInput, strengthFive)
+    vXListOfStrengths += strengthFive
   }
 
   private def selectStrengthSix(successProfilesDetails: SuccessProfilesDetails): Unit = {
-    val strength = successProfilesDetails.strengthsSection
+    val strength    = successProfilesDetails.strengthsSection
+    val strengthSix = strength.map(_.strengthSix).get
     waitForVisibilityOfElementById(strengthSixId).click()
-    selectOption(generalInput, strength.map(_.strengthSix).get)
+    selectOption(generalInput, strengthSix)
+    vXListOfStrengths += strengthSix
   }
 
   private def selectStrengthSeven(successProfilesDetails: SuccessProfilesDetails): Unit = {
-    val strength = successProfilesDetails.strengthsSection
+    val strength      = successProfilesDetails.strengthsSection
+    val strengthSeven = strength.map(_.strengthSeven).get
     waitForVisibilityOfElementById(strengthSevenId).click()
-    selectOption(generalInput, strength.map(_.strengthSeven).get)
+    selectOption(generalInput, strengthSeven)
+    vXListOfStrengths += strengthSeven
   }
 
   private def selectStrengthEight(successProfilesDetails: SuccessProfilesDetails): Unit = {
-    val strength = successProfilesDetails.strengthsSection
+    val strength      = successProfilesDetails.strengthsSection
+    val strengthEight = strength.map(_.strengthEight).get
     waitForVisibilityOfElementById(strengthEightId).click()
-    selectOption(generalInput, strength.map(_.strengthEight).get)
-  }
-
-  def selectStrengthsAssessed(successProfilesDetails: SuccessProfilesDetails): Unit = {
-    scrollToElement(By.id(strengthsSectionId))
-    val strength = successProfilesDetails.strengthsSection
-    selectStrengthsRequired(successProfilesDetails)
-    strength.map(_.strengthsAssessed).get match {
-      case 1 => strengthsRequired(successProfilesDetails, 1)
-      case 2 => strengthsRequired(successProfilesDetails, 2)
-      case 3 => strengthsRequired(successProfilesDetails, 3)
-      case 4 => strengthsRequired(successProfilesDetails, 4)
-      case 5 => strengthsRequired(successProfilesDetails, 5)
-      case 6 => strengthsRequired(successProfilesDetails, 6)
-      case 7 => strengthsRequired(successProfilesDetails, 7)
-      case 8 => strengthsRequired(successProfilesDetails, 8)
-    }
+    selectOption(generalInput, strengthEight)
+    vXListOfStrengths += strengthEight
   }
 
   private val strengths: Seq[SuccessProfilesDetails => Unit] = Seq(
@@ -110,8 +111,11 @@ object StrengthsSection extends VacancyBasePage {
     selectStrengthEight
   )
 
-  private def strengthsRequired(successProfilesDetails: SuccessProfilesDetails, strengthRequired: Int): Unit =
-    strengths.take(strengthRequired).foreach { f =>
+  def selectStrengths(successProfilesDetails: SuccessProfilesDetails): Unit = {
+    scrollToElement(By.id(strengthsSectionId))
+    selectStrengthsRequired(successProfilesDetails)
+    strengths.take(vXHowManyStrengths).foreach { f =>
       f(successProfilesDetails)
     }
+  }
 }

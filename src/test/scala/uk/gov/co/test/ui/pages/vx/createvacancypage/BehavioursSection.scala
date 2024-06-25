@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.pages.vx.createvacancypage
 
 import org.openqa.selenium.By
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXHowManyBehaviours, vXListOfChosenBehaviours, vacancyFormId}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXBehaviourApplicationRequired, vXBehaviourInterviewRequired, vXHowManyBehaviours, vXListOfChosenBehaviours, vacancyFormId}
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 
 case class Behaviours(chosenBehaviour: String, stageApplication: Boolean, stageInterview: Boolean)
@@ -51,7 +51,7 @@ object BehavioursSection extends VacancyBasePage {
   def interviewSevenId         = s"${vacancyFormId}_datafield_60422_1_1_12684"
   def interviewEightId         = s"${vacancyFormId}_datafield_60436_1_1_12684"
 
-  def selectBehavioursProfiles(successProfilesDetails: SuccessProfilesDetails): Unit = {
+  def selectBehaviours(successProfilesDetails: SuccessProfilesDetails): Unit = {
     scrollToElement(By.id(successProfilesSectionId))
     val behaviour = successProfilesDetails.behavioursSection
     if (successProfilesDetails.behaviours) {
@@ -74,16 +74,29 @@ object BehavioursSection extends VacancyBasePage {
     }
   }
 
+  private def checkboxCheck(stageRequired: Boolean, checkId: String): Unit =
+    if (!stageRequired && waitForVisibilityOfElementById(checkId).isSelected) {
+      waitForVisibilityOfElementById(checkId).click()
+    }
+
   private def selectBehaviourOne(successProfilesDetails: SuccessProfilesDetails): Unit = {
     val behaviour       = successProfilesDetails.behavioursSection
     scrollToElement(By.id(behavioursOneId))
     waitForVisibilityOfElementById(behavioursOneId).click()
     val chosenBehaviour = behaviour.map(_.behaviourOne.map(_.chosenBehaviour).get).get
     vXListOfChosenBehaviours.clear()
+    vXBehaviourApplicationRequired.clear()
+    vXBehaviourInterviewRequired.clear()
     vXListOfChosenBehaviours += chosenBehaviour
     selectOption(generalInput, chosenBehaviour)
-    if (behaviour.map(_.behaviourOne.map(_.stageApplication).get).get) checkbox(applicationOneId).select()
-    if (behaviour.map(_.behaviourOne.map(_.stageInterview).get).get) checkbox(interviewOneId).select()
+    vXBehaviourApplicationRequired += behaviour.map(_.behaviourOne.map(_.stageApplication).get).get
+    if (vXBehaviourApplicationRequired.headOption.get) {
+      checkbox(applicationOneId).select()
+    } else checkboxCheck(vXBehaviourApplicationRequired.headOption.get, applicationOneId)
+    vXBehaviourInterviewRequired += behaviour.map(_.behaviourOne.map(_.stageInterview).get).get
+    if (vXBehaviourInterviewRequired.headOption.get) {
+      checkbox(interviewOneId).select()
+    } else checkboxCheck(vXBehaviourInterviewRequired.headOption.get, interviewOneId)
   }
 
   private def selectBehaviourTwo(successProfilesDetails: SuccessProfilesDetails): Unit = {
@@ -93,8 +106,14 @@ object BehavioursSection extends VacancyBasePage {
     val chosenBehaviour = behaviour.map(_.behaviourTwo.map(_.chosenBehaviour).get).get
     vXListOfChosenBehaviours += chosenBehaviour
     selectOption(generalInput, chosenBehaviour)
-    if (behaviour.map(_.behaviourTwo.map(_.stageApplication).get).get) checkbox(applicationTwoId).select()
-    if (behaviour.map(_.behaviourTwo.map(_.stageInterview).get).get) checkbox(interviewTwoId).select()
+    vXBehaviourApplicationRequired += behaviour.map(_.behaviourTwo.map(_.stageApplication).get).get
+    if (vXBehaviourApplicationRequired.lift(1).get) {
+      checkbox(applicationTwoId).select()
+    } else checkboxCheck(vXBehaviourApplicationRequired.lift(1).get, applicationTwoId)
+    vXBehaviourInterviewRequired += behaviour.map(_.behaviourTwo.map(_.stageInterview).get).get
+    if (vXBehaviourInterviewRequired.lift(1).get) {
+      checkbox(interviewTwoId).select()
+    } else checkboxCheck(vXBehaviourInterviewRequired.lift(1).get, interviewTwoId)
   }
 
   private def selectBehaviourThree(successProfilesDetails: SuccessProfilesDetails): Unit = {
@@ -104,8 +123,14 @@ object BehavioursSection extends VacancyBasePage {
     val chosenBehaviour = behaviour.map(_.behaviourThree.map(_.chosenBehaviour).get).get
     vXListOfChosenBehaviours += chosenBehaviour
     selectOption(generalInput, chosenBehaviour)
-    if (behaviour.map(_.behaviourThree.map(_.stageApplication).get).get) checkbox(applicationThreeId).select()
-    if (behaviour.map(_.behaviourThree.map(_.stageInterview).get).get) checkbox(interviewThreeId).select()
+    vXBehaviourApplicationRequired += behaviour.map(_.behaviourThree.map(_.stageApplication).get).get
+    if (vXBehaviourApplicationRequired.lift(2).get) {
+      checkbox(applicationThreeId).select()
+    } else checkboxCheck(vXBehaviourApplicationRequired.lift(2).get, applicationThreeId)
+    vXBehaviourInterviewRequired += behaviour.map(_.behaviourThree.map(_.stageInterview).get).get
+    if (vXBehaviourInterviewRequired.lift(2).get) {
+      checkbox(interviewThreeId).select()
+    } else checkboxCheck(vXBehaviourInterviewRequired.lift(2).get, interviewThreeId)
   }
 
   private def selectBehaviourFour(successProfilesDetails: SuccessProfilesDetails): Unit = {
@@ -115,8 +140,14 @@ object BehavioursSection extends VacancyBasePage {
     val chosenBehaviour = behaviour.map(_.behaviourFour.map(_.chosenBehaviour).get).get
     vXListOfChosenBehaviours += chosenBehaviour
     selectOption(generalInput, chosenBehaviour)
-    if (behaviour.map(_.behaviourFour.map(_.stageApplication).get).get) checkbox(applicationFourId).select()
-    if (behaviour.map(_.behaviourFour.map(_.stageInterview).get).get) checkbox(interviewFourId).select()
+    vXBehaviourApplicationRequired += behaviour.map(_.behaviourFour.map(_.stageApplication).get).get
+    if (vXBehaviourApplicationRequired.lift(3).get) {
+      checkbox(applicationFourId).select()
+    } else checkboxCheck(vXBehaviourApplicationRequired.lift(3).get, applicationFourId)
+    vXBehaviourInterviewRequired += behaviour.map(_.behaviourFour.map(_.stageInterview).get).get
+    if (vXBehaviourInterviewRequired.lift(3).get) {
+      checkbox(interviewFourId).select()
+    } else checkboxCheck(vXBehaviourInterviewRequired.lift(3).get, interviewFourId)
   }
 
   private def selectBehaviourFive(successProfilesDetails: SuccessProfilesDetails): Unit = {
@@ -126,8 +157,14 @@ object BehavioursSection extends VacancyBasePage {
     val chosenBehaviour = behaviour.map(_.behaviourFive.map(_.chosenBehaviour).get).get
     vXListOfChosenBehaviours += chosenBehaviour
     selectOption(generalInput, chosenBehaviour)
-    if (behaviour.map(_.behaviourFive.map(_.stageApplication).get).get) checkbox(applicationFiveId).select()
-    if (behaviour.map(_.behaviourFive.map(_.stageInterview).get).get) checkbox(interviewFiveId).select()
+    vXBehaviourApplicationRequired += behaviour.map(_.behaviourFive.map(_.stageApplication).get).get
+    if (vXBehaviourApplicationRequired.lift(4).get) {
+      checkbox(applicationFiveId).select()
+    } else checkboxCheck(vXBehaviourApplicationRequired.lift(4).get, applicationFiveId)
+    vXBehaviourInterviewRequired += behaviour.map(_.behaviourFive.map(_.stageInterview).get).get
+    if (vXBehaviourInterviewRequired.lift(4).get) {
+      checkbox(interviewFiveId).select()
+    } else checkboxCheck(vXBehaviourInterviewRequired.lift(4).get, interviewFiveId)
   }
 
   private def selectBehaviourSix(successProfilesDetails: SuccessProfilesDetails): Unit = {
@@ -137,8 +174,14 @@ object BehavioursSection extends VacancyBasePage {
     val chosenBehaviour = behaviour.map(_.behaviourSix.map(_.chosenBehaviour).get).get
     vXListOfChosenBehaviours += chosenBehaviour
     selectOption(generalInput, chosenBehaviour)
-    if (behaviour.map(_.behaviourSix.map(_.stageApplication).get).get) checkbox(applicationSixId).select()
-    if (behaviour.map(_.behaviourSix.map(_.stageInterview).get).get) checkbox(interviewSixId).select()
+    vXBehaviourApplicationRequired += behaviour.map(_.behaviourSix.map(_.stageApplication).get).get
+    if (vXBehaviourApplicationRequired.lift(5).get) {
+      checkbox(applicationSixId).select()
+    } else checkboxCheck(vXBehaviourApplicationRequired.lift(5).get, applicationSixId)
+    vXBehaviourInterviewRequired += behaviour.map(_.behaviourSix.map(_.stageInterview).get).get
+    if (vXBehaviourInterviewRequired.lift(5).get) {
+      checkbox(interviewSixId).select()
+    } else checkboxCheck(vXBehaviourInterviewRequired.lift(5).get, interviewSixId)
   }
 
   private def selectBehaviourSeven(successProfilesDetails: SuccessProfilesDetails): Unit = {
@@ -148,8 +191,14 @@ object BehavioursSection extends VacancyBasePage {
     val chosenBehaviour = behaviour.map(_.behaviourSeven.map(_.chosenBehaviour).get).get
     vXListOfChosenBehaviours += chosenBehaviour
     selectOption(generalInput, chosenBehaviour)
-    if (behaviour.map(_.behaviourSeven.map(_.stageApplication).get).get) checkbox(applicationSevenId).select()
-    if (behaviour.map(_.behaviourSeven.map(_.stageInterview).get).get) checkbox(interviewSevenId).select()
+    vXBehaviourApplicationRequired += behaviour.map(_.behaviourSeven.map(_.stageApplication).get).get
+    if (vXBehaviourApplicationRequired.lift(6).get) {
+      checkbox(applicationSevenId).select()
+    } else checkboxCheck(vXBehaviourApplicationRequired.lift(6).get, applicationSevenId)
+    vXBehaviourInterviewRequired += behaviour.map(_.behaviourSeven.map(_.stageInterview).get).get
+    if (vXBehaviourInterviewRequired.lift(6).get) {
+      checkbox(interviewSevenId).select()
+    } else checkboxCheck(vXBehaviourInterviewRequired.lift(6).get, interviewSevenId)
   }
 
   private def selectBehaviourEight(successProfilesDetails: SuccessProfilesDetails): Unit = {
@@ -159,8 +208,14 @@ object BehavioursSection extends VacancyBasePage {
     val chosenBehaviour = behaviour.map(_.behaviourEight.map(_.chosenBehaviour).get).get
     vXListOfChosenBehaviours += chosenBehaviour
     selectOption(generalInput, chosenBehaviour)
-    if (behaviour.map(_.behaviourEight.map(_.stageApplication).get).get) checkbox(applicationEightId).select()
-    if (behaviour.map(_.behaviourEight.map(_.stageInterview).get).get) checkbox(interviewEightId).select()
+    vXBehaviourApplicationRequired += behaviour.map(_.behaviourEight.map(_.stageApplication).get).get
+    if (vXBehaviourApplicationRequired.lift(7).get) {
+      checkbox(applicationEightId).select()
+    } else checkboxCheck(vXBehaviourApplicationRequired.lift(7).get, applicationEightId)
+    vXBehaviourInterviewRequired += behaviour.map(_.behaviourEight.map(_.stageInterview).get).get
+    if (vXBehaviourInterviewRequired.lift(7).get) {
+      checkbox(interviewEightId).select()
+    } else checkboxCheck(vXBehaviourInterviewRequired.lift(7).get, interviewEightId)
   }
 
   private def selectHowManyBehaviours(howMany: Int): Unit = {

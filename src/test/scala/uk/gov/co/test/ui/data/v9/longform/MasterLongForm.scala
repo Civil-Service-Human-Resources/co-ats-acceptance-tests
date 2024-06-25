@@ -1,8 +1,8 @@
 package uk.gov.co.test.ui.data.v9.longform
 
-import uk.gov.co.test.ui.data.Characters.{valid250Characters, valid500Characters}
-import uk.gov.co.test.ui.pages.v9.longform._
+import uk.gov.co.test.ui.data.Characters.{valid250Characters, valid500Characters, valid750Characters}
 import uk.gov.co.test.ui.data.MasterVacancyDetails.vXOtherLocations
+import uk.gov.co.test.ui.pages.v9.longform._
 
 object MASTER_LONG_FORM_DATA
     extends LongFormDetails(
@@ -75,30 +75,18 @@ object MASTER_LONG_FORM_CV
 object MASTER_LONG_FORM_PERSONAL_STATEMENT
     extends StatementDetails(
       s"$valid250Characters",
+      s"$valid500Characters",
+      s"$valid750Characters",
       true
     )
 
 object MASTER_LONG_FORM_BEHAVIOURS
     extends BehavioursDetails(
-      s"$valid250Characters",
-      s"$valid250Characters",
-      s"$valid250Characters",
-      s"$valid250Characters",
-      s"$valid250Characters",
-      s"$valid250Characters",
-      s"$valid250Characters",
       s"$valid250Characters"
     )
 
 object MASTER_LONG_FORM_TECHNICAL_SKILLS
     extends TechSkillsDetails(
-      s"$valid250Characters",
-      s"$valid250Characters",
-      s"$valid250Characters",
-      s"$valid250Characters",
-      s"$valid250Characters",
-      s"$valid250Characters",
-      s"$valid250Characters",
       s"$valid250Characters"
     )
 

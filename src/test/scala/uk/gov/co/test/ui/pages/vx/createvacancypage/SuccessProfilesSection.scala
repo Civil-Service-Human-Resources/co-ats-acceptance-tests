@@ -3,10 +3,10 @@ package uk.gov.co.test.ui.pages.vx.createvacancypage
 import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXAbilitiesRequired, vXBehavioursRequired, vXExperiencesRequired, vXStrengthsRequired, vXTechSkillsRequired, vacancyFormId}
 import uk.gov.co.test.ui.data.vx.vacancy.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
-import uk.gov.co.test.ui.pages.vx.createvacancypage.AbilitiesSection.selectAbilitiesProfile
-import uk.gov.co.test.ui.pages.vx.createvacancypage.BehavioursSection.selectBehavioursProfiles
-import uk.gov.co.test.ui.pages.vx.createvacancypage.ExperienceSection.selectExperiencesRequired
-import uk.gov.co.test.ui.pages.vx.createvacancypage.StrengthsSection.selectStrengthsAssessed
+import uk.gov.co.test.ui.pages.vx.createvacancypage.AbilitiesSection.selectAbilities
+import uk.gov.co.test.ui.pages.vx.createvacancypage.BehavioursSection.selectBehaviours
+import uk.gov.co.test.ui.pages.vx.createvacancypage.ExperienceSection.selectExperiences
+import uk.gov.co.test.ui.pages.vx.createvacancypage.StrengthsSection.selectStrengths
 import uk.gov.co.test.ui.pages.vx.createvacancypage.TechnicalSkillsSection.selectTechnicalSkills
 
 case class SuccessProfilesDetails(
@@ -36,32 +36,52 @@ object SuccessProfilesSection extends VacancyBasePage {
       waitForVisibilityOfElementById(checkId).click()
     }
 
-  private def whichSuccessProfiles(successProfilesDetails: SuccessProfilesDetails): Unit = {
-    if (successProfilesDetails.abilities) {
-      vXAbilitiesRequired = successProfilesDetails.abilities
+  private def abilitiesRequired(successProfilesDetails: SuccessProfilesDetails): Unit = {
+    vXAbilitiesRequired = successProfilesDetails.abilities
+    if (vXAbilitiesRequired) {
       checkbox(abilitiesId).select()
-      selectAbilitiesProfile(successProfilesDetails)
+      selectAbilities(successProfilesDetails)
     } else checkboxCheck(vXAbilitiesRequired, abilitiesId)
-    if (successProfilesDetails.behaviours) {
-      vXBehavioursRequired = successProfilesDetails.behaviours
+  }
+
+  private def behavioursRequired(successProfilesDetails: SuccessProfilesDetails): Unit = {
+    vXBehavioursRequired = successProfilesDetails.behaviours
+    if (vXBehavioursRequired) {
       checkbox(behavioursId).select()
-      selectBehavioursProfiles(successProfilesDetails)
+      selectBehaviours(successProfilesDetails)
     } else checkboxCheck(vXBehavioursRequired, behavioursId)
-    if (successProfilesDetails.experience) {
-      vXExperiencesRequired = successProfilesDetails.experience
+  }
+
+  private def experiencesRequired(successProfilesDetails: SuccessProfilesDetails): Unit = {
+    vXExperiencesRequired = successProfilesDetails.experience
+    if (vXExperiencesRequired) {
       checkbox(experienceId).select()
-      selectExperiencesRequired(successProfilesDetails)
+      selectExperiences(successProfilesDetails)
     } else checkboxCheck(vXExperiencesRequired, experienceId)
-    if (successProfilesDetails.strengths) {
-      vXStrengthsRequired = successProfilesDetails.strengths
+  }
+
+  private def strengthsRequired(successProfilesDetails: SuccessProfilesDetails): Unit = {
+    vXStrengthsRequired = successProfilesDetails.strengths
+    if (vXStrengthsRequired) {
       checkbox(strengthsId).select()
-      selectStrengthsAssessed(successProfilesDetails)
+      selectStrengths(successProfilesDetails)
     } else checkboxCheck(vXStrengthsRequired, strengthsId)
-    if (successProfilesDetails.technicalSkills) {
-      vXTechSkillsRequired = successProfilesDetails.technicalSkills
+  }
+
+  private def techSkillsRequired(successProfilesDetails: SuccessProfilesDetails): Unit = {
+    vXTechSkillsRequired = successProfilesDetails.technicalSkills
+    if (vXTechSkillsRequired) {
       checkbox(technicalSkillsId).select()
       selectTechnicalSkills(successProfilesDetails)
     } else checkboxCheck(vXTechSkillsRequired, technicalSkillsId)
+  }
+
+  private def whichSuccessProfiles(successProfilesDetails: SuccessProfilesDetails): Unit = {
+    abilitiesRequired(successProfilesDetails)
+    behavioursRequired(successProfilesDetails)
+    experiencesRequired(successProfilesDetails)
+    strengthsRequired(successProfilesDetails)
+    techSkillsRequired(successProfilesDetails)
   }
 
   private val successProfiles: Seq[SuccessProfilesDetails => Unit] = Seq(

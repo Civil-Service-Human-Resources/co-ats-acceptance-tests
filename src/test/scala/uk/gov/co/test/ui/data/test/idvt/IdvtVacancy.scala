@@ -1,4 +1,4 @@
-package uk.gov.co.test.ui.data.test.pec
+package uk.gov.co.test.ui.data.test.idvt
 
 import uk.gov.co.test.ui.data.vx.vacancy.NewVacancyDetails
 import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.{contactEmailVxConfig, contactNameVxConfig}
@@ -7,37 +7,37 @@ import uk.gov.co.test.ui.pages.vx.createvacancypage._
 
 import scala.collection.mutable.ListBuffer
 
-object PEC_APPLY_ONLY_VACANCY_DATA
+object IDVT_VACANCY_DATA
     extends NewVacancyDetails(
-      PEC_APPLY_ONLY_BASIC_DETAILS,
-      PEC_APPLY_ONLY_JOB_INFORMATION,
-      PEC_APPLY_ONLY_APPROACH,
-      PEC_APPLY_ONLY_APPROVAL,
-      PEC_APPLY_ONLY_RESERVE_LIST,
-      PEC_APPLY_ONLY_LOCATIONS,
-      PEC_APPLY_ONLY_CONTRACT_DETAILS,
-      PEC_APPLY_ONLY_ADVERT,
-      PEC_APPLY_ONLY_CONTACT_DETAILS,
-      PEC_APPLY_ONLY_VETTING_DETAILS,
-      PEC_APPLY_ONLY_INTERVIEWS_DETAILS,
-      PEC_APPLY_ONLY_SUCCESS_PROFILES,
-      PEC_APPLY_ONLY_VACANCY_TESTS,
-      PEC_APPLY_ONLY_ADDITIONAL_QUESTIONS,
-      PEC_APPLY_ONLY_CRITERIA,
-      PEC_APPLY_ONLY_MANAGEMENT,
-      PEC_APPLY_ONLY_ONLINE_PEC_APPLY_ONLY_CHECK_FORMS,
-      PEC_APPLY_ONLY_PEC_APPLY_ONLY_CHECK_FORMS
+      IDVT_BASIC_DETAILS,
+      IDVT_JOB_INFORMATION,
+      IDVT_APPROACH,
+      IDVT_APPROVAL,
+      IDVT_RESERVE_LIST,
+      IDVT_LOCATIONS,
+      IDVT_CONTRACT_DETAILS,
+      IDVT_ADVERT,
+      IDVT_CONTACT_DETAILS,
+      IDVT_VETTING_DETAILS,
+      IDVT_INTERVIEWS_DETAILS,
+      IDVT_SUCCESS_PROFILES,
+      IDVT_VACANCY_TESTS,
+      IDVT_ADDITIONAL_QUESTIONS,
+      IDVT_CRITERIA,
+      IDVT_MANAGEMENT,
+      IDVT_ONLINE_IDVT_CHECK_FORMS,
+      IDVT_IDVT_CHECK_FORMS
     )
 
-object PEC_APPLY_ONLY_BASIC_DETAILS
+object IDVT_BASIC_DETAILS
     extends BasicDetails(
-      "Insolvency Service - Apply online",
-      s"AUTOCO - " + generateRandomJobPosition(),
+      "DO NOT USE- Automation Test Template",
+      s"Insolvency - " + generateRandomJobPosition(),
       true,
       "Prawf awtomeiddio",
       32
     )
-object PEC_APPLY_ONLY_JOB_INFORMATION
+object IDVT_JOB_INFORMATION
     extends JobInfoDetails(
       true,
       "Insolvency Service",
@@ -45,6 +45,7 @@ object PEC_APPLY_ONLY_JOB_INFORMATION
       true,
       "Prawf awtomeiddio",
       "Autotest - Business area detail",
+      "Autotest - Position identifier",
       typeOfRole = ListBuffer(
         "Accountancy",
         "Analytical",
@@ -54,9 +55,10 @@ object PEC_APPLY_ONLY_JOB_INFORMATION
         "Tax Profession"
       ),
       "Other",
-      "5"
+      "1",
+      false
     )
-object PEC_APPLY_ONLY_APPROACH
+object IDVT_APPROACH
     extends ApproachDetails(
       "External",
       true,
@@ -65,7 +67,8 @@ object PEC_APPLY_ONLY_APPROACH
       "Prawf awtomeiddio",
       "This vacancy is open to employees who already hold the substantive grade for the post and were appointed to the Civil Service on merit following a fair and open competition; or were appointed to a permanent Civil Service post through an exception in the Civil Service Commissioners’ rules."
     )
-object PEC_APPLY_ONLY_APPROVAL
+
+object IDVT_APPROVAL
     extends ApprovalDetails(
       true,
       "Autotest - budgetary authorisation info",
@@ -73,15 +76,15 @@ object PEC_APPLY_ONLY_APPROVAL
       "Test-T&Cs.pdf"
     )
 
-object PEC_APPLY_ONLY_RESERVE_LIST
+object IDVT_RESERVE_LIST
     extends ReserveListDetails(
-      false,
+      true,
       "12 Months",
       false,
       "6 Months"
     )
 
-object PEC_APPLY_ONLY_LOCATIONS
+object IDVT_LOCATIONS
     extends LocationsDetails(
       "Postcodes",
       "M1 4RJ",
@@ -97,24 +100,24 @@ object PEC_APPLY_ONLY_LOCATIONS
       otherLocations = ListBuffer("London", "Southampton", "Manchester")
     )
 
-object PEC_APPLY_ONLY_CONTRACT_DETAILS
+object IDVT_CONTRACT_DETAILS
     extends ContractDetails(
       List("Permanent"),
       "Autotest - Maximum characters: 255. Any text over this limit will not show on the advert.",
       true,
       "Prawf awtomeiddio",
       List("Full-time"),
-      "Executive Officer",
+      ListBuffer("Executive Officer"),
       "Grade 7",
       "GBP (£)",
       25000,
       95000,
       "Can agree on the higher bracket",
-      false,
+      true,
       18750
     )
 
-object PEC_APPLY_ONLY_ADVERT
+object IDVT_ADVERT
     extends AdvertDetails(
       "Autotest - Job summary",
       "Autotest - Job description",
@@ -123,7 +126,7 @@ object PEC_APPLY_ONLY_ADVERT
       "Autotest - Selection process details"
     )
 
-object PEC_APPLY_ONLY_CONTACT_DETAILS
+object IDVT_CONTACT_DETAILS
     extends ContactDetails(
       s"$contactNameVxConfig",
       s"$contactEmailVxConfig",
@@ -133,56 +136,56 @@ object PEC_APPLY_ONLY_CONTACT_DETAILS
       s"$contactEmailVxConfig"
     )
 
-object PEC_APPLY_ONLY_VETTING_DETAILS
+object IDVT_VETTING_DETAILS
     extends VettingDetails(
       true,
-      "Standard",
+      "Basic",
       "Disclosure barring service (DBS)",
-      "None",
-      false
+      "Security check",
+      true
     )
 
-object PEC_APPLY_ONLY_INTERVIEWS_DETAILS
+object IDVT_INTERVIEWS_DETAILS
     extends InterviewsDetails(
-      "No interviews",
-      "Video",
+      "1",
+      "Interview",
       "Assessment",
       "Telephone",
-      "Interview",
+      "Video",
       false
     )
 
-object PEC_APPLY_ONLY_SUCCESS_PROFILES
+object IDVT_SUCCESS_PROFILES
     extends SuccessProfilesDetails(
       false,
-      false,
-      false,
-      false,
-      false,
-      Some(PEC_APPLY_ONLY_ABILITIES),
-      Some(PEC_APPLY_ONLY_BEHAVIOURS),
-      Some(PEC_APPLY_ONLY_EXPERIENCES),
-      Some(PEC_APPLY_ONLY_STRENGTHS),
-      Some(PEC_APPLY_ONLY_TECH_SKILLS)
+      true,
+      true,
+      true,
+      true,
+      Some(IDVT_ABILITIES),
+      Some(IDVT_BEHAVIOURS),
+      Some(IDVT_EXPERIENCES),
+      Some(IDVT_STRENGTHS),
+      Some(IDVT_TECH_SKILLS)
     )
 
-object PEC_APPLY_ONLY_ABILITIES
+object IDVT_ABILITIES
     extends AbilitiesDetails(
       """The following online tests can be used to assess abilities:
                            |Civil Service Numerical Test
                            |Civil Service Verbal Test""".stripMargin
     )
 
-object PEC_APPLY_ONLY_BEHAVIOURS
+object IDVT_BEHAVIOURS
     extends BehavioursDetails(
       assessBehaviours = """The following online tests can be used to assess behaviours:
           |Civil Service Judgement Test
           |Civil Service Management Judgement Test""".stripMargin,
       8,
       behaviourOne =
-        Some(Behaviours(chosenBehaviour = "Changing and Improving", stageApplication = true, stageInterview = false)),
+        Some(Behaviours(chosenBehaviour = "Changing and Improving", stageApplication = true, stageInterview = true)),
       behaviourTwo = Some(
-        Behaviours(chosenBehaviour = "Communicating and Influencing", stageApplication = true, stageInterview = false)
+        Behaviours(chosenBehaviour = "Communicating and Influencing", stageApplication = true, stageInterview = true)
       ),
       behaviourThree =
         Some(Behaviours(chosenBehaviour = "Delivering at Pace", stageApplication = true, stageInterview = true)),
@@ -191,7 +194,7 @@ object PEC_APPLY_ONLY_BEHAVIOURS
       ),
       behaviourFive = Some(Behaviours(chosenBehaviour = "Leadership", stageApplication = true, stageInterview = true)),
       behaviourSix = Some(
-        Behaviours(chosenBehaviour = "Making Effective Decisions", stageApplication = true, stageInterview = false)
+        Behaviours(chosenBehaviour = "Making Effective Decisions", stageApplication = true, stageInterview = true)
       ),
       behaviourSeven = Some(
         Behaviours(chosenBehaviour = "Managing a Quality Service", stageApplication = true, stageInterview = true)
@@ -201,10 +204,10 @@ object PEC_APPLY_ONLY_BEHAVIOURS
       )
     )
 
-object PEC_APPLY_ONLY_EXPERIENCES
+object IDVT_EXPERIENCES
     extends ExperienceDetails(
       true,
-      "0 - 7",
+      "0 - 100",
       true,
       true,
       true,
@@ -228,7 +231,7 @@ object PEC_APPLY_ONLY_EXPERIENCES
       )
     )
 
-object PEC_APPLY_ONLY_STRENGTHS
+object IDVT_STRENGTHS
     extends StrengthsDetails(
       8,
       "Adaptable",
@@ -241,76 +244,60 @@ object PEC_APPLY_ONLY_STRENGTHS
       "Service Focussed"
     )
 
-object PEC_APPLY_ONLY_TECH_SKILLS
+object IDVT_TECH_SKILLS
     extends TechSkillsDetails(
       8,
-      Some(
-        TechSkills(
-          techSkill = "Autotest - technical skills 1",
-          description = "Autotest - technical skills 1 description",
-          techInterview = false,
-          techApplication = true
-        )
+      TechSkill(
+        skillName = "Autotest - technical skills 1",
+        skillDescription = Some("Autotest - technical skills 1 description"),
+        applicationRequired = true,
+        interviewRequired = true
       ),
-      Some(
-        TechSkills(
-          techSkill = "Autotest - technical skills 2",
-          description = "Autotest - technical skills 2 description",
-          techInterview = false,
-          techApplication = true
-        )
+      TechSkill(
+        skillName = "Autotest - technical skills 2",
+        skillDescription = Some("Autotest - technical skills 2 description"),
+        applicationRequired = true,
+        interviewRequired = true
       ),
-      Some(
-        TechSkills(
-          techSkill = "Autotest - technical skills 3",
-          description = "Autotest - technical skills 3 description",
-          techInterview = false,
-          techApplication = true
-        )
+      TechSkill(
+        skillName = "Autotest - technical skills 3",
+        skillDescription = Some("Autotest - technical skills 3 description"),
+        applicationRequired = true,
+        interviewRequired = true
       ),
-      Some(
-        TechSkills(
-          techSkill = "Autotest - technical skills 4",
-          description = "Autotest - technical skills 4 description",
-          techInterview = false,
-          techApplication = true
-        )
+      TechSkill(
+        skillName = "Autotest - technical skills 4",
+        skillDescription = Some("Autotest - technical skills 4 description"),
+        applicationRequired = true,
+        interviewRequired = true
       ),
-      Some(
-        TechSkills(
-          techSkill = "Autotest - technical skills 5",
-          description = "Autotest - technical skills 5 description",
-          techInterview = false,
-          techApplication = true
-        )
+      TechSkill(
+        skillName = "Autotest - technical skills 5",
+        skillDescription = Some("Autotest - technical skills 5 description"),
+        applicationRequired = true,
+        interviewRequired = true
       ),
-      Some(
-        TechSkills(
-          techSkill = "Autotest - technical skills 6",
-          description = "Autotest - technical skills 6 description",
-          techInterview = false,
-          techApplication = true
-        )
+      TechSkill(
+        skillName = "Autotest - technical skills 6",
+        skillDescription = Some("Autotest - technical skills 6 description"),
+        applicationRequired = true,
+        interviewRequired = true
       ),
-      Some(
-        TechSkills(
-          techSkill = "Autotest - technical skills 7",
-          description = "Autotest - technical skills 7 description",
-          techInterview = false,
-          techApplication = true
-        )
+      TechSkill(
+        skillName = "Autotest - technical skills 7",
+        skillDescription = Some("Autotest - technical skills 7 description"),
+        applicationRequired = true,
+        interviewRequired = true
       ),
-      Some(
-        TechSkills(
-          techSkill = "Autotest - technical skills 8",
-          description = "Autotest - technical skills 8 description",
-          techInterview = false,
-          techApplication = true
-        )
+      TechSkill(
+        skillName = "Autotest - technical skills 8",
+        skillDescription = Some("Autotest - technical skills 8 description"),
+        applicationRequired = true,
+        interviewRequired = true
       )
     )
 
-object PEC_APPLY_ONLY_VACANCY_TESTS
+object IDVT_VACANCY_TESTS
     extends VacancyTestsDetails(
       false,
       "Online Tests",
@@ -368,13 +355,13 @@ object PEC_APPLY_ONLY_VACANCY_TESTS
       ),
       false,
       "Autotest - Additional details for the recruitment team",
-      Some(PEC_APPLY_ONLY_RECRUITER_TESTS),
-      Some(PEC_APPLY_ONLY_GROUP_A_TESTS),
-      Some(PEC_APPLY_ONLY_GROUP_B_TESTS),
-      Some(PEC_APPLY_ONLY_GROUP_C_TESTS)
+      Some(IDVT_RECRUITER_TESTS),
+      Some(IDVT_GROUP_A_TESTS),
+      Some(IDVT_GROUP_B_TESTS),
+      Some(IDVT_GROUP_C_TESTS)
     )
 
-object PEC_APPLY_ONLY_RECRUITER_TESTS
+object IDVT_RECRUITER_TESTS
     extends RecruiterTestsDetails(
       "Before the tests",
       "Auto-progress after each test",
@@ -383,7 +370,7 @@ object PEC_APPLY_ONLY_RECRUITER_TESTS
       "Autotest - Online test instructions"
     )
 
-object PEC_APPLY_ONLY_GROUP_A_TESTS
+object IDVT_GROUP_A_TESTS
     extends GroupATestsDetails(
       "First",
       "Three",
@@ -393,7 +380,7 @@ object PEC_APPLY_ONLY_GROUP_A_TESTS
       7
     )
 
-object PEC_APPLY_ONLY_GROUP_B_TESTS
+object IDVT_GROUP_B_TESTS
     extends GroupBTestsDetails(
       "Second",
       "Two",
@@ -402,7 +389,7 @@ object PEC_APPLY_ONLY_GROUP_B_TESTS
       5
     )
 
-object PEC_APPLY_ONLY_GROUP_C_TESTS
+object IDVT_GROUP_C_TESTS
     extends GroupCTestsDetails(
       "Third",
       "Two",
@@ -411,88 +398,93 @@ object PEC_APPLY_ONLY_GROUP_C_TESTS
       3
     )
 
-object PEC_APPLY_ONLY_ADDITIONAL_QUESTIONS
+object IDVT_ADDITIONAL_QUESTIONS
     extends AdditionalQuestionsDetails(
-      false,
+      true,
       3,
       "Autotest - Question 1",
       "Autotest - Question 2",
       "Autotest - Question 3"
     )
 
-object PEC_APPLY_ONLY_CRITERIA
+object IDVT_CRITERIA
     extends CriteriaDetails(
       campaignID = Some("Autotest - If this vacancy is linked to a campaign, enter the campaign ID (optional)"),
-      probationIncomplete = false,
-      promotionApply = false,
-      misconductLive = false,
-      performanceReview = false,
-      attendancePoor = false,
+      probationIncomplete = true,
+      promotionApply = true,
+      misconductLive = true,
+      performanceReview = true,
+      attendancePoor = true,
       nationalityRequirements = true,
-      rightToRemainUK = false,
-      licencesNotHeld = false,
-      membershipsNotHeld = false,
-      languagesSkillsNotHeld = false,
-      qualificationsHeld = false,
-      preSiftRequired = false,
-      uploadAttachment = false,
+      rightToRemainUK = true,
+      licencesNotHeld = true,
+      membershipsNotHeld = true,
+      languagesSkillsNotHeld = true,
+      qualificationsHeld = true,
+      preSiftRequired = true,
+      uploadAttachment = true,
       candidateInstructions = "Autotest - Instructions for candidate"
     )
 
-object PEC_APPLY_ONLY_MANAGEMENT
+object IDVT_MANAGEMENT
     extends ManagementDetails(
-      false,
-      false,
+      true,
+      true,
       "Other",
-      false,
+      true,
       assignTo = Option(s"$contactEmailVxConfig"),
       assignTo2 = Option(s"$contactEmailVxConfig"),
       true,
       "Business As Usual (BAU)",
       "Menu",
-      false,
-      false,
-      linkToProject = Option(false),
+      true,
+      true,
+      linkToProject = Option(true),
       projectName = Option("Autotest - Project name"),
       deptComplaintsProcess = Option("Autotest - Your department's complaints process"),
       vacancyComments = Option("Autotest - Comments on this vacancy")
     )
 
-object PEC_APPLY_ONLY_ONLINE_PEC_APPLY_ONLY_CHECK_FORMS
+object IDVT_ONLINE_IDVT_CHECK_FORMS
     extends OnlinePecCheckFormsDetails(
       true,
-      false,
+      true,
+      true,
       s"$contactEmailVxConfig"
     )
 
-object PEC_APPLY_ONLY_PEC_APPLY_ONLY_CHECK_FORMS
+object IDVT_IDVT_CHECK_FORMS
     extends PecCheckFormsDetails(
-      rtwCheck = List("Not Applicable"),
+      rtwCheck = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
       "Before pre employment checks",
-      "No digital checks",
-      false,
+      "Right to work and criminal record check",
+      true,
       "Autotest - Details of the identity documents the candidate needs to provide",
       false,
-      generalInfo = List("Not Applicable"),
-      referenceChecks = List("External Candidates", "NDPB Candidates"),
-      bankruptcyChecks = List("Not Applicable"),
-      crcChecks = List("Not Applicable"),
-      nsvChecks = List("Not Applicable"),
+      generalInfo = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      referenceChecks = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      bankruptcyChecks = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      crcChecks = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      nsvChecks = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
       "Show recruiter and candidate forms",
-      jobHistoryChecks = List("External Candidates", "NDPB Candidates"),
-      healthRefChecks = List("Not Applicable"),
+      jobHistoryChecks = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      healthRefChecks = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
       "Show recruiter and candidate forms",
-      overseasCheck = List("Not Applicable"),
-      pensionsCheck = List("Not Applicable"),
-      previousCsJobCheck = List("Not Applicable"),
-      internalFraudCheck = List("Not Applicable"),
-      selfEmploymentCheck = List("Not Applicable"),
-      false,
-      false,
+      overseasCheck = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      pensionsCheck = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      previousCsJobCheck =
+        ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      internalFraudCheck =
+        ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      selfEmploymentCheck =
+        ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      true,
+      true,
+      true,
       "Autotest - Name of check",
-      additionalCheck = List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
-      nenOnboarding = List("Not Applicable"),
+      additionalCheck = ListBuffer("Not Applicable"),
+      nenOnboarding = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
       s"$contactEmailVxConfig",
-      pnOnboarding = List("Not Applicable"),
+      pnOnboarding = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
       s"$contactEmailVxConfig"
     )

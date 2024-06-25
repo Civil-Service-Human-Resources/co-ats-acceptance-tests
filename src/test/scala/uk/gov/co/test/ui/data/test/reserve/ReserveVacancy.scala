@@ -2,7 +2,6 @@ package uk.gov.co.test.ui.data.test.reserve
 
 import uk.gov.co.test.ui.data.vx.vacancy.NewVacancyDetails
 import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.{contactEmailVxConfig, contactNameVxConfig}
-import uk.gov.co.test.ui.pages.v9.SignInPage.generateRandomJobPosition
 import uk.gov.co.test.ui.pages.vx.createvacancypage._
 
 import scala.collection.mutable.ListBuffer
@@ -32,7 +31,7 @@ object RESERVE_VACANCY_DATA
 object RESERVE_BASIC_DETAILS
     extends BasicDetails(
       "DO NOT USE- Automation Test Template",
-      s"Reserve - " + generateRandomJobPosition(),
+      s"CRX760: Reserve list - automation tests",
       true,
       "Prawf awtomeiddio",
       32
@@ -45,6 +44,7 @@ object RESERVE_JOB_INFORMATION
       true,
       "Prawf awtomeiddio",
       "Autotest - Business area detail",
+      "Autotest - Position identifier",
       typeOfRole = ListBuffer(
         "Accountancy",
         "Analytical",
@@ -54,7 +54,8 @@ object RESERVE_JOB_INFORMATION
         "Tax Profession"
       ),
       "Other",
-      "3"
+      "3",
+      true
     )
 object RESERVE_APPROACH
     extends ApproachDetails(
@@ -76,23 +77,23 @@ object RESERVE_APPROVAL
 object RESERVE_RESERVE_LIST
     extends ReserveListDetails(
       true,
-      "6 Months",
+      "3 Months",
       false,
-      "6 Months"
+      "8 weeks"
     )
 
 object RESERVE_LOCATIONS
     extends LocationsDetails(
-      "Postcodes",
+      "Remote (anywhere in the UK)",
       "M1 4RJ",
       "Manchester",
       "North West",
       "Germany",
       "Newcastle, Liverpool, Cardiff",
-      true,
-      true,
+      false,
+      false,
       "All communities",
-      true,
+      false,
       "3",
       otherLocations = ListBuffer("London", "Southampton", "Manchester")
     )
@@ -104,13 +105,13 @@ object RESERVE_CONTRACT_DETAILS
       true,
       "Prawf awtomeiddio",
       List("Full-time", "Part-time", "Compressed Hours", "Flexible working", "Homeworking"),
-      "Senior Executive Officer",
+      ListBuffer("Senior Executive Officer"),
       "Grade 7",
       "GBP (£)",
       75000,
       95000,
       "Can agree on the higher bracket",
-      true,
+      false,
       18750
     )
 
@@ -135,16 +136,16 @@ object RESERVE_CONTACT_DETAILS
 
 object RESERVE_VETTING_DETAILS
     extends VettingDetails(
-      true,
-      "Basic",
+      false,
+      "Standard",
       "Disclosure barring service (DBS)",
-      "Security check",
-      true
+      "None",
+      false
     )
 
 object RESERVE_INTERVIEWS_DETAILS
     extends InterviewsDetails(
-      "1",
+      "No interviews",
       "Interview",
       "Assessment",
       "Video",
@@ -154,11 +155,11 @@ object RESERVE_INTERVIEWS_DETAILS
 
 object RESERVE_SUCCESS_PROFILES
     extends SuccessProfilesDetails(
-      true,
-      true,
-      true,
-      true,
-      true,
+      false,
+      false,
+      false,
+      false,
+      false,
       Some(RESERVE_ABILITIES),
       Some(RESERVE_BEHAVIOURS),
       Some(RESERVE_EXPERIENCES),
@@ -244,69 +245,53 @@ object RESERVE_STRENGTHS
 object RESERVE_TECH_SKILLS
     extends TechSkillsDetails(
       8,
-      Some(
-        TechSkills(
-          techSkill = "Autotest - technical skills 1",
-          description = "Autotest - technical skills 1 description",
-          techInterview = true,
-          techApplication = true
-        )
+      TechSkill(
+        skillName = "Autotest - technical skills 1",
+        skillDescription = Some("Autotest - technical skills 1 description"),
+        applicationRequired = true,
+        interviewRequired = true
       ),
-      Some(
-        TechSkills(
-          techSkill = "Autotest - technical skills 2",
-          description = "Autotest - technical skills 2 description",
-          techInterview = true,
-          techApplication = true
-        )
+      TechSkill(
+        skillName = "Autotest - technical skills 2",
+        skillDescription = Some("Autotest - technical skills 2 description"),
+        applicationRequired = true,
+        interviewRequired = true
       ),
-      Some(
-        TechSkills(
-          techSkill = "Autotest - technical skills 3",
-          description = "Autotest - technical skills 3 description",
-          techInterview = true,
-          techApplication = true
-        )
+      TechSkill(
+        skillName = "Autotest - technical skills 3",
+        skillDescription = Some("Autotest - technical skills 3 description"),
+        applicationRequired = true,
+        interviewRequired = true
       ),
-      Some(
-        TechSkills(
-          techSkill = "Autotest - technical skills 4",
-          description = "Autotest - technical skills 4 description",
-          techInterview = true,
-          techApplication = true
-        )
+      TechSkill(
+        skillName = "Autotest - technical skills 4",
+        skillDescription = Some("Autotest - technical skills 4 description"),
+        applicationRequired = true,
+        interviewRequired = true
       ),
-      Some(
-        TechSkills(
-          techSkill = "Autotest - technical skills 5",
-          description = "Autotest - technical skills 5 description",
-          techInterview = true,
-          techApplication = true
-        )
+      TechSkill(
+        skillName = "Autotest - technical skills 5",
+        skillDescription = Some("Autotest - technical skills 5 description"),
+        applicationRequired = true,
+        interviewRequired = true
       ),
-      Some(
-        TechSkills(
-          techSkill = "Autotest - technical skills 6",
-          description = "Autotest - technical skills 6 description",
-          techInterview = true,
-          techApplication = true
-        )
+      TechSkill(
+        skillName = "Autotest - technical skills 6",
+        skillDescription = Some("Autotest - technical skills 6 description"),
+        applicationRequired = true,
+        interviewRequired = true
       ),
-      Some(
-        TechSkills(
-          techSkill = "Autotest - technical skills 7",
-          description = "Autotest - technical skills 7 description",
-          techInterview = true,
-          techApplication = true
-        )
+      TechSkill(
+        skillName = "Autotest - technical skills 7",
+        skillDescription = Some("Autotest - technical skills 7 description"),
+        applicationRequired = true,
+        interviewRequired = true
       ),
-      Some(
-        TechSkills(
-          techSkill = "Autotest - technical skills 8",
-          description = "Autotest - technical skills 8 description",
-          techInterview = true,
-          techApplication = true
-        )
+      TechSkill(
+        skillName = "Autotest - technical skills 8",
+        skillDescription = Some("Autotest - technical skills 8 description"),
+        applicationRequired = true,
+        interviewRequired = true
       )
     )
 
@@ -413,7 +398,7 @@ object RESERVE_GROUP_C_TESTS
 
 object RESERVE_ADDITIONAL_QUESTIONS
     extends AdditionalQuestionsDetails(
-      true,
+      false,
       3,
       "Autotest - Question 1",
       "Autotest - Question 2",
@@ -423,36 +408,36 @@ object RESERVE_ADDITIONAL_QUESTIONS
 object RESERVE_CRITERIA
     extends CriteriaDetails(
       campaignID = Some("Autotest - If this vacancy is linked to a campaign, enter the campaign ID (optional)"),
-      probationIncomplete = true,
-      promotionApply = true,
-      misconductLive = true,
-      performanceReview = true,
-      attendancePoor = true,
+      probationIncomplete = false,
+      promotionApply = false,
+      misconductLive = false,
+      performanceReview = false,
+      attendancePoor = false,
       nationalityRequirements = true,
-      rightToRemainUK = true,
-      licencesNotHeld = true,
-      membershipsNotHeld = true,
-      languagesSkillsNotHeld = true,
-      qualificationsHeld = true,
-      preSiftRequired = true,
-      uploadAttachment = true,
+      rightToRemainUK = false,
+      licencesNotHeld = false,
+      membershipsNotHeld = false,
+      languagesSkillsNotHeld = false,
+      qualificationsHeld = false,
+      preSiftRequired = false,
+      uploadAttachment = false,
       candidateInstructions = "Autotest - Instructions for candidate"
     )
 
 object RESERVE_MANAGEMENT
     extends ManagementDetails(
-      true,
       false,
-      "Other",
-      true,
+      false,
+      "Nature of the role",
+      false,
       assignTo = Option(s"$contactEmailVxConfig"),
       assignTo2 = Option(s"$contactEmailVxConfig"),
       true,
-      "Business As Usual (BAU)",
+      "SCS - Cross government campaign",
       "Menu",
-      true,
-      true,
-      linkToProject = Option(true),
+      false,
+      false,
+      linkToProject = Option(false),
       projectName = Option("Autotest - Project name"),
       deptComplaintsProcess = Option("Autotest - Your department's complaints process"),
       vacancyComments = Option("Autotest - Comments on this vacancy")
@@ -462,37 +447,39 @@ object RESERVE_ONLINE_PEC_CHECK_FORMS
     extends OnlinePecCheckFormsDetails(
       true,
       true,
+      true,
       s"$contactEmailVxConfig"
     )
 
 object RESERVE_PEC_CHECK_FORMS
     extends PecCheckFormsDetails(
-      rtwCheck = List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      rtwCheck = ListBuffer("External Candidates", "OGD Candidates", "NDPB Candidates"),
       "Before pre employment checks",
       "Right to work and criminal record check",
-      true,
+      false,
       "Autotest - Details of the identity documents the candidate needs to provide",
       false,
-      generalInfo = List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
-      referenceChecks = List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
-      bankruptcyChecks = List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
-      crcChecks = List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
-      nsvChecks = List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      generalInfo = ListBuffer("External Candidates", "OGD Candidates", "NDPB Candidates"),
+      referenceChecks = ListBuffer("Not Applicable"),
+      bankruptcyChecks = ListBuffer("Not Applicable"),
+      crcChecks = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      nsvChecks = ListBuffer("Not Applicable"),
       "Show recruiter and candidate forms",
-      jobHistoryChecks = List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
-      healthRefChecks = List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      jobHistoryChecks = ListBuffer("Not Applicable"),
+      healthRefChecks = ListBuffer("Not Applicable"),
       "Show recruiter and candidate forms",
-      overseasCheck = List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
-      pensionsCheck = List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
-      previousCsJobCheck = List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
-      internalFraudCheck = List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
-      selfEmploymentCheck = List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
-      true,
-      true,
+      overseasCheck = ListBuffer("Not Applicable"),
+      pensionsCheck = ListBuffer("Not Applicable"),
+      previousCsJobCheck = ListBuffer("Not Applicable"),
+      internalFraudCheck = ListBuffer("Not Applicable"),
+      selfEmploymentCheck = ListBuffer("Not Applicable"),
+      false,
+      false,
+      false,
       "Autotest - Name of check",
-      additionalCheck = List("Not Applicable"),
-      nenOnboarding = List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      additionalCheck = ListBuffer("Not Applicable"),
+      nenOnboarding = ListBuffer("Not Applicable"),
       s"$contactEmailVxConfig",
-      pnOnboarding = List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      pnOnboarding = ListBuffer("Not Applicable"),
       s"$contactEmailVxConfig"
     )

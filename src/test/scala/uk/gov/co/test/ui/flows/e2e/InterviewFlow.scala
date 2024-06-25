@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.flows.e2e
 
 import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXInterviewExpectedRounds, vXInterviewNumber}
-import uk.gov.co.test.ui.data.vx.application.{APPLICATION_DATA, ApplicationDetails}
+import uk.gov.co.test.ui.data.vx.application.ApplicationDetails
 import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.interviewSlotBookedState
 import uk.gov.co.test.ui.pages.v9.BookedInterviewPage.confirmBookingSlot
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage

@@ -1,8 +1,8 @@
 package uk.gov.co.test.ui.pages.v9.pecform
 
 import org.scalatest.concurrent.Eventually.eventually
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{v9EussStatus, v9RtwBritishCitizen, v9RtwHoldPassport, vXApproach, vXRtwChecks}
 import uk.gov.co.test.ui.data.v9.pecform.PecFormDetails
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXRtwChecks, vXWhenRtwChecks}
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
 import uk.gov.co.test.ui.pages.v9.pecform.YourDetailsPage.pecFormId
 
@@ -42,7 +42,7 @@ object RightToWorkPage extends CivilServiceJobsBasePage {
   def liveInUKNoId                      = s"${pecFormId}_datafield_175692_1_1_2_label"
   def euOrSwissCitizenYesId             = s"${pecFormId}_datafield_175710_1_1_1_label"
   def euOrSwissCitizenNoId              = s"${pecFormId}_datafield_175710_1_1_2_label"
-  def eussStatusDidNotApplyId           = s"${pecFormId}_datafield_175746_1_1_legend"
+  def eussStatusDidNotApplyId           = s"${pecFormId}_datafield_175746_1_1_42631_label"
   def eussStatusAppliedAwaitId          = s"${pecFormId}_datafield_175746_1_1_42632_label"
   def eussStatusSettledStatusId         = s"${pecFormId}_datafield_175746_1_1_42633_label"
   def eussStatusPreSettledStatusId      = s"${pecFormId}_datafield_175746_1_1_42634_label"
@@ -98,40 +98,45 @@ object RightToWorkPage extends CivilServiceJobsBasePage {
     else radioSelect(retainedNationalityNoId)
 
   private def selectHoldBritishPassport(rtwDetails: RtwDetails): Unit =
-    if (rtwDetails.holdBritishPassport) radioSelect(holdBritishPassportYesId)
+    if (rtwDetails.holdBritishPassport && v9RtwHoldPassport) radioSelect(holdBritishPassportYesId)
     else radioSelect(holdBritishPassportNoId)
 
   private def selectLiveInUK(rtwDetails: RtwDetails): Unit =
     if (rtwDetails.liveInUK) radioSelect(liveInUKYesId)
     else radioSelect(liveInUKNoId)
 
-  private def selectEUOrSwissCitizen(rtwDetails: RtwDetails): Unit =
+  private def selectEuOrSwissCitizen(rtwDetails: RtwDetails): Unit =
     if (rtwDetails.euOrSwissCitizen) {
       radioSelect(euOrSwissCitizenYesId)
-      selectEUSSStatus(rtwDetails)
+      selectEussStatusFlow(rtwDetails)
     } else {
       radioSelect(euOrSwissCitizenNoId)
-      selectMemberEUOrSwiss(rtwDetails)
+      selectMemberEuOrSwiss(rtwDetails)
     }
 
-  private def selectMemberEUOrSwiss(rtwDetails: RtwDetails): Unit =
+  private def selectMemberEuOrSwiss(rtwDetails: RtwDetails): Unit =
     if (rtwDetails.memberEUOrSwiss) {
       radioSelect(memberOfEUOrSwissYesId)
-    } else radioSelect(memberOfEUOrSwissNoId)
+      selectEussStatusFlow(rtwDetails)
+    } else {
+      radioSelect(memberOfEUOrSwissNoId)
+      selectBiometricResidenceCard(rtwDetails)
+    }
 
   private def selectAreYouBritishCitizen(rtwDetails: RtwDetails): Unit =
-    if (rtwDetails.britishCitizen) {
+    if (rtwDetails.britishCitizen && v9RtwBritishCitizen) {
       radioSelect(britishCitizenYesId)
       selectHoldBritishPassport(rtwDetails)
     } else {
+      v9RtwHoldPassport = false
       radioSelect(britishCitizenNoId)
       selectLiveInUK(rtwDetails)
-      selectEUOrSwissCitizen(rtwDetails)
+      selectEuOrSwissCitizen(rtwDetails)
     }
 
-  private def selectEUSSStatus(rtwDetails: RtwDetails): Unit =
-    rtwDetails.eussStatus match {
-      case "What is your European Union Settlement Scheme (EUSS) status?"                 =>
+  private def selectEussStatus(rtwDetails: RtwDetails): Unit =
+    v9EussStatus match {
+      case "I did not apply for the EU Settlement Scheme"                 =>
         radioSelect(eussStatusDidNotApplyId)
         selectBiometricResidenceCard(rtwDetails)
       case "I have applied for the settlement scheme and await confirmation of my status" =>
@@ -148,16 +153,24 @@ object RightToWorkPage extends CivilServiceJobsBasePage {
         uploadProofOfNationality(rtwDetails)
     }
 
+  private def selectEussStatusFlow(rtwDetails: RtwDetails): Unit =
+    if (v9EussStatus.isEmpty) {
+      v9EussStatus = rtwDetails.eussStatus
+      selectEussStatus(rtwDetails)
+    } else selectEussStatus(rtwDetails)
+
   private val rtw: Seq[RtwDetails => Unit] = Seq(
     selectNationalityAtBirth,
     selectPresentNationality,
     selectAnyOtherCurrentNationality,
-    selectAreYouBritishCitizen,
-    selectEUOrSwissCitizen
+    selectAreYouBritishCitizen
   )
 
   def rightToWorkPage(pecFormDetails: PecFormDetails): Unit =
-    if (!vXRtwChecks.contains("Not Applicable") && vXWhenRtwChecks == "Before pre employment checks") {
+    if (
+      !vXRtwChecks.contains("Not Applicable") &&
+      vXRtwChecks.contains(s"$vXApproach Candidates")
+    ) {
       rtwPageCheck()
       rtw.foreach { f =>
         f(pecFormDetails.rtwDetails)

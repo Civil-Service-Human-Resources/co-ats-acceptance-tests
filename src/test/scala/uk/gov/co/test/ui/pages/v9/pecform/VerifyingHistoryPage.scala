@@ -1,6 +1,7 @@
 package uk.gov.co.test.ui.pages.v9.pecform
 
 import org.scalatest.concurrent.Eventually.eventually
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXApproach, vXPecEmploymentHistoryCheck}
 import uk.gov.co.test.ui.data.v9.pecform.PecFormDetails
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
 import uk.gov.co.test.ui.pages.v9.pecform.YourDetailsPage.pecFormId
@@ -133,12 +134,16 @@ object VerifyingHistoryPage extends CivilServiceJobsBasePage {
     enterThirdRefereeDetails
   )
 
-  def verifyingHistoryPage(pecFormDetails: PecFormDetails): Unit = {
-    confirmThreeRefereeDetails()
-    instructionsDetails()
-    verifyingHistory.foreach { f =>
-      f(pecFormDetails.verifyingHistoryDetails)
+  def verifyingHistoryPage(pecFormDetails: PecFormDetails): Unit =
+    if (
+      !vXPecEmploymentHistoryCheck.contains("Not Applicable") &&
+      vXPecEmploymentHistoryCheck.contains(s"$vXApproach Candidates")
+    ) {
+      confirmThreeRefereeDetails()
+      instructionsDetails()
+      verifyingHistory.foreach { f =>
+        f(pecFormDetails.verifyingHistoryDetails)
+      }
+      clickOn(pageContinue)
     }
-    clickOn(pageContinue)
-  }
 }

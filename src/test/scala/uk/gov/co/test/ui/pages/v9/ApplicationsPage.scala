@@ -124,6 +124,7 @@ object ApplicationsPage extends CivilServiceJobsBasePage {
   def extractApplicationId(): Unit = {
     navigateToApplicationsPage()
     applicationId = applicationIdValue()
+    println(s"Application ID: $applicationId")
   }
 
   def navigateToApplicationCentrePage(): Unit =

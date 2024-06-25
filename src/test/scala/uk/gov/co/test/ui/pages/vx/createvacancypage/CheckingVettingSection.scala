@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.pages.vx.createvacancypage
 
 import org.openqa.selenium.By
-import uk.gov.co.test.ui.data.MasterVacancyDetails.vacancyFormId
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXCrcCheckProvider, vXCrcLevel, vXMedicalRequired, vXNonReserved, vXProfile, vXVettingLevel, vacancyFormId}
 import uk.gov.co.test.ui.data.vx.vacancy.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 
@@ -33,24 +33,37 @@ object CheckingVettingSection extends VacancyBasePage {
   def medicalRequiredYesId         = s"${vacancyFormId}_datafield_59608_1_1_1"
   def medicalRequiredNoId          = s"${vacancyFormId}_datafield_59608_1_1_2"
 
-  private def selectCheckLevelRequired(vettingDetails: VettingDetails): Unit =
-    vettingDetails.checkLevelRequired match {
+  private def selectReservedStatus(vettingDetails: VettingDetails): Unit = {
+    scrollToElement(By.id(reservedStatusId))
+    vXNonReserved = vettingDetails.reservedStatus
+    if (vXNonReserved) clickOnRadioButton(reservedYesId) else clickOnRadioButton(reservedNoId)
+  }
+
+  private def selectCheckLevelRequired(vettingDetails: VettingDetails): Unit = {
+    vXCrcLevel = vettingDetails.checkLevelRequired
+    vXCrcLevel match {
       case "Basic"    => clickOnRadioButton(basicCheckId)
       case "Standard" => clickOnRadioButton(standardCheckId)
       case "Enhanced" => clickOnRadioButton(enhancedCheckId)
       case "None"     => clickOnRadioButton(noCheckRequiredId)
     }
+  }
 
-  private def checkWhichProvider(vettingDetails: VettingDetails): Unit =
-    vettingDetails.whichProvider match {
-      case "Disclosure barring service (DBS)" => checkbox(dbsProviderId).select()
-      case "Disclosure Scotland"              => checkbox(disclosureScotlandProviderId).select()
-      case "Access NI"                        => checkbox(accessNIProviderId).select()
+  private def checkWhichProvider(vettingDetails: VettingDetails): Unit = {
+    vXCrcCheckProvider = vettingDetails.whichProvider
+    if (vXProfile != "Vacancy Holder 1") {
+      vXCrcCheckProvider match {
+        case "Disclosure barring service (DBS)" => checkbox(dbsProviderId).select()
+        case "Disclosure Scotland" => checkbox(disclosureScotlandProviderId).select()
+        case "Access NI" => checkbox(accessNIProviderId).select()
+      }
     }
+  }
 
   private def selectVettingLevelRequired(vettingDetails: VettingDetails): Unit = {
     scrollToElement(By.id(vettingRequiredId))
-    vettingDetails.vettingLevelRequired match {
+    vXVettingLevel = vettingDetails.vettingLevelRequired
+    vXVettingLevel match {
       case "Counter terrorist check" => clickOnRadioButton(counterTerroristCheckId)
       case "Security check"          => clickOnRadioButton(securityCheckId)
       case "Developed vetting"       => clickOnRadioButton(developedVettingId)
@@ -58,14 +71,11 @@ object CheckingVettingSection extends VacancyBasePage {
     }
   }
 
-  private def selectReservedStatus(vettingDetails: VettingDetails): Unit = {
-    scrollToElement(By.id(reservedStatusId))
-    if (vettingDetails.reservedStatus) clickOnRadioButton(reservedYesId) else clickOnRadioButton(reservedNoId)
-  }
-
-  private def selectMedicalRequired(vettingDetails: VettingDetails): Unit =
-    if (vettingDetails.medicalRequired) clickOnRadioButton(medicalRequiredYesId)
+  private def selectMedicalRequired(vettingDetails: VettingDetails): Unit = {
+    vXMedicalRequired = vettingDetails.medicalRequired
+    if (vXMedicalRequired) clickOnRadioButton(medicalRequiredYesId)
     else clickOnRadioButton(medicalRequiredNoId)
+  }
 
   private val checkAndVetting: Seq[VettingDetails => Unit] = Seq(
     selectReservedStatus,

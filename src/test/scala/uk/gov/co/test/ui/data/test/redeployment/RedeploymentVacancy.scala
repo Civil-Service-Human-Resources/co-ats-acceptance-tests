@@ -45,6 +45,7 @@ object REDEPLOYMENT_JOB_INFORMATION
       true,
       "Prawf awtomeiddio",
       "Autotest - Business area detail",
+      "Autotest - Position identifier",
       typeOfRole = ListBuffer(
         "Accountancy",
         "Analytical",
@@ -54,7 +55,8 @@ object REDEPLOYMENT_JOB_INFORMATION
         "Tax Profession"
       ),
       "Other",
-      "3"
+      "3",
+      false
     )
 object REDEPLOYMENT_APPROACH
     extends ApproachDetails(
@@ -104,7 +106,7 @@ object REDEPLOYMENT_CONTRACT_DETAILS
       true,
       "Prawf awtomeiddio",
       List("Full-time", "Part-time", "Compressed Hours", "Flexible working", "Homeworking"),
-      "Senior Executive Officer",
+      ListBuffer("Senior Executive Officer"),
       "Grade 7",
       "GBP (£)",
       75000,
@@ -244,69 +246,53 @@ object REDEPLOYMENT_STRENGTHS
 object REDEPLOYMENT_TECH_SKILLS
     extends TechSkillsDetails(
       8,
-      Some(
-        TechSkills(
-          techSkill = "Autotest - technical skills 1",
-          description = "Autotest - technical skills 1 description",
-          techInterview = true,
-          techApplication = true
-        )
+      TechSkill(
+        skillName = "Autotest - technical skills 1",
+        skillDescription = Some("Autotest - technical skills 1 description"),
+        applicationRequired = true,
+        interviewRequired = true
       ),
-      Some(
-        TechSkills(
-          techSkill = "Autotest - technical skills 2",
-          description = "Autotest - technical skills 2 description",
-          techInterview = true,
-          techApplication = true
-        )
+      TechSkill(
+        skillName = "Autotest - technical skills 2",
+        skillDescription = Some("Autotest - technical skills 2 description"),
+        applicationRequired = true,
+        interviewRequired = true
       ),
-      Some(
-        TechSkills(
-          techSkill = "Autotest - technical skills 3",
-          description = "Autotest - technical skills 3 description",
-          techInterview = true,
-          techApplication = true
-        )
+      TechSkill(
+        skillName = "Autotest - technical skills 3",
+        skillDescription = Some("Autotest - technical skills 3 description"),
+        applicationRequired = true,
+        interviewRequired = true
       ),
-      Some(
-        TechSkills(
-          techSkill = "Autotest - technical skills 4",
-          description = "Autotest - technical skills 4 description",
-          techInterview = true,
-          techApplication = true
-        )
+      TechSkill(
+        skillName = "Autotest - technical skills 4",
+        skillDescription = Some("Autotest - technical skills 4 description"),
+        applicationRequired = true,
+        interviewRequired = true
       ),
-      Some(
-        TechSkills(
-          techSkill = "Autotest - technical skills 5",
-          description = "Autotest - technical skills 5 description",
-          techInterview = true,
-          techApplication = true
-        )
+      TechSkill(
+        skillName = "Autotest - technical skills 5",
+        skillDescription = Some("Autotest - technical skills 5 description"),
+        applicationRequired = true,
+        interviewRequired = true
       ),
-      Some(
-        TechSkills(
-          techSkill = "Autotest - technical skills 6",
-          description = "Autotest - technical skills 6 description",
-          techInterview = true,
-          techApplication = true
-        )
+      TechSkill(
+        skillName = "Autotest - technical skills 6",
+        skillDescription = Some("Autotest - technical skills 6 description"),
+        applicationRequired = true,
+        interviewRequired = true
       ),
-      Some(
-        TechSkills(
-          techSkill = "Autotest - technical skills 7",
-          description = "Autotest - technical skills 7 description",
-          techInterview = true,
-          techApplication = true
-        )
+      TechSkill(
+        skillName = "Autotest - technical skills 7",
+        skillDescription = Some("Autotest - technical skills 7 description"),
+        applicationRequired = true,
+        interviewRequired = true
       ),
-      Some(
-        TechSkills(
-          techSkill = "Autotest - technical skills 8",
-          description = "Autotest - technical skills 8 description",
-          techInterview = true,
-          techApplication = true
-        )
+      TechSkill(
+        skillName = "Autotest - technical skills 8",
+        skillDescription = Some("Autotest - technical skills 8 description"),
+        applicationRequired = true,
+        interviewRequired = true
       )
     )
 
@@ -462,37 +448,42 @@ object REDEPLOYMENT_ONLINE_PEC_CHECK_FORMS
     extends OnlinePecCheckFormsDetails(
       true,
       true,
+      true,
       s"$contactEmailVxConfig"
     )
 
 object REDEPLOYMENT_PEC_CHECK_FORMS
     extends PecCheckFormsDetails(
-      rtwCheck = List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      rtwCheck = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
       "Before pre employment checks",
       "Right to work and criminal record check",
       true,
       "Autotest - Details of the identity documents the candidate needs to provide",
       false,
-      generalInfo = List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
-      referenceChecks = List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
-      bankruptcyChecks = List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
-      crcChecks = List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
-      nsvChecks = List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      generalInfo = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      referenceChecks = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      bankruptcyChecks = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      crcChecks = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      nsvChecks = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
       "Show recruiter and candidate forms",
-      jobHistoryChecks = List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
-      healthRefChecks = List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      jobHistoryChecks = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      healthRefChecks = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
       "Show recruiter and candidate forms",
-      overseasCheck = List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
-      pensionsCheck = List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
-      previousCsJobCheck = List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
-      internalFraudCheck = List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
-      selfEmploymentCheck = List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      overseasCheck = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      pensionsCheck = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      previousCsJobCheck =
+        ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      internalFraudCheck =
+        ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      selfEmploymentCheck =
+        ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      true,
       true,
       true,
       "Autotest - Name of check",
-      additionalCheck = List("Not Applicable"),
-      nenOnboarding = List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      additionalCheck = ListBuffer("Not Applicable"),
+      nenOnboarding = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
       s"$contactEmailVxConfig",
-      pnOnboarding = List("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      pnOnboarding = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
       s"$contactEmailVxConfig"
     )

@@ -1,25 +1,28 @@
 package uk.gov.co.test.ui.data.vx.application
 
-import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.contactEmailVxConfig
+import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.{contactEmailVxConfig, contactNameVxConfig}
 import uk.gov.co.test.ui.pages.vx.vacancytabs._
 import uk.gov.co.test.ui.pages.vx.{CalenderScheduleDetails, InterviewScheduleDetails}
 
 import java.time.LocalDate
+import scala.collection.mutable.ListBuffer
 
-object APPLICATION_DATA
+object MASTER_APPLICATION_DATA
     extends ApplicationDetails(
-      APPLICATION_EMPLOYMENT_HISTORY,
-      APPLICATION_PRE_SIFT_EVALUATION,
-      APPLICATION_SIFT_EVALUATION,
-      APPLICATION_INTERVIEW_SCHEDULE,
-      APPLICATION_CALENDER_SCHEDULE,
-      APPLICATION_INTERVIEW_ONE_EVALUATION,
-      APPLICATION_INTERVIEW_TWO_EVALUATION,
-      APPLICATION_INTERVIEW_THREE_EVALUATION,
-      APPLICATION_INTERVIEW_FOUR_EVALUATION
+      MASTER_APPLICATION_EMPLOYMENT_HISTORY,
+      MASTER_APPLICATION_PRE_SIFT_EVALUATION,
+      MASTER_APPLICATION_SIFT_EVALUATION,
+      MASTER_APPLICATION_INTERVIEW_SCHEDULE,
+      MASTER_APPLICATION_CALENDER_SCHEDULE,
+      MASTER_APPLICATION_INTERVIEW_ONE_EVALUATION,
+      MASTER_APPLICATION_INTERVIEW_TWO_EVALUATION,
+      MASTER_APPLICATION_INTERVIEW_THREE_EVALUATION,
+      MASTER_APPLICATION_INTERVIEW_FOUR_EVALUATION,
+      MASTER_APPLICATION_POSTING_NOTICE,
+      MASTER_APPLICATION_NEW_ENTRANT_NOTICE
     )
 
-object APPLICATION_EMPLOYMENT_HISTORY
+object MASTER_APPLICATION_EMPLOYMENT_HISTORY
     extends HistoryDetails(
       false,
       historyCheckStarted = LocalDate.now(),
@@ -40,7 +43,7 @@ object APPLICATION_EMPLOYMENT_HISTORY
       internalNotes = "Autotest - internal notes (optional)"
     )
 
-object APPLICATION_PRE_SIFT_EVALUATION
+object MASTER_APPLICATION_PRE_SIFT_EVALUATION
     extends PreSiftDetails(
       "A",
       "Autotest - CV assessment comments",
@@ -52,7 +55,7 @@ object APPLICATION_PRE_SIFT_EVALUATION
       "Autotest - Overall comments"
     )
 
-object APPLICATION_SIFT_EVALUATION
+object MASTER_APPLICATION_SIFT_EVALUATION
     extends SiftDetails(
       """Scoring guide:
         |Not demonstrated -No positive evidence and/or substantial negative evidence demonstrated
@@ -62,14 +65,14 @@ object APPLICATION_SIFT_EVALUATION
         |Good demonstration - Substantial positive evidence of the competency or behaviour
         |Strong demonstration - Substantial positive evidence; includes some evidence of exceeding expectations at this level
         |Outstanding demonstration - The evidence provided wholly exceeds expectation at this level""".stripMargin,
-      behaviourOne = Outcome(6, Some("Autotest - Changing and Improving - behaviour one comments")),
-      behaviourTwo = Outcome(7, Some("Autotest - Changing and Improving - behaviour one comments")),
-      behaviourThree = Outcome(7, Some("Autotest - Delivering at Pace - behaviour three comments")),
-      behaviourFour = Outcome(7, Some("Autotest - Developing Self and Others - behaviour four comments")),
-      behaviourFive = Outcome(7, Some("Autotest - Leadership - behaviour five comments")),
-      behaviourSix = Outcome(6, Some("Autotest - Making Effective Decisions - behaviour six comments")),
-      behaviourSeven = Outcome(6, Some("Autotest - Managing a Quality Service - behaviour seven comments")),
-      behaviourEight = Outcome(7, Some("Autotest - Working Together - behaviour eight comments")),
+      behaviourOne = Outcome(6, Some("Autotest - behaviour one comments")),
+      behaviourTwo = Outcome(7, Some("Autotest - behaviour two comments")),
+      behaviourThree = Outcome(7, Some("Autotest - behaviour three comments")),
+      behaviourFour = Outcome(7, Some("Autotest - behaviour four comments")),
+      behaviourFive = Outcome(7, Some("Autotest - behaviour five comments")),
+      behaviourSix = Outcome(6, Some("Autotest - behaviour six comments")),
+      behaviourSeven = Outcome(6, Some("Autotest - behaviour seven comments")),
+      behaviourEight = Outcome(7, Some("Autotest - behaviour eight comments")),
       techSkillOne = Outcome(5, Some("Autotest - Tech Skill One - tech skill one  comments")),
       techSkillTwo = Outcome(7, Some("Autotest - Tech Skill Two - tech skill two comments")),
       techSkillThree = Outcome(7, Some("Autotest - Tech Skill Three - tech skill three comments")),
@@ -85,7 +88,7 @@ object APPLICATION_SIFT_EVALUATION
       "Declaration\n\nBy submitting this form you are agreeing to and accepting that you have no conflict of interest with this applicant and the evaluation reflects the views of all the selection panel members."
     )
 
-object APPLICATION_INTERVIEW_SCHEDULE
+object MASTER_APPLICATION_INTERVIEW_SCHEDULE
     extends InterviewScheduleDetails(
       false,
       Some("Copy From Template"),
@@ -110,7 +113,7 @@ object APPLICATION_INTERVIEW_SCHEDULE
       false
     )
 
-object APPLICATION_CALENDER_SCHEDULE
+object MASTER_APPLICATION_CALENDER_SCHEDULE
     extends CalenderScheduleDetails(
       "09:00",
       60,
@@ -123,7 +126,7 @@ object APPLICATION_CALENDER_SCHEDULE
       None
     )
 
-object APPLICATION_INTERVIEW_ONE_EVALUATION
+object MASTER_APPLICATION_INTERVIEW_ONE_EVALUATION
     extends InterviewOneDetails(
       scoringGuide = """Scoring guide:
           |Not demonstrated - No positive evidence and/or substantial negative evidence demonstrated
@@ -192,7 +195,7 @@ object APPLICATION_INTERVIEW_ONE_EVALUATION
           |By submitting this form you are agreeing to and accepting that you have no conflict of interest with this applicant and the evaluation reflects the views of all the selection panel members.""".stripMargin
     )
 
-object APPLICATION_INTERVIEW_TWO_EVALUATION
+object MASTER_APPLICATION_INTERVIEW_TWO_EVALUATION
     extends InterviewTwoDetails(
       scoringGuide = """Scoring guide:
                      |Not demonstrated - No positive evidence and/or substantial negative evidence demonstrated
@@ -261,7 +264,7 @@ object APPLICATION_INTERVIEW_TWO_EVALUATION
                              |By submitting this form you are agreeing to and accepting that you have no conflict of interest with this applicant and the evaluation reflects the views of all the selection panel members.""".stripMargin
     )
 
-object APPLICATION_INTERVIEW_THREE_EVALUATION
+object MASTER_APPLICATION_INTERVIEW_THREE_EVALUATION
     extends InterviewThreeDetails(
       scoringGuide = """Scoring guide:
                      |Not demonstrated - No positive evidence and/or substantial negative evidence demonstrated
@@ -330,7 +333,7 @@ object APPLICATION_INTERVIEW_THREE_EVALUATION
                              |By submitting this form you are agreeing to and accepting that you have no conflict of interest with this applicant and the evaluation reflects the views of all the selection panel members.""".stripMargin
     )
 
-object APPLICATION_INTERVIEW_FOUR_EVALUATION
+object MASTER_APPLICATION_INTERVIEW_FOUR_EVALUATION
     extends InterviewFourDetails(
       scoringGuide = """Scoring guide:
                      |Not demonstrated - No positive evidence and/or substantial negative evidence demonstrated
@@ -397,4 +400,92 @@ object APPLICATION_INTERVIEW_FOUR_EVALUATION
       declarationStatement = """Declaration
                              |
                              |By submitting this form you are agreeing to and accepting that you have no conflict of interest with this applicant and the evaluation reflects the views of all the selection panel members.""".stripMargin
+    )
+
+object MASTER_APPLICATION_POSTING_NOTICE
+    extends PostingNoticeDetails(
+      "1234",
+      "autotest-sop org",
+      "autotest-sop position",
+      "autotest-business unit",
+      "123456",
+      "JA448800D",
+      startDate = LocalDate.now(),
+      "09:30",
+      "Autotest address",
+      true,
+      "autotest - 2nd location",
+      "Temporary",
+      "The post is time limited and is being advertised as an apprenticeship for the advertised period. The fixed-term will end when the apprenticeship has completed.",
+      "autotest - key responsibilities",
+      contractEndDate = LocalDate.now(),
+      "Level Transfer",
+      workingPattern = ListBuffer("Annualised hours", "Full Time", "Part Time"),
+      "40",
+      "8",
+      "8",
+      "8",
+      "8",
+      "8",
+      "0",
+      "0",
+      payZone = ListBuffer("London", "National"),
+      "45000",
+      true,
+      negotiatedSalaryDate = LocalDate.now(),
+      true,
+      "autotest - allowances name and account",
+      true,
+      true,
+      s"$contactNameVxConfig",
+      "01520000000",
+      s"$contactEmailVxConfig",
+      "12345"
+    )
+
+object MASTER_APPLICATION_NEW_ENTRANT_NOTICE
+    extends NewEntrantNoticeDetails(
+      "1234",
+      "autotest-sop org",
+      "autotest-sop position",
+      "autotest-business unit",
+      "OGD",
+      true,
+      false,
+      "Exception 1: Temporary appointments",
+      LocalDate.now().plusDays(1),
+      "09:30",
+      "Autotest address",
+      true,
+      "autotest - 2nd location",
+      "Fixed Term Appointment",
+      true,
+      "90%",
+      "Up to 18",
+      contractEndDate = LocalDate.now().plusMonths(3),
+      "The post is permanent and requires temporary cover, for no more than 12 months,  whilst permanent recruitment activity has commenced and needs time to complete. The fixed-term will end when the permanent recruitment completes.",
+      "autotest - key responsibilities",
+      "Homeworking",
+      "40",
+      "8",
+      "8",
+      "8",
+      "8",
+      "8",
+      "0",
+      "0",
+      payZone = ListBuffer("London", "National"),
+      "55000",
+      true,
+      negotiatedSalaryDate = LocalDate.now().minusDays(2),
+      true,
+      "autotest - allowances name and account",
+      true,
+      true,
+      LocalDate.now(),
+      s"$contactNameVxConfig",
+      "United Kingdom +44",
+      "7711234123",
+      s"$contactEmailVxConfig",
+      "12345"
     )
