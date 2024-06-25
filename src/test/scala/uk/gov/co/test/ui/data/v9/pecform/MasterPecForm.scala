@@ -1,5 +1,6 @@
 package uk.gov.co.test.ui.data.v9.pecform
 
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{randomFirstName, randomLastName}
 import uk.gov.co.test.ui.pages.v9.pecform._
 import uk.gov.co.test.ui.pages.vx.DashboardPage.v9RefereeEmail
 
@@ -15,6 +16,7 @@ object MASTER_PEC_FORM_DATA
       MASTER_PEC_FORM_HEALTH_DECLARATION,
       MASTER_PEC_FORM_SELF_EMPLOYMENT,
       MASTER_PEC_FORM_PREVIOUS_CS_EMPLOYMENT,
+      MASTER_PEC_FORM_NATIONAL_SECURITY_VETTING,
       MASTER_PEC_FORM_UPLOAD_IDENTITY_DOCS,
       MASTER_PEC_FORM_DBS_PERSONAL_INFO,
       MASTER_PEC_FORM_DBS_ADDRESS_DETAILS,
@@ -163,16 +165,16 @@ object MASTER_PEC_FORM_OVERSEAS
     )
 
 object MASTER_PEC_FORM_BANKRUPTCY_DETAILS
-  extends BankruptcyDetails(
-    true,
-    "Autotest - bankruptcy status",
-    true,
-    "Autotest - insolvency status",
-    true,
-    "Autotest - details about the receiving order in effect on your property",
-    true,
-    "Autotest - details on any penalties imposed in relation to late filing on your tax affairs within the last 5 years"
-  )
+    extends BankruptcyDetails(
+      true,
+      "Autotest - bankruptcy status",
+      true,
+      "Autotest - insolvency status",
+      true,
+      "Autotest - details about the receiving order in effect on your property",
+      true,
+      "Autotest - details on any penalties imposed in relation to late filing on your tax affairs within the last 5 years"
+    )
 
 object MASTER_PEC_FORM_HEALTH_DECLARATION
     extends HealthDeclarationDetails(
@@ -245,6 +247,39 @@ object MASTER_PEC_FORM_DIGITAL_IDENTITY_CHECK
       true,
       "Do you have an in-date photocard driving licence?",
       true
+    )
+
+object MASTER_PEC_FORM_NATIONAL_SECURITY_VETTING
+    extends NsvDetails(
+      s"$randomLastName",
+      anyOtherSurname = Some(s"$randomLastName"),
+      anyOtherSurnameTwo = Some(s"$randomLastName"),
+      anyOtherForename = Some(s"$randomFirstName"),
+      anyOtherForenameTwo = Some(s"$randomFirstName"),
+      "Ely",
+      "United Kingdom",
+      true,
+      "IMMINOTTELL",
+      "40 Cromwell Road",
+      addressLineTwo = Some("Heald Place"),
+      "Ely",
+      "CB6 1AS",
+      "Cambridgeshire",
+      "United Kingdom",
+      "03/11/1975",
+      false,
+      true,
+      "MI6",
+      "007",
+      "31/07/1980",
+      serviceEndDate = Some("01/09/2000"),
+      "Contractor",
+      true,
+      "Enhanced Developed Vetting",
+      "01/01/1990",
+      "31/12/1996",
+      "NSVS",
+      securityClearanceInfo = Some(value = "Autotest - security clearance details")
     )
 
 object MASTER_PEC_FORM_DECLARATION

@@ -11,6 +11,7 @@ import uk.gov.co.test.ui.pages.v9.pecform.DeclarationPage.{declarationPage, pecF
 import uk.gov.co.test.ui.pages.v9.pecform.DigitalIdentityCheckPage.digitalIdentityCheckPage
 import uk.gov.co.test.ui.pages.v9.pecform.EmploymentHistoryPage.employmentHistoryPage
 import uk.gov.co.test.ui.pages.v9.pecform.HealthDeclarationPage.healthDeclarationPage
+import uk.gov.co.test.ui.pages.v9.pecform.NationalSecurityVettingPage.nationalSecurityVettingPage
 import uk.gov.co.test.ui.pages.v9.pecform.OverseasPage.overseasPage
 import uk.gov.co.test.ui.pages.v9.pecform.PensionQuestionnairePage.pensionQuestionnairePage
 import uk.gov.co.test.ui.pages.v9.pecform.PreviousCSEmploymentPage.previousCSEmploymentPage
@@ -33,6 +34,7 @@ object PecFormFlow extends CivilServiceJobsBasePage {
     healthDeclarationPage, //TODO full logic required
     selfEmploymentPage, //TODO full logic required
     previousCSEmploymentPage, //TODO full logic required
+    nationalSecurityVettingPage,
     uploadIdentityDocPage,
     dbsPersonalInfoPage,
     dbsAddressDetailsPage,

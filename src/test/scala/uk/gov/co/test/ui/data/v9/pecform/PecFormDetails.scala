@@ -13,6 +13,7 @@ case class PecFormDetails(
   healthDeclarationDetails: HealthDeclarationDetails,
   selfEmploymentDetails: SelfEmploymentDetails,
   previousCSEmploymentDetails: PreviousCSEmploymentDetails,
+  nsvDetails: NsvDetails,
   identityDocDetails: IdentityDocDetails,
   dbsPersonalInfoDetails: DbsPersonalInfoDetails,
   dbsAddressDetails: DbsAddressDetails,

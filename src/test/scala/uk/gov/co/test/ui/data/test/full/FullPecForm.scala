@@ -1,5 +1,6 @@
 package uk.gov.co.test.ui.data.test.full
 
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{randomFirstName, randomLastName}
 import uk.gov.co.test.ui.data.v9.pecform.PecFormDetails
 import uk.gov.co.test.ui.pages.v9.pecform._
 import uk.gov.co.test.ui.pages.vx.DashboardPage.v9RefereeEmail
@@ -16,6 +17,7 @@ object FULL_PEC_FORM_DATA
       FULL_PEC_FORM_HEALTH_DECLARATION,
       FULL_PEC_FORM_SELF_EMPLOYMENT,
       FULL_PEC_FORM_PREVIOUS_CS_EMPLOYMENT,
+      FULL_PEC_FORM_NATIONAL_SECURITY_VETTING,
       FULL_PEC_FORM_UPLOAD_IDENTITY_DOCS,
       FULL_PEC_FORM_DBS_PERSONAL_INFO,
       FULL_PEC_FORM_DBS_ADDRESS_DETAILS,
@@ -246,6 +248,39 @@ object FULL_PEC_FORM_SELF_EMPLOYMENT
 object FULL_PEC_FORM_PREVIOUS_CS_EMPLOYMENT
     extends PreviousCSEmploymentDetails(
       false
+    )
+
+object FULL_PEC_FORM_NATIONAL_SECURITY_VETTING
+    extends NsvDetails(
+      s"$randomLastName",
+      anyOtherSurname = Some(s"$randomLastName"),
+      anyOtherSurnameTwo = Some(s"$randomLastName"),
+      anyOtherForename = Some(s"$randomFirstName"),
+      anyOtherForenameTwo = Some(s"$randomFirstName"),
+      "Ely",
+      "United Kingdom",
+      true,
+      "IMMINOTTELL",
+      "40 Cromwell Road",
+      addressLineTwo = Some("Heald Place"),
+      "Ely",
+      "CB6 1AS",
+      "Cambridgeshire",
+      "United Kingdom",
+      "03/11/1975",
+      false,
+      true,
+      "MI6",
+      "007",
+      "31/07/1980",
+      serviceEndDate = Some("01/09/2000"),
+      "Contractor",
+      true,
+      "Enhanced Developed Vetting",
+      "01/01/1990",
+      "31/12/1996",
+      "NSVS",
+      securityClearanceInfo = Some(value = "Autotest - security clearance details")
     )
 
 object FULL_PEC_FORM_DECLARATION
