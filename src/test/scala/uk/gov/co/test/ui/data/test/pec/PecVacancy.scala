@@ -139,8 +139,12 @@ object PEC_CONTACT_DETAILS
 object PEC_VETTING_DETAILS
     extends VettingDetails(
       true,
-      "Basic",
+      "Enhanced",
       "Disclosure barring service (DBS)",
+      true,
+      true,
+      true,
+      true,
       "Security check",
       true
     )
@@ -479,7 +483,7 @@ object PEC_PEC_CHECK_FORMS
       selfEmploymentCheck =
         ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
       true,
-      true,
+      false,
       true,
       "Autotest - name of additional check",
       additionalCheck = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),

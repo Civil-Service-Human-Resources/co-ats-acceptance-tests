@@ -20,6 +20,7 @@ object OGD_APPLICATION_DATA
       OGD_APPLICATION_INTERVIEW_TWO_EVALUATION,
       OGD_APPLICATION_INTERVIEW_THREE_EVALUATION,
       OGD_APPLICATION_INTERVIEW_FOUR_EVALUATION,
+      OGD_APPLICATION_OGD_SECURITY_CHECKS,
       OGD_APPLICATION_POSTING_NOTICE,
       OGD_APPLICATION_NEW_ENTRANT_NOTICE
     )
@@ -403,6 +404,12 @@ object OGD_APPLICATION_INTERVIEW_FOUR_EVALUATION
                              |
                              |By submitting this form you are agreeing to and accepting that you have no conflict of interest with this applicant and the evaluation reflects the views of all the selection panel members.""".stripMargin
     )
+
+object OGD_APPLICATION_OGD_SECURITY_CHECKS
+  extends OgdSecurityChecksDetails(
+    true,
+    true
+  )
 
 object OGD_APPLICATION_POSTING_NOTICE
     extends PostingNoticeDetails(

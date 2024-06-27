@@ -522,10 +522,6 @@ object InterviewOneEvaluationTab extends VacancyBasePage {
       interviewOneDetails.strengthOne.comment
     )
     vXI1StrengthsTotalScore += interviewOneDetails.strengthOne.score
-    println(vXListOfStrengths)
-    println(s"Strength 1  \n${vXListOfStrengths.head}")
-    println(vXI1StrengthsTotalScore)
-    println("Done")
   }
 
   private def enterStrengthTwoOutcome(interviewOneDetails: InterviewOneDetails): Unit = {
@@ -759,7 +755,6 @@ object InterviewOneEvaluationTab extends VacancyBasePage {
       vXI1StrengthsTotalScore
     ) + totalScore(vXI1AssessmentsTotalScore) + vXI1ExperienceScore
     waitForVisibilityOfElementById(overallScoreId).getText should endWith(s"$overallScore")
-//    waitForVisibilityOfElementById(overallScoreId).getText shouldEqual s"Overall score\n  $overallScore"
   }
 
   private def enterOutcome(interviewOneDetails: InterviewOneDetails): Unit = {

@@ -2,99 +2,103 @@ package uk.gov.co.test.ui.pages.vx
 
 import org.openqa.selenium.By
 import org.scalatest.concurrent.Eventually.eventually
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{applicationId, randomFirstName, randomLastName, v9CivilServant, v9HomeDepartment, v9RtwHoldPassport, vXApproach, vXCandidateUploadIdentityDocs, vXCrcCheckProvider, vXCrcLevel, vXInterviewNumber, vXJobInfoDepartment, vXPecBankruptcyCheck, vXPecCrc, vXPecEmploymentHistoryCheck, vXPecHealthRefCheck, vXPecNen, vXPecNsv, vXPecOverseasCheck, vXPecPensionsCheck, vXPecPn, vXPecPreviousCivilEmploymentCheck, vXPecSelfEmploymentCheck, vXRtwChecks, vXUseOnlinePecForms, vXWhichIdentityChecks, vacancyId, vacancyName}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{applicationId, randomFirstName, randomLastName, v9CivilServant, v9HomeDepartment, vXApproach, vXCandidateUploadIdentityDocs, vXCrcCheckProvider, vXCrcLevel, vXInterviewNumber, vXJobInfoDepartment, vXPecBankruptcyCheck, vXPecCrc, vXPecEmploymentHistoryCheck, vXPecHealthRefCheck, vXPecNen, vXPecNsv, vXPecOverseasCheck, vXPecPensionsCheck, vXPecPn, vXPecPreviousCivilEmploymentCheck, vXPecSelfEmploymentCheck, vXRtwChecks, vXUseOnlinePecForms, vacancyId, vacancyName}
+import uk.gov.co.test.ui.data.vx.application.MASTER_APPLICATION_DATA
 import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.{candidateAcceptsOffer, confirmApplicationUpdateNoPecNen, confirmApplicationUpdateNoPecPn, confirmApplicationUpdateState, confirmOfferAcceptedNoPecFunction, confirmOfferAcceptedState}
 import uk.gov.co.test.ui.pages.v9.ProvisionalOfferPage.offerDecisionFlow
 import uk.gov.co.test.ui.pages.vx.DashboardPage.matchCriteria
+import uk.gov.co.test.ui.pages.vx.vacancytabs.OgdSecurityChecksDetails
+import uk.gov.co.test.ui.pages.vx.vacancytabs.OgdSecurityChecksTab.ogdSecurityChecksFlow
 
 object ApplicationSummaryPage extends VacancyBasePage {
 
-  val dashboardPageTitle                 = "Home : Civil Service Jobs - GOV.UK"
-  val applicationSummaryPageTitle        = "Application Summary : Civil Service Jobs - GOV.UK"
-  val searchApplicationPath              = ".//*[@class='textlabel' and text() = 'Search Applications']"
-  val searchPath                         = "selected_option"
-  val searchInput                        = "search_input"
-  val matchingOption                     = "matching_options"
-  val searchForId                        = "search_button"
-  val appIdPath                          = ".//*[@class='app_id']"
-  val preSiftEvaluationFormBarId         = "process_rule_but_468"
-  val completeSiftBarId                  = "process_rule_but_18"
-  val progressBarId                      = "process_rule_but_657"
-  val provisionalOfferOnlineBarId        = "process_rule_but_3176"
-  val provisionalOfferOnlineReserveBarId = "process_rule_but_727"
-  val provisionalOfferOfflineBarId       = "process_rule_but_725"
-  val reserveExpiryListBarId             = "process_rule_but_1347"
-  val employmentHistoryBarId             = "process_rule_but_744"
-  val conditionalOfferBarId              = "process_rule_but_1024"
-  val updateApplicantBarId               = "process_rule_but_2008"
-  val emailVacancyHolderBarId            = "process_rule_but_2032"
-  val progressBarAfterPreSiftId          = "process_rule_but_155"
-  val rejectBarAfterPreSiftId            = "process_rule_but_154"
-  val withdrawBarId                      = "process_rule_but_509"
-  val completeNewEntrantFormBarId        = "process_rule_but_765"
-  val withdrawApplicationOnOfferBarId    = "process_rule_but_570"
-  val sendNenToHrBarId                   = "process_rule_but_2018"
-  val sendNenToHrBarAfterNenId           = "process_rule_but_2012"
-  val updateApplicantTypeBarId           = "process_rule_but_2008"
-  val inviteCandidateToIdvtBarId         = "process_rule_but_3213"
-  val crcBarId                           = "process_rule_but_776"
-  val inviteToI1BarId                    = "process_rule_but_162"
-  val inviteToI2BarId                    = "process_rule_but_164"
-  val inviteToI3BarId                    = "process_rule_but_176"
-  val inviteToI4BarId                    = "process_rule_but_192"
-  val scheduleOfflineI1BarId             = "process_rule_but_488"
-  val scheduleOfflineI2BarId             = "process_rule_but_489"
-  val scheduleOfflineI3BarId             = "process_rule_but_490"
-  val scheduleOfflineI4BarId             = "process_rule_but_491"
-  val interviewNotBookedBarId            = "process_rule_but_484"
-  val scheduleI1BarId                    = "process_rule_but_23"
-  val completeI1EvaluationBarId          = "process_rule_but_579"
-  val completeI2EvaluationBarId          = "process_rule_but_580"
-  val completeI3EvaluationBarId          = "process_rule_but_581"
-  val completeI4EvaluationBarId          = "process_rule_but_582"
-  val noShowI1BarId                      = "process_rule_but_25"
-  val noShowI2BarId                      = "process_rule_but_166"
-  val noShowI3BarId                      = "process_rule_but_181"
-  val noShowI4BarId                      = "process_rule_but_197"
-  val uploadIDEditFeedbackBarId          = "process_rule_but_1462"
-  val uploadIDOnOfferBarId               = "process_rule_but_1064"
-  val progressI1EvaluationBarId          = "process_rule_but_703"
-  val progressI2EvaluationBarId          = "process_rule_but_704"
-  val progressI3EvaluationBarId          = "process_rule_but_1085"
-  val progressI4EvaluationBarId          = "process_rule_but_1086"
-  val withdrawAtInterviewBarId           = "process_rule_but_511"
-  val launchFullPecRecruiterFormBarId    = "process_rule_but_731"
-  val completePostingNoticeFormBarId     = "process_rule_but_910"
-  val requestUpdatedNenBarId             = "process_rule_but_1608"
-  val finaliseNenBarId                   = "process_rule_but_944"
-  val completeSecurityChecksFormBarId    = "process_rule_but_1482"
-  val firstDayArrangementsBarId          = "process_rule_but_1200"
-  val firstDayArrangementsOfflineBarId   = "process_rule_but_991"
-  val formalOfferOnlineBarId             = "process_rule_but_526"
-  val formalOfferOfflineBarId            = "process_rule_but_766"
-  val rtwChecksFormBarId                 = "process_rule_but_733"
-  val idvtNotCompletedBarId              = "process_rule_but_3220"
-  val confirmIdDocumentsBarId            = "process_rule_but_2070"
-  val furtherIdRequiredBarId             = "process_rule_but_2071"
-  val scheduleI2BarId                    = "process_rule_but_34"
-  val offerDecisionBarId                 = "process_rule_but_564"
-  val requestUpdatedPostingNoticeBarId   = "process_rule_but_1607"
-  val firstDayArrangementsAfterPnBarId   = "process_rule_but_911"
-  val firstDayArrangementsAfterNenBarId  = "process_rule_but_938"
-  val readyToHireBarId                   = "process_rule_but_965"
-  val sendPnToHrBarId                    = "process_rule_but_2014"
-  val passChecksBarId                    = "process_rule_but_999"
-  val failChecksBarId                    = "process_rule_but_750"
-  val referToVhForRiskBarId              = "process_rule_but_751"
-  val allBarItemsId                      = "process_rules_bar"
-  val preSiftActionButtonsPath           = ".//*[@aria-label='Action Buttons']"
-  val siftEvaluationTabPath              = ".//span[@class='main-label' and text() = 'Sift evaluation']"
-  val commentsTabPath                    = ".//span[@class='main-label' and text() = 'Comments']"
-  val summaryTabPath                     = ".//span[@class='main-label' and text() = 'Summary']"
-  val vacancyAppliedDatePath             = ".//*[@id='collapse_panel']/span[2]"
-  var appSummaryFormId                   = ""
-  def outcomeId                          = s"select2-${appSummaryFormId}_datafield_66487_1_1-container"
-  val messageIcon                        = ".//*[@class='msg_icon']"
+  val dashboardPageTitle                    = "Home : Civil Service Jobs - GOV.UK"
+  val applicationSummaryPageTitle           = "Application Summary : Civil Service Jobs - GOV.UK"
+  val searchApplicationPath                 = ".//*[@class='textlabel' and text() = 'Search Applications']"
+  val searchPath                            = "selected_option"
+  val searchInput                           = "search_input"
+  val matchingOption                        = "matching_options"
+  val searchForId                           = "search_button"
+  val appIdPath                             = ".//*[@class='app_id']"
+  val preSiftEvaluationFormBarId            = "process_rule_but_468"
+  val completeSiftBarId                     = "process_rule_but_18"
+  val progressBarId                         = "process_rule_but_657"
+  val provisionalOfferOnlineBarId           = "process_rule_but_3176"
+  val provisionalOfferOnlineReserveBarId    = "process_rule_but_727"
+  val provisionalOfferOfflineBarId          = "process_rule_but_725"
+  val reserveExpiryListBarId                = "process_rule_but_1347"
+  val employmentHistoryBarId                = "process_rule_but_744"
+  val conditionalOfferBarId                 = "process_rule_but_1024"
+  val updateApplicantBarId                  = "process_rule_but_2008"
+  val emailVacancyHolderBarId               = "process_rule_but_2032"
+  val progressBarAfterPreSiftId             = "process_rule_but_155"
+  val rejectBarAfterPreSiftId               = "process_rule_but_154"
+  val withdrawBarId                         = "process_rule_but_509"
+  val completeNewEntrantFormBarId           = "process_rule_but_765"
+  val withdrawApplicationOnOfferBarId       = "process_rule_but_570"
+  val sendNenToHrBarId                      = "process_rule_but_2018"
+  val sendNenToHrBarAfterNenId              = "process_rule_but_2012"
+  val updateApplicantTypeBarId              = "process_rule_but_2008"
+  val inviteCandidateToIdvtBarId            = "process_rule_but_3213"
+  val crcBarId                              = "process_rule_but_776"
+  val inviteToI1BarId                       = "process_rule_but_162"
+  val inviteToI2BarId                       = "process_rule_but_164"
+  val inviteToI3BarId                       = "process_rule_but_176"
+  val inviteToI4BarId                       = "process_rule_but_192"
+  val scheduleOfflineI1BarId                = "process_rule_but_488"
+  val scheduleOfflineI2BarId                = "process_rule_but_489"
+  val scheduleOfflineI3BarId                = "process_rule_but_490"
+  val scheduleOfflineI4BarId                = "process_rule_but_491"
+  val interviewNotBookedBarId               = "process_rule_but_484"
+  val scheduleI1BarId                       = "process_rule_but_23"
+  val completeI1EvaluationBarId             = "process_rule_but_579"
+  val completeI2EvaluationBarId             = "process_rule_but_580"
+  val completeI3EvaluationBarId             = "process_rule_but_581"
+  val completeI4EvaluationBarId             = "process_rule_but_582"
+  val noShowI1BarId                         = "process_rule_but_25"
+  val noShowI2BarId                         = "process_rule_but_166"
+  val noShowI3BarId                         = "process_rule_but_181"
+  val noShowI4BarId                         = "process_rule_but_197"
+  val uploadIDEditFeedbackBarId             = "process_rule_but_1462"
+  val uploadIDOnOfferBarId                  = "process_rule_but_1064"
+  val progressI1EvaluationBarId             = "process_rule_but_703"
+  val progressI2EvaluationBarId             = "process_rule_but_704"
+  val progressI3EvaluationBarId             = "process_rule_but_1085"
+  val progressI4EvaluationBarId             = "process_rule_but_1086"
+  val withdrawAtInterviewBarId              = "process_rule_but_511"
+  val launchFullPecRecruiterFormBarId       = "process_rule_but_731"
+  val launchFullPecAfterSecurityChecksBarId = "process_rule_but_1490"
+  val completePostingNoticeFormBarId        = "process_rule_but_910"
+  val requestUpdatedNenBarId                = "process_rule_but_1608"
+  val finaliseNenBarId                      = "process_rule_but_944"
+  val completeSecurityChecksFormBarId       = "process_rule_but_1482"
+  val firstDayArrangementsBarId             = "process_rule_but_1200"
+  val firstDayArrangementsOfflineBarId      = "process_rule_but_991"
+  val formalOfferOnlineBarId                = "process_rule_but_526"
+  val formalOfferOfflineBarId               = "process_rule_but_766"
+  val rtwChecksFormBarId                    = "process_rule_but_733"
+  val idvtNotCompletedBarId                 = "process_rule_but_3220"
+  val confirmIdDocumentsBarId               = "process_rule_but_2070"
+  val furtherIdRequiredBarId                = "process_rule_but_2071"
+  val scheduleI2BarId                       = "process_rule_but_34"
+  val offerDecisionBarId                    = "process_rule_but_564"
+  val requestUpdatedPostingNoticeBarId      = "process_rule_but_1607"
+  val firstDayArrangementsAfterPnBarId      = "process_rule_but_911"
+  val firstDayArrangementsAfterNenBarId     = "process_rule_but_938"
+  val readyToHireBarId                      = "process_rule_but_965"
+  val sendPnToHrBarId                       = "process_rule_but_2014"
+  val passChecksBarId                       = "process_rule_but_999"
+  val failChecksBarId                       = "process_rule_but_750"
+  val referToVhForRiskBarId                 = "process_rule_but_751"
+  val allBarItemsId                         = "process_rules_bar"
+  val preSiftActionButtonsPath              = ".//*[@aria-label='Action Buttons']"
+  val siftEvaluationTabPath                 = ".//span[@class='main-label' and text() = 'Sift evaluation']"
+  val commentsTabPath                       = ".//span[@class='main-label' and text() = 'Comments']"
+  val summaryTabPath                        = ".//span[@class='main-label' and text() = 'Summary']"
+  val vacancyAppliedDatePath                = ".//*[@id='collapse_panel']/span[2]"
+  var appSummaryFormId                      = ""
+  def outcomeId                             = s"select2-${appSummaryFormId}_datafield_66487_1_1-container"
+  val messageIcon                           = ".//*[@class='msg_icon']"
 
   private def dashboardPageCheck(): Unit =
     eventually(onPage(dashboardPageTitle))
@@ -139,49 +143,53 @@ object ApplicationSummaryPage extends VacancyBasePage {
       confirmApplicationUpdateState()
       agreeStartDate()
     } else if (
-      vXUseOnlinePecForms && ((!vXRtwChecks
-        .contains("Not Applicable") && vXRtwChecks.contains(s"$vXApproach Candidates")) ||
-        (!vXPecEmploymentHistoryCheck
-          .contains("Not Applicable") && vXPecEmploymentHistoryCheck.contains(s"$vXApproach Candidates")) ||
-        (!vXPecPensionsCheck.contains("Not Applicable") && vXPecPensionsCheck.contains(s"$vXApproach Candidates")) ||
-        (!vXPecOverseasCheck.contains("Not Applicable") && vXPecOverseasCheck.contains(s"$vXApproach Candidates")) ||
-        (!vXPecBankruptcyCheck
-          .contains("Not Applicable") && vXPecBankruptcyCheck.contains(s"$vXApproach Candidates")) ||
-        (!vXPecHealthRefCheck.contains("Not Applicable") && vXPecHealthRefCheck.contains(s"$vXApproach Candidates")) ||
-        (!vXPecPreviousCivilEmploymentCheck
-          .contains("Not Applicable") && vXPecPreviousCivilEmploymentCheck.contains(s"$vXApproach Candidates")) ||
-        (!vXPecSelfEmploymentCheck
-          .contains("Not Applicable") && vXPecSelfEmploymentCheck.contains(s"$vXApproach Candidates")) ||
-        vXCandidateUploadIdentityDocs ||
-        (vXCrcLevel != "None" && vXCrcCheckProvider.contains("DBS")) ||
-        (vXWhichIdentityChecks != "No digital checks" && v9RtwHoldPassport)) &&
+      vXUseOnlinePecForms && (
+        (vXRtwChecks.contains("Not Applicable") && !vXRtwChecks.contains(s"$vXApproach Candidates")) &&
+        (vXPecEmploymentHistoryCheck.contains("Not Applicable") && !vXPecEmploymentHistoryCheck.contains(s"$vXApproach Candidates")) &&
+        (vXPecPensionsCheck.contains("Not Applicable") && !vXPecPensionsCheck.contains(s"$vXApproach Candidates")) &&
+        (vXPecOverseasCheck.contains("Not Applicable") && !vXPecOverseasCheck.contains(s"$vXApproach Candidates")) &&
+        (vXPecBankruptcyCheck
+          .contains("Not Applicable") && !vXPecBankruptcyCheck.contains(s"$vXApproach Candidates")) &&
+        (vXPecHealthRefCheck.contains("Not Applicable") && !vXPecHealthRefCheck.contains(s"$vXApproach Candidates")) &&
+        (vXPecPreviousCivilEmploymentCheck
+          .contains("Not Applicable") && !vXPecPreviousCivilEmploymentCheck.contains(s"$vXApproach Candidates")) &&
+        (vXPecSelfEmploymentCheck
+          .contains("Not Applicable") && !vXPecSelfEmploymentCheck.contains(s"$vXApproach Candidates")))
+      &&
       (vXPecPn.contains("Internal Candidates") && (v9CivilServant && vXJobInfoDepartment == v9HomeDepartment))
     ) {
       confirmApplicationUpdateNoPecPn()
       postingNoticeRequested()
     } else if (
-      vXUseOnlinePecForms && ((!vXRtwChecks
-        .contains("Not Applicable") && vXRtwChecks.contains(s"$vXApproach Candidates")) ||
-        (!vXPecEmploymentHistoryCheck
-          .contains("Not Applicable") && vXPecEmploymentHistoryCheck.contains(s"$vXApproach Candidates")) ||
-        (!vXPecPensionsCheck.contains("Not Applicable") && vXPecPensionsCheck.contains(s"$vXApproach Candidates")) ||
-        (!vXPecOverseasCheck.contains("Not Applicable") && vXPecOverseasCheck.contains(s"$vXApproach Candidates")) ||
-        (!vXPecBankruptcyCheck
-          .contains("Not Applicable") && vXPecBankruptcyCheck.contains(s"$vXApproach Candidates")) ||
-        (!vXPecHealthRefCheck.contains("Not Applicable") && vXPecHealthRefCheck.contains(s"$vXApproach Candidates")) ||
-        (!vXPecPreviousCivilEmploymentCheck
-          .contains("Not Applicable") && vXPecPreviousCivilEmploymentCheck.contains(s"$vXApproach Candidates")) ||
-        (!vXPecSelfEmploymentCheck
-          .contains("Not Applicable") && vXPecSelfEmploymentCheck.contains(s"$vXApproach Candidates")) ||
-        vXCandidateUploadIdentityDocs ||
-        (vXCrcLevel != "None" && vXCrcCheckProvider.contains("DBS")) ||
-        (vXWhichIdentityChecks != "No digital checks" && v9RtwHoldPassport)) &&
-      ((vXPecNen.contains("External Candidates") || vXPecNen.contains("OGD Candidates") || vXPecNen.contains(
-        "NDPB Candidates"
-      )) && (v9CivilServant && vXJobInfoDepartment != v9HomeDepartment))
+      vXUseOnlinePecForms && ((vXRtwChecks
+        .contains("Not Applicable") && !vXRtwChecks.contains(s"$vXApproach Candidates")) &&
+        (vXPecEmploymentHistoryCheck
+          .contains("Not Applicable") && !vXPecEmploymentHistoryCheck.contains(s"$vXApproach Candidates")) &&
+        (vXPecPensionsCheck.contains("Not Applicable") && !vXPecPensionsCheck.contains(s"$vXApproach Candidates")) &&
+        (vXPecOverseasCheck.contains("Not Applicable") && !vXPecOverseasCheck.contains(s"$vXApproach Candidates")) &&
+        (vXPecBankruptcyCheck
+          .contains("Not Applicable") && !vXPecBankruptcyCheck.contains(s"$vXApproach Candidates")) &&
+        (vXPecHealthRefCheck.contains("Not Applicable") && !vXPecHealthRefCheck.contains(s"$vXApproach Candidates")) &&
+        (vXPecPreviousCivilEmploymentCheck
+          .contains("Not Applicable") && !vXPecPreviousCivilEmploymentCheck.contains(s"$vXApproach Candidates")) &&
+        (vXPecSelfEmploymentCheck
+          .contains("Not Applicable") && !vXPecSelfEmploymentCheck.contains(s"$vXApproach Candidates")))
+      &&
+      ((vXPecNen.contains("External Candidates") || vXPecNen
+        .contains("OGD Candidates") || vXPecNen.contains("NDPB Candidates")) &&
+        (v9CivilServant && vXJobInfoDepartment != v9HomeDepartment))
     ) {
       confirmApplicationUpdateNoPecNen()
       checksCompleteDecisionRequired()
+    } else if (
+      vXUseOnlinePecForms &&
+        (vXCrcLevel != "None" && vXCrcCheckProvider.contains("DBS") && !vXPecCrc.contains("Not Applicable")) &&
+        (v9CivilServant && (v9HomeDepartment != vXJobInfoDepartment) && (v9HomeDepartment != "Independent Parliamentary Standards Authority"))
+    ){
+      securityChecksRequired()
+      ogdSecurityChecksFlow(MASTER_APPLICATION_DATA)
+      inviteCandidateToCompletePecForm()
+      confirmOfferAcceptedState()
     } else {
       confirmOfferAcceptedState()
       provisionalOfferAccepted()
@@ -233,6 +241,19 @@ object ApplicationSummaryPage extends VacancyBasePage {
         uploadIDOnOfferBarId,
         updateApplicantTypeBarId,
         emailVacancyHolderBarId
+      )
+    )
+    confirmCandidateSummary(newStatus)
+  }
+
+  def inviteCandidateToCompletePecForm(): Unit = {
+    val newStatus = "Invite candidate to complete PEC form"
+    changeSystem("recruiter")
+    checkForNewValuePath(vacancyStatusPath, newStatus)
+    availableBarItems(
+      List(
+        launchFullPecAfterSecurityChecksBarId,
+        withdrawApplicationOnOfferBarId
       )
     )
     confirmCandidateSummary(newStatus)

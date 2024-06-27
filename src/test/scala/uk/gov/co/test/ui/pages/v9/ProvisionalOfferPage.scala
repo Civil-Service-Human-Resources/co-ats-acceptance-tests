@@ -40,7 +40,8 @@ object ProvisionalOfferPage extends CivilServiceJobsBasePage {
   private def acceptOffer(): Unit =
     if (v9CivilServant) {
       radioSelect(isCivilServantYesId)
-      selectDropdownOption(homeDepartmentId, v9HomeDepartment)
+      if (v9HomeDepartment.isEmpty) selectDropdownOption(homeDepartmentId, "Attorney General's Office")
+      else selectDropdownOption(homeDepartmentId, v9HomeDepartment)
     } else radioSelect(isCivilServantNoId)
 
   private def declineOffer(): Unit = {

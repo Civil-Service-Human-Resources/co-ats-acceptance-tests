@@ -19,6 +19,7 @@ object PN_NEN_APPLICATION_DATA
       PN_NEN_APPLICATION_INTERVIEW_TWO_EVALUATION,
       PN_NEN_APPLICATION_INTERVIEW_THREE_EVALUATION,
       PN_NEN_APPLICATION_INTERVIEW_FOUR_EVALUATION,
+      PN_NEN_APPLICATION_OGD_SECURITY_CHECKS,
       PN_NEN_APPLICATION_POSTING_NOTICE,
       PN_NEN_APPLICATION_NEW_ENTRANT_NOTICE
     )
@@ -401,6 +402,12 @@ object PN_NEN_APPLICATION_INTERVIEW_FOUR_EVALUATION
       declarationStatement = """Declaration
                              |
                              |By submitting this form you are agreeing to and accepting that you have no conflict of interest with this applicant and the evaluation reflects the views of all the selection panel members.""".stripMargin
+    )
+
+object PN_NEN_APPLICATION_OGD_SECURITY_CHECKS
+    extends OgdSecurityChecksDetails(
+      true,
+      true
     )
 
 object PN_NEN_APPLICATION_POSTING_NOTICE

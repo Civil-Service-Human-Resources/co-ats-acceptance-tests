@@ -2,7 +2,7 @@ package uk.gov.co.test.ui.flows.v9
 
 import uk.gov.co.test.ui.data.MasterVacancyDetails.{v9RtwHoldPassport, vXApproach, vXCandidateUploadIdentityDocs, vXCrcCheckProvider, vXCrcLevel, vXPecBankruptcyCheck, vXPecEmploymentHistoryCheck, vXPecHealthRefCheck, vXPecOverseasCheck, vXPecPensionsCheck, vXPecPreviousCivilEmploymentCheck, vXPecSelfEmploymentCheck, vXRtwChecks, vXUseOnlinePecForms, vXWhichIdentityChecks}
 import uk.gov.co.test.ui.data.v9.pecform.PecFormDetails
-import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.pecStartFunction
+import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.{confirmOfferAcceptedState, pecStartFunction}
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
 import uk.gov.co.test.ui.pages.v9.pecform.BankruptcyDetailsPage.bankruptcyDetailsPage
 import uk.gov.co.test.ui.pages.v9.pecform.DbsAddressDetailsPage.dbsAddressDetailsPage
@@ -43,7 +43,8 @@ object PecFormFlow extends CivilServiceJobsBasePage {
   )
 
   def fillPecFormDetailsOnly(pecFormDetails: PecFormDetails): Unit = {
-    if (currentUrl.contains("recruiter")) changeSystem("candidate")
+//    if (currentUrl.contains("recruiter")) changeSystem("candidate")
+    confirmOfferAcceptedState()
     if (
       vXUseOnlinePecForms && ((!vXRtwChecks
         .contains("Not Applicable") && vXRtwChecks.contains(s"$vXApproach Candidates")) ||

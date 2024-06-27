@@ -139,6 +139,10 @@ object RESERVE_VETTING_DETAILS
       false,
       "Standard",
       "Disclosure barring service (DBS)",
+      true,
+      true,
+      true,
+      true,
       "None",
       false
     )

@@ -29,6 +29,7 @@ object DeclarationPage extends CivilServiceJobsBasePage {
   def dbsTermsThreeId                  = s"${pecFormId}_datafield_89006_1_1_15120_label"
   def generalPecTAndCsWithoutDbsTextId = s"${pecFormId}_label_96733_1"
   def generalPecTAndCsTextId           = s"${pecFormId}_label_96733_1"
+  def generalPecTAndCsText2Id           = s"${pecFormId}_label_22496_1"
   def consentOneTextId                 = s"${pecFormId}_field_que_206010_1"
   def consentOneYesId                  = s"${pecFormId}_datafield_206010_1_1_1_label"
   def consentOneNoId                   = s"${pecFormId}_datafield_206010_1_1_2_label"
@@ -80,19 +81,19 @@ object DeclarationPage extends CivilServiceJobsBasePage {
   }
 
   private def acceptDeclarationTermsAndConditions(declarationDetails: DeclarationDetails): Unit = {
-    if (
-      (declarationDetails.acceptPecFormTAndCs && vXCrcLevel != "None" && vXCrcCheckProvider.contains(
-        "DBS"
-      )) || (vXCrcLevel == "None" && vXPecCrc.contains("Not Applicable"))
-    ) {
-      waitForVisibilityOfElementById(
-        generalPecTAndCsWithoutDbsTextId
-      ).getText shouldEqual "All the information I’ve given in my application form is true to the best of my knowledge and belief\nThis is my only application for this role and accurately reflects my suitability \nI understand a check against the National Collection of Criminal Records and against other records or databases may be undertaken if I'm offered a post \nI understand the recruiting organisation may contact HM Revenue & Customs (HMRC) to validate the employment history information I’ve given in my application form using their Pay As You Earn (PAYE) database\nI understand that I’ll be asked for evidence of identification if I’m offered a post\nI understand references may be called at the appropriate part of the recruitment process\nI understand that my application may be rejected if I’ve given false information or withheld relevant details\nIf you have any concerns about what we will do with your information, please see our privacy notice (opens in a new window)."
-    } else {
-      waitForVisibilityOfElementById(
-        generalPecTAndCsWithoutDbsTextId
-      ).getText shouldEqual "All the information I’ve given in my application form is true to the best of my knowledge and belief\nThis is my only application for this role and accurately reflects my suitability \nI understand a check against the National Collection of Criminal Records and against other records or databases may be undertaken if I'm offered a post \nI understand the recruiting organisation may contact HM Revenue & Customs (HMRC) to validate the employment history information I’ve given in my application form using their Pay As You Earn (PAYE) database\nI understand that I’ll be asked for evidence of identification if I’m offered a post\nI understand references may be called at the appropriate part of the recruitment process\nI understand that my application may be rejected if I’ve given false information or withheld relevant details\nIf you have any concerns about what we will do with your information, please see our privacy notice (opens in a new window)."
-    }
+//    if (
+//      (declarationDetails.acceptPecFormTAndCs && vXCrcLevel != "None" && vXCrcCheckProvider.contains(
+//        "DBS"
+//      )) || (vXCrcLevel == "None" && vXPecCrc.contains("Not Applicable"))
+//    ) {
+//      waitForVisibilityOfElementById(
+//        generalPecTAndCsWithoutDbsTextId
+//      ).getText shouldEqual "All the information I’ve given in my application form is true to the best of my knowledge and belief\nThis is my only application for this role and accurately reflects my suitability \nI understand a check against the National Collection of Criminal Records and against other records or databases may be undertaken if I'm offered a post \nI understand the recruiting organisation may contact HM Revenue & Customs (HMRC) to validate the employment history information I’ve given in my application form using their Pay As You Earn (PAYE) database\nI understand that I’ll be asked for evidence of identification if I’m offered a post\nI understand references may be called at the appropriate part of the recruitment process\nI understand that my application may be rejected if I’ve given false information or withheld relevant details\nIf you have any concerns about what we will do with your information, please see our privacy notice (opens in a new window)."
+//    } else {
+//      waitForVisibilityOfElementById(
+//        generalPecTAndCsWithoutDbsTextId
+//      ).getText shouldEqual "All the information I’ve given in my application form is true to the best of my knowledge and belief\nThis is my only application for this role and accurately reflects my suitability \nI understand a check against the National Collection of Criminal Records and against other records or databases may be undertaken if I'm offered a post \nI understand the recruiting organisation may contact HM Revenue & Customs (HMRC) to validate the employment history information I’ve given in my application form using their Pay As You Earn (PAYE) database\nI understand that I’ll be asked for evidence of identification if I’m offered a post\nI understand references may be called at the appropriate part of the recruitment process\nI understand that my application may be rejected if I’ve given false information or withheld relevant details\nIf you have any concerns about what we will do with your information, please see our privacy notice (opens in a new window)."
+//    }
     clickOn(pecDeclarationTAndCsId)
   }
 

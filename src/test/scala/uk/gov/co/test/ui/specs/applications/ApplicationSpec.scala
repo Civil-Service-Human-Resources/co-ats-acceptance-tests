@@ -1,6 +1,5 @@
 package uk.gov.co.test.ui.specs.applications
 
-import uk.gov.co.test.ui.data.MasterVacancyDetails.vacancyId
 import uk.gov.co.test.ui.data.test.full._
 import uk.gov.co.test.ui.data.v9.applicants.{MASTER_REGISTER_CANDIDATE, REGISTER_CANDIDATE}
 import uk.gov.co.test.ui.data.v9.longform.MASTER_LONG_FORM_DATA
@@ -22,8 +21,7 @@ class ApplicationSpec extends BaseFeatureSpec {
   Feature("Candidate Completes Short & Long Form Application Process") {
     Scenario("VX: A Candidate Completes Short And Long Forms", RunInV9) {
       Given("candidate registers a new account")
-      vacancyId = "9831"
-      extractAllVacancyDetails(vacancyId)
+      extractAllVacancyDetails("9831")
       fillNewCandidateDetails(REGISTER_CANDIDATE)
 
       When("candidate completes the short form")
@@ -36,7 +34,6 @@ class ApplicationSpec extends BaseFeatureSpec {
     Scenario("VX: Full Application Process", RunInVX) {
       Given("candidate registers for new job application")
       fillNewVacancyForm(FULL_VACANCY_DATA)
-//      extractAllVacancyDetails("10095")
       fillNewCandidateDetails(MASTER_REGISTER_CANDIDATE)
 
       When("candidate completes the short & long forms")

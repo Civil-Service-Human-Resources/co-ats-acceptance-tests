@@ -140,6 +140,10 @@ object REDEPLOYMENT_VETTING_DETAILS
       true,
       "Basic",
       "Disclosure barring service (DBS)",
+      true,
+      true,
+      true,
+      true,
       "Security check",
       true
     )

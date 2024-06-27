@@ -2,7 +2,7 @@ package uk.gov.co.test.ui.pages.v9
 
 import org.openqa.selenium.{By, WebElement}
 import org.scalatest.concurrent.Eventually.eventually
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{applicationId, vacancyId}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{applicationId, randomEmail, vacancyId}
 
 import scala.collection.mutable
 import scala.jdk.CollectionConverters._
@@ -124,7 +124,11 @@ object ApplicationsPage extends CivilServiceJobsBasePage {
   def extractApplicationId(): Unit = {
     navigateToApplicationsPage()
     applicationId = applicationIdValue()
+    println("=============================================")
+    println(s"Candidate Email: $randomEmail")
     println(s"Application ID: $applicationId")
+    println(s"Vacancy ID: $vacancyId")
+    println("=============================================")
   }
 
   def navigateToApplicationCentrePage(): Unit =

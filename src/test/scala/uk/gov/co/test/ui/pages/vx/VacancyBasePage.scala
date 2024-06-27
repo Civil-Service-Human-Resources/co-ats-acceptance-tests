@@ -216,7 +216,6 @@ trait VacancyBasePage extends Matchers with BasePage with BrowserDriver {
     searchOn()
     confirmAndActivateVacancy()
     addExternalPosting()
-    println(s"Vacancy ID: $vacancyId")
   }
 
   def repostVacancy(): Unit = {}

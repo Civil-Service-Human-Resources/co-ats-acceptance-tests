@@ -18,6 +18,7 @@ object MASTER_APPLICATION_DATA
       MASTER_APPLICATION_INTERVIEW_TWO_EVALUATION,
       MASTER_APPLICATION_INTERVIEW_THREE_EVALUATION,
       MASTER_APPLICATION_INTERVIEW_FOUR_EVALUATION,
+      MASTER_APPLICATION_OGD_SECURITY_CHECKS,
       MASTER_APPLICATION_POSTING_NOTICE,
       MASTER_APPLICATION_NEW_ENTRANT_NOTICE
     )
@@ -400,6 +401,12 @@ object MASTER_APPLICATION_INTERVIEW_FOUR_EVALUATION
       declarationStatement = """Declaration
                              |
                              |By submitting this form you are agreeing to and accepting that you have no conflict of interest with this applicant and the evaluation reflects the views of all the selection panel members.""".stripMargin
+    )
+
+object MASTER_APPLICATION_OGD_SECURITY_CHECKS
+    extends OgdSecurityChecksDetails(
+      true,
+      true
     )
 
 object MASTER_APPLICATION_POSTING_NOTICE

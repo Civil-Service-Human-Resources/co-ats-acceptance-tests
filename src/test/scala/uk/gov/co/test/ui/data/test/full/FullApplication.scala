@@ -20,6 +20,7 @@ object FULL_APPLICATION_DATA
       FULL_APPLICATION_INTERVIEW_TWO_EVALUATION,
       FULL_APPLICATION_INTERVIEW_THREE_EVALUATION,
       FULL_APPLICATION_INTERVIEW_FOUR_EVALUATION,
+      FULL_APPLICATION_OGD_SECURITY_CHECKS,
       FULL_APPLICATION_POSTING_NOTICE,
       FULL_APPLICATION_NEW_ENTRANT_NOTICE
     )
@@ -402,6 +403,12 @@ object FULL_APPLICATION_INTERVIEW_FOUR_EVALUATION
       declarationStatement = """Declaration
                              |
                              |By submitting this form you are agreeing to and accepting that you have no conflict of interest with this applicant and the evaluation reflects the views of all the selection panel members.""".stripMargin
+    )
+
+object FULL_APPLICATION_OGD_SECURITY_CHECKS
+    extends OgdSecurityChecksDetails(
+      true,
+      true
     )
 
 object FULL_APPLICATION_POSTING_NOTICE

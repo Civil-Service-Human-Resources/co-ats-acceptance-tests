@@ -141,6 +141,10 @@ object OGD_VETTING_DETAILS
       false,
       "None",
       "Disclosure barring service (DBS)",
+      true,
+      true,
+      true,
+      true,
       "None",
       false
     )

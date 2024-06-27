@@ -140,6 +140,10 @@ object PN_NEN_VETTING_DETAILS
       true,
       "None",
       "Disclosure barring service (DBS)",
+      true,
+      true,
+      true,
+      true,
       "None",
       false
     )

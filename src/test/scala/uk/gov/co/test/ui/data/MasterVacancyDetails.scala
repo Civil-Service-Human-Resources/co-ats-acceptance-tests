@@ -219,7 +219,7 @@ object MasterVacancyDetails extends VacancyBasePage {
 
   //v9 SHORT FORM eligibility page
   var v9CivilServant: Boolean  = _
-  var v9HomeDepartment: String = "Independent Parliamentary Standards Authority"
+  var v9HomeDepartment: String = ""
 
   //v9 SHORT FORM personal info page
   var v9ReasonableAdjustments = false
@@ -229,8 +229,8 @@ object MasterVacancyDetails extends VacancyBasePage {
   var applicationId: String = ""
 
   //v9 PEC FORM rtw
-  var v9RtwBritishCitizen: Boolean = true
-  var v9RtwHoldPassport: Boolean   = true
+  var v9RtwBritishCitizen: Boolean = _
+  var v9RtwHoldPassport: Boolean   = _
   var v9EussStatus: String         = ""
 
   //v9 PEC FORM digital identity checks

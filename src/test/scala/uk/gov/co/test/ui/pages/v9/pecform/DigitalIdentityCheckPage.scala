@@ -65,12 +65,8 @@ object DigitalIdentityCheckPage extends CivilServiceJobsBasePage {
   }
 
   private def selectBiometricPassportOrId(digitalIdentityDetails: DigitalIdentityDetails): Unit = {
-    println(s"CRC Level is: $vXCrcLevel")
-    println(s"Identity Check Level is: $vXWhichIdentityChecks")
     v9BiometricPassportOrId = digitalIdentityDetails.biometricPassportOrId
-    if (
-      vXCrcLevel != "None" && vXWhichIdentityChecks != "No digital checks" && vXRtwChecks.contains("Not Applicable")
-    ) {
+    if (vXCrcLevel != "None" && vXWhichIdentityChecks != "No digital checks") {
       waitForVisibilityOfElementById(
         biometricPassportOrIdQuestionId
       ).getText shouldEqual digitalIdentityDetails.biometricPassportOrIdQuestion
@@ -98,7 +94,7 @@ object DigitalIdentityCheckPage extends CivilServiceJobsBasePage {
   )
 
   def digitalIdentityCheckPage(pecFormDetails: PecFormDetails): Unit =
-    if (vXWhichIdentityChecks != "No digital checks" && v9RtwHoldPassport) {
+    if (vXWhichIdentityChecks != "No digital checks") {
       digitalIdentityPageCheck()
       idvt.foreach { f =>
         f(pecFormDetails.digitalIdentityDetails)

@@ -220,7 +220,6 @@ object VacancyDetailsPage extends VacancyBasePage {
 
   def extractVacancyId(): String = {
     vacancyId = waitForVisibilityOfElementByPath(appIdPath).getText
-    println(s"Vacancy ID: $vacancyId")
     vacancyId
   }
 

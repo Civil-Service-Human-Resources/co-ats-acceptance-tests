@@ -9,29 +9,41 @@ case class VettingDetails(
   reservedStatus: Boolean,
   checkLevelRequired: String,
   whichProvider: String,
+  workingWithAdults: Boolean,
+  workingWithChildren: Boolean,
+  workingWithAdultsOrChildren: Boolean,
+  willApplicantBeVolunteer: Boolean,
   vettingLevelRequired: String,
   medicalRequired: Boolean
 )
 
 object CheckingVettingSection extends VacancyBasePage {
 
-  def reservedStatusId             = s"${vacancyFormId}_datafield_59601_1_1_fieldset"
-  def reservedYesId                = s"${vacancyFormId}_datafield_59601_1_1_868"
-  def reservedNoId                 = s"${vacancyFormId}_datafield_59601_1_1_869"
-  def basicCheckId                 = s"${vacancyFormId}_datafield_59611_1_1_12650"
-  def standardCheckId              = s"${vacancyFormId}_datafield_59611_1_1_11340"
-  def enhancedCheckId              = s"${vacancyFormId}_datafield_59611_1_1_11341"
-  def noCheckRequiredId            = s"${vacancyFormId}_datafield_59611_1_1_15464"
-  def dbsProviderId                = s"${vacancyFormId}_datafield_97307_1_1_15345"
-  def disclosureScotlandProviderId = s"${vacancyFormId}_datafield_97307_1_1_15346"
-  def accessNIProviderId           = s"${vacancyFormId}_datafield_97307_1_1_15346"
-  def vettingRequiredId            = s"${vacancyFormId}_field_value_93637_1"
-  def counterTerroristCheckId      = s"${vacancyFormId}_datafield_93637_1_1_15342"
-  def securityCheckId              = s"${vacancyFormId}_datafield_93637_1_1_15343"
-  def developedVettingId           = s"${vacancyFormId}_datafield_93637_1_1_15344"
-  def noVettingRequiredId          = s"${vacancyFormId}_datafield_93637_1_1_15341"
-  def medicalRequiredYesId         = s"${vacancyFormId}_datafield_59608_1_1_1"
-  def medicalRequiredNoId          = s"${vacancyFormId}_datafield_59608_1_1_2"
+  def reservedStatusId                 = s"${vacancyFormId}_datafield_59601_1_1_fieldset"
+  def reservedYesId                    = s"${vacancyFormId}_datafield_59601_1_1_868"
+  def reservedNoId                     = s"${vacancyFormId}_datafield_59601_1_1_869"
+  def basicCheckId                     = s"${vacancyFormId}_datafield_59611_1_1_12650"
+  def standardCheckId                  = s"${vacancyFormId}_datafield_59611_1_1_11340"
+  def enhancedCheckId                  = s"${vacancyFormId}_datafield_59611_1_1_11341"
+  def noCheckRequiredId                = s"${vacancyFormId}_datafield_59611_1_1_15464"
+  def dbsProviderId                    = s"${vacancyFormId}_datafield_97307_1_1_15345"
+  def disclosureScotlandProviderId     = s"${vacancyFormId}_datafield_97307_1_1_15346"
+  def accessNIProviderId               = s"${vacancyFormId}_datafield_97307_1_1_15346"
+  def vettingRequiredId                = s"${vacancyFormId}_field_value_93637_1"
+  def counterTerroristCheckId          = s"${vacancyFormId}_datafield_93637_1_1_15342"
+  def securityCheckId                  = s"${vacancyFormId}_datafield_93637_1_1_15343"
+  def developedVettingId               = s"${vacancyFormId}_datafield_93637_1_1_15344"
+  def noVettingRequiredId              = s"${vacancyFormId}_datafield_93637_1_1_15341"
+  def medicalRequiredYesId             = s"${vacancyFormId}_datafield_59608_1_1_1"
+  def medicalRequiredNoId              = s"${vacancyFormId}_datafield_59608_1_1_2"
+  def workingWithAdultsYesId           = s"${vacancyFormId}_datafield_185590_1_1_1"
+  def workingWithAdultsNoId            = s"${vacancyFormId}_datafield_185590_1_1_2"
+  def workingWithChildrenYesId         = s"${vacancyFormId}_datafield_185593_1_1_1"
+  def workingWithChildrenNoId          = s"${vacancyFormId}_datafield_185593_1_1_2"
+  def workingWithAdultsOrChildrenYesId = s"${vacancyFormId}_datafield_185596_1_1_1"
+  def workingWithAdultsOrChildrenNoId  = s"${vacancyFormId}_datafield_185596_1_1_2"
+  def willApplicantBeVolunteerYesId    = s"${vacancyFormId}_datafield_185587_1_1_1"
+  def willApplicantBeVolunteerNoId     = s"${vacancyFormId}_datafield_185587_1_1_2"
 
   private def selectReservedStatus(vettingDetails: VettingDetails): Unit = {
     scrollToElement(By.id(reservedStatusId))
@@ -54,11 +66,35 @@ object CheckingVettingSection extends VacancyBasePage {
     if (vXProfile != "Vacancy Holder 1") {
       vXCrcCheckProvider match {
         case "Disclosure barring service (DBS)" => checkbox(dbsProviderId).select()
-        case "Disclosure Scotland" => checkbox(disclosureScotlandProviderId).select()
-        case "Access NI" => checkbox(accessNIProviderId).select()
+        case "Disclosure Scotland"              => checkbox(disclosureScotlandProviderId).select()
+        case "Access NI"                        => checkbox(accessNIProviderId).select()
       }
     }
   }
+
+  private def selectDbsEnhancedChecksOnly(vettingDetails: VettingDetails): Unit =
+    if (vXCrcLevel == "Enhanced" && vXCrcCheckProvider.contains("DBS")) {
+      selectWorkingWithAdults(vettingDetails)
+      selectWorkingWithChildren(vettingDetails)
+      selectWorkingWithAdultsOrChildren(vettingDetails)
+      selectWillApplicantBeVolunteer(vettingDetails)
+    }
+
+  private def selectWorkingWithAdults(vettingDetails: VettingDetails): Unit =
+    if (vettingDetails.workingWithAdults) clickOnRadioButton(workingWithAdultsYesId)
+    else clickOnRadioButton(workingWithAdultsNoId)
+
+  private def selectWorkingWithChildren(vettingDetails: VettingDetails): Unit =
+    if (vettingDetails.workingWithChildren) clickOnRadioButton(workingWithChildrenYesId)
+    else clickOnRadioButton(workingWithChildrenNoId)
+
+  private def selectWorkingWithAdultsOrChildren(vettingDetails: VettingDetails): Unit =
+    if (vettingDetails.workingWithAdultsOrChildren) clickOnRadioButton(workingWithAdultsOrChildrenYesId)
+    else clickOnRadioButton(workingWithAdultsOrChildrenNoId)
+
+  private def selectWillApplicantBeVolunteer(vettingDetails: VettingDetails): Unit =
+    if (vettingDetails.willApplicantBeVolunteer) clickOnRadioButton(willApplicantBeVolunteerYesId)
+    else clickOnRadioButton(willApplicantBeVolunteerNoId)
 
   private def selectVettingLevelRequired(vettingDetails: VettingDetails): Unit = {
     scrollToElement(By.id(vettingRequiredId))
@@ -81,6 +117,7 @@ object CheckingVettingSection extends VacancyBasePage {
     selectReservedStatus,
     selectCheckLevelRequired,
     checkWhichProvider,
+    selectDbsEnhancedChecksOnly,
     selectVettingLevelRequired,
     selectMedicalRequired
   )

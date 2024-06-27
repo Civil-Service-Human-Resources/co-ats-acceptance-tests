@@ -47,6 +47,8 @@ object DbsPersonalInfoPage extends CivilServiceJobsBasePage {
   def haveMiddleNameYesId                   = s"${pecFormId}_datafield_116033_1_1_1_label"
   def haveMiddleNameNoId                    = s"${pecFormId}_datafield_116033_1_1_2_label"
   def firstMiddleNameId                     = s"${pecFormId}_datafield_56819_1_1"
+  def secondMiddleNameId                    = s"${pecFormId}_datafield_56825_1_1"
+  def thirdMiddleNameId                     = s"${pecFormId}_datafield_56832_1_1"
   def lastNameId                            = s"${pecFormId}_datafield_120741_1_1"
   def lastNameAtBirthId                     = s"${pecFormId}_datafield_185693_1_1"
   def dobDayId                              = s"${pecFormId}_datafield_54654_1_1--DAY"
@@ -164,8 +166,15 @@ object DbsPersonalInfoPage extends CivilServiceJobsBasePage {
       radioSelect(passportYesId)
       enterDetails(passportNumberId, dbsPersonalInfoDetails.passportNumber)
       selectDropdownOption(passportCountryIssueId, dbsPersonalInfoDetails.passportCountryIssue)
-      enterDate(dbsPersonalInfoDetails.passportDob, passportDobDayId, passportDobMonthId, passportDobYearId)
-      enterDate(dbsPersonalInfoDetails.passportIssueDate, passportIssueDayId, passportIssueMonthId, passportIssueYearId)
+      if (vXCrcLevel == "Standard" || vXCrcLevel == "Enhanced") {
+        enterDate(dbsPersonalInfoDetails.passportDob, passportDobDayId, passportDobMonthId, passportDobYearId)
+        enterDate(
+          dbsPersonalInfoDetails.passportIssueDate,
+          passportIssueDayId,
+          passportIssueMonthId,
+          passportIssueYearId
+        )
+      }
     } else {
       radioSelect(passportNoId)
     }
@@ -174,20 +183,22 @@ object DbsPersonalInfoPage extends CivilServiceJobsBasePage {
     if (dbsPersonalInfoDetails.haveDrivingLicence) {
       radioSelect(drivingLicenceYesId)
       enterDetails(drivingLicenceNumberId, dbsPersonalInfoDetails.drivingLicenceNumber)
-      enterDate(
-        dbsPersonalInfoDetails.drivingLicenceDob,
-        drivingLicenceDobDayId,
-        drivingLicenceDobMonthId,
-        drivingLicenceDobYearId
-      )
-      selectDropdownOption(drivingLicenceTypeId, dbsPersonalInfoDetails.drivingLicenceType)
-      enterDate(
-        dbsPersonalInfoDetails.drivingLicenceValidFromDate,
-        drivingLicenceValidDayId,
-        drivingLicenceValidMonthId,
-        drivingLicenceValidYearId
-      )
-      selectDropdownOption(drivingLicenceCountryIssueId, dbsPersonalInfoDetails.drivingLicenceCountryIssue)
+      if (vXCrcLevel == "Standard" || vXCrcLevel == "Enhanced") {
+        enterDate(
+          dbsPersonalInfoDetails.drivingLicenceDob,
+          drivingLicenceDobDayId,
+          drivingLicenceDobMonthId,
+          drivingLicenceDobYearId
+        )
+        selectDropdownOption(drivingLicenceTypeId, dbsPersonalInfoDetails.drivingLicenceType)
+        enterDate(
+          dbsPersonalInfoDetails.drivingLicenceValidFromDate,
+          drivingLicenceValidDayId,
+          drivingLicenceValidMonthId,
+          drivingLicenceValidYearId
+        )
+        selectDropdownOption(drivingLicenceCountryIssueId, dbsPersonalInfoDetails.drivingLicenceCountryIssue)
+      }
     } else {
       radioSelect(drivingLicenceNoId)
     }

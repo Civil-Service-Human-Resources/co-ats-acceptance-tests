@@ -19,6 +19,7 @@ object RESERVE_APPLICATION_DATA
       RESERVE_APPLICATION_INTERVIEW_TWO_EVALUATION,
       RESERVE_APPLICATION_INTERVIEW_THREE_EVALUATION,
       RESERVE_APPLICATION_INTERVIEW_FOUR_EVALUATION,
+      RESERVE_APPLICATION_OGD_SECURITY_CHECKS,
       RESERVE_APPLICATION_POSTING_NOTICE,
       RESERVE_APPLICATION_NEW_ENTRANT_NOTICE
     )
@@ -402,6 +403,13 @@ object RESERVE_APPLICATION_INTERVIEW_FOUR_EVALUATION
                              |
                              |By submitting this form you are agreeing to and accepting that you have no conflict of interest with this applicant and the evaluation reflects the views of all the selection panel members.""".stripMargin
     )
+
+object RESERVE_APPLICATION_OGD_SECURITY_CHECKS
+  extends OgdSecurityChecksDetails(
+    true,
+    true
+  )
+
 
 object RESERVE_APPLICATION_POSTING_NOTICE
     extends PostingNoticeDetails(
