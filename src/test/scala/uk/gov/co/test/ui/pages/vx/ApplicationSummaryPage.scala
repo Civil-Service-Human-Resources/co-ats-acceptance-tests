@@ -2,12 +2,12 @@ package uk.gov.co.test.ui.pages.vx
 
 import org.openqa.selenium.By
 import org.scalatest.concurrent.Eventually.eventually
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{applicationId, randomFirstName, randomLastName, v9CivilServant, v9HomeDepartment, vXApproach, vXCandidateUploadIdentityDocs, vXCrcCheckProvider, vXCrcLevel, vXInterviewNumber, vXJobInfoDepartment, vXPecBankruptcyCheck, vXPecCrc, vXPecEmploymentHistoryCheck, vXPecHealthRefCheck, vXPecNen, vXPecNsv, vXPecOverseasCheck, vXPecPensionsCheck, vXPecPn, vXPecPreviousCivilEmploymentCheck, vXPecSelfEmploymentCheck, vXRtwChecks, vXUseOnlinePecForms, vacancyId, vacancyName}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{applicationId, randomFirstName, randomLastName, v9CivilServant, v9HomeDepartment, v9PecRequired, vXApproach, vXCandidateUploadIdentityDocs, vXCrcCheckProvider, vXCrcLevel, vXInterviewNumber, vXJobInfoDepartment, vXPecBankruptcyCheck, vXPecCrc, vXPecEmploymentHistoryCheck, vXPecFraudCheck, vXPecGeneralInfo, vXPecHealthRefCheck, vXPecNen, vXPecNsv, vXPecOgdSecurityCheck, vXPecOverseasCheck, vXPecPensionsCheck, vXPecPn, vXPecPreviousCivilEmploymentCheck, vXPecReferenceCheck, vXPecSelfEmploymentCheck, vXRtwChecks, vXTypeOfCandidate, vXUseOnlinePecForms, vXVettingLevel, vacancyId, vacancyName}
 import uk.gov.co.test.ui.data.vx.application.MASTER_APPLICATION_DATA
-import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.{candidateAcceptsOffer, confirmApplicationUpdateNoPecNen, confirmApplicationUpdateNoPecPn, confirmApplicationUpdateState, confirmOfferAcceptedNoPecFunction, confirmOfferAcceptedState}
+import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.{candidateAcceptsOffer, confirmApplicationUpdateNoPecNen, confirmApplicationUpdateNoPecPn, confirmApplicationUpdateState, confirmOfferAcceptedNoPecFunction, v9ConfirmOfferAcceptedState}
 import uk.gov.co.test.ui.pages.v9.ProvisionalOfferPage.offerDecisionFlow
 import uk.gov.co.test.ui.pages.vx.DashboardPage.matchCriteria
-import uk.gov.co.test.ui.pages.vx.vacancytabs.OgdSecurityChecksDetails
+import uk.gov.co.test.ui.pages.vx.vacancytabs.NewEntrantNoticeTab.{correspondenceSendId, emailChecksClearPath}
 import uk.gov.co.test.ui.pages.vx.vacancytabs.OgdSecurityChecksTab.ogdSecurityChecksFlow
 
 object ApplicationSummaryPage extends VacancyBasePage {
@@ -139,61 +139,88 @@ object ApplicationSummaryPage extends VacancyBasePage {
     progressApplicationToOffer()
     candidateAcceptsOffer()
     offerDecisionFlow("Accept")
+    vXExtractTypeOfCandidate()
+
+    println(s"1. vXUseOnlinePecForms: $vXUseOnlinePecForms")
+    println(s"2. pecFieldsRequired: ${pecFieldsRequired()}")
+    println(s"3. v9CivilServant $v9CivilServant")
+    println(s"4. vXJobInfoDepartment $vXJobInfoDepartment")
+    println(s"5. v9HomeDepartment $v9HomeDepartment")
+    println(s"6. vXPecOgdSecurityCheck $vXPecOgdSecurityCheck")
+    println(s"7. vXTypeOfCandidate => $vXTypeOfCandidate")
+
     if (!vXUseOnlinePecForms) {
       confirmApplicationUpdateState()
       agreeStartDate()
     } else if (
-      vXUseOnlinePecForms && (
-        (vXRtwChecks.contains("Not Applicable") && !vXRtwChecks.contains(s"$vXApproach Candidates")) &&
-        (vXPecEmploymentHistoryCheck.contains("Not Applicable") && !vXPecEmploymentHistoryCheck.contains(s"$vXApproach Candidates")) &&
-        (vXPecPensionsCheck.contains("Not Applicable") && !vXPecPensionsCheck.contains(s"$vXApproach Candidates")) &&
-        (vXPecOverseasCheck.contains("Not Applicable") && !vXPecOverseasCheck.contains(s"$vXApproach Candidates")) &&
-        (vXPecBankruptcyCheck
-          .contains("Not Applicable") && !vXPecBankruptcyCheck.contains(s"$vXApproach Candidates")) &&
-        (vXPecHealthRefCheck.contains("Not Applicable") && !vXPecHealthRefCheck.contains(s"$vXApproach Candidates")) &&
-        (vXPecPreviousCivilEmploymentCheck
-          .contains("Not Applicable") && !vXPecPreviousCivilEmploymentCheck.contains(s"$vXApproach Candidates")) &&
-        (vXPecSelfEmploymentCheck
-          .contains("Not Applicable") && !vXPecSelfEmploymentCheck.contains(s"$vXApproach Candidates")))
-      &&
+      vXUseOnlinePecForms &&
+      pecFieldsRequired() &&
       (vXPecPn.contains("Internal Candidates") && (v9CivilServant && vXJobInfoDepartment == v9HomeDepartment))
     ) {
       confirmApplicationUpdateNoPecPn()
       postingNoticeRequested()
     } else if (
-      vXUseOnlinePecForms && ((vXRtwChecks
-        .contains("Not Applicable") && !vXRtwChecks.contains(s"$vXApproach Candidates")) &&
-        (vXPecEmploymentHistoryCheck
-          .contains("Not Applicable") && !vXPecEmploymentHistoryCheck.contains(s"$vXApproach Candidates")) &&
-        (vXPecPensionsCheck.contains("Not Applicable") && !vXPecPensionsCheck.contains(s"$vXApproach Candidates")) &&
-        (vXPecOverseasCheck.contains("Not Applicable") && !vXPecOverseasCheck.contains(s"$vXApproach Candidates")) &&
-        (vXPecBankruptcyCheck
-          .contains("Not Applicable") && !vXPecBankruptcyCheck.contains(s"$vXApproach Candidates")) &&
-        (vXPecHealthRefCheck.contains("Not Applicable") && !vXPecHealthRefCheck.contains(s"$vXApproach Candidates")) &&
-        (vXPecPreviousCivilEmploymentCheck
-          .contains("Not Applicable") && !vXPecPreviousCivilEmploymentCheck.contains(s"$vXApproach Candidates")) &&
-        (vXPecSelfEmploymentCheck
-          .contains("Not Applicable") && !vXPecSelfEmploymentCheck.contains(s"$vXApproach Candidates")))
-      &&
-      ((vXPecNen.contains("External Candidates") || vXPecNen
-        .contains("OGD Candidates") || vXPecNen.contains("NDPB Candidates")) &&
-        (v9CivilServant && vXJobInfoDepartment != v9HomeDepartment))
+      vXUseOnlinePecForms &&
+      pecFieldsRequired() &&
+      (
+        ((!vXPecNsv
+          .contains("Not Applicable") && vXPecNsv.contains(s"$vXApproach Candidates")) && vXVettingLevel == "None") &&
+          (vXPecNen.contains("External Candidates") || vXPecNen.contains("OGD Candidates") || vXPecNen.contains(
+            "NDPB Candidates"
+          ) && (vXJobInfoDepartment != v9HomeDepartment)) && !vXPecOgdSecurityCheck
+      )
     ) {
       confirmApplicationUpdateNoPecNen()
       checksCompleteDecisionRequired()
+      //added these
+      checkVacancyStatus("Checks Complete – Decision Required")
+      moveVacancyOnAndSendEmail(passChecksBarId, emailChecksClearPath, correspondenceSendId)
     } else if (
       vXUseOnlinePecForms &&
-        (vXCrcLevel != "None" && vXCrcCheckProvider.contains("DBS") && !vXPecCrc.contains("Not Applicable")) &&
-        (v9CivilServant && (v9HomeDepartment != vXJobInfoDepartment) && (v9HomeDepartment != "Independent Parliamentary Standards Authority"))
-    ){
+      pecFieldsRequired() &&
+      (v9CivilServant && (v9HomeDepartment != vXJobInfoDepartment) && vXPecOgdSecurityCheck && (vXTypeOfCandidate == "OGD")) &&
+      ((!vXPecCrc.contains("Not Applicable") && vXPecCrc.contains(s"$vXApproach Candidates") && vXCrcLevel != "None" && vXCrcCheckProvider.contains("DBS")) ||
+          (!vXPecNsv.contains("Not Applicable") && vXPecNsv.contains(s"$vXApproach Candidates") && vXVettingLevel != "None")
+      )) {
       securityChecksRequired()
       ogdSecurityChecksFlow(MASTER_APPLICATION_DATA)
       inviteCandidateToCompletePecForm()
-      confirmOfferAcceptedState()
+      v9ConfirmOfferAcceptedState()
     } else {
-      confirmOfferAcceptedState()
-      provisionalOfferAccepted()
+      v9ConfirmOfferAcceptedState()
+      vXProvisionalOfferAccepted()
     }
+  }
+
+  def pecFieldsRequired(): Boolean = {
+    if (
+      vXCandidateUploadIdentityDocs ||
+      (!vXRtwChecks.contains("Not Applicable") && vXRtwChecks.contains(s"$vXTypeOfCandidate Candidates")) ||
+      (!vXPecGeneralInfo.contains("Not Applicable") && vXPecGeneralInfo.contains(s"$vXTypeOfCandidate Candidates")) ||
+      (!vXPecReferenceCheck
+        .contains("Not Applicable") && vXPecReferenceCheck.contains(s"$vXTypeOfCandidate Candidates")) ||
+      (!vXPecBankruptcyCheck
+        .contains("Not Applicable") && vXPecBankruptcyCheck.contains(s"$vXTypeOfCandidate Candidates")) ||
+      (!vXPecCrc.contains("Not Applicable") && vXPecCrc.contains(s"$vXTypeOfCandidate Candidates")) ||
+      (!vXPecNsv.contains("Not Applicable") && vXPecNsv.contains(s"$vXTypeOfCandidate Candidates")) ||
+      (!vXPecEmploymentHistoryCheck
+        .contains("Not Applicable") && vXPecEmploymentHistoryCheck.contains(s"$vXTypeOfCandidate Candidates")) ||
+      (!vXPecHealthRefCheck
+        .contains("Not Applicable") && vXPecHealthRefCheck.contains(s"$vXTypeOfCandidate Candidates")) ||
+      (!vXPecOverseasCheck
+        .contains("Not Applicable") && vXPecOverseasCheck.contains(s"$vXTypeOfCandidate Candidates")) ||
+      (!vXPecPensionsCheck
+        .contains("Not Applicable") && vXPecPensionsCheck.contains(s"$vXTypeOfCandidate Candidates")) ||
+      (!vXPecPreviousCivilEmploymentCheck
+        .contains("Not Applicable") && vXPecPreviousCivilEmploymentCheck.contains(s"$vXTypeOfCandidate Candidates")) ||
+      (!vXPecFraudCheck.contains("Not Applicable") && vXPecFraudCheck.contains(s"$vXTypeOfCandidate Candidates")) ||
+      (!vXPecSelfEmploymentCheck
+        .contains("Not Applicable") && vXPecSelfEmploymentCheck.contains(s"$vXTypeOfCandidate Candidates")) ||
+      (!vXPecNen.contains("Not Applicable") && vXPecNen.contains(s"$vXTypeOfCandidate Candidates")) ||
+      (!vXPecPn.contains("Not Applicable") && vXPecPn.contains(s"$vXTypeOfCandidate Candidates"))
+    ) v9PecRequired = true
+    else v9PecRequired = false
+    v9PecRequired
   }
 
   def acceptsOfferAgain(): Unit = {
@@ -206,8 +233,8 @@ object ApplicationSummaryPage extends VacancyBasePage {
       confirmOfferAcceptedNoPecFunction()
       securityChecksRequired()
     } else {
-      confirmOfferAcceptedState()
-      provisionalOfferAccepted()
+      v9ConfirmOfferAcceptedState()
+      vXProvisionalOfferAccepted()
     }
   }
 
@@ -230,7 +257,7 @@ object ApplicationSummaryPage extends VacancyBasePage {
     confirmCandidateSummary(newStatus)
   }
 
-  def provisionalOfferAccepted(): Unit = {
+  def vXProvisionalOfferAccepted(): Unit = {
     val newStatus = "Provisional Offer Accepted"
     changeSystem("recruiter")
     checkForNewValuePath(vacancyStatusPath, newStatus)
@@ -244,6 +271,15 @@ object ApplicationSummaryPage extends VacancyBasePage {
       )
     )
     confirmCandidateSummary(newStatus)
+  }
+
+  def vXExtractTypeOfCandidate(): Unit = {
+    changeSystem("recruiter")
+    if (!waitForVisibilityOfElementByPath(summaryTabPath).isSelected) {
+      waitForVisibilityOfElementByPath(summaryTabPath).click()
+      refreshPage()
+    }
+    setTypeOfCandidate()
   }
 
   def inviteCandidateToCompletePecForm(): Unit = {
@@ -582,18 +618,32 @@ object ApplicationSummaryPage extends VacancyBasePage {
     checkCandidateSummary("6") shouldEqual vacancyName
     checkCandidateSummary("7") shouldEqual vXJobInfoDepartment
     checkCandidateSummary("8") shouldEqual
-      (if (dataLevel.isDefined && dataLevel.get == "restricted") {
-         "Restricted Data"
-       } else if (
-         v9CivilServant && (v9HomeDepartment != vXJobInfoDepartment) && (v9HomeDepartment == "Independent Parliamentary Standards Authority")
-       ) {
-         "NDPB - Current employee of Accredited NDPB"
-       } else if (
-         v9CivilServant && (v9HomeDepartment != vXJobInfoDepartment) && (v9HomeDepartment != "Independent Parliamentary Standards Authority")
-       ) {
-         "OGD - Current employee of another Civil Service Department"
-       } else if (v9CivilServant && (v9HomeDepartment == vXJobInfoDepartment)) {
-         "Internal - Current employee of advertising department"
-       } else "External - Non Civil Servant / External")
+      (
+        if (dataLevel.isDefined && dataLevel.get == "restricted") {
+          "Restricted Data"
+        } else if (
+          v9CivilServant && (v9HomeDepartment != vXJobInfoDepartment) && (v9HomeDepartment != "Animal and Plant Health Agency")
+        ) {
+          "NDPB - Current employee of Accredited NDPB"
+        } else if (
+          v9CivilServant && (v9HomeDepartment != vXJobInfoDepartment) && (v9HomeDepartment == "Animal and Plant Health Agency")
+        ) {
+          "OGD - Current employee of another Civil Service Department"
+        } else if (v9CivilServant && (v9HomeDepartment == vXJobInfoDepartment)) {
+          "Internal - Current employee of advertising department"
+        } else {
+          "External - Non Civil Servant / External"
+        }
+      )
+    setTypeOfCandidate()
+  }
+
+  def setTypeOfCandidate(): Unit = {
+    val typeOfCandidate = checkCandidateSummary("8")
+    if (typeOfCandidate.startsWith("External")) vXTypeOfCandidate = "External"
+    else if (typeOfCandidate.startsWith("OGD")) vXTypeOfCandidate = "OGD"
+    else if (typeOfCandidate.startsWith("NDPB")) vXTypeOfCandidate = "NDPB"
+    else if (typeOfCandidate.startsWith("Internal")) vXTypeOfCandidate = "Internal"
+    else vXTypeOfCandidate = "Restricted Data"
   }
 }

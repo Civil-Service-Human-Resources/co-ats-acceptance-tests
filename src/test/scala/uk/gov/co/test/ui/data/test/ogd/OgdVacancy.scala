@@ -32,7 +32,7 @@ object OGD_VACANCY_DATA
 object OGD_BASIC_DETAILS
     extends BasicDetails(
       "DO NOT USE- Automation Test Template",
-      s"CRX827: CO-OGD Automation - " + generateRandomJobPosition(),
+      s"Automation: CRX827 - CO-OGD - " + generateRandomJobPosition(),
       true,
       "Prawf awtomeiddio",
       32

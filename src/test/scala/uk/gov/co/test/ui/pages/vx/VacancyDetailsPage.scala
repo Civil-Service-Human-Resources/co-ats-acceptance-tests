@@ -441,7 +441,6 @@ object VacancyDetailsPage extends VacancyBasePage {
       if (vXCrcLevel != "None") {
         vXCrcCheckProvider =
           waitForVisibilityOfElementById(crcCheckProviderId).findElement(By.xpath(checkLabelPath)).getText
-        if (vXCrcCheckProvider.contains("DBS")) vXCrcCheckProvider = "DBS"
       } else vXCrcCheckProvider = ""
     }
 

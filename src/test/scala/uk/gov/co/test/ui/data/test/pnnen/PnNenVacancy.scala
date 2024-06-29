@@ -56,7 +56,7 @@ object PN_NEN_JOB_INFORMATION
       ),
       "Other",
       "3",
-      true
+      false
     )
 object PN_NEN_APPROACH
     extends ApproachDetails(

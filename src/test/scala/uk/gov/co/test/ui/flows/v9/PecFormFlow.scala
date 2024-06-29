@@ -1,8 +1,8 @@
 package uk.gov.co.test.ui.flows.v9
 
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{v9RtwHoldPassport, vXApproach, vXCandidateUploadIdentityDocs, vXCrcCheckProvider, vXCrcLevel, vXPecBankruptcyCheck, vXPecEmploymentHistoryCheck, vXPecHealthRefCheck, vXPecOverseasCheck, vXPecPensionsCheck, vXPecPreviousCivilEmploymentCheck, vXPecSelfEmploymentCheck, vXRtwChecks, vXUseOnlinePecForms, vXWhichIdentityChecks}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{v9RtwHoldPassport, vXCrcCheckProvider, vXCrcLevel, vXUseOnlinePecForms, vXVettingLevel, vXWhichIdentityChecks}
 import uk.gov.co.test.ui.data.v9.pecform.PecFormDetails
-import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.{confirmOfferAcceptedState, pecStartFunction}
+import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.pecStartFunction
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
 import uk.gov.co.test.ui.pages.v9.pecform.BankruptcyDetailsPage.bankruptcyDetailsPage
 import uk.gov.co.test.ui.pages.v9.pecform.DbsAddressDetailsPage.dbsAddressDetailsPage
@@ -20,6 +20,7 @@ import uk.gov.co.test.ui.pages.v9.pecform.SelfEmploymentPage.selfEmploymentPage
 import uk.gov.co.test.ui.pages.v9.pecform.UploadIdentityDocsPage.uploadIdentityDocPage
 import uk.gov.co.test.ui.pages.v9.pecform.VerifyingHistoryPage.verifyingHistoryPage
 import uk.gov.co.test.ui.pages.v9.pecform.YourDetailsPage.yourDetailsPage
+import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.pecFieldsRequired
 
 object PecFormFlow extends CivilServiceJobsBasePage {
 
@@ -43,25 +44,15 @@ object PecFormFlow extends CivilServiceJobsBasePage {
   )
 
   def fillPecFormDetailsOnly(pecFormDetails: PecFormDetails): Unit = {
-//    if (currentUrl.contains("recruiter")) changeSystem("candidate")
-    confirmOfferAcceptedState()
+    if (currentUrl.contains("recruiter")) changeSystem("candidate")
+//    v9ConfirmOfferAcceptedState()
     if (
-      vXUseOnlinePecForms && ((!vXRtwChecks
-        .contains("Not Applicable") && vXRtwChecks.contains(s"$vXApproach Candidates")) ||
-        (!vXPecEmploymentHistoryCheck
-          .contains("Not Applicable") && vXPecEmploymentHistoryCheck.contains(s"$vXApproach Candidates")) ||
-        (!vXPecPensionsCheck.contains("Not Applicable") && vXPecPensionsCheck.contains(s"$vXApproach Candidates")) ||
-        (!vXPecOverseasCheck.contains("Not Applicable") && vXPecOverseasCheck.contains(s"$vXApproach Candidates")) ||
-        (!vXPecBankruptcyCheck
-          .contains("Not Applicable") && vXPecBankruptcyCheck.contains(s"$vXApproach Candidates")) ||
-        (!vXPecHealthRefCheck.contains("Not Applicable") && vXPecHealthRefCheck.contains(s"$vXApproach Candidates")) ||
-        (!vXPecPreviousCivilEmploymentCheck
-          .contains("Not Applicable") && vXPecPreviousCivilEmploymentCheck.contains(s"$vXApproach Candidates")) ||
-        (!vXPecSelfEmploymentCheck
-          .contains("Not Applicable") && vXPecSelfEmploymentCheck.contains(s"$vXApproach Candidates")) ||
-        vXCandidateUploadIdentityDocs ||
-        (vXCrcLevel != "None" && vXCrcCheckProvider.contains("DBS")) ||
-        (vXWhichIdentityChecks != "No digital checks" && v9RtwHoldPassport))
+      vXUseOnlinePecForms && (
+        pecFieldsRequired() ||
+          (vXCrcLevel != "None" && vXCrcCheckProvider.contains("DBS")) ||
+          (vXVettingLevel != "None") ||
+          (vXWhichIdentityChecks != "No digital checks" && v9RtwHoldPassport)
+      )
     ) {
       pecStartFunction().click()
       pecForm.foreach { f =>

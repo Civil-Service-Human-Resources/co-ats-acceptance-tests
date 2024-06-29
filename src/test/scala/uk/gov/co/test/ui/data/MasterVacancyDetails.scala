@@ -33,7 +33,8 @@ object MasterVacancyDetails extends VacancyBasePage {
   var vXLineManagerDuties: Boolean = _
 
   //vx VACANCY approach
-  var vXApproach = ""
+  var vXApproach        = ""
+  var vXTypeOfCandidate = ""
 
   //vX VACANCY approval
   var vXBudgetaryApproval = true
@@ -219,7 +220,7 @@ object MasterVacancyDetails extends VacancyBasePage {
 
   //v9 SHORT FORM eligibility page
   var v9CivilServant: Boolean  = _
-  var v9HomeDepartment: String = ""
+  var v9HomeDepartment: String = "Animal and Plant Health Agency"
 
   //v9 SHORT FORM personal info page
   var v9ReasonableAdjustments = false
@@ -227,6 +228,9 @@ object MasterVacancyDetails extends VacancyBasePage {
 
   //v9 SHORT FORM applications page
   var applicationId: String = ""
+
+  //v9 PEC FORM required
+  var v9PecRequired: Boolean = _
 
   //v9 PEC FORM rtw
   var v9RtwBritishCitizen: Boolean = _

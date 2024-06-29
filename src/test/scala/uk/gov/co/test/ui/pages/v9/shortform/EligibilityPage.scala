@@ -46,7 +46,8 @@ object EligibilityPage extends CivilServiceJobsBasePage {
     if (v9CivilServant) {
       radioSelect(currentCivilServantYesId)
       if (v9HomeDepartment.isEmpty) {
-        selectDropdownOption(homeDepartmentSelectId, "Attorney General's Office")
+        selectDropdownOption(homeDepartmentSelectId, "Animal and Plant Health Agency")
+        v9HomeDepartment = "Animal and Plant Health Agency"
       } else {
         selectDropdownOption(homeDepartmentSelectId, v9HomeDepartment)
       }

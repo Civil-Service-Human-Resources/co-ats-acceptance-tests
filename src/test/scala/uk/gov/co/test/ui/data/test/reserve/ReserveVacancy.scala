@@ -39,8 +39,8 @@ object RESERVE_BASIC_DETAILS
 object RESERVE_JOB_INFORMATION
     extends JobInfoDetails(
       true,
-      "HM Revenue and Customs",
-      "HMRC - CCG - Strategy",
+      "Cabinet Office",
+      "CO - Central Digital & Data Office",
       true,
       "Prawf awtomeiddio",
       "Autotest - Business area detail",

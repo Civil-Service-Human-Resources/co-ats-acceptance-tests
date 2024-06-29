@@ -32,7 +32,7 @@ object NON_REDEPLOYMENT_VACANCY_DATA
 object NON_REDEPLOYMENT_BASIC_DETAILS
     extends BasicDetails(
       "DO NOT USE- Automation Test Template",
-      s"HMRC - " + generateRandomJobPosition(),
+      s"Automation: CO - " + generateRandomJobPosition(),
       true,
       "Prawf awtomeiddio",
       32
@@ -40,8 +40,8 @@ object NON_REDEPLOYMENT_BASIC_DETAILS
 object NON_REDEPLOYMENT_JOB_INFORMATION
     extends JobInfoDetails(
       true,
-      "HM Revenue and Customs",
-      "HMRC - CCG - Strategy",
+      "Cabinet Office",
+      "CO - Central Digital & Data Office",
       true,
       "Prawf awtomeiddio",
       "Autotest - Business area detail",

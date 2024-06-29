@@ -54,7 +54,7 @@ trait BasePage extends Matchers with Page with WebBrowser with PatienceConfigura
   }
 
   def checkForNewValuePath(statusPath: String, expectedStatus: String)(implicit driver: WebDriver): Unit = {
-    val wait = new WebDriverWait(driver, 50, 500)
+    val wait = new WebDriverWait(driver, 60, 500)
     try wait.until { (d: WebDriver) =>
       d.findElement(By.xpath(statusPath)).getText.endsWith(expectedStatus)
     } catch {

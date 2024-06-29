@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.pages.v9.pecform
 
 import org.scalatest.concurrent.Eventually.eventually
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXApproach, vXPecNsv}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXApproach, vXPecNsv, vXVettingLevel}
 import uk.gov.co.test.ui.data.v9.pecform.PecFormDetails
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
 import uk.gov.co.test.ui.pages.v9.pecform.YourDetailsPage.pecFormId
@@ -54,15 +54,24 @@ object NationalSecurityVettingPage extends CivilServiceJobsBasePage {
   def immigrationRefNumberYesId   = s"${pecFormId}_datafield_126345_1_1_1_label"
   def immigrationRefNumberNoId    = s"${pecFormId}_datafield_126345_1_1_2_label"
   def immigrationRefNumberId      = s"${pecFormId}_datafield_126349_1_1"
-  def addressLineOneId            = s"${pecFormId}_datafield_122536_1_1"
-  def addressLineTwoId            = s"${pecFormId}_datafield_122543_1_1"
-  def townCityId                  = s"${pecFormId}_datafield_122550_1_1"
-  def postcodeId                  = s"${pecFormId}_datafield_122568_1_1"
-  def countyId                    = s"${pecFormId}_datafield_122557_1_1"
-  def countryId                   = s"${pecFormId}_datafield_122564_1_1"
-  def dateFromDayId               = s"${pecFormId}_datafield_122575_1_1--DAY"
-  def dateFromMonthId             = s"${pecFormId}_datafield_122575_1_1--MONTH"
-  def dateFromYearId              = s"${pecFormId}_datafield_122575_1_1--YEAR"
+  def addressLineOne5yrsId        = s"${pecFormId}_datafield_122536_1_1"
+  def addressLineTwo5yrsId        = s"${pecFormId}_datafield_122543_1_1"
+  def townCity5yrsId              = s"${pecFormId}_datafield_122550_1_1"
+  def postcode5yrsId              = s"${pecFormId}_datafield_122568_1_1"
+  def county5yrsId                = s"${pecFormId}_datafield_122557_1_1"
+  def country5yrsId               = s"${pecFormId}_datafield_122564_1_1"
+  def dateFromDay5yrsId           = s"${pecFormId}_datafield_122575_1_1--DAY"
+  def dateFromMonth5yrsId         = s"${pecFormId}_datafield_122575_1_1--MONTH"
+  def dateFromYear5yrsId          = s"${pecFormId}_datafield_122575_1_1--YEAR"
+  def addressLineOne10yrsId       = s"${pecFormId}_datafield_165179_1_1"
+  def addressLineTwo10yrsId       = s"${pecFormId}_datafield_165187_1_1"
+  def townCity10yrsId             = s"${pecFormId}_datafield_165194_1_1"
+  def postcode10yrsId             = s"${pecFormId}_datafield_165215_1_1"
+  def county10yrsId               = s"${pecFormId}_datafield_165202_1_1"
+  def country10yrsId              = s"${pecFormId}_datafield_165210_1_1"
+  def dateFromDay10yrsId          = s"${pecFormId}_datafield_165231_1_1--DAY"
+  def dateFromMonth10yrsId        = s"${pecFormId}_datafield_165231_1_1--MONTH"
+  def dateFromYear10yrsId         = s"${pecFormId}_datafield_165231_1_1--YEAR"
   def formerGovPoliceServiceYesId = s"${pecFormId}_datafield_79960_1_1_1_label"
   def formerGovPoliceServiceNoId  = s"${pecFormId}_datafield_79960_1_1_2_label"
   def govDeptNameId               = s"${pecFormId}_datafield_79964_1_1"
@@ -132,20 +141,34 @@ object NationalSecurityVettingPage extends CivilServiceJobsBasePage {
     enterDate(yearId, year)
   }
 
-  private def enterResidencyDetails(nsvDetails: NsvDetails): Unit = {
-    enterDetails(addressLineOneId, nsvDetails.addressLineOne)
-    enterDetails(addressLineTwoId, nsvDetails.addressLineTwo.get)
-    enterDetails(townCityId, nsvDetails.townCity)
-    enterDetails(postcodeId, nsvDetails.postcode)
-    enterDetails(countyId, nsvDetails.county)
-    selectDropdownOption(countryId, nsvDetails.country)
-    enterDate(
-      nsvDetails.addressDateFrom,
-      dateFromDayId,
-      dateFromMonthId,
-      dateFromYearId
-    )
-  }
+  private def enterResidencyDetails(nsvDetails: NsvDetails): Unit =
+    if (vXVettingLevel == "Developed vetting") {
+      enterDetails(addressLineOne10yrsId, nsvDetails.addressLineOne)
+      enterDetails(addressLineTwo10yrsId, nsvDetails.addressLineTwo.get)
+      enterDetails(townCity10yrsId, nsvDetails.townCity)
+      enterDetails(postcode10yrsId, nsvDetails.postcode)
+      enterDetails(county10yrsId, nsvDetails.county)
+      selectDropdownOption(country10yrsId, nsvDetails.country)
+      enterDate(
+        nsvDetails.addressDateFrom,
+        dateFromDay10yrsId,
+        dateFromMonth10yrsId,
+        dateFromYear10yrsId
+      )
+    } else {
+      enterDetails(addressLineOne5yrsId, nsvDetails.addressLineOne)
+      enterDetails(addressLineTwo5yrsId, nsvDetails.addressLineTwo.get)
+      enterDetails(townCity5yrsId, nsvDetails.townCity)
+      enterDetails(postcode5yrsId, nsvDetails.postcode)
+      enterDetails(county5yrsId, nsvDetails.county)
+      selectDropdownOption(country5yrsId, nsvDetails.country)
+      enterDate(
+        nsvDetails.addressDateFrom,
+        dateFromDay5yrsId,
+        dateFromMonth5yrsId,
+        dateFromYear5yrsId
+      )
+    }
 
   private def selectFormerGovPoliceService(nsvDetails: NsvDetails): Unit =
     if (nsvDetails.formerGovPoliceService) {

@@ -59,7 +59,7 @@ case class NewEntrantNoticeDetails(
 
 object NewEntrantNoticeTab extends VacancyBasePage {
 
-  private lazy val emailChecksClearPath = ".//span[@title='Generate Communication : VH - Checks Clear']"
+  lazy val emailChecksClearPath = ".//span[@title='Generate Communication : VH - Checks Clear']"
   val newEntrantNoticeTabPath           = ".//span[@class='main-label' and text() = 'New Entrant Notification']"
   def correspondenceSendId              = "correspondence_form_form_submit"
   def newEntrantNotificationHeaderId    = s"${vacancyFormId}_label_146446_1"
@@ -161,8 +161,8 @@ object NewEntrantNoticeTab extends VacancyBasePage {
   def dateAndTimeUpdatedId              = s"${vacancyFormId}_label_95885_1"
 
   def enterNewEntrantNoticeForm(): Unit = {
-    checkVacancyStatus("Checks Complete – Decision Required")
-    moveVacancyOnAndSendEmail(passChecksBarId, emailChecksClearPath, correspondenceSendId)
+//    checkVacancyStatus("Checks Complete – Decision Required")
+//    moveVacancyOnAndSendEmail(passChecksBarId, emailChecksClearPath, correspondenceSendId)
     onboardingCompleteNen()
     moveVacancyOnViaTopBar(completeNewEntrantFormBarId, newEntrantNoticeTabPath)
     waitForVisibilityOfElementById(newEntrantNotificationHeaderId).getText shouldEqual "New Entrant Notification"

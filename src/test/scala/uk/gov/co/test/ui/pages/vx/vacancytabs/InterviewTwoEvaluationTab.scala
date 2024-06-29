@@ -6,6 +6,7 @@ import uk.gov.co.test.ui.data.vx.application.{ApplicationDetails, AssessmentOutc
 import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.applicationStateAfterInterview
 import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.{availableBarItems, completeI2EvaluationBarId, interviewEvaluation, noShowI2BarId, withdrawAtInterviewBarId}
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
+import uk.gov.co.test.ui.pages.vx.vacancytabs.InterviewOneEvaluationTab.formProblemStatusId
 
 import scala.collection.mutable.ListBuffer
 
@@ -757,6 +758,8 @@ object InterviewTwoEvaluationTab extends VacancyBasePage {
 
   private def enterOutcome(interviewTwoDetails: InterviewTwoDetails): Unit = {
     vXInterviewTwoOutcome = interviewTwoDetails.finalOutcome
+    checkForNewValueId(formProblemStatusId, "There is a problem")
+    scrollToElement(By.id(outcomeTitleId))
     waitForVisibilityOfElementById(outcomeTitleId).getText shouldEqual "Outcome"
     waitForVisibilityOfElementById(outcomeId).click()
     action().moveToElement(waitForDropdownOption(vXInterviewTwoOutcome)).perform()

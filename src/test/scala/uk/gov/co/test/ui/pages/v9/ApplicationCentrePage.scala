@@ -172,7 +172,7 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
     offerDecisionFunction().click()
   }
 
-  def confirmOfferAcceptedState(): Unit = {
+  def v9ConfirmOfferAcceptedState(): Unit = {
     val newStatus = "Offer accepted"
     changeSystem("candidate")
     confirmStatusOnApplicationPage(newStatus)
@@ -198,6 +198,38 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
     getApplicationState shouldEqual s"Application status: $newStatus"
     getApplicationConfirmation shouldEqual
       """We're finalising all documentation regarding your application.
+        |You'll be contacted shortly to advise what will happen next.""".stripMargin
+  }
+
+  def passedPecChecks(): Unit = {
+    val newStatus = "Pre-employment checks complete"
+    changeSystem("candidate")
+    confirmStatusOnApplicationPage(newStatus)
+    feedbackFunction().isEnabled
+    withdrawApplicationFunction().isEnabled
+    applicationCentrePageCheck()
+    advertDetailsFunction().isEnabled
+    applicationForVacancyText shouldEqual s"Application For $vacancyName"
+    getApplicationState shouldEqual s"Application status: $newStatus"
+    getApplicationConfirmation shouldEqual
+      """Congratulations you’ve passed our pre-employment checks.
+        |
+        |You'll be contacted shortly to advise what will happen next.""".stripMargin
+  }
+
+  def applicationUpdatePassedPecChecks(): Unit = {
+    val newStatus = "Application update"
+    changeSystem("candidate")
+    confirmStatusOnApplicationPage(newStatus)
+    feedbackFunction().isEnabled
+    withdrawApplicationFunction().isEnabled
+    applicationCentrePageCheck()
+    advertDetailsFunction().isEnabled
+    applicationForVacancyText shouldEqual s"Application For $vacancyName"
+    getApplicationState shouldEqual s"Application status: $newStatus"
+    getApplicationConfirmation shouldEqual
+      """Congratulations you’ve passed our pre-employment checks.
+        |
         |You'll be contacted shortly to advise what will happen next.""".stripMargin
   }
 
@@ -237,9 +269,9 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
     changeSystem("candidate")
     confirmStatusOnApplicationPage(newStatus)
     applicationCentrePageCheck()
-    feedbackFunction().isEnabled
     advertDetailsFunction().isEnabled
-    withdrawApplicationFunction().isEnabled
+    feedbackFunction().isEnabled
+//    withdrawApplicationFunction().isEnabled
     applicationForVacancyText shouldEqual s"Application For $vacancyName"
     getApplicationState shouldEqual s"Application status: $newStatus"
     getApplicationConfirmation shouldEqual

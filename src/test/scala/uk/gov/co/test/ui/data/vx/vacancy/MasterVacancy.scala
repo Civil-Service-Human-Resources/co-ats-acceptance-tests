@@ -40,7 +40,7 @@ object MASTER_JOB_INFORMATION
     extends JobInfoDetails(
       true,
       "Department for Work and Pensions",
-      "DWP - Communications",
+      "DWP - Digital",
       true,
       "Prawf awtomeiddio",
       "Autotest - Business area detail",

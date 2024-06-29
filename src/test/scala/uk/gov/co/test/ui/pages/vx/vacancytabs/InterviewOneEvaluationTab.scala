@@ -172,6 +172,7 @@ object InterviewOneEvaluationTab extends VacancyBasePage {
   def overallScoreId                             = s"${vacancyFormId}_field_24019_1"
   def overallOverrideScoreId                     = s"${vacancyFormId}_datafield_116074_1_1"
   def outcomeTitleId                             = s"${vacancyFormId}_label_23489_1"
+  def formProblemStatusId                        = "form_page_status_header"
   def outcomeId                                  = s"select2-${vacancyFormId}_datafield_38894_1_1-container"
   def outcomeCommentsId                          = s"${vacancyFormId}_datafield_24276_1_1"
   def uploadIDTitleId                            = s"${vacancyFormId}_label_56054_1"
@@ -759,6 +760,8 @@ object InterviewOneEvaluationTab extends VacancyBasePage {
 
   private def enterOutcome(interviewOneDetails: InterviewOneDetails): Unit = {
     vXInterviewOneOutcome = interviewOneDetails.finalOutcome
+    checkForNewValueId(formProblemStatusId, "There is a problem")
+    scrollToElement(By.id(outcomeTitleId))
     waitForVisibilityOfElementById(outcomeTitleId).getText shouldEqual "Outcome"
     waitForVisibilityOfElementById(outcomeId).click()
     action().moveToElement(waitForDropdownOption(vXInterviewOneOutcome)).perform()
