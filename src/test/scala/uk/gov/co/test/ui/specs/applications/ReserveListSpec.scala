@@ -1,11 +1,13 @@
 package uk.gov.co.test.ui.specs.applications
 
+import uk.gov.co.test.ui.data.MasterVacancyDetails.vacancyId
 import uk.gov.co.test.ui.data.test.reserve.RESERVE_VACANCY_DATA
 import uk.gov.co.test.ui.data.v9.applicants._
-import uk.gov.co.test.ui.flows.e2e.ReserveListFlow.reserveListFlow
+import uk.gov.co.test.ui.flows.e2e.FullApplicationFlow.reserveListFlow
 import uk.gov.co.test.ui.flows.v9.RegisterCandidateFlow.fillNewCandidateDetails
 import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.fillNewVacancyForm
 import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.reserveExpiryList
+import uk.gov.co.test.ui.pages.vx.VacancyDetailsPage.extractAllVacancyDetails
 import uk.gov.co.test.ui.pages.vx.createvacancypage.ReserveListSection.changeReserveListDetails
 import uk.gov.co.test.ui.pages.vx.vacancytabs.ExternalPostingsTab.repostExternalPosting
 import uk.gov.co.test.ui.pages.vx.vacancytabs.ReserveListsTab.{reserveExpiryListChecks, reserveListEmailChecks, reserveListHistoryChecks}
@@ -16,7 +18,8 @@ class ReserveListSpec extends BaseFeatureSpec {
   Feature("Recruiter Checks The Reserve List For Rejected Status") {
     Scenario("VX: Recruiter Checks 3 Months Reserve List", RunInVX) {
       Given("a recruiter changes the reserve list to 3 months for a vacancy")
-      fillNewVacancyForm(RESERVE_VACANCY_DATA)
+//      fillNewVacancyForm(RESERVE_VACANCY_DATA)
+      vacancyId = "10278"
       changeReserveListDetails("3 Months")
       repostExternalPosting()
 

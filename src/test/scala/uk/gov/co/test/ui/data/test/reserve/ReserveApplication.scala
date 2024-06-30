@@ -168,7 +168,7 @@ object RESERVE_APPLICATION_INTERVIEW_ONE_EVALUATION
       strengthSix = Outcome(4, Some("Autotest - I1 - Change Agent - strength six comments")),
       strengthSeven = Outcome(2, Some("Autotest - I1 - Team Leader - strength seven comments")),
       strengthEight = Outcome(4, Some("Autotest - I1 - Service Focussed - strength eight comments")),
-      additionalAssessments = "6",
+      additionalAssessments = "0",
       assessmentOne =
         AssessmentOutcome("Presentation", 5, Some("Autotest - I1 - Presentation - assessment one comments")),
       assessmentTwo =

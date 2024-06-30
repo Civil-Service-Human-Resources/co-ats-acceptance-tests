@@ -143,7 +143,7 @@ object MASTER_VETTING_DETAILS
       true,
       true,
       true,
-      "Security check",
+      "Developed vetting",
       true
     )
 

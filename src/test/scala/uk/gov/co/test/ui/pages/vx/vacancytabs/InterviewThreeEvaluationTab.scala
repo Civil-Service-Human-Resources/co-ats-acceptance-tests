@@ -6,7 +6,7 @@ import uk.gov.co.test.ui.data.vx.application.{ApplicationDetails, AssessmentOutc
 import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.applicationStateAfterInterview
 import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.{availableBarItems, completeI3EvaluationBarId, interviewEvaluation, noShowI3BarId, withdrawAtInterviewBarId}
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
-import uk.gov.co.test.ui.pages.vx.vacancytabs.InterviewOneEvaluationTab.formProblemStatusId
+import uk.gov.co.test.ui.pages.vx.vacancytabs.InterviewOneEvaluationTab.{formProblemStatusId, outcomeTitleId, scrollToElement}
 
 import scala.collection.mutable.ListBuffer
 
@@ -735,16 +735,18 @@ object InterviewThreeEvaluationTab extends VacancyBasePage {
   )
 
   private def assessmentsOutcome(interviewThreeDetails: InterviewThreeDetails): Unit = {
-    howManyAssessments(interviewThreeDetails)
     waitForVisibilityOfElementById(assessmentHeaderId).getText shouldEqual "Additional assessments"
     waitForVisibilityOfElementById(assessmentInfoId).getText        should endWith(
       "Additional assessment names, scores and comments will be visible to the applicant"
     )
+    howManyAssessments(interviewThreeDetails)
     vXI3AssessmentsTotalScore.clear()
-    assessments.take(interviewThreeDetails.additionalAssessments.toInt).foreach { f =>
-      f(interviewThreeDetails)
-    }
-    totalScore(vXI3AssessmentsTotalScore)
+    if (interviewThreeDetails.additionalAssessments != "0") {
+      assessments.take(interviewThreeDetails.additionalAssessments.toInt).foreach { f =>
+        f(interviewThreeDetails)
+      }
+      totalScore(vXI3AssessmentsTotalScore)
+    } else vXI3AssessmentsTotalScore += 0
   }
 
   private def enterExperienceOutcome(interviewThreeDetails: InterviewThreeDetails): Unit =
@@ -775,7 +777,10 @@ object InterviewThreeEvaluationTab extends VacancyBasePage {
 
   private def enterOutcome(interviewThreeDetails: InterviewThreeDetails): Unit = {
     vXInterviewThreeOutcome = interviewThreeDetails.finalOutcome
-    checkForNewValueId(formProblemStatusId, "There is a problem")
+    if (vXExperiencesRequired && vXBehavioursRequired && vXTechSkillsRequired && vXStrengthsRequired) {
+      checkForNewValueId(formProblemStatusId, "There is a problem")
+      scrollToElement(By.id(outcomeTitleId))
+    }
     scrollToElement(By.id(outcomeTitleId))
     waitForVisibilityOfElementById(outcomeTitleId).getText shouldEqual "Outcome"
     waitForVisibilityOfElementById(outcomeId).click()

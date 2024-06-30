@@ -1,8 +1,8 @@
 package uk.gov.co.test.ui.specs
 
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{v9EussStatus, v9HomeDepartment, v9IdvtDataConsent, v9RtwBritishCitizen, v9RtwHoldPassport, v9SmartphoneAccess}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{v9EussStatus, v9IdvtDataConsent, v9RtwBritishCitizen, v9RtwHoldPassport, v9SmartphoneAccess}
 import uk.gov.co.test.ui.data.v9.applicants._
-import uk.gov.co.test.ui.flows.e2e.IdvtFlow.idvtFlow
+import uk.gov.co.test.ui.flows.e2e.FullApplicationFlow.idvtFlow
 import uk.gov.co.test.ui.flows.v9.RegisterCandidateFlow.fillNewCandidateDetails
 import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.{confirmPecRtwAndDbsAnyState, confirmPecRtwOnlyAndDBSEnhancedStartCheck, confirmPecRtwOnlyCrcNoneNotApplicable, confirmPecRtwOnlyStartCheckState, confirmPecRtwOnlyState, confirmTrustIdQrCode}
 import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.{digitalIdentityCheckInProgress, invitedToDigitalIdentityCheck, manualIdCheck, manualIdCheckWithIdvt, rtwCheckAvailable, rtwCheckAvailableWithIdvt}

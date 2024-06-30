@@ -3,6 +3,7 @@ package uk.gov.co.test.ui.pages.v9
 import org.openqa.selenium.support.ui.WebDriverWait
 import org.openqa.selenium.{By, Keys, WebDriver}
 import org.scalatest.concurrent.Eventually.eventually
+import uk.gov.co.test.ui.pages.v9.ApplicationsPage.{confirmStatusOnApplicationPage, extractApplicationInfo}
 
 object SearchJobsPage extends CivilServiceJobsBasePage {
 
@@ -57,7 +58,7 @@ object SearchJobsPage extends CivilServiceJobsBasePage {
   def checkForNewVacancy(jobId: String, jobTitle: String, searchPathway: String): Unit = {
     val jobDetailsPath: String     = s".//a[text()='$jobTitle']"
     val oneResultReturnedPageTitle = s"1 Job found with job reference $jobId - Civil Service Jobs - GOV.UK"
-    val wait                       = new WebDriverWait(driver, 210, 3000)
+    val wait                       = new WebDriverWait(driver, 210, 1000)
     wait.until { (d: WebDriver) =>
       driver.navigate().refresh()
       enterSearchCriteria(jobId, searchPathway)
@@ -82,10 +83,10 @@ object SearchJobsPage extends CivilServiceJobsBasePage {
     waitForVisibilityOfElementByPath(navigateToHomeSearchPath).click()
     eventually(onPage(civilServiceJobsPageTitle))
     enterSearchCriteria(jobId, searchPathway)
-//    waitForVacancy(jobId, jobTitle, searchPathway)
     checkForNewVacancy(jobId, jobTitle, searchPathway)
     eventually(onPage(s"$jobTitle - Civil Service Jobs - GOV.UK"))
     clickOn("login_button")
     driver.navigate().refresh()
+    extractApplicationInfo()
   }
 }

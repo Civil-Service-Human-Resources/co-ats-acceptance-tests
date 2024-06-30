@@ -32,7 +32,7 @@ object PN_NEN_VACANCY_DATA
 object PN_NEN_BASIC_DETAILS
     extends BasicDetails(
       "DO NOT USE- Automation Test Template",
-      s"DEFRA - " + generateRandomJobPosition(),
+      s"Automation: PN/NEN-DEFRA - " + generateRandomJobPosition(),
       true,
       "Prawf awtomeiddio",
       32
@@ -138,13 +138,13 @@ object PN_NEN_CONTACT_DETAILS
 object PN_NEN_VETTING_DETAILS
     extends VettingDetails(
       true,
-      "None",
+      "Enhanced",
       "Disclosure barring service (DBS)",
       true,
       true,
       true,
       true,
-      "None",
+      "Developed vetting",
       false
     )
 
@@ -479,7 +479,7 @@ object PN_NEN_PEC_CHECK_FORMS
       previousCsJobCheck = ListBuffer("Not Applicable"),
       internalFraudCheck = ListBuffer("Not Applicable"),
       selfEmploymentCheck = ListBuffer("Not Applicable"),
-      true,
+      false,
       false,
       false,
       "Autotest - Name of check",

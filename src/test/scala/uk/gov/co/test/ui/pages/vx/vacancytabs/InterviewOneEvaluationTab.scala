@@ -722,16 +722,18 @@ object InterviewOneEvaluationTab extends VacancyBasePage {
   )
 
   private def assessmentsOutcome(interviewOneDetails: InterviewOneDetails): Unit = {
-    howManyAssessments(interviewOneDetails)
     waitForVisibilityOfElementById(assessmentHeaderId).getText shouldEqual "Additional assessments"
-    waitForVisibilityOfElementById(
-      assessmentInfoId
-    ).getText                                                       should endWith("Additional assessment names, scores and comments will be visible to the applicant")
+    waitForVisibilityOfElementById(assessmentInfoId).getText        should endWith(
+      "Additional assessment names, scores and comments will be visible to the applicant"
+    )
+    howManyAssessments(interviewOneDetails)
     vXI1AssessmentsTotalScore.clear()
-    assessments.take(interviewOneDetails.additionalAssessments.toInt).foreach { f =>
-      f(interviewOneDetails)
-    }
-    totalScore(vXI1AssessmentsTotalScore)
+    if (interviewOneDetails.additionalAssessments != "0") {
+      assessments.take(interviewOneDetails.additionalAssessments.toInt).foreach { f =>
+        f(interviewOneDetails)
+      }
+      totalScore(vXI1AssessmentsTotalScore)
+    } else vXI1AssessmentsTotalScore += 0
   }
 
   private def enterExperienceOutcome(interviewOneDetails: InterviewOneDetails): Unit =
@@ -760,7 +762,10 @@ object InterviewOneEvaluationTab extends VacancyBasePage {
 
   private def enterOutcome(interviewOneDetails: InterviewOneDetails): Unit = {
     vXInterviewOneOutcome = interviewOneDetails.finalOutcome
-    checkForNewValueId(formProblemStatusId, "There is a problem")
+    if (vXExperiencesRequired && vXBehavioursRequired && vXTechSkillsRequired && vXStrengthsRequired) {
+      checkForNewValueId(formProblemStatusId, "There is a problem")
+      scrollToElement(By.id(outcomeTitleId))
+    }
     scrollToElement(By.id(outcomeTitleId))
     waitForVisibilityOfElementById(outcomeTitleId).getText shouldEqual "Outcome"
     waitForVisibilityOfElementById(outcomeId).click()

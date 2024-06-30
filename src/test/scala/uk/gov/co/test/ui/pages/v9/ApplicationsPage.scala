@@ -121,14 +121,16 @@ object ApplicationsPage extends CivilServiceJobsBasePage {
     _reviewUpdate
   }
 
-  def extractApplicationId(): Unit = {
+  def extractApplicationInfo(): Unit = {
     navigateToApplicationsPage()
     applicationId = applicationIdValue()
-    println("=============================================")
+    println("===============================================")
     println(s"Candidate Email: $randomEmail")
-    println(s"Application ID: $applicationId")
     println(s"Vacancy ID: $vacancyId")
-    println("=============================================")
+    println(s"Application ID: $applicationId")
+    println("===============================================")
+    statusValue() shouldEqual "Application in progress"
+    reviewUpdateValue().click()
   }
 
   def navigateToApplicationCentrePage(): Unit =
@@ -136,7 +138,7 @@ object ApplicationsPage extends CivilServiceJobsBasePage {
       reviewUpdateValue().click()
     } else {
       navigateToApplicationsPage()
-      eventually(statusValue() shouldEqual "Application being reviewed")
+      eventually(statusValue() shouldEqual "Application received")
       reviewUpdateValue().click()
     }
 

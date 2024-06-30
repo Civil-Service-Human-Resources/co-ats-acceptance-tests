@@ -104,7 +104,7 @@ object MASTER_APPLICATION_INTERVIEW_SCHEDULE
       "Prawf awtomeiddio",
       true,
       "Prawf awtomeiddio",
-      s"HMRC Government Offices Great George Street I%s",
+      s"DWP Government Offices I%s",
       false,
       24,
       "Use System Default",

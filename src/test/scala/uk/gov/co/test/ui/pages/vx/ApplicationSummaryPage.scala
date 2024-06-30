@@ -2,7 +2,7 @@ package uk.gov.co.test.ui.pages.vx
 
 import org.openqa.selenium.By
 import org.scalatest.concurrent.Eventually.eventually
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{applicationId, randomFirstName, randomLastName, v9CivilServant, v9HomeDepartment, v9PecRequired, vXApproach, vXCandidateUploadIdentityDocs, vXCrcCheckProvider, vXCrcLevel, vXInterviewNumber, vXJobInfoDepartment, vXPecBankruptcyCheck, vXPecCrc, vXPecEmploymentHistoryCheck, vXPecFraudCheck, vXPecGeneralInfo, vXPecHealthRefCheck, vXPecNen, vXPecNsv, vXPecOgdSecurityCheck, vXPecOverseasCheck, vXPecPensionsCheck, vXPecPn, vXPecPreviousCivilEmploymentCheck, vXPecReferenceCheck, vXPecSelfEmploymentCheck, vXRtwChecks, vXTypeOfCandidate, vXUseOnlinePecForms, vXVettingLevel, vacancyId, vacancyName}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{applicationId, randomFirstName, randomLastName, v9CivilServant, v9HomeDepartment, v9PecRequired, vXApproach, vXCandidateUploadIdentityDocs, vXCrcCheckProvider, vXCrcLevel, vXInterviewNumber, vXJobInfoDepartment, vXPecBankruptcyCheck, vXPecCrc, vXPecEmploymentHistoryCheck, vXPecFraudCheck, vXPecGeneralInfo, vXPecHealthRefCheck, vXPecNen, vXPecNsv, vXPecOgdSecurityCheck, vXPecOverseasCheck, vXPecPensionsCheck, vXPecPn, vXPecPreviousCivilEmploymentCheck, vXPecReferenceCheck, vXPecSelfEmploymentCheck, vXTypeOfCandidate, vXUseOnlinePecForms, vXVettingLevel, vXWhichIdentityChecks, vacancyId, vacancyName}
 import uk.gov.co.test.ui.data.vx.application.MASTER_APPLICATION_DATA
 import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.{candidateAcceptsOffer, confirmApplicationUpdateNoPecNen, confirmApplicationUpdateNoPecPn, confirmApplicationUpdateState, confirmOfferAcceptedNoPecFunction, v9ConfirmOfferAcceptedState}
 import uk.gov.co.test.ui.pages.v9.ProvisionalOfferPage.offerDecisionFlow
@@ -140,69 +140,59 @@ object ApplicationSummaryPage extends VacancyBasePage {
     candidateAcceptsOffer()
     offerDecisionFlow("Accept")
     vXExtractTypeOfCandidate()
-
-    println(s"1. vXUseOnlinePecForms: $vXUseOnlinePecForms")
-    println(s"2. pecFieldsRequired: ${pecFieldsRequired()}")
-    println(s"3. v9CivilServant $v9CivilServant")
-    println(s"4. vXJobInfoDepartment $vXJobInfoDepartment")
-    println(s"5. v9HomeDepartment $v9HomeDepartment")
-    println(s"6. vXPecOgdSecurityCheck $vXPecOgdSecurityCheck")
-    println(s"7. vXTypeOfCandidate => $vXTypeOfCandidate")
+    pecFieldsRequired()
 
     if (!vXUseOnlinePecForms) {
       confirmApplicationUpdateState()
       agreeStartDate()
-    } else if (
-      vXUseOnlinePecForms &&
-      pecFieldsRequired() &&
-      (vXPecPn.contains("Internal Candidates") && (v9CivilServant && vXJobInfoDepartment == v9HomeDepartment))
-    ) {
-      confirmApplicationUpdateNoPecPn()
-      postingNoticeRequested()
-    } else if (
-      vXUseOnlinePecForms &&
-      pecFieldsRequired() &&
-      (
-        ((!vXPecNsv
-          .contains("Not Applicable") && vXPecNsv.contains(s"$vXApproach Candidates")) && vXVettingLevel == "None") &&
-          (vXPecNen.contains("External Candidates") || vXPecNen.contains("OGD Candidates") || vXPecNen.contains(
-            "NDPB Candidates"
-          ) && (vXJobInfoDepartment != v9HomeDepartment)) && !vXPecOgdSecurityCheck
-      )
-    ) {
-      confirmApplicationUpdateNoPecNen()
-      checksCompleteDecisionRequired()
-      //added these
-      checkVacancyStatus("Checks Complete – Decision Required")
-      moveVacancyOnAndSendEmail(passChecksBarId, emailChecksClearPath, correspondenceSendId)
-    } else if (
-      vXUseOnlinePecForms &&
-      pecFieldsRequired() &&
-      (v9CivilServant && (v9HomeDepartment != vXJobInfoDepartment) && vXPecOgdSecurityCheck && (vXTypeOfCandidate == "OGD")) &&
-      ((!vXPecCrc.contains("Not Applicable") && vXPecCrc.contains(s"$vXApproach Candidates") && vXCrcLevel != "None" && vXCrcCheckProvider.contains("DBS")) ||
-          (!vXPecNsv.contains("Not Applicable") && vXPecNsv.contains(s"$vXApproach Candidates") && vXVettingLevel != "None")
-      )) {
-      securityChecksRequired()
-      ogdSecurityChecksFlow(MASTER_APPLICATION_DATA)
-      inviteCandidateToCompletePecForm()
-      v9ConfirmOfferAcceptedState()
     } else {
-      v9ConfirmOfferAcceptedState()
-      vXProvisionalOfferAccepted()
+      if (
+        vXUseOnlinePecForms && !v9PecRequired &&
+        ((!vXPecPn.contains("Not Applicable") && vXPecPn.contains(s"$vXTypeOfCandidate Candidates")) &&
+          (v9CivilServant && vXJobInfoDepartment == v9HomeDepartment)) &&
+        ((vXVettingLevel != "None") || (vXCrcLevel != "None" && vXCrcCheckProvider.contains("DBS")))
+      ) {
+        confirmApplicationUpdateNoPecPn()
+        postingNoticeRequested()
+      } else if (
+        vXUseOnlinePecForms && !v9PecRequired &&
+        ((!vXPecNen.contains("Not Applicable") && vXPecNen.contains(s"$vXTypeOfCandidate Candidates")) &&
+          (v9CivilServant && vXJobInfoDepartment != v9HomeDepartment)) &&
+        vXWhichIdentityChecks != "None"
+      ) {
+        confirmApplicationUpdateNoPecNen()
+        checksCompleteDecisionRequired()
+        //added these
+        checkVacancyStatus("Checks Complete – Decision Required")
+        moveVacancyOnAndSendEmail(passChecksBarId, emailChecksClearPath, correspondenceSendId)
+      } else if (
+        vXUseOnlinePecForms &&
+        v9PecRequired &&
+        (v9CivilServant && (v9HomeDepartment != vXJobInfoDepartment) && vXPecOgdSecurityCheck && (vXTypeOfCandidate == "OGD")) &&
+        ((!vXPecCrc.contains("Not Applicable") && vXPecCrc.contains(
+          s"$vXApproach Candidates"
+        ) && vXCrcLevel != "None" && vXCrcCheckProvider.contains("DBS")) ||
+          (!vXPecNsv
+            .contains("Not Applicable") && vXPecNsv.contains(s"$vXApproach Candidates") && vXVettingLevel != "None"))
+      ) {
+        securityChecksRequired()
+        ogdSecurityChecksFlow(MASTER_APPLICATION_DATA)
+        inviteCandidateToCompletePecForm()
+        v9ConfirmOfferAcceptedState()
+      } else {
+        v9ConfirmOfferAcceptedState()
+        vXProvisionalOfferAccepted()
+      }
     }
   }
 
-  def pecFieldsRequired(): Boolean = {
+  def pecFieldsRequired(): Unit =
     if (
-      vXCandidateUploadIdentityDocs ||
-      (!vXRtwChecks.contains("Not Applicable") && vXRtwChecks.contains(s"$vXTypeOfCandidate Candidates")) ||
       (!vXPecGeneralInfo.contains("Not Applicable") && vXPecGeneralInfo.contains(s"$vXTypeOfCandidate Candidates")) ||
       (!vXPecReferenceCheck
         .contains("Not Applicable") && vXPecReferenceCheck.contains(s"$vXTypeOfCandidate Candidates")) ||
       (!vXPecBankruptcyCheck
         .contains("Not Applicable") && vXPecBankruptcyCheck.contains(s"$vXTypeOfCandidate Candidates")) ||
-      (!vXPecCrc.contains("Not Applicable") && vXPecCrc.contains(s"$vXTypeOfCandidate Candidates")) ||
-      (!vXPecNsv.contains("Not Applicable") && vXPecNsv.contains(s"$vXTypeOfCandidate Candidates")) ||
       (!vXPecEmploymentHistoryCheck
         .contains("Not Applicable") && vXPecEmploymentHistoryCheck.contains(s"$vXTypeOfCandidate Candidates")) ||
       (!vXPecHealthRefCheck
@@ -215,13 +205,12 @@ object ApplicationSummaryPage extends VacancyBasePage {
         .contains("Not Applicable") && vXPecPreviousCivilEmploymentCheck.contains(s"$vXTypeOfCandidate Candidates")) ||
       (!vXPecFraudCheck.contains("Not Applicable") && vXPecFraudCheck.contains(s"$vXTypeOfCandidate Candidates")) ||
       (!vXPecSelfEmploymentCheck
-        .contains("Not Applicable") && vXPecSelfEmploymentCheck.contains(s"$vXTypeOfCandidate Candidates")) ||
-      (!vXPecNen.contains("Not Applicable") && vXPecNen.contains(s"$vXTypeOfCandidate Candidates")) ||
-      (!vXPecPn.contains("Not Applicable") && vXPecPn.contains(s"$vXTypeOfCandidate Candidates"))
-    ) v9PecRequired = true
-    else v9PecRequired = false
-    v9PecRequired
-  }
+        .contains("Not Applicable") && vXPecSelfEmploymentCheck.contains(s"$vXTypeOfCandidate Candidates"))
+    ) {
+      v9PecRequired = true
+    } else {
+      v9PecRequired = false
+    }
 
   def acceptsOfferAgain(): Unit = {
     candidateAcceptsOffer()

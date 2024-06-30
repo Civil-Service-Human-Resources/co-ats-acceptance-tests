@@ -6,7 +6,7 @@ import uk.gov.co.test.ui.data.vx.application.{ApplicationDetails, AssessmentOutc
 import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.applicationStateAfterInterview
 import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.{availableBarItems, completeI4EvaluationBarId, interviewEvaluation, noShowI4BarId, withdrawAtInterviewBarId}
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
-import uk.gov.co.test.ui.pages.vx.vacancytabs.InterviewOneEvaluationTab.{checkForTotalValueId, formProblemStatusId, strengthTotalScoreId, techSkillTotalScoreId, totalScore, vXI1StrengthsTotalScore, vXI1TechSkillsTotalScore}
+import uk.gov.co.test.ui.pages.vx.vacancytabs.InterviewOneEvaluationTab.{formProblemStatusId, outcomeTitleId, scrollToElement}
 
 import scala.collection.mutable.ListBuffer
 
@@ -359,13 +359,18 @@ object InterviewFourEvaluationTab extends VacancyBasePage {
 
   private def behavioursOutcome(interviewFourDetails: InterviewFourDetails): Unit =
     if (vXBehavioursRequired) {
-      waitForVisibilityOfElementById(behaviourAssessmentHeaderId).getText shouldEqual "Behaviour assessment" //TODO different to I3
+      waitForVisibilityOfElementById(
+        behaviourAssessmentHeaderId
+      ).getText                                                  shouldEqual "Behaviour assessment" //TODO different to I3
       waitForVisibilityOfElementById(behaviourScoringGuideId).getText should include(interviewFourDetails.scoringGuide)
       vXI4BehavioursTotalScore.clear()
       behaviourOutcome.take(vXHowManyBehaviours).foreach { f =>
         f(interviewFourDetails)
       }
-      checkForTotalValueId(behaviourTotalScoreId, s"${totalScore(vXI4BehavioursTotalScore)}") //TODO I2 is different, no Pascal Case
+      checkForTotalValueId(
+        behaviourTotalScoreId,
+        s"${totalScore(vXI4BehavioursTotalScore)}"
+      ) //TODO I2 is different, no Pascal Case
     }
 
   private def enterTechSkillOneOutcome(interviewFourDetails: InterviewFourDetails): Unit = {
@@ -502,13 +507,18 @@ object InterviewFourEvaluationTab extends VacancyBasePage {
   private def techSkillOutcome(interviewFourDetails: InterviewFourDetails): Unit =
     if (vXTechSkillsRequired) {
       scrollToElement(By.id(techSkillsHeaderId))
-      waitForVisibilityOfElementById(techSkillsHeaderId).getText shouldEqual "Technical Skill assessment" //TODO I3 different, no Pascal Case
+      waitForVisibilityOfElementById(
+        techSkillsHeaderId
+      ).getText                                                   shouldEqual "Technical Skill assessment" //TODO I3 different, no Pascal Case
       waitForVisibilityOfElementById(techSkillsScoringGuideId).getText should include(interviewFourDetails.scoringGuide)
       vXI4TechSkillsTotalScore.clear()
       skillOutcome.take(vXHowManySkills).foreach { f =>
         f(interviewFourDetails)
       }
-      checkForTotalValueId(techSkillTotalScoreId, s"${totalScore(vXI4TechSkillsTotalScore)}") //TODO I3 different wording case
+      checkForTotalValueId(
+        techSkillTotalScoreId,
+        s"${totalScore(vXI4TechSkillsTotalScore)}"
+      ) //TODO I3 different wording case
     }
 
   private def enterStrengthOneOutcome(interviewFourDetails: InterviewFourDetails): Unit = {
@@ -622,12 +632,17 @@ object InterviewFourEvaluationTab extends VacancyBasePage {
     if (vXStrengthsRequired) {
       scrollToElement(By.id(strengthsHeaderId))
       waitForVisibilityOfElementById(strengthsHeaderId).getText shouldEqual "Strength assessment"
-      waitForVisibilityOfElementById(strengthScoringGuideId).getText should include(interviewFourDetails.strengthScoringGuide)
+      waitForVisibilityOfElementById(strengthScoringGuideId).getText should include(
+        interviewFourDetails.strengthScoringGuide
+      )
       vXI4StrengthsTotalScore.clear()
       strengths.take(vXHowManyStrengths).foreach { f =>
         f(interviewFourDetails)
       }
-      checkForTotalValueId(strengthTotalScoreId, s"${totalScore(vXI4StrengthsTotalScore)}") //TODO I3 has different casing
+      checkForTotalValueId(
+        strengthTotalScoreId,
+        s"${totalScore(vXI4StrengthsTotalScore)}"
+      ) //TODO I3 has different casing
     }
 
   private def howManyAssessments(interviewFourDetails: InterviewFourDetails): Unit = {
@@ -718,17 +733,21 @@ object InterviewFourEvaluationTab extends VacancyBasePage {
   )
 
   private def assessmentsOutcome(interviewFourDetails: InterviewFourDetails): Unit = {
-    howManyAssessments(interviewFourDetails)
     waitForVisibilityOfElementById(assessmentHeaderId).getText shouldEqual "Additional assessments"
-    waitForVisibilityOfElementById(assessmentInfoId).getText should endWith("Additional assessment names, scores and comments will be visible to the applicant")
+    waitForVisibilityOfElementById(assessmentInfoId).getText        should endWith(
+      "Additional assessment names, scores and comments will be visible to the applicant"
+    )
+    howManyAssessments(interviewFourDetails)
     vXI4AssessmentsTotalScore.clear()
-    assessments.take(interviewFourDetails.additionalAssessments.toInt).foreach { f =>
-      f(interviewFourDetails)
-    }
-    totalScore(vXI4AssessmentsTotalScore)
+    if (interviewFourDetails.additionalAssessments != "0") {
+      assessments.take(interviewFourDetails.additionalAssessments.toInt).foreach { f =>
+        f(interviewFourDetails)
+      }
+      totalScore(vXI4AssessmentsTotalScore)
+    } else vXI4AssessmentsTotalScore += 0
   }
 
-  private def enterExperienceOutcome(interviewFourDetails: InterviewFourDetails): Unit = {
+  private def enterExperienceOutcome(interviewFourDetails: InterviewFourDetails): Unit =
     if (vXExperiencesRequired) {
       enterOutcome(
         experienceTitleId,
@@ -740,7 +759,6 @@ object InterviewFourEvaluationTab extends VacancyBasePage {
       )
       vXI4ExperienceScore = interviewFourDetails.experience.score
     } else vXI4ExperienceScore = 0
-  }
 
   private def checkOverallScore(interviewFourDetails: InterviewFourDetails): Unit = {
     waitForVisibilityOfElementByPath(
@@ -757,7 +775,10 @@ object InterviewFourEvaluationTab extends VacancyBasePage {
 
   private def enterOutcome(interviewFourDetails: InterviewFourDetails): Unit = {
     vXInterviewFourOutcome = interviewFourDetails.finalOutcome
-    checkForNewValueId(formProblemStatusId, "There is a problem")
+    if (vXExperiencesRequired && vXBehavioursRequired && vXTechSkillsRequired && vXStrengthsRequired) {
+      checkForNewValueId(formProblemStatusId, "There is a problem")
+      scrollToElement(By.id(outcomeTitleId))
+    }
     scrollToElement(By.id(outcomeTitleId))
     waitForVisibilityOfElementById(outcomeTitleId).getText shouldEqual "Outcome"
     waitForVisibilityOfElementById(outcomeId).click()

@@ -491,7 +491,7 @@ object SiftEvaluationTab extends VacancyBasePage {
     }
     clickOn(submitForm)
     siftEvaluation()
-    if (vXAnyOnlineTests || vXInterviewExpectedRounds == "No interviews") {
+    if ((vXAnyOnlineTests || vXInterviewExpectedRounds == "No interviews") && applicationDetails.siftDetails.finalOutcome != "Hold") {
       successfulAtSiftState()
     } else {
       applicationBeingReviewedState()

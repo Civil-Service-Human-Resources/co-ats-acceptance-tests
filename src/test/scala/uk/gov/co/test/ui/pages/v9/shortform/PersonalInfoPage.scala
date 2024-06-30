@@ -125,6 +125,7 @@ object PersonalInfoPage extends CivilServiceJobsBasePage {
         &&
         (vXJobInfoDepartment == "Department for Energy Security & Net Zero" ||
         vXJobInfoDepartment == "Department for Science, Innovation and Technology" ||
+        vXJobInfoDepartment == "Department for Environment, Food and Rural Affairs" ||
         vXJobInfoDepartment == "HM Revenue and Customs" ||
         vXJobInfoDepartment == "Government Equalities Office" ||
         vXJobInfoDepartment == "Revenue Scotland" ||
@@ -173,9 +174,6 @@ object PersonalInfoPage extends CivilServiceJobsBasePage {
   )
 
   def personalInfoPage(shortFormDetails: ShortFormDetails): Unit = {
-    println(s"3. v9CivilServant $v9CivilServant")
-    println(s"4. vXJobInfoDepartment $vXJobInfoDepartment")
-    println(s"5. v9HomeDepartment $v9HomeDepartment")
     personalInfo.foreach { f =>
       f(shortFormDetails.personalInfoDetails)
     }

@@ -1,6 +1,6 @@
 package uk.gov.co.test.ui.flows.v9
 
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{v9RtwHoldPassport, vXCrcCheckProvider, vXCrcLevel, vXUseOnlinePecForms, vXVettingLevel, vXWhichIdentityChecks}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{v9PecRequired, v9RtwHoldPassport, vXCrcCheckProvider, vXCrcLevel, vXUseOnlinePecForms, vXVettingLevel, vXWhichIdentityChecks}
 import uk.gov.co.test.ui.data.v9.pecform.PecFormDetails
 import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.pecStartFunction
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
@@ -20,7 +20,6 @@ import uk.gov.co.test.ui.pages.v9.pecform.SelfEmploymentPage.selfEmploymentPage
 import uk.gov.co.test.ui.pages.v9.pecform.UploadIdentityDocsPage.uploadIdentityDocPage
 import uk.gov.co.test.ui.pages.v9.pecform.VerifyingHistoryPage.verifyingHistoryPage
 import uk.gov.co.test.ui.pages.v9.pecform.YourDetailsPage.yourDetailsPage
-import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.pecFieldsRequired
 
 object PecFormFlow extends CivilServiceJobsBasePage {
 
@@ -48,7 +47,7 @@ object PecFormFlow extends CivilServiceJobsBasePage {
 //    v9ConfirmOfferAcceptedState()
     if (
       vXUseOnlinePecForms && (
-        pecFieldsRequired() ||
+        v9PecRequired ||
           (vXCrcLevel != "None" && vXCrcCheckProvider.contains("DBS")) ||
           (vXVettingLevel != "None") ||
           (vXWhichIdentityChecks != "No digital checks" && v9RtwHoldPassport)

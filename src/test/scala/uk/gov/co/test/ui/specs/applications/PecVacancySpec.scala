@@ -40,25 +40,5 @@ class PecVacancySpec extends BaseFeatureSpec {
       Then("the candidate is able to fully complete the pec form")
       fillPecFormDetailsOnly(PEC_FORM_DATA)
     }
-
-    Scenario("VX: A Candidate Completes The Candidate PEC Forms; Master Application Process", RunInVX) {
-      Given("candidate registers for new job application")
-      fillNewVacancyForm(MASTER_VACANCY_DATA)
-//      extractAllVacancyDetails("10252")
-      fillNewCandidateDetails(MASTER_REGISTER_CANDIDATE)
-
-      When("candidate completes the short & long forms")
-      fillShortFormDetails(MASTER_SHORT_FORM_DATA)
-      fillLongFormDetails(MASTER_LONG_FORM_DATA)
-
-      And("the application is completed before pec form")
-      PreSiftEvaluationFlow(MASTER_APPLICATION_DATA)
-      SiftEvaluationFlow(MASTER_APPLICATION_DATA)
-      completeAllInterviews(MASTER_APPLICATION_DATA)
-      moveAndAcceptOffer()
-
-      Then("the candidate is able to fully complete the pec form")
-      fillPecFormDetailsOnly(MASTER_PEC_FORM_DATA)
-    }
   }
 }

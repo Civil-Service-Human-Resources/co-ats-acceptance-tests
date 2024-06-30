@@ -174,7 +174,7 @@ object MasterVacancyDetails extends VacancyBasePage {
 
   //vx VACANCY online pre-employment check forms
   var vXUseOnlinePecForms: Boolean = _
-  var vXNoPecOgdTransfer: Boolean  = _
+  var vXNoPecOgdDigitalTransfer: Boolean  = _
   var vXHavePecMailbox: Boolean    = _
   var vXPecMailbox                 = ""
 
@@ -200,7 +200,7 @@ object MasterVacancyDetails extends VacancyBasePage {
   var vXPecFraudCheck                        = new ListBuffer[String]()
   var vXPecSelfEmploymentCheck               = new ListBuffer[String]()
   var vXPecOgdSecurityCheck: Boolean         = _
-  var vXPecUseOgdProcess: Boolean            = _
+  var vXPecUseOgdProcess: Boolean            = false
   var vXPecIncludeAdditionalCheck: Boolean   = _
   var vXPecNameOfAdditionalCheck             = ""
   var vXPecAdditionalCheck                   = new ListBuffer[String]()

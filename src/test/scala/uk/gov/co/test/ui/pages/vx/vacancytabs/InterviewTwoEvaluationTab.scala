@@ -1,12 +1,12 @@
 package uk.gov.co.test.ui.pages.vx.vacancytabs
 
 import org.openqa.selenium.By
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{randomFirstName, randomLastName, vXBehaviourInterviewRequired, vXBehavioursRequired, vXHowManyBehaviours, vXHowManySkills, vXHowManyStrengths, vXInterviewTwoOutcome, vXListOfChosenBehaviours, vXListOfSkillsInterviewRequired, vXListOfStrengths, vXListOfTechSkills, vXStrengthsRequired, vXTechSkillsRequired, vacancyFormId}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{randomFirstName, randomLastName, vXBehaviourInterviewRequired, vXBehavioursRequired, vXExperiencesRequired, vXHowManyBehaviours, vXHowManySkills, vXHowManyStrengths, vXInterviewTwoOutcome, vXListOfChosenBehaviours, vXListOfSkillsInterviewRequired, vXListOfStrengths, vXListOfTechSkills, vXStrengthsRequired, vXTechSkillsRequired, vacancyFormId}
 import uk.gov.co.test.ui.data.vx.application.{ApplicationDetails, AssessmentOutcome, Outcome}
 import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.applicationStateAfterInterview
 import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.{availableBarItems, completeI2EvaluationBarId, interviewEvaluation, noShowI2BarId, withdrawAtInterviewBarId}
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
-import uk.gov.co.test.ui.pages.vx.vacancytabs.InterviewOneEvaluationTab.formProblemStatusId
+import uk.gov.co.test.ui.pages.vx.vacancytabs.InterviewOneEvaluationTab.{formProblemStatusId, outcomeTitleId, scrollToElement}
 
 import scala.collection.mutable.ListBuffer
 
@@ -720,15 +720,17 @@ object InterviewTwoEvaluationTab extends VacancyBasePage {
 
   private def assessmentsOutcome(interviewTwoDetails: InterviewTwoDetails): Unit = {
     waitForVisibilityOfElementById(assessmentHeaderId).getText shouldEqual "Additional assessments"
-    waitForVisibilityOfElementById(
-      assessmentInfoId
-    ).getText                                                       should endWith("Additional assessment names, scores and comments will be visible to the applicant")
-    vXI2AssessmentsTotalScore.clear()
+    waitForVisibilityOfElementById(assessmentInfoId).getText        should endWith(
+      "Additional assessment names, scores and comments will be visible to the applicant"
+    )
     howManyAssessments(interviewTwoDetails)
-    assessments.take(interviewTwoDetails.additionalAssessments.toInt).foreach { f =>
-      f(interviewTwoDetails)
-    }
-    totalScore(vXI2AssessmentsTotalScore)
+    vXI2AssessmentsTotalScore.clear()
+    if (interviewTwoDetails.additionalAssessments != "0") {
+      assessments.take(interviewTwoDetails.additionalAssessments.toInt).foreach { f =>
+        f(interviewTwoDetails)
+      }
+      totalScore(vXI2AssessmentsTotalScore)
+    } else vXI2AssessmentsTotalScore += 0
   }
 
   private def enterExperienceOutcome(interviewTwoDetails: InterviewTwoDetails): Unit = {
@@ -758,7 +760,10 @@ object InterviewTwoEvaluationTab extends VacancyBasePage {
 
   private def enterOutcome(interviewTwoDetails: InterviewTwoDetails): Unit = {
     vXInterviewTwoOutcome = interviewTwoDetails.finalOutcome
-    checkForNewValueId(formProblemStatusId, "There is a problem")
+    if (vXExperiencesRequired && vXBehavioursRequired && vXTechSkillsRequired && vXStrengthsRequired) {
+      checkForNewValueId(formProblemStatusId, "There is a problem")
+      scrollToElement(By.id(outcomeTitleId))
+    }
     scrollToElement(By.id(outcomeTitleId))
     waitForVisibilityOfElementById(outcomeTitleId).getText shouldEqual "Outcome"
     waitForVisibilityOfElementById(outcomeId).click()
