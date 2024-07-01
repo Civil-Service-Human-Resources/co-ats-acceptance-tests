@@ -63,10 +63,6 @@ object TechnicalSkillsSection extends VacancyBasePage {
   def selectTechnicalSkills(successProfilesDetails: SuccessProfilesDetails): Unit = {
     val techSkills = successProfilesDetails.techSkillsSection
     if (vXTechSkillsRequired) {
-      vXListOfTechSkills.clear()
-      vXListOfTechSkillsDescription.clear()
-      vXListOfSkillsApplicationRequired.clear()
-      vXListOfSkillsInterviewRequired.clear()
       vXHowManySkills = techSkills.map(_.howManySkills).get
       selectHowManyTechSkills(vXHowManySkills)
       techSkillsRequired(successProfilesDetails)

@@ -359,7 +359,6 @@ object InterviewTwoEvaluationTab extends VacancyBasePage {
     if (vXBehavioursRequired) {
       waitForVisibilityOfElementById(behaviourAssessmentHeaderId).getText shouldEqual "Behaviour assessment"
       waitForVisibilityOfElementById(behaviourScoringGuideId).getText          should include(interviewTwoDetails.scoringGuide)
-      vXI2BehavioursTotalScore.clear()
       behaviourOutcome.take(vXHowManyBehaviours).foreach { f =>
         f(interviewTwoDetails)
       }
@@ -502,7 +501,6 @@ object InterviewTwoEvaluationTab extends VacancyBasePage {
       scrollToElement(By.id(techSkillsHeaderId))
       waitForVisibilityOfElementById(techSkillsHeaderId).getText  shouldEqual "Technical skill assessment"
       waitForVisibilityOfElementById(techSkillsScoringGuideId).getText should include(interviewTwoDetails.scoringGuide)
-      vXI2TechSkillsTotalScore.clear()
       skillOutcome.take(vXHowManySkills).foreach { f =>
         f(interviewTwoDetails)
       }
@@ -624,7 +622,6 @@ object InterviewTwoEvaluationTab extends VacancyBasePage {
       waitForVisibilityOfElementById(strengthScoringGuideId).getText should include(
         interviewTwoDetails.strengthScoringGuide
       )
-      vXI2StrengthsTotalScore.clear()
       strengths.take(vXHowManyStrengths).foreach { f =>
         f(interviewTwoDetails)
       }

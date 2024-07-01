@@ -88,24 +88,32 @@ object ReserveListsTab extends VacancyBasePage {
   def reserveListHistoryChecks(): Unit = {
     waitForVisibilityOfElementByPath(historyTabPath).click()
     waitForVisibilityOfElementById("summary_tabs_history_tab").isDisplayed
+    val scheduleDate = reserveScheduleDetails()
+    waitForVisibilityOfElementByPath("(//*[@class='detail-grid-tr'])[1]//a").click()
+    val scheduledFor = waitForVisibilityOfElementByPath("//*[@class='history-entry-div']").getText
+    scheduleDate      should startWith(s"Process rule: Scheduled move - ${vXReserveListLength.toLowerCase}")
+    scheduledFor should include(s"${reserveExpiryDateReformatted()}")
+//    waitForVisibilityOfElementByPath(
+//      "(//*[@class='detail-grid-tl'])[3]"
+//    ).getText shouldEqual s"Subject: Application update - $vacancyName - $vacancyId"
+//    waitForVisibilityOfElementByPath("(//*[@class='detail-grid-tr'])[3]//a").click()
+  }
+
+  def reserveListEmailChecks(): Unit = {
     waitForVisibilityOfElementByPath(
       "(//*[@class='detail-grid-tl'])[3]"
     ).getText shouldEqual s"Subject: Application update - $vacancyName - $vacancyId"
     waitForVisibilityOfElementByPath("(//*[@class='detail-grid-tr'])[3]//a").click()
-  }
-
-  def reserveListEmailChecks(): Unit = {
-    val scheduleDate = reserveScheduleDetails()
+//    val scheduleDate = reserveScheduleDetails()
     val templateId   = reserveEmailDetails("1")
     val destination  = reserveEmailDetails("2")
     val subject      = reserveEmailDetails("3")
     val status       = reserveEmailDetails("4")
     val emailPreview = waitForVisibilityOfElementByPath("//*[@class='email_preview ']//tbody/tr[2]").getText
-//    scheduleDate      should startWith(s"Process rule scheduled for ${reserveExpiryDateReformatted()}")
-    scheduleDate      should startWith(s"Process rule: Scheduled move - ${vXReserveListLength.toLowerCase}")
-    waitForVisibilityOfElementByPath("(//*[@class='detail-grid-tr'])[1]//a").click()
-    val scheduledFor = waitForVisibilityOfElementByPath("//*[@class='history-entry-div']").getText
-    scheduledFor should include(s"${reserveExpiryDateReformatted2()}")
+//    scheduleDate      should startWith(s"Process rule: Scheduled move - ${vXReserveListLength.toLowerCase}")
+//    waitForVisibilityOfElementByPath("(//*[@class='detail-grid-tr'])[1]//a").click()
+//    val scheduledFor = waitForVisibilityOfElementByPath("//*[@class='history-entry-div']").getText
+//    scheduledFor should include(s"${reserveExpiryDateReformatted2()}")
     templateId   shouldEqual "220"
     destination  shouldEqual randomEmail
     subject      shouldEqual s"Application update - $vacancyName - $vacancyId"
@@ -143,7 +151,8 @@ object ReserveListsTab extends VacancyBasePage {
   }
 
   def calculatedExpiryDateReformatted(monthsToAdd: Int, weeksToAdd: Option[Int] = None): String = {
-    val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+//    val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
     if (weeksToAdd.isEmpty) {
       val expiry     = LocalDate.now().plusMonths(monthsToAdd).plusDays(1)
       val expiryDate = expiry.format(formatter)
@@ -155,18 +164,18 @@ object ReserveListsTab extends VacancyBasePage {
     }
   }
 
-  def calculatedExpiryDateReformatted2(monthsToAdd: Int, weeksToAdd: Option[Int] = None): String = {
-    val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
-    if (weeksToAdd.isEmpty) {
-      val expiry     = LocalDate.now().plusMonths(monthsToAdd).plusDays(1)
-      val expiryDate = expiry.format(formatter)
-      expiryDate
-    } else {
-      val expiry     = LocalDate.now().plusMonths(monthsToAdd).plusWeeks(weeksToAdd.get).plusDays(1)
-      val expiryDate = expiry.format(formatter)
-      expiryDate
-    }
-  }
+//  def calculatedExpiryDateReformatted2(monthsToAdd: Int, weeksToAdd: Option[Int] = None): String = {
+//    val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
+//    if (weeksToAdd.isEmpty) {
+//      val expiry     = LocalDate.now().plusMonths(monthsToAdd).plusDays(1)
+//      val expiryDate = expiry.format(formatter)
+//      expiryDate
+//    } else {
+//      val expiry     = LocalDate.now().plusMonths(monthsToAdd).plusWeeks(weeksToAdd.get).plusDays(1)
+//      val expiryDate = expiry.format(formatter)
+//      expiryDate
+//    }
+//  }
 
   def reserveExpiryDateMonths(): String =
     vXReserveListTotalLength match {
@@ -194,16 +203,16 @@ object ReserveListsTab extends VacancyBasePage {
       case _                     => throw new IllegalStateException("Invalid reserve period!")
     }
 
-  def reserveExpiryDateReformatted2(): String =
-    vXReserveListTotalLength match {
-      case "3 Months"            => calculatedExpiryDateReformatted2(3)
-      case "6 Months"            => calculatedExpiryDateReformatted2(6)
-      case "9 Months"            => calculatedExpiryDateReformatted2(9)
-      case "12 Months"           => calculatedExpiryDateReformatted2(12)
-      case "12 Months + 2 weeks" => calculatedExpiryDateReformatted2(12, weeksToAdd = Some(2))
-      case "12 Months + 4 weeks" => calculatedExpiryDateReformatted2(12, weeksToAdd = Some(4))
-      case "12 Months + 6 weeks" => calculatedExpiryDateReformatted2(12, weeksToAdd = Some(6))
-      case "12 Months + 8 weeks" => calculatedExpiryDateReformatted2(12, weeksToAdd = Some(8))
-      case _                     => throw new IllegalStateException("Invalid reserve period!")
-    }
+//  def reserveExpiryDateReformatted2(): String =
+//    vXReserveListTotalLength match {
+//      case "3 Months"            => calculatedExpiryDateReformatted2(3)
+//      case "6 Months"            => calculatedExpiryDateReformatted2(6)
+//      case "9 Months"            => calculatedExpiryDateReformatted2(9)
+//      case "12 Months"           => calculatedExpiryDateReformatted2(12)
+//      case "12 Months + 2 weeks" => calculatedExpiryDateReformatted2(12, weeksToAdd = Some(2))
+//      case "12 Months + 4 weeks" => calculatedExpiryDateReformatted2(12, weeksToAdd = Some(4))
+//      case "12 Months + 6 weeks" => calculatedExpiryDateReformatted2(12, weeksToAdd = Some(6))
+//      case "12 Months + 8 weeks" => calculatedExpiryDateReformatted2(12, weeksToAdd = Some(8))
+//      case _                     => throw new IllegalStateException("Invalid reserve period!")
+//    }
 }

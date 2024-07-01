@@ -55,7 +55,7 @@ object RESERVE_JOB_INFORMATION
       ),
       "Other",
       "3",
-      true
+      false
     )
 object RESERVE_APPROACH
     extends ApproachDetails(
@@ -402,7 +402,7 @@ object RESERVE_GROUP_C_TESTS
 
 object RESERVE_ADDITIONAL_QUESTIONS
     extends AdditionalQuestionsDetails(
-      false,
+      anyAdditionalQuestions = Some(false),
       3,
       "Autotest - Question 1",
       "Autotest - Question 2",

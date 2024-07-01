@@ -6,7 +6,7 @@ import uk.gov.co.test.ui.data.vx.vacancy.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 
 case class AdditionalQuestionsDetails(
-  anyAdditionalQuestions: Boolean,
+  anyAdditionalQuestions: Option[Boolean] = None,
   howManyQuestions: Int,
   questionOne: String,
   questionTwo: String,
@@ -27,9 +27,15 @@ object AdditionalQuestionsSection extends VacancyBasePage {
 
   private def selectMoreQuestions(additionalQuestionsDetails: AdditionalQuestionsDetails): Unit = {
     scrollToElement(By.id(moreQuestionsSectionId))
-    vXAnyAdditionalQuestions = additionalQuestionsDetails.anyAdditionalQuestions
-    if (vXAnyAdditionalQuestions) clickOnRadioButton(additionalQuestionsYesId)
-    else clickOnRadioButton(additionalQuestionsNoId)
+    vXAnyAdditionalQuestions = Some(additionalQuestionsDetails.anyAdditionalQuestions).get
+    if (vXAnyAdditionalQuestions.get) {
+      clickOnRadioButton(additionalQuestionsYesId)
+    } else if (!vXAnyAdditionalQuestions.get) {
+      clickOnRadioButton(additionalQuestionsNoId)
+    } else {
+      println("Additional questions section not answered!")
+      vXAnyAdditionalQuestions = Some(None.get)
+    }
   }
 
   private def selectHowManyQuestions(additionalQuestionsDetails: AdditionalQuestionsDetails): Unit = {
@@ -47,13 +53,19 @@ object AdditionalQuestionsSection extends VacancyBasePage {
     }
   }
 
-  private def moreQuestionsFlow(additionalQuestionsDetails: AdditionalQuestionsDetails): Unit =
+  private def moreQuestionsFlow(additionalQuestionsDetails: AdditionalQuestionsDetails): Unit = {
+    vXAnyAdditionalQuestions = Some(false)
+    vXHowManyQuestions = 0
+    vXQuestionOne = ""
+    vXQuestionTwo = ""
+    vXQuestionThree = ""
     if (vXProfile != "Vacancy Holder 1") {
       selectMoreQuestions(additionalQuestionsDetails)
-      if (additionalQuestionsDetails.anyAdditionalQuestions) {
+      if (vXAnyAdditionalQuestions.get) {
         selectHowManyQuestions(additionalQuestionsDetails)
       }
     }
+  }
 
   private def questionOneText(additionalQuestionsDetails: AdditionalQuestionsDetails): Unit = {
     vXQuestionOne = additionalQuestionsDetails.questionOne
@@ -88,9 +100,10 @@ object AdditionalQuestionsSection extends VacancyBasePage {
     moreQuestionsFlow
   )
 
-  def additionalQuestionsSection(newVacancyDetails: NewVacancyDetails): Unit =
+  def additionalQuestionsSection(newVacancyDetails: NewVacancyDetails): Unit = {
     questions.foreach { f =>
       f(newVacancyDetails.additionalQuestionsDetails)
     }
+  }
 
 }

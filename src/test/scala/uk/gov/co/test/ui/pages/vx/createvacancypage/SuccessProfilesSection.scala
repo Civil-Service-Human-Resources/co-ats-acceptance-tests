@@ -1,8 +1,9 @@
 package uk.gov.co.test.ui.pages.vx.createvacancypage
 
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXAbilitiesRequired, vXBehavioursRequired, vXExperiencesRequired, vXStrengthsRequired, vXTechSkillsRequired, vacancyFormId}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXAbilitiesRequired, vXBehaviourApplicationRequired, vXBehaviourInterviewRequired, vXBehavioursRequired, vXCvScoreRange, vXDesirablePastExperience, vXExperiencesRequired, vXFullQualification, vXHowManyBehaviours, vXHowManySkills, vXHowManyStrengths, vXJobHistory, vXLanguagesMandatory, vXLicencesMandatory, vXListOfChosenBehaviours, vXListOfSkillsApplicationRequired, vXListOfSkillsInterviewRequired, vXListOfStrengths, vXListOfTechSkills, vXListOfTechSkillsDescription, vXMembershipsMandatory, vXPersonalStatement, vXPreviousExperiences, vXProvideNameBlindCv, vXQualificationsMandatory, vXSpecificLanguages, vXSpecificLicences, vXSpecificMemberships, vXSpecificPastExperience, vXSpecificQualifications, vXStatementGuidance, vXStatementGuidanceText, vXStatementScoreRange, vXStatementWordLimit, vXStrengthsRequired, vXTechSkillsRequired, vacancyFormId}
 import uk.gov.co.test.ui.data.vx.vacancy.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
+import uk.gov.co.test.ui.pages.vx.VacancyDetailsPage.clearScores
 import uk.gov.co.test.ui.pages.vx.createvacancypage.AbilitiesSection.selectAbilities
 import uk.gov.co.test.ui.pages.vx.createvacancypage.BehavioursSection.selectBehaviours
 import uk.gov.co.test.ui.pages.vx.createvacancypage.ExperienceSection.selectExperiences
@@ -46,6 +47,10 @@ object SuccessProfilesSection extends VacancyBasePage {
 
   private def behavioursRequired(successProfilesDetails: SuccessProfilesDetails): Unit = {
     vXBehavioursRequired = successProfilesDetails.behaviours
+    vXHowManyBehaviours = 0
+    vXListOfChosenBehaviours.clear()
+    vXBehaviourApplicationRequired.clear()
+    vXBehaviourInterviewRequired.clear()
     if (vXBehavioursRequired) {
       checkbox(behavioursId).select()
       selectBehaviours(successProfilesDetails)
@@ -54,6 +59,26 @@ object SuccessProfilesSection extends VacancyBasePage {
 
   private def experiencesRequired(successProfilesDetails: SuccessProfilesDetails): Unit = {
     vXExperiencesRequired = successProfilesDetails.experience
+    vXProvideNameBlindCv = false
+    vXCvScoreRange = ""
+    vXJobHistory = false
+    vXFullQualification = false
+    vXPreviousExperiences = false
+    vXPersonalStatement = false
+    vXStatementScoreRange = ""
+    vXStatementWordLimit = 0
+    vXStatementGuidance = false
+    vXStatementGuidanceText = ""
+    vXDesirablePastExperience = false
+    vXSpecificPastExperience = ""
+    vXLicencesMandatory = false
+    vXSpecificLicences = ""
+    vXMembershipsMandatory = false
+    vXSpecificMemberships = ""
+    vXLanguagesMandatory = false
+    vXSpecificLanguages = ""
+    vXQualificationsMandatory = false
+    vXSpecificQualifications = ""
     if (vXExperiencesRequired) {
       checkbox(experienceId).select()
       selectExperiences(successProfilesDetails)
@@ -62,6 +87,8 @@ object SuccessProfilesSection extends VacancyBasePage {
 
   private def strengthsRequired(successProfilesDetails: SuccessProfilesDetails): Unit = {
     vXStrengthsRequired = successProfilesDetails.strengths
+    vXHowManyStrengths = 0
+    vXListOfStrengths.clear()
     if (vXStrengthsRequired) {
       checkbox(strengthsId).select()
       selectStrengths(successProfilesDetails)
@@ -70,6 +97,11 @@ object SuccessProfilesSection extends VacancyBasePage {
 
   private def techSkillsRequired(successProfilesDetails: SuccessProfilesDetails): Unit = {
     vXTechSkillsRequired = successProfilesDetails.technicalSkills
+    vXHowManySkills = 0
+    vXListOfTechSkills.clear()
+    vXListOfTechSkillsDescription.clear()
+    vXListOfSkillsApplicationRequired.clear()
+    vXListOfSkillsInterviewRequired.clear()
     if (vXTechSkillsRequired) {
       checkbox(technicalSkillsId).select()
       selectTechnicalSkills(successProfilesDetails)
@@ -77,11 +109,12 @@ object SuccessProfilesSection extends VacancyBasePage {
   }
 
   private def whichSuccessProfiles(successProfilesDetails: SuccessProfilesDetails): Unit = {
+    clearScores()
     abilitiesRequired(successProfilesDetails)
-    behavioursRequired(successProfilesDetails)
     experiencesRequired(successProfilesDetails)
-    strengthsRequired(successProfilesDetails)
+    behavioursRequired(successProfilesDetails)
     techSkillsRequired(successProfilesDetails)
+    strengthsRequired(successProfilesDetails)
   }
 
   private val successProfiles: Seq[SuccessProfilesDetails => Unit] = Seq(

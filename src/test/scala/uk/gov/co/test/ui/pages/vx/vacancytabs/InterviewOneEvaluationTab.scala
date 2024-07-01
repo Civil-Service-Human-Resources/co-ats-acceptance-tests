@@ -363,7 +363,6 @@ object InterviewOneEvaluationTab extends VacancyBasePage {
     if (vXBehavioursRequired) {
       waitForVisibilityOfElementById(behaviourAssessmentHeaderId).getText shouldEqual "Behaviour assessment"
       waitForVisibilityOfElementById(behaviourScoringGuideId).getText          should include(interviewOneDetails.scoringGuide)
-      vXI1BehavioursTotalScore.clear()
       behaviourOutcome.take(vXHowManyBehaviours).foreach { f =>
         f(interviewOneDetails)
       }
@@ -506,7 +505,6 @@ object InterviewOneEvaluationTab extends VacancyBasePage {
       scrollToElement(By.id(techSkillsHeaderId))
       waitForVisibilityOfElementById(techSkillsHeaderId).getText  shouldEqual "Technical Skill assessment"
       waitForVisibilityOfElementById(techSkillsScoringGuideId).getText should include(interviewOneDetails.scoringGuide)
-      vXI1TechSkillsTotalScore.clear()
       skillOutcome.take(vXHowManySkills).foreach { f =>
         f(interviewOneDetails)
       }
@@ -627,7 +625,6 @@ object InterviewOneEvaluationTab extends VacancyBasePage {
       waitForVisibilityOfElementById(strengthScoringGuideId).getText should include(
         interviewOneDetails.strengthScoringGuide
       )
-      vXI1StrengthsTotalScore.clear()
       strengths.take(vXHowManyStrengths).foreach { f =>
         f(interviewOneDetails)
       }
@@ -727,7 +724,6 @@ object InterviewOneEvaluationTab extends VacancyBasePage {
       "Additional assessment names, scores and comments will be visible to the applicant"
     )
     howManyAssessments(interviewOneDetails)
-    vXI1AssessmentsTotalScore.clear()
     if (interviewOneDetails.additionalAssessments != "0") {
       assessments.take(interviewOneDetails.additionalAssessments.toInt).foreach { f =>
         f(interviewOneDetails)

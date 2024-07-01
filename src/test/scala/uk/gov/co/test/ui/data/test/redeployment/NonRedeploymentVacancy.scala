@@ -32,7 +32,7 @@ object NON_REDEPLOYMENT_VACANCY_DATA
 object NON_REDEPLOYMENT_BASIC_DETAILS
     extends BasicDetails(
       "DO NOT USE- Automation Test Template",
-      s"Automation: CO - " + generateRandomJobPosition(),
+      s"Automation: HMRC-Redeployment - " + generateRandomJobPosition(),
       true,
       "Prawf awtomeiddio",
       32
@@ -40,8 +40,8 @@ object NON_REDEPLOYMENT_BASIC_DETAILS
 object NON_REDEPLOYMENT_JOB_INFORMATION
     extends JobInfoDetails(
       true,
-      "Cabinet Office",
-      "CO - Central Digital & Data Office",
+      "HM Revenue and Customs",
+      "HMRC - Borders and Trade - Border Change Delivery",
       true,
       "Prawf awtomeiddio",
       "Autotest - Business area detail",
@@ -403,7 +403,7 @@ object NON_REDEPLOYMENT_GROUP_C_TESTS
 
 object NON_REDEPLOYMENT_ADDITIONAL_QUESTIONS
     extends AdditionalQuestionsDetails(
-      true,
+      anyAdditionalQuestions = Some(true),
       3,
       "Autotest - Question 1",
       "Autotest - Question 2",
@@ -482,7 +482,7 @@ object NON_REDEPLOYMENT_PEC_CHECK_FORMS
       selfEmploymentCheck =
         ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
       true,
-      true,
+      false,
       true,
       "Autotest - Name of check",
       additionalCheck = ListBuffer("Not Applicable"),

@@ -50,7 +50,7 @@ object RoleSpecificQuestionsPage extends CivilServiceJobsBasePage {
   )
 
   def roleQuestionsPage(longFormDetails: LongFormDetails): Unit =
-    if (vXAnyAdditionalQuestions) {
+    if (vXAnyAdditionalQuestions.get) {
       roleQuestionsPageCheck()
       questions.take(vXHowManyQuestions).foreach { f =>
         f(longFormDetails.roleQuestionsDetails)

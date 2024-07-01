@@ -107,6 +107,7 @@ object MasterVacancyDetails extends VacancyBasePage {
   //vx VACANCY experience
   var vXJobHistory: Boolean              = _
   var vXFullQualification: Boolean       = _
+  var vXProvideNameBlindCv: Boolean      = _
   var vXCvScoreRange: String             = ""
   var vXPreviousExperiences: Boolean     = _
   var vXPersonalStatement: Boolean       = _
@@ -146,11 +147,11 @@ object MasterVacancyDetails extends VacancyBasePage {
   var vXAnyOnlineTests: Boolean = _
 
   //vx VACANCY additional questions
-  var vXAnyAdditionalQuestions: Boolean = _
-  var vXHowManyQuestions: Int           = _
-  var vXQuestionOne                     = ""
-  var vXQuestionTwo                     = ""
-  var vXQuestionThree                   = ""
+  var vXAnyAdditionalQuestions: Option[Boolean] = None
+  var vXHowManyQuestions: Int                   = _
+  var vXQuestionOne                             = ""
+  var vXQuestionTwo                             = ""
+  var vXQuestionThree                           = ""
 
   //vx VACANCY eligibility and rejection criteria
   var vXRejectProbation: Boolean             = true
@@ -173,10 +174,10 @@ object MasterVacancyDetails extends VacancyBasePage {
   var vXGrsVacancy: Boolean       = true
 
   //vx VACANCY online pre-employment check forms
-  var vXUseOnlinePecForms: Boolean = _
-  var vXNoPecOgdDigitalTransfer: Boolean  = _
-  var vXHavePecMailbox: Boolean    = _
-  var vXPecMailbox                 = ""
+  var vXUseOnlinePecForms: Boolean       = _
+  var vXNoPecOgdDigitalTransfer: Boolean = _
+  var vXHavePecMailbox: Boolean          = _
+  var vXPecMailbox                       = ""
 
   //vx VACANCY pre-employment check forms
   var vXRtwChecks                            = new ListBuffer[String]()
@@ -200,7 +201,7 @@ object MasterVacancyDetails extends VacancyBasePage {
   var vXPecFraudCheck                        = new ListBuffer[String]()
   var vXPecSelfEmploymentCheck               = new ListBuffer[String]()
   var vXPecOgdSecurityCheck: Boolean         = _
-  var vXPecUseOgdProcess: Boolean            = false
+  var vXPecUseDigitalOgdProcess: Boolean     = false
   var vXPecIncludeAdditionalCheck: Boolean   = _
   var vXPecNameOfAdditionalCheck             = ""
   var vXPecAdditionalCheck                   = new ListBuffer[String]()

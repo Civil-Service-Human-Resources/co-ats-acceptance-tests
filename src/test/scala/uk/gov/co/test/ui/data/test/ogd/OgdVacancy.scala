@@ -404,7 +404,7 @@ object OGD_GROUP_C_TESTS
 
 object OGD_ADDITIONAL_QUESTIONS
     extends AdditionalQuestionsDetails(
-      false,
+      anyAdditionalQuestions = Some(false),
       3,
       "Autotest - Question 1",
       "Autotest - Question 2",

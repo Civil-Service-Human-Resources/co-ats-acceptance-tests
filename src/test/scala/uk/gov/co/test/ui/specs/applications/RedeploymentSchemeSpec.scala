@@ -160,6 +160,7 @@ class RedeploymentSchemeSpec extends BaseFeatureSpec {
     Scenario("VX: Candidate Selects DESNZ Home Department For Ineligible Vacancy", RunInVX) {
       Given("a vacancy is not included in the redeployment scheme")
       fillNewVacancyForm(NON_REDEPLOYMENT_VACANCY_DATA)
+//      extractAllVacancyDetails("10308")
       v9HomeDepartment = "Department for Energy Security & Net Zero"
 
       When("a candidate selects an eligible home department")

@@ -166,14 +166,10 @@ object ApplicationSummaryPage extends VacancyBasePage {
         checkVacancyStatus("Checks Complete – Decision Required")
         moveVacancyOnAndSendEmail(passChecksBarId, emailChecksClearPath, correspondenceSendId)
       } else if (
-        vXUseOnlinePecForms &&
-        v9PecRequired &&
+        vXUseOnlinePecForms && v9PecRequired &&
         (v9CivilServant && (v9HomeDepartment != vXJobInfoDepartment) && vXPecOgdSecurityCheck && (vXTypeOfCandidate == "OGD")) &&
-        ((!vXPecCrc.contains("Not Applicable") && vXPecCrc.contains(
-          s"$vXApproach Candidates"
-        ) && vXCrcLevel != "None" && vXCrcCheckProvider.contains("DBS")) ||
-          (!vXPecNsv
-            .contains("Not Applicable") && vXPecNsv.contains(s"$vXApproach Candidates") && vXVettingLevel != "None"))
+        ((!vXPecCrc.contains("Not Applicable") && vXPecCrc.contains(s"$vXTypeOfCandidate Candidates") && vXCrcLevel != "None" && vXCrcCheckProvider.contains("DBS")) ||
+          (!vXPecNsv.contains("Not Applicable") && vXPecNsv.contains(s"$vXTypeOfCandidate Candidates") && vXVettingLevel != "None"))
       ) {
         securityChecksRequired()
         ogdSecurityChecksFlow(MASTER_APPLICATION_DATA)

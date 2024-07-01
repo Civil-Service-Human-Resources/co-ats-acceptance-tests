@@ -121,19 +121,20 @@ object PersonalInfoPage extends CivilServiceJobsBasePage {
     }
 
   private def enterRedeploymentScheme(personalInfoDetails: PersonalInfoDetails): Unit =
-    if (v9CivilServant
-        &&
-        (vXJobInfoDepartment == "Department for Energy Security & Net Zero" ||
+    if (
+      v9CivilServant
+      &&
+      (vXJobInfoDepartment == "Department for Energy Security & Net Zero" ||
         vXJobInfoDepartment == "Department for Science, Innovation and Technology" ||
         vXJobInfoDepartment == "Department for Environment, Food and Rural Affairs" ||
-        vXJobInfoDepartment == "HM Revenue and Customs" ||
+//        vXJobInfoDepartment == "HM Revenue and Customs" ||
         vXJobInfoDepartment == "Government Equalities Office" ||
         vXJobInfoDepartment == "Revenue Scotland" ||
         vXJobInfoDepartment == "Scottish Fiscal Commission" ||
         vXJobInfoDepartment == "Cabinet Office" ||
         vXJobInfoDepartment == "Transport Scotland")
-        &&
-        (v9HomeDepartment == "Department for Energy Security & Net Zero" ||
+      &&
+      (v9HomeDepartment == "Department for Energy Security & Net Zero" ||
         v9HomeDepartment == "Attorney General's Office" ||
         v9HomeDepartment == "Animal and Plant Health Agency" ||
         v9HomeDepartment == "Department for Science, Innovation and Technology" ||
@@ -151,7 +152,6 @@ object PersonalInfoPage extends CivilServiceJobsBasePage {
         v9HomeDepartment == "Health and Safety Executive" ||
         v9HomeDepartment == "Department for Work and Pensions" ||
         v9HomeDepartment == "UK Hydrographic Office" ||
-        v9HomeDepartment == "Animal and Plant Health Agency" ||
         v9HomeDepartment == "Transport Scotland")
     ) {
       scrollToElement(By.id(redeploymentSchemeId))

@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.pages.vx.createvacancypage
 
 import org.openqa.selenium.By
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXCvScoreRange, vXLanguagesMandatory, vXLicencesMandatory, vXMembershipsMandatory, vXPersonalStatement, vXQualificationsMandatory, vXStatementGuidance, vXStatementGuidanceText, vXStatementScoreRange, vXStatementWordLimit, vacancyFormId}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXCvScoreRange, vXDesirablePastExperience, vXFullQualification, vXJobHistory, vXLanguagesMandatory, vXLicencesMandatory, vXMembershipsMandatory, vXPersonalStatement, vXPreviousExperiences, vXProvideNameBlindCv, vXQualificationsMandatory, vXSpecificLanguages, vXSpecificLicences, vXSpecificMemberships, vXSpecificPastExperience, vXSpecificQualifications, vXStatementGuidance, vXStatementGuidanceText, vXStatementScoreRange, vXStatementWordLimit, vacancyFormId}
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 
 case class MandatoryRequirements(requirements: Boolean, requirementsInfo: String)
@@ -63,32 +63,38 @@ object ExperienceSection extends VacancyBasePage {
 
   private def provideCV(successProfilesDetails: SuccessProfilesDetails): Unit = {
     val cv = successProfilesDetails.experienceSection
-    if (cv.map(_.provideCV).get) clickOnRadioButton(provideCvYesId) else clickOnRadioButton(provideCvNoId)
+    vXProvideNameBlindCv = cv.map(_.provideCV).get
+    if (vXProvideNameBlindCv) clickOnRadioButton(provideCvYesId) else clickOnRadioButton(provideCvNoId)
   }
 
   private def selectCVScoreRange(successProfilesDetails: SuccessProfilesDetails): Unit = {
     vXCvScoreRange = successProfilesDetails.experienceSection.map(_.cvScoreRange).get
-    vXCvScoreRange match {
-      case "0 - 100" => clickOnRadioButton(cvScore0to100Id)
-      case "0 - 7"   => clickOnRadioButton(cvScore0to7Id)
-      case _         => throw new IllegalStateException("CV Score not correct")
+    if (vXProvideNameBlindCv) {
+      vXCvScoreRange match {
+        case "0 - 100" => clickOnRadioButton(cvScore0to100Id)
+        case "0 - 7"   => clickOnRadioButton(cvScore0to7Id)
+        case _         => throw new IllegalStateException("CV Score not correct")
+      }
     }
   }
 
   private def selectJobHistory(successProfilesDetails: SuccessProfilesDetails): Unit = {
     val history = successProfilesDetails.experienceSection
-    if (history.map(_.cvJobHistory).get) clickOnRadioButton(jobHistoryYesId) else clickOnRadioButton(jobHistoryNoId)
+    vXJobHistory = history.map(_.cvJobHistory).get
+    if (vXJobHistory) clickOnRadioButton(jobHistoryYesId) else clickOnRadioButton(jobHistoryNoId)
   }
 
   private def selectQualificationDetails(successProfilesDetails: SuccessProfilesDetails): Unit = {
     val qualifications = successProfilesDetails.experienceSection
-    if (qualifications.map(_.cvQualifications).get) clickOnRadioButton(qualificationDetailsYesId)
+    vXFullQualification = qualifications.map(_.cvQualifications).get
+    if (vXFullQualification) clickOnRadioButton(qualificationDetailsYesId)
     else clickOnRadioButton(qualificationDetailsNoId)
   }
 
   private def selectPreviousSkills(successProfilesDetails: SuccessProfilesDetails): Unit = {
     val qualifications = successProfilesDetails.experienceSection
-    if (qualifications.map(_.cvPreviousSkills).get) clickOnRadioButton(previousSkillsYesId)
+    vXPreviousExperiences = qualifications.map(_.cvPreviousSkills).get
+    if (vXPreviousExperiences) clickOnRadioButton(previousSkillsYesId)
     else clickOnRadioButton(previousSkillsNoId)
   }
 
@@ -104,6 +110,7 @@ object ExperienceSection extends VacancyBasePage {
         case _         => throw new IllegalStateException("Personal Statement score not correct")
       }
       selectStatementWordLimit(successProfilesDetails)
+      selectStatementGuidanceText(successProfilesDetails)
     } else clickOnRadioButton(personalStatementNoId)
   }
 
@@ -134,18 +141,18 @@ object ExperienceSection extends VacancyBasePage {
   }
 
   private def selectPastExperiences(successProfilesDetails: SuccessProfilesDetails): Unit = {
-    val pastExperience = successProfilesDetails.experienceSection.map(_.pastExperience).get
-    if (pastExperience) {
+    vXDesirablePastExperience = successProfilesDetails.experienceSection.map(_.pastExperience).get
+    if (vXDesirablePastExperience) {
       clickOnRadioButton(pastExperiencesYesId)
       enterPastExperience(successProfilesDetails)
     } else clickOnRadioButton(pastExperiencesNoId)
   }
 
   private def enterPastExperience(successProfilesDetails: SuccessProfilesDetails): Unit = {
-    val pastExperienceText = successProfilesDetails.experienceSection.map(_.pastExperienceText).get
+    vXSpecificPastExperience = successProfilesDetails.experienceSection.map(_.pastExperienceText).get
     val pastExperience     = waitForVisibilityOfElementById(pastExperiencesInputId)
     pastExperience.clear()
-    pastExperience.sendKeys(pastExperienceText)
+    pastExperience.sendKeys(vXSpecificPastExperience)
   }
 
   private def selectMandatoryLicences(successProfilesDetails: SuccessProfilesDetails): Unit = {
@@ -157,10 +164,10 @@ object ExperienceSection extends VacancyBasePage {
   }
 
   private def enterLicenceRequirements(successProfilesDetails: SuccessProfilesDetails): Unit = {
-    val requirementInfo = successProfilesDetails.experienceSection.map(_.licences.map(_.requirementsInfo).get).get
+    vXSpecificLicences = successProfilesDetails.experienceSection.map(_.licences.map(_.requirementsInfo).get).get
     val requirement     = waitForVisibilityOfElementById(mandatoryLicencesInputId)
     requirement.clear()
-    requirement.sendKeys(requirementInfo)
+    requirement.sendKeys(vXSpecificLicences)
   }
 
   private def selectMandatoryMemberships(successProfilesDetails: SuccessProfilesDetails): Unit = {
@@ -172,10 +179,10 @@ object ExperienceSection extends VacancyBasePage {
   }
 
   private def enterMembershipsRequirements(successProfilesDetails: SuccessProfilesDetails): Unit = {
-    val requirementInfo = successProfilesDetails.experienceSection.map(_.memberships.map(_.requirementsInfo).get).get
+    vXSpecificMemberships = successProfilesDetails.experienceSection.map(_.memberships.map(_.requirementsInfo).get).get
     val requirement     = waitForVisibilityOfElementById(mandatoryMembershipsInputId)
     requirement.clear()
-    requirement.sendKeys(requirementInfo)
+    requirement.sendKeys(vXSpecificMemberships)
   }
 
   private def selectMandatoryLanguages(successProfilesDetails: SuccessProfilesDetails): Unit = {
@@ -187,10 +194,10 @@ object ExperienceSection extends VacancyBasePage {
   }
 
   private def enterLanguagesRequirements(successProfilesDetails: SuccessProfilesDetails): Unit = {
-    val requirementInfo = successProfilesDetails.experienceSection.map(_.languages.map(_.requirementsInfo).get).get
+    vXSpecificLanguages = successProfilesDetails.experienceSection.map(_.languages.map(_.requirementsInfo).get).get
     val requirement     = waitForVisibilityOfElementById(mandatoryLanguagesInputId)
     requirement.clear()
-    requirement.sendKeys(requirementInfo)
+    requirement.sendKeys(vXSpecificLanguages)
   }
 
   private def selectMandatoryQualifications(successProfilesDetails: SuccessProfilesDetails): Unit = {
@@ -203,10 +210,10 @@ object ExperienceSection extends VacancyBasePage {
   }
 
   private def enterQualificationsRequirements(successProfilesDetails: SuccessProfilesDetails): Unit = {
-    val requirementInfo = successProfilesDetails.experienceSection.map(_.qualifications.map(_.requirementsInfo).get).get
+    vXSpecificQualifications = successProfilesDetails.experienceSection.map(_.qualifications.map(_.requirementsInfo).get).get
     val requirement     = waitForVisibilityOfElementById(mandatoryQualificationsInputId)
     requirement.clear()
-    requirement.sendKeys(requirementInfo)
+    requirement.sendKeys(vXSpecificQualifications)
   }
 
   private val experiences: Seq[SuccessProfilesDetails => Unit] = Seq(
@@ -216,7 +223,6 @@ object ExperienceSection extends VacancyBasePage {
     selectQualificationDetails,
     selectPreviousSkills,
     selectProvideStatement,
-    selectStatementGuidanceText,
     selectPastExperiences,
     selectMandatoryLicences,
     selectMandatoryMemberships,

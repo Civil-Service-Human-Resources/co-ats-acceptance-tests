@@ -31,7 +31,6 @@ object ShortFormFlow extends CivilServiceJobsBasePage {
       clickOn(submitForm)
     } else println(s"Vacancy is not open for '$vXApproach' candidates!")
     if (
-      vXHowManySkills > 0 ||
       vXAnyOnlineTests ||
       vXHowManyQuestions > 0 ||
       vXAbilitiesRequired ||
@@ -41,7 +40,7 @@ object ShortFormFlow extends CivilServiceJobsBasePage {
       vXTechSkillsRequired ||
       vXGiveLocationPreference ||
       vXAttachmentRequired ||
-      vXAnyAdditionalQuestions
+      vXAnyAdditionalQuestions.get
     ) {
       confirmShortFormCompletion()
       vXNoLongForm = false

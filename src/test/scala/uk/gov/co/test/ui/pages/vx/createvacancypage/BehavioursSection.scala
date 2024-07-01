@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.pages.vx.createvacancypage
 
 import org.openqa.selenium.By
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXBehaviourApplicationRequired, vXBehaviourInterviewRequired, vXHowManyBehaviours, vXListOfChosenBehaviours, vacancyFormId}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXBehaviourApplicationRequired, vXBehaviourInterviewRequired, vXBehavioursRequired, vXHowManyBehaviours, vXListOfChosenBehaviours, vacancyFormId}
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 
 case class Behaviours(chosenBehaviour: String, stageApplication: Boolean, stageInterview: Boolean)
@@ -54,8 +54,7 @@ object BehavioursSection extends VacancyBasePage {
   def selectBehaviours(successProfilesDetails: SuccessProfilesDetails): Unit = {
     scrollToElement(By.id(successProfilesSectionId))
     val behaviour = successProfilesDetails.behavioursSection
-    if (successProfilesDetails.behaviours) {
-      checkbox(behavioursId).select()
+    if (vXBehavioursRequired) {
       getAssessSectionText(assessBehavioursId) shouldBe behaviour
         .map(_.assessBehaviours)
         .get
@@ -84,9 +83,6 @@ object BehavioursSection extends VacancyBasePage {
     scrollToElement(By.id(behavioursOneId))
     waitForVisibilityOfElementById(behavioursOneId).click()
     val chosenBehaviour = behaviour.map(_.behaviourOne.map(_.chosenBehaviour).get).get
-    vXListOfChosenBehaviours.clear()
-    vXBehaviourApplicationRequired.clear()
-    vXBehaviourInterviewRequired.clear()
     vXListOfChosenBehaviours += chosenBehaviour
     selectOption(generalInput, chosenBehaviour)
     vXBehaviourApplicationRequired += behaviour.map(_.behaviourOne.map(_.stageApplication).get).get

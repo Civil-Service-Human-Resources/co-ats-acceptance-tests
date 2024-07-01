@@ -363,7 +363,6 @@ object InterviewThreeEvaluationTab extends VacancyBasePage {
         behaviourAssessmentHeaderId
       ).getText                                                  shouldEqual "Behaviour Assessment" //TODO different to I2
       waitForVisibilityOfElementById(behaviourScoringGuideId).getText should include(interviewThreeDetails.scoringGuide)
-      vXI3BehavioursTotalScore.clear()
       behaviourOutcome.take(vXHowManyBehaviours).foreach { f =>
         f(interviewThreeDetails)
       }
@@ -637,7 +636,6 @@ object InterviewThreeEvaluationTab extends VacancyBasePage {
       waitForVisibilityOfElementById(strengthScoringGuideId).getText should include(
         interviewThreeDetails.strengthScoringGuide
       )
-      vXI3StrengthsTotalScore.clear()
       strengths.take(vXHowManyStrengths).foreach { f =>
         f(interviewThreeDetails)
       }
@@ -740,7 +738,6 @@ object InterviewThreeEvaluationTab extends VacancyBasePage {
       "Additional assessment names, scores and comments will be visible to the applicant"
     )
     howManyAssessments(interviewThreeDetails)
-    vXI3AssessmentsTotalScore.clear()
     if (interviewThreeDetails.additionalAssessments != "0") {
       assessments.take(interviewThreeDetails.additionalAssessments.toInt).foreach { f =>
         f(interviewThreeDetails)

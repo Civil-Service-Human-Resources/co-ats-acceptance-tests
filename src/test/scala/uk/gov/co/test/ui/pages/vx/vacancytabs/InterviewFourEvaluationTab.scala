@@ -363,7 +363,6 @@ object InterviewFourEvaluationTab extends VacancyBasePage {
         behaviourAssessmentHeaderId
       ).getText                                                  shouldEqual "Behaviour assessment" //TODO different to I3
       waitForVisibilityOfElementById(behaviourScoringGuideId).getText should include(interviewFourDetails.scoringGuide)
-      vXI4BehavioursTotalScore.clear()
       behaviourOutcome.take(vXHowManyBehaviours).foreach { f =>
         f(interviewFourDetails)
       }
@@ -511,7 +510,6 @@ object InterviewFourEvaluationTab extends VacancyBasePage {
         techSkillsHeaderId
       ).getText                                                   shouldEqual "Technical Skill assessment" //TODO I3 different, no Pascal Case
       waitForVisibilityOfElementById(techSkillsScoringGuideId).getText should include(interviewFourDetails.scoringGuide)
-      vXI4TechSkillsTotalScore.clear()
       skillOutcome.take(vXHowManySkills).foreach { f =>
         f(interviewFourDetails)
       }
@@ -635,7 +633,6 @@ object InterviewFourEvaluationTab extends VacancyBasePage {
       waitForVisibilityOfElementById(strengthScoringGuideId).getText should include(
         interviewFourDetails.strengthScoringGuide
       )
-      vXI4StrengthsTotalScore.clear()
       strengths.take(vXHowManyStrengths).foreach { f =>
         f(interviewFourDetails)
       }
@@ -738,7 +735,6 @@ object InterviewFourEvaluationTab extends VacancyBasePage {
       "Additional assessment names, scores and comments will be visible to the applicant"
     )
     howManyAssessments(interviewFourDetails)
-    vXI4AssessmentsTotalScore.clear()
     if (interviewFourDetails.additionalAssessments != "0") {
       assessments.take(interviewFourDetails.additionalAssessments.toInt).foreach { f =>
         f(interviewFourDetails)

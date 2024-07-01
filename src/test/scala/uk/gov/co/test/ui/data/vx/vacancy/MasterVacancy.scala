@@ -402,7 +402,7 @@ object MASTER_GROUP_C_TESTS
 
 object MASTER_ADDITIONAL_QUESTIONS
     extends AdditionalQuestionsDetails(
-      true,
+      anyAdditionalQuestions = Some(true),
       3,
       "Autotest - Question 1",
       "Autotest - Question 2",
