@@ -505,7 +505,16 @@ object VacancyDetailsPage extends VacancyBasePage {
     val provideCv = waitForVisibilityOfElementById(provideNameBlindCvId).findElement(By.xpath(checkLabelPath))
     if (provideCv.getText == "Yes") {
       vXProvideNameBlindCv = true
-    } else vXProvideNameBlindCv = false
+      extractCVScoreRange()
+      extractJobHistory()
+      extractFullQualificationDetails()
+      extractPreviousExperiences()
+    } else {
+      vXProvideNameBlindCv = false
+      vXJobHistory = false
+      vXFullQualification = false
+      vXPreviousExperiences = false
+    }
   }
 
   private def extractCVScoreRange(): Unit = {
@@ -1166,7 +1175,7 @@ object VacancyDetailsPage extends VacancyBasePage {
         vXAnyAdditionalQuestions = Some(false)
       }
     }
-    println(s"1. vXAnyAdditionalQuestions ${vXAnyAdditionalQuestions}")
+    println(s"1. vXAnyAdditionalQuestions $vXAnyAdditionalQuestions")
     println(s"2. vXHowManyQuestions $vXHowManyQuestions")
     println(s"3. vXQuestionOne $vXQuestionOne")
     println(s"4. vXQuestionTwo $vXQuestionTwo")
@@ -1449,10 +1458,6 @@ object VacancyDetailsPage extends VacancyBasePage {
 
   private def extractExperienceSection(): Unit = {
     extractProvideNameBlindCv()
-    extractCVScoreRange()
-    extractJobHistory()
-    extractFullQualificationDetails()
-    extractPreviousExperiences()
     extractPersonalStatement()
     extractDesirablePastExperience()
     extractLicencesMandatory()

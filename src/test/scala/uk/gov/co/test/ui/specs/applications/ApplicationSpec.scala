@@ -10,6 +10,7 @@ import uk.gov.co.test.ui.flows.e2e.FullApplicationFlow.fillFullApplicationDetail
 import uk.gov.co.test.ui.flows.v9.RegisterCandidateFlow.fillNewCandidateDetails
 import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.fillNewVacancyForm
 import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.weAreCheckingYourApplicationState
+import uk.gov.co.test.ui.pages.vx.VacancyDetailsPage.extractAllVacancyDetails
 import uk.gov.co.test.ui.specs.BaseFeatureSpec
 import uk.gov.co.test.ui.tags.RunInVX
 
@@ -18,7 +19,7 @@ class ApplicationSpec extends BaseFeatureSpec {
     Scenario("VX: All Forms; Master Application Process", RunInVX) {
       Given("new vacancy is created and posted")
       fillNewVacancyForm(MASTER_VACANCY_DATA)
-//      extractAllVacancyDetails("10252")
+//      extractAllVacancyDetails("10312")
 
       When("recruiter & new candidate complete the full application")
       fillNewCandidateDetails(MASTER_REGISTER_CANDIDATE)
