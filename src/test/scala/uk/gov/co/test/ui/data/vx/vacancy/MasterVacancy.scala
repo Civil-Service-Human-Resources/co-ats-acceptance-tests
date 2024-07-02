@@ -209,6 +209,7 @@ object MASTER_BEHAVIOURS
 object MASTER_EXPERIENCES
     extends ExperienceDetails(
       true,
+      true,
       "0 - 100",
       true,
       true,

@@ -610,3 +610,14 @@ object REGISTER_CANDIDATE_NEN_DEFRA
       false,
       true
     )
+
+object REGISTER_CANDIDATE_NAME_BLIND
+  extends CandidateDetails(
+    firstname = s"$randomFirstName",
+    lastname = s"$randomLastName",
+    preferredFirstName = s"$preferredFirstName",
+    email = s"$randomEmail",
+    s"$passwordCandidate",
+    false,
+    true
+  )

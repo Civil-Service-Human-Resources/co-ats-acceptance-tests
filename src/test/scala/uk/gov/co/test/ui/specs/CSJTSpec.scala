@@ -24,6 +24,7 @@ class CSJTSpec extends BaseFeatureSpec {
       fillLongFormDetails(MASTER_LONG_FORM_DATA)
 
       Then("the candidate is able to complete the csjt")
+      println("Done!")
     }
 
     Scenario("VX: Candidate Applies For Vacancy With One CSJT Online", RunInVX) {

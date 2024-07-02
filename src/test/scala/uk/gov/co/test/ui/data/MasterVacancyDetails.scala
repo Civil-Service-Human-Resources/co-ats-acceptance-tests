@@ -105,26 +105,28 @@ object MasterVacancyDetails extends VacancyBasePage {
   //vx VACANCY abilities TODO
 
   //vx VACANCY experience
-  var vXJobHistory: Boolean              = _
-  var vXFullQualification: Boolean       = _
-  var vXProvideNameBlindCv: Boolean      = _
-  var vXCvScoreRange: String             = ""
-  var vXPreviousExperiences: Boolean     = _
-  var vXPersonalStatement: Boolean       = _
-  var vXStatementScoreRange: String      = ""
-  var vXStatementGuidance: Boolean       = _
-  var vXStatementGuidanceText: String    = ""
-  var vXStatementWordLimit: Int          = 250
-  var vXDesirablePastExperience: Boolean = _
-  var vXSpecificPastExperience: String   = ""
-  var vXLicencesMandatory: Boolean       = _
-  var vXSpecificLicences: String         = ""
-  var vXMembershipsMandatory: Boolean    = _
-  var vXSpecificMemberships: String      = ""
-  var vXLanguagesMandatory: Boolean      = _
-  var vXSpecificLanguages: String        = ""
-  var vXQualificationsMandatory: Boolean = _
-  var vXSpecificQualifications: String   = ""
+  var vXJobHistory: Boolean                 = _
+  var vXFullQualification: Boolean          = _
+  var vXProvideNameBlindCv: Boolean         = _
+  var vXCvAttachment: Boolean               = _
+  var vXCvScoreRange: String                = ""
+  var vXPreviousExperiences: Boolean        = _
+  var vXPersonalStatementNameBlind: Boolean = _
+  var vXPersonalStatement: Boolean          = _
+  var vXStatementScoreRange: String         = ""
+  var vXStatementGuidance: Boolean          = _
+  var vXStatementGuidanceText: String       = ""
+  var vXStatementWordLimit: Int             = 250
+  var vXDesirablePastExperience: Boolean    = _
+  var vXSpecificPastExperience: String      = ""
+  var vXLicencesMandatory: Boolean          = _
+  var vXSpecificLicences: String            = ""
+  var vXMembershipsMandatory: Boolean       = _
+  var vXSpecificMemberships: String         = ""
+  var vXLanguagesMandatory: Boolean         = _
+  var vXSpecificLanguages: String           = ""
+  var vXQualificationsMandatory: Boolean    = _
+  var vXSpecificQualifications: String      = ""
 
   //vx VACANCY behaviours
   var vXHowManyBehaviours: Int                            = _

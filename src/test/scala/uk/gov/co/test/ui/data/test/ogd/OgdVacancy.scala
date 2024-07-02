@@ -211,6 +211,7 @@ object OGD_BEHAVIOURS
 object OGD_EXPERIENCES
     extends ExperienceDetails(
       true,
+      true,
       "0 - 100",
       true,
       true,

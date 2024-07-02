@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.pages.vx.vacancytabs
 
 import org.openqa.selenium.By
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXPreSiftRequired, vacancyFormId}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXCvAttachment, vXPersonalStatement, vXPreSiftRequired, vacancyFormId}
 import uk.gov.co.test.ui.data.vx.application.ApplicationDetails
 import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.applicationBeingReviewedPreSiftState
 import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.{availableBarItems, confirmCandidateSummary, navigateToApplicationSummary, preSiftEvaluationFormBarId, progressBarAfterPreSiftId, rejectBarAfterPreSiftId, withdrawBarId}
@@ -83,7 +83,9 @@ object PreSiftEvaluationTab extends VacancyBasePage {
   def PreSiftEvaluationFlow(applicationDetails: ApplicationDetails): Unit = {
     navigateToApplicationSummary()
     if (vXPreSiftRequired) {
-      confirmCandidateSummary(preSiftStatus, Some("restricted"))
+      if (vXCvAttachment || vXPersonalStatement) {
+        confirmCandidateSummary(preSiftStatus)
+      } else confirmCandidateSummary(preSiftStatus, Some("restricted"))
       completePreSiftEvaluationForm()
       preSift.foreach { f =>
         f(applicationDetails.preSiftDetails)
@@ -93,7 +95,9 @@ object PreSiftEvaluationTab extends VacancyBasePage {
       ).getText shouldEqual "Declaration\nBy submitting this form you are agreeing to and accepting that you have no conflict of interest with this applicant."
       clickOn(submitForm)
       preSiftCompletion()
-      confirmCandidateSummary(preSiftCompleteStatus, Some("restricted"))
+      if (vXCvAttachment || vXPersonalStatement) {
+        confirmCandidateSummary(preSiftCompleteStatus)
+      } else confirmCandidateSummary(preSiftCompleteStatus, Some("restricted"))
       applicationBeingReviewedPreSiftState()
     }
   }

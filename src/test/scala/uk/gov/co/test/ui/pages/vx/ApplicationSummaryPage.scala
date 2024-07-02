@@ -2,7 +2,7 @@ package uk.gov.co.test.ui.pages.vx
 
 import org.openqa.selenium.By
 import org.scalatest.concurrent.Eventually.eventually
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{applicationId, randomFirstName, randomLastName, v9CivilServant, v9HomeDepartment, v9PecRequired, vXApproach, vXCandidateUploadIdentityDocs, vXCrcCheckProvider, vXCrcLevel, vXInterviewNumber, vXJobInfoDepartment, vXPecBankruptcyCheck, vXPecCrc, vXPecEmploymentHistoryCheck, vXPecFraudCheck, vXPecGeneralInfo, vXPecHealthRefCheck, vXPecNen, vXPecNsv, vXPecOgdSecurityCheck, vXPecOverseasCheck, vXPecPensionsCheck, vXPecPn, vXPecPreviousCivilEmploymentCheck, vXPecReferenceCheck, vXPecSelfEmploymentCheck, vXTypeOfCandidate, vXUseOnlinePecForms, vXVettingLevel, vXWhichIdentityChecks, vacancyId, vacancyName}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{applicationId, randomFirstName, randomLastName, v9CivilServant, v9HomeDepartment, v9PecRequired, vXCandidateUploadIdentityDocs, vXCrcCheckProvider, vXCrcLevel, vXCvAttachment, vXInterviewNumber, vXJobInfoDepartment, vXPecBankruptcyCheck, vXPecCrc, vXPecEmploymentHistoryCheck, vXPecFraudCheck, vXPecGeneralInfo, vXPecHealthRefCheck, vXPecNen, vXPecNsv, vXPecOgdSecurityCheck, vXPecOverseasCheck, vXPecPensionsCheck, vXPecPn, vXPecPreviousCivilEmploymentCheck, vXPecReferenceCheck, vXPecSelfEmploymentCheck, vXPersonalStatement, vXTypeOfCandidate, vXUseOnlinePecForms, vXVettingLevel, vXWhichIdentityChecks, vacancyId, vacancyName}
 import uk.gov.co.test.ui.data.vx.application.MASTER_APPLICATION_DATA
 import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.{candidateAcceptsOffer, confirmApplicationUpdateNoPecNen, confirmApplicationUpdateNoPecPn, confirmApplicationUpdateState, confirmOfferAcceptedNoPecFunction, v9ConfirmOfferAcceptedState}
 import uk.gov.co.test.ui.pages.v9.ProvisionalOfferPage.offerDecisionFlow
@@ -168,8 +168,12 @@ object ApplicationSummaryPage extends VacancyBasePage {
       } else if (
         vXUseOnlinePecForms && v9PecRequired &&
         (v9CivilServant && (v9HomeDepartment != vXJobInfoDepartment) && vXPecOgdSecurityCheck && (vXTypeOfCandidate == "OGD")) &&
-        ((!vXPecCrc.contains("Not Applicable") && vXPecCrc.contains(s"$vXTypeOfCandidate Candidates") && vXCrcLevel != "None" && vXCrcCheckProvider.contains("DBS")) ||
-          (!vXPecNsv.contains("Not Applicable") && vXPecNsv.contains(s"$vXTypeOfCandidate Candidates") && vXVettingLevel != "None"))
+        ((!vXPecCrc.contains("Not Applicable") && vXPecCrc.contains(
+          s"$vXTypeOfCandidate Candidates"
+        ) && vXCrcLevel != "None" && vXCrcCheckProvider.contains("DBS")) ||
+          (!vXPecNsv.contains("Not Applicable") && vXPecNsv.contains(
+            s"$vXTypeOfCandidate Candidates"
+          ) && vXVettingLevel != "None"))
       ) {
         securityChecksRequired()
         ogdSecurityChecksFlow(MASTER_APPLICATION_DATA)
@@ -509,7 +513,9 @@ object ApplicationSummaryPage extends VacancyBasePage {
     val newStatus = "Sift Evaluation – Feedback Captured (Not Issued)"
     checkForNewValuePath(vacancyStatusPath, newStatus)
     availableBarItems(List(progressBarId, withdrawBarId))
-    confirmCandidateSummary(newStatus, Some("restricted"))
+    if (vXCvAttachment || vXPersonalStatement) {
+      confirmCandidateSummary(newStatus)
+    } else confirmCandidateSummary(newStatus, Some("restricted"))
     waitForVisibilityOfElementById(progressBarId).click()
   }
 
@@ -602,25 +608,27 @@ object ApplicationSummaryPage extends VacancyBasePage {
     checkCandidateSummary("5") shouldEqual vacancyId
     checkCandidateSummary("6") shouldEqual vacancyName
     checkCandidateSummary("7") shouldEqual vXJobInfoDepartment
-    checkCandidateSummary("8") shouldEqual
-      (
-        if (dataLevel.isDefined && dataLevel.get == "restricted") {
-          "Restricted Data"
-        } else if (
-          v9CivilServant && (v9HomeDepartment != vXJobInfoDepartment) && (v9HomeDepartment != "Animal and Plant Health Agency")
-        ) {
-          "NDPB - Current employee of Accredited NDPB"
-        } else if (
-          v9CivilServant && (v9HomeDepartment != vXJobInfoDepartment) && (v9HomeDepartment == "Animal and Plant Health Agency")
-        ) {
-          "OGD - Current employee of another Civil Service Department"
-        } else if (v9CivilServant && (v9HomeDepartment == vXJobInfoDepartment)) {
-          "Internal - Current employee of advertising department"
-        } else {
-          "External - Non Civil Servant / External"
-        }
-      )
-    setTypeOfCandidate()
+    if (!vXCvAttachment && !vXPersonalStatement) {
+      checkCandidateSummary("8") shouldEqual
+        (
+          if (dataLevel.isDefined && dataLevel.get == "restricted") {
+            "Restricted Data"
+          } else if (
+            v9CivilServant && (v9HomeDepartment != vXJobInfoDepartment) && (v9HomeDepartment != "Animal and Plant Health Agency")
+          ) {
+            "NDPB - Current employee of Accredited NDPB"
+          } else if (
+            v9CivilServant && (v9HomeDepartment != vXJobInfoDepartment) && (v9HomeDepartment == "Animal and Plant Health Agency")
+          ) {
+            "OGD - Current employee of another Civil Service Department"
+          } else if (v9CivilServant && (v9HomeDepartment == vXJobInfoDepartment)) {
+            "Internal - Current employee of advertising department"
+          } else {
+            "External - Non Civil Servant / External"
+          }
+        )
+      setTypeOfCandidate()
+    }
   }
 
   def setTypeOfCandidate(): Unit = {

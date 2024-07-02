@@ -210,6 +210,7 @@ object PN_NEN_BEHAVIOURS
 object PN_NEN_EXPERIENCES
     extends ExperienceDetails(
       false,
+      false,
       "0 - 100",
       false,
       false,

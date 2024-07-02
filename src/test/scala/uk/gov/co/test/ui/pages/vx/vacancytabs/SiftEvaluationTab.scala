@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.pages.vx.vacancytabs
 
 import org.openqa.selenium.By
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXAnyOnlineTests, vXBehaviourApplicationRequired, vXBehavioursRequired, vXCvScoreRange, vXExperiencesRequired, vXHowManyBehaviours, vXHowManySkills, vXInterviewExpectedRounds, vXListOfChosenBehaviours, vXListOfSkillsApplicationRequired, vXListOfTechSkills, vXPreSiftRequired, vXTechSkillsRequired, vacancyFormId}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXAnyOnlineTests, vXBehaviourApplicationRequired, vXBehavioursRequired, vXCvAttachment, vXCvScoreRange, vXExperiencesRequired, vXHowManyBehaviours, vXHowManySkills, vXInterviewExpectedRounds, vXListOfChosenBehaviours, vXListOfSkillsApplicationRequired, vXListOfTechSkills, vXPersonalStatement, vXPreSiftRequired, vXTechSkillsRequired, vacancyFormId}
 import uk.gov.co.test.ui.data.vx.application.{ApplicationDetails, Outcome}
 import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.{applicationBeingReviewedState, successfulAtSiftState}
 import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.{availableBarItems, completeSiftBarId, confirmCandidateSummary, progressBarAfterPreSiftId, siftEvaluation, withdrawBarId}
@@ -132,7 +132,9 @@ object SiftEvaluationTab extends VacancyBasePage {
   private def moveSiftEvaluationForm(): Unit = {
     if (vXPreSiftRequired) waitForVisibilityOfElementById(progressBarAfterPreSiftId).click()
     checkForNewValuePath(vacancyStatusPath, siftEvaluationStatus)
-    confirmCandidateSummary(siftEvaluationStatus, Some("restricted"))
+    if (vXCvAttachment || vXPersonalStatement) {
+      confirmCandidateSummary(siftEvaluationStatus)
+    } else confirmCandidateSummary(siftEvaluationStatus, Some("restricted"))
     moveVacancyOnViaTopBar(completeSiftBarId, siftEvaluationTabPath)
     availableBarItems(List(completeSiftBarId, withdrawBarId))
     waitForVisibilityOfElementById(siftEvaluationHeaderId).getText should endWith("Sift Evaluation")

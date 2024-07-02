@@ -210,6 +210,7 @@ object NON_REDEPLOYMENT_BEHAVIOURS
 object NON_REDEPLOYMENT_EXPERIENCES
     extends ExperienceDetails(
       true,
+      true,
       "0 - 100",
       true,
       true,
