@@ -27,7 +27,12 @@ object FullApplicationFlow extends CivilServiceJobsBasePage {
     fillPecFormDetailsOnly(IDVT_FORM_DATA)
   }
 
-  def fillFullApplicationDetails(shortFormDetails: ShortFormDetails, longFormDetails: LongFormDetails, applicationDetails: ApplicationDetails, pecFormDetails: PecFormDetails): Unit = {
+  def fillFullApplicationDetails(
+    shortFormDetails: ShortFormDetails,
+    longFormDetails: LongFormDetails,
+    applicationDetails: ApplicationDetails,
+    pecFormDetails: PecFormDetails
+  ): Unit = {
     fillShortFormDetails(shortFormDetails)
     fillLongFormDetails(longFormDetails)
     PreSiftEvaluationFlow(applicationDetails)

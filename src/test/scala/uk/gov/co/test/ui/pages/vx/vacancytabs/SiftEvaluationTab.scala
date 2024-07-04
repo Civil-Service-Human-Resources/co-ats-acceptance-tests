@@ -132,9 +132,7 @@ object SiftEvaluationTab extends VacancyBasePage {
   private def moveSiftEvaluationForm(): Unit = {
     if (vXPreSiftRequired) waitForVisibilityOfElementById(progressBarAfterPreSiftId).click()
     checkForNewValuePath(vacancyStatusPath, siftEvaluationStatus)
-    if (vXCvAttachment || vXPersonalStatement) {
-      confirmCandidateSummary(siftEvaluationStatus)
-    } else confirmCandidateSummary(siftEvaluationStatus, Some("restricted"))
+    confirmCandidateSummary(siftEvaluationStatus, Some("restricted"))
     moveVacancyOnViaTopBar(completeSiftBarId, siftEvaluationTabPath)
     availableBarItems(List(completeSiftBarId, withdrawBarId))
     waitForVisibilityOfElementById(siftEvaluationHeaderId).getText should endWith("Sift Evaluation")

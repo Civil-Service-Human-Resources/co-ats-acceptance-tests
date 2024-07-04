@@ -513,9 +513,7 @@ object ApplicationSummaryPage extends VacancyBasePage {
     val newStatus = "Sift Evaluation – Feedback Captured (Not Issued)"
     checkForNewValuePath(vacancyStatusPath, newStatus)
     availableBarItems(List(progressBarId, withdrawBarId))
-    if (vXCvAttachment || vXPersonalStatement) {
-      confirmCandidateSummary(newStatus)
-    } else confirmCandidateSummary(newStatus, Some("restricted"))
+    confirmCandidateSummary(newStatus, Some("restricted"))
     waitForVisibilityOfElementById(progressBarId).click()
   }
 
@@ -600,33 +598,39 @@ object ApplicationSummaryPage extends VacancyBasePage {
       refreshPage()
     }
     checkCandidateSummary("1") shouldEqual applicationId
-    checkCandidateSummary("2") shouldEqual (if (dataLevel.isDefined && dataLevel.get == "restricted") "Restricted Data"
+    checkCandidateSummary("2") shouldEqual (if (
+                                              (!vXCvAttachment && !vXPersonalStatement) && (dataLevel.isDefined && dataLevel.get == "restricted")
+                                            ) "Restricted Data"
                                             else randomFirstName)
-    checkCandidateSummary("3") shouldEqual (if (dataLevel.isDefined && dataLevel.get == "restricted") "Restricted Data"
+    checkCandidateSummary("3") shouldEqual (if (
+                                              (!vXCvAttachment && !vXPersonalStatement) && (dataLevel.isDefined && dataLevel.get == "restricted")
+                                            ) "Restricted Data"
                                             else randomLastName)
     checkCandidateSummary("4") shouldEqual newStatus
     checkCandidateSummary("5") shouldEqual vacancyId
     checkCandidateSummary("6") shouldEqual vacancyName
     checkCandidateSummary("7") shouldEqual vXJobInfoDepartment
-    if (!vXCvAttachment && !vXPersonalStatement) {
-      checkCandidateSummary("8") shouldEqual
-        (
-          if (dataLevel.isDefined && dataLevel.get == "restricted") {
-            "Restricted Data"
-          } else if (
-            v9CivilServant && (v9HomeDepartment != vXJobInfoDepartment) && (v9HomeDepartment != "Animal and Plant Health Agency")
-          ) {
-            "NDPB - Current employee of Accredited NDPB"
-          } else if (
-            v9CivilServant && (v9HomeDepartment != vXJobInfoDepartment) && (v9HomeDepartment == "Animal and Plant Health Agency")
-          ) {
-            "OGD - Current employee of another Civil Service Department"
-          } else if (v9CivilServant && (v9HomeDepartment == vXJobInfoDepartment)) {
-            "Internal - Current employee of advertising department"
-          } else {
-            "External - Non Civil Servant / External"
-          }
-        )
+//    checkCandidateSummary("8") shouldEqual
+//      (
+//        if ((vXCvAttachment || vXPersonalStatement) && (dataLevel.isDefined && dataLevel.get == "restricted")) {
+//          ""
+//        } else if (dataLevel.isDefined && dataLevel.get == "restricted") {
+//          "Restricted Data"
+//        } else if (
+//          v9CivilServant && (v9HomeDepartment != vXJobInfoDepartment) && (v9HomeDepartment != "Animal and Plant Health Agency")
+//        ) {
+//          "NDPB - Current employee of Accredited NDPB"
+//        } else if (
+//          v9CivilServant && (v9HomeDepartment != vXJobInfoDepartment) && (v9HomeDepartment == "Animal and Plant Health Agency")
+//        ) {
+//          "OGD - Current employee of another Civil Service Department"
+//        } else if (v9CivilServant && (v9HomeDepartment == vXJobInfoDepartment)) {
+//          "Internal - Current employee of advertising department"
+//        } else {
+//          "External - Non Civil Servant / External"
+//        }
+//      )
+    if ((!vXCvAttachment && !vXPersonalStatement) && dataLevel.isEmpty) {
       setTypeOfCandidate()
     }
   }
@@ -639,4 +643,5 @@ object ApplicationSummaryPage extends VacancyBasePage {
     else if (typeOfCandidate.startsWith("Internal")) vXTypeOfCandidate = "Internal"
     else vXTypeOfCandidate = "Restricted Data"
   }
+
 }

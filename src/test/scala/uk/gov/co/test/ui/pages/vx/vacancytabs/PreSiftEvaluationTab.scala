@@ -83,9 +83,8 @@ object PreSiftEvaluationTab extends VacancyBasePage {
   def PreSiftEvaluationFlow(applicationDetails: ApplicationDetails): Unit = {
     navigateToApplicationSummary()
     if (vXPreSiftRequired) {
-      if (vXCvAttachment || vXPersonalStatement) {
-        confirmCandidateSummary(preSiftStatus)
-      } else confirmCandidateSummary(preSiftStatus, Some("restricted"))
+      confirmCandidateSummary(preSiftStatus, Some("restricted"))
+      confirmCandidateSummary(preSiftStatus)
       completePreSiftEvaluationForm()
       preSift.foreach { f =>
         f(applicationDetails.preSiftDetails)
@@ -95,9 +94,7 @@ object PreSiftEvaluationTab extends VacancyBasePage {
       ).getText shouldEqual "Declaration\nBy submitting this form you are agreeing to and accepting that you have no conflict of interest with this applicant."
       clickOn(submitForm)
       preSiftCompletion()
-      if (vXCvAttachment || vXPersonalStatement) {
-        confirmCandidateSummary(preSiftCompleteStatus)
-      } else confirmCandidateSummary(preSiftCompleteStatus, Some("restricted"))
+      confirmCandidateSummary(preSiftCompleteStatus, Some("restricted"))
       applicationBeingReviewedPreSiftState()
     }
   }
