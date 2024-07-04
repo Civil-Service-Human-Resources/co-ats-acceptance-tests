@@ -32,7 +32,7 @@ object PEC_VACANCY_DATA
 object PEC_BASIC_DETAILS
     extends BasicDetails(
       "DO NOT USE- Automation Test Template",
-      s"PEC - " + generateRandomJobPosition(),
+      s"Automation: PEC - " + generateRandomJobPosition(),
       true,
       "Prawf awtomeiddio",
       32
@@ -78,7 +78,7 @@ object PEC_APPROVAL
 
 object PEC_RESERVE_LIST
     extends ReserveListDetails(
-      true,
+      false,
       "12 Months",
       false,
       "6 Months"
@@ -151,7 +151,7 @@ object PEC_VETTING_DETAILS
 
 object PEC_INTERVIEWS_DETAILS
     extends InterviewsDetails(
-      "2",
+      "No interviews",
       "Interview",
       "Assessment",
       "Telephone",
@@ -161,11 +161,11 @@ object PEC_INTERVIEWS_DETAILS
 
 object PEC_SUCCESS_PROFILES
     extends SuccessProfilesDetails(
-      true,
-      true,
-      true,
-      true,
-      true,
+      false,
+      false,
+      false,
+      false,
+      false,
       Some(PEC_ABILITIES),
       Some(PEC_BEHAVIOURS),
       Some(PEC_EXPERIENCES),
@@ -405,7 +405,7 @@ object PEC_GROUP_C_TESTS
 
 object PEC_ADDITIONAL_QUESTIONS
     extends AdditionalQuestionsDetails(
-      anyAdditionalQuestions = Some(true),
+      anyAdditionalQuestions = Some(false),
       3,
       "Autotest - Question 1",
       "Autotest - Question 2",
@@ -426,8 +426,8 @@ object PEC_CRITERIA
       membershipsNotHeld = true,
       languagesSkillsNotHeld = true,
       qualificationsHeld = true,
-      preSiftRequired = true,
-      uploadAttachment = true,
+      preSiftRequired = false,
+      uploadAttachment = false,
       candidateInstructions = "Autotest - Instructions for candidate"
     )
 
@@ -453,7 +453,7 @@ object PEC_MANAGEMENT
 object PEC_ONLINE_PEC_CHECK_FORMS
     extends OnlinePecCheckFormsDetails(
       true,
-      true,
+      false,
       true,
       s"$contactEmailVxConfig"
     )
@@ -465,7 +465,7 @@ object PEC_PEC_CHECK_FORMS
       "Right to work and criminal record check",
       true,
       "Autotest - Passport",
-      false,
+      true,
       generalInfo = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
       referenceChecks = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
       bankruptcyChecks = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),

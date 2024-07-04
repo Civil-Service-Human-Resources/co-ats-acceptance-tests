@@ -19,16 +19,9 @@ object UploadDocumentsPage extends CivilServiceJobsBasePage {
   def uploadStatementInstructionsId = s"${longFormId}_field_que_22306_1"
   def uploadDocumentsId             = s"${longFormId}_datafield_22309_1_1"
   def uploadDocumentsInstructionsId = s"${longFormId}_field_que_22309_1"
-//  def instructionsTextPath     = ".//*[@class='hform_lbl_text']"
 
   private def uploadDocumentsPageCheck(): Unit =
     eventually(onPage(uploadDocumentsPageTitle))
-
-//  private def confirmInstructions(): Unit = {
-//    uploadDocumentsPageCheck()
-//    val v9Instruction = waitForVisibilityOfElementByPath(instructionsTextPath).getText
-//    v9Instruction shouldEqual " Documents must be uploaded in .doc, .docx or .pdf file format, with a maximum file size of 5 MB.\nOnce you have attached a file, you will be able to remove and attach another as many times as required before you submit your application."
-//  }
 
   private def uploadCv(uploadDocumentsDetails: UploadDocumentsDetails): Unit =
     if (vXExperiencesRequired && vXCvAttachment) {
@@ -54,7 +47,7 @@ object UploadDocumentsPage extends CivilServiceJobsBasePage {
     }
 
   private def uploadCandidateDocuments(uploadDocumentsDetails: UploadDocumentsDetails): Unit =
-    if (vXExperiencesRequired && vXAttachmentRequired) {
+    if (vXAttachmentRequired) {
       val v9DocumentInstruction = waitForVisibilityOfElementById(uploadDocumentsInstructionsId).getText
       v9DocumentInstruction shouldEqual
         """ Documents must be uploaded in .doc, .docx or .pdf file format, with a maximum file size of 5 MB.

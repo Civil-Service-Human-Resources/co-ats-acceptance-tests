@@ -7,6 +7,7 @@ import uk.gov.co.test.ui.data.v9.pecform.MASTER_PEC_FORM_DATA
 import uk.gov.co.test.ui.data.v9.shortform.MASTER_SHORT_FORM_DATA
 import uk.gov.co.test.ui.data.vx.application.MASTER_APPLICATION_DATA
 import uk.gov.co.test.ui.data.vx.vacancy.MASTER_VACANCY_DATA
+import uk.gov.co.test.ui.flows.e2e.FullApplicationFlow.fillFullApplicationDetails
 import uk.gov.co.test.ui.flows.e2e.InterviewFlow.completeAllInterviews
 import uk.gov.co.test.ui.flows.v9.LongFormFlow.fillLongFormDetails
 import uk.gov.co.test.ui.flows.v9.PecFormFlow.fillPecFormDetailsOnly
@@ -27,18 +28,16 @@ class PecVacancySpec extends BaseFeatureSpec {
       fillNewVacancyForm(PEC_VACANCY_DATA)
       fillNewCandidateDetails(REGISTER_CANDIDATE_PEC)
 
-      When("candidate completes the short & long forms")
-      fillShortFormDetails(PEC_SHORT_FORM_DATA)
-      fillLongFormDetails(PEC_LONG_FORM_DATA)
-
-      And("the application is completed before pec form")
-      PreSiftEvaluationFlow(PEC_APPLICATION_DATA)
-      SiftEvaluationFlow(PEC_APPLICATION_DATA)
-      completeAllInterviews(PEC_APPLICATION_DATA)
-      moveAndAcceptOffer()
+      When("candidate completes all forms")
+      fillFullApplicationDetails(
+        PEC_SHORT_FORM_DATA,
+        PEC_LONG_FORM_DATA,
+        PEC_APPLICATION_DATA,
+        PEC_FORM_DATA
+      )
 
       Then("the candidate is able to fully complete the pec form")
-      fillPecFormDetailsOnly(PEC_FORM_DATA)
+      println("Done PEC!")
     }
   }
 }

@@ -84,7 +84,6 @@ object PreSiftEvaluationTab extends VacancyBasePage {
     navigateToApplicationSummary()
     if (vXPreSiftRequired) {
       confirmCandidateSummary(preSiftStatus, Some("restricted"))
-      confirmCandidateSummary(preSiftStatus)
       completePreSiftEvaluationForm()
       preSift.foreach { f =>
         f(applicationDetails.preSiftDetails)
