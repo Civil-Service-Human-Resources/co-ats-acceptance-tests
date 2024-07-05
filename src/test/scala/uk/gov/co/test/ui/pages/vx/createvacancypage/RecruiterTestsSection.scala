@@ -1,11 +1,11 @@
 package uk.gov.co.test.ui.pages.vx.createvacancypage
 
 import org.openqa.selenium.By
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXApplicationClosingDate, vacancyFormId}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXApplicationClosingDate, vXWhenFullApplication, vacancyFormId}
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 
 case class RecruiterTestsDetails(
-  whenDeadline: String,
+  whenFullApplication: String,
   progressionOption: String,
   sameDeadlineAllTests: Boolean,
   additionalInstructionsRequired: Boolean,
@@ -51,11 +51,11 @@ object RecruiterTestsSection extends VacancyBasePage {
   }
 
   def selectCandidateDeadline(vacancyTestsDetails: VacancyTestsDetails): Unit = {
-    val deadline = vacancyTestsDetails.recruiterOptions.map(_.whenDeadline).get
+    vXWhenFullApplication = vacancyTestsDetails.recruiterOptions.map(_.whenFullApplication).get
     validateUrl()
     waitForVisibilityOfElementById(candidateDeadlineId).click()
-    action().moveToElement(waitForDropdownOption(deadline)).perform()
-    waitForDropdownOption(deadline).click()
+    action().moveToElement(waitForDropdownOption(vXWhenFullApplication)).perform()
+    waitForDropdownOption(vXWhenFullApplication).click()
   }
 
   def selectProgressionOptions(vacancyTestsDetails: VacancyTestsDetails): Unit = {

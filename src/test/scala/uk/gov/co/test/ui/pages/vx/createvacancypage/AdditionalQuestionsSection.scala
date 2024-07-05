@@ -34,7 +34,7 @@ object AdditionalQuestionsSection extends VacancyBasePage {
       clickOnRadioButton(additionalQuestionsNoId)
     } else {
       println("Additional questions section not answered!")
-      vXAnyAdditionalQuestions = Some(None.get)
+      vXAnyAdditionalQuestions = None
     }
   }
 

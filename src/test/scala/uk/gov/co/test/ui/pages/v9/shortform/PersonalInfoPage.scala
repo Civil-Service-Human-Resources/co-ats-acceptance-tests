@@ -131,7 +131,7 @@ object PersonalInfoPage extends CivilServiceJobsBasePage {
         vXJobInfoDepartment == "Government Equalities Office" ||
         vXJobInfoDepartment == "Revenue Scotland" ||
         vXJobInfoDepartment == "Scottish Fiscal Commission" ||
-        vXJobInfoDepartment == "Cabinet Office" ||
+//        vXJobInfoDepartment == "Cabinet Office" ||
         vXJobInfoDepartment == "Transport Scotland")
       &&
       (v9HomeDepartment == "Department for Energy Security & Net Zero" ||

@@ -414,7 +414,7 @@ object NON_NAME_BLIND_ADDITIONAL_QUESTIONS
 
 object NON_NAME_BLIND_CRITERIA
     extends CriteriaDetails(
-      campaignID = Some("Autotest - If this vacancy is linked to a campaign, enter the campaign ID (optional)"),
+      campaignID = None,
       probationIncomplete = true,
       promotionApply = true,
       misconductLive = true,

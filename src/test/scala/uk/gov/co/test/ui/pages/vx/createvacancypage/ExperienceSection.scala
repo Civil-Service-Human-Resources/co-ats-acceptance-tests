@@ -87,7 +87,7 @@ object ExperienceSection extends VacancyBasePage {
 //    val provideNameBlindCv = driver.findElements(By.id(provideNameBlindCvTextId))
     val cvAttachment = driver.findElements(By.id(cvAttachmentTextId))
     if (!cvAttachment.isEmpty) {
-      vXProvideNameBlindCv = false
+      vXProvideNameBlindCv = (_: Boolean)
       if (vXCvAttachment) {
         clickOnRadioButton(cvAttachmentYesId)
         selectCVScoreRange(successProfilesDetails)
@@ -95,7 +95,7 @@ object ExperienceSection extends VacancyBasePage {
         clickOnRadioButton(cvAttachmentNoId)
       }
     } else {
-      vXCvAttachment = false
+      vXCvAttachment = (_: Boolean)
       if (vXProvideNameBlindCv) {
         clickOnRadioButton(provideNameBlindCvYesId)
         selectCVScoreRange(successProfilesDetails)
@@ -146,7 +146,7 @@ object ExperienceSection extends VacancyBasePage {
 //    val personalStatement          = driver.findElements(By.id(personalStatementTextId))
 
     if (!personalStatementNameBlind.isEmpty) {
-      vXPersonalStatement = false
+      vXPersonalStatement = (_: Boolean)
       if (vXPersonalStatementNameBlind) {
         clickOnRadioButton(personalStatementNameBlindYesId)
         selectStatementNameBlindScoreRange(successProfilesDetails)
@@ -154,7 +154,7 @@ object ExperienceSection extends VacancyBasePage {
         selectStatementGuidanceText(successProfilesDetails)
       } else clickOnRadioButton(personalStatementNameBlindNoId)
     } else {
-      vXPersonalStatementNameBlind = false
+      vXPersonalStatementNameBlind = (_: Boolean)
       if (vXPersonalStatement) {
         clickOnRadioButton(personalStatementYesId)
         selectStatementNameBlindScoreRange(successProfilesDetails)

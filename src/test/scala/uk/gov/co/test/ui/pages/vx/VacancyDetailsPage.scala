@@ -520,7 +520,7 @@ object VacancyDetailsPage extends VacancyBasePage {
         vXPreviousExperiences = false
       }
       extractProvideNameBlindStatement()
-      vXCvAttachment = false
+      vXCvAttachment = (_: Boolean)
     }
   }
 
@@ -535,7 +535,7 @@ object VacancyDetailsPage extends VacancyBasePage {
         vXCvAttachment = false
       }
       extractProvideStatement()
-      vXProvideNameBlindCv = false
+      vXProvideNameBlindCv = (_: Boolean)
       vXJobHistory = false
       vXFullQualification = false
       vXPreviousExperiences = false
@@ -580,7 +580,7 @@ object VacancyDetailsPage extends VacancyBasePage {
     } else {
       vXPersonalStatementNameBlind = false
     }
-    vXPersonalStatement = false
+    vXPersonalStatement = (_: Boolean)
   }
 
   private def extractProvideStatement(): Unit = {
@@ -595,7 +595,7 @@ object VacancyDetailsPage extends VacancyBasePage {
       vXStatementGuidance = false
       vXStatementGuidanceText = ""
     }
-    vXPersonalStatementNameBlind = false
+    vXPersonalStatementNameBlind = (_: Boolean)
   }
 
   private def extractStatementScoreRange(): Unit = {

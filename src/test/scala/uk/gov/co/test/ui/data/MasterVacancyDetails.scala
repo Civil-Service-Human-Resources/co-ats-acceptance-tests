@@ -146,7 +146,8 @@ object MasterVacancyDetails extends VacancyBasePage {
   var vXListOfStrengths: ListBuffer[String] = ListBuffer()
 
   //vx VACANCY online tests
-  var vXAnyOnlineTests: Boolean = _
+  var vXAnyOnlineTests: Boolean     = _
+  var vXWhenFullApplication: String = ""
 
   //vx VACANCY additional questions
   var vXAnyAdditionalQuestions: Option[Boolean] = None

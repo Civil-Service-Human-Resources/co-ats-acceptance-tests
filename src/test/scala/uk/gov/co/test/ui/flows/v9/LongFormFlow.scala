@@ -1,9 +1,8 @@
 package uk.gov.co.test.ui.flows.v9
 
-import uk.gov.co.test.ui.data.MasterVacancyDetails.vXNoLongForm
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXNoLongForm, vXWhenFullApplication}
 import uk.gov.co.test.ui.data.v9.longform.LongFormDetails
 import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.{confirmLongFormCompletion, continueApplicationName}
-import uk.gov.co.test.ui.pages.v9.ApplicationsPage.extractApplicationInfo
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
 import uk.gov.co.test.ui.pages.v9.longform.BehavioursPage.behavioursPage
 import uk.gov.co.test.ui.pages.v9.longform.DeclarationPage.{declarationPage, longFormSubmission}
@@ -30,12 +29,14 @@ object LongFormFlow extends CivilServiceJobsBasePage {
   )
 
   def fillLongFormDetails(longFormDetails: LongFormDetails): Unit =
-    if (!vXNoLongForm) {
-      clickOn(continueApplicationName)
-      longform.foreach { f =>
-        f(longFormDetails)
+    if (vXWhenFullApplication.isEmpty || vXWhenFullApplication == "Before the tests") {
+      if (!vXNoLongForm) {
+        clickOn(continueApplicationName)
+        longform.foreach { f =>
+          f(longFormDetails)
+        }
+        clickOn(longFormSubmission)
+        confirmLongFormCompletion()
       }
-      clickOn(longFormSubmission)
-      confirmLongFormCompletion()
     }
 }
