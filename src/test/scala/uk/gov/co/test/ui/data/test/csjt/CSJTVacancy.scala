@@ -210,7 +210,6 @@ object CSJT_BEHAVIOURS
 object CSJT_EXPERIENCES
     extends ExperienceDetails(
       true,
-      true,
       "0 - 100",
       true,
       true,

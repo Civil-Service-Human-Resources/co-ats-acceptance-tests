@@ -1,6 +1,6 @@
 package uk.gov.co.test.ui.pages.vx.createvacancypage
 
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXAbilitiesRequired, vXBehaviourApplicationRequired, vXBehaviourInterviewRequired, vXBehavioursRequired, vXCvScoreRange, vXDesirablePastExperience, vXExperiencesRequired, vXFullQualification, vXHowManyBehaviours, vXHowManySkills, vXHowManyStrengths, vXJobHistory, vXLanguagesMandatory, vXLicencesMandatory, vXListOfChosenBehaviours, vXListOfSkillsApplicationRequired, vXListOfSkillsInterviewRequired, vXListOfStrengths, vXListOfTechSkills, vXListOfTechSkillsDescription, vXMembershipsMandatory, vXPersonalStatementNameBlind, vXPreviousExperiences, vXCvAttachment, vXProvideNameBlindCv, vXQualificationsMandatory, vXSpecificLanguages, vXSpecificLicences, vXSpecificMemberships, vXSpecificPastExperience, vXSpecificQualifications, vXStatementGuidance, vXStatementGuidanceText, vXStatementScoreRange, vXStatementWordLimit, vXStrengthsRequired, vXTechSkillsRequired, vacancyFormId}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXAbilitiesRequired, vXBehaviourApplicationRequired, vXBehaviourInterviewRequired, vXBehavioursRequired, vXCvAttachment, vXCvScoreRange, vXDesirablePastExperience, vXExperiencesRequired, vXFullQualification, vXHowManyBehaviours, vXHowManySkills, vXHowManyStrengths, vXJobHistory, vXLanguagesMandatory, vXLicencesMandatory, vXListOfChosenBehaviours, vXListOfSkillsApplicationRequired, vXListOfSkillsInterviewRequired, vXListOfStrengths, vXListOfTechSkills, vXListOfTechSkillsDescription, vXMembershipsMandatory, vXPersonalStatement, vXPersonalStatementNameBlind, vXPreviousExperiences, vXProvideNameBlindCv, vXQualificationsMandatory, vXSpecificLanguages, vXSpecificLicences, vXSpecificMemberships, vXSpecificPastExperience, vXSpecificQualifications, vXStatementGuidance, vXStatementGuidanceText, vXStatementScoreRange, vXStatementWordLimit, vXStrengthsRequired, vXTechSkillsRequired, vacancyFormId}
 import uk.gov.co.test.ui.data.vx.vacancy.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 import uk.gov.co.test.ui.pages.vx.VacancyDetailsPage.clearScores
@@ -66,6 +66,7 @@ object SuccessProfilesSection extends VacancyBasePage {
     vXFullQualification = false
     vXPreviousExperiences = false
     vXPersonalStatementNameBlind = false
+    vXPersonalStatement = false
     vXStatementScoreRange = ""
     vXStatementWordLimit = 0
     vXStatementGuidance = false

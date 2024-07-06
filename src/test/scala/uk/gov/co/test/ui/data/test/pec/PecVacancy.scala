@@ -211,7 +211,6 @@ object PEC_BEHAVIOURS
 object PEC_EXPERIENCES
     extends ExperienceDetails(
       true,
-      true,
       "0 - 100",
       true,
       true,

@@ -209,7 +209,6 @@ object RESERVE_BEHAVIOURS
 object RESERVE_EXPERIENCES
     extends ExperienceDetails(
       true,
-      true,
       "0 - 100",
       true,
       true,

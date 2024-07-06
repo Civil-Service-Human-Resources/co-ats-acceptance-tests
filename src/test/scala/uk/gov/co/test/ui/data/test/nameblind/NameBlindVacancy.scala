@@ -78,7 +78,7 @@ object NON_NAME_BLIND_APPROVAL
 
 object NON_NAME_BLIND_RESERVE_LIST
     extends ReserveListDetails(
-      true,
+      false,
       "12 Months",
       false,
       "6 Months"
@@ -95,7 +95,7 @@ object NON_NAME_BLIND_LOCATIONS
       false,
       true,
       "All communities",
-      false,
+      true,
       "3",
       otherLocations = ListBuffer("London", "Southampton", "Manchester")
     )
@@ -139,7 +139,7 @@ object NON_NAME_BLIND_CONTACT_DETAILS
 object NON_NAME_BLIND_VETTING_DETAILS
     extends VettingDetails(
       true,
-      "Enhanced",
+      "Standard",
       "Disclosure barring service (DBS)",
       true,
       true,
@@ -210,7 +210,6 @@ object NON_NAME_BLIND_BEHAVIOURS
 
 object NON_NAME_BLIND_EXPERIENCES
     extends ExperienceDetails(
-      true,
       true,
       "0 - 100",
       true,
@@ -453,7 +452,7 @@ object NON_NAME_BLIND_MANAGEMENT
 object NON_NAME_BLIND_ONLINE_NON_NAME_BLIND_CHECK_FORMS
     extends OnlinePecCheckFormsDetails(
       true,
-      true,
+      false,
       true,
       s"$contactEmailVxConfig"
     )
@@ -465,7 +464,7 @@ object NON_NAME_BLIND_NON_NAME_BLIND_CHECK_FORMS
       "Right to work and criminal record check",
       true,
       "Autotest - Passport",
-      false,
+      true,
       generalInfo = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
       referenceChecks = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
       bankruptcyChecks = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),

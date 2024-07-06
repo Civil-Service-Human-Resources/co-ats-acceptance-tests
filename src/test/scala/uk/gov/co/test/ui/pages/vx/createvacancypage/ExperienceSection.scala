@@ -7,8 +7,7 @@ import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 case class MandatoryRequirements(requirements: Boolean, requirementsInfo: String)
 
 case class ExperienceDetails(
-  provideNameBlindCv: Boolean,
-  cvAttachment: Boolean,
+  provideCv: Boolean,
   cvScoreRange: String,
   cvJobHistory: Boolean,
   cvQualifications: Boolean,
@@ -78,24 +77,24 @@ object ExperienceSection extends VacancyBasePage {
 //  }
 
   private def selectRequestCv(successProfilesDetails: SuccessProfilesDetails): Unit = {
-    val cv           = successProfilesDetails.experienceSection
-    vXProvideNameBlindCv = cv.map(_.provideNameBlindCv).get
-    vXCvAttachment = cv.map(_.cvAttachment).get
+    val cv                 = successProfilesDetails.experienceSection
+    vXProvideNameBlindCv = cv.map(_.provideCv).get
+    vXCvAttachment = cv.map(_.provideCv).get
     vXJobHistory = false
     vXFullQualification = false
     vXPreviousExperiences = false
-//    val provideNameBlindCv = driver.findElements(By.id(provideNameBlindCvTextId))
-    val cvAttachment = driver.findElements(By.id(cvAttachmentTextId))
+    val provideNameBlindCv = driver.findElements(By.id(provideNameBlindCvTextId))
+    val cvAttachment       = driver.findElements(By.id(cvAttachmentTextId))
     if (!cvAttachment.isEmpty) {
-      vXProvideNameBlindCv = (_: Boolean)
+      vXProvideNameBlindCv = false
       if (vXCvAttachment) {
         clickOnRadioButton(cvAttachmentYesId)
         selectCVScoreRange(successProfilesDetails)
       } else {
         clickOnRadioButton(cvAttachmentNoId)
       }
-    } else {
-      vXCvAttachment = (_: Boolean)
+    } else if (!provideNameBlindCv.isEmpty) {
+      vXCvAttachment = false
       if (vXProvideNameBlindCv) {
         clickOnRadioButton(provideNameBlindCvYesId)
         selectCVScoreRange(successProfilesDetails)
@@ -138,23 +137,23 @@ object ExperienceSection extends VacancyBasePage {
   }
 
   private def selectProvideStatement(successProfilesDetails: SuccessProfilesDetails): Unit = {
-    val statement = successProfilesDetails.experienceSection
+    val statement                  = successProfilesDetails.experienceSection
     vXPersonalStatementNameBlind = statement.map(_.provideStatement).get
     vXPersonalStatement = statement.map(_.provideStatement).get
-
+    vXStatementGuidance = false
+    vXStatementGuidanceText = ""
     val personalStatementNameBlind = driver.findElements(By.id(personalStatementNameBlindTextId))
-//    val personalStatement          = driver.findElements(By.id(personalStatementTextId))
-
+    val personalStatement          = driver.findElements(By.id(personalStatementTextId))
     if (!personalStatementNameBlind.isEmpty) {
-      vXPersonalStatement = (_: Boolean)
+      vXPersonalStatement = false
       if (vXPersonalStatementNameBlind) {
         clickOnRadioButton(personalStatementNameBlindYesId)
         selectStatementNameBlindScoreRange(successProfilesDetails)
         selectStatementWordLimit(successProfilesDetails)
         selectStatementGuidanceText(successProfilesDetails)
       } else clickOnRadioButton(personalStatementNameBlindNoId)
-    } else {
-      vXPersonalStatementNameBlind = (_: Boolean)
+    } else if (!personalStatement.isEmpty) {
+      vXPersonalStatementNameBlind = false
       if (vXPersonalStatement) {
         clickOnRadioButton(personalStatementYesId)
         selectStatementNameBlindScoreRange(successProfilesDetails)

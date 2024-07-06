@@ -211,7 +211,6 @@ object IDVT_BEHAVIOURS
 object IDVT_EXPERIENCES
     extends ExperienceDetails(
       true,
-      true,
       "0 - 100",
       true,
       true,

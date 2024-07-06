@@ -412,7 +412,7 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
     // TODO to bypass grammatical bug, this function was created
     val schedule   = interviewTypeDetail() match {
       case "Telephone" => s"'Schedule interview'"
-      case "Assessment" => s"\'Schedule interview\""//TODO requires fix to align with other fields
+      case "Assessment" => s"\'Schedule interview\""//TODO requires fix to align with other fields. this occurs on I2 ONLY, not related to type!
       case "Video"     => s"'Schedule interview'"
       case "Interview" => s"'Schedule interview'"
     }
