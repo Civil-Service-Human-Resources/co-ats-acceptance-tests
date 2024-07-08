@@ -358,7 +358,7 @@ object InterviewThreeEvaluationTab extends VacancyBasePage {
   )
 
   private def behavioursOutcome(interviewThreeDetails: InterviewThreeDetails): Unit =
-    if (vXBehavioursRequired) {
+    if (vXBehavioursRequired && vXBehaviourInterviewRequired.contains(true)) {
       waitForVisibilityOfElementById(
         behaviourAssessmentHeaderId
       ).getText                                                  shouldEqual "Behaviour Assessment" //TODO different to I2
@@ -504,7 +504,7 @@ object InterviewThreeEvaluationTab extends VacancyBasePage {
   )
 
   private def techSkillOutcome(interviewThreeDetails: InterviewThreeDetails): Unit =
-    if (vXTechSkillsRequired) {
+    if (vXTechSkillsRequired && vXListOfSkillsInterviewRequired.contains(true)) {
       scrollToElement(By.id(techSkillsHeaderId))
       waitForVisibilityOfElementById(
         techSkillsHeaderId

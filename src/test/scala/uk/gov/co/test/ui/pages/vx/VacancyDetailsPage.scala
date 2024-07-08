@@ -1218,7 +1218,7 @@ object VacancyDetailsPage extends VacancyBasePage {
       } else {
         vXAnyAdditionalQuestions = Some(false)
       }
-    }
+    } else vXAnyAdditionalQuestions = None
     println(s"1. vXAnyAdditionalQuestions $vXAnyAdditionalQuestions")
     println(s"2. vXHowManyQuestions $vXHowManyQuestions")
     println(s"3. vXQuestionOne $vXQuestionOne")

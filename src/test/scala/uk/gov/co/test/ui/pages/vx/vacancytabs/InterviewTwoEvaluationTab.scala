@@ -356,7 +356,7 @@ object InterviewTwoEvaluationTab extends VacancyBasePage {
   )
 
   private def behavioursOutcome(interviewTwoDetails: InterviewTwoDetails): Unit =
-    if (vXBehavioursRequired) {
+    if (vXBehavioursRequired && vXBehaviourInterviewRequired.contains(true)) {
       waitForVisibilityOfElementById(behaviourAssessmentHeaderId).getText shouldEqual "Behaviour assessment"
       waitForVisibilityOfElementById(behaviourScoringGuideId).getText          should include(interviewTwoDetails.scoringGuide)
       behaviourOutcome.take(vXHowManyBehaviours).foreach { f =>
@@ -497,7 +497,7 @@ object InterviewTwoEvaluationTab extends VacancyBasePage {
   )
 
   private def techSkillOutcome(interviewTwoDetails: InterviewTwoDetails): Unit =
-    if (vXTechSkillsRequired) {
+    if (vXTechSkillsRequired && vXListOfSkillsInterviewRequired.contains(true)) {
       scrollToElement(By.id(techSkillsHeaderId))
       waitForVisibilityOfElementById(techSkillsHeaderId).getText  shouldEqual "Technical skill assessment"
       waitForVisibilityOfElementById(techSkillsScoringGuideId).getText should include(interviewTwoDetails.scoringGuide)

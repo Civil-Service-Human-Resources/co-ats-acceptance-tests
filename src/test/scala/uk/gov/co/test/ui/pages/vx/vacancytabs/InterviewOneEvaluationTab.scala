@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.pages.vx.vacancytabs
 
 import org.openqa.selenium.By
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{randomFirstName, randomLastName, vXBehaviourInterviewRequired, vXBehavioursRequired, vXExperiencesRequired, vXHowManyBehaviours, vXHowManySkills, vXHowManyStrengths, vXInterviewOneOutcome, vXListOfChosenBehaviours, vXListOfSkillsInterviewRequired, vXListOfStrengths, vXListOfTechSkills, vXStrengthsRequired, vXTechSkillsRequired, vacancyFormId}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{randomFirstName, randomLastName, vXBehaviourInterviewRequired, vXBehavioursRequired, vXExperiencesRequired, vXHowManyBehaviours, vXHowManySkills, vXHowManyStrengths, vXInterviewOneOutcome, vXListOfChosenBehaviours, vXListOfSkillsApplicationRequired, vXListOfSkillsInterviewRequired, vXListOfStrengths, vXListOfTechSkills, vXListOfTechSkillsDescription, vXStrengthsRequired, vXTechSkillsRequired, vacancyFormId}
 import uk.gov.co.test.ui.data.vx.application.{ApplicationDetails, AssessmentOutcome, Outcome}
 import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.applicationStateAfterInterview
 import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.{availableBarItems, completeI1EvaluationBarId, interviewEvaluation, noShowI1BarId, withdrawAtInterviewBarId}
@@ -360,7 +360,7 @@ object InterviewOneEvaluationTab extends VacancyBasePage {
   )
 
   private def behavioursOutcome(interviewOneDetails: InterviewOneDetails): Unit =
-    if (vXBehavioursRequired) {
+    if (vXBehavioursRequired && vXBehaviourInterviewRequired.contains(true)) {
       waitForVisibilityOfElementById(behaviourAssessmentHeaderId).getText shouldEqual "Behaviour assessment"
       waitForVisibilityOfElementById(behaviourScoringGuideId).getText          should include(interviewOneDetails.scoringGuide)
       behaviourOutcome.take(vXHowManyBehaviours).foreach { f =>
@@ -500,8 +500,8 @@ object InterviewOneEvaluationTab extends VacancyBasePage {
     enterTechSkillEightOutcome
   )
 
-  private def techSkillOutcome(interviewOneDetails: InterviewOneDetails): Unit =
-    if (vXTechSkillsRequired) {
+  private def techSkillOutcome(interviewOneDetails: InterviewOneDetails): Unit = {
+    if (vXTechSkillsRequired && vXListOfSkillsInterviewRequired.contains(true)) {
       scrollToElement(By.id(techSkillsHeaderId))
       waitForVisibilityOfElementById(techSkillsHeaderId).getText  shouldEqual "Technical Skill assessment"
       waitForVisibilityOfElementById(techSkillsScoringGuideId).getText should include(interviewOneDetails.scoringGuide)
@@ -510,6 +510,7 @@ object InterviewOneEvaluationTab extends VacancyBasePage {
       }
       checkForTotalValueId(techSkillTotalScoreId, s"${totalScore(vXI1TechSkillsTotalScore)}")
     }
+  }
 
   private def enterStrengthOneOutcome(interviewOneDetails: InterviewOneDetails): Unit = {
     enterOutcome(

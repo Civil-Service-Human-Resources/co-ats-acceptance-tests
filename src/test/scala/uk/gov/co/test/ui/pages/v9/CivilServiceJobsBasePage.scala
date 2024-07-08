@@ -103,9 +103,9 @@ trait CivilServiceJobsBasePage extends Matchers with BasePage with BrowserDriver
   def generateTestCandidateDetails(): Unit = {
     generateRandomFirstName()
     generateRandomLastName()
-    generateRandomPassword()
-    generatePreferredFirstName()
+//    generatePreferredFirstName()
     generatedDacTestEmail()
+    generateRandomPassword()
   }
 
   def generateCandidateDetailsIterator(i: Int): Unit = {
