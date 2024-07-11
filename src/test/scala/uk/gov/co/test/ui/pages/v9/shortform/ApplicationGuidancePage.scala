@@ -16,7 +16,8 @@ object ApplicationGuidancePage extends CivilServiceJobsBasePage {
   private lazy val findCSJobsTitle  = "Welcome to our recruitment portal - Civil Service Jobs - GOV.UK"
   private lazy val appDeadline      = "The deadline is 11:55PM on 22 November 2023."
   val returnBackToSearchResultsPath = ".//a[@title='Return to search results']"
-  val formIdPath                    = ".//form[@onsubmit='return submit_form()']"
+//  val formIdPath                    = ".//form[@onsubmit='return submit_form()']"
+  val formIdPath                    = ".//form[@enctype='multipart/form-data']"
   var shortFormId: String           = ""
 
   private def confirmApplicationGuidance(appGuidanceDetails: AppGuidanceDetails): Unit = {

@@ -425,6 +425,7 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
     advertDetailsFunction().isEnabled
     applicationForVacancyText shouldEqual s"Application For $vacancyName"
     getApplicationState        shouldEqual s"Application status: $status"
+
     getApplicationConfirmation shouldEqual s"""Congratulations, we'd like to invite you $inviteType.
                                              |To book your interview slot click $schedule.
                                              |To get your preferred time we recommend you book as early as possible.
@@ -443,7 +444,7 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
         s"""Your telephone interview slot is booked and details are shown below:
                      |Date: $vXInterviewLongDate
                      |Time: ${vXSlotTwoStartTime.replaceAll("[A-Za-z ]", "").filterNot(_.isWhitespace)}
-                     |We will send details on how to access your ${vXInterviewOneType.toLowerCase} interview separately when they are available.
+                     |We will send details on how to access your telephone interview separately when they are available.
                      |Autotest - Instructions for $randomFirstName $randomLastName for interview ${vXInterviewNumber.head}
                      |If you're no longer interested in this job, please withdraw your application.""".stripMargin
       case "Assessment" =>
@@ -456,7 +457,7 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
         s"""Your video interview slot is booked and details are shown below:
                      |Date: $vXInterviewLongDate
                      |Time: ${vXSlotTwoStartTime.replaceAll("[A-Za-z ]", "").filterNot(_.isWhitespace)}
-                     |We will send details on how to access your ${vXInterviewThreeType.toLowerCase} interview separately when they are available.
+                     |We will send details on how to access your video interview separately when they are available.
                      |Autotest - Instructions for $randomFirstName $randomLastName for interview ${vXInterviewNumber.head}
                      |If you're no longer interested in this job, please withdraw your application.""".stripMargin
       case "Interview"  =>

@@ -26,7 +26,8 @@ case class YourDetails(
 object YourDetailsPage extends CivilServiceJobsBasePage {
 
   private lazy val yourDetailsPageTitle = "Your Details - Civil Service Jobs - GOV.UK"
-  private lazy val formIdPath           = ".//form[@onsubmit='return submit_form()']"
+//  private lazy val formIdPath           = ".//form[@onsubmit='return submit_form()']"//deprecated
+  private lazy val formIdPath           = ".//form[@enctype='multipart/form-data']"
   def titleId                           = s"${pecFormId}_datafield_114326_1_1"
   def firstNamePath                     = s"//*[@id='${pecFormId}_label_86431_1']/div/p"
   def lastNamePath                      = s"//*[@id='${pecFormId}_label_86442_1']/div/p"

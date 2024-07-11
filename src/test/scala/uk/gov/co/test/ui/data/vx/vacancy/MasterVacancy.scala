@@ -149,10 +149,10 @@ object MASTER_VETTING_DETAILS
 
 object MASTER_INTERVIEWS_DETAILS
     extends InterviewsDetails(
-      "4",
+      "3",
+      "Video",
       "Telephone",
       "Assessment",
-      "Video",
       "Interview",
       false
     )

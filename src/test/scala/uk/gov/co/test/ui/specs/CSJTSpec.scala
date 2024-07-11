@@ -36,7 +36,7 @@ class CSJTSpec extends BaseFeatureSpec {
     Scenario("VX: All Forms; Master Application Process fot DAC TEST CANDIDATES", RunInVX) {
       Given("new vacancy is created and posted")
 //      fillNewVacancyForm(MASTER_VACANCY_DATA)
-      extractAllVacancyDetails("10348")
+      extractAllVacancyDetails("10358")
 
       When("recruiter & new candidate complete the full application")
       fillNewCandidateDetails(MASTER_REGISTER_CANDIDATE)
