@@ -11,6 +11,7 @@ object PN_NEN_PEC_FORM_DATA
       PN_NEN_PEC_RIGHT_TO_WORK,
       PN_NEN_PEC_FORM_EMPLOYMENT_HISTORY,
       PN_NEN_PEC_FORM_VERIFYING_HISTORY,
+      PN_NEN_PEC_FORM_WORKPLACE_MISCONDUCT,
       PN_NEN_PEC_FORM_PENSION_QUESTIONNAIRE,
       PN_NEN_PEC_FORM_OVERSEAS,
       PN_NEN_PEC_FORM_BANKRUPTCY_DETAILS,
@@ -156,6 +157,15 @@ object PN_NEN_PEC_FORM_VERIFYING_HISTORY
       "Autotest3 - relation to referee",
       "Other3 Test3",
       s"$v9RefereeEmail"
+    )
+
+object PN_NEN_PEC_FORM_WORKPLACE_MISCONDUCT
+    extends MisconductDetails(
+      true,
+      "Autotest - name, address & email of employer for claim of misconduct against candidate",
+      true,
+      "Autotest - name, address & email of employer for currently under investigation of candidate",
+      true
     )
 
 object PN_NEN_PEC_FORM_PENSION_QUESTIONNAIRE

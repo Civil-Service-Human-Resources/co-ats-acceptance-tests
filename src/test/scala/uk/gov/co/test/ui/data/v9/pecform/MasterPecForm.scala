@@ -10,6 +10,7 @@ object MASTER_PEC_FORM_DATA
       MASTER_PEC_RIGHT_TO_WORK,
       MASTER_PEC_FORM_EMPLOYMENT_HISTORY,
       MASTER_PEC_FORM_VERIFYING_HISTORY,
+      MASTER_PEC_FORM_WORKPLACE_MISCONDUCT,
       MASTER_PEC_FORM_PENSION_QUESTIONNAIRE,
       MASTER_PEC_FORM_OVERSEAS,
       MASTER_PEC_FORM_BANKRUPTCY_DETAILS,
@@ -97,6 +98,15 @@ object MASTER_PEC_FORM_VERIFYING_HISTORY
       "Autotest3 - relation to referee",
       "Other3 Test3",
       s"$v9RefereeEmail"
+    )
+
+object MASTER_PEC_FORM_WORKPLACE_MISCONDUCT
+    extends MisconductDetails(
+      true,
+      "Autotest - name, address & email of employer for claim of misconduct against candidate",
+      true,
+      "Autotest - name, address & email of employer for currently under investigation of candidate",
+      true
     )
 
 object MASTER_PEC_FORM_PENSION_QUESTIONNAIRE

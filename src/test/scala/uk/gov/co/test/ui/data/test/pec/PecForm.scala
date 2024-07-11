@@ -11,6 +11,7 @@ object PEC_FORM_DATA
       PEC_RIGHT_TO_WORK,
       PEC_FORM_EMPLOYMENT_HISTORY,
       PEC_FORM_VERIFYING_HISTORY,
+      PEC_FORM_WORKPLACE_MISCONDUCT,
       PEC_FORM_PENSION_QUESTIONNAIRE,
       PEC_FORM_OVERSEAS,
       PEC_FORM_BANKRUPTCY_DETAILS,
@@ -156,6 +157,15 @@ object PEC_FORM_VERIFYING_HISTORY
       "Autotest3 - relation to referee",
       "Other3 Test3",
       s"$v9RefereeEmail"
+    )
+
+object PEC_FORM_WORKPLACE_MISCONDUCT
+    extends MisconductDetails(
+      true,
+      "Autotest - name, address & email of employer for claim of misconduct against candidate",
+      true,
+      "Autotest - name, address & email of employer for currently under investigation of candidate",
+      true
     )
 
 object PEC_FORM_PENSION_QUESTIONNAIRE

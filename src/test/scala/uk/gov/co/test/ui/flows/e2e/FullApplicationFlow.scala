@@ -1,6 +1,6 @@
 package uk.gov.co.test.ui.flows.e2e
 
-import uk.gov.co.test.ui.data.test.idvt.{IDVT_APPLICATION_DATA, IDVT_FORM_DATA, IDVT_LONG_FORM_DATA, IDVT_SHORT_FORM_DATA}
+import uk.gov.co.test.ui.data.test.idvt.{IDVT_APPLICATION_DATA, IDVT_LONG_FORM_DATA, IDVT_PEC_FORM_DATA, IDVT_SHORT_FORM_DATA}
 import uk.gov.co.test.ui.data.test.reserve.{RESERVE_APPLICATION_DATA, RESERVE_LONG_FORM_DATA, RESERVE_SHORT_FORM_DATA}
 import uk.gov.co.test.ui.data.v9.longform.LongFormDetails
 import uk.gov.co.test.ui.data.v9.pecform.PecFormDetails
@@ -24,7 +24,7 @@ object FullApplicationFlow extends CivilServiceJobsBasePage {
     SiftEvaluationFlow(IDVT_APPLICATION_DATA)
     completeAllInterviews(IDVT_APPLICATION_DATA)
     moveAndAcceptOffer()
-    fillPecFormDetailsOnly(IDVT_FORM_DATA)
+    fillPecFormDetailsOnly(IDVT_PEC_FORM_DATA)
   }
 
   def fillFullApplicationDetails(

@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.pages.vx.createvacancypage
 
 import org.openqa.selenium.By
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXCandidateUploadIdentityDocs, vXDetailsForUploadIdentityDocs, vXManuallyCheckIdentityDocs, vXPecAdditionalCheck, vXPecBankruptcyCheck, vXPecCrc, vXPecEmploymentHistoryCheck, vXPecFraudCheck, vXPecGeneralInfo, vXPecHealthDisplayOptions, vXPecHealthRefCheck, vXPecIncludeAdditionalCheck, vXPecNameOfAdditionalCheck, vXPecNen, vXPecNsv, vXPecNsvDisplayOptions, vXPecOgdSecurityCheck, vXPecOverseasCheck, vXPecPensionsCheck, vXPecPn, vXPecPreviousCivilEmploymentCheck, vXPecReferenceCheck, vXPecSelfEmploymentCheck, vXPecUseDigitalOgdProcess, vXRtwChecks, vXUseOnlinePecForms, vXWhenRtwChecks, vXWhichIdentityChecks, vacancyFormId}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXCandidateUploadIdentityDocs, vXDetailsForUploadIdentityDocs, vXManuallyCheckIdentityDocs, vXPecAdditionalCheck, vXPecBankruptcyCheck, vXPecCrc, vXPecEmploymentHistoryCheck, vXPecFraudCheck, vXPecGeneralInfo, vXPecHealthDisplayOptions, vXPecHealthRefCheck, vXPecIncludeAdditionalCheck, vXPecNameOfAdditionalCheck, vXPecNen, vXPecNsv, vXPecNsvDisplayOptions, vXPecOgdSecurityCheck, vXPecOverseasCheck, vXPecPensionsCheck, vXPecPn, vXPecPreviousCivilEmploymentCheck, vXPecReferenceCheck, vXPecSelfEmploymentCheck, vXPecUseDigitalOgdProcess, vXPecWorkplaceMisconductCheck, vXRtwChecks, vXUseOnlinePecForms, vXWhenRtwChecks, vXWhichIdentityChecks, vacancyFormId}
 import uk.gov.co.test.ui.data.vx.vacancy.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 
@@ -16,6 +16,7 @@ case class PecCheckFormsDetails(
   manualIdentityDocCheck: Boolean,
   generalInfo: ListBuffer[String],
   referenceChecks: ListBuffer[String],
+  workplaceMisconductCheck: ListBuffer[String],
   bankruptcyChecks: ListBuffer[String],
   crcChecks: ListBuffer[String],
   nsvChecks: ListBuffer[String],
@@ -46,6 +47,7 @@ object PecCheckFormsSection extends VacancyBasePage {
   def sameTimeAsPecChecksId            = s"${vacancyFormId}_datafield_106424_1_1_17182"
   def generalInformationInputId        = s"select2-${vacancyFormId}_datafield_94582_1_1-container"
   def referenceCheckInputId            = s"select2-${vacancyFormId}_datafield_94578_1_1-container"
+  def workplaceMisconductCheckInputId  = s"select2-${vacancyFormId}_datafield_209454_1_1-container"
   def bankruptcyCheckInputId           = s"select2-${vacancyFormId}_datafield_87979_1_1-container"
   def crcInputId                       = s"select2-${vacancyFormId}_datafield_87982_1_1-container"
   def nsvInputId                       = s"select2-${vacancyFormId}_datafield_100822_1_1-container"
@@ -187,6 +189,7 @@ object PecCheckFormsSection extends VacancyBasePage {
     vXRtwChecks = pecCheckFormsDetails.rtwCheck
     vXPecGeneralInfo = pecCheckFormsDetails.generalInfo
     vXPecReferenceCheck = pecCheckFormsDetails.referenceChecks
+    vXPecWorkplaceMisconductCheck = pecCheckFormsDetails.workplaceMisconductCheck
     vXPecBankruptcyCheck = pecCheckFormsDetails.bankruptcyChecks
     vXPecCrc = pecCheckFormsDetails.crcChecks
     vXPecNsv = pecCheckFormsDetails.nsvChecks
@@ -206,6 +209,7 @@ object PecCheckFormsSection extends VacancyBasePage {
     selectUploadIdentityDocs(pecCheckFormsDetails)
     enterTypeRoles(vXPecGeneralInfo, generalInformationInputId)
     enterTypeRoles(vXPecReferenceCheck, referenceCheckInputId)
+    enterTypeRoles(vXPecWorkplaceMisconductCheck, workplaceMisconductCheckInputId)
     enterTypeRoles(vXPecBankruptcyCheck, bankruptcyCheckInputId)
     enterTypeRoles(vXPecCrc, crcInputId)
     enterTypeRoles(vXPecNsv, nsvInputId)

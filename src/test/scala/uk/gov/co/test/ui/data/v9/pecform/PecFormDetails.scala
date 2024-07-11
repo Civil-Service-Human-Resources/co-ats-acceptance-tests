@@ -7,6 +7,7 @@ case class PecFormDetails(
   rtwDetails: RtwDetails,
   employmentHistoryDetails: EmploymentHistoryDetails,
   verifyingHistoryDetails: VerifyingHistoryDetails,
+  misconductDetails: MisconductDetails,
   pensionDetails: PensionDetails,
   overseasDetails: OverseasDetails,
   bankruptcyDetails: BankruptcyDetails,

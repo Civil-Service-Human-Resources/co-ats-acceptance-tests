@@ -467,6 +467,8 @@ object NON_NAME_BLIND_NON_NAME_BLIND_CHECK_FORMS
       true,
       generalInfo = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
       referenceChecks = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      workplaceMisconductCheck =
+        ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
       bankruptcyChecks = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
       crcChecks = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
       nsvChecks = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),

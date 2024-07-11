@@ -11,6 +11,7 @@ object NON_NAME_BLIND_PEC_FORM_DATA
       NON_NAME_BLIND_PEC_RIGHT_TO_WORK,
       NON_NAME_BLIND_PEC_FORM_EMPLOYMENT_HISTORY,
       NON_NAME_BLIND_PEC_FORM_VERIFYING_HISTORY,
+      NON_NAME_BLIND_PEC_FORM_WORKPLACE_MISCONDUCT,
       NON_NAME_BLIND_PEC_FORM_PENSION_QUESTIONNAIRE,
       NON_NAME_BLIND_PEC_FORM_OVERSEAS,
       NON_NAME_BLIND_PEC_FORM_BANKRUPTCY_DETAILS,
@@ -156,6 +157,15 @@ object NON_NAME_BLIND_PEC_FORM_VERIFYING_HISTORY
       "Autotest3 - relation to referee",
       "Other3 Test3",
       s"$v9RefereeEmail"
+    )
+
+object NON_NAME_BLIND_PEC_FORM_WORKPLACE_MISCONDUCT
+    extends MisconductDetails(
+      true,
+      "Autotest - name, address & email of employer for claim of misconduct against candidate",
+      true,
+      "Autotest - name, address & email of employer for currently under investigation of candidate",
+      true
     )
 
 object NON_NAME_BLIND_PEC_FORM_PENSION_QUESTIONNAIRE

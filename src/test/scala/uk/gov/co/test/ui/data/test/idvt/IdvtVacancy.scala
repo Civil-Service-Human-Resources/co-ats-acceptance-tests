@@ -25,8 +25,8 @@ object IDVT_VACANCY_DATA
       IDVT_ADDITIONAL_QUESTIONS,
       IDVT_CRITERIA,
       IDVT_MANAGEMENT,
-      IDVT_ONLINE_IDVT_CHECK_FORMS,
-      IDVT_IDVT_CHECK_FORMS
+      IDVT_ONLINE_PEC_CHECK_FORMS,
+      IDVT_PEC_CHECK_FORMS
     )
 
 object IDVT_BASIC_DETAILS
@@ -449,7 +449,7 @@ object IDVT_MANAGEMENT
       vacancyComments = Option("Autotest - Comments on this vacancy")
     )
 
-object IDVT_ONLINE_IDVT_CHECK_FORMS
+object IDVT_ONLINE_PEC_CHECK_FORMS
     extends OnlinePecCheckFormsDetails(
       true,
       true,
@@ -457,7 +457,7 @@ object IDVT_ONLINE_IDVT_CHECK_FORMS
       s"$contactEmailVxConfig"
     )
 
-object IDVT_IDVT_CHECK_FORMS
+object IDVT_PEC_CHECK_FORMS
     extends PecCheckFormsDetails(
       rtwCheck = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
       "Before pre employment checks",
@@ -467,6 +467,8 @@ object IDVT_IDVT_CHECK_FORMS
       false,
       generalInfo = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
       referenceChecks = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      workplaceMisconductCheck =
+        ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
       bankruptcyChecks = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
       crcChecks = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
       nsvChecks = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),

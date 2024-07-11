@@ -19,6 +19,7 @@ import uk.gov.co.test.ui.pages.v9.pecform.RightToWorkPage.rightToWorkPage
 import uk.gov.co.test.ui.pages.v9.pecform.SelfEmploymentPage.selfEmploymentPage
 import uk.gov.co.test.ui.pages.v9.pecform.UploadIdentityDocsPage.uploadIdentityDocPage
 import uk.gov.co.test.ui.pages.v9.pecform.VerifyingHistoryPage.verifyingHistoryPage
+import uk.gov.co.test.ui.pages.v9.pecform.WorkplaceMisconductPage.workplaceMisconductPage
 import uk.gov.co.test.ui.pages.v9.pecform.YourDetailsPage.yourDetailsPage
 
 object PecFormFlow extends CivilServiceJobsBasePage {
@@ -28,6 +29,7 @@ object PecFormFlow extends CivilServiceJobsBasePage {
     rightToWorkPage,
     employmentHistoryPage,
     verifyingHistoryPage,
+    workplaceMisconductPage,
     pensionQuestionnairePage,
     overseasPage,
     bankruptcyDetailsPage, //TODO full logic required

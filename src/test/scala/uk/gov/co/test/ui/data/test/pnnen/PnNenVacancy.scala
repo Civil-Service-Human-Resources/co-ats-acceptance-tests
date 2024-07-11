@@ -467,6 +467,7 @@ object PN_NEN_PEC_CHECK_FORMS
       false,
       generalInfo = ListBuffer("Not Applicable"),
       referenceChecks = ListBuffer("Not Applicable"),
+      workplaceMisconductCheck = ListBuffer("Not Applicable"),
       bankruptcyChecks = ListBuffer("Not Applicable"),
       crcChecks = ListBuffer("Not Applicable"),
       nsvChecks = ListBuffer("Not Applicable"),

@@ -149,10 +149,10 @@ object MASTER_VETTING_DETAILS
 
 object MASTER_INTERVIEWS_DETAILS
     extends InterviewsDetails(
-      "3",
-      "Video",
+      "4",
       "Telephone",
       "Assessment",
+      "Video",
       "Interview",
       false
     )
@@ -465,6 +465,8 @@ object MASTER_PEC_CHECK_FORMS
       true,
       generalInfo = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
       referenceChecks = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      workplaceMisconductCheck =
+        ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
       bankruptcyChecks = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
       crcChecks = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
       nsvChecks = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),

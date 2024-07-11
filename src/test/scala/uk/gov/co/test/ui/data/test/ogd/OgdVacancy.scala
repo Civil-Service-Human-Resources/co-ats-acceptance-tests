@@ -467,6 +467,7 @@ object OGD_OGD_CHECK_FORMS
       false,
       generalInfo = ListBuffer("External Candidates"),
       referenceChecks = ListBuffer("Not Applicable"),
+      workplaceMisconductCheck = ListBuffer("Not Applicable"),
       bankruptcyChecks = ListBuffer("Not Applicable"),
       crcChecks = ListBuffer("External Candidates", "OGD Candidates"),
       nsvChecks = ListBuffer("External Candidates", "OGD Candidates"),

@@ -11,6 +11,7 @@ object OGD_PEC_FORM_DATA
       OGD_PEC_FORM_RIGHT_TO_WORK,
       OGD_PEC_FORM_EMPLOYMENT_HISTORY,
       OGD_PEC_FORM_VERIFYING_HISTORY,
+      OGD_PEC_FORM_WORKPLACE_MISCONDUCT,
       OGD_PEC_FORM_PENSION_QUESTIONNAIRE,
       OGD_PEC_FORM_OVERSEAS,
       OGD_PEC_FORM_BANKRUPTCY_DETAILS,
@@ -183,6 +184,15 @@ object OGD_PEC_FORM_VERIFYING_HISTORY
       "Autotest3 - relation to referee",
       "Other3 Test3",
       s"$v9RefereeEmail"
+    )
+
+object OGD_PEC_FORM_WORKPLACE_MISCONDUCT
+    extends MisconductDetails(
+      true,
+      "Autotest - name, address & email of employer for claim of misconduct against candidate",
+      true,
+      "Autotest - name, address & email of employer for currently under investigation of candidate",
+      true
     )
 
 object OGD_PEC_FORM_PENSION_QUESTIONNAIRE
