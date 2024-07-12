@@ -191,8 +191,8 @@ object MasterVacancyDetails extends VacancyBasePage {
   var vXManuallyCheckIdentityDocs: Boolean   = _
   var vXPecGeneralInfo                       = new ListBuffer[String]()
   var vXPecReferenceCheck                    = new ListBuffer[String]()
-  var vXPecBankruptcyCheck                   = new ListBuffer[String]()
   var vXPecWorkplaceMisconductCheck          = new ListBuffer[String]()
+  var vXPecBankruptcyCheck                   = new ListBuffer[String]()
   var vXPecCrc                               = new ListBuffer[String]()
   var vXPecNsv                               = new ListBuffer[String]()
   var vXPecNsvDisplayOptions                 = ""

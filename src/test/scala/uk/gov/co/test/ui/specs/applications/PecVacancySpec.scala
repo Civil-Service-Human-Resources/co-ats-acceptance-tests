@@ -1,5 +1,6 @@
 package uk.gov.co.test.ui.specs.applications
 
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{v9HomeDepartment, vXJobInfoDepartment}
 import uk.gov.co.test.ui.data.test.pec._
 import uk.gov.co.test.ui.data.v9.applicants.{MASTER_REGISTER_CANDIDATE, REGISTER_CANDIDATE_PEC}
 import uk.gov.co.test.ui.data.v9.longform.MASTER_LONG_FORM_DATA
@@ -26,10 +27,11 @@ class PecVacancySpec extends BaseFeatureSpec {
     Scenario("VX: A Candidate Completes The Candidate PEC Forms; Partial Application Process", RunInVX) {
       Given("candidate registers for new job application")
       fillNewVacancyForm(PEC_VACANCY_DATA)
-//      extractAllVacancyDetails("10365")
+//      extractAllVacancyDetails("10382")
       fillNewCandidateDetails(REGISTER_CANDIDATE_PEC)
 
       When("candidate completes all forms")
+//      v9HomeDepartment = vXJobInfoDepartment
       fillFullApplicationDetails(
         PEC_SHORT_FORM_DATA,
         PEC_LONG_FORM_DATA,

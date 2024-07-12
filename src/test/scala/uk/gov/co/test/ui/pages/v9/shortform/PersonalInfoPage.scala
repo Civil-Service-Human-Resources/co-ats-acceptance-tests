@@ -2,7 +2,7 @@ package uk.gov.co.test.ui.pages.v9.shortform
 
 import org.openqa.selenium.By
 import org.scalatest.concurrent.Eventually.eventually
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{preferredFirstName, preferredTeleNumber, randomEmail, randomFirstName, randomLastName, v9AdjustmentsForTests, v9CivilServant, v9HomeDepartment, v9ReasonableAdjustments, vXAnyOnlineTests, vXGreatForVeterans, vXJobInfoDepartment}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{preferredFirstName, preferredTeleNumber, randomEmail, randomFirstName, randomLastName, v9AdjustmentsForTests, v9CivilServant, v9HomeDepartment, v9ReasonableAdjustments, vXAnyOnlineTests, vXGreatForVeterans, vXJobGrades, vXJobInfoDepartment}
 import uk.gov.co.test.ui.data.v9.shortform.ShortFormDetails
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
 import uk.gov.co.test.ui.pages.v9.shortform.ApplicationGuidancePage.shortFormId
@@ -26,6 +26,8 @@ object PersonalInfoPage extends CivilServiceJobsBasePage {
   def firstNameInputId                     = s"${shortFormId}_datafield_11625_1_1"
   def lastNameInputId                      = s"${shortFormId}_datafield_11628_1_1"
   def preferredFirstNameInputId            = s"${shortFormId}_datafield_21495_1_1"
+  def modSubstantiveGradeId                = s"${shortFormId}_datafield_44737_1_1"
+  def modStaffNumberId                     = s"${shortFormId}_datafield_138820_1_1"
   def preferredTeleNoInputId               = s"${shortFormId}_datafield_11643_1_1"
   def secondaryNoInputId                   = s"${shortFormId}_datafield_11657_1_1"
   def emailInputId                         = s"${shortFormId}_datafield_11631_1_1"
@@ -56,17 +58,23 @@ object PersonalInfoPage extends CivilServiceJobsBasePage {
     } else extractValue(firstNameInputId) shouldEqual randomFirstName
   }
 
-  private def enterLastName(personalInfoDetails: PersonalInfoDetails): Unit           =
+  private def enterLastName(personalInfoDetails: PersonalInfoDetails): Unit              =
     if (extractValue(lastNameInputId).isEmpty) {
       enterDetails(lastNameInputId, randomLastName)
     } else extractValue(lastNameInputId) shouldEqual randomLastName
 
-  private def enterPreferredFirstName(personalInfoDetails: PersonalInfoDetails): Unit =
+  private def enterPreferredFirstName(personalInfoDetails: PersonalInfoDetails): Unit    =
     if (extractValue(preferredFirstNameInputId).isEmpty) {
       enterDetails(preferredFirstNameInputId, preferredFirstName)
     } else extractValue(preferredFirstNameInputId) shouldEqual preferredFirstName
 
-  private def enterEmail(personalInfoDetails: PersonalInfoDetails): Unit              =
+  private def selectGradeAndNumberForMOD(personalInfoDetails: PersonalInfoDetails): Unit =
+    if (v9HomeDepartment == "Ministry of Defence" && vXJobInfoDepartment == "Ministry of Defence") {
+      selectDropdownOption(modSubstantiveGradeId, vXJobGrades.headOption.get)
+      enterDetails(modStaffNumberId, "12345")
+    }
+
+  private def enterEmail(personalInfoDetails: PersonalInfoDetails): Unit =
     if (extractValue(emailInputId).isEmpty) {
       enterDetails(emailInputId, randomEmail)
     } else extractValue(emailInputId) shouldEqual randomEmail
@@ -163,6 +171,7 @@ object PersonalInfoPage extends CivilServiceJobsBasePage {
     enterFirstName,
     enterLastName,
     enterPreferredFirstName,
+    selectGradeAndNumberForMOD,
     enterPreferredTeleNo,
     enterSecondaryContactNo,
     enterEmail,
