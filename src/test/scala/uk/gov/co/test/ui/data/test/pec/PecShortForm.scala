@@ -19,7 +19,7 @@ object PEC_SHORT_FORM_APP_GUIDANCE
 
 object PEC_SHORT_FORM_ELIGIBILITY
     extends EligibilityDetails(
-      false,
+      true,
       true,
       true,
       true,

@@ -18,15 +18,15 @@ import scala.util.Random
 
 trait CivilServiceJobsBasePage extends Matchers with BasePage with BrowserDriver {
 
-  val url: String                        = TestConfiguration.url("v9test")
-  val passwordCandidate: String          = readProperty("services.v9test.admin.candidate_password")
-  val getOs: String                      = System.getProperty("os.name").toLowerCase
-  val civilServiceSignOutPageTitle       = "Civil Service Jobs - Civil Service Jobs - GOV.UK"
-  val v9AcceptAdditionalCookies: String  = "accept_all_cookies_button"
-  val vXaAcceptAdditionalCookies: String = "cookies-accept-button"
-  val pageContinue                       = "continue_button"
-  val continueToLongForm                 = "select_manual_form_700"
-  val submitForm                         = "submit_button"
+  val url: String                       = TestConfiguration.url("v9test")
+  val passwordCandidate: String         = readProperty("services.v9test.admin.candidate_password")
+  val getOs: String                     = System.getProperty("os.name").toLowerCase
+  val civilServiceSignOutPageTitle      = "Civil Service Jobs - Civil Service Jobs - GOV.UK"
+  val v9AcceptAdditionalCookies: String = "accept_all_cookies_button"
+  val vXAcceptAdditionalCookies: String = "cookies-accept-button"
+  val pageContinue                      = "continue_button"
+  val continueToLongForm                = "select_manual_form_700"
+  val submitForm                        = "submit_button"
 
   def randomnessName(): String = {
     val randomLastName = Iterator.continually(Random.nextPrintableChar()).filter(_.isLetter).take(10).mkString
@@ -80,13 +80,13 @@ trait CivilServiceJobsBasePage extends Matchers with BasePage with BrowserDriver
     clickOn(v9AcceptAdditionalCookies)
 
   def vXAcceptAllCookies(): Unit =
-    clickOn(vXaAcceptAdditionalCookies)
+    clickOn(vXAcceptAdditionalCookies)
 
   def v9SearchCookiesById(): util.List[WebElement] =
     driver.findElements(By.id(v9AcceptAdditionalCookies))
 
   def vXSearchCookiesById(): WebElement =
-    driver.findElement(By.id(vXaAcceptAdditionalCookies))
+    driver.findElement(By.id(vXAcceptAdditionalCookies))
 
   def navigateToV9Test(): Unit = {
     go to url

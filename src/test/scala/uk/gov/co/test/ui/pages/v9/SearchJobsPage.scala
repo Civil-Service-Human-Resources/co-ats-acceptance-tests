@@ -3,6 +3,7 @@ package uk.gov.co.test.ui.pages.v9
 import org.openqa.selenium.support.ui.WebDriverWait
 import org.openqa.selenium.{By, Keys, WebDriver}
 import org.scalatest.concurrent.Eventually.eventually
+import uk.gov.co.test.ui.data.MasterVacancyDetails.v9RunInWelsh
 import uk.gov.co.test.ui.pages.v9.ApplicationsPage.{confirmStatusOnApplicationPage, extractApplicationInfo}
 
 object SearchJobsPage extends CivilServiceJobsBasePage {
@@ -85,7 +86,8 @@ object SearchJobsPage extends CivilServiceJobsBasePage {
     enterSearchCriteria(jobId, searchPathway)
     checkForNewVacancy(jobId, jobTitle, searchPathway)
     eventually(onPage(s"$jobTitle - Civil Service Jobs - GOV.UK"))
-    clickOn("login_button")
+    if (v9RunInWelsh) waitForVisibilityOfElementByPath(".//*[@title='Cymraeg']").click()
+    waitForVisibilityOfElementByPath(".//*[@name='login_button']").click()
     driver.navigate().refresh()
     extractApplicationInfo()
   }

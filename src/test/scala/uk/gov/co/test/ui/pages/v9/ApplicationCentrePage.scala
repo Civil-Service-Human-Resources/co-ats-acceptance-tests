@@ -2,7 +2,7 @@ package uk.gov.co.test.ui.pages.v9
 
 import org.openqa.selenium.{By, WebElement}
 import org.scalatest.concurrent.Eventually.eventually
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{randomFirstName, randomLastName, v9AdjustmentsForTests, v9ReasonableAdjustments, vXAnyOnlineTests, vXInterviewExpectedRounds, vXInterviewFourType, vXInterviewLocation, vXInterviewLongDate, vXInterviewNumber, vXInterviewOneType, vXInterviewThreeType, vXInterviewTwoType, vXPreSiftRequired, vXSlotTwoStartTime, vacancyName}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{randomFirstName, randomLastName, v9AdjustmentsForTests, v9ReasonableAdjustments, v9RunInWelsh, vXAnyOnlineTests, vXInterviewExpectedRounds, vXInterviewFourType, vXInterviewLocation, vXInterviewLongDate, vXInterviewNumber, vXInterviewOneType, vXInterviewThreeType, vXInterviewTwoType, vXPreSiftRequired, vXSlotTwoStartTime, vacancyName}
 import uk.gov.co.test.ui.data.vx.application.ApplicationDetails
 import uk.gov.co.test.ui.pages.v9.ApplicationsPage.{confirmStatusOnApplicationPage, reviewUpdateOnApplicationPage}
 import uk.gov.co.test.ui.pages.vx.DashboardPage.contactEmailVxConfig
@@ -10,29 +10,34 @@ import uk.gov.co.test.ui.pages.vx.vacancytabs.ReserveListsTab.reserveExpiryDateM
 
 object ApplicationCentrePage extends CivilServiceJobsBasePage {
 
-  val applicationCentreTitle        = "Application Centre - Civil Service Jobs - GOV.UK"
-  val shortFormCompletionText       = "Thank you for submitting the first section of your application."
-  val shortFormCompletionTextId     = "//*[@id='main-content']/div/div[3]/p[1]"
-  val completeNextSectionText       = "You can now complete the second section, where you must provide supporting evidence."
-  val completeNextSectionTextId     = "//*[@id='main-content']/div/div[3]/p[3]"
-  val applicationForVacancyTextPath = ".//*[@class='section app-heading']"
-  val completionTextPath            = ".//*[@class='app-status-desc']"
-  val applicationStatePath          = ".//*[@id='main-content']/div/div[1]/h3"
-  val advertDetailsButtonPath       = ".//input[@value='Advert Details']"
-  val startCheckButtonPath       = ".//input[@value='Start check']"
-  val withdrawApplicationButtonPath = ".//input[@value='Withdraw Application']"
-  val continueApplicationButtonPath = ".//input[@value='Continue application']"
-  val offerDecisionButtonPath       = ".//input[@value='Offer Decision']"
-  val feedbackButtonPath            = ".//input[@value='Feedback']"
-  val scheduleInterviewButtonPath   = ".//input[@value='Schedule interview']"
-  val startTestButtonPath           = ".//input[@value='Start Test']"
-  val resumeTestButtonPath          = ".//input[@value='Resume Test']"
-  val pecStartButtonPath            = ".//input[@value='Begin pre-employment checks']"
-  val applicationLinkPath           = ".//a[@title='Applications']"
-  val continueApplicationName       = "submit_form"
+  val applicationCentreTitle             = "Application Centre - Civil Service Jobs - GOV.UK"
+  val welshApplicationCentreTitle        = "Canolfan Ymgeisio - Civil Service Jobs - GOV.UK"
+  val shortFormCompletionText            = "Thank you for submitting the first section of your application."
+  val shortFormCompletionTextId          = "//*[@id='main-content']/div/div[3]/p[1]"
+  val completeNextSectionText            = "You can now complete the second section, where you must provide supporting evidence."
+  val completeNextSectionTextId          = "//*[@id='main-content']/div/div[3]/p[3]"
+  val applicationForVacancyTextPath      = ".//*[@class='section app-heading']"
+  val completionTextPath                 = ".//*[@class='app-status-desc']"
+  val applicationStatePath               = ".//*[@id='main-content']/div/div[1]/h3"
+  val advertDetailsButtonPath            = ".//input[@value='Advert Details']"
+  val welshAdvertDetailsButtonPath       = ".//input[@value='Manylion Hysbyseb']"
+  val startCheckButtonPath               = ".//input[@value='Start check']"
+  val withdrawApplicationButtonPath      = ".//input[@value='Withdraw Application']"
+  val welshWithdrawApplicationButtonPath = ".//input[@value='Tynnu cais yn ôl']"
+  val continueApplicationButtonPath      = ".//input[@value='Continue application']"
+  val offerDecisionButtonPath            = ".//input[@value='Offer Decision']"
+  val welshOfferDecisionButtonPath       = ".//input[@value='Penderfyniad Cynnig']"
+  val feedbackButtonPath                 = ".//input[@value='Feedback']"
+  val welshFeedbackButtonPath            = ".//input[@value='Adborth']"
+  val scheduleInterviewButtonPath        = ".//input[@value='Schedule interview']"
+  val startTestButtonPath                = ".//input[@value='Start Test']"
+  val resumeTestButtonPath               = ".//input[@value='Resume Test']"
+  val pecStartButtonPath                 = ".//input[@value='Begin pre-employment checks']"
+  val applicationLinkPath                = ".//a[@title='Applications']"
+  val continueApplicationName            = "submit_form"
 
   private def applicationCentrePageCheck(): Unit =
-    eventually(onPage(applicationCentreTitle))
+    if (v9RunInWelsh) eventually(onPage(welshApplicationCentreTitle)) else eventually(onPage(applicationCentreTitle))
 
   def applicationForVacancyText: String =
     waitForVisibilityOfElementByPath(applicationForVacancyTextPath).getText
@@ -47,25 +52,29 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
     waitForVisibilityOfElementByPath(applicationStatePath).getText
 
   def advertDetailsFunction(): WebElement =
-    waitForVisibilityOfElementByPath(advertDetailsButtonPath)
+    if (v9RunInWelsh) waitForVisibilityOfElementByPath(welshAdvertDetailsButtonPath)
+    else waitForVisibilityOfElementByPath(advertDetailsButtonPath)
 
   def scheduleInterviewFunction(): WebElement =
     waitForVisibilityOfElementByPath(scheduleInterviewButtonPath)
 
   def withdrawApplicationFunction(): WebElement =
-    waitForVisibilityOfElementByPath(withdrawApplicationButtonPath)
+    if (v9RunInWelsh) waitForVisibilityOfElementByPath(welshWithdrawApplicationButtonPath)
+    else waitForVisibilityOfElementByPath(withdrawApplicationButtonPath)
 
   def continueApplicationFunction(): WebElement =
     waitForVisibilityOfElementByPath(continueApplicationButtonPath)
 
   def feedbackFunction(): WebElement =
-    waitForVisibilityOfElementByPath(feedbackButtonPath)
+    if (v9RunInWelsh) waitForVisibilityOfElementByPath(welshFeedbackButtonPath)
+    else waitForVisibilityOfElementByPath(feedbackButtonPath)
 
   def startCheckFunction(): WebElement =
     waitForVisibilityOfElementByPath(startCheckButtonPath)
 
   def offerDecisionFunction(): WebElement =
-    waitForVisibilityOfElementByPath(offerDecisionButtonPath)
+    if (v9RunInWelsh) waitForVisibilityOfElementByPath(welshOfferDecisionButtonPath)
+    else waitForVisibilityOfElementByPath(offerDecisionButtonPath)
 
   def startTestFunction(): WebElement =
     waitForVisibilityOfElementByPath(startTestButtonPath)
@@ -95,9 +104,15 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
     applicationCentrePageCheck()
     withdrawApplicationFunction().isEnabled
     advertDetailsFunction().isEnabled
-    applicationForVacancyText  shouldEqual s"Application For $vacancyName"
-    getApplicationState        shouldEqual "Application status: Application received"
-    getApplicationConfirmation shouldEqual "Your application has been received.\nWe’ll email you about your application’s progress, or you can check this in your Application Centre."
+    if (v9RunInWelsh) {
+      getApplicationState        shouldEqual "Statws cais: Cais wedi'i dderbyn"
+      getApplicationConfirmation shouldEqual """Mae eich cais wedi cael ei dderbyn.
+                                               |Byddwn yn anfon e-bost atoch am ddatblygiad eich cais, neu gallwch wirio hyn yn eich Canolfan Geisiadau.""".stripMargin
+    } else {
+      applicationForVacancyText  shouldEqual s"Application For $vacancyName"
+      getApplicationState        shouldEqual "Application status: Application received"
+      getApplicationConfirmation shouldEqual "Your application has been received.\nWe’ll email you about your application’s progress, or you can check this in your Application Centre."
+    }
   }
 
   def confirmLongFormCompletion(): Unit = { //TODO check last text doesn't match with confirmLongFormPECCompletion()
@@ -120,28 +135,42 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
       getApplicationConfirmation shouldEqual """Your application has been received.
                                                |We'll email you updates on the progress of your application or you can check the progress here in your account.""".stripMargin
     } else {
-      getApplicationState shouldEqual "Application status: Application received"
+      getApplicationState        shouldEqual "Application status: Application received"
       getApplicationConfirmation shouldEqual "Your application has been received.\nWe’ll email you about your application’s progress, or you can check this in your Application Centre."
     }
   }
 
   def confirmProvisionalOfferState(): Unit = {
-    val status = "Provisional offer"
+    val status      = "Provisional offer"
+    val welshStatus = "Cynnig dros dro"
     changeSystem("candidate")
-    confirmStatusOnApplicationPage(status)
     applicationCentrePageCheck()
     offerDecisionFunction().isEnabled
     feedbackFunction().isEnabled
     withdrawApplicationFunction().isEnabled
     advertDetailsFunction().isEnabled
-    applicationForVacancyText  shouldEqual s"Application For $vacancyName"
-    getApplicationState        shouldEqual s"Application status: $status"
-    getApplicationConfirmation shouldEqual """Congratulations, we'd like to make you a provisional job offer.
-                                             |Please click "Offer Decision" to accept this offer.
-                                             |We'll then conduct some pre-employment checks before we consider making you a formal job offer.
-                                             |Please do not resign from your current employment until you‘ve been made a formal offer.
-                                             |You can see any feedback that's been given by clicking the "Feedback" button.
-                                             |If you're no longer interested in this job please withdraw your application.""".stripMargin
+    if (v9RunInWelsh) {
+      confirmStatusOnApplicationPage(welshStatus)
+      getApplicationState        shouldEqual s"Statws cais: $welshStatus"
+      getApplicationConfirmation shouldEqual
+        """Llongyfarchiadau, hoffem wneud cynnig swydd dros dro i chi.
+          |Cliciwch ar "Penderfyniad Cynnig" i dderbyn y cynnig hwn.
+          |Yna byddwn yn cynnal rhai gwiriadau cyn cyflogi cyn i ni ystyried gwneud cynnig swydd ffurfiol i chi.
+          |Peidiwch ag ymddiswyddo o'ch cyflogaeth bresennol nes eich bod wedi cael cynnig ffurfiol.
+          |Gallwch weld unrhyw adborth a roddwyd trwy glicio ar y botwm "Adborth" .
+          |Os nad oes gennych ddiddordeb yn y swydd hon mwyach, dylech dynnu eich cais yn ôl.""".stripMargin
+    } else {
+      confirmStatusOnApplicationPage(status)
+      applicationForVacancyText  shouldEqual s"Application For $vacancyName"
+      getApplicationState        shouldEqual s"Application status: $status"
+      getApplicationConfirmation shouldEqual
+        """Congratulations, we'd like to make you a provisional job offer.
+          |Please click "Offer Decision" to accept this offer.
+          |We'll then conduct some pre-employment checks before we consider making you a formal job offer.
+          |Please do not resign from your current employment until you‘ve been made a formal offer.
+          |You can see any feedback that's been given by clicking the "Feedback" button.
+          |If you're no longer interested in this job please withdraw your application.""".stripMargin
+    }
   }
 
   def weAreCheckingYourApplicationState(): Unit = {
@@ -149,8 +178,8 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
     changeSystem("candidate")
     confirmStatusOnApplicationPage(status)
     applicationCentrePageCheck()
-    applicationForVacancyText shouldEqual s"Application For $vacancyName"
-    getApplicationState shouldEqual s"Application status: $status"
+    applicationForVacancyText  shouldEqual s"Application For $vacancyName"
+    getApplicationState        shouldEqual s"Application status: $status"
     getApplicationConfirmation shouldEqual
       """We're currently checking your details.
         |Your application will be progressed shortly if the details are correct, otherwise we'll send you an email advising you what to do next.""".stripMargin
@@ -186,8 +215,8 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
     applicationCentrePageCheck()
     advertDetailsFunction().isEnabled
     feedbackFunction().isEnabled
-    applicationForVacancyText shouldEqual s"Application For $vacancyName"
-    getApplicationState shouldEqual s"Application status: $newStatus"
+    applicationForVacancyText  shouldEqual s"Application For $vacancyName"
+    getApplicationState        shouldEqual s"Application status: $newStatus"
     getApplicationConfirmation shouldEqual
       """We're finalising all documentation regarding your application.
         |You'll be contacted shortly to advise what will happen next.""".stripMargin
@@ -201,8 +230,8 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
     withdrawApplicationFunction().isEnabled
     applicationCentrePageCheck()
     advertDetailsFunction().isEnabled
-    applicationForVacancyText shouldEqual s"Application For $vacancyName"
-    getApplicationState shouldEqual s"Application status: $newStatus"
+    applicationForVacancyText  shouldEqual s"Application For $vacancyName"
+    getApplicationState        shouldEqual s"Application status: $newStatus"
     getApplicationConfirmation shouldEqual
       """Congratulations you’ve passed our pre-employment checks.
         |You'll be contacted shortly to advise what will happen next.""".stripMargin
@@ -216,8 +245,8 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
     withdrawApplicationFunction().isEnabled
     applicationCentrePageCheck()
     advertDetailsFunction().isEnabled
-    applicationForVacancyText shouldEqual s"Application For $vacancyName"
-    getApplicationState shouldEqual s"Application status: $newStatus"
+    applicationForVacancyText  shouldEqual s"Application For $vacancyName"
+    getApplicationState        shouldEqual s"Application status: $newStatus"
     getApplicationConfirmation shouldEqual
       """Congratulations you’ve passed our pre-employment checks.
         |
@@ -232,8 +261,8 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
     feedbackFunction().isEnabled
     withdrawApplicationFunction().isEnabled
     advertDetailsFunction().isEnabled
-    applicationForVacancyText shouldEqual s"Application For $vacancyName"
-    getApplicationState shouldEqual s"Application status: $newStatus"
+    applicationForVacancyText  shouldEqual s"Application For $vacancyName"
+    getApplicationState        shouldEqual s"Application status: $newStatus"
     getApplicationConfirmation shouldEqual
       """We are reviewing the outcomes of your pre-employment checks.
         |We will contact you as soon as a decision has been made. Please do not resign from your current position at this time.""".stripMargin
@@ -247,8 +276,8 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
     feedbackFunction().isEnabled
     advertDetailsFunction().isEnabled
     withdrawApplicationFunction().isEnabled
-    applicationForVacancyText shouldEqual s"Application For $vacancyName"
-    getApplicationState shouldEqual s"Application status: $newStatus"
+    applicationForVacancyText  shouldEqual s"Application For $vacancyName"
+    getApplicationState        shouldEqual s"Application status: $newStatus"
     getApplicationConfirmation shouldEqual
       """We're delighted that you have accepted our job offer.
         |As part of the onboarding process we may require further information.
@@ -263,8 +292,8 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
     advertDetailsFunction().isEnabled
     feedbackFunction().isEnabled
 //    withdrawApplicationFunction().isEnabled
-    applicationForVacancyText shouldEqual s"Application For $vacancyName"
-    getApplicationState shouldEqual s"Application status: $newStatus"
+    applicationForVacancyText  shouldEqual s"Application For $vacancyName"
+    getApplicationState        shouldEqual s"Application status: $newStatus"
     getApplicationConfirmation shouldEqual
       """We're finalising all documentation regarding your application.
         |You'll be contacted shortly to advise what will happen next.""".stripMargin
@@ -291,8 +320,8 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
     advertDetailsFunction().isEnabled
     feedbackFunction().isEnabled
     withdrawApplicationFunction().isEnabled
-    applicationForVacancyText shouldEqual s"Application For $vacancyName"
-    getApplicationState shouldEqual s"Application status: $status"
+    applicationForVacancyText  shouldEqual s"Application For $vacancyName"
+    getApplicationState        shouldEqual s"Application status: $status"
     getApplicationConfirmation shouldEqual "Great news, you've accepted your provisional offer and your pre-employment checks are underway.\nWe will send an email notification to you once all pre-employment checks are complete."
   }
 
@@ -304,8 +333,8 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
     advertDetailsFunction().isEnabled
     feedbackFunction().isEnabled
     withdrawApplicationFunction().isEnabled
-    applicationForVacancyText shouldEqual s"Application For $vacancyName"
-    getApplicationState shouldEqual s"Application status: $status"
+    applicationForVacancyText  shouldEqual s"Application For $vacancyName"
+    getApplicationState        shouldEqual s"Application status: $status"
     getApplicationConfirmation shouldEqual "Great news, you've accepted your provisional offer and your pre-employment checks are underway.\nWe are still checking:\nyour identity and right to work in the Civil Service\n\n\nWe will send an email notification to you once all pre-employment checks are complete."
   }
 
@@ -317,8 +346,8 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
     advertDetailsFunction().isEnabled
     feedbackFunction().isEnabled
     withdrawApplicationFunction().isEnabled
-    applicationForVacancyText shouldEqual s"Application For $vacancyName"
-    getApplicationState shouldEqual s"Application status: $status"
+    applicationForVacancyText  shouldEqual s"Application For $vacancyName"
+    getApplicationState        shouldEqual s"Application status: $status"
     getApplicationConfirmation shouldEqual "Great news, you've accepted your provisional offer and your pre-employment checks are underway.\nWe are still checking:\nyour identity and right to work in the Civil Service\nwhether you have any convictions\n\n\nWe will send an email notification to you once all pre-employment checks are complete."
   }
 
@@ -329,8 +358,8 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
     applicationCentrePageCheck()
     startCheckFunction().isEnabled
     withdrawApplicationFunction().isEnabled
-    applicationForVacancyText shouldEqual s"Application For $vacancyName"
-    getApplicationState shouldEqual s"Application status: $status"
+    applicationForVacancyText  shouldEqual s"Application For $vacancyName"
+    getApplicationState        shouldEqual s"Application status: $status"
     getApplicationConfirmation shouldEqual "To complete the following check you will need:\n • an in date British or Irish passport, or an in date Irish passport card \n • to take a ‘selfie’ photograph of yourself\nStarting your ID check\nYou'll need access to a smartphone or tablet with a camera to complete the ID check. \nWhen you are ready, select the \"Start check\" button. You will be directed to the external service.\nNext steps\nWhen you've submitted your identity documents, you'll be sent an email when we receive the results back from the external service.\nYou can come back to this page to check the status of your application.\nIf you need help using the external service\nIf you are not able to use this external service for any reason contact ryan.hobbs@cabinetoffice.gov.uk\nWhat we will do with your data (opens in a new window)"
   }
 
@@ -341,14 +370,16 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
     applicationCentrePageCheck()
     startCheckFunction().isEnabled
     withdrawApplicationFunction().isEnabled
-    applicationForVacancyText shouldEqual s"Application For $vacancyName"
-    getApplicationState shouldEqual s"Application status: $status"
+    applicationForVacancyText  shouldEqual s"Application For $vacancyName"
+    getApplicationState        shouldEqual s"Application status: $status"
     getApplicationConfirmation shouldEqual "To complete the following check you will need:\n • an in date British or Irish passport, or an in date Irish passport card \n • to take a ‘selfie’ photograph of yourself\nStarting your ID check\nYou'll need access to a smartphone or tablet with a camera to complete the ID check. \nWhen you are ready, select the \"Start check\" button. You will be directed to the external service.\nNext steps\nWhen you've submitted your identity documents, you'll be sent an email when we receive the results back from the external service.\nYou can come back to this page to check the status of your application.\nIf you need help using the external service\nIf you are not able to use this external service for any reason contact ryan.hobbs@cabinetoffice.gov.uk\nWhat we will do with your data (opens in a new window)"
   }
 
   def confirmTrustIdQrCode(): Unit = {
     startCheckFunction().click()
-    waitForVisibilityOfElementByPath(".//p[@class='sc-eqUAAy dPUdmr mb-0 text-center']").getText shouldEqual "Scan the QR with your mobile camera"
+    waitForVisibilityOfElementByPath(
+      ".//p[@class='sc-eqUAAy dPUdmr mb-0 text-center']"
+    ).getText shouldEqual "Scan the QR with your mobile camera"
     waitForVisibilityOfElementByPath(".//img[@alt='QR code for scanning with your mobile device']").isDisplayed
     waitForVisibilityOfElementById("emailAddress").isDisplayed
   }
@@ -382,17 +413,26 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
   }
 
   def successfulAtSiftState(): Unit = {
-    val status = "Successful at Interview"
+    val status      = "Successful at Interview"
+    val welshStatus = "Llwyddiannus yn y Cyfweliad"
     changeSystem("candidate")
-    confirmStatusOnApplicationPage(status)
     feedbackFunction().isEnabled
     advertDetailsFunction().isEnabled
     withdrawApplicationFunction().isEnabled
-    applicationForVacancyText  shouldEqual s"Application For $vacancyName"
-    getApplicationState        shouldEqual s"Application status: $status"
-    getApplicationConfirmation shouldEqual
-      """Congratulations you have been successful at sift.
-        |We will be in contact shortly with more information about the next steps.""".stripMargin
+    if (v9RunInWelsh) {
+      confirmStatusOnApplicationPage(welshStatus)
+      getApplicationState        shouldEqual s"Statws cais: $welshStatus"
+      getApplicationConfirmation shouldEqual
+        """Llongyfarchiadau rydych wedi bod yn llwyddiannus yn y sifft.
+          |Byddwn mewn cysylltiad yn fuan gyda mwy o wybodaeth am y camau nesaf.""".stripMargin
+    } else {
+      confirmStatusOnApplicationPage(status)
+      applicationForVacancyText  shouldEqual s"Application For $vacancyName"
+      getApplicationState        shouldEqual s"Application status: $status"
+      getApplicationConfirmation shouldEqual
+        """Congratulations you have been successful at sift.
+          |We will be in contact shortly with more information about the next steps.""".stripMargin
+    }
     switchToOtherWindow
   }
 
@@ -424,7 +464,7 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
     withdrawApplicationFunction().isEnabled
     advertDetailsFunction().isEnabled
     applicationForVacancyText shouldEqual s"Application For $vacancyName"
-    getApplicationState        shouldEqual s"Application status: $status"
+    getApplicationState shouldEqual s"Application status: $status"
 
     getApplicationConfirmation shouldEqual s"""Congratulations, we'd like to invite you $inviteType.
                                              |To book your interview slot click $schedule.
@@ -504,9 +544,11 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
     feedbackFunction().isEnabled
     withdrawApplicationFunction().isEnabled
     advertDetailsFunction().isEnabled
-    applicationForVacancyText  shouldEqual s"Application For $vacancyName"
-    getApplicationState        shouldEqual s"Application status: $status"
-    getApplicationConfirmation should startWith(s"We've placed you on a reserve list until ${reserveExpiryDateMonths()}.")
+    applicationForVacancyText shouldEqual s"Application For $vacancyName"
+    getApplicationState       shouldEqual s"Application status: $status"
+    getApplicationConfirmation     should startWith(
+      s"We've placed you on a reserve list until ${reserveExpiryDateMonths()}."
+    )
   }
 
   def successfulAtInterviewState(): Unit = {
@@ -531,8 +573,8 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
     confirmStatusOnApplicationPage(newStatus)
     applicationCentrePageCheck()
     !withdrawApplicationFunction().isDisplayed
-    applicationForVacancyText shouldEqual s"Application For $vacancyName"
-    getApplicationState shouldEqual s"Application status: $newStatus"
+    applicationForVacancyText  shouldEqual s"Application For $vacancyName"
+    getApplicationState        shouldEqual s"Application status: $newStatus"
     getApplicationConfirmation shouldEqual
       """Thank you for submitting photographs of your identity documents.
         |These are now being reviewed and we are waiting for the results of the check from the external service.

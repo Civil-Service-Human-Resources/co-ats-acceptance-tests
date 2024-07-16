@@ -2,7 +2,7 @@ package uk.gov.co.test.ui.pages.v9
 
 import org.openqa.selenium.{By, WebElement}
 import org.scalatest.concurrent.Eventually.eventually
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{applicationId, randomEmail, vacancyId}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{applicationId, randomEmail, v9RunInWelsh, vacancyId}
 
 import scala.collection.mutable
 import scala.jdk.CollectionConverters._
@@ -11,14 +11,18 @@ import scala.util.control.Breaks.{break, breakable}
 object ApplicationsPage extends CivilServiceJobsBasePage {
 
   val applicationsPageTitle    = "Applications - Civil Service Jobs - GOV.UK"
+  val welshApplicationsPageTitle    = "Ceisiadau - Civil Service Jobs - GOV.UK"
   val applicationLinkPath      = ".//a[@title='Applications']"
+  val welshApplicationLinkPath = ".//a[@title='Ceisiadau']"
   val applicationTableAreaPath = ".//*[@id='DataTables_Table_0']/tbody"
 
-  def applicationsPageCheck(): Unit =
-    eventually(onPage(applicationsPageTitle))
+  def applicationsPageCheck(): Unit = {
+    if (v9RunInWelsh) eventually(onPage(welshApplicationsPageTitle)) else eventually(onPage(applicationsPageTitle))
+  }
 
   def navigateToApplicationsPage(): Unit = {
-    waitForVisibilityOfElementByPath(applicationLinkPath).click()
+    if (v9RunInWelsh) waitForVisibilityOfElementByPath(welshApplicationLinkPath).click()
+    else waitForVisibilityOfElementByPath(applicationLinkPath).click()
     applicationsPageCheck()
   }
 
@@ -129,7 +133,8 @@ object ApplicationsPage extends CivilServiceJobsBasePage {
     println(s"Vacancy ID: $vacancyId")
     println(s"Application ID: $applicationId")
     println("===============================================")
-    statusValue() shouldEqual "Application in progress"
+    if (v9RunInWelsh) statusValue() shouldEqual "Cais yn mynd yn ei flaen"
+    else statusValue() shouldEqual "Application in progress"
     reviewUpdateValue().click()
   }
 
@@ -138,12 +143,13 @@ object ApplicationsPage extends CivilServiceJobsBasePage {
       reviewUpdateValue().click()
     } else {
       navigateToApplicationsPage()
-      eventually(statusValue() shouldEqual "Application received")
+      if (v9RunInWelsh) eventually(statusValue() shouldEqual "Cais wedi'i dderbyn")
+      else eventually(statusValue() shouldEqual "Application received")
       reviewUpdateValue().click()
     }
 
   def confirmStatusOnApplicationPage(currentStatus: String): Unit = {
-    waitForVisibilityOfElementByPath(applicationLinkPath).click()
+    navigateToApplicationsPage()
     applicationsPageCheck()
     statusValue() shouldEqual currentStatus
     reviewUpdateValue().click()

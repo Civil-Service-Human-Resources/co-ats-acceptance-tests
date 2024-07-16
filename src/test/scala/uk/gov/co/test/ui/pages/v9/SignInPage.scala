@@ -1,6 +1,7 @@
 package uk.gov.co.test.ui.pages.v9
 
 import org.openqa.selenium.{By, WebElement}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.v9RunInWelsh
 
 import java.util
 
@@ -19,13 +20,11 @@ object SignInPage extends CivilServiceJobsBasePage {
   def candidateFullName(user: CandidateDetails): String =
     s"${user.firstname} ${user.lastname}"
 
-  def signIn(): WebElement = waitForElementToBeClickableByPath(
-    "//*[@id='login_button']"
-  )
+  def signIn(): WebElement = waitForElementToBeClickableByPath("//*[@id='login_button']")
 
-  def signOut(): WebElement = waitForElementToBeClickableByPath(
-    "//*[@title='Sign out']"
-  )
+  def signOut(): WebElement =
+    if (v9RunInWelsh) waitForVisibilityOfElementByPath("//*[@title='Allgofnodi']")
+    else waitForElementToBeClickableByPath("//*[@title='Sign out']")
 
   def searchForSignOut(): util.List[WebElement] = driver.findElements(By.xpath("//*[@title='Sign out']"))
 

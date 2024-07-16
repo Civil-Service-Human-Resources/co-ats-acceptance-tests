@@ -150,7 +150,7 @@ object MasterVacancyDetails extends VacancyBasePage {
   var vXWhenFullApplication: String = ""
 
   //vx VACANCY additional questions
-  var vXAnyAdditionalQuestions: Option[Boolean] = None
+  var vXAnyAdditionalQuestions: Option[Boolean] = _
   var vXHowManyQuestions: Int                   = _
   var vXQuestionOne                             = ""
   var vXQuestionTwo                             = ""
@@ -224,6 +224,7 @@ object MasterVacancyDetails extends VacancyBasePage {
   var preferredTeleNumber: String = ""
 
   //v9 SHORT FORM eligibility page
+  var v9RunInWelsh: Boolean    = false
   var v9CivilServant: Boolean  = _
   var v9HomeDepartment: String = "Animal and Plant Health Agency"
 

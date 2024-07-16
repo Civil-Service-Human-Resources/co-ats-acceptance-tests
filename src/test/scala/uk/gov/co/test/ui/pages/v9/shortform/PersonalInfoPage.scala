@@ -2,7 +2,7 @@ package uk.gov.co.test.ui.pages.v9.shortform
 
 import org.openqa.selenium.By
 import org.scalatest.concurrent.Eventually.eventually
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{preferredFirstName, preferredTeleNumber, randomEmail, randomFirstName, randomLastName, v9AdjustmentsForTests, v9CivilServant, v9HomeDepartment, v9ReasonableAdjustments, vXAnyOnlineTests, vXGreatForVeterans, vXJobGrades, vXJobInfoDepartment}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{preferredFirstName, preferredTeleNumber, randomEmail, randomFirstName, randomLastName, v9AdjustmentsForTests, v9CivilServant, v9HomeDepartment, v9ReasonableAdjustments, v9RunInWelsh, vXAnyOnlineTests, vXGreatForVeterans, vXJobGrades, vXJobInfoDepartment, vXTypeOfCandidate}
 import uk.gov.co.test.ui.data.v9.shortform.ShortFormDetails
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
 import uk.gov.co.test.ui.pages.v9.shortform.ApplicationGuidancePage.shortFormId
@@ -23,6 +23,7 @@ case class PersonalInfoDetails(
 object PersonalInfoPage extends CivilServiceJobsBasePage {
 
   def personalInfoTitle                    = "Personal information - Civil Service Jobs - GOV.UK"
+  def welshPersonalInfoTitle               = "Gwybodaeth bersonol - Civil Service Jobs - GOV.UK"
   def firstNameInputId                     = s"${shortFormId}_datafield_11625_1_1"
   def lastNameInputId                      = s"${shortFormId}_datafield_11628_1_1"
   def preferredFirstNameInputId            = s"${shortFormId}_datafield_21495_1_1"
@@ -49,7 +50,7 @@ object PersonalInfoPage extends CivilServiceJobsBasePage {
   def veteranInitiativeNoId                = s"${shortFormId}_datafield_138179_1_1_2_label"
 
   private def personalInfoPageCheck(): Unit =
-    eventually(onPage(personalInfoTitle))
+    if (v9RunInWelsh) eventually(onPage(welshPersonalInfoTitle)) else eventually(onPage(personalInfoTitle))
 
   private def enterFirstName(personalInfoDetails: PersonalInfoDetails): Unit = {
     personalInfoPageCheck()
@@ -69,7 +70,9 @@ object PersonalInfoPage extends CivilServiceJobsBasePage {
     } else extractValue(preferredFirstNameInputId) shouldEqual preferredFirstName
 
   private def selectGradeAndNumberForMOD(personalInfoDetails: PersonalInfoDetails): Unit =
-    if (v9HomeDepartment == "Ministry of Defence" && vXJobInfoDepartment == "Ministry of Defence") {
+    if (
+      v9HomeDepartment == "Ministry of Defence" && vXJobInfoDepartment == "Ministry of Defence" && vXTypeOfCandidate == "Internal"
+    ) {
       selectDropdownOption(modSubstantiveGradeId, vXJobGrades.headOption.get)
       enterDetails(modStaffNumberId, "12345")
     }
@@ -140,11 +143,15 @@ object PersonalInfoPage extends CivilServiceJobsBasePage {
         vXJobInfoDepartment == "Revenue Scotland" ||
         vXJobInfoDepartment == "Scottish Fiscal Commission" ||
         vXJobInfoDepartment == "Cabinet Office" ||
+        vXJobInfoDepartment == "Home Office" ||
         vXJobInfoDepartment == "Transport Scotland")
       &&
       (v9HomeDepartment == "Department for Energy Security & Net Zero" ||
         v9HomeDepartment == "Attorney General's Office" ||
         v9HomeDepartment == "Animal and Plant Health Agency" ||
+        v9HomeDepartment == "Asiantaeth Iechyd Anifeiliaid a Phlanhigion" ||
+        v9HomeDepartment == "Home Office" ||
+        v9HomeDepartment == "Swyddfa Gartref" ||
         v9HomeDepartment == "Department for Science, Innovation and Technology" ||
         v9HomeDepartment == "Department for Environment, Food and Rural Affairs" ||
         v9HomeDepartment == "Government Equalities Office" ||

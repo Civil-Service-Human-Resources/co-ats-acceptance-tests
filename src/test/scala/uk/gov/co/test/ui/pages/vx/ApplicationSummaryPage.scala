@@ -2,9 +2,9 @@ package uk.gov.co.test.ui.pages.vx
 
 import org.openqa.selenium.By
 import org.scalatest.concurrent.Eventually.eventually
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{applicationId, randomFirstName, randomLastName, v9CivilServant, v9HomeDepartment, v9PecRequired, vXCandidateUploadIdentityDocs, vXCrcCheckProvider, vXCrcLevel, vXCvAttachment, vXInterviewNumber, vXJobInfoDepartment, vXPecBankruptcyCheck, vXPecCrc, vXPecEmploymentHistoryCheck, vXPecFraudCheck, vXPecGeneralInfo, vXPecHealthRefCheck, vXPecNen, vXPecNsv, vXPecOgdSecurityCheck, vXPecOverseasCheck, vXPecPensionsCheck, vXPecPn, vXPecPreviousCivilEmploymentCheck, vXPecReferenceCheck, vXPecSelfEmploymentCheck, vXPersonalStatement, vXTypeOfCandidate, vXUseOnlinePecForms, vXVettingLevel, vXWhichIdentityChecks, vacancyId, vacancyName}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{applicationId, randomFirstName, randomLastName, v9CivilServant, v9HomeDepartment, v9PecRequired, v9RunInWelsh, vXCandidateUploadIdentityDocs, vXCrcCheckProvider, vXCrcLevel, vXCvAttachment, vXInterviewNumber, vXJobInfoDepartment, vXPecBankruptcyCheck, vXPecCrc, vXPecEmploymentHistoryCheck, vXPecFraudCheck, vXPecGeneralInfo, vXPecHealthRefCheck, vXPecNen, vXPecNsv, vXPecOgdSecurityCheck, vXPecOverseasCheck, vXPecPensionsCheck, vXPecPn, vXPecPreviousCivilEmploymentCheck, vXPecReferenceCheck, vXPecSelfEmploymentCheck, vXPersonalStatement, vXTypeOfCandidate, vXUseOnlinePecForms, vXVettingLevel, vXWhichIdentityChecks, vacancyId, vacancyName}
 import uk.gov.co.test.ui.data.vx.application.MASTER_APPLICATION_DATA
-import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.{candidateAcceptsOffer, confirmApplicationUpdateNoPecNen, confirmApplicationUpdateNoPecPn, confirmApplicationUpdateState, confirmOfferAcceptedNoPecFunction, v9ConfirmOfferAcceptedState}
+import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.{candidateAcceptsOffer, confirmApplicationUpdateNoPecNen, confirmApplicationUpdateNoPecPn, confirmApplicationUpdateState, confirmOfferAcceptedNoPecFunction, offerDecisionButtonPath, v9ConfirmOfferAcceptedState}
 import uk.gov.co.test.ui.pages.v9.ProvisionalOfferPage.offerDecisionFlow
 import uk.gov.co.test.ui.pages.vx.DashboardPage.matchCriteria
 import uk.gov.co.test.ui.pages.vx.vacancytabs.NewEntrantNoticeTab.{correspondenceSendId, emailChecksClearPath}
@@ -138,10 +138,9 @@ object ApplicationSummaryPage extends VacancyBasePage {
   def moveAndAcceptOffer(): Unit = {
     progressApplicationToOffer()
     candidateAcceptsOffer()
-    offerDecisionFlow("Accept")
+    if (v9RunInWelsh) offerDecisionFlow("Derbyn") else offerDecisionFlow("Accept")
     vXExtractTypeOfCandidate()
     pecFieldsRequired()
-
     if (!vXUseOnlinePecForms) {
       confirmApplicationUpdateState()
       agreeStartDate()

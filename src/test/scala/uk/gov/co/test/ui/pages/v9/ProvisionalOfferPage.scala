@@ -2,31 +2,39 @@ package uk.gov.co.test.ui.pages.v9
 
 import org.openqa.selenium.By
 import org.scalatest.concurrent.Eventually.eventually
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{v9CivilServant, v9HomeDepartment, vacancyName}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{v9CivilServant, v9HomeDepartment, v9RunInWelsh, vacancyName}
 
 object ProvisionalOfferPage extends CivilServiceJobsBasePage {
 
-  val provisionalOfferPageTitle  = "Provisional Offer - Civil Service Jobs - GOV.UK"
-  def congratsMessageId          = s"${offerDecisionFormId}_label_28793_1"
-  def offerDecisionOptionId      = s"${offerDecisionFormId}_datafield_56084_1_1"
-  def isCivilServantYesId        = s"${offerDecisionFormId}_datafield_183007_1_1_1_label"
-  def isCivilServantNoId         = s"${offerDecisionFormId}_datafield_183007_1_1_2_label"
-  def homeDepartmentId           = s"${offerDecisionFormId}_datafield_182930_1_1"
-  def reasonForDeclineId         = s"${offerDecisionFormId}_datafield_36538_1_1"
-  def declinedOtherReasonInputId = s"${offerDecisionFormId}_datafield_28826_1_1"
-  def discussOfferInputId        = s"${offerDecisionFormId}_datafield_56114_1_1"
-  var offerDecisionFormId        = ""
+  val provisionalOfferPageTitle      = "Provisional Offer - Civil Service Jobs - GOV.UK"
+  val welshProvisionalOfferPageTitle = "Cynnig Dros Dro - Civil Service Jobs - GOV.UK"
+  def congratsMessageId              = s"${offerDecisionFormId}_label_28793_1"
+  def offerDecisionOptionId          = s"${offerDecisionFormId}_datafield_56084_1_1"
+  def isCivilServantYesId            = s"${offerDecisionFormId}_datafield_183007_1_1_1_label"
+  def isCivilServantNoId             = s"${offerDecisionFormId}_datafield_183007_1_1_2_label"
+  def homeDepartmentId               = s"${offerDecisionFormId}_datafield_182930_1_1"
+  def reasonForDeclineId             = s"${offerDecisionFormId}_datafield_36538_1_1"
+  def declinedOtherReasonInputId     = s"${offerDecisionFormId}_datafield_28826_1_1"
+  def discussOfferInputId            = s"${offerDecisionFormId}_datafield_56114_1_1"
+  var offerDecisionFormId            = ""
 
   private def provisionalOfferPageCheck(): Unit =
-    eventually(onPage(provisionalOfferPageTitle))
+    if (v9RunInWelsh) eventually(onPage(welshProvisionalOfferPageTitle))
+    else eventually(onPage(provisionalOfferPageTitle))
 
   def confirmCongratsMessage(): Unit = {
     provisionalOfferPageCheck()
     extractOfferDecisionFormId()
-    waitForVisibilityOfElementById(
-      congratsMessageId
-    ).getText shouldEqual s"""Congratulations, following recent communication we are pleased to offer you the position of $vacancyName, subject to satisfactory completion of pre-employment checks.
-                                 |Please do not resign from your current employment until you‘ve been made a formal offer.""".stripMargin
+    val congratsMessage = waitForVisibilityOfElementById(congratsMessageId).getText
+    if (v9RunInWelsh) {
+//      congratsMessage shouldEqual
+//        s"""Llongyfarchiadau, yn dilyn cyfathrebiad diweddar, rydym yn falch o gynnig safle $vacancyName i chi, yn amodol ar gwblhau gwiriadau cyn cyflogaeth yn foddhaol.
+//           |Peidiwch ag ymddiswyddo o’ch cyflogaeth bresennol hyd nes y byddwch wedi cael cynnig ffurfiol.""".stripMargin
+    } else {
+      congratsMessage shouldEqual
+        s"""Congratulations, following recent communication we are pleased to offer you the position of $vacancyName, subject to satisfactory completion of pre-employment checks.
+           |Please do not resign from your current employment until you‘ve been made a formal offer.""".stripMargin
+    }
   }
 
   private def extractOfferDecisionFormId(): String = {
@@ -41,9 +49,16 @@ object ProvisionalOfferPage extends CivilServiceJobsBasePage {
     if (v9CivilServant) {
       radioSelect(isCivilServantYesId)
       if (v9HomeDepartment.isEmpty) {
-        selectDropdownOption(homeDepartmentId, "Animal and Plant Health Agency")
-        v9HomeDepartment = "Animal and Plant Health Agency"
-      } else selectDropdownOption(homeDepartmentId, v9HomeDepartment)
+        if (v9RunInWelsh) {
+          selectDropdownOption(homeDepartmentId, "Asiantaeth Iechyd Anifeiliaid a Phlanhigion")
+          v9HomeDepartment = "Asiantaeth Iechyd Anifeiliaid a Phlanhigion"
+        } else {
+          selectDropdownOption(homeDepartmentId, "Animal and Plant Health Agency")
+          v9HomeDepartment = "Animal and Plant Health Agency"
+        }
+      } else {
+        selectDropdownOption(homeDepartmentId, v9HomeDepartment)
+      }
     } else radioSelect(isCivilServantNoId)
 
   private def declineOffer(): Unit = {
@@ -59,6 +74,7 @@ object ProvisionalOfferPage extends CivilServiceJobsBasePage {
     selectOfferDecision(decision)
     decision match {
       case "Accept"              => acceptOffer()
+      case "Derbyn"              => acceptOffer()
       case "Decline"             => declineOffer()
       case "I'd like to discuss" => discussOffer()
     }

@@ -66,7 +66,7 @@ object DigitalIdentityCheckPage extends CivilServiceJobsBasePage {
 
   private def selectBiometricPassportOrId(digitalIdentityDetails: DigitalIdentityDetails): Unit = {
     v9BiometricPassportOrId = digitalIdentityDetails.biometricPassportOrId
-    if (vXCrcLevel != "None" && vXWhichIdentityChecks != "No digital checks") {
+    if (vXCrcLevel != "None" && vXWhichIdentityChecks != "No digital checks" && vXWhichIdentityChecks == "Right to work and criminal record check") {
       waitForVisibilityOfElementById(
         biometricPassportOrIdQuestionId
       ).getText shouldEqual digitalIdentityDetails.biometricPassportOrIdQuestion

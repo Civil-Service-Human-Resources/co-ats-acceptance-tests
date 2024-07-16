@@ -1205,26 +1205,21 @@ object VacancyDetailsPage extends VacancyBasePage {
   }
 
   private def extractAdditionalQuestions(): Unit = {
-    val questions  = waitForVisibilityOfElementById(additionalQuestionsId).findElement(By.xpath(checkLabelPath))
-    val anyChecked = waitForVisibilityOfElementById(additionalQuestionsId).findElement(By.xpath(checkLabelExistsPath))
     vXAnyAdditionalQuestions = Some(false)
     vXHowManyQuestions = 0
     vXQuestionOne = ""
     vXQuestionTwo = ""
     vXQuestionThree = ""
-    if (anyChecked != null) {
+    val anyChecked = waitForVisibilityOfElementById(additionalQuestionsId).findElements(By.xpath(checkLabelExistsPath))
+    if (anyChecked.size() != 0) {
+      val questions = waitForVisibilityOfElementById(additionalQuestionsId).findElement(By.xpath(checkLabelPath))
       if (questions.getText == "Yes") {
         vXAnyAdditionalQuestions = Some(true)
         extractHowManyQuestions()
       } else {
         vXAnyAdditionalQuestions = Some(false)
       }
-    } else vXAnyAdditionalQuestions = None
-    println(s"1. vXAnyAdditionalQuestions $vXAnyAdditionalQuestions")
-    println(s"2. vXHowManyQuestions $vXHowManyQuestions")
-    println(s"3. vXQuestionOne $vXQuestionOne")
-    println(s"4. vXQuestionTwo $vXQuestionTwo")
-    println(s"5. vXQuestionThree $vXQuestionThree")
+    }
   }
 
   private def extractHowManyQuestions(): Unit = {
