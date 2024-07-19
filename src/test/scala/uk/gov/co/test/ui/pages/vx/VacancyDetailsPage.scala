@@ -1576,7 +1576,7 @@ object VacancyDetailsPage extends VacancyBasePage {
     }
 
   def extractAllVacancyDetails(vacancyToExtract: String): Unit = {
-    resetApplicationDetails()
+//    resetApplicationDetails()
     searchForVacancy(vacancyToExtract)
     navigateToVacancyForms()
     jobInformationDetails()

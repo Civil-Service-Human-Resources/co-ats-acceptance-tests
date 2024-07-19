@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.pages.v9.pecform
 
 import org.scalatest.concurrent.Eventually.eventually
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXApproach, vXPecHealthRefCheck}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXApproach, vXPecHealthRefCheck, vXTypeOfCandidate}
 import uk.gov.co.test.ui.data.v9.pecform.PecFormDetails
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
 import uk.gov.co.test.ui.pages.v9.pecform.YourDetailsPage.pecFormId
@@ -99,7 +99,7 @@ object HealthDeclarationPage extends CivilServiceJobsBasePage {
   def healthDeclarationPage(pecFormDetails: PecFormDetails): Unit =
     if (
       !vXPecHealthRefCheck.contains("Not Applicable") &&
-      vXPecHealthRefCheck.contains(s"$vXApproach Candidates")
+      vXPecHealthRefCheck.contains(s"$vXTypeOfCandidate Candidates")
     ) {
       healthDeclarationPageCheck()
       health.foreach { f =>

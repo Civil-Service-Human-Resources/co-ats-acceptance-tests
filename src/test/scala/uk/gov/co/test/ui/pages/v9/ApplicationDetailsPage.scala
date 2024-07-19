@@ -1,6 +1,6 @@
 package uk.gov.co.test.ui.pages.v9
 
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{v9BiometricPassportOrId, v9EussStatus, v9IdvtDataConsent, v9InDateDrivingLicence, v9RtwBritishCitizen, v9RtwHoldPassport, v9SmartphoneAccess}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{v9BiometricPassportOrId, v9BiometricResidenceCard, v9EussStatus, v9IdvtDataConsent, v9InDateDrivingLicence, v9RtwBritishCitizen, v9RtwHoldPassport, v9SmartphoneAccess}
 
 object ApplicationDetailsPage extends CivilServiceJobsBasePage {
 
@@ -8,7 +8,7 @@ object ApplicationDetailsPage extends CivilServiceJobsBasePage {
     v9RtwBritishCitizen = true
     v9RtwHoldPassport = true
     v9EussStatus = ""
-
+    v9BiometricResidenceCard = false
   }
 
   private def idvt(): Unit = {

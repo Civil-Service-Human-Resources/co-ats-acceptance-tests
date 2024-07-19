@@ -36,18 +36,18 @@ class PecVacancySpec extends BaseFeatureSpec {
     Scenario("VX: A Candidate Completes The Candidate PEC Forms With Workplace Misconduct Section", RunInVX) {
       Given("candidate registers for new job application")
 //      fillNewVacancyForm(PEC_MISCONDUCT_ONLY_VACANCY_DATA)
-//      extractAllVacancyDetails("10388")
-      extractAllVacancyDetails("10389")
+      fillNewVacancyForm(PEC_VACANCY_DATA)
+//      extractAllVacancyDetails("10403")
       fillNewCandidateDetails(REGISTER_CANDIDATE_PEC)
 
       When("candidate completes all forms")
-      v9RunInWelsh = true
-//      v9HomeDepartment = vXJobInfoDepartment //Internal Candidate //Internal Candidate Candidate - (Welsh - Swyddfa Gartref)
-//      v9HomeDepartment =  "Swyddfa Gartref"// Welsh Internal
-//      v9HomeDepartment = "Animal and Plant Health Agency" //OGD Candidate - (Welsh - Asiantaeth Iechyd Anifeiliaid a Phlanhigion)
-//      v9HomeDepartment = "Asiantaeth Iechyd Anifeiliaid a Phlanhigion" //OGD Welsh Dept
-//      v9HomeDepartment = "UK Research and Innovation" //NPDB Candidate - (Welsh -Ymchwil ac Arloesi yn y DU)
-      v9HomeDepartment = "Ymchwil ac Arloesi y DU" //NPDB Candidate Welsh
+      v9RunInWelsh = false
+//      v9HomeDepartment = vXJobInfoDepartment //Internal
+//      v9HomeDepartment =  "Swyddfa Gartref"// Internal Welsh
+//      v9HomeDepartment = "Animal and Plant Health Agency" //OGD
+//      v9HomeDepartment = "Asiantaeth Iechyd Anifeiliaid a Phlanhigion" //OGD Welsh
+//      v9HomeDepartment = "UK Research and Innovation" //NPDB
+//      v9HomeDepartment = "Ymchwil ac Arloesi y DU" //NPDB Welsh
       fillFullApplicationDetails(
         PEC_SHORT_FORM_DATA,
         PEC_LONG_FORM_DATA,

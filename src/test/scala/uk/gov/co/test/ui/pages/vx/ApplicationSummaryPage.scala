@@ -2,9 +2,9 @@ package uk.gov.co.test.ui.pages.vx
 
 import org.openqa.selenium.By
 import org.scalatest.concurrent.Eventually.eventually
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{applicationId, randomFirstName, randomLastName, v9CivilServant, v9HomeDepartment, v9PecRequired, v9RunInWelsh, vXCandidateUploadIdentityDocs, vXCrcCheckProvider, vXCrcLevel, vXCvAttachment, vXInterviewNumber, vXJobInfoDepartment, vXPecBankruptcyCheck, vXPecCrc, vXPecEmploymentHistoryCheck, vXPecFraudCheck, vXPecGeneralInfo, vXPecHealthRefCheck, vXPecNen, vXPecNsv, vXPecOgdSecurityCheck, vXPecOverseasCheck, vXPecPensionsCheck, vXPecPn, vXPecPreviousCivilEmploymentCheck, vXPecReferenceCheck, vXPecSelfEmploymentCheck, vXPersonalStatement, vXTypeOfCandidate, vXUseOnlinePecForms, vXVettingLevel, vXWhichIdentityChecks, vacancyId, vacancyName}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{applicationId, randomFirstName, randomLastName, v9CivilServant, v9HomeDepartment, v9PecRequired, v9RunInWelsh, vXCandidateUploadIdentityDocs, vXCrcCheckProvider, vXCrcLevel, vXCvAttachment, vXInterviewNumber, vXJobInfoDepartment, vXPecBankruptcyCheck, vXPecCrc, vXPecEmploymentHistoryCheck, vXPecFraudCheck, vXPecGeneralInfo, vXPecHealthRefCheck, vXPecNen, vXPecNsv, vXPecOgdSecurityCheck, vXPecOverseasCheck, vXPecPensionsCheck, vXPecPn, vXPecPreviousCivilEmploymentCheck, vXPecReferenceCheck, vXPecSelfEmploymentCheck, vXPecWorkplaceMisconductCheck, vXPersonalStatement, vXTypeOfCandidate, vXUseOnlinePecForms, vXVettingLevel, vXWhichIdentityChecks, vacancyId, vacancyName}
 import uk.gov.co.test.ui.data.vx.application.MASTER_APPLICATION_DATA
-import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.{candidateAcceptsOffer, confirmApplicationUpdateNoPecNen, confirmApplicationUpdateNoPecPn, confirmApplicationUpdateState, confirmOfferAcceptedNoPecFunction, offerDecisionButtonPath, v9ConfirmOfferAcceptedState}
+import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.{candidateAcceptsOffer, confirmApplicationUpdateNoPecNen, confirmApplicationUpdateNoPecPn, confirmApplicationUpdateState, confirmOfferAcceptedNoPecFunction, v9ConfirmOfferAcceptedState}
 import uk.gov.co.test.ui.pages.v9.ProvisionalOfferPage.offerDecisionFlow
 import uk.gov.co.test.ui.pages.vx.DashboardPage.matchCriteria
 import uk.gov.co.test.ui.pages.vx.vacancytabs.NewEntrantNoticeTab.{correspondenceSendId, emailChecksClearPath}
@@ -178,6 +178,12 @@ object ApplicationSummaryPage extends VacancyBasePage {
         ogdSecurityChecksFlow(MASTER_APPLICATION_DATA)
         inviteCandidateToCompletePecForm()
         v9ConfirmOfferAcceptedState()
+      } else if (
+        vXUseOnlinePecForms && v9PecRequired &&
+        (vXCrcLevel == "None" && vXVettingLevel == "None")
+      ) {
+        inviteCandidateToCompletePecForm()
+        v9ConfirmOfferAcceptedState()
       } else {
         v9ConfirmOfferAcceptedState()
         vXProvisionalOfferAccepted()
@@ -190,6 +196,8 @@ object ApplicationSummaryPage extends VacancyBasePage {
       (!vXPecGeneralInfo.contains("Not Applicable") && vXPecGeneralInfo.contains(s"$vXTypeOfCandidate Candidates")) ||
       (!vXPecReferenceCheck
         .contains("Not Applicable") && vXPecReferenceCheck.contains(s"$vXTypeOfCandidate Candidates")) ||
+      (!vXPecWorkplaceMisconductCheck
+        .contains("Not Applicable") && vXPecWorkplaceMisconductCheck.contains(s"$vXTypeOfCandidate Candidates")) ||
       (!vXPecBankruptcyCheck
         .contains("Not Applicable") && vXPecBankruptcyCheck.contains(s"$vXTypeOfCandidate Candidates")) ||
       (!vXPecEmploymentHistoryCheck
@@ -636,10 +644,12 @@ object ApplicationSummaryPage extends VacancyBasePage {
 
   def setTypeOfCandidate(): Unit = {
     val typeOfCandidate = checkCandidateSummary("8")
-    if (typeOfCandidate.startsWith("External")) vXTypeOfCandidate = "External"
+    if (typeOfCandidate.startsWith("External") || (v9RunInWelsh && typeOfCandidate.startsWith("Allanol")))
+      vXTypeOfCandidate = "External"
     else if (typeOfCandidate.startsWith("OGD")) vXTypeOfCandidate = "OGD"
     else if (typeOfCandidate.startsWith("NDPB")) vXTypeOfCandidate = "NDPB"
-    else if (typeOfCandidate.startsWith("Internal")) vXTypeOfCandidate = "Internal"
+    else if (typeOfCandidate.startsWith("Internal") || (v9RunInWelsh && typeOfCandidate.startsWith("Mewnol")))
+      vXTypeOfCandidate = "Internal"
     else vXTypeOfCandidate = "Restricted Data"
   }
 

@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.pages.v9.pecform
 
 import org.scalatest.concurrent.Eventually.eventually
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXApproach, vXPecPreviousCivilEmploymentCheck}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXApproach, vXPecPreviousCivilEmploymentCheck, vXTypeOfCandidate}
 import uk.gov.co.test.ui.data.v9.pecform.PecFormDetails
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
 import uk.gov.co.test.ui.pages.v9.pecform.YourDetailsPage.pecFormId
@@ -33,7 +33,7 @@ object PreviousCSEmploymentPage extends CivilServiceJobsBasePage {
   def previousCSEmploymentPage(pecFormDetails: PecFormDetails): Unit =
     if (
       !vXPecPreviousCivilEmploymentCheck.contains("Not Applicable") &&
-      vXPecPreviousCivilEmploymentCheck.contains(s"$vXApproach Candidates")
+      vXPecPreviousCivilEmploymentCheck.contains(s"$vXTypeOfCandidate Candidates")
     ) {
       previousCSEmploymentPageCheck()
       previousCSEmployment.foreach { f =>

@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.pages.v9.pecform
 
 import org.scalatest.concurrent.Eventually.eventually
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXApproach, vXPecNsv, vXVettingLevel}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXApproach, vXPecNsv, vXTypeOfCandidate, vXVettingLevel}
 import uk.gov.co.test.ui.data.v9.pecform.PecFormDetails
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
 import uk.gov.co.test.ui.pages.v9.pecform.YourDetailsPage.pecFormId
@@ -248,7 +248,7 @@ object NationalSecurityVettingPage extends CivilServiceJobsBasePage {
   def nationalSecurityVettingPage(pecFormDetails: PecFormDetails): Unit =
     if (
       !vXPecNsv.contains("Not Applicable") &&
-      vXPecNsv.contains(s"$vXApproach Candidates")
+      vXPecNsv.contains(s"$vXTypeOfCandidate Candidates") && vXVettingLevel != "None"
     ) {
       nsvPageCheck()
       nsv.foreach { f =>

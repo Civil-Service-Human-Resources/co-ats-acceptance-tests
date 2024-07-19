@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.pages.v9.pecform
 
 import org.scalatest.concurrent.Eventually.eventually
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{randomEmail, vXApproach, vXCrcCheckProvider, vXCrcLevel, vXPecCrc}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{randomEmail, vXApproach, vXCrcCheckProvider, vXCrcLevel, vXPecCrc, vXTypeOfCandidate}
 import uk.gov.co.test.ui.data.v9.pecform.PecFormDetails
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
 import uk.gov.co.test.ui.pages.v9.pecform.YourDetailsPage.pecFormId
@@ -263,7 +263,7 @@ object DbsPersonalInfoPage extends CivilServiceJobsBasePage {
   def dbsPersonalInfoPage(pecFormDetails: PecFormDetails): Unit =
     if (
       vXCrcLevel != "None" && vXCrcCheckProvider.contains("DBS") && !vXPecCrc.contains("Not Applicable") && vXPecCrc
-        .contains(s"$vXApproach Candidates")
+        .contains(s"$vXTypeOfCandidate Candidates")
     ) {
       dbsPersonalInfoPageCheck()
       personalInfo.foreach { f =>

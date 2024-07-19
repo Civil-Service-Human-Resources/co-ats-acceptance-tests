@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.pages.v9.pecform
 
 import org.scalatest.concurrent.Eventually.eventually
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{v9EussStatus, v9RtwBritishCitizen, v9RtwHoldPassport, vXApproach, vXRtwChecks}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{v9BiometricResidenceCard, v9EussStatus, v9RtwBritishCitizen, v9RtwHoldPassport, vXApproach, vXRtwChecks, vXTypeOfCandidate}
 import uk.gov.co.test.ui.data.v9.pecform.PecFormDetails
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
 import uk.gov.co.test.ui.pages.v9.pecform.YourDetailsPage.pecFormId
@@ -79,13 +79,15 @@ object RightToWorkPage extends CivilServiceJobsBasePage {
       radioSelect(anyOtherNationalityNoId)
     }
 
-  private def selectBiometricResidenceCard(rtwDetails: RtwDetails): Unit =
-    if (rtwDetails.biometricResidenceCard) {
+  private def selectBiometricResidenceCard(rtwDetails: RtwDetails): Unit = {
+    v9BiometricResidenceCard = rtwDetails.biometricResidenceCard
+    if (v9BiometricResidenceCard) {
       radioSelect(biometricResidenceCardYesId)
       enterDetails(viewAndProveStatusCodeId, rtwDetails.viewAndProveStatusCode)
       uploadProofOfNationality(rtwDetails)
       selectAreYouRefugee(rtwDetails)
     } else radioSelect(biometricResidenceCardNoId)
+  }
 
   private def selectAreYouRefugee(rtwDetails: RtwDetails): Unit =
     if (rtwDetails.areYouRefugee) {
@@ -169,7 +171,7 @@ object RightToWorkPage extends CivilServiceJobsBasePage {
   def rightToWorkPage(pecFormDetails: PecFormDetails): Unit =
     if (
       !vXRtwChecks.contains("Not Applicable") &&
-      vXRtwChecks.contains(s"$vXApproach Candidates")
+      vXRtwChecks.contains(s"$vXTypeOfCandidate Candidates")
     ) {
       rtwPageCheck()
       rtw.foreach { f =>

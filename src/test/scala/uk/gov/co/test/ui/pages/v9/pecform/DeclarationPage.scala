@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.pages.v9.pecform
 
 import org.scalatest.concurrent.Eventually.eventually
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXApproach, vXCrcCheckProvider, vXCrcLevel, vXPecCrc, vXPecEmploymentHistoryCheck}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{v9RunInWelsh, vXApproach, vXCrcCheckProvider, vXCrcLevel, vXPecCrc, vXPecEmploymentHistoryCheck}
 import uk.gov.co.test.ui.data.v9.pecform.PecFormDetails
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
 import uk.gov.co.test.ui.pages.v9.pecform.YourDetailsPage.pecFormId
@@ -19,34 +19,35 @@ case class DeclarationDetails(
 
 object DeclarationPage extends CivilServiceJobsBasePage {
 
-  private lazy val declarationTitle    = "Declaration - Civil Service Jobs - GOV.UK"
-  def declarationTermsAndConditionsId  = s"${pecFormId}_datafield_22499_1_1_804_label"
-  def dbsTermsOneTextId                = s"${pecFormId}_field_que_72275_1"
-  def dbsTermsOneId                    = s"${pecFormId}_datafield_72275_1_1_15120_label"
-  def dbsTermsTwoTextId                = s"${pecFormId}_field_que_89002_1"
-  def dbsTermsTwoId                    = s"${pecFormId}_datafield_89002_1_1_15120_label"
-  def dbsTermsThreeTextId              = s"${pecFormId}_field_que_89006_1"
-  def dbsTermsThreeId                  = s"${pecFormId}_datafield_89006_1_1_15120_label"
-  def generalPecTAndCsWithoutDbsTextId = s"${pecFormId}_label_96733_1"
-  def generalPecTAndCsTextId           = s"${pecFormId}_label_96733_1"
-  def generalPecTAndCsText2Id          = s"${pecFormId}_label_22496_1"
-  def consentOneTextId                 = s"${pecFormId}_field_que_206010_1"
-  def consentOneYesId                  = s"${pecFormId}_datafield_206010_1_1_1_label"
-  def consentOneNoId                   = s"${pecFormId}_datafield_206010_1_1_2_label"
-  def consentTwoTextId                 = s"${pecFormId}_field_que_206013_1"
-  def consentTwoYesId                  = s"${pecFormId}_datafield_206013_1_1_1_label"
-  def consentTwoNoId                   = s"${pecFormId}_datafield_206013_1_1_2_label"
-  def consentThreeTextId               = s"${pecFormId}_field_que_206016_1"
-  def consentThreeYesId                = s"${pecFormId}_datafield_206016_1_1_1_label"
-  def consentThreeNoId                 = s"${pecFormId}_datafield_206016_1_1_2_label"
-  def consentFourTextId                = s"${pecFormId}_field_que_206019_1"
-  def consentFourYesId                 = s"${pecFormId}_datafield_206019_1_1_1_label"
-  def consentFourNoId                  = s"${pecFormId}_datafield_206019_1_1_2_label"
-  def pecDeclarationTAndCsId           = s"${pecFormId}_datafield_205986_1_1_804_label"
-  val pecFormSubmission                = "submit_button"
+  private lazy val declarationTitle      = "Declaration - Civil Service Jobs - GOV.UK"
+  private lazy val welshDeclarationTitle = "Datganiad - Civil Service Jobs - GOV.UK"
+  def declarationTermsAndConditionsId    = s"${pecFormId}_datafield_22499_1_1_804_label"
+  def dbsTermsOneTextId                  = s"${pecFormId}_field_que_72275_1"
+  def dbsTermsOneId                      = s"${pecFormId}_datafield_72275_1_1_15120_label"
+  def dbsTermsTwoTextId                  = s"${pecFormId}_field_que_89002_1"
+  def dbsTermsTwoId                      = s"${pecFormId}_datafield_89002_1_1_15120_label"
+  def dbsTermsThreeTextId                = s"${pecFormId}_field_que_89006_1"
+  def dbsTermsThreeId                    = s"${pecFormId}_datafield_89006_1_1_15120_label"
+  def generalPecTAndCsWithoutDbsTextId   = s"${pecFormId}_label_96733_1"
+  def generalPecTAndCsTextId             = s"${pecFormId}_label_96733_1"
+  def generalPecTAndCsText2Id            = s"${pecFormId}_label_22496_1"
+  def consentOneTextId                   = s"${pecFormId}_field_que_206010_1"
+  def consentOneYesId                    = s"${pecFormId}_datafield_206010_1_1_1_label"
+  def consentOneNoId                     = s"${pecFormId}_datafield_206010_1_1_2_label"
+  def consentTwoTextId                   = s"${pecFormId}_field_que_206013_1"
+  def consentTwoYesId                    = s"${pecFormId}_datafield_206013_1_1_1_label"
+  def consentTwoNoId                     = s"${pecFormId}_datafield_206013_1_1_2_label"
+  def consentThreeTextId                 = s"${pecFormId}_field_que_206016_1"
+  def consentThreeYesId                  = s"${pecFormId}_datafield_206016_1_1_1_label"
+  def consentThreeNoId                   = s"${pecFormId}_datafield_206016_1_1_2_label"
+  def consentFourTextId                  = s"${pecFormId}_field_que_206019_1"
+  def consentFourYesId                   = s"${pecFormId}_datafield_206019_1_1_1_label"
+  def consentFourNoId                    = s"${pecFormId}_datafield_206019_1_1_2_label"
+  def pecDeclarationTAndCsId             = s"${pecFormId}_datafield_205986_1_1_804_label"
+  val pecFormSubmission                  = "submit_button"
 
   private def declarationPageCheck(): Unit =
-    eventually(onPage(declarationTitle))
+    if (v9RunInWelsh) eventually(onPage(welshDeclarationTitle)) else eventually(onPage(declarationTitle))
 
   private def acceptDbsTerms(declarationDetails: DeclarationDetails): Unit =
     if (

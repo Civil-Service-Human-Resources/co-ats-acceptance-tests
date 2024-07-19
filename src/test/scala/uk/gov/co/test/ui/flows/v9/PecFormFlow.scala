@@ -46,7 +46,6 @@ object PecFormFlow extends CivilServiceJobsBasePage {
 
   def fillPecFormDetailsOnly(pecFormDetails: PecFormDetails): Unit = {
     if (currentUrl.contains("recruiter")) changeSystem("candidate")
-//    v9ConfirmOfferAcceptedState()
     if (
       vXUseOnlinePecForms && (
         v9PecRequired ||

@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.pages.v9.pecform
 
 import org.scalatest.concurrent.Eventually.eventually
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXApproach, vXPecSelfEmploymentCheck}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXApproach, vXPecSelfEmploymentCheck, vXTypeOfCandidate}
 import uk.gov.co.test.ui.data.v9.pecform.PecFormDetails
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
 import uk.gov.co.test.ui.pages.v9.pecform.YourDetailsPage.pecFormId
@@ -33,7 +33,7 @@ object SelfEmploymentPage extends CivilServiceJobsBasePage {
   def selfEmploymentPage(pecFormDetails: PecFormDetails): Unit =
     if (
       !vXPecSelfEmploymentCheck.contains("Not Applicable") &&
-      vXPecSelfEmploymentCheck.contains(s"$vXApproach Candidates")
+      vXPecSelfEmploymentCheck.contains(s"$vXTypeOfCandidate Candidates")
     ) {
       selfEmploymentPageCheck()
       selfEmployment.foreach { f =>

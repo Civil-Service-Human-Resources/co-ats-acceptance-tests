@@ -12,6 +12,7 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
 
   val applicationCentreTitle             = "Application Centre - Civil Service Jobs - GOV.UK"
   val welshApplicationCentreTitle        = "Canolfan Ymgeisio - Civil Service Jobs - GOV.UK"
+//  val welshApplicationCentreTitle        = "Ceisiadau - Civil Service Jobs - GOV.UK"
   val shortFormCompletionText            = "Thank you for submitting the first section of your application."
   val shortFormCompletionTextId          = "//*[@id='main-content']/div/div[3]/p[1]"
   val completeNextSectionText            = "You can now complete the second section, where you must provide supporting evidence."
@@ -33,6 +34,7 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
   val startTestButtonPath                = ".//input[@value='Start Test']"
   val resumeTestButtonPath               = ".//input[@value='Resume Test']"
   val pecStartButtonPath                 = ".//input[@value='Begin pre-employment checks']"
+  val welshPecStartButtonPath                 = ".//input[@value='Dechrau gwiriadau cyn-cyflogaeth']"
   val applicationLinkPath                = ".//a[@title='Applications']"
   val continueApplicationName            = "submit_form"
 
@@ -82,8 +84,10 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
   def resumeTestFunction(): WebElement =
     waitForVisibilityOfElementByPath(resumeTestButtonPath)
 
-  def pecStartFunction(): WebElement =
-    waitForVisibilityOfElementByPath(pecStartButtonPath)
+  def pecStartFunction(): WebElement = {
+    if (v9RunInWelsh) waitForVisibilityOfElementByPath(welshPecStartButtonPath)
+    else waitForVisibilityOfElementByPath(pecStartButtonPath)
+  }
 
   def helpWithSelectionText(): String =
     driver.findElement(By.tagName("b")).getText
@@ -194,18 +198,28 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
   }
 
   def v9ConfirmOfferAcceptedState(): Unit = {
-    val newStatus = "Offer accepted"
+    val status = "Offer accepted"
+    val welshStatus = "Cynnig wedi'i dderbyn"
     changeSystem("candidate")
-    confirmStatusOnApplicationPage(newStatus)
+    if (v9RunInWelsh) {
+      confirmStatusOnApplicationPage(welshStatus)
+      getApplicationState shouldEqual s"Statws cais: $welshStatus"
+      getApplicationConfirmation shouldEqual
+        """Rydym yn falch eich bod chi wedi derbyn ein cynnig swydd.
+          |Fel rhan o'r broses gyflogi rydym angen gwybodaeth ychwanegol.""".stripMargin
+    } else {
+      confirmStatusOnApplicationPage(status)
+      applicationForVacancyText shouldEqual s"Application For $vacancyName"
+      getApplicationState shouldEqual s"Application status: $status"
+      getApplicationConfirmation shouldEqual
+        """We're delighted that you have accepted our job offer.
+          |As part of the onboarding process we require additional information.""".stripMargin
+    }
     applicationCentrePageCheck()
     pecStartFunction().isEnabled
     feedbackFunction().isEnabled
     withdrawApplicationFunction().isEnabled
     advertDetailsFunction().isEnabled
-    applicationForVacancyText  shouldEqual s"Application For $vacancyName"
-    getApplicationState        shouldEqual s"Application status: $newStatus"
-    getApplicationConfirmation shouldEqual """We're delighted that you have accepted our job offer.
-                                             |As part of the onboarding process we require additional information.""".stripMargin
   }
 
   def confirmApplicationUpdateNoPecPn(): Unit = {
