@@ -3,7 +3,7 @@ package uk.gov.co.test.ui.pages.v9
 import org.openqa.selenium.support.ui.Select
 import org.openqa.selenium.{By, WebElement}
 import org.scalatest.concurrent.Eventually.eventually
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{randomFirstName, vXInstructionsForCandidates, vXInterviewLocation, vXInterviewNumber, vXInterviewRoom, vXInterviewScheduleTitle, vXSlotOneStartTime, vXSlotTwoStartTime}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{randomFirstName, randomLastName, vXInstructionsForCandidates, vXInterviewLocation, vXInterviewNumber, vXInterviewRoom, vXInterviewScheduleTitle, vXSlotOneStartTime, vXSlotTwoStartTime, vacancyId}
 import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.scheduleInterviewFunction
 
 import scala.collection.mutable
@@ -18,10 +18,8 @@ object BookedInterviewPage extends CivilServiceJobsBasePage {
   private lazy val allSlotsSelectionPath    = ".//*[@id='itinerary']"
   private lazy val bookSlotId               = "book_interview_button"
 //  private lazy val anotherLocationPath             = "(//p)[9]"
-  private lazy val slotOneSelectionPath     =
-    s"//*[contains(text(),'${vXSlotOneStartTime.replaceAll("[A-Za-z ]", "").filterNot(_.isWhitespace)}')]"
-  private lazy val slotTwoSelectionPath     =
-    s"//*[contains(text(),'${vXSlotTwoStartTime.replaceAll("[A-Za-z ]", "").filterNot(_.isWhitespace)}')]"
+//  private lazy val slotOneSelectionPath     = s"//*[contains(text(),'${vXSlotOneStartTime.replaceAll("[A-Za-z ]", "").filterNot(_.isWhitespace)}')]"
+//  private lazy val slotTwoSelectionPath     = s"//*[contains(text(),'${vXSlotTwoStartTime.replaceAll("[A-Za-z ]", "").filterNot(_.isWhitespace)}')]"
 
   private def bookedInterviewPageCheck(): Unit =
     eventually(onPage(bookedInterviewPageTitle))
@@ -56,6 +54,7 @@ object BookedInterviewPage extends CivilServiceJobsBasePage {
     val (_slotTitle, _instructions, _slotSelection, _slotOne, _slotTwo, _bookSlot) = slotSectionValues()
     _slotTitle    shouldEqual s"$vXInterviewScheduleTitle $vXInterviewLocation"
     _instructions shouldEqual vXInstructionsForCandidates
+    scrollToElement(By.xpath(allSlotsSelectionPath))
     val selection = new Select(_slotSelection)
     selection.selectByVisibleText(_slotTwo.getText)
     _bookSlot.click()
@@ -77,6 +76,9 @@ object BookedInterviewPage extends CivilServiceJobsBasePage {
   def availableSlots(): mutable.Buffer[WebElement] =
     driver.findElements(By.xpath(allBookingSectionsPath)).asScala
 
+//  def availableSlots(): mutable.Buffer[WebElement] =
+//    driver.findElements(By.xpath(s"//*[contains(text(), '$vacancyId - Interview ${vXInterviewNumber.head} for $randomFirstName $randomLastName')]//..//form[@class='interview_slot_book']//select[@id='itinerary']")).asScala
+
   def firstSectionItem(subSection: WebElement): WebElement =
     subSection.findElement(By.id(interviewBookingTitleId))
 
@@ -86,11 +88,17 @@ object BookedInterviewPage extends CivilServiceJobsBasePage {
   def thirdSectionItem(subSection: WebElement): WebElement =
     subSection.findElement(By.xpath(allSlotsSelectionPath))
 
-  def fourthSectionItem(subSection: WebElement): WebElement =
+  def fourthSectionItem(subSection: WebElement): WebElement = {
+    val slotOneSelectionPath =
+      s"//*[contains(text(),'${vXSlotOneStartTime.replaceAll("[A-Za-z ]", "").filterNot(_.isWhitespace)}')]"
     subSection.findElement(By.xpath(slotOneSelectionPath))
+  }
 
-  def fifthSectionItem(subSection: WebElement): WebElement =
+  def fifthSectionItem(subSection: WebElement): WebElement = {
+    val slotTwoSelectionPath =
+      s"//*[contains(text(),'${vXSlotTwoStartTime.replaceAll("[A-Za-z ]", "").filterNot(_.isWhitespace)}')]"
     subSection.findElement(By.xpath(slotTwoSelectionPath))
+  }
 
   def sixthSectionItem(subSection: WebElement): WebElement =
     subSection.findElement(By.name(bookSlotId))

@@ -1,7 +1,8 @@
 package uk.gov.co.test.ui.specs.smoketests
 
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{v9HomeDepartment, v9RtwBritishIrishPassport}
 import uk.gov.co.test.ui.data.v9.applicants.{REGISTERED_CANDIDATE, REGISTER_CANDIDATE}
-import uk.gov.co.test.ui.flows.v9.DacAudit24TestCandidates.{createDacTestCandidates, createDacTestCandidatesThree}
+import uk.gov.co.test.ui.flows.v9.DacAudit24TestCandidates.{createDacTestCandidateEight, createDacTestCandidatesFive, createDacTestCandidatesFour, createDacTestCandidatesSixAndSeven, createDacTestCandidatesTwoAndThree}
 import uk.gov.co.test.ui.flows.v9.GenerateNewCandidates.createMultipleCandidates
 import uk.gov.co.test.ui.flows.v9.RegisterCandidateFlow.fillNewCandidateDetails
 import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.applicationCentrePageTitle
@@ -42,15 +43,37 @@ class RegisterCandidateSpec extends BaseFeatureSpec {
     }
 
     Scenario("VX: Create DAC Candidate Accounts for Request Two", RunInV9) {
-      createDacTestCandidates("10348", 2)
+      createDacTestCandidatesTwoAndThree("9794", 20)
     }
 
     Scenario("VX: Create DAC Candidate Accounts for Request Three", RunInV9) {
-      createDacTestCandidates("10349", 2)
+      createDacTestCandidatesTwoAndThree("9795", 20)
     }
 
     Scenario("VX: Create DAC Candidate Accounts for Request Four", RunInV9) {
-      createDacTestCandidatesThree("10350", 2)
+      v9HomeDepartment = "UK Research and Innovation" //NPDB
+      createDacTestCandidatesFour("9793", 20)
+    }
+
+    Scenario("VX: Create DAC Candidate Accounts for Request Five", RunInV9) {
+      v9HomeDepartment = "UK Research and Innovation" //NPDB
+      createDacTestCandidatesFive(List("9793", "9794", "9795", "9796", "9797"), 20)
+    }
+
+    Scenario("VX: Create DAC Candidate Accounts for Request Six", RunInV9) {
+      v9HomeDepartment = "Animal and Plant Health Agency" //OGD
+      createDacTestCandidatesSixAndSeven("10349", 10)
+    }
+
+    Scenario("VX: Create DAC Candidate Accounts for Request Seven", RunInV9) {
+      v9HomeDepartment = "UK Research and Innovation" //NPDB
+      createDacTestCandidatesSixAndSeven("9795", 10)
+    }
+
+    Scenario("VX: Create DAC Candidate Accounts for Request Eight", RunInV9) {
+      v9HomeDepartment = "UK Research and Innovation" //NPDB
+      v9RtwBritishIrishPassport = false
+      createDacTestCandidateEight("9795", 9)
     }
   }
 }

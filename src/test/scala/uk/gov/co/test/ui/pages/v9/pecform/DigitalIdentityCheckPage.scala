@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.pages.v9.pecform
 
 import org.scalatest.concurrent.Eventually.eventually
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{v9BiometricPassportOrId, v9BiometricResidenceCard, v9EussStatus, v9IdvtDataConsent, v9InDateDrivingLicence, v9RtwBritishCitizen, v9SmartphoneAccess, vXCrcLevel, vXPecCrc, vXRtwChecks, vXTypeOfCandidate, vXWhichIdentityChecks}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{v9BiometricPassportOrId, v9BiometricResidenceCard, v9EussStatus, v9IdvtDataConsent, v9InDateDrivingLicence, v9RtwBritishCitizen, v9RtwBritishIrishPassport, v9SmartphoneAccess, vXCrcLevel, vXPecCrc, vXRtwChecks, vXTypeOfCandidate, vXWhichIdentityChecks}
 import uk.gov.co.test.ui.data.v9.pecform.PecFormDetails
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
 import uk.gov.co.test.ui.pages.v9.pecform.YourDetailsPage.pecFormId
@@ -109,11 +109,15 @@ object DigitalIdentityCheckPage extends CivilServiceJobsBasePage {
 
   def digitalIdentityCheckPage(pecFormDetails: PecFormDetails): Unit =
     if (
-      (vXWhichIdentityChecks != "No digital checks" && (v9RtwBritishCitizen ||
+      (vXWhichIdentityChecks != "No digital checks" && (v9RtwBritishIrishPassport ||
         (v9EussStatus == "I have settled status" ||
           v9EussStatus == "I have pre-settled status" ||
           v9EussStatus == "I have applied for the settlement scheme and await confirmation of my status") ||
-        v9BiometricResidenceCard))
+        v9BiometricResidenceCard) &&
+        ((!vXPecCrc.contains("Not Applicable") || vXPecCrc.contains(s"$vXTypeOfCandidate Candidates")) ||
+          (vXWhichIdentityChecks == "Right to work and criminal record check" &&
+            (!vXPecCrc.contains("Not Applicable") || vXPecCrc.contains(s"$vXTypeOfCandidate Candidates"))) )
+        )
       ||
       (vXWhichIdentityChecks == "Right to work and criminal record check" &&
         (vXCrcLevel != "None") &&

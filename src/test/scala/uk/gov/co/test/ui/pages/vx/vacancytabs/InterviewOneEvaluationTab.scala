@@ -765,6 +765,7 @@ object InterviewOneEvaluationTab extends VacancyBasePage {
     }
     scrollToElement(By.id(outcomeTitleId))
     waitForVisibilityOfElementById(outcomeTitleId).getText shouldEqual "Outcome"
+    Thread.sleep(5000)
     waitForVisibilityOfElementById(outcomeId).click()
     action().moveToElement(waitForDropdownOption(vXInterviewOneOutcome)).perform()
     waitForDropdownOption(vXInterviewOneOutcome).click()

@@ -169,12 +169,14 @@ trait VacancyBasePage extends Matchers with BasePage with BrowserDriver {
   }
 
   def enterRoles(value: List[String], inputId: String): Unit = {
+    scrollToElement(By.id(inputId))
     clearField(inputId)
     for (role <- value)
       selectTypeOfRoles(role, inputId)
   }
 
   def enterTypeRoles(value: ListBuffer[String], inputId: String): Unit = {
+    scrollToElement(By.id(inputId))
     clearField(inputId)
     for (role <- value)
       selectTypeOfRoles(role, inputId)

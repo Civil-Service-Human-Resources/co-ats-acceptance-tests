@@ -1,6 +1,6 @@
 package uk.gov.co.test.ui.flows.v9
 
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{v9PecRequired, v9RtwHoldPassport, vXCrcCheckProvider, vXCrcLevel, vXUseOnlinePecForms, vXVettingLevel, vXWhichIdentityChecks}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{v9PecRequired, v9RtwBritishIrishPassport, vXCrcCheckProvider, vXCrcLevel, vXUseOnlinePecForms, vXVettingLevel, vXWhichIdentityChecks}
 import uk.gov.co.test.ui.data.v9.pecform.PecFormDetails
 import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.pecStartFunction
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
@@ -51,7 +51,7 @@ object PecFormFlow extends CivilServiceJobsBasePage {
         v9PecRequired ||
           (vXCrcLevel != "None" && vXCrcCheckProvider.contains("DBS")) ||
           (vXVettingLevel != "None") ||
-          (vXWhichIdentityChecks != "No digital checks" && v9RtwHoldPassport)
+          (vXWhichIdentityChecks != "No digital checks" && v9RtwBritishIrishPassport)
       )
     ) {
       pecStartFunction().click()

@@ -180,7 +180,9 @@ object ApplicationSummaryPage extends VacancyBasePage {
         v9ConfirmOfferAcceptedState()
       } else if (
         vXUseOnlinePecForms && v9PecRequired &&
-        (vXCrcLevel == "None" && vXVettingLevel == "None")
+        (v9CivilServant && (v9HomeDepartment != vXJobInfoDepartment) && vXPecOgdSecurityCheck && (vXTypeOfCandidate == "OGD")) &&
+        (!vXPecCrc.contains("Not Applicable") && vXPecCrc.contains(s"$vXTypeOfCandidate Candidates") &&
+          vXCrcLevel == "None" && vXVettingLevel == "None")
       ) {
         inviteCandidateToCompletePecForm()
         v9ConfirmOfferAcceptedState()

@@ -73,8 +73,8 @@ trait BasePage extends Matchers with Page with WebBrowser with PatienceConfigura
 
   def checkForTotalValueId(valueId: String, endsWithExpectedScore: String)(implicit driver: WebDriver): Unit = {
     val wait = new WebDriverWait(driver, 25, 200)
-    scrollToElement(By.id(valueId))
     try wait.until { (d: WebDriver) =>
+      scrollToElement(By.id(valueId))
       d.findElement(By.id(valueId)).getText.endsWith(endsWithExpectedScore)
     } catch {
       case staleError: StaleElementReferenceException => println(staleError)
@@ -101,9 +101,14 @@ trait BasePage extends Matchers with Page with WebBrowser with PatienceConfigura
     wait.until(visibilityOfElementLocated(By.tagName(tag)))
   }
 
-  def waitForVisibilityOfElementById(id: String)(implicit driver: WebDriver): WebElement = {
+  def waitForVisibilityOfElementById(elementId: String)(implicit driver: WebDriver): WebElement = {
     val wait = new WebDriverWait(driver, 30, 200)
-    wait.until(visibilityOfElementLocated(By.id(id)))
+    wait.until(visibilityOfElementLocated(By.id(elementId)))
+  }
+
+  def waitForElementClickableById(id: String)(implicit driver: WebDriver): WebElement = {
+    val wait = new WebDriverWait(driver, 30, 200)
+    wait.until(elementToBeClickable(By.id(id)))
   }
 
   def waitForVisibilityOfElementAlertByPath()(implicit driver: WebDriver): Alert = {
@@ -140,10 +145,10 @@ trait BasePage extends Matchers with Page with WebBrowser with PatienceConfigura
   def radioSelect(id: String)(implicit driver: WebDriver): Unit =
     waitForVisibilityOfElementById(id).click()
 
-  def clickOnRadioButton(id: String)(implicit webDriver: WebDriver): Boolean = {
+  def clickOnRadioButton(radioId: String)(implicit webDriver: WebDriver): Boolean = {
     val wait   = new WebDriverWait(webDriver, 10, 200)
-    val lookup = By.id(id)
-    wait.until(ExpectedConditions.elementToBeClickable(By.xpath(s"//label[@for='$id']")))
+    val lookup = By.id(radioId)
+    wait.until(ExpectedConditions.elementToBeClickable(By.xpath(s"//label[@for='$radioId']")))
 
     wait.until(new ExpectedCondition[Boolean]() {
       def apply(webDriver: WebDriver): Boolean = {

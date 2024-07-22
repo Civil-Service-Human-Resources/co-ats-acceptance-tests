@@ -66,8 +66,8 @@ object PecCheckFormsSection extends VacancyBasePage {
   def ogdTransferProcessCheckNoId      = s"${vacancyFormId}_datafield_127230_1_1_2"
   def ogdDigitalTransferProcessTextId  = s"${vacancyFormId}_field_que_206243_1"
   def ogdDigitalTransferProcessId      = s"${vacancyFormId}_datafield_206243_1_1_legend"
-  def useOgdTransferProcessYesId       = s"${vacancyFormId}_datafield_206243_1_1_1"
-  def useOgdTransferProcessNoId        = s"${vacancyFormId}_datafield_206243_1_1_2"
+  def useOgdDigitalTransferYesId       = s"${vacancyFormId}_datafield_206243_1_1_1"
+  def useOgdDigitalTransferNoId        = s"${vacancyFormId}_datafield_206243_1_1_2"
   def includeAdditionalCheckYesId      = s"${vacancyFormId}_datafield_168748_1_1_1"
   def includeAdditionalCheckNoId       = s"${vacancyFormId}_datafield_168748_1_1_2"
   def noIdentityChecksId               = s"${vacancyFormId}_datafield_184419_1_1_50074"
@@ -165,8 +165,8 @@ object PecCheckFormsSection extends VacancyBasePage {
     vXPecUseDigitalOgdProcess = pecCheckFormsDetails.useOgdDigitalTransferProcess
     val ogdDigitalDisplayed = driver.findElement(By.id(ogdDigitalTransferProcessTextId)).isDisplayed
     if (ogdDigitalDisplayed) {
-      if (vXPecUseDigitalOgdProcess) clickOnRadioButton(useOgdTransferProcessYesId)
-      else clickOnRadioButton(useOgdTransferProcessNoId)
+      if (vXPecUseDigitalOgdProcess) clickOnRadioButton(useOgdDigitalTransferYesId)
+      else clickOnRadioButton(useOgdDigitalTransferNoId)
     }
   }
 

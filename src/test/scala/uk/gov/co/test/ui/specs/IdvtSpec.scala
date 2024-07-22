@@ -1,9 +1,13 @@
 package uk.gov.co.test.ui.specs
 
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{v9EussStatus, v9IdvtDataConsent, v9RtwBritishCitizen, v9RtwHoldPassport, v9SmartphoneAccess}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{v9EussStatus, v9IdvtDataConsent, v9RtwBritishCitizen, v9RtwBritishIrishPassport, v9SmartphoneAccess}
+import uk.gov.co.test.ui.data.test.idvt.IDVT_VACANCY_DATA
+import uk.gov.co.test.ui.data.test.pnnen.PN_NEN_VACANCY_DATA
 import uk.gov.co.test.ui.data.v9.applicants._
+import uk.gov.co.test.ui.data.vx.vacancy.MASTER_VACANCY_DATA
 import uk.gov.co.test.ui.flows.e2e.FullApplicationFlow.idvtFlow
 import uk.gov.co.test.ui.flows.v9.RegisterCandidateFlow.fillNewCandidateDetails
+import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.fillNewVacancyForm
 import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.{confirmPecRtwAndDbsAnyState, confirmPecRtwOnlyAndDBSEnhancedStartCheck, confirmPecRtwOnlyCrcNoneNotApplicable, confirmPecRtwOnlyStartCheckState, confirmPecRtwOnlyState, confirmTrustIdQrCode}
 import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.{digitalIdentityCheckInProgress, invitedToDigitalIdentityCheck, manualIdCheck, manualIdCheckWithIdvt, rtwCheckAvailable, rtwCheckAvailableWithIdvt}
 import uk.gov.co.test.ui.pages.vx.VacancyDetailsPage.extractAllVacancyDetails
@@ -13,11 +17,12 @@ class IdvtSpec extends BaseFeatureSpec {
   Feature("IDVT Checks - IDVT: RTW Only") {
     Scenario("VX: (IDVT: RTW Only; CRC: None) - No Passport", RunInVX) {
       Given("candidate registers for new job application")
-      extractAllVacancyDetails("9922")
+      fillNewVacancyForm(IDVT_VACANCY_DATA)
+//      extractAllVacancyDetails("10415")
       fillNewCandidateDetails(REGISTER_CANDIDATE_IDVT_01)
 
       When("candidate completes pec form with rtw no passport")
-      v9RtwHoldPassport = false
+      v9RtwBritishIrishPassport = false
       idvtFlow()
 
       Then("the application is at rtw checks position")
@@ -106,7 +111,7 @@ class IdvtSpec extends BaseFeatureSpec {
       fillNewCandidateDetails(REGISTER_CANDIDATE_IDVT_07)
 
       When("candidate completes pec form with rtw no passport")
-      v9RtwHoldPassport = false
+      v9RtwBritishIrishPassport = false
       idvtFlow()
 
       Then("the application is at rtw checks position")

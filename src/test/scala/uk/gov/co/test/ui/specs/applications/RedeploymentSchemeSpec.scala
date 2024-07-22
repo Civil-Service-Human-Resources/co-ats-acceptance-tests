@@ -161,6 +161,7 @@ class RedeploymentSchemeSpec extends BaseFeatureSpec {
       Given("a vacancy is not included in the redeployment scheme")
       fillNewVacancyForm(NON_REDEPLOYMENT_VACANCY_DATA)
 //      extractAllVacancyDetails("10308")
+//      extractAllVacancyDetails("9667")
       v9HomeDepartment = "Department for Energy Security & Net Zero"
 
       When("a candidate selects an eligible home department")

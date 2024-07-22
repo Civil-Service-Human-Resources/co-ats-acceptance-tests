@@ -47,13 +47,28 @@ object InterviewFlow extends CivilServiceJobsBasePage {
   def untagVacancies(vacancyToUntag: String): Unit =
     for (i <- 1 to 25) untagVacancy(i, vacancyToUntag)
 
-  //DAC test data for number two
+  //DAC test data for request two
   def interviewInvited(applicationDetails: ApplicationDetails): Unit =
     if (vXInterviewExpectedRounds != "No interviews") {
       1 to vXInterviewExpectedRounds.toInt foreach { _ =>
         interviewSchedulePage(applicationDetails)
         calenderSchedulePage(applicationDetails)
         inviteToInterviewEmailFlow()
+        changeSystem("recruiter")
+        vXInterviewNumber.remove(0)
+      }
+    }
+
+  //DAC test data for request six
+  def interviewScheduledForSix(applicationDetails: ApplicationDetails): Unit =
+    if (vXInterviewExpectedRounds != "No interviews") {
+      1 to vXInterviewExpectedRounds.toInt foreach { _ =>
+        interviewSchedulePage(applicationDetails)
+        calenderSchedulePage(applicationDetails)
+        inviteToInterviewEmailFlow() //check function inside
+        confirmBookingSlot()
+        interviewSlotBookedState()
+        interviewScheduled()
         changeSystem("recruiter")
         vXInterviewNumber.remove(0)
       }

@@ -46,9 +46,9 @@ trait CivilServiceJobsBasePage extends Matchers with BasePage with BrowserDriver
     randomLastName
   }
 
-  def generateRandomPassword(): String = {
+  def generateRandomPassword(i: Int): String = {
     val fake = new Faker()
-    randomPassword = s"${fake.color().name()}${fake.cat().breed()}${Random.between(10, 99)}"
+    randomPassword = s"${fake.color().name().split("\\s+").map(_.capitalize).mkString("")}${fake.address().state().split("\\s+").map(_.capitalize).mkString("")}${i+11}"
     randomPassword
   }
 
@@ -100,12 +100,12 @@ trait CivilServiceJobsBasePage extends Matchers with BasePage with BrowserDriver
     generatedEmail()
   }
 
-  def generateTestCandidateDetails(): Unit = {
+  def generateTestCandidateDetails(i: Int): Unit = {
     generateRandomFirstName()
     generateRandomLastName()
 //    generatePreferredFirstName()
     generatedDacTestEmail()
-    generateRandomPassword()
+    generateRandomPassword(i)
   }
 
   def generateCandidateDetailsIterator(i: Int): Unit = {

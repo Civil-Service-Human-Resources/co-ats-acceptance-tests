@@ -152,7 +152,7 @@ object IDVT_PEC_FORM_DIGITAL_IDENTITY_CHECK
       "I consent to my data being processed for digital identity checks",
       true,
       "Do you have access to a smartphone or tablet with a camera?",
-      true,
+      false,
       "Do you have an in-date biometric passport or biometric ID card?",
       true,
       "Do you have an in-date photocard driving licence?",
