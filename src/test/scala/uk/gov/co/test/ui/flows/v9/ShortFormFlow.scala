@@ -40,7 +40,7 @@ object ShortFormFlow extends CivilServiceJobsBasePage {
       vXTechSkillsRequired ||
       vXGiveLocationPreference ||
       vXAttachmentRequired ||
-        vXAnyAdditionalQuestions.get
+      vXAnyAdditionalQuestions.get
     ) {
       confirmShortFormCompletion()
       vXNoLongForm = false

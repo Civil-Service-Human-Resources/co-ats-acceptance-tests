@@ -236,8 +236,23 @@ object ApplicationSummaryPage extends VacancyBasePage {
     }
   }
 
+  def selectedForOffer(): Unit = {
+    val newStatus = "Selected for Offer"
+    checkForNewValuePath(vacancyStatusPath, newStatus)
+    availableBarItems(
+      List(
+        provisionalOfferOnlineBarId,
+        provisionalOfferOfflineBarId,
+        uploadIDOnOfferBarId,
+        withdrawApplicationOnOfferBarId
+      )
+    )
+    confirmCandidateSummary(newStatus)
+  }
+
   def progressApplicationToOffer(): Unit = {
     val newStatus = "Provisional Offer - Online"
+    selectedForOffer()
     if (!driver.findElements(By.id(progressBarId)).isEmpty) {
       waitForVisibilityOfElementById(progressBarId).click()
     }

@@ -48,7 +48,7 @@ trait CivilServiceJobsBasePage extends Matchers with BasePage with BrowserDriver
 
   def generateRandomPassword(i: Int): String = {
     val fake = new Faker()
-    randomPassword = s"${fake.color().name().split("\\s+").map(_.capitalize).mkString("")}${fake.address().state().split("\\s+").map(_.capitalize).mkString("")}${i+11}"
+    randomPassword = s"${fake.color().name().split("\\s+").map(_.capitalize).mkString("")}${fake.address().state().split("\\s+").map(_.capitalize).mkString("")}$i"
     randomPassword
   }
 

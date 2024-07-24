@@ -148,6 +148,7 @@ object PersonalInfoPage extends CivilServiceJobsBasePage {
 //      &&
       (v9HomeDepartment == "Department for Energy Security & Net Zero" ||
         v9HomeDepartment == "Attorney General's Office" ||
+        v9HomeDepartment == "HM Revenue and Customs" ||
         v9HomeDepartment == "Animal and Plant Health Agency" ||
         v9HomeDepartment == "Asiantaeth Iechyd Anifeiliaid a Phlanhigion" ||
         v9HomeDepartment == "Home Office" ||

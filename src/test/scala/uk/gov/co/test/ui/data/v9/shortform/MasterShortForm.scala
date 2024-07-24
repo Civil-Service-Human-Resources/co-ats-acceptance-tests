@@ -18,7 +18,7 @@ object MASTER_SHORT_FORM_APP_GUIDANCE
 
 object MASTER_SHORT_FORM_ELIGIBILITY
     extends EligibilityDetails(
-      true,
+      false,
       true,
       true,
       true,

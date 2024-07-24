@@ -2,7 +2,7 @@ package uk.gov.co.test.ui.pages.v9
 
 import org.openqa.selenium.{By, WebElement}
 import org.scalatest.concurrent.Eventually.eventually
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{applicationId, randomEmail, v9RunInWelsh, vacancyId}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{applicationId, randomEmail, randomPassword, v9RunInWelsh, vacancyId}
 
 import scala.collection.mutable
 import scala.jdk.CollectionConverters._
@@ -130,6 +130,7 @@ object ApplicationsPage extends CivilServiceJobsBasePage {
     applicationId = applicationIdValue()
     println("===============================================")
     println(s"Candidate Email: $randomEmail")
+    println(s"Candidate Password: $randomPassword")
     println(s"Vacancy ID: $vacancyId")
     println(s"Application ID: $applicationId")
     println("===============================================")

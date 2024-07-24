@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.pages.v9.pecform
 
 import org.scalatest.concurrent.Eventually.eventually
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{v9RunInWelsh, vXApproach, vXCrcCheckProvider, vXCrcLevel, vXPecCrc, vXPecEmploymentHistoryCheck}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{v9RunInWelsh, vXApproach, vXCrcCheckProvider, vXCrcLevel, vXPecCrc, vXPecEmploymentHistoryCheck, vXTypeOfCandidate}
 import uk.gov.co.test.ui.data.v9.pecform.PecFormDetails
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
 import uk.gov.co.test.ui.pages.v9.pecform.YourDetailsPage.pecFormId
@@ -52,7 +52,7 @@ object DeclarationPage extends CivilServiceJobsBasePage {
   private def acceptDbsTerms(declarationDetails: DeclarationDetails): Unit =
     if (
       vXCrcLevel != "None" && vXCrcCheckProvider.contains("DBS") && !vXPecCrc.contains("Not Applicable") && vXPecCrc
-        .contains(s"$vXApproach Candidates")
+        .contains(s"$vXTypeOfCandidate Candidates")
     ) {
       waitForVisibilityOfElementById(
         dbsTermsOneTextId
@@ -71,7 +71,7 @@ object DeclarationPage extends CivilServiceJobsBasePage {
   private def consentTerms(declarationDetails: DeclarationDetails): Unit =
     if (
       !vXPecEmploymentHistoryCheck
-        .contains("Not Applicable") && vXPecEmploymentHistoryCheck.contains(s"$vXApproach Candidates")
+        .contains("Not Applicable") && vXPecEmploymentHistoryCheck.contains(s"$vXTypeOfCandidate Candidates")
     ) {
       waitForVisibilityOfElementById(
         consentOneTextId
