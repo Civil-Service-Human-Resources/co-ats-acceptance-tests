@@ -48,7 +48,7 @@ object PreviousCSEmploymentPage extends CivilServiceJobsBasePage {
       enterDismissalDate(previousCSEmploymentDetails)
       enterDetails(deptDismissedFromId, previousCSEmploymentDetails.deptDismissedFrom)
       enterDetails(reasonForDismissalId, previousCSEmploymentDetails.reasonForDismissal)
-      enterDismissalDetails(previousCSEmploymentDetails)
+      enterDetails(dismissalDetailsId, previousCSEmploymentDetails.dismissalDetails.get)
     } else {
       radioSelect(everDismissedFromCSNoId)
     }
@@ -60,11 +60,6 @@ object PreviousCSEmploymentPage extends CivilServiceJobsBasePage {
       dismissalDateMonthId,
       dismissalDateYearId
     )
-
-  private def enterDismissalDetails(previousCSEmploymentDetails: PreviousCSEmploymentDetails): Unit =
-    if (Some(previousCSEmploymentDetails.dismissalDetails).nonEmpty) {
-      enterDetails(dismissalDetailsId, previousCSEmploymentDetails.dismissalDetails.get)
-    }
 
   private val previousCSEmployment: Seq[PreviousCSEmploymentDetails => Unit] = Seq(
     selectPreviousCSEmployment
