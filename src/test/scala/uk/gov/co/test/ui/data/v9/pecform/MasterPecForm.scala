@@ -238,9 +238,14 @@ object MASTER_PEC_FORM_SELF_EMPLOYMENT
     )
 
 object MASTER_PEC_FORM_PREVIOUS_CS_EMPLOYMENT
-    extends PreviousCSEmploymentDetails(
-      false
-    )
+  extends PreviousCSEmploymentDetails(
+    true,
+    true,
+    dismissalDate = LocalDate.now().minusMonths(22),
+    "Autotest - department dismissed from",
+    "Autotest - reason for dismissal",
+    dismissalDetails = Some("Autotest - dismissal details")
+  )
 
 object MASTER_PEC_FORM_DBS_PERSONAL_INFO
     extends DbsPersonalInfoDetails(

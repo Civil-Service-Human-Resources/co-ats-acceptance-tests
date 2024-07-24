@@ -130,7 +130,12 @@ object IDVT_PEC_FORM_SELF_EMPLOYMENT
 
 object IDVT_PEC_FORM_PREVIOUS_CS_EMPLOYMENT
     extends PreviousCSEmploymentDetails(
-      false
+      true,
+      true,
+      dismissalDate = LocalDate.now().minusMonths(22),
+      "Autotest - department dismissed from",
+      "Autotest - reason for dismissal",
+      dismissalDetails = Some("Autotest - dismissal details")
     )
 
 object IDVT_PEC_FORM_UPLOAD_IDENTITY_DOCS

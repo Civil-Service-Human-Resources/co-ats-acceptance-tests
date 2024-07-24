@@ -297,9 +297,14 @@ object NON_NAME_BLIND_PEC_FORM_SELF_EMPLOYMENT
     )
 
 object NON_NAME_BLIND_PEC_FORM_PREVIOUS_CS_EMPLOYMENT
-    extends PreviousCSEmploymentDetails(
-      false
-    )
+  extends PreviousCSEmploymentDetails(
+    true,
+    true,
+    dismissalDate = LocalDate.now().minusMonths(22),
+    "Autotest - department dismissed from",
+    "Autotest - reason for dismissal",
+    dismissalDetails = Some("Autotest - dismissal details")
+  )
 
 object NON_NAME_BLIND_PEC_FORM_NATIONAL_SECURITY_VETTING
     extends NsvDetails(
