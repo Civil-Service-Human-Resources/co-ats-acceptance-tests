@@ -36,8 +36,8 @@ class PecVacancySpec extends BaseFeatureSpec {
     Scenario("VX: A Candidate Completes The Candidate PEC Forms With Workplace Misconduct Section", RunInVX) {
       Given("candidate registers for new job application")
 //      fillNewVacancyForm(PEC_MISCONDUCT_ONLY_VACANCY_DATA)
-      fillNewVacancyForm(PEC_VACANCY_DATA)
-//      extractAllVacancyDetails("10403")
+//      fillNewVacancyForm(PEC_VACANCY_DATA)
+      extractAllVacancyDetails("10427")
       fillNewCandidateDetails(REGISTER_CANDIDATE_PEC)
 
       When("candidate completes all forms")

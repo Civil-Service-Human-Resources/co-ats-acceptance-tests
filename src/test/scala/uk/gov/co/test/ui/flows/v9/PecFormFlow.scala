@@ -32,9 +32,9 @@ object PecFormFlow extends CivilServiceJobsBasePage {
     workplaceMisconductPage,
     pensionQuestionnairePage,
     overseasPage,
-    bankruptcyDetailsPage, //TODO full logic required
-    healthDeclarationPage, //TODO full logic required
-    selfEmploymentPage, //TODO full logic required
+    bankruptcyDetailsPage,
+    healthDeclarationPage,
+    selfEmploymentPage,
     previousCSEmploymentPage, //TODO full logic required
     nationalSecurityVettingPage,
     uploadIdentityDocPage,

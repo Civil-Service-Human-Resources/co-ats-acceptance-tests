@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.pages.v9.pecform
 
 import org.scalatest.concurrent.Eventually.eventually
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{randomEmail, vXApproach, vXCrcCheckProvider, vXCrcLevel, vXPecCrc, vXTypeOfCandidate}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{randomEmail, vXCrcCheckProvider, vXCrcLevel, vXPecCrc, vXTypeOfCandidate}
 import uk.gov.co.test.ui.data.v9.pecform.PecFormDetails
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
 import uk.gov.co.test.ui.pages.v9.pecform.YourDetailsPage.pecFormId
@@ -119,15 +119,8 @@ object DbsPersonalInfoPage extends CivilServiceJobsBasePage {
       enterDetails(lastNameAtBirthId, dbsPersonalInfoDetails.lastNameAtBirth)
     }
 
-  private def enterDate(date: String, dayId: String, monthId: String, yearId: String): Unit = {
-    val (day, month, year) = splitDate(date)
-    enterDate(dayId, day)
-    enterDate(monthId, month)
-    enterDate(yearId, year)
-  }
-
   private def enterDob(dbsPersonalInfoDetails: DbsPersonalInfoDetails): Unit =
-    enterDate(dbsPersonalInfoDetails.dob, dobDayId, dobMonthId, dobYearId)
+    enterStartOrEndDate(dbsPersonalInfoDetails.dob, dobDayId, dobMonthId, dobYearId)
 
   private def selectOtherNames(dbsPersonalInfoDetails: DbsPersonalInfoDetails): Unit =
     if (dbsPersonalInfoDetails.otherNames) {
@@ -167,8 +160,8 @@ object DbsPersonalInfoPage extends CivilServiceJobsBasePage {
       enterDetails(passportNumberId, dbsPersonalInfoDetails.passportNumber)
       selectDropdownOption(passportCountryIssueId, dbsPersonalInfoDetails.passportCountryIssue)
       if (vXCrcLevel == "Standard" || vXCrcLevel == "Enhanced") {
-        enterDate(dbsPersonalInfoDetails.passportDob, passportDobDayId, passportDobMonthId, passportDobYearId)
-        enterDate(
+        enterStartOrEndDate(dbsPersonalInfoDetails.passportDob, passportDobDayId, passportDobMonthId, passportDobYearId)
+        enterStartOrEndDate(
           dbsPersonalInfoDetails.passportIssueDate,
           passportIssueDayId,
           passportIssueMonthId,
@@ -184,14 +177,14 @@ object DbsPersonalInfoPage extends CivilServiceJobsBasePage {
       radioSelect(drivingLicenceYesId)
       enterDetails(drivingLicenceNumberId, dbsPersonalInfoDetails.drivingLicenceNumber)
       if (vXCrcLevel == "Standard" || vXCrcLevel == "Enhanced") {
-        enterDate(
+        enterStartOrEndDate(
           dbsPersonalInfoDetails.drivingLicenceDob,
           drivingLicenceDobDayId,
           drivingLicenceDobMonthId,
           drivingLicenceDobYearId
         )
         selectDropdownOption(drivingLicenceTypeId, dbsPersonalInfoDetails.drivingLicenceType)
-        enterDate(
+        enterStartOrEndDate(
           dbsPersonalInfoDetails.drivingLicenceValidFromDate,
           drivingLicenceValidDayId,
           drivingLicenceValidMonthId,

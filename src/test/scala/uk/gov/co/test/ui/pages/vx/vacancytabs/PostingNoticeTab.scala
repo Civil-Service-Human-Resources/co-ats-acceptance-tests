@@ -7,7 +7,6 @@ import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.{completePostingNoticeF
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 
 import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 import scala.collection.mutable.ListBuffer
 
 case class PostingNoticeDetails(
@@ -217,12 +216,6 @@ object PostingNoticeTab extends VacancyBasePage {
 
   private def enterStartTimeFirstDay(postingNoticeDetails: PostingNoticeDetails): Unit =
     enterTimeFields(postingNoticeDetails.startTime, startTimeHourId, startTimeMinuteId)
-
-  def formattedDate(atDate: LocalDate): String = {
-    val formatter     = DateTimeFormatter.ofPattern("dd/MM/yyyy")
-    val formattedDate = atDate.format(formatter)
-    formattedDate
-  }
 
   private def selectDualLocation(postingNoticeDetails: PostingNoticeDetails): Unit =
     if (postingNoticeDetails.dualLocation) {

@@ -13,6 +13,8 @@ import uk.gov.co.test.ui.pages.BasePage
 import uk.gov.co.test.ui.pages.v9.SearchJobsPage.civilServiceJobsPageTitle
 import uk.gov.co.test.ui.pages.v9.SignInPage.{searchForSignOut, signOut}
 
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import java.util
 import scala.util.Random
 
@@ -48,7 +50,8 @@ trait CivilServiceJobsBasePage extends Matchers with BasePage with BrowserDriver
 
   def generateRandomPassword(i: Int): String = {
     val fake = new Faker()
-    randomPassword = s"${fake.color().name().split("\\s+").map(_.capitalize).mkString("")}${fake.address().state().split("\\s+").map(_.capitalize).mkString("")}$i"
+    randomPassword =
+      s"${fake.color().name().split("\\s+").map(_.capitalize).mkString("")}${fake.address().state().split("\\s+").map(_.capitalize).mkString("")}$i"
     randomPassword
   }
 
@@ -187,5 +190,18 @@ trait CivilServiceJobsBasePage extends Matchers with BasePage with BrowserDriver
   def enterDate(id: String, value: String): Unit = {
     val dateValue = new Select(waitForVisibilityOfElementById(id))
     dateValue.selectByValue(value)
+  }
+
+  def enterStartOrEndDate(date: String, dayId: String, monthId: String, yearId: String): Unit = {
+    val (day, month, year) = splitDate(date)
+    enterDate(dayId, day)
+    enterDate(monthId, month)
+    enterDate(yearId, year)
+  }
+
+  def formattedDate(atDate: LocalDate): String = {
+    val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
+    val formattedDate = atDate.format(formatter)
+    formattedDate
   }
 }

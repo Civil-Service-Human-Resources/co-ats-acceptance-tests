@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.pages.v9.pecform
 
 import org.scalatest.concurrent.Eventually.eventually
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXApproach, vXPecPensionsCheck, vXTypeOfCandidate}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXPecPensionsCheck, vXTypeOfCandidate}
 import uk.gov.co.test.ui.data.v9.pecform.PecFormDetails
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
 import uk.gov.co.test.ui.pages.v9.pecform.YourDetailsPage.pecFormId
@@ -95,8 +95,8 @@ object PensionQuestionnairePage extends CivilServiceJobsBasePage {
   }
 
   private def pensionInfoCheck(pensionDetails: PensionDetails): Unit = {
-    waitForVisibilityOfElementById(pensionInfoHeaderId).getText shouldEqual (pensionDetails.pensionInfoHeader)
-    waitForVisibilityOfElementByPath(pensionInfoId).getText     shouldEqual (pensionDetails.pensionInfo)
+    waitForVisibilityOfElementById(pensionInfoHeaderId).getText shouldEqual pensionDetails.pensionInfoHeader
+    waitForVisibilityOfElementByPath(pensionInfoId).getText     shouldEqual pensionDetails.pensionInfo
   }
 
   private def enterDate(date: String, dayId: String, monthId: String, yearId: String): Unit = {

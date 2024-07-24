@@ -297,4 +297,10 @@ trait VacancyBasePage extends Matchers with BasePage with BrowserDriver {
       fieldId.sendKeys(Keys.BACK_SPACE)
     }
 
+  def formattedDate(atDate: LocalDate): String = {
+    val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
+    val formattedDate = atDate.format(formatter)
+    formattedDate
+  }
+
 }

@@ -5,6 +5,8 @@ import uk.gov.co.test.ui.data.v9.pecform.PecFormDetails
 import uk.gov.co.test.ui.pages.v9.pecform._
 import uk.gov.co.test.ui.pages.vx.DashboardPage.v9RefereeEmail
 
+import java.time.LocalDate
+
 object IDVT_PEC_FORM_DATA
     extends PecFormDetails(
       IDVT_PEC_FORM_YOUR_DETAILS,
@@ -83,12 +85,47 @@ object IDVT_PEC_FORM_BANKRUPTCY_DETAILS
 
 object IDVT_PEC_FORM_HEALTH_DECLARATION
     extends HealthDeclarationDetails(
-      false, false, false, false, false, false, false
+      true,
+      "Autotest - any adjustments details",
+      true,
+      "Autotest - health issues details",
+      true,
+      "Autotest - conditions affecting job advert details",
+      true,
+      "Autotest - ongoing investigations details",
+      true,
+      "Autotest - current health issues that may affect new role details",
+      true,
+      "Autotest - health related absence details",
+      true,
+      "Autotest - discuss any health related issues details"
     )
 
 object IDVT_PEC_FORM_SELF_EMPLOYMENT
     extends SelfEmploymentDetails(
-      false
+      true,
+      employmentStartDate = LocalDate.now().minusYears(3),
+      employmentEndDate = LocalDate.now().minusMonths(3),
+      "Autotest - name of business",
+      "Autotest - type of business",
+      true,
+      "Autotest - details about why the accounts are not closed",
+      false,
+      "Autotest - details of the status of these accounts",
+      true,
+      "Alliance & Roberts",
+      "Mr Automation",
+      "07700123123",
+      emailOfSolicitorOrAccountant = s"$v9RefereeEmail",
+      true,
+      "Test-T&Cs.pdf",
+      true,
+      "1234567890",
+      true,
+      true,
+      "Autotest - details about the self-employment you intend to keep after you start your Civil Service role",
+      true,
+      "Autotest - how your self-employment could cause a conflict of interest with your Civil Service role"
     )
 
 object IDVT_PEC_FORM_PREVIOUS_CS_EMPLOYMENT
@@ -202,7 +239,7 @@ object IDVT_PEC_FORM_WORKPLACE_MISCONDUCT
 object IDVT_PEC_FORM_PENSION_QUESTIONNAIRE
     extends PensionDetails(
       "Your answers will allow us to work out which of the Civil Service Pension schemes you can join.",
-      "Have you ever been a member of public service pension scheme?\nAnswer this question with your latest period of pension scheme membership. Public services employers include the Civil Service, judiciary workers, teachers, members of the armed forces, fire and rescue services, the police, health service workers and local government employees. *By-analogy schemes are almost identical to the main Civil Service arrangements, but may have slightly different terms or rules.",
+      "Have you ever been a member of public service pension scheme?\nAnswer this question with your latest period of pension scheme membership. Public services employers include the Civil Service, judiciary workers, teachers, members of the armed forces, fire and rescue services, the police, health service workers and local government employees.\n*By-analogy schemes are almost identical to the main Civil Service arrangements, but may have slightly different terms or rules.",
       "Civil Service Pension arrangements",
       "HMRC",
       "Classic plus",
