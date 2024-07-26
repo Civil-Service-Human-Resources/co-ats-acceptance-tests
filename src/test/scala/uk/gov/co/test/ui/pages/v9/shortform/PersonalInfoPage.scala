@@ -154,7 +154,7 @@ object PersonalInfoPage extends CivilServiceJobsBasePage {
         v9HomeDepartment == "Home Office" ||
         v9HomeDepartment == "Swyddfa Gartref" ||
         v9HomeDepartment == "Department for Science, Innovation and Technology" ||
-        v9HomeDepartment == "Department for Environment, Food and Rural Affairs" ||
+//        v9HomeDepartment == "Department for Environment, Food and Rural Affairs" ||
         v9HomeDepartment == "Government Equalities Office" ||
         v9HomeDepartment == "Revenue Scotland" ||
         v9HomeDepartment == "Scottish Fiscal Commission" ||

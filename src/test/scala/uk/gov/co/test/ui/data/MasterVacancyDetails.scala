@@ -226,7 +226,8 @@ object MasterVacancyDetails extends VacancyBasePage {
   //v9 SHORT FORM eligibility page
   var v9RunInWelsh: Boolean    = false
   var v9CivilServant: Boolean  = _
-  var v9HomeDepartment: String = "Animal and Plant Health Agency"
+  var v9HomeDepartment: String = ""
+//  var v9HomeDepartment: String = "Animal and Plant Health Agency"
 
   //v9 SHORT FORM personal info page
   var v9ReasonableAdjustments = false

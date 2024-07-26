@@ -246,10 +246,10 @@ trait VacancyBasePage extends Matchers with BasePage with BrowserDriver {
     extractTabFormId()
   }
 
-  def moveVacancyOnAndSendEmail(barId: String, tabPath: String, sendEMail: String): Unit = {
+  def moveVacancyOnAndSendEmail(barId: String, tabPath: String, sendEmail: String): Unit = {
     clickOn(barId)
     waitForVisibilityOfElementByPath(tabPath).isDisplayed
-    waitForVisibilityOfElementById(sendEMail).click()
+    waitForVisibilityOfElementById(sendEmail).click()
   }
 
   def selectDropdownOption(selectId: String, selectOption: String): Unit = {
@@ -301,6 +301,13 @@ trait VacancyBasePage extends Matchers with BasePage with BrowserDriver {
     val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
     val formattedDate = atDate.format(formatter)
     formattedDate
+  }
+
+  def selectDropdownById(id: String, value: String): Unit = {
+    scrollToElement(By.id(id))
+    waitForVisibilityOfElementById(id).click()
+    val dept = new Select(waitForVisibilityOfElementById(id))
+    dept.selectByVisibleText(value)
   }
 
 }

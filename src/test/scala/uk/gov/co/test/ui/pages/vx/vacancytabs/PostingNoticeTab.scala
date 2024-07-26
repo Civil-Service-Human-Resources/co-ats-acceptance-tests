@@ -143,6 +143,7 @@ object PostingNoticeTab extends VacancyBasePage {
   }
 
   private def vacancyInfoSection(postingNoticeDetails: PostingNoticeDetails): Unit = {
+    scrollToElement(By.id(pnVacancyInfoHeaderId))
     waitForVisibilityOfElementById(pnVacancyInfoHeaderId).getText shouldEqual "Vacancy Information"
     waitForVisibilityOfElementById(vacancyRefId).getText               should endWith(vacancyId)
     waitForVisibilityOfElementById(vacancyTitleId).getText             should endWith(vacancyName)
@@ -154,6 +155,7 @@ object PostingNoticeTab extends VacancyBasePage {
   }
 
   private def newEntrantInfoSection(postingNoticeDetails: PostingNoticeDetails): Unit = {
+    scrollToElement(By.id(newEntrantHeaderId))
     waitForVisibilityOfElementById(newEntrantHeaderId).getText  shouldEqual "New Entrant Information"
     waitForVisibilityOfElementById(forenameId).getText               should endWith(randomFirstName)
     waitForVisibilityOfElementById(preferredNameId).getText          should endWith(preferredFirstName)
@@ -164,6 +166,7 @@ object PostingNoticeTab extends VacancyBasePage {
   }
 
   private def postingInfoSection(postingNoticeDetails: PostingNoticeDetails): Unit = {
+    scrollToElement(By.id(postingInfoHeaderId))
     waitForVisibilityOfElementById(postingInfoHeaderId).getText shouldEqual "Posting Information"
     enterStartDate(postingNoticeDetails)
     enterStartTimeFirstDay(postingNoticeDetails)
@@ -193,6 +196,7 @@ object PostingNoticeTab extends VacancyBasePage {
   }
 
   private def lineManagerDetailsSection(postingNoticeDetails: PostingNoticeDetails): Unit = {
+    scrollToElement(By.id(lineManagerDetailsHeaderId))
     waitForVisibilityOfElementById(lineManagerDetailsHeaderId).getText shouldEqual "Line Manager Details"
     enterPnValue(lineManagersFullNameId, postingNoticeDetails.lineManagersFullName)
     enterPnValue(lineManagersTelNoId, postingNoticeDetails.lineManagersTeleNo)
@@ -201,6 +205,7 @@ object PostingNoticeTab extends VacancyBasePage {
   }
 
   private def timeRecord(): Unit = {
+    scrollToElement(By.id(completedById))
     waitForVisibilityOfElementById(completedById).getText        should startWith("Completed By -")
     waitForVisibilityOfElementById(dateAndTimeUpdatedId).getText should startWith("Date and time updated - ")
     scrollToElement(By.id(submitForm))
@@ -229,6 +234,7 @@ object PostingNoticeTab extends VacancyBasePage {
     val employmentType = postingNoticeDetails.employmentType
     waitForVisibilityOfElementById(employmentTypeId).click()
     selectOption(generalInput, employmentType)
+
     if (
       employmentType == "Temporary" ||
       employmentType == "Fixed Term Appointment" ||

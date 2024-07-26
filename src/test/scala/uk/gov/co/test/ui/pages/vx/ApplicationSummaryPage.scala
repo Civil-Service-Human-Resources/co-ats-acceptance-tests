@@ -2,7 +2,7 @@ package uk.gov.co.test.ui.pages.vx
 
 import org.openqa.selenium.By
 import org.scalatest.concurrent.Eventually.eventually
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{applicationId, randomFirstName, randomLastName, v9CivilServant, v9HomeDepartment, v9PecRequired, v9RunInWelsh, vXCandidateUploadIdentityDocs, vXCrcCheckProvider, vXCrcLevel, vXCvAttachment, vXInterviewNumber, vXJobInfoDepartment, vXPecBankruptcyCheck, vXPecCrc, vXPecEmploymentHistoryCheck, vXPecFraudCheck, vXPecGeneralInfo, vXPecHealthRefCheck, vXPecNen, vXPecNsv, vXPecOgdSecurityCheck, vXPecOverseasCheck, vXPecPensionsCheck, vXPecPn, vXPecPreviousCivilEmploymentCheck, vXPecReferenceCheck, vXPecSelfEmploymentCheck, vXPecWorkplaceMisconductCheck, vXPersonalStatement, vXTypeOfCandidate, vXUseOnlinePecForms, vXVettingLevel, vXWhichIdentityChecks, vacancyId, vacancyName}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{applicationId, randomFirstName, randomLastName, v9CivilServant, v9HomeDepartment, v9PecRequired, v9RunInWelsh, vXCandidateUploadIdentityDocs, vXCrcCheckProvider, vXCrcLevel, vXCvAttachment, vXInterviewNumber, vXJobInfoDepartment, vXPecBankruptcyCheck, vXPecCrc, vXPecEmploymentHistoryCheck, vXPecFraudCheck, vXPecGeneralInfo, vXPecHealthRefCheck, vXPecNen, vXPecNsv, vXPecOgdSecurityCheck, vXPecOverseasCheck, vXPecPensionsCheck, vXPecPn, vXPecPreviousCivilEmploymentCheck, vXPecReferenceCheck, vXPecSelfEmploymentCheck, vXPecWorkplaceMisconductCheck, vXPersonalStatement, vXTypeOfCandidate, vXUseOnlinePecForms, vXVettingLevel, vacancyId, vacancyName}
 import uk.gov.co.test.ui.data.vx.application.MASTER_APPLICATION_DATA
 import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.{candidateAcceptsOffer, confirmApplicationUpdateNoPecNen, confirmApplicationUpdateNoPecPn, confirmApplicationUpdateState, confirmOfferAcceptedNoPecFunction, v9ConfirmOfferAcceptedState}
 import uk.gov.co.test.ui.pages.v9.ProvisionalOfferPage.offerDecisionFlow
@@ -136,10 +136,9 @@ object ApplicationSummaryPage extends VacancyBasePage {
   }
 
   def moveAndAcceptOffer(): Unit = {
+    selectedForOffer()
     progressApplicationToOffer()
     candidateAcceptsOffer()
-    if (v9RunInWelsh) offerDecisionFlow("Derbyn") else offerDecisionFlow("Accept")
-    vXExtractTypeOfCandidate()
     pecFieldsRequired()
     if (!vXUseOnlinePecForms) {
       confirmApplicationUpdateState()
@@ -147,22 +146,18 @@ object ApplicationSummaryPage extends VacancyBasePage {
     } else {
       if (
         vXUseOnlinePecForms && !v9PecRequired &&
-        ((!vXPecPn.contains("Not Applicable") && vXPecPn.contains(s"$vXTypeOfCandidate Candidates")) &&
-          (v9CivilServant && vXJobInfoDepartment == v9HomeDepartment)) &&
-        ((vXVettingLevel != "None") || (vXCrcLevel != "None" && vXCrcCheckProvider.contains("DBS")))
+        (!vXPecPn.contains("Not Applicable") && vXPecPn.contains(s"$vXTypeOfCandidate Candidates")) &&
+        (v9CivilServant && vXJobInfoDepartment == v9HomeDepartment)
       ) {
         confirmApplicationUpdateNoPecPn()
         postingNoticeRequested()
       } else if (
         vXUseOnlinePecForms && !v9PecRequired &&
         ((!vXPecNen.contains("Not Applicable") && vXPecNen.contains(s"$vXTypeOfCandidate Candidates")) &&
-          (v9CivilServant && vXJobInfoDepartment != v9HomeDepartment)) &&
-        vXWhichIdentityChecks != "None"
+          ((v9CivilServant && vXJobInfoDepartment != v9HomeDepartment) || !v9CivilServant))
       ) {
         confirmApplicationUpdateNoPecNen()
         checksCompleteDecisionRequired()
-        //added these
-        checkVacancyStatus("Checks Complete – Decision Required")
         moveVacancyOnAndSendEmail(passChecksBarId, emailChecksClearPath, correspondenceSendId)
       } else if (
         vXUseOnlinePecForms && v9PecRequired &&
@@ -252,7 +247,6 @@ object ApplicationSummaryPage extends VacancyBasePage {
 
   def progressApplicationToOffer(): Unit = {
     val newStatus = "Provisional Offer - Online"
-    selectedForOffer()
     if (!driver.findElements(By.id(progressBarId)).isEmpty) {
       waitForVisibilityOfElementById(progressBarId).click()
     }

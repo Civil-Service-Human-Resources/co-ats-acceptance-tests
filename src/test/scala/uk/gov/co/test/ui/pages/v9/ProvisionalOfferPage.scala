@@ -45,16 +45,32 @@ object ProvisionalOfferPage extends CivilServiceJobsBasePage {
   private def selectOfferDecision(decision: String): Unit =
     selectDropdownOption(offerDecisionOptionId, decision)
 
+//  private def acceptOffer(): Unit =
+//    if (v9CivilServant) {
+//      radioSelect(isCivilServantYesId)
+//      if (v9HomeDepartment.isEmpty) {
+//        if (v9RunInWelsh) {
+//          selectDropdownOption(homeDepartmentId, "Asiantaeth Iechyd Anifeiliaid a Phlanhigion")
+//          v9HomeDepartment = "Asiantaeth Iechyd Anifeiliaid a Phlanhigion"
+//        } else {
+//          selectDropdownOption(homeDepartmentId, "Animal and Plant Health Agency")
+//          v9HomeDepartment = "Animal and Plant Health Agency"
+//        }
+//      } else {
+//        selectDropdownOption(homeDepartmentId, v9HomeDepartment)
+//      }
+//    } else radioSelect(isCivilServantNoId)
+
   private def acceptOffer(): Unit =
     if (v9CivilServant) {
       radioSelect(isCivilServantYesId)
       if (v9HomeDepartment.isEmpty) {
-        if (v9RunInWelsh) {
-          selectDropdownOption(homeDepartmentId, "Asiantaeth Iechyd Anifeiliaid a Phlanhigion")
-          v9HomeDepartment = "Asiantaeth Iechyd Anifeiliaid a Phlanhigion"
-        } else {
+        if (!v9RunInWelsh) {
           selectDropdownOption(homeDepartmentId, "Animal and Plant Health Agency")
           v9HomeDepartment = "Animal and Plant Health Agency"
+        } else {
+          selectDropdownOption(homeDepartmentId, "Asiantaeth Iechyd Anifeiliaid a Phlanhigion")
+          v9HomeDepartment = "Asiantaeth Iechyd Anifeiliaid a Phlanhigion"
         }
       } else {
         selectDropdownOption(homeDepartmentId, v9HomeDepartment)

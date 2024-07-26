@@ -5,6 +5,8 @@ import org.scalatest.concurrent.Eventually.eventually
 import uk.gov.co.test.ui.data.MasterVacancyDetails.{randomFirstName, randomLastName, v9AdjustmentsForTests, v9ReasonableAdjustments, v9RunInWelsh, vXAnyOnlineTests, vXInterviewExpectedRounds, vXInterviewFourType, vXInterviewLocation, vXInterviewLongDate, vXInterviewNumber, vXInterviewOneType, vXInterviewThreeType, vXInterviewTwoType, vXPreSiftRequired, vXSlotTwoStartTime, vacancyName}
 import uk.gov.co.test.ui.data.vx.application.ApplicationDetails
 import uk.gov.co.test.ui.pages.v9.ApplicationsPage.{confirmStatusOnApplicationPage, reviewUpdateOnApplicationPage}
+import uk.gov.co.test.ui.pages.v9.ProvisionalOfferPage.offerDecisionFlow
+import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.vXExtractTypeOfCandidate
 import uk.gov.co.test.ui.pages.vx.DashboardPage.contactEmailVxConfig
 import uk.gov.co.test.ui.pages.vx.vacancytabs.ReserveListsTab.reserveExpiryDateMonths
 
@@ -34,7 +36,7 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
   val startTestButtonPath                = ".//input[@value='Start Test']"
   val resumeTestButtonPath               = ".//input[@value='Resume Test']"
   val pecStartButtonPath                 = ".//input[@value='Begin pre-employment checks']"
-  val welshPecStartButtonPath                 = ".//input[@value='Dechrau gwiriadau cyn-cyflogaeth']"
+  val welshPecStartButtonPath            = ".//input[@value='Dechrau gwiriadau cyn-cyflogaeth']"
   val applicationLinkPath                = ".//a[@title='Applications']"
   val continueApplicationName            = "submit_form"
 
@@ -84,10 +86,9 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
   def resumeTestFunction(): WebElement =
     waitForVisibilityOfElementByPath(resumeTestButtonPath)
 
-  def pecStartFunction(): WebElement = {
+  def pecStartFunction(): WebElement =
     if (v9RunInWelsh) waitForVisibilityOfElementByPath(welshPecStartButtonPath)
     else waitForVisibilityOfElementByPath(pecStartButtonPath)
-  }
 
   def helpWithSelectionText(): String =
     driver.findElement(By.tagName("b")).getText
@@ -195,25 +196,27 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
   def candidateAcceptsOffer(): Unit = {
     confirmProvisionalOfferState()
     offerDecisionFunction().click()
+    if (!v9RunInWelsh) offerDecisionFlow("Accept") else offerDecisionFlow("Derbyn")
+    vXExtractTypeOfCandidate()
   }
 
   def v9ConfirmOfferAcceptedState(): Unit = {
-    val status = "Offer accepted"
+    val status      = "Offer accepted"
     val welshStatus = "Cynnig wedi'i dderbyn"
     changeSystem("candidate")
-    if (v9RunInWelsh) {
-      confirmStatusOnApplicationPage(welshStatus)
-      getApplicationState shouldEqual s"Statws cais: $welshStatus"
-      getApplicationConfirmation shouldEqual
-        """Rydym yn falch eich bod chi wedi derbyn ein cynnig swydd.
-          |Fel rhan o'r broses gyflogi rydym angen gwybodaeth ychwanegol.""".stripMargin
-    } else {
+    if (!v9RunInWelsh) {
       confirmStatusOnApplicationPage(status)
-      applicationForVacancyText shouldEqual s"Application For $vacancyName"
-      getApplicationState shouldEqual s"Application status: $status"
+      applicationForVacancyText  shouldEqual s"Application For $vacancyName"
+      getApplicationState        shouldEqual s"Application status: $status"
       getApplicationConfirmation shouldEqual
         """We're delighted that you have accepted our job offer.
           |As part of the onboarding process we require additional information.""".stripMargin
+    } else {
+      confirmStatusOnApplicationPage(welshStatus)
+      getApplicationState        shouldEqual s"Statws cais: $welshStatus"
+      getApplicationConfirmation shouldEqual
+        """Rydym yn falch eich bod chi wedi derbyn ein cynnig swydd.
+          |Fel rhan o'r broses gyflogi rydym angen gwybodaeth ychwanegol.""".stripMargin
     }
     applicationCentrePageCheck()
     pecStartFunction().isEnabled

@@ -422,7 +422,7 @@ object MASTER_APPLICATION_POSTING_NOTICE
       "Autotest address",
       true,
       "autotest - 2nd location",
-      "Temporary",
+      "Fixed Term Appointment",
       "The post is time limited and is being advertised as an apprenticeship for the advertised period. The fixed-term will end when the apprenticeship has completed.",
       "autotest - key responsibilities",
       contractEndDate = LocalDate.now(),
