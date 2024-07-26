@@ -50,11 +50,10 @@ object PersonalInfoPage extends CivilServiceJobsBasePage {
   def veteranInitiativeYesId               = s"${shortFormId}_datafield_138179_1_1_1_label"
   def veteranInitiativeNoId                = s"${shortFormId}_datafield_138179_1_1_2_label"
 
-  private def personalInfoPageCheck(): Unit =
+  def personalInfoPageCheck(): Unit =
     if (v9RunInWelsh) eventually(onPage(welshPersonalInfoTitle)) else eventually(onPage(personalInfoTitle))
 
   private def enterFirstName(personalInfoDetails: PersonalInfoDetails): Unit = {
-    personalInfoPageCheck()
     if (extractValue(firstNameInputId).isEmpty) {
       enterDetails(firstNameInputId, randomFirstName)
     } else extractValue(firstNameInputId) shouldEqual randomFirstName
@@ -159,6 +158,7 @@ object PersonalInfoPage extends CivilServiceJobsBasePage {
   )
 
   def personalInfoPage(shortFormDetails: ShortFormDetails): Unit = {
+    personalInfoPageCheck()
     personalInfo.foreach { f =>
       f(shortFormDetails.personalInfoDetails)
     }

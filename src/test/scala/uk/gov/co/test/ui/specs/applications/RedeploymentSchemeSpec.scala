@@ -3,8 +3,9 @@ package uk.gov.co.test.ui.specs.applications
 import uk.gov.co.test.ui.data.MasterVacancyDetails.{v9HomeDepartment, vacancyId}
 import uk.gov.co.test.ui.data.test.redeployment.{NON_REDEPLOYMENT_VACANCY_DATA, REDEPLOYMENT_SHORT_FORM_DATA}
 import uk.gov.co.test.ui.data.v9.applicants._
+import uk.gov.co.test.ui.data.v9.shortform.MASTER_SHORT_FORM_DATA
 import uk.gov.co.test.ui.flows.v9.RegisterCandidateFlow.fillNewCandidateDetails
-import uk.gov.co.test.ui.flows.v9.ShortFormFlow.fillShortFormDetails
+import uk.gov.co.test.ui.flows.v9.ShortFormFlow.{checkRedeploymentDepartments, fillShortFormDetails}
 import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.fillNewVacancyForm
 import uk.gov.co.test.ui.pages.vx.VacancyDetailsPage.extractAllVacancyDetails
 import uk.gov.co.test.ui.specs.BaseFeatureSpec
@@ -12,6 +13,18 @@ import uk.gov.co.test.ui.tags.RunInVX
 
 class RedeploymentSchemeSpec extends BaseFeatureSpec {
   Feature("Candidate To Be Considered Under The Redeployment Scheme") {
+    Scenario("VX: All Home Departments Checked For Redeployment Scheme", RunInVX) {
+      Given("a vacancy is included in the redeployment scheme")
+      extractAllVacancyDetails("9667")
+
+      When("a candidate selects an eligible home department")
+      fillNewCandidateDetails(REGISTER_CANDIDATE_REDEPLOYMENT_SCHEME_1)
+
+      Then("they are asked if they meet the criteria to be considered under the redeployment scheme")
+      checkRedeploymentDepartments(MASTER_SHORT_FORM_DATA)
+    }
+
+
     Scenario("VX: Candidate Selects DESNZ Home Department For Redeployment Scheme", RunInVX) {
       Given("a vacancy is included in the redeployment scheme")
       vacancyId = "9667"

@@ -20,6 +20,7 @@ object EligibilityPage extends CivilServiceJobsBasePage {
 
   private lazy val eligibilityTitle       = "Eligibility - Civil Service Jobs - GOV.UK"
   private lazy val welshEligibilityTitle  = "Cymhwyster - Civil Service Jobs - GOV.UK"
+  val eligibilityPageTracker              = ".//a[@aria-label='Section Header: Eligibility  Item completed']"
   def currentCivilServantYesId            = s"${shortFormId}_datafield_87767_1_1_1_label"
   def currentCivilServantNoId             = s"${shortFormId}_datafield_87767_1_1_2_label"
   def homeDepartmentSelectId              = s"${shortFormId}_datafield_177937_1_1"
@@ -38,7 +39,7 @@ object EligibilityPage extends CivilServiceJobsBasePage {
   def licenceRequirementsNoId             = s"${shortFormId}_datafield_26731_1_1_799_label"
   def licenceRequirementsSimilarId        = s"${shortFormId}_datafield_26731_1_1_800_label"
 
-  private def eligibilityPageCheck(): Unit =
+  def eligibilityPageCheck(): Unit =
     if (v9RunInWelsh) eventually(onPage(welshEligibilityTitle)) else eventually(onPage(eligibilityTitle))
 
   private def currentCivilServantOrCSCEmployed(eligibilityDetails: EligibilityDetails): Unit = {
