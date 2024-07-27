@@ -64,11 +64,6 @@ object EligibilityPage extends CivilServiceJobsBasePage {
       radioSelect(currentCivilServantNoId)
       vXTypeOfCandidate = "External"
     }
-    println(s"vXJobInfoDepartment is: $vXJobInfoDepartment")
-    println(s"v9HomeDepartment is: $v9HomeDepartment")
-    println(s"vXTypeOfCandidate is: $vXTypeOfCandidate")
-    println(s"v9CivilServant is: $v9CivilServant")
-    println(s"isCivilService is: $isCivilService")
   }
 
   private def selectNationalityReqMet(eligibilityDetails: EligibilityDetails): Unit =

@@ -39,7 +39,7 @@ object MASTER_SHORT_FORM_PERSONAL_INFO
       "Yes",
       true,
       false,
-      redeploymentDept = List(
+      deptInRedeploymentScheme = List(
         "Accountant in Bankruptcy",
         "Active Travel England",
         "Advisory, Conciliation and Arbitration Service",
@@ -159,6 +159,24 @@ object MASTER_SHORT_FORM_PERSONAL_INFO
         "Welsh Government",
         "Welsh Revenue Authority",
         "Wilton Park"
+      ),
+      deptNotInRedeploymentScheme = List(
+        "British Transport Police Authority",
+        "Commonwealth Parliamentary Association UK",
+//        "Department for International Development", //TODO doesn't appear on the cs list
+//        "Department for International Trade", //TODO doesn't appear on the cs list
+//        "Foreign and Commonwealth Office", //TODO doesn't appear on the cs list
+//        "Government Communication Service", //TODO doesn't appear on the cs list
+        "His Majesty's Inspectorate of Constabulary and Fire & Rescue Services",
+        "Medical Research Council",
+        "Office of the Scottish Charity Regulator", //TODO appears different in redeployment spreadsheet
+        "Public Prosecution Service for Northern Ireland",
+        "Royal Botanic Gardens Kew",
+        "MI6 - Secret Intelligence Service", //TODO appears different in redeployment spreadsheet
+//        "Stabilisation Unit", //TODO doesn't appear on the cs list
+        "MI5 - The Security Service",
+        "UK Research and Innovation",
+        "Valuation Tribunal Service"
       )
     )
 

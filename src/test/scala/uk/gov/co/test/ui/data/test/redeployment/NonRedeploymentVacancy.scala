@@ -32,7 +32,7 @@ object NON_REDEPLOYMENT_VACANCY_DATA
 object NON_REDEPLOYMENT_BASIC_DETAILS
     extends BasicDetails(
       "DO NOT USE- Automation Test Template",
-      s"Automation: HMRC-Redeployment - " + generateRandomJobPosition(),
+      s"Automation: MRC-Non-Redeployment - " + generateRandomJobPosition(),
       true,
       "Prawf awtomeiddio",
       32
@@ -40,8 +40,8 @@ object NON_REDEPLOYMENT_BASIC_DETAILS
 object NON_REDEPLOYMENT_JOB_INFORMATION
     extends JobInfoDetails(
       true,
-      "HM Revenue and Customs",
-      "HMRC - Borders and Trade - Border Change Delivery",
+      "Medical Research Council",
+      "MRC - Business Development",
       true,
       "Prawf awtomeiddio",
       "Autotest - Business area detail",
@@ -77,7 +77,7 @@ object NON_REDEPLOYMENT_APPROVAL
 
 object NON_REDEPLOYMENT_RESERVE_LIST
     extends ReserveListDetails(
-      true,
+      false,
       "12 Months",
       false,
       "6 Months"

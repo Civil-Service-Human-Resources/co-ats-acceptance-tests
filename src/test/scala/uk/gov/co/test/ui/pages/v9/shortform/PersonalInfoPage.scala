@@ -18,13 +18,15 @@ case class PersonalInfoDetails(
   areYouAVeteran: String,
   veteranInitiative: Boolean,
   redeploymentScheme: Boolean,
-  redeploymentDept: List[String]
+  deptInRedeploymentScheme: List[String],
+  deptNotInRedeploymentScheme: List[String]
 )
 
 object PersonalInfoPage extends CivilServiceJobsBasePage {
 
   def personalInfoTitle                    = "Personal information - Civil Service Jobs - GOV.UK"
   def welshPersonalInfoTitle               = "Gwybodaeth bersonol - Civil Service Jobs - GOV.UK"
+  val personalInfoPageTracker              = ".//a[@aria-label='Section Header: Personal information  Item completed']"
   def firstNameInputId                     = s"${shortFormId}_datafield_11625_1_1"
   def lastNameInputId                      = s"${shortFormId}_datafield_11628_1_1"
   def preferredFirstNameInputId            = s"${shortFormId}_datafield_21495_1_1"
@@ -53,11 +55,10 @@ object PersonalInfoPage extends CivilServiceJobsBasePage {
   def personalInfoPageCheck(): Unit =
     if (v9RunInWelsh) eventually(onPage(welshPersonalInfoTitle)) else eventually(onPage(personalInfoTitle))
 
-  private def enterFirstName(personalInfoDetails: PersonalInfoDetails): Unit = {
+  private def enterFirstName(personalInfoDetails: PersonalInfoDetails): Unit             =
     if (extractValue(firstNameInputId).isEmpty) {
       enterDetails(firstNameInputId, randomFirstName)
     } else extractValue(firstNameInputId) shouldEqual randomFirstName
-  }
 
   private def enterLastName(personalInfoDetails: PersonalInfoDetails): Unit              =
     if (extractValue(lastNameInputId).isEmpty) {
@@ -133,9 +134,9 @@ object PersonalInfoPage extends CivilServiceJobsBasePage {
 
   private def enterRedeploymentScheme(personalInfoDetails: PersonalInfoDetails): Unit =
     if (
-      v9CivilServant && personalInfoDetails.redeploymentDept.contains(
+      v9CivilServant && personalInfoDetails.deptInRedeploymentScheme.contains(
         vXJobInfoDepartment
-      ) && personalInfoDetails.redeploymentDept.contains(v9HomeDepartment)
+      ) && personalInfoDetails.deptInRedeploymentScheme.contains(v9HomeDepartment)
     ) {
       scrollToElement(By.id(redeploymentSchemeId))
       if (personalInfoDetails.redeploymentScheme) radioSelect(redeploymentSchemeYesId)

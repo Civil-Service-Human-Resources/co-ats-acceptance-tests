@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.flows.v9
 
 import org.openqa.selenium.By
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXAbilitiesRequired, vXAnyAdditionalQuestions, vXAnyOnlineTests, vXApproach, vXAttachmentRequired, vXBehavioursRequired, vXExperiencesRequired, vXGiveLocationPreference, vXHowManyQuestions, vXNoLongForm, vXStrengthsRequired, vXTechSkillsRequired, vacancyId, vacancyName}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXAbilitiesRequired, vXAnyAdditionalQuestions, vXAnyOnlineTests, vXApproach, vXAttachmentRequired, vXBehavioursRequired, vXExperiencesRequired, vXGiveLocationPreference, vXHowManyQuestions, vXNoLongForm, vXStrengthsRequired, vXTechSkillsRequired, vXTypeOfCandidate, vacancyId, vacancyName}
 import uk.gov.co.test.ui.data.v9.shortform.ShortFormDetails
 import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.{confirmShortFormCompletion, confirmShortFormCompletionNoLongForm}
 import uk.gov.co.test.ui.pages.v9.ApplicationsPage.{navigateToApplicationCentrePage, navigateToApplicationsPage}
@@ -11,7 +11,7 @@ import uk.gov.co.test.ui.pages.v9.shortform.ApplicationGuidancePage.appGuidanceP
 import uk.gov.co.test.ui.pages.v9.shortform.DeclarationPage.{declarationPage, declarationPageCheck, declarationPageTracker}
 import uk.gov.co.test.ui.pages.v9.shortform.DiversityMonitoringPage.diversityMonitoringPage
 import uk.gov.co.test.ui.pages.v9.shortform.EligibilityPage.{currentCivilServantYesId, eligibilityPage, eligibilityPageCheck, eligibilityPageTracker, homeDepartmentSelectId}
-import uk.gov.co.test.ui.pages.v9.shortform.PersonalInfoPage.{personalInfoPage, personalInfoPageCheck, redeploymentSchemeId, redeploymentSchemeNoId}
+import uk.gov.co.test.ui.pages.v9.shortform.PersonalInfoPage.{personalInfoPage, personalInfoPageCheck, personalInfoPageTracker, redeploymentSchemeId, redeploymentSchemeNoId}
 
 object ShortFormFlow extends CivilServiceJobsBasePage {
 
@@ -53,24 +53,61 @@ object ShortFormFlow extends CivilServiceJobsBasePage {
     navigateToApplicationCentrePage()
   }
 
-  def checkRedeploymentDepartments(shortFormDetails: ShortFormDetails): Unit = {
+  def checkForRedeploymentScheme(shortFormDetails: ShortFormDetails, vacancyInScheme: Boolean): Unit = {
     if (vXApproach == "External" || vXApproach == "Pre-release") {
       jobSearchAndApplyFlow(vacancyName, vacancyId, "what")
       shortForm.foreach { f =>
         f(shortFormDetails)
       }
-    } else println(s"Vacancy is not open for '$vXApproach' candidates!")
-    val amountOfDeptInScheme = shortFormDetails.personalInfoDetails.redeploymentDept.size - 1
+    } else println(s"Vacancy is not open for '$vXTypeOfCandidate' candidates!")
+    val amountOfDeptInScheme = shortFormDetails.personalInfoDetails.deptInRedeploymentScheme.size - 1
     for (i <- 0 to amountOfDeptInScheme) {
       waitForVisibilityOfElementByPath(eligibilityPageTracker).click()
       eligibilityPageCheck()
       radioSelect(currentCivilServantYesId)
-      selectDropdownOption(homeDepartmentSelectId, shortFormDetails.personalInfoDetails.redeploymentDept.lift(i).get)
+      selectDropdownOption(
+        homeDepartmentSelectId,
+        shortFormDetails.personalInfoDetails.deptInRedeploymentScheme.lift(i).get
+      )
       clickOn(pageContinue)
       personalInfoPageCheck()
-      scrollToElement(By.id(redeploymentSchemeId))
-      radioSelect(redeploymentSchemeNoId)
+      if (vacancyInScheme) {
+        scrollToElement(By.id(redeploymentSchemeId))
+        radioSelect(redeploymentSchemeNoId)
+      } else {
+        val redeploymentSchemeCheck = driver.findElements(By.id(redeploymentSchemeId))
+        redeploymentSchemeCheck shouldBe empty
+        clickOn(pageContinue)
+        waitForVisibilityOfElementByPath(personalInfoPageTracker).isDisplayed
+      }
+    }
+    waitForVisibilityOfElementByPath(declarationPageTracker).click()
+    declarationPageCheck()
+    clickOn(submitForm)
+  }
+
+  def checkForNoRedeploymentScheme(shortFormDetails: ShortFormDetails): Unit = {
+    if (vXApproach == "External" || vXApproach == "Pre-release") {
+      jobSearchAndApplyFlow(vacancyName, vacancyId, "what")
+      shortForm.foreach { f =>
+        f(shortFormDetails)
+      }
+    } else println(s"Vacancy is not open for '$vXTypeOfCandidate' candidates!")
+    val amountOfDeptNotInScheme = shortFormDetails.personalInfoDetails.deptNotInRedeploymentScheme.size - 1
+    for (i <- 0 to amountOfDeptNotInScheme) {
+      waitForVisibilityOfElementByPath(eligibilityPageTracker).click()
+      eligibilityPageCheck()
+      radioSelect(currentCivilServantYesId)
+      selectDropdownOption(
+        homeDepartmentSelectId,
+        shortFormDetails.personalInfoDetails.deptNotInRedeploymentScheme.lift(i).get
+      )
       clickOn(pageContinue)
+      personalInfoPageCheck()
+      val redeploymentSchemeCheck = driver.findElements(By.id(redeploymentSchemeId))
+      redeploymentSchemeCheck shouldBe empty
+      clickOn(pageContinue)
+      waitForVisibilityOfElementByPath(personalInfoPageTracker).isDisplayed
     }
     waitForVisibilityOfElementByPath(declarationPageTracker).click()
     declarationPageCheck()
