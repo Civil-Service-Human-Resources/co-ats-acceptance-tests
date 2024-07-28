@@ -42,14 +42,14 @@ class RegisterCandidateSpec extends BaseFeatureSpec {
     }
 
     Scenario("VX: Create DAC Candidate Accounts For All Requests", RunInV9) {
-      createDacTestCandidates(1, "0000", 2)
-      createDacTestCandidates(2, "10349", 2)
-      createDacTestCandidates(3, "10350", 2)
-      createDacTestCandidates(4, "10348", 2)
-      createDacTestCandidates(5, "0000", 2)
-      createDacTestCandidates(6, "10349", 2)
-      createDacTestCandidates(7, "10350", 2)
-      createDacTestCandidates(8, "10350", 2)
+      createDacTestCandidates(1, "0000", 20)
+      createDacTestCandidates(2, "10349", 20)
+      createDacTestCandidates(3, "10350", 20)
+      createDacTestCandidates(4, "10348", 20)
+      createDacTestCandidates(5, "0000", 20)
+      createDacTestCandidates(6, "10349", 10)
+      createDacTestCandidates(7, "10350", 10)
+      createDacTestCandidates(8, "10350", 20)
     }
   }
 }
