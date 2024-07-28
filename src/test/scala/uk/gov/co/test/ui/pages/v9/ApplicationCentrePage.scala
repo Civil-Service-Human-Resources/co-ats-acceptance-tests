@@ -2,7 +2,7 @@ package uk.gov.co.test.ui.pages.v9
 
 import org.openqa.selenium.{By, WebElement}
 import org.scalatest.concurrent.Eventually.eventually
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{randomFirstName, randomLastName, v9AdjustmentsForTests, v9ReasonableAdjustments, v9RunInWelsh, vXAnyOnlineTests, vXInterviewExpectedRounds, vXInterviewFourType, vXInterviewLocation, vXInterviewLongDate, vXInterviewNumber, vXInterviewOneType, vXInterviewThreeType, vXInterviewTwoType, vXPreSiftRequired, vXSlotTwoStartTime, vacancyName}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{randomFirstName, randomLastName, v9AdjustmentsForTests, v9ReasonableAdjustments, v9RunInWelsh, vXAnyOnlineTests, vXInterviewExpectedRounds, vXInterviewFourType, vXInterviewLocation, vXInterviewLongDate, vXInterviewNumber, vXInterviewOneOutcome, vXInterviewOneType, vXInterviewThreeType, vXInterviewTwoType, vXPreSiftRequired, vXSlotTwoStartTime, vacancyName}
 import uk.gov.co.test.ui.data.vx.application.ApplicationDetails
 import uk.gov.co.test.ui.pages.v9.ApplicationsPage.{confirmStatusOnApplicationPage, reviewUpdateOnApplicationPage}
 import uk.gov.co.test.ui.pages.v9.ProvisionalOfferPage.offerDecisionFlow
@@ -611,7 +611,7 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
 
   def interviewNumberDetail(applicationDetails: ApplicationDetails): String =
     vXInterviewExpectedRounds.toInt match {
-      case 1 => applicationDetails.interviewOneDetails.finalOutcome
+      case 1 => if (vXInterviewOneOutcome.isEmpty) applicationDetails.interviewOneDetails.finalOutcome else vXInterviewOneOutcome
       case 2 => applicationDetails.interviewTwoDetails.finalOutcome
       case 3 => applicationDetails.interviewThreeDetails.finalOutcome
       case 4 => applicationDetails.interviewFourDetails.finalOutcome

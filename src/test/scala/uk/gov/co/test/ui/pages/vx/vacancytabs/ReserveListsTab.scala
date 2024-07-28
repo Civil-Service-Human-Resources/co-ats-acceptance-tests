@@ -10,26 +10,31 @@ import java.time.format.DateTimeFormatter
 
 object ReserveListsTab extends VacancyBasePage {
 
-  private lazy val reserveExpiryListTabPath    = ".//span[@class='main-label' and text() = 'Reserve List - Expiry Dates']"
-  private lazy val reserveListLengthHeaderPath = "(//h4)[8]"
-  private lazy val reserveExpiryListHeaderPath = "(//h4)[9]"
-  private lazy val submitId                    = "submit_button"
-  var reserveListFormId: String                = ""
-
-  def currentReserveListLengthId           = s"${reserveListFormId}_label_121022_1"
-  def currentReserveExtendListLengthId     = s"${reserveListFormId}_label_205614_1"
-  def reserveList3MonthsExpiryId           = s"${reserveListFormId}_field_121032_1"
-  def reserveList6MonthsExpiryId           = s"${reserveListFormId}_field_121036_1"
-  def reserveList9MonthsExpiryId           = s"${reserveListFormId}_field_121040_1"
-  def reserveList12MonthsExpiryId          = s"${reserveListFormId}_field_121044_1"
-  def reserveList15MonthsExpiryId          = s"${reserveListFormId}_field_176823_1"
-  def reserveList18MonthsExpiryId          = s"${reserveListFormId}_field_176826_1"
-  def reserveList21MonthsExpiryId          = s"${reserveListFormId}_field_176829_1"
-  def reserveList24MonthsExpiryId          = s"${reserveListFormId}_field_176833_1"
-  def reserveList12MonthsAnd2WeeksExpiryId = s"${reserveListFormId}_field_205651_1"
-  def reserveList12MonthsAnd4WeeksExpiryId = s"${reserveListFormId}_field_205654_1"
-  def reserveList12MonthsAnd6WeeksExpiryId = s"${reserveListFormId}_field_205657_1"
-  def reserveList12MonthsAnd8WeeksExpiryId = s"${reserveListFormId}_field_205660_1"
+  var reserveListFormId: String                   = ""
+  private lazy val reserveExpiryListTabPath       = ".//span[@class='main-label' and text() = 'Reserve List - Expiry Dates']"
+  private lazy val reserveListLengthHeaderPath    = "(//h4)[7]"
+  private lazy val reserveExpiryListHeaderPath    = "(//h4)[8]"
+  private lazy val reserveListLengthSubHeaderPath = "(//*[@class='form_row form_label hform_label'])[2]"
+  private lazy val reserveProcessRuleSeeMorePath  = "(//*[@class='detail-grid-tr'])[1]//a"
+  private lazy val historySectionId               = "summary_tabs_history_tab"
+  private lazy val reserveExpiryScheduledFor      = "//*[@class='history-entry-div']"
+  private lazy val reserveListExpiryEmail         = "(//*[@class='detail-grid-tl'])[3]"
+  private lazy val reserveListExpiryEmailSeeMore  = "(//*[@class='detail-grid-tr'])[3]//a"
+  private lazy val reserveListExpiryEmailPreview  = "//*[@class='email_preview ']//tbody/tr[2]"
+  def currentReserveListLengthId                  = s"${reserveListFormId}_label_121022_1"
+  def currentReserveExtendListLengthId            = s"${reserveListFormId}_label_205614_1"
+  def reserveList3MonthsExpiryId                  = s"${reserveListFormId}_field_121032_1"
+  def reserveList6MonthsExpiryId                  = s"${reserveListFormId}_field_121036_1"
+  def reserveList9MonthsExpiryId                  = s"${reserveListFormId}_field_121040_1"
+  def reserveList12MonthsExpiryId                 = s"${reserveListFormId}_field_121044_1"
+  def reserveList15MonthsExpiryId                 = s"${reserveListFormId}_field_176823_1"
+  def reserveList18MonthsExpiryId                 = s"${reserveListFormId}_field_176826_1"
+  def reserveList21MonthsExpiryId                 = s"${reserveListFormId}_field_176829_1"
+  def reserveList24MonthsExpiryId                 = s"${reserveListFormId}_field_176833_1"
+  def reserveList12MonthsAnd2WeeksExpiryId        = s"${reserveListFormId}_field_205651_1"
+  def reserveList12MonthsAnd4WeeksExpiryId        = s"${reserveListFormId}_field_205654_1"
+  def reserveList12MonthsAnd6WeeksExpiryId        = s"${reserveListFormId}_field_205657_1"
+  def reserveList12MonthsAnd8WeeksExpiryId        = s"${reserveListFormId}_field_205660_1"
 
   private def checkReserveHeader(fieldPath: String, expectedReserveHeader: String): Unit = {
     val header = waitForVisibilityOfElementByPath(fieldPath).getText
@@ -47,9 +52,13 @@ object ReserveListsTab extends VacancyBasePage {
     extractTabFormId()
   }
 
-  def reserveExpiryListChecks(): Unit = {
+  def reserveListExpiryChecks(): Unit = {
     selectReserveExpiryListTab()
     checkReserveHeader(reserveListLengthHeaderPath, "Reserve list length")
+    checkReserveHeader(
+      reserveListLengthSubHeaderPath,
+      "To extend the reserve list please update the vacancy form (max length 12 months)"
+    )
     checkReserveHeader(
       reserveExpiryListHeaderPath,
       "Reserve list expiry dates (auto-populated when the candidate first enters the Reserve List status)"
@@ -85,35 +94,32 @@ object ReserveListsTab extends VacancyBasePage {
     }
   }
 
-  def reserveListHistoryChecks(): Unit = {
+  def reserveListHistoryProcessChecks(): Unit = {
     waitForVisibilityOfElementByPath(historyTabPath).click()
-    waitForVisibilityOfElementById("summary_tabs_history_tab").isDisplayed
+    waitForVisibilityOfElementById(historySectionId).isDisplayed
     val scheduleDate = reserveScheduleDetails()
-    waitForVisibilityOfElementByPath("(//*[@class='detail-grid-tr'])[1]//a").click()
-    val scheduledFor = waitForVisibilityOfElementByPath("//*[@class='history-entry-div']").getText
-    scheduleDate      should startWith(s"Process rule: Scheduled move - ${vXReserveListLength.toLowerCase}")
+    waitForVisibilityOfElementByPath(reserveProcessRuleSeeMorePath).click()
+    val scheduledFor = waitForVisibilityOfElementByPath(reserveExpiryScheduledFor).getText
+    if (vXReserveExtendRequired) {
+      scheduleDate should startWith(
+        s"Process rule: Scheduled move - ${vXReserveListLength.toLowerCase} and $vXReserveExtendLength expiry date"
+      )
+    } else {
+      scheduleDate should startWith(s"Process rule: Scheduled move - ${vXReserveListLength.toLowerCase} expiry date")
+    }
     scheduledFor should include(s"${reserveExpiryDateReformatted()}")
-//    waitForVisibilityOfElementByPath(
-//      "(//*[@class='detail-grid-tl'])[3]"
-//    ).getText shouldEqual s"Subject: Application update - $vacancyName - $vacancyId"
-//    waitForVisibilityOfElementByPath("(//*[@class='detail-grid-tr'])[3]//a").click()
   }
 
-  def reserveListEmailChecks(): Unit = {
+  def reserveListHistoryEmailChecks(): Unit = {
     waitForVisibilityOfElementByPath(
-      "(//*[@class='detail-grid-tl'])[3]"
+      reserveListExpiryEmail
     ).getText shouldEqual s"Subject: Application update - $vacancyName - $vacancyId"
-    waitForVisibilityOfElementByPath("(//*[@class='detail-grid-tr'])[3]//a").click()
-//    val scheduleDate = reserveScheduleDetails()
+    waitForVisibilityOfElementByPath(reserveListExpiryEmailSeeMore).click()
     val templateId   = reserveEmailDetails("1")
     val destination  = reserveEmailDetails("2")
     val subject      = reserveEmailDetails("3")
     val status       = reserveEmailDetails("4")
-    val emailPreview = waitForVisibilityOfElementByPath("//*[@class='email_preview ']//tbody/tr[2]").getText
-//    scheduleDate      should startWith(s"Process rule: Scheduled move - ${vXReserveListLength.toLowerCase}")
-//    waitForVisibilityOfElementByPath("(//*[@class='detail-grid-tr'])[1]//a").click()
-//    val scheduledFor = waitForVisibilityOfElementByPath("//*[@class='history-entry-div']").getText
-//    scheduledFor should include(s"${reserveExpiryDateReformatted2()}")
+    val emailPreview = waitForVisibilityOfElementByPath(reserveListExpiryEmailPreview).getText
     templateId   shouldEqual "220"
     destination  shouldEqual randomEmail
     subject      shouldEqual s"Application update - $vacancyName - $vacancyId"
@@ -151,8 +157,7 @@ object ReserveListsTab extends VacancyBasePage {
   }
 
   def calculatedExpiryDateReformatted(monthsToAdd: Int, weeksToAdd: Option[Int] = None): String = {
-//    val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
-val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
+    val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
     if (weeksToAdd.isEmpty) {
       val expiry     = LocalDate.now().plusMonths(monthsToAdd).plusDays(1)
       val expiryDate = expiry.format(formatter)
@@ -163,19 +168,6 @@ val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
       expiryDate
     }
   }
-
-//  def calculatedExpiryDateReformatted2(monthsToAdd: Int, weeksToAdd: Option[Int] = None): String = {
-//    val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
-//    if (weeksToAdd.isEmpty) {
-//      val expiry     = LocalDate.now().plusMonths(monthsToAdd).plusDays(1)
-//      val expiryDate = expiry.format(formatter)
-//      expiryDate
-//    } else {
-//      val expiry     = LocalDate.now().plusMonths(monthsToAdd).plusWeeks(weeksToAdd.get).plusDays(1)
-//      val expiryDate = expiry.format(formatter)
-//      expiryDate
-//    }
-//  }
 
   def reserveExpiryDateMonths(): String =
     vXReserveListTotalLength match {
@@ -202,17 +194,4 @@ val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
       case "12 Months + 8 weeks" => calculatedExpiryDateReformatted(12, weeksToAdd = Some(8))
       case _                     => throw new IllegalStateException("Invalid reserve period!")
     }
-
-//  def reserveExpiryDateReformatted2(): String =
-//    vXReserveListTotalLength match {
-//      case "3 Months"            => calculatedExpiryDateReformatted2(3)
-//      case "6 Months"            => calculatedExpiryDateReformatted2(6)
-//      case "9 Months"            => calculatedExpiryDateReformatted2(9)
-//      case "12 Months"           => calculatedExpiryDateReformatted2(12)
-//      case "12 Months + 2 weeks" => calculatedExpiryDateReformatted2(12, weeksToAdd = Some(2))
-//      case "12 Months + 4 weeks" => calculatedExpiryDateReformatted2(12, weeksToAdd = Some(4))
-//      case "12 Months + 6 weeks" => calculatedExpiryDateReformatted2(12, weeksToAdd = Some(6))
-//      case "12 Months + 8 weeks" => calculatedExpiryDateReformatted2(12, weeksToAdd = Some(8))
-//      case _                     => throw new IllegalStateException("Invalid reserve period!")
-//    }
 }

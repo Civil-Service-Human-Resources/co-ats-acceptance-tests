@@ -80,7 +80,7 @@ object BookedInterviewPage extends CivilServiceJobsBasePage {
     subSection.findElement(By.tagName("p"))
 
   def thirdSectionItem(instructions: String): String = {
-    val slotSelection = s"//p[contains(text(), '$instructions')]//..//select"
+    val slotSelection = s"//p[contains(text(), \"$instructions\")]//..//select"
     slotSelection
   }
 
@@ -88,7 +88,7 @@ object BookedInterviewPage extends CivilServiceJobsBasePage {
     val slotOneSelectionPath =
       s"//option[contains(text(),'${vXSlotOneStartTime.replaceAll("[A-Za-z ]", "").filterNot(_.isWhitespace)}')]"
     subSection.findElement(
-      By.xpath(s"//p[contains(text(), '$instructions')]//..//select[@id='itinerary']$slotOneSelectionPath")
+      By.xpath(s"//p[contains(text(), \"$instructions\")]//..//select[@id='itinerary']$slotOneSelectionPath")
     )
   }
 
@@ -96,12 +96,12 @@ object BookedInterviewPage extends CivilServiceJobsBasePage {
     val slotTwoSelectionPath =
       s"//*[contains(text(),'${vXSlotTwoStartTime.replaceAll("[A-Za-z ]", "").filterNot(_.isWhitespace)}')]"
     subSection.findElement(
-      By.xpath(s"//p[contains(text(), '$instructions')]//..//select[@id='itinerary']$slotTwoSelectionPath")
+      By.xpath(s"//p[contains(text(), \"$instructions\")]//..//select[@id='itinerary']$slotTwoSelectionPath")
     )
   }
 
   def sixthSectionItem(subSection: WebElement, instructions: String): WebElement =
-    subSection.findElement(By.xpath(s"//p[contains(text(), '$instructions')]//..//input[@value='Book Slot']"))
+    subSection.findElement(By.xpath(s"//p[contains(text(), \"$instructions\")]//..//input[@value='Book Slot']"))
 
   def slotSectionValues(): (String, String, String, String, String, WebElement) = {
     var _slotTitle: String     = ""

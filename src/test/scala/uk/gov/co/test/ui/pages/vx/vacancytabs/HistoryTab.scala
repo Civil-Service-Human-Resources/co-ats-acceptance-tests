@@ -2,7 +2,6 @@ package uk.gov.co.test.ui.pages.vx.vacancytabs
 
 import org.openqa.selenium.{By, Keys, WebElement}
 import uk.gov.co.test.ui.data.MasterVacancyDetails.{preferredFirstName, preferredTeleNumber, randomEmail, randomFirstName, randomLastName, v9HomeDepartment, vXJobGradeEquivalent, vXJobGrades, vXJobInfoDepartment, vXVacancyHolderEmail, vacancyId}
-import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.progressApplicationToOffer
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 
 import scala.collection.{Seq, mutable}
@@ -11,13 +10,14 @@ import scala.util.control.Breaks.{break, breakable}
 
 object HistoryTab extends VacancyBasePage {
 
-  val historyTabPath    = ".//span[@class='main-label' and text() = 'History']"
-  val emailSubjectPath  = ".//table[@class='display email_information']/tbody/tr[1]/td"
-  val administrationId  = "drop_cat_6"
-  val otherStatusLinkId = "actiontab6"
-  val selectStatusId  = "select2-status_value_select-container"
-  val enterStatusPath   = ".//input[@class='select2-search__field']"
-  val changeStatusId    = "select_status_value-submit"
+  val historyTabPath       = ".//span[@class='main-label' and text() = 'History']"
+  val emailSubjectPath     = ".//table[@class='display email_information']/tbody/tr[1]/td"
+  val administrationId     = "drop_cat_6"
+  val otherStatusLinkId    = "actiontab6"
+  val selectStatusId       = "select2-status_value_select-container"
+  val enterStatusPath      = ".//input[@class='select2-search__field']"
+  val changeStatusId       = "select_status_value-submit"
+  val reserveScheduledRule = "(//*[@class='detail-grid-tl'])[1]"
 
   private def statusSelect: WebElement = waitForVisibilityOfElementById(selectStatusId)
 
@@ -32,8 +32,7 @@ object HistoryTab extends VacancyBasePage {
   }
 
   def reserveScheduleDetails(): String = {
-    val reserveSchedulePath = s"(//*[@class='detail-grid-tl'])[1]"
-    val scheduleDate        = waitForVisibilityOfElementByPath(reserveSchedulePath).getText
+    val scheduleDate = waitForVisibilityOfElementByPath(reserveScheduledRule).getText
     scheduleDate
   }
 

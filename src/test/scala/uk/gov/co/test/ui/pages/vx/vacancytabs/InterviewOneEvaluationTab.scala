@@ -758,7 +758,7 @@ object InterviewOneEvaluationTab extends VacancyBasePage {
   }
 
   private def enterOutcome(interviewOneDetails: InterviewOneDetails): Unit = {
-    vXInterviewOneOutcome = interviewOneDetails.finalOutcome
+    val i1FinalOutcome = interviewOneDetails.finalOutcome
     if (vXExperiencesRequired && vXBehavioursRequired && vXTechSkillsRequired && vXStrengthsRequired) {
       checkForNewValueId(formProblemStatusId, "There is a problem")
       scrollToElement(By.id(outcomeTitleId))
@@ -767,8 +767,13 @@ object InterviewOneEvaluationTab extends VacancyBasePage {
     waitForVisibilityOfElementById(outcomeTitleId).getText shouldEqual "Outcome"
     Thread.sleep(5000)
     waitForVisibilityOfElementById(outcomeId).click()
-    action().moveToElement(waitForDropdownOption(vXInterviewOneOutcome)).perform()
-    waitForDropdownOption(vXInterviewOneOutcome).click()
+    if (vXInterviewOneOutcome.isEmpty) {
+      action().moveToElement(waitForDropdownOption(i1FinalOutcome)).perform()
+      waitForDropdownOption(i1FinalOutcome).click()
+    } else {
+      action().moveToElement(waitForDropdownOption(vXInterviewOneOutcome)).perform()
+      waitForDropdownOption(vXInterviewOneOutcome).click()
+    }
     enterValue(outcomeCommentsId, s"Autotest - I1 - $randomFirstName $randomLastName overall performed very well!")
   }
 

@@ -35,7 +35,7 @@ object DacAudit24TestCandidates extends CivilServiceJobsBasePage {
 
   def createDacTestCandidates(requestNumber: Int, vacancy: String, candidatesRequired: Int = 1): Unit = {
     val utf8: Charset = StandardCharsets.UTF_8
-    val file          = "dac.txt"
+    val file          = s"dac.txt_$requestNumber"
     val writer        = new PrintWriter(new File(file))
     val vacancies     = List("10348", "10349", "10350", "10416", "10417")
 

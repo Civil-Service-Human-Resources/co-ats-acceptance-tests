@@ -130,7 +130,6 @@ object ApplicationsPage extends CivilServiceJobsBasePage {
     applicationId = applicationIdValue()
     println("===============================================")
     println(s"Candidate Email: $randomEmail")
-    println(s"Candidate Password: $randomPassword")
     println(s"Vacancy ID: $vacancyId")
     println(s"Application ID: $applicationId")
     println("===============================================")
