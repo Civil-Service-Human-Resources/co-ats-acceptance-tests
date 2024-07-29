@@ -21,7 +21,7 @@ class PnNenSpec extends BaseFeatureSpec {
       Given("candidate registers for new job application")
       fillNewVacancyForm(PN_NEN_VACANCY_DATA)
 //      vacancyId = "10440"
-      extractAllVacancyDetails(vacancyId)
+//      extractAllVacancyDetails(vacancyId)
       fillNewCandidateDetails(REGISTER_CANDIDATE_NEN_DEFRA)
 
       When("external candidate completes all forms until nen form")
