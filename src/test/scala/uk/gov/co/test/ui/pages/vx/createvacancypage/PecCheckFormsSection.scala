@@ -82,7 +82,9 @@ object PecCheckFormsSection extends VacancyBasePage {
   def detailsIdentityDocsId            = s"${vacancyFormId}_datafield_159299_1_1_en-GB"
   def manualIdentityCheckYesId         = s"${vacancyFormId}_datafield_181577_1_1_1"
   def manualIdentityCheckNoId          = s"${vacancyFormId}_datafield_181577_1_1_2"
+  def nenHrEmailHeaderId               = s"${vacancyFormId}_field_que_141090_1"
   def nenHrEmailId                     = s"${vacancyFormId}_datafield_141090_1_1"
+  def pnHrEmailHeaderId                = s"${vacancyFormId}_field_que_141267_1"
   def pnHrEmailId                      = s"${vacancyFormId}_datafield_141267_1_1"
 
   private def selectWhenCompleteRtwCheck(pecCheckFormsDetails: PecCheckFormsDetails): Unit =
@@ -142,14 +144,16 @@ object PecCheckFormsSection extends VacancyBasePage {
     }
 
   private def enterHrEmail(hrEmailId: String, hrEmail: String, value: ListBuffer[String]): Unit =
-    if (!driver.findElements(By.id(hrEmailId)).isEmpty) {
-      if (value.contains("Not Applicable")) {
-        val hrEmailField = waitForVisibilityOfElementById(hrEmailId)
-        hrEmailField.clear()
-      } else {
-        val hrEmailField = waitForVisibilityOfElementById(hrEmailId)
-        hrEmailField.clear()
-        hrEmailField.sendKeys(hrEmail)
+    if (driver.findElement(By.id(nenHrEmailHeaderId)).getText.nonEmpty) {
+      if (!driver.findElements(By.id(hrEmailId)).isEmpty) {
+        if (value.contains("Not Applicable")) {
+          val hrEmailField = waitForVisibilityOfElementById(hrEmailId)
+          hrEmailField.clear()
+        } else {
+          val hrEmailField = waitForVisibilityOfElementById(hrEmailId)
+          hrEmailField.clear()
+          hrEmailField.sendKeys(hrEmail)
+        }
       }
     }
 

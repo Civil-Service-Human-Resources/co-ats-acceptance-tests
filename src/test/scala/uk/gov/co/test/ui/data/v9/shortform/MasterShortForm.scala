@@ -99,7 +99,7 @@ object MASTER_SHORT_FORM_PERSONAL_INFO
         "HM Prison & Probation Service",
         "HM Revenue and Customs",
         "HM Treasury",
-        "HMGCC (His Majesty's Government Communications Centre)",
+        "HMGCC (His Majesty’s Government Communications Centre)",
         "Home Office",
         "Insolvency Service",
         "Institute for Apprenticeships and Technical Education",
@@ -161,10 +161,6 @@ object MASTER_SHORT_FORM_PERSONAL_INFO
       deptNotInRedeploymentScheme = List(
         "British Transport Police Authority",
         "Commonwealth Parliamentary Association UK",
-//        "Department for International Development", //TODO doesn't appear on the cs list
-        "Department for Business and Trade",
-        "Foreign, Commonwealth & Development Office",
-//        "Government Communication Service", //TODO doesn't appear on the cs list
         "His Majesty's Inspectorate of Constabulary and Fire & Rescue Services",
         "Medical Research Council",
         "Office of the Scottish Charity Regulator",

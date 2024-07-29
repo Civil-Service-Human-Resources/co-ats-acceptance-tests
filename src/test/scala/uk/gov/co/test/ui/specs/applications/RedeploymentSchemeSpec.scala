@@ -1,6 +1,7 @@
 package uk.gov.co.test.ui.specs.applications
 
-import uk.gov.co.test.ui.data.test.redeployment.NON_REDEPLOYMENT_VACANCY_DATA
+import uk.gov.co.test.ui.data.MasterVacancyDetails.vacancyId
+import uk.gov.co.test.ui.data.test.redeployment.{NON_REDEPLOYMENT_VACANCY_DATA, REDEPLOYMENT_VACANCY_DATA}
 import uk.gov.co.test.ui.data.v9.applicants._
 import uk.gov.co.test.ui.data.v9.shortform.MASTER_SHORT_FORM_DATA
 import uk.gov.co.test.ui.flows.v9.RegisterCandidateFlow.fillNewCandidateDetails
@@ -14,7 +15,8 @@ class RedeploymentSchemeSpec extends BaseFeatureSpec {
   Feature("Candidate To Be Considered Under The Redeployment Scheme") {
     Scenario("VX: Candidate Selects Home Departments Eligible For Redeployment Scheme", RunInVX) {
       Given("a vacancy is included in the redeployment scheme")
-      extractAllVacancyDetails("9667")
+      fillNewVacancyForm(REDEPLOYMENT_VACANCY_DATA)
+//      extractAllVacancyDetails("10461")
 
       When("a candidate selects an eligible home department")
       fillNewCandidateDetails(REGISTER_CANDIDATE_REDEPLOYMENT_SCHEME_1)
@@ -25,9 +27,10 @@ class RedeploymentSchemeSpec extends BaseFeatureSpec {
 
     Scenario("VX: Candidate Selects Home Departments Ineligible For Redeployment Scheme", RunInVX) {
       Given("a vacancy is included in the redeployment scheme")
-      extractAllVacancyDetails("9667")
+      extractAllVacancyDetails(vacancyId)
+//      extractAllVacancyDetails("10461")
 
-      When("a candidate selects an eligible home department")
+      When("a candidate selects an ineligible home department")
       fillNewCandidateDetails(REGISTER_CANDIDATE_REDEPLOYMENT_SCHEME_2)
 
       Then("candidate is not asked about the redeployment scheme")
@@ -37,7 +40,7 @@ class RedeploymentSchemeSpec extends BaseFeatureSpec {
     Scenario("VX: Vacancy Does Not Meet Criteria For Redeployment Scheme", RunInVX) {
       Given("a vacancy is not included in the redeployment scheme")
       fillNewVacancyForm(NON_REDEPLOYMENT_VACANCY_DATA)
-//      extractAllVacancyDetails("10460")
+//      extractAllVacancyDetails("10462")
 
       When("a candidate selects an eligible home department")
       fillNewCandidateDetails(REGISTER_CANDIDATE_REDEPLOYMENT_SCHEME_3)
@@ -48,7 +51,7 @@ class RedeploymentSchemeSpec extends BaseFeatureSpec {
 
     Scenario("VX: Vacancy & Home Department Do Not Meet Criteria For Redeployment Scheme", RunInVX) {
       Given("a vacancy is not included in the redeployment scheme")
-      extractAllVacancyDetails("10460")
+      extractAllVacancyDetails(vacancyId)
 
       When("a candidate selects an eligible home department")
       fillNewCandidateDetails(REGISTER_CANDIDATE_REDEPLOYMENT_SCHEME_4)
