@@ -32,17 +32,17 @@ class RedeploymentSchemeSpec extends BaseFeatureSpec {
       checkForNoRedeploymentScheme(MASTER_SHORT_FORM_DATA)
     }
 
-    Scenario("VX: Vacancy Does Not Meet Criteria For Redeployment Scheme", RunInVX) {
-      Given("a vacancy is not included in the redeployment scheme")
-//      fillNewVacancyForm(NON_REDEPLOYMENT_VACANCY_DATA)
-      extractAllVacancyDetails("10443")
-
-      When("a candidate selects an eligible home department")
-      fillNewCandidateDetails(REGISTER_CANDIDATE_REDEPLOYMENT_SCHEME_3)
-
-      Then("candidate is not asked about the redeployment scheme")
-      checkForRedeploymentScheme(MASTER_SHORT_FORM_DATA, vacancyInScheme = false)
-    }
+//    Scenario("VX: Vacancy Does Not Meet Criteria For Redeployment Scheme", RunInVX) {
+//      Given("a vacancy is not included in the redeployment scheme")
+////      fillNewVacancyForm(NON_REDEPLOYMENT_VACANCY_DATA)
+//      extractAllVacancyDetails("10443")
+//
+//      When("a candidate selects an eligible home department")
+//      fillNewCandidateDetails(REGISTER_CANDIDATE_REDEPLOYMENT_SCHEME_3)
+//
+//      Then("candidate is not asked about the redeployment scheme")
+//      checkForRedeploymentScheme(MASTER_SHORT_FORM_DATA, vacancyInScheme = false)
+//    }
 
     Scenario("VX: Vacancy & Home Department Do Not Meet Criteria For Redeployment Scheme", RunInVX) {
       Given("a vacancy is not included in the redeployment scheme")

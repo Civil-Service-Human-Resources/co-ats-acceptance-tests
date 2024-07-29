@@ -462,16 +462,14 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
     }
     val inviteType = interviewTypeDetail() match {
       case "Telephone"  => s"for a ${interviewTypeDetail().toLowerCase} interview"
-      case "Assessment" => s"to an ${interviewTypeDetail().toLowerCase}"
+      case "Assessment" => s"for an ${interviewTypeDetail().toLowerCase}"
       case "Video"      => s"for a ${interviewTypeDetail().toLowerCase} interview"
       case "Interview"  => s"for an ${interviewTypeDetail().toLowerCase}"
     }
     // TODO to bypass grammatical bug, this function was created
-    val schedule   = interviewTypeDetail() match {
-      case "Telephone" => s"'Schedule interview'"
-      case "Assessment" => s"\'Schedule interview\""//TODO requires fix to align with other fields. this occurs on I2 ONLY, not related to type!
-      case "Video"     => s"'Schedule interview'"
-      case "Interview" => s"'Schedule interview'"
+    val schedule   = vXInterviewNumber.head match {
+      case "2"   => s"\'Schedule interview\""//TODO requires fix to align with other fields. this occurs on I2 ONLY, not related to type!
+      case _     => s"'Schedule interview'"
     }
     changeSystem("candidate")
     confirmStatusOnApplicationPage(status)
@@ -611,7 +609,9 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
 
   def interviewNumberDetail(applicationDetails: ApplicationDetails): String =
     vXInterviewExpectedRounds.toInt match {
-      case 1 => if (vXInterviewOneOutcome.isEmpty) applicationDetails.interviewOneDetails.finalOutcome else vXInterviewOneOutcome
+      case 1 =>
+        if (vXInterviewOneOutcome.isEmpty) applicationDetails.interviewOneDetails.finalOutcome
+        else vXInterviewOneOutcome
       case 2 => applicationDetails.interviewTwoDetails.finalOutcome
       case 3 => applicationDetails.interviewThreeDetails.finalOutcome
       case 4 => applicationDetails.interviewFourDetails.finalOutcome

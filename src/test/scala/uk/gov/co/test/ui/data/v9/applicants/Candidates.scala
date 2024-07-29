@@ -138,7 +138,7 @@ object MASTER_REGISTER_CANDIDATE_15_MONTHS
       true
     )
 
-object REGISTER_CANDIDATE_PEC
+object REGISTER_CANDIDATE_PEC_1
     extends CandidateDetails(
       firstname = s"$randomFirstName",
       lastname = s"$randomLastName",
@@ -148,6 +148,17 @@ object REGISTER_CANDIDATE_PEC
       false,
       true
     )
+
+object REGISTER_CANDIDATE_PEC_2
+  extends CandidateDetails(
+    firstname = s"$randomFirstName",
+    lastname = s"$randomLastName",
+    preferredFirstName = s"$preferredFirstName",
+    email = s"$randomEmail",
+    s"$passwordCandidate",
+    false,
+    true
+  )
 
 object REGISTER_CANDIDATE_OGD_HMRC
     extends CandidateDetails(

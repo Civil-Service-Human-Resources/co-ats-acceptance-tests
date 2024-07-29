@@ -11,6 +11,7 @@ import org.scalatest.time.{Millis, Seconds, Span}
 import org.scalatestplus.selenium.{Page, WebBrowser}
 import uk.gov.co.test.ui.flows.v9.LoginCandidateFlow.loginNewCandidate
 import uk.gov.co.test.ui.pages.v9.SignInPage.signOut
+import uk.gov.co.test.ui.pages.vx.vacancytabs.InterviewOneEvaluationTab.{evaluation, outcomeTitleId}
 
 import java.util
 import java.util.UUID
@@ -105,6 +106,24 @@ trait BasePage extends Matchers with Page with WebBrowser with PatienceConfigura
     val wait = new WebDriverWait(driver, 30, 200)
     wait.until(visibilityOfElementLocated(By.id(elementId)))
   }
+
+//  def waitForElementByOutcomeId(outcomeId: String)(implicit driver: WebDriver): Unit = {
+//    val wait = new WebDriverWait(driver, 30, 200)
+//    try wait.until { (d: WebDriver) =>
+//      scrollToElement(By.id(outcomeTitleId))
+//      waitForVisibilityOfElementById(outcomeTitleId).getText shouldEqual "Outcome"
+//      scrollToElement(By.id(outcomeId))
+//      d.findElement(By.id(outcomeId)).click()
+//    } catch {
+//      case staleError: StaleElementReferenceException =>
+//        println(staleError)
+//        refreshPage()
+//        moveInterviewScheduleForm()
+//        evaluation.foreach { f =>
+//          f(applicationDetails.interviewOneDetails)
+//        }
+//    }
+//  }
 
   def waitForElementClickableById(id: String)(implicit driver: WebDriver): WebElement = {
     val wait = new WebDriverWait(driver, 30, 200)

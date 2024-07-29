@@ -2,11 +2,6 @@ package uk.gov.co.test.ui.specs
 
 import uk.gov.co.test.ui.data.test.csjt.CSJT_VACANCY_DATA
 import uk.gov.co.test.ui.data.v9.applicants._
-import uk.gov.co.test.ui.data.v9.longform.MASTER_LONG_FORM_DATA
-import uk.gov.co.test.ui.data.v9.pecform.MASTER_PEC_FORM_DATA
-import uk.gov.co.test.ui.data.v9.shortform.MASTER_SHORT_FORM_DATA
-import uk.gov.co.test.ui.data.vx.application.MASTER_APPLICATION_DATA
-import uk.gov.co.test.ui.data.vx.vacancy.MASTER_VACANCY_DATA
 import uk.gov.co.test.ui.flows.e2e.FullApplicationFlow.fillFullApplicationDetails
 import uk.gov.co.test.ui.flows.v9.RegisterCandidateFlow.fillNewCandidateDetails
 import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.fillNewVacancyForm
@@ -22,12 +17,7 @@ class CSJTSpec extends BaseFeatureSpec {
       fillNewCandidateDetails(MASTER_REGISTER_CANDIDATE)
 
       When("candidate registers for new job application with csjt required")
-      fillFullApplicationDetails(
-        MASTER_SHORT_FORM_DATA,
-        MASTER_LONG_FORM_DATA,
-        MASTER_APPLICATION_DATA,
-        MASTER_PEC_FORM_DATA
-      )
+      fillFullApplicationDetails()
 
       Then("the candidate is able to complete the csjt")
       println("Done!")
@@ -40,12 +30,7 @@ class CSJTSpec extends BaseFeatureSpec {
 
       When("recruiter & new candidate complete the full application")
       fillNewCandidateDetails(MASTER_REGISTER_CANDIDATE)
-      fillFullApplicationDetails(
-        MASTER_SHORT_FORM_DATA,
-        MASTER_LONG_FORM_DATA,
-        MASTER_APPLICATION_DATA,
-        MASTER_PEC_FORM_DATA
-      )
+      fillFullApplicationDetails()
 
       Then("the candidate is notified of application checks")
       weAreCheckingYourApplicationState()
