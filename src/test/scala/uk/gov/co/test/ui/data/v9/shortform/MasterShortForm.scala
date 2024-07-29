@@ -64,7 +64,6 @@ object MASTER_SHORT_FORM_PERSONAL_INFO
         "Department for Education",
         "Department for Energy Security & Net Zero",
         "Department for Environment, Food and Rural Affairs",
-        "Department for Levelling Up, Housing and Communities",
         "Department for Science, Innovation and Technology",
         "Department for Transport",
         "Department for Work and Pensions",
@@ -96,11 +95,11 @@ object MASTER_SHORT_FORM_PERSONAL_INFO
         "Health and Safety Executive",
         "HM Courts and Tribunals Service",
         "HM Crown Prosecution Service Inspectorate",
-//        "HM Government Communications Centre", TODO doesn't appear on the cs list
         "HM Land Registry",
         "HM Prison & Probation Service",
         "HM Revenue and Customs",
         "HM Treasury",
+        "HMGCC (His Majesty's Government Communications Centre)",
         "Home Office",
         "Insolvency Service",
         "Institute for Apprenticeships and Technical Education",
@@ -110,6 +109,7 @@ object MASTER_SHORT_FORM_PERSONAL_INFO
         "Medicines and Healthcare Products Regulatory Agency",
         "Met Office",
         "Ministry of Defence",
+        "Ministry of Housing, Communities and Local Government",
         "Ministry of Justice",
         "National Crime Agency",
         "National Infrastructure Commission",
@@ -122,7 +122,6 @@ object MASTER_SHORT_FORM_PERSONAL_INFO
         "Office for Standards in Education, Children's Services and Skills",
         "Office of Qualifications and Examinations Regulation",
         "Office of Rail and Road",
-//        "Office of Tax Simplification", TODO doesn't appear on the cs list
         "Office of the Advocate General for Scotland",
         "Office of the Public Guardian",
         "Office of the Secretary of State for Scotland",
@@ -130,7 +129,6 @@ object MASTER_SHORT_FORM_PERSONAL_INFO
         "OFGEM",
         "Ofwat (Water Services Regulation Authority)",
         "Planning Inspectorate",
-//        "Public Health England", TODO doesn't appear on the cs list
         "Queen Elizabeth II Conference Centre",
         "Registers of Scotland",
         "Revenue Scotland",
@@ -164,16 +162,15 @@ object MASTER_SHORT_FORM_PERSONAL_INFO
         "British Transport Police Authority",
         "Commonwealth Parliamentary Association UK",
 //        "Department for International Development", //TODO doesn't appear on the cs list
-//        "Department for International Trade", //TODO doesn't appear on the cs list
-//        "Foreign and Commonwealth Office", //TODO doesn't appear on the cs list
+        "Department for Business and Trade",
+        "Foreign, Commonwealth & Development Office",
 //        "Government Communication Service", //TODO doesn't appear on the cs list
         "His Majesty's Inspectorate of Constabulary and Fire & Rescue Services",
         "Medical Research Council",
-        "Office of the Scottish Charity Regulator", //TODO appears different in redeployment spreadsheet
+        "Office of the Scottish Charity Regulator",
         "Public Prosecution Service for Northern Ireland",
         "Royal Botanic Gardens Kew",
-        "MI6 - Secret Intelligence Service", //TODO appears different in redeployment spreadsheet
-//        "Stabilisation Unit", //TODO doesn't appear on the cs list
+        "MI6 - Secret Intelligence Service",
         "MI5 - The Security Service",
         "UK Research and Innovation",
         "Valuation Tribunal Service"

@@ -31,7 +31,7 @@ object NON_REDEPLOYMENT_VACANCY_DATA
 
 object NON_REDEPLOYMENT_BASIC_DETAILS
     extends BasicDetails(
-      "DO NOT USE- Automation Test Template",
+      "Cabinet Office - apply online", //although part of the redeployment scheme, the switch is turned OFF
       s"Automation: MRC-Non-Redeployment - " + generateRandomJobPosition(),
       true,
       "Prawf awtomeiddio",

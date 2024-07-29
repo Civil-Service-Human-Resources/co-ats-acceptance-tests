@@ -466,11 +466,6 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
       case "Video"      => s"for a ${interviewTypeDetail().toLowerCase} interview"
       case "Interview"  => s"for an ${interviewTypeDetail().toLowerCase}"
     }
-    // TODO to bypass grammatical bug, this function was created
-    val schedule   = vXInterviewNumber.head match {
-      case "2"   => s"\'Schedule interview\""//TODO requires fix to align with other fields. this occurs on I2 ONLY, not related to type!
-      case _     => s"'Schedule interview'"
-    }
     changeSystem("candidate")
     confirmStatusOnApplicationPage(status)
     applicationCentrePageCheck()
@@ -482,7 +477,7 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
     getApplicationState shouldEqual s"Application status: $status"
 
     getApplicationConfirmation shouldEqual s"""Congratulations, we'd like to invite you $inviteType.
-                                             |To book your interview slot click $schedule.
+                                             |To book your interview slot click 'Schedule interview'.
                                              |To get your preferred time we recommend you book as early as possible.
                                              |If you're no longer interested in this job, please withdraw your application.""".stripMargin //TODO an issue with speech mark on I2 'Schedule interview"
   }
