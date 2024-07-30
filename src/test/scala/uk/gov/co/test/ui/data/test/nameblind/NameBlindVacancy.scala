@@ -150,14 +150,14 @@ object NON_NAME_BLIND_VETTING_DETAILS
     )
 
 object NON_NAME_BLIND_INTERVIEWS_DETAILS
-  extends InterviewsDetails(
-    "1",
-    "Interview",
-    "Assessment",
-    "Video",
-    "Telephone",
-    false
-  )
+    extends InterviewsDetails(
+      "1",
+      "Interview",
+      "Assessment",
+      "Video",
+      "Telephone",
+      false
+    )
 
 object NON_NAME_BLIND_SUCCESS_PROFILES
     extends SuccessProfilesDetails(

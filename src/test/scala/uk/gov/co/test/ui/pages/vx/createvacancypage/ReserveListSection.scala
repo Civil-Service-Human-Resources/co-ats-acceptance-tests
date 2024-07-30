@@ -82,7 +82,8 @@ object ReserveListSection extends VacancyBasePage {
       clickOnRadioButton(reserveListYesId)
       lengthOfReserveList(reserveLength)
       if (reserveLength == "12 Months") {
-        if (extendRequired.isDefined && extendRequired.get.equals(true)) {
+//        if (extendRequired.isDefined && extendRequired.get.equals(true)) {
+        if (extendRequired.isDefined && extendRequired.get) {
           clickOnRadioButton(approvalToExtendYesId)
           waitForVisibilityOfElementById(extendLengthId).click()
           action().moveToElement(waitForDropdownOption(extendLength.getOrElse(""))).perform()

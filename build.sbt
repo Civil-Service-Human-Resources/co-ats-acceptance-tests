@@ -7,7 +7,9 @@ lazy val testSuite = (project in file("."))
     version := "0.1.0",
     scalaVersion := "2.13.8",
     scalacOptions ++= Seq("-unchecked", "-deprecation", "-feature"),
-    parallelExecution in Test := false,
+    parallelExecution in Test := true,
+    testForkedParallel in IntegrationTest := true,
+    concurrentRestrictions in Global := Seq(Tags.limitAll(4)),
     libraryDependencies ++= Dependencies.test,
     testOptions in Test := Seq(
       Tests.Argument(TestFrameworks.ScalaTest, "-u", "target/test-reports"),

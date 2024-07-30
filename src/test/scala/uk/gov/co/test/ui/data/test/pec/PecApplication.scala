@@ -406,10 +406,10 @@ object PEC_APPLICATION_INTERVIEW_FOUR_EVALUATION
     )
 
 object PEC_APPLICATION_OGD_SECURITY_CHECKS
-  extends OgdSecurityChecksDetails(
-    true,
-    true
-  )
+    extends OgdSecurityChecksDetails(
+      true,
+      true
+    )
 
 object PEC_APPLICATION_POSTING_NOTICE
     extends PostingNoticeDetails(

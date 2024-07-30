@@ -44,7 +44,7 @@ object InterviewFlow extends CivilServiceJobsBasePage {
     }
 
   //test data
-  def untagVacancies(vacancyToUntag: String): Unit =
+  def untagVacancies(vacancyToUntag: String): Unit                   =
     for (i <- 1 to 25) untagVacancy(i, vacancyToUntag)
 
   //DAC test data for request two

@@ -478,12 +478,9 @@ object PEC_MISCONDUCT_ONLY_PEC_MISCONDUCT_ONLY_CHECK_FORMS
       "Show recruiter and candidate forms",
       overseasCheck = ListBuffer("Not Applicable"),
       pensionsCheck = ListBuffer("Not Applicable"),
-      previousCsJobCheck =
-        ListBuffer("Not Applicable"),
-      internalFraudCheck =
-        ListBuffer("Not Applicable"),
-      selfEmploymentCheck =
-        ListBuffer("Not Applicable"),
+      previousCsJobCheck = ListBuffer("Not Applicable"),
+      internalFraudCheck = ListBuffer("Not Applicable"),
+      selfEmploymentCheck = ListBuffer("Not Applicable"),
       true,
       false,
       false,

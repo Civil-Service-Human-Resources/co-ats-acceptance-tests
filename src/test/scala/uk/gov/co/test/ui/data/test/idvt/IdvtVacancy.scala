@@ -217,8 +217,9 @@ object IDVT_EXPERIENCES
       "Autotest - Enter guidance text for the candidate",
       false,
       "Autotest - Specific past experience/skills",
-      licences =
-        Some(MandatoryRequirements(requirements = false, requirementsInfo = "Autotest - Specific licence requirements")),
+      licences = Some(
+        MandatoryRequirements(requirements = false, requirementsInfo = "Autotest - Specific licence requirements")
+      ),
       memberships = Some(
         MandatoryRequirements(requirements = false, requirementsInfo = "Autotest - Specific memberships requirements")
       ),

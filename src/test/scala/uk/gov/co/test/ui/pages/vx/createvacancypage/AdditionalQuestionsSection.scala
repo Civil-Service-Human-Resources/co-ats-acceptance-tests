@@ -100,10 +100,9 @@ object AdditionalQuestionsSection extends VacancyBasePage {
     moreQuestionsFlow
   )
 
-  def additionalQuestionsSection(newVacancyDetails: NewVacancyDetails): Unit = {
+  def additionalQuestionsSection(newVacancyDetails: NewVacancyDetails): Unit =
     questions.foreach { f =>
       f(newVacancyDetails.additionalQuestionsDetails)
     }
-  }
 
 }

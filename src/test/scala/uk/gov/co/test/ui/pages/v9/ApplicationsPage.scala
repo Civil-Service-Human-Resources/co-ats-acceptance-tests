@@ -2,7 +2,7 @@ package uk.gov.co.test.ui.pages.v9
 
 import org.openqa.selenium.{By, WebElement}
 import org.scalatest.concurrent.Eventually.eventually
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{applicationId, randomEmail, randomPassword, v9RunInWelsh, vacancyId}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{applicationId, randomEmail, v9RunInWelsh, vacancyId}
 
 import scala.collection.mutable
 import scala.jdk.CollectionConverters._
@@ -10,15 +10,14 @@ import scala.util.control.Breaks.{break, breakable}
 
 object ApplicationsPage extends CivilServiceJobsBasePage {
 
-  val applicationsPageTitle    = "Applications - Civil Service Jobs - GOV.UK"
-  val welshApplicationsPageTitle    = "Ceisiadau - Civil Service Jobs - GOV.UK"
-  val applicationLinkPath      = ".//a[@title='Applications']"
-  val welshApplicationLinkPath = ".//a[@title='Ceisiadau']"
-  val applicationTableAreaPath = ".//*[@id='DataTables_Table_0']/tbody"
+  val applicationsPageTitle      = "Applications - Civil Service Jobs - GOV.UK"
+  val welshApplicationsPageTitle = "Ceisiadau - Civil Service Jobs - GOV.UK"
+  val applicationLinkPath        = ".//a[@title='Applications']"
+  val welshApplicationLinkPath   = ".//a[@title='Ceisiadau']"
+  val applicationTableAreaPath   = ".//*[@id='DataTables_Table_0']/tbody"
 
-  def applicationsPageCheck(): Unit = {
+  def applicationsPageCheck(): Unit =
     if (v9RunInWelsh) eventually(onPage(welshApplicationsPageTitle)) else eventually(onPage(applicationsPageTitle))
-  }
 
   def navigateToApplicationsPage(): Unit = {
     if (v9RunInWelsh) waitForVisibilityOfElementByPath(welshApplicationLinkPath).click()
@@ -134,7 +133,7 @@ object ApplicationsPage extends CivilServiceJobsBasePage {
     println(s"Application ID: $applicationId")
     println("===============================================")
     if (v9RunInWelsh) statusValue() shouldEqual "Cais yn mynd yn ei flaen"
-    else statusValue() shouldEqual "Application in progress"
+    else statusValue()              shouldEqual "Application in progress"
     reviewUpdateValue().click()
   }
 
@@ -144,7 +143,7 @@ object ApplicationsPage extends CivilServiceJobsBasePage {
     } else {
       navigateToApplicationsPage()
       if (v9RunInWelsh) eventually(statusValue() shouldEqual "Cais wedi'i dderbyn")
-      else eventually(statusValue() shouldEqual "Application received")
+      else eventually(statusValue()              shouldEqual "Application received")
       reviewUpdateValue().click()
     }
 

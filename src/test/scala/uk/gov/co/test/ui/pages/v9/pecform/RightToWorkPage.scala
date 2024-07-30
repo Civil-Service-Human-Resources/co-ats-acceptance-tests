@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.pages.v9.pecform
 
 import org.scalatest.concurrent.Eventually.eventually
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{v9BiometricResidenceCard, v9EussStatus, v9RtwBritishCitizen, v9RtwBritishIrishPassport, vXApproach, vXRtwChecks, vXTypeOfCandidate}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{v9BiometricResidenceCard, v9EussStatus, v9RtwBritishCitizen, v9RtwBritishIrishPassport, vXRtwChecks, vXTypeOfCandidate}
 import uk.gov.co.test.ui.data.v9.pecform.PecFormDetails
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
 import uk.gov.co.test.ui.pages.v9.pecform.YourDetailsPage.pecFormId
@@ -138,7 +138,7 @@ object RightToWorkPage extends CivilServiceJobsBasePage {
 
   private def selectEussStatus(rtwDetails: RtwDetails): Unit =
     v9EussStatus match {
-      case "I did not apply for the EU Settlement Scheme"                 =>
+      case "I did not apply for the EU Settlement Scheme"                                 =>
         radioSelect(eussStatusDidNotApplyId)
         selectBiometricResidenceCard(rtwDetails)
       case "I have applied for the settlement scheme and await confirmation of my status" =>

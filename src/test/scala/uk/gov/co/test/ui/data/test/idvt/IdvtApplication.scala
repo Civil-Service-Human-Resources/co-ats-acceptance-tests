@@ -406,10 +406,10 @@ object IDVT_APPLICATION_INTERVIEW_FOUR_EVALUATION
     )
 
 object IDVT_APPLICATION_OGD_SECURITY_CHECKS
-  extends OgdSecurityChecksDetails(
-    true,
-    true
-  )
+    extends OgdSecurityChecksDetails(
+      true,
+      true
+    )
 
 object IDVT_APPLICATION_POSTING_NOTICE
     extends PostingNoticeDetails(

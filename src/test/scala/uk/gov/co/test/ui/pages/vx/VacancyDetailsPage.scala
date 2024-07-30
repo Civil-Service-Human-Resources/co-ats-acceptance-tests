@@ -3,8 +3,7 @@ package uk.gov.co.test.ui.pages.vx
 import org.openqa.selenium.{By, WebElement}
 import org.scalatest.concurrent.Eventually.eventually
 import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXAbilitiesRequired, vXAnyAdditionalQuestions, vXAnyOnlineTests, vXApplicationClosingDate, vXApplicationLiveDate, vXApproach, vXAttachmentRequired, vXAvailableOutsideInNI, vXBehaviourApplicationRequired, vXBehaviourInterviewRequired, vXBehavioursRequired, vXBudgetaryApproval, vXBusinessArea, vXBusinessAreaDetail, vXCandidateInstructions, vXCandidateUploadIdentityDocs, vXCommunitiesInNIR, vXContactName, vXCostCentre, vXCrcCheckProvider, vXCrcLevel, vXCvAttachment, vXCvScoreRange, vXDesirablePastExperience, vXDetailsForUploadIdentityDocs, vXEmailForQuestions, vXExperiencesRequired, vXFullQualification, vXGiveLocationPreference, vXGreatForVeterans, vXHavePecMailbox, vXHowManyBehaviours, vXHowManyQuestions, vXHowManySkills, vXHowManyStrengths, vXInterviewExpectedRounds, vXInterviewFourType, vXInterviewNumber, vXInterviewOneType, vXInterviewThreeType, vXInterviewTwoType, vXJobGradeEquivalent, vXJobGrades, vXJobHistory, vXJobInfoDepartment, vXLanguagesMandatory, vXLicencesMandatory, vXListOfChosenBehaviours, vXListOfSkillsApplicationRequired, vXListOfSkillsInterviewRequired, vXListOfStrengths, vXListOfTechSkills, vXListOfTechSkillsDescription, vXLocationDisplay, vXLocationType, vXManuallyCheckIdentityDocs, vXMaxLocations, vXMedicalRequired, vXMembershipsMandatory, vXNoOfJobsAvailable, vXNoPecOgdDigitalTransfer, vXNonReserved, vXOtherLocations, vXPecAdditionalCheck, vXPecBankruptcyCheck, vXPecCrc, vXPecEmploymentHistoryCheck, vXPecFraudCheck, vXPecGeneralInfo, vXPecHealthDisplayOptions, vXPecHealthRefCheck, vXPecHrEmailForNen, vXPecHrEmailForPn, vXPecIncludeAdditionalCheck, vXPecMailbox, vXPecNameOfAdditionalCheck, vXPecNen, vXPecNsv, vXPecNsvDisplayOptions, vXPecOgdSecurityCheck, vXPecOverseasCheck, vXPecPensionsCheck, vXPecPn, vXPecPreviousCivilEmploymentCheck, vXPecReferenceCheck, vXPecSelfEmploymentCheck, vXPecUseDigitalOgdProcess, vXPecWorkplaceMisconductCheck, vXPersonalStatement, vXPersonalStatementNameBlind, vXPreSiftRequired, vXPreviousExperiences, vXProfession, vXProfile, vXProvideNameBlindCv, vXQualificationsMandatory, vXQuestionOne, vXQuestionThree, vXQuestionTwo, vXRejectApplyingOnPromotion, vXRejectLanguagesNotHeld, vXRejectLicencesNotHeld, vXRejectLiveMisconduct, vXRejectMembershipsNotHeld, vXRejectNationalityReq, vXRejectNoRightToRemain, vXRejectPoorAttendance, vXRejectPoorPerformance, vXRejectProbation, vXRejectQualificationsNotHeld, vXReserveExtendLength, vXReserveExtendRequired, vXReserveListLength, vXReserveListRequired, vXRtwChecks, vXSpecificLanguages, vXSpecificLicences, vXSpecificMemberships, vXSpecificPastExperience, vXSpecificQualifications, vXStatementGuidance, vXStatementGuidanceText, vXStatementScoreRange, vXStatementWordLimit, vXStrengthsRequired, vXTeamEmail, vXTechSkillsRequired, vXTypeOfRole, vXUseOnlinePecForms, vXVacanciesInNIR, vXVacancyHolderEmail, vXVacancyHolderName, vXVettingLevel, vXWhenRtwChecks, vXWhichIdentityChecks, vacancyFormId, vacancyId, vacancyName}
-import uk.gov.co.test.ui.pages.v9.ApplicationDetailsPage.resetApplicationDetails
-import uk.gov.co.test.ui.pages.vx.createvacancypage.PecCheckFormsSection.{driver, nenHrEmailHeaderId}
+import uk.gov.co.test.ui.pages.vx.createvacancypage.PecCheckFormsSection.nenHrEmailHeaderId
 import uk.gov.co.test.ui.pages.vx.vacancytabs.InterviewFourEvaluationTab.{vXI4AssessmentsTotalScore, vXI4BehavioursTotalScore, vXI4ExperienceScore, vXI4StrengthsTotalScore, vXI4TechSkillsTotalScore}
 import uk.gov.co.test.ui.pages.vx.vacancytabs.InterviewOneEvaluationTab.{vXI1AssessmentsTotalScore, vXI1BehavioursTotalScore, vXI1ExperienceScore, vXI1StrengthsTotalScore, vXI1TechSkillsTotalScore}
 import uk.gov.co.test.ui.pages.vx.vacancytabs.InterviewThreeEvaluationTab.{vXI3AssessmentsTotalScore, vXI3BehavioursTotalScore, vXI3ExperienceScore, vXI3StrengthsTotalScore, vXI3TechSkillsTotalScore}
@@ -1434,26 +1433,24 @@ object VacancyDetailsPage extends VacancyBasePage {
     extractValues(pecNenId, vXPecNen)
   }
 
-  private def extractNenHrEmail(): Unit = {
+  private def extractNenHrEmail(): Unit =
     if (driver.findElement(By.id(nenHrEmailHeaderId)).getText.nonEmpty) {
       if (!vXPecNen.contains("Not Applicable")) {
         vXPecHrEmailForNen = waitForVisibilityOfElementById(pecNenHrEmailId).getAttribute("value")
       }
     }
-  }
 
   private def extractPnTypes(): Unit = {
     vXPecPn.clear()
     extractValues(pecPnId, vXPecPn)
   }
 
-  private def extractPnHrEmail(): Unit = {
+  private def extractPnHrEmail(): Unit =
     if (driver.findElement(By.id(nenHrEmailHeaderId)).getText.nonEmpty) {
       if (!vXPecPn.contains("Not Applicable")) {
         vXPecHrEmailForPn = waitForVisibilityOfElementById(pecPnHrEmailId).getAttribute("value")
       }
     }
-  }
 
   private def jobInformationDetails(): Unit = {
     extractDepartment()

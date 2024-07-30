@@ -256,7 +256,7 @@ object CalenderSchedulePage extends VacancyBasePage {
   }
 
   private def tagSelectedVacancy(): Unit = {
-    val appLiveDate = changeDateFormat(vXApplicationLiveDate, "short")
+    val appLiveDate    = changeDateFormat(vXApplicationLiveDate, "short")
     val appClosingDate = changeDateFormat(vXApplicationClosingDate, "short")
     waitForVisibilityOfElementByPath(taggedVacanciesTabPath).click()
     waitForVisibilityOfElementById(addTaggedVacancyId).click()
@@ -275,8 +275,8 @@ object CalenderSchedulePage extends VacancyBasePage {
   }
 
   private def confirmTaggedVacancy(): Unit = {
-    val appLiveDate = changeDateFormat(vXApplicationLiveDate, "short")
-    val appClosingDate = changeDateFormat(vXApplicationClosingDate, "short")
+    val appLiveDate                                  = changeDateFormat(vXApplicationLiveDate, "short")
+    val appClosingDate                               = changeDateFormat(vXApplicationClosingDate, "short")
     checkForNewValuePath(displayingResultsT1Path, vacancyId)
     val addVacancyTable                              = "DataTables_Table_1"
     val (_title, _liveDate, _closingDate, _isActive) = selectedVacancyValues(addVacancyTable)

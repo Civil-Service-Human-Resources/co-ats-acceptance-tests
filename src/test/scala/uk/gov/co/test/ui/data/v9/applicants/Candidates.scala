@@ -150,15 +150,15 @@ object REGISTER_CANDIDATE_PEC_1
     )
 
 object REGISTER_CANDIDATE_PEC_2
-  extends CandidateDetails(
-    firstname = s"$randomFirstName",
-    lastname = s"$randomLastName",
-    preferredFirstName = s"$preferredFirstName",
-    email = s"$randomEmail",
-    s"$passwordCandidate",
-    false,
-    true
-  )
+    extends CandidateDetails(
+      firstname = s"$randomFirstName",
+      lastname = s"$randomLastName",
+      preferredFirstName = s"$preferredFirstName",
+      email = s"$randomEmail",
+      s"$passwordCandidate",
+      false,
+      true
+    )
 
 object REGISTER_CANDIDATE_OGD_HMRC
     extends CandidateDetails(

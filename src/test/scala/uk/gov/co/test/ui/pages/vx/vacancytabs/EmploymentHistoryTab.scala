@@ -120,7 +120,6 @@ object EmploymentHistoryTab extends VacancyBasePage {
       uploadEehcEvidence(historyDetails)
     } else radioClick(receivedHistoryCheckNoId)
 
-
   private def enterDateHistoryCheckStarted(historyDetails: HistoryDetails): Unit =
     enterDateFields(
       formattedDate(historyDetails.historyCheckStarted),
