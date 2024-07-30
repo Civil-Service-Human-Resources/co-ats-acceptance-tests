@@ -57,16 +57,14 @@ object SearchJobsPage extends CivilServiceJobsBasePage {
   def checkForNewVacancy(jobId: String, jobTitle: String, searchPathway: String): Unit = {
     val jobDetailsPath: String = s".//a[text()='$jobTitle']"
     searchForVacancyFlow(jobId, searchPathway)
-    if (waitForVisibilityOfElementByTag("h1").getText == "Cannot view job") {
+    val title                  = waitForElementClickableByPath(jobDetailsPath)
+    title.click()
+    if (!driver.findElements(By.linkText("Cannot view job")).isEmpty) {
+      println("Vacancy search resulted in 'Cannot view job' error pathway!")
       waitForVisibilityOfElementByPath(navigateToHomeSearchPath).click()
       waitForVisibilityOfElementByTag("h1").getText shouldEqual cSJobSearchHeader
       searchForVacancyFlow(jobId, searchPathway)
-      println("Vacancy search resulted in 'Cannot view job' error!")
-    } else {
-      println(s"waitForVisibilityOfElementByTag(h1).getText is: ${waitForVisibilityOfElementByTag("h1").getText}")
     }
-    val title                  = waitForElementClickableByPath(jobDetailsPath)
-    title.click()
   }
 
   def enterSearchCriteria(jobId: String, searchPathway: String): Unit = {
