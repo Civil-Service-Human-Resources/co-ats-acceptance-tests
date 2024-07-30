@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.pages.v9.pecform
 
 import org.scalatest.concurrent.Eventually.eventually
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXApproach, vXPecOverseasCheck}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXApproach, vXPecOverseasCheck, vXTypeOfCandidate}
 import uk.gov.co.test.ui.data.v9.pecform.PecFormDetails
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
 import uk.gov.co.test.ui.pages.v9.pecform.YourDetailsPage.pecFormId
@@ -270,7 +270,7 @@ object OverseasPage extends CivilServiceJobsBasePage {
   def overseasPage(pecFormDetails: PecFormDetails): Unit =
     if (
       !vXPecOverseasCheck.contains("Not Applicable") &&
-      vXPecOverseasCheck.contains(s"$vXApproach Candidates")
+      vXPecOverseasCheck.contains(s"$vXTypeOfCandidate Candidates")
     ) {
       overseas.foreach { f =>
         f(pecFormDetails.overseasDetails)

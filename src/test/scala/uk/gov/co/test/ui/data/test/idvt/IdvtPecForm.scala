@@ -5,27 +5,30 @@ import uk.gov.co.test.ui.data.v9.pecform.PecFormDetails
 import uk.gov.co.test.ui.pages.v9.pecform._
 import uk.gov.co.test.ui.pages.vx.DashboardPage.v9RefereeEmail
 
-object IDVT_FORM_DATA
+import java.time.LocalDate
+
+object IDVT_PEC_FORM_DATA
     extends PecFormDetails(
-      IDVT_FORM_YOUR_DETAILS,
-      IDVT_RIGHT_TO_WORK,
-      IDVT_FORM_EMPLOYMENT_HISTORY,
-      IDVT_FORM_VERIFYING_HISTORY,
-      IDVT_FORM_PENSION_QUESTIONNAIRE,
-      IDVT_FORM_OVERSEAS,
-      IDVT_FORM_BANKRUPTCY_DETAILS,
-      IDVT_FORM_HEALTH_DECLARATION,
-      IDVT_FORM_SELF_EMPLOYMENT,
-      IDVT_FORM_PREVIOUS_CS_EMPLOYMENT,
-      IDVT_FORM_NATIONAL_SECURITY_VETTING,
-      IDVT_FORM_UPLOAD_IDENTITY_DOCS,
-      IDVT_FORM_DBS_PERSONAL_INFO,
-      IDVT_FORM_DBS_ADDRESS_DETAILS,
-      IDVT_FORM_DIGITAL_IDENTITY_CHECK,
-      IDVT_FORM_DECLARATION
+      IDVT_PEC_FORM_YOUR_DETAILS,
+      IDVT_PEC_FORM_RIGHT_TO_WORK,
+      IDVT_PEC_FORM_EMPLOYMENT_HISTORY,
+      IDVT_PEC_FORM_VERIFYING_HISTORY,
+      IDVT_PEC_FORM_WORKPLACE_MISCONDUCT,
+      IDVT_PEC_FORM_PENSION_QUESTIONNAIRE,
+      IDVT_PEC_FORM_OVERSEAS,
+      IDVT_PEC_FORM_BANKRUPTCY_DETAILS,
+      IDVT_PEC_FORM_HEALTH_DECLARATION,
+      IDVT_PEC_FORM_SELF_EMPLOYMENT,
+      IDVT_PEC_FORM_PREVIOUS_CS_EMPLOYMENT,
+      IDVT_PEC_FORM_NATIONAL_SECURITY_VETTING,
+      IDVT_PEC_FORM_UPLOAD_IDENTITY_DOCS,
+      IDVT_PEC_FORM_DBS_PERSONAL_INFO,
+      IDVT_PEC_FORM_DBS_ADDRESS_DETAILS,
+      IDVT_PEC_FORM_DIGITAL_IDENTITY_CHECK,
+      IDVT_PEC_FORM_DECLARATION
     )
 
-object IDVT_FORM_YOUR_DETAILS
+object IDVT_PEC_FORM_YOUR_DETAILS
     extends YourDetails(
       "Mr",
       true,
@@ -34,6 +37,10 @@ object IDVT_FORM_YOUR_DETAILS
       "01/01/1980",
       "Man",
       "Single",
+      "01/12/2020",
+      "Modernised",
+      true,
+      "SEO",
       "1001 Autotest street",
       addressLineTwo = Option("Cheadle"),
       "Manchester",
@@ -43,7 +50,7 @@ object IDVT_FORM_YOUR_DETAILS
       "00110000001"
     )
 
-object IDVT_RIGHT_TO_WORK
+object IDVT_PEC_FORM_RIGHT_TO_WORK
     extends RtwDetails(
       "British citizen, Briton",
       "British citizen, Briton",
@@ -64,7 +71,7 @@ object IDVT_RIGHT_TO_WORK
       true
     )
 
-object IDVT_FORM_BANKRUPTCY_DETAILS
+object IDVT_PEC_FORM_BANKRUPTCY_DETAILS
     extends BankruptcyDetails(
       false,
       "Autotest - bankruptcy status",
@@ -76,27 +83,67 @@ object IDVT_FORM_BANKRUPTCY_DETAILS
       "Autotest - details on any penalties imposed in relation to late filing on your tax affairs within the last 5 years"
     )
 
-object IDVT_FORM_HEALTH_DECLARATION
+object IDVT_PEC_FORM_HEALTH_DECLARATION
     extends HealthDeclarationDetails(
-      false, false, false, false, false, false, false
+      true,
+      "Autotest - any adjustments details",
+      true,
+      "Autotest - health issues details",
+      true,
+      "Autotest - conditions affecting job advert details",
+      true,
+      "Autotest - ongoing investigations details",
+      true,
+      "Autotest - current health issues that may affect new role details",
+      true,
+      "Autotest - health related absence details",
+      true,
+      "Autotest - discuss any health related issues details"
     )
 
-object IDVT_FORM_SELF_EMPLOYMENT
+object IDVT_PEC_FORM_SELF_EMPLOYMENT
     extends SelfEmploymentDetails(
-      false
+      true,
+      employmentStartDate = LocalDate.now().minusYears(3),
+      employmentEndDate = LocalDate.now().minusMonths(3),
+      "Autotest - name of business",
+      "Autotest - type of business",
+      true,
+      "Autotest - details about why the accounts are not closed",
+      false,
+      "Autotest - details of the status of these accounts",
+      true,
+      "Alliance & Roberts",
+      "Mr Automation",
+      "07700123123",
+      emailOfSolicitorOrAccountant = s"$v9RefereeEmail",
+      true,
+      "Test-T&Cs.pdf",
+      true,
+      "1234567890",
+      true,
+      true,
+      "Autotest - details about the self-employment you intend to keep after you start your Civil Service role",
+      true,
+      "Autotest - how your self-employment could cause a conflict of interest with your Civil Service role"
     )
 
-object IDVT_FORM_PREVIOUS_CS_EMPLOYMENT
+object IDVT_PEC_FORM_PREVIOUS_CS_EMPLOYMENT
     extends PreviousCSEmploymentDetails(
-      false
+      true,
+      true,
+      dismissalDate = LocalDate.now().minusMonths(22),
+      "Autotest - department dismissed from",
+      "Autotest - reason for dismissal",
+      dismissalDetails = Some("Autotest - dismissal details")
     )
 
-object IDVT_FORM_UPLOAD_IDENTITY_DOCS
+object IDVT_PEC_FORM_UPLOAD_IDENTITY_DOCS
     extends IdentityDocDetails(
       "Test-T&Cs.pdf"
     )
 
-object IDVT_FORM_DBS_PERSONAL_INFO
+object IDVT_PEC_FORM_DBS_PERSONAL_INFO
     extends DbsPersonalInfoDetails(
       "Mr",
       "Marie",
@@ -130,7 +177,7 @@ object IDVT_FORM_DBS_PERSONAL_INFO
       false
     )
 
-object IDVT_FORM_DBS_ADDRESS_DETAILS
+object IDVT_PEC_FORM_DBS_ADDRESS_DETAILS
     extends DbsAddressDetails(
       "40 Cromwell Road",
       Some(""),
@@ -141,7 +188,7 @@ object IDVT_FORM_DBS_ADDRESS_DETAILS
       "03/11/1975"
     )
 
-object IDVT_FORM_DIGITAL_IDENTITY_CHECK
+object IDVT_PEC_FORM_DIGITAL_IDENTITY_CHECK
     extends DigitalIdentityDetails(
       "As part of checking your right to work in the UK, we would like to process your biometric data for digital identity validation. We will ask for your passport or passport card, and a photo of your face.\n\nIf you consent to this processing, we will share your personal data with our checking provider TrustID and their supply chain. Please see our privacy notice (opens in new window) for more detail.\n\nIf you choose not to consent, you will need to present your original ID documents in person.",
       "I consent to my data being processed for digital identity checks",
@@ -154,7 +201,7 @@ object IDVT_FORM_DIGITAL_IDENTITY_CHECK
       true
     )
 
-object IDVT_FORM_EMPLOYMENT_HISTORY
+object IDVT_PEC_FORM_EMPLOYMENT_HISTORY
     extends EmploymentHistoryDetails(
       true,
       "Employer Test One",
@@ -168,7 +215,7 @@ object IDVT_FORM_EMPLOYMENT_HISTORY
       "01/06/2021"
     )
 
-object IDVT_FORM_VERIFYING_HISTORY
+object IDVT_PEC_FORM_VERIFYING_HISTORY
     extends VerifyingHistoryDetails(
       true,
       "Autotest1 - relation to referee",
@@ -185,10 +232,19 @@ object IDVT_FORM_VERIFYING_HISTORY
       s"$v9RefereeEmail"
     )
 
-object IDVT_FORM_PENSION_QUESTIONNAIRE
+object IDVT_PEC_FORM_WORKPLACE_MISCONDUCT
+    extends MisconductDetails(
+      true,
+      "Autotest - name, address & email of employer for claim of misconduct against candidate",
+      true,
+      "Autotest - name, address & email of employer for currently under investigation of candidate",
+      true
+    )
+
+object IDVT_PEC_FORM_PENSION_QUESTIONNAIRE
     extends PensionDetails(
       "Your answers will allow us to work out which of the Civil Service Pension schemes you can join.",
-      "Have you ever been a member of public service pension scheme?\nAnswer this question with your latest period of pension scheme membership. Public services employers include the Civil Service, judiciary workers, teachers, members of the armed forces, fire and rescue services, the police, health service workers and local government employees. *By-analogy schemes are almost identical to the main Civil Service arrangements, but may have slightly different terms or rules.",
+      "Have you ever been a member of public service pension scheme?\nAnswer this question with your latest period of pension scheme membership. Public services employers include the Civil Service, judiciary workers, teachers, members of the armed forces, fire and rescue services, the police, health service workers and local government employees.\n*By-analogy schemes are almost identical to the main Civil Service arrangements, but may have slightly different terms or rules.",
       "Civil Service Pension arrangements",
       "HMRC",
       "Classic plus",
@@ -214,7 +270,7 @@ object IDVT_FORM_PENSION_QUESTIONNAIRE
       false
     )
 
-object IDVT_FORM_OVERSEAS
+object IDVT_PEC_FORM_OVERSEAS
     extends OverseasDetails(
       "Have you resided outside the UK within the past 3 years for 6 months or more?",
       true,
@@ -250,7 +306,7 @@ object IDVT_FORM_OVERSEAS
       "Autotest - Provide details about why we cannot contact your fellow UK traveller"
     )
 
-object IDVT_FORM_NATIONAL_SECURITY_VETTING
+object IDVT_PEC_FORM_NATIONAL_SECURITY_VETTING
     extends NsvDetails(
       s"$randomLastName",
       anyOtherSurname = Some(s"$randomLastName"),
@@ -283,7 +339,7 @@ object IDVT_FORM_NATIONAL_SECURITY_VETTING
       securityClearanceInfo = Some(value = "Autotest - security clearance details")
     )
 
-object IDVT_FORM_DECLARATION
+object IDVT_PEC_FORM_DECLARATION
     extends DeclarationDetails(
       true, true, true, true, true, true, true, true
     )

@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.pages.vx.vacancytabs
 
 import org.openqa.selenium.By
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXAnyOnlineTests, vXBehaviourApplicationRequired, vXBehavioursRequired, vXCvScoreRange, vXExperiencesRequired, vXHowManyBehaviours, vXHowManySkills, vXInterviewExpectedRounds, vXListOfChosenBehaviours, vXListOfSkillsApplicationRequired, vXListOfTechSkills, vXPreSiftRequired, vXTechSkillsRequired, vacancyFormId}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXAnyOnlineTests, vXBehaviourApplicationRequired, vXBehavioursRequired, vXCvAttachment, vXCvScoreRange, vXExperiencesRequired, vXHowManyBehaviours, vXHowManySkills, vXInterviewExpectedRounds, vXListOfChosenBehaviours, vXListOfSkillsApplicationRequired, vXListOfTechSkills, vXPersonalStatement, vXPreSiftRequired, vXTechSkillsRequired, vacancyFormId}
 import uk.gov.co.test.ui.data.vx.application.{ApplicationDetails, Outcome}
 import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.{applicationBeingReviewedState, successfulAtSiftState}
 import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.{availableBarItems, completeSiftBarId, confirmCandidateSummary, progressBarAfterPreSiftId, siftEvaluation, withdrawBarId}
@@ -99,8 +99,8 @@ object SiftEvaluationTab extends VacancyBasePage {
   def techSkillTotalScoreId                   = s"${vacancyFormId}_field_66891_1"
   def cvAssessmentTitleId                     = s"${vacancyFormId}_label_66191_1"
 //  def cvAssessmentScoreId                     = s"select2-${vacancyFormId}_datafield_109033_1_1-container"
-  def cvAssessment100ScoreId                     = s"select2-${vacancyFormId}_datafield_109033_1_1-container"
-  def cvAssessment7ScoreId                     = s"select2-${vacancyFormId}_datafield_187906_1_1-container"
+  def cvAssessment100ScoreId                  = s"select2-${vacancyFormId}_datafield_109033_1_1-container"
+  def cvAssessment7ScoreId                    = s"select2-${vacancyFormId}_datafield_187906_1_1-container"
   def cvAssessmentCommentsId                  = s"${vacancyFormId}_datafield_66204_1_1"
   def personalStatementTitleId                = s"${vacancyFormId}_label_66211_1"
   def personalStatementScoreId                = s"select2-${vacancyFormId}_datafield_187935_1_1-container"
@@ -281,7 +281,6 @@ object SiftEvaluationTab extends VacancyBasePage {
     if (vXBehavioursRequired) {
       waitForVisibilityOfElementById(behaviourAssessmentHeaderId).getText shouldEqual "Behaviour assessment"
       waitForVisibilityOfElementById(behaviourScoringGuideId).getText          should include(siftDetails.scoringGuide)
-      vXBehavioursTotalScore.clear()
       behaviourOutcome.take(vXHowManyBehaviours).foreach { f =>
         f(siftDetails)
       }
@@ -424,7 +423,6 @@ object SiftEvaluationTab extends VacancyBasePage {
       scrollToElement(By.id(techSkillsHeaderId))
       waitForVisibilityOfElementById(techSkillsHeaderId).getText  shouldEqual "Technical skills"
       waitForVisibilityOfElementById(techSkillsScoringGuideId).getText should include(siftDetails.scoringGuide)
-      vXTechSkillsTotalScore.clear()
       skillOutcome.take(vXHowManySkills).foreach { f =>
         f(siftDetails)
       }
@@ -463,7 +461,6 @@ object SiftEvaluationTab extends VacancyBasePage {
     val overallScore = totalScore(vXBehavioursTotalScore) + totalScore(
       vXTechSkillsTotalScore
     ) + vXCVAssessmentScore + vXPersonalStatementScore
-//    waitForVisibilityOfElementById(overallScoreId).getText shouldEqual s"Overall score  \n $overallScore"
     waitForVisibilityOfElementById(overallScoreId).getText should endWith(s"$overallScore")
   }
 
@@ -491,7 +488,9 @@ object SiftEvaluationTab extends VacancyBasePage {
     }
     clickOn(submitForm)
     siftEvaluation()
-    if (vXAnyOnlineTests || vXInterviewExpectedRounds == "No interviews") {
+    if (
+      (vXAnyOnlineTests || vXInterviewExpectedRounds == "No interviews") && applicationDetails.siftDetails.finalOutcome != "Hold"
+    ) {
       successfulAtSiftState()
     } else {
       applicationBeingReviewedState()

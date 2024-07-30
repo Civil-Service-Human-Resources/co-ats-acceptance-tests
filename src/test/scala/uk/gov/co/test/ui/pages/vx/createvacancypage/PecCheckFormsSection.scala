@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.pages.vx.createvacancypage
 
 import org.openqa.selenium.By
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXCandidateUploadIdentityDocs, vXDetailsForUploadIdentityDocs, vXManuallyCheckIdentityDocs, vXPecAdditionalCheck, vXPecBankruptcyCheck, vXPecCrc, vXPecEmploymentHistoryCheck, vXPecFraudCheck, vXPecGeneralInfo, vXPecHealthDisplayOptions, vXPecHealthRefCheck, vXPecIncludeAdditionalCheck, vXPecNameOfAdditionalCheck, vXPecNen, vXPecNsv, vXPecNsvDisplayOptions, vXPecOgdSecurityCheck, vXPecOverseasCheck, vXPecPensionsCheck, vXPecPn, vXPecPreviousCivilEmploymentCheck, vXPecReferenceCheck, vXPecSelfEmploymentCheck, vXPecUseOgdProcess, vXRtwChecks, vXUseOnlinePecForms, vXWhenRtwChecks, vXWhichIdentityChecks, vacancyFormId}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXCandidateUploadIdentityDocs, vXDetailsForUploadIdentityDocs, vXManuallyCheckIdentityDocs, vXPecAdditionalCheck, vXPecBankruptcyCheck, vXPecCrc, vXPecEmploymentHistoryCheck, vXPecFraudCheck, vXPecGeneralInfo, vXPecHealthDisplayOptions, vXPecHealthRefCheck, vXPecIncludeAdditionalCheck, vXPecNameOfAdditionalCheck, vXPecNen, vXPecNsv, vXPecNsvDisplayOptions, vXPecOgdSecurityCheck, vXPecOverseasCheck, vXPecPensionsCheck, vXPecPn, vXPecPreviousCivilEmploymentCheck, vXPecReferenceCheck, vXPecSelfEmploymentCheck, vXPecUseDigitalOgdProcess, vXPecWorkplaceMisconductCheck, vXRtwChecks, vXUseOnlinePecForms, vXWhenRtwChecks, vXWhichIdentityChecks, vacancyFormId}
 import uk.gov.co.test.ui.data.vx.vacancy.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 
@@ -16,6 +16,7 @@ case class PecCheckFormsDetails(
   manualIdentityDocCheck: Boolean,
   generalInfo: ListBuffer[String],
   referenceChecks: ListBuffer[String],
+  workplaceMisconductCheck: ListBuffer[String],
   bankruptcyChecks: ListBuffer[String],
   crcChecks: ListBuffer[String],
   nsvChecks: ListBuffer[String],
@@ -46,6 +47,7 @@ object PecCheckFormsSection extends VacancyBasePage {
   def sameTimeAsPecChecksId            = s"${vacancyFormId}_datafield_106424_1_1_17182"
   def generalInformationInputId        = s"select2-${vacancyFormId}_datafield_94582_1_1-container"
   def referenceCheckInputId            = s"select2-${vacancyFormId}_datafield_94578_1_1-container"
+  def workplaceMisconductCheckInputId  = s"select2-${vacancyFormId}_datafield_209454_1_1-container"
   def bankruptcyCheckInputId           = s"select2-${vacancyFormId}_datafield_87979_1_1-container"
   def crcInputId                       = s"select2-${vacancyFormId}_datafield_87982_1_1-container"
   def nsvInputId                       = s"select2-${vacancyFormId}_datafield_100822_1_1-container"
@@ -62,8 +64,10 @@ object PecCheckFormsSection extends VacancyBasePage {
   def nameOfCheckInputId               = s"${vacancyFormId}_datafield_176558_1_1_en-GB"
   def ogdTransferProcessCheckYesId     = s"${vacancyFormId}_datafield_127230_1_1_1"
   def ogdTransferProcessCheckNoId      = s"${vacancyFormId}_datafield_127230_1_1_2"
-  def useOgdTransferProcessYesId       = s"${vacancyFormId}_datafield_206243_1_1_1"
-  def useOgdTransferProcessNoId        = s"${vacancyFormId}_datafield_206243_1_1_2"
+  def ogdDigitalTransferProcessTextId  = s"${vacancyFormId}_field_que_206243_1"
+  def ogdDigitalTransferProcessId      = s"${vacancyFormId}_datafield_206243_1_1_legend"
+  def useOgdDigitalTransferYesId       = s"${vacancyFormId}_datafield_206243_1_1_1"
+  def useOgdDigitalTransferNoId        = s"${vacancyFormId}_datafield_206243_1_1_2"
   def includeAdditionalCheckYesId      = s"${vacancyFormId}_datafield_168748_1_1_1"
   def includeAdditionalCheckNoId       = s"${vacancyFormId}_datafield_168748_1_1_2"
   def noIdentityChecksId               = s"${vacancyFormId}_datafield_184419_1_1_50074"
@@ -78,7 +82,9 @@ object PecCheckFormsSection extends VacancyBasePage {
   def detailsIdentityDocsId            = s"${vacancyFormId}_datafield_159299_1_1_en-GB"
   def manualIdentityCheckYesId         = s"${vacancyFormId}_datafield_181577_1_1_1"
   def manualIdentityCheckNoId          = s"${vacancyFormId}_datafield_181577_1_1_2"
+  def nenHrEmailHeaderId               = s"${vacancyFormId}_field_que_141090_1"
   def nenHrEmailId                     = s"${vacancyFormId}_datafield_141090_1_1"
+  def pnHrEmailHeaderId                = s"${vacancyFormId}_field_que_141267_1"
   def pnHrEmailId                      = s"${vacancyFormId}_datafield_141267_1_1"
 
   private def selectWhenCompleteRtwCheck(pecCheckFormsDetails: PecCheckFormsDetails): Unit =
@@ -138,27 +144,34 @@ object PecCheckFormsSection extends VacancyBasePage {
     }
 
   private def enterHrEmail(hrEmailId: String, hrEmail: String, value: ListBuffer[String]): Unit =
-    if (!driver.findElements(By.id(hrEmailId)).isEmpty) {
-      if (value.contains("Not Applicable")) {
-        val hrEmailField = waitForVisibilityOfElementById(hrEmailId)
-        hrEmailField.clear()
-      } else {
-        val hrEmailField = waitForVisibilityOfElementById(hrEmailId)
-        hrEmailField.clear()
-        hrEmailField.sendKeys(hrEmail)
+    if (driver.findElement(By.id(nenHrEmailHeaderId)).getText.nonEmpty) {
+      if (!driver.findElements(By.id(hrEmailId)).isEmpty) {
+        if (value.contains("Not Applicable")) {
+          val hrEmailField = waitForVisibilityOfElementById(hrEmailId)
+          hrEmailField.clear()
+        } else {
+          val hrEmailField = waitForVisibilityOfElementById(hrEmailId)
+          hrEmailField.clear()
+          hrEmailField.sendKeys(hrEmail)
+        }
       }
     }
 
   private def selectOGDTransferProcessCheck(pecCheckFormsDetails: PecCheckFormsDetails): Unit = {
     vXPecOgdSecurityCheck = pecCheckFormsDetails.ogdTransferProcessCheck
-    if (vXPecOgdSecurityCheck) clickOnRadioButton(ogdTransferProcessCheckYesId)
-    else clickOnRadioButton(ogdTransferProcessCheckNoId)
+    if (vXPecOgdSecurityCheck) {
+      clickOnRadioButton(ogdTransferProcessCheckYesId)
+      selectOgdDigitalTransferProcess(pecCheckFormsDetails)
+    } else clickOnRadioButton(ogdTransferProcessCheckNoId)
   }
 
-  private def selectUseOGDTransferProcessCheck(pecCheckFormsDetails: PecCheckFormsDetails): Unit = {
-    vXPecUseOgdProcess = pecCheckFormsDetails.useOgdDigitalTransferProcess
-    if (vXPecUseOgdProcess) clickOnRadioButton(useOgdTransferProcessYesId)
-    else clickOnRadioButton(useOgdTransferProcessNoId)
+  private def selectOgdDigitalTransferProcess(pecCheckFormsDetails: PecCheckFormsDetails): Unit = {
+    vXPecUseDigitalOgdProcess = pecCheckFormsDetails.useOgdDigitalTransferProcess
+    val ogdDigitalDisplayed = driver.findElement(By.id(ogdDigitalTransferProcessTextId)).isDisplayed
+    if (ogdDigitalDisplayed) {
+      if (vXPecUseDigitalOgdProcess) clickOnRadioButton(useOgdDigitalTransferYesId)
+      else clickOnRadioButton(useOgdDigitalTransferNoId)
+    }
   }
 
   private def selectIncludeAdditionalCheck(pecCheckFormsDetails: PecCheckFormsDetails): Unit = {
@@ -180,6 +193,7 @@ object PecCheckFormsSection extends VacancyBasePage {
     vXRtwChecks = pecCheckFormsDetails.rtwCheck
     vXPecGeneralInfo = pecCheckFormsDetails.generalInfo
     vXPecReferenceCheck = pecCheckFormsDetails.referenceChecks
+    vXPecWorkplaceMisconductCheck = pecCheckFormsDetails.workplaceMisconductCheck
     vXPecBankruptcyCheck = pecCheckFormsDetails.bankruptcyChecks
     vXPecCrc = pecCheckFormsDetails.crcChecks
     vXPecNsv = pecCheckFormsDetails.nsvChecks
@@ -199,6 +213,7 @@ object PecCheckFormsSection extends VacancyBasePage {
     selectUploadIdentityDocs(pecCheckFormsDetails)
     enterTypeRoles(vXPecGeneralInfo, generalInformationInputId)
     enterTypeRoles(vXPecReferenceCheck, referenceCheckInputId)
+    enterTypeRoles(vXPecWorkplaceMisconductCheck, workplaceMisconductCheckInputId)
     enterTypeRoles(vXPecBankruptcyCheck, bankruptcyCheckInputId)
     enterTypeRoles(vXPecCrc, crcInputId)
     enterTypeRoles(vXPecNsv, nsvInputId)
@@ -212,7 +227,6 @@ object PecCheckFormsSection extends VacancyBasePage {
     enterTypeRoles(vXPecFraudCheck, internalFraudCheckInputId)
     enterTypeRoles(vXPecSelfEmploymentCheck, selfEmploymentCheckInputId)
     selectOGDTransferProcessCheck(pecCheckFormsDetails)
-    selectUseOGDTransferProcessCheck(pecCheckFormsDetails)
     selectIncludeAdditionalCheck(pecCheckFormsDetails)
     enterTypeRoles(vXPecNen, nenInputId)
     enterHrEmail(nenHrEmailId, pecCheckFormsDetails.nenHrEmail, vXPecNen)

@@ -35,8 +35,7 @@ object BasicDetailsSection extends VacancyBasePage {
   val welshTitleInput       = "edit_opp_form_title_cy"
   val updateWelshId         = "lbledit_edit_opp_form_title-update"
 
-  def newVacancy: WebElement = waitForVisibilityOfElementByPathLast(newVacancyPath)
-
+  def newVacancy: WebElement     = waitForVisibilityOfElementByPathLast(newVacancyPath)
   def vacancySection: WebElement = waitForVisibilityOfElementByPathLast(vacancySectionPath)
 
   def createNewVacancy(): Unit = {
@@ -51,12 +50,9 @@ object BasicDetailsSection extends VacancyBasePage {
   private def displayWelshVersion(): WebElement =
     waitForVisibilityOfElementByPath(displayWelshPath)
 
-  private def title(): TextField = textField("title")
-
-  private def closingDate(): TextField = textField(closingDateId)
-
-  private def templateSelect: WebElement = waitForVisibilityOfElementByPath(selectTemplatePath)
-
+  private def title(): TextField        = textField("title")
+  private def closingDate(): TextField  = textField(closingDateId)
+  def templateSelect: WebElement        = waitForVisibilityOfElementByPath(selectTemplatePath)
   private def enterTemplate: WebElement = waitForVisibilityOfElementByPath(enterTemplatePath)
 
   private def selectTemplate(basicDetails: BasicDetails): Unit = {

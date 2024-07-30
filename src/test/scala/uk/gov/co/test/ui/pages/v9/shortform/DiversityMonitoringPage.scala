@@ -1,10 +1,10 @@
 package uk.gov.co.test.ui.pages.v9.shortform
 
 import org.scalatest.concurrent.Eventually.eventually
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{v9RunInWelsh, vXVacanciesInNIR}
 import uk.gov.co.test.ui.data.v9.shortform.ShortFormDetails
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
 import uk.gov.co.test.ui.pages.v9.shortform.ApplicationGuidancePage.shortFormId
-import uk.gov.co.test.ui.data.MasterVacancyDetails.vXVacanciesInNIR
 
 case class DiversityDetails(
   haveDisability: String,
@@ -27,6 +27,7 @@ case class DiversityDetails(
 object DiversityMonitoringPage extends CivilServiceJobsBasePage {
 
   def diversityMonitoringTitle           = "Diversity monitoring - Civil Service Jobs - GOV.UK"
+  def welshDiversityMonitoringTitle      = "Monitro Amrywiaeth - Civil Service Jobs - GOV.UK"
   def haveDisabilityYesId                = s"${shortFormId}_datafield_36491_1_1_729_label"
   def haveDisabilityNoId                 = s"${shortFormId}_datafield_36491_1_1_730_label"
   def haveDisabilityNotSayId             = s"${shortFormId}_datafield_36491_1_1_731_label"
@@ -87,7 +88,8 @@ object DiversityMonitoringPage extends CivilServiceJobsBasePage {
   def notProtestantOrRomanCatholicId     = s"${shortFormId}_datafield_22678_1_1_803_label"
 
   private def diversityMonitoringPageCheck(): Unit =
-    eventually(onPage(diversityMonitoringTitle))
+    if (v9RunInWelsh) eventually(onPage(welshDiversityMonitoringTitle))
+    else eventually(onPage(diversityMonitoringTitle))
 
   private def selectConsiderToHaveDisability(diversityDetails: DiversityDetails): Unit =
     diversityDetails.haveDisability match {
@@ -128,11 +130,13 @@ object DiversityMonitoringPage extends CivilServiceJobsBasePage {
     }
 
   private def selectEthnicGroup(diversityDetails: DiversityDetails): Unit =
-    selectDropdownOption(ethnicGroupId, diversityDetails.ethnicGroup)
+    if (v9RunInWelsh) selectDropdownOption(ethnicGroupId, "Asiaidd / Asiaidd Prydeinig")
+    else selectDropdownOption(ethnicGroupId, diversityDetails.ethnicGroup)
 
   private def selectEthnicity(diversityDetails: DiversityDetails): Unit = {
     val ethnic = diversityDetails.ethnicity(diversityDetails.ethnicGroup).tail.head
-    selectDropdownOption(ethnicityId, ethnic)
+    if (v9RunInWelsh) selectDropdownOption(ethnicityId, "Asiaidd neu Asiaidd Prydeinig - Bangladeshaidd")
+    else selectDropdownOption(ethnicityId, ethnic)
     if (
       ethnic == "Other ethnic group" || ethnic == "Any other White background" || ethnic == "Any other Mixed background" ||
       ethnic == "Any other Asian background" || ethnic == "Any other Black background"
@@ -142,7 +146,8 @@ object DiversityMonitoringPage extends CivilServiceJobsBasePage {
   }
 
   private def selectReligionOrBelief(diversityDetails: DiversityDetails): Unit =
-    selectDropdownOption(religionOrBeliefId, diversityDetails.religionOrBelief)
+    if (v9RunInWelsh) selectDropdownOption(religionOrBeliefId, "Mwslim")
+    else selectDropdownOption(religionOrBeliefId, diversityDetails.religionOrBelief)
 
   private def selectHouseholdEarnerDid(diversityDetails: DiversityDetails): Unit =
     diversityDetails.householdEarnerDid match {

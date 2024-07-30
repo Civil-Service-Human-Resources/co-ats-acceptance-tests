@@ -31,8 +31,8 @@ object NON_REDEPLOYMENT_VACANCY_DATA
 
 object NON_REDEPLOYMENT_BASIC_DETAILS
     extends BasicDetails(
-      "DO NOT USE- Automation Test Template",
-      s"HMRC - " + generateRandomJobPosition(),
+      "Cabinet Office - apply online", //although part of the redeployment scheme, the switch is turned OFF
+      s"Automation: MRC-Non-Redeployment - " + generateRandomJobPosition(),
       true,
       "Prawf awtomeiddio",
       32
@@ -40,8 +40,8 @@ object NON_REDEPLOYMENT_BASIC_DETAILS
 object NON_REDEPLOYMENT_JOB_INFORMATION
     extends JobInfoDetails(
       true,
-      "HM Revenue and Customs",
-      "HMRC - CCG - Strategy",
+      "Medical Research Council",
+      "MRC - Business Development",
       true,
       "Prawf awtomeiddio",
       "Autotest - Business area detail",
@@ -77,7 +77,7 @@ object NON_REDEPLOYMENT_APPROVAL
 
 object NON_REDEPLOYMENT_RESERVE_LIST
     extends ReserveListDetails(
-      true,
+      false,
       "12 Months",
       false,
       "6 Months"
@@ -140,6 +140,10 @@ object NON_REDEPLOYMENT_VETTING_DETAILS
       true,
       "Basic",
       "Disclosure barring service (DBS)",
+      true,
+      true,
+      true,
+      true,
       "Security check",
       true
     )
@@ -399,7 +403,7 @@ object NON_REDEPLOYMENT_GROUP_C_TESTS
 
 object NON_REDEPLOYMENT_ADDITIONAL_QUESTIONS
     extends AdditionalQuestionsDetails(
-      true,
+      anyAdditionalQuestions = Some(true),
       3,
       "Autotest - Question 1",
       "Autotest - Question 2",
@@ -408,7 +412,7 @@ object NON_REDEPLOYMENT_ADDITIONAL_QUESTIONS
 
 object NON_REDEPLOYMENT_CRITERIA
     extends CriteriaDetails(
-      campaignID = Some("Autotest - If this vacancy is linked to a campaign, enter the campaign ID (optional)"),
+      campaignID = None,
       probationIncomplete = true,
       promotionApply = true,
       misconductLive = true,
@@ -462,6 +466,8 @@ object NON_REDEPLOYMENT_PEC_CHECK_FORMS
       false,
       generalInfo = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
       referenceChecks = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      workplaceMisconductCheck =
+        ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
       bankruptcyChecks = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
       crcChecks = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
       nsvChecks = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
@@ -478,12 +484,12 @@ object NON_REDEPLOYMENT_PEC_CHECK_FORMS
       selfEmploymentCheck =
         ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
       true,
-      true,
+      false,
       true,
       "Autotest - Name of check",
       additionalCheck = ListBuffer("Not Applicable"),
-      nenOnboarding = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      nenOnboarding = ListBuffer("External Candidates", "OGD Candidates", "NDPB Candidates"),
       s"$contactEmailVxConfig",
-      pnOnboarding = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      pnOnboarding = ListBuffer("Internal Candidates"),
       s"$contactEmailVxConfig"
     )

@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.pages.v9.pecform
 
 import org.scalatest.concurrent.Eventually.eventually
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXCrcCheckProvider, vXCrcLevel, vXPecCrc}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{v9RunInWelsh, vXApproach, vXCrcCheckProvider, vXCrcLevel, vXPecCrc, vXPecEmploymentHistoryCheck, vXTypeOfCandidate}
 import uk.gov.co.test.ui.data.v9.pecform.PecFormDetails
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
 import uk.gov.co.test.ui.pages.v9.pecform.YourDetailsPage.pecFormId
@@ -19,36 +19,41 @@ case class DeclarationDetails(
 
 object DeclarationPage extends CivilServiceJobsBasePage {
 
-  private lazy val declarationTitle    = "Declaration - Civil Service Jobs - GOV.UK"
-  def declarationTermsAndConditionsId  = s"${pecFormId}_datafield_22499_1_1_804_label"
-  def dbsTermsOneTextId                = s"${pecFormId}_field_que_72275_1"
-  def dbsTermsOneId                    = s"${pecFormId}_datafield_72275_1_1_15120_label"
-  def dbsTermsTwoTextId                = s"${pecFormId}_field_que_89002_1"
-  def dbsTermsTwoId                    = s"${pecFormId}_datafield_89002_1_1_15120_label"
-  def dbsTermsThreeTextId              = s"${pecFormId}_field_que_89006_1"
-  def dbsTermsThreeId                  = s"${pecFormId}_datafield_89006_1_1_15120_label"
-  def generalPecTAndCsWithoutDbsTextId = s"${pecFormId}_label_96733_1"
-  def generalPecTAndCsTextId           = s"${pecFormId}_label_96733_1"
-  def consentOneTextId                 = s"${pecFormId}_field_que_206010_1"
-  def consentOneYesId                  = s"${pecFormId}_datafield_206010_1_1_1_label"
-  def consentOneNoId                   = s"${pecFormId}_datafield_206010_1_1_2_label"
-  def consentTwoTextId                 = s"${pecFormId}_field_que_206013_1"
-  def consentTwoYesId                  = s"${pecFormId}_datafield_206013_1_1_1_label"
-  def consentTwoNoId                   = s"${pecFormId}_datafield_206013_1_1_2_label"
-  def consentThreeTextId               = s"${pecFormId}_field_que_206016_1"
-  def consentThreeYesId                = s"${pecFormId}_datafield_206016_1_1_1_label"
-  def consentThreeNoId                 = s"${pecFormId}_datafield_206016_1_1_2_label"
-  def consentFourTextId                = s"${pecFormId}_field_que_206019_1"
-  def consentFourYesId                 = s"${pecFormId}_datafield_206019_1_1_1_label"
-  def consentFourNoId                  = s"${pecFormId}_datafield_206019_1_1_2_label"
-  def pecDeclarationTAndCsId           = s"${pecFormId}_datafield_205986_1_1_804_label"
-  val pecFormSubmission                = "submit_button"
+  private lazy val declarationTitle      = "Declaration - Civil Service Jobs - GOV.UK"
+  private lazy val welshDeclarationTitle = "Datganiad - Civil Service Jobs - GOV.UK"
+  def declarationTermsAndConditionsId    = s"${pecFormId}_datafield_22499_1_1_804_label"
+  def dbsTermsOneTextId                  = s"${pecFormId}_field_que_72275_1"
+  def dbsTermsOneId                      = s"${pecFormId}_datafield_72275_1_1_15120_label"
+  def dbsTermsTwoTextId                  = s"${pecFormId}_field_que_89002_1"
+  def dbsTermsTwoId                      = s"${pecFormId}_datafield_89002_1_1_15120_label"
+  def dbsTermsThreeTextId                = s"${pecFormId}_field_que_89006_1"
+  def dbsTermsThreeId                    = s"${pecFormId}_datafield_89006_1_1_15120_label"
+  def generalPecTAndCsWithoutDbsTextId   = s"${pecFormId}_label_96733_1"
+  def generalPecTAndCsTextId             = s"${pecFormId}_label_96733_1"
+  def generalPecTAndCsText2Id            = s"${pecFormId}_label_22496_1"
+  def consentOneTextId                   = s"${pecFormId}_field_que_206010_1"
+  def consentOneYesId                    = s"${pecFormId}_datafield_206010_1_1_1_label"
+  def consentOneNoId                     = s"${pecFormId}_datafield_206010_1_1_2_label"
+  def consentTwoTextId                   = s"${pecFormId}_field_que_206013_1"
+  def consentTwoYesId                    = s"${pecFormId}_datafield_206013_1_1_1_label"
+  def consentTwoNoId                     = s"${pecFormId}_datafield_206013_1_1_2_label"
+  def consentThreeTextId                 = s"${pecFormId}_field_que_206016_1"
+  def consentThreeYesId                  = s"${pecFormId}_datafield_206016_1_1_1_label"
+  def consentThreeNoId                   = s"${pecFormId}_datafield_206016_1_1_2_label"
+  def consentFourTextId                  = s"${pecFormId}_field_que_206019_1"
+  def consentFourYesId                   = s"${pecFormId}_datafield_206019_1_1_1_label"
+  def consentFourNoId                    = s"${pecFormId}_datafield_206019_1_1_2_label"
+  def pecDeclarationTAndCsId             = s"${pecFormId}_datafield_205986_1_1_804_label"
+  val pecFormSubmission                  = "submit_button"
 
   private def declarationPageCheck(): Unit =
-    eventually(onPage(declarationTitle))
+    if (v9RunInWelsh) eventually(onPage(welshDeclarationTitle)) else eventually(onPage(declarationTitle))
 
   private def acceptDbsTerms(declarationDetails: DeclarationDetails): Unit =
-    if (vXCrcLevel != "None" && vXCrcCheckProvider.contains("DBS")) {
+    if (
+      vXCrcLevel != "None" && vXCrcCheckProvider.contains("DBS") && !vXPecCrc.contains("Not Applicable") && vXPecCrc
+        .contains(s"$vXTypeOfCandidate Candidates")
+    ) {
       waitForVisibilityOfElementById(
         dbsTermsOneTextId
       ).getText shouldEqual "I consent to the DBS providing an electronic result directly to the responsible organisation that has submitted my application. I understand that an electronic result contains a message that indicates either the certificate does not contain criminal record information or to await certificate which will indicate that my certificate contains criminal record information."
@@ -63,38 +68,28 @@ object DeclarationPage extends CivilServiceJobsBasePage {
       if (declarationDetails.acceptDbsTermsThree) radioSelect(dbsTermsThreeId)
     }
 
-  private def consentTerms(declarationDetails: DeclarationDetails): Unit = {
-    waitForVisibilityOfElementById(
-      consentOneTextId
-    ).getText shouldEqual "I consent to the recruiting organisation contacting HM Revenue and Customs (HMRC) to validate the employment history information I’ve given in this application"
-    waitForVisibilityOfElementById(
-      consentTwoTextId
-    ).getText shouldEqual "I consent to HMRC disclosing employment history information about me from their Pay As You Earn (PAYE) database to the recruiting organisation to validate my employment history for this application only"
-    waitForVisibilityOfElementById(
-      consentThreeTextId
-    ).getText shouldEqual "I understand my employment history, disclosed by HMRC to the recruiting organisation, may be shared onwards with the organisation I have applied to"
-    if (declarationDetails.consentJobHistoryOne) radioSelect(consentOneYesId)
-    if (declarationDetails.consentJobHistoryTwo) radioSelect(consentTwoYesId)
-    if (declarationDetails.consentJobHistoryThree) radioSelect(consentThreeYesId)
-    if (declarationDetails.consentFour) radioSelect(consentFourYesId)
-  }
-
-  private def acceptDeclarationTermsAndConditions(declarationDetails: DeclarationDetails): Unit = {
+  private def consentTerms(declarationDetails: DeclarationDetails): Unit =
     if (
-      (declarationDetails.acceptPecFormTAndCs && vXCrcLevel != "None" && vXCrcCheckProvider.contains(
-        "DBS"
-      )) || (vXCrcLevel == "None" && vXPecCrc.contains("Not Applicable"))
+      !vXPecEmploymentHistoryCheck
+        .contains("Not Applicable") && vXPecEmploymentHistoryCheck.contains(s"$vXTypeOfCandidate Candidates")
     ) {
       waitForVisibilityOfElementById(
-        generalPecTAndCsWithoutDbsTextId
-      ).getText shouldEqual "All the information I’ve given in my application form is true to the best of my knowledge and belief\nThis is my only application for this role and accurately reflects my suitability \nI understand a check against the National Collection of Criminal Records and against other records or databases may be undertaken if I'm offered a post \nI understand the recruiting organisation may contact HM Revenue & Customs (HMRC) to validate the employment history information I’ve given in my application form using their Pay As You Earn (PAYE) database\nI understand that I’ll be asked for evidence of identification if I’m offered a post\nI understand references may be called at the appropriate part of the recruitment process\nI understand that my application may be rejected if I’ve given false information or withheld relevant details\nIf you have any concerns about what we will do with your information, please see our privacy notice (opens in a new window)."
-    } else {
+        consentOneTextId
+      ).getText shouldEqual "I consent to the recruiting organisation contacting HM Revenue and Customs (HMRC) to validate the employment history information I’ve given in this application"
       waitForVisibilityOfElementById(
-        generalPecTAndCsWithoutDbsTextId
-      ).getText shouldEqual "All the information I’ve given in my application form is true to the best of my knowledge and belief\nThis is my only application for this role and accurately reflects my suitability \nI understand a check against the National Collection of Criminal Records and against other records or databases may be undertaken if I'm offered a post \nI understand the recruiting organisation may contact HM Revenue & Customs (HMRC) to validate the employment history information I’ve given in my application form using their Pay As You Earn (PAYE) database\nI understand that I’ll be asked for evidence of identification if I’m offered a post\nI understand references may be called at the appropriate part of the recruitment process\nI understand that my application may be rejected if I’ve given false information or withheld relevant details\nIf you have any concerns about what we will do with your information, please see our privacy notice (opens in a new window)."
+        consentTwoTextId
+      ).getText shouldEqual "I consent to HMRC disclosing employment history information about me from their Pay As You Earn (PAYE) database to the recruiting organisation to validate my employment history for this application only"
+      waitForVisibilityOfElementById(
+        consentThreeTextId
+      ).getText shouldEqual "I understand my employment history, disclosed by HMRC to the recruiting organisation, may be shared onwards with the organisation I have applied to"
+      if (declarationDetails.consentJobHistoryOne) radioSelect(consentOneYesId)
+      if (declarationDetails.consentJobHistoryTwo) radioSelect(consentTwoYesId)
+      if (declarationDetails.consentJobHistoryThree) radioSelect(consentThreeYesId)
+      if (declarationDetails.consentFour) radioSelect(consentFourYesId)
     }
+
+  private def acceptDeclarationTermsAndConditions(declarationDetails: DeclarationDetails): Unit =
     clickOn(pecDeclarationTAndCsId)
-  }
 
   private val declaration: Seq[DeclarationDetails => Unit] = Seq(
     acceptDbsTerms,

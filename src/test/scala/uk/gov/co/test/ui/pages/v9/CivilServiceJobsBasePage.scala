@@ -13,20 +13,22 @@ import uk.gov.co.test.ui.pages.BasePage
 import uk.gov.co.test.ui.pages.v9.SearchJobsPage.civilServiceJobsPageTitle
 import uk.gov.co.test.ui.pages.v9.SignInPage.{searchForSignOut, signOut}
 
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import java.util
 import scala.util.Random
 
 trait CivilServiceJobsBasePage extends Matchers with BasePage with BrowserDriver {
 
-  val url: String                        = TestConfiguration.url("v9test")
-  val passwordCandidate: String          = readProperty("services.v9test.admin.candidate_password")
-  val getOs: String                      = System.getProperty("os.name").toLowerCase
-  val civilServiceSignOutPageTitle       = "Civil Service Jobs - Civil Service Jobs - GOV.UK"
-  val v9AcceptAdditionalCookies: String  = "accept_all_cookies_button"
-  val vXaAcceptAdditionalCookies: String = "cookies-accept-button"
-  val pageContinue                       = "continue_button"
-  val continueToLongForm                 = "select_manual_form_700"
-  val submitForm                         = "submit_button"
+  val url: String                       = TestConfiguration.url("v9test")
+  val passwordCandidate: String         = readProperty("services.v9test.admin.candidate_password")
+  val getOs: String                     = System.getProperty("os.name").toLowerCase
+  val civilServiceSignOutPageTitle      = "Civil Service Jobs - Civil Service Jobs - GOV.UK"
+  val v9AcceptAdditionalCookies: String = "accept_all_cookies_button"
+  val vXAcceptAdditionalCookies: String = "cookies-accept-button"
+  val pageContinue                      = "continue_button"
+  val continueToLongForm                = "select_manual_form_700"
+  val submitForm                        = "submit_button"
 
   def randomnessName(): String = {
     val randomLastName = Iterator.continually(Random.nextPrintableChar()).filter(_.isLetter).take(10).mkString
@@ -46,9 +48,10 @@ trait CivilServiceJobsBasePage extends Matchers with BasePage with BrowserDriver
     randomLastName
   }
 
-  def generateRandomPassword(): String = {
+  def generateRandomPassword(i: Int): String = {
     val fake = new Faker()
-    randomPassword = s"${fake.color().name()}${fake.cat().breed()}${Random.between(10, 99)}"
+    randomPassword =
+      s"${fake.color().name().split("\\s+").map(_.capitalize).mkString("")}${fake.address().state().split("\\s+").map(_.capitalize).mkString("")}$i"
     randomPassword
   }
 
@@ -80,13 +83,13 @@ trait CivilServiceJobsBasePage extends Matchers with BasePage with BrowserDriver
     clickOn(v9AcceptAdditionalCookies)
 
   def vXAcceptAllCookies(): Unit =
-    clickOn(vXaAcceptAdditionalCookies)
+    clickOn(vXAcceptAdditionalCookies)
 
   def v9SearchCookiesById(): util.List[WebElement] =
     driver.findElements(By.id(v9AcceptAdditionalCookies))
 
   def vXSearchCookiesById(): WebElement =
-    driver.findElement(By.id(vXaAcceptAdditionalCookies))
+    driver.findElement(By.id(vXAcceptAdditionalCookies))
 
   def navigateToV9Test(): Unit = {
     go to url
@@ -100,12 +103,12 @@ trait CivilServiceJobsBasePage extends Matchers with BasePage with BrowserDriver
     generatedEmail()
   }
 
-  def generateTestCandidateDetails(): Unit = {
+  def generateTestCandidateDetails(i: Int): Unit = {
     generateRandomFirstName()
     generateRandomLastName()
-    generateRandomPassword()
-    generatePreferredFirstName()
+//    generatePreferredFirstName()
     generatedDacTestEmail()
+    generateRandomPassword(i)
   }
 
   def generateCandidateDetailsIterator(i: Int): Unit = {
@@ -187,5 +190,18 @@ trait CivilServiceJobsBasePage extends Matchers with BasePage with BrowserDriver
   def enterDate(id: String, value: String): Unit = {
     val dateValue = new Select(waitForVisibilityOfElementById(id))
     dateValue.selectByValue(value)
+  }
+
+  def enterStartOrEndDate(date: String, dayId: String, monthId: String, yearId: String): Unit = {
+    val (day, month, year) = splitDate(date)
+    enterDate(dayId, day)
+    enterDate(monthId, month)
+    enterDate(yearId, year)
+  }
+
+  def formattedDate(atDate: LocalDate): String = {
+    val formatter     = DateTimeFormatter.ofPattern("dd/MM/yyyy")
+    val formattedDate = atDate.format(formatter)
+    formattedDate
   }
 }

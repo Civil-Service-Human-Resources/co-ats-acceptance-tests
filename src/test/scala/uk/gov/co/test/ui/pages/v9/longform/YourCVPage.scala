@@ -3,7 +3,7 @@ package uk.gov.co.test.ui.pages.v9.longform
 import org.openqa.selenium.{By, WebElement}
 import org.scalatest.concurrent.Eventually.eventually
 import uk.gov.co.test.ui.data.v9.longform.LongFormDetails
-import uk.gov.co.test.ui.data.MasterVacancyDetails.vXExperiencesRequired
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXExperiencesRequired, vXProvideNameBlindCv}
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
 import uk.gov.co.test.ui.pages.v9.longform.DiversityMonitoringPage.longFormId
 
@@ -191,7 +191,7 @@ object YourCVPage extends CivilServiceJobsBasePage {
   )
 
   def yourCVPage(longFormDetails: LongFormDetails): Unit =
-    if (vXExperiencesRequired) {
+    if (vXExperiencesRequired && vXProvideNameBlindCv) {
       yourCVPageCheck()
       yourCV.foreach { f =>
         f(longFormDetails.cvDetails)

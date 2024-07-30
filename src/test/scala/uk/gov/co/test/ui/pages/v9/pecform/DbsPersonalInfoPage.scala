@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.pages.v9.pecform
 
 import org.scalatest.concurrent.Eventually.eventually
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{randomEmail, vXApproach, vXCrcCheckProvider, vXCrcLevel, vXPecCrc}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{randomEmail, vXCrcCheckProvider, vXCrcLevel, vXPecCrc, vXTypeOfCandidate}
 import uk.gov.co.test.ui.data.v9.pecform.PecFormDetails
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
 import uk.gov.co.test.ui.pages.v9.pecform.YourDetailsPage.pecFormId
@@ -47,6 +47,8 @@ object DbsPersonalInfoPage extends CivilServiceJobsBasePage {
   def haveMiddleNameYesId                   = s"${pecFormId}_datafield_116033_1_1_1_label"
   def haveMiddleNameNoId                    = s"${pecFormId}_datafield_116033_1_1_2_label"
   def firstMiddleNameId                     = s"${pecFormId}_datafield_56819_1_1"
+  def secondMiddleNameId                    = s"${pecFormId}_datafield_56825_1_1"
+  def thirdMiddleNameId                     = s"${pecFormId}_datafield_56832_1_1"
   def lastNameId                            = s"${pecFormId}_datafield_120741_1_1"
   def lastNameAtBirthId                     = s"${pecFormId}_datafield_185693_1_1"
   def dobDayId                              = s"${pecFormId}_datafield_54654_1_1--DAY"
@@ -117,15 +119,8 @@ object DbsPersonalInfoPage extends CivilServiceJobsBasePage {
       enterDetails(lastNameAtBirthId, dbsPersonalInfoDetails.lastNameAtBirth)
     }
 
-  private def enterDate(date: String, dayId: String, monthId: String, yearId: String): Unit = {
-    val (day, month, year) = splitDate(date)
-    enterDate(dayId, day)
-    enterDate(monthId, month)
-    enterDate(yearId, year)
-  }
-
   private def enterDob(dbsPersonalInfoDetails: DbsPersonalInfoDetails): Unit =
-    enterDate(dbsPersonalInfoDetails.dob, dobDayId, dobMonthId, dobYearId)
+    enterStartOrEndDate(dbsPersonalInfoDetails.dob, dobDayId, dobMonthId, dobYearId)
 
   private def selectOtherNames(dbsPersonalInfoDetails: DbsPersonalInfoDetails): Unit =
     if (dbsPersonalInfoDetails.otherNames) {
@@ -164,8 +159,15 @@ object DbsPersonalInfoPage extends CivilServiceJobsBasePage {
       radioSelect(passportYesId)
       enterDetails(passportNumberId, dbsPersonalInfoDetails.passportNumber)
       selectDropdownOption(passportCountryIssueId, dbsPersonalInfoDetails.passportCountryIssue)
-      enterDate(dbsPersonalInfoDetails.passportDob, passportDobDayId, passportDobMonthId, passportDobYearId)
-      enterDate(dbsPersonalInfoDetails.passportIssueDate, passportIssueDayId, passportIssueMonthId, passportIssueYearId)
+      if (vXCrcLevel == "Standard" || vXCrcLevel == "Enhanced") {
+        enterStartOrEndDate(dbsPersonalInfoDetails.passportDob, passportDobDayId, passportDobMonthId, passportDobYearId)
+        enterStartOrEndDate(
+          dbsPersonalInfoDetails.passportIssueDate,
+          passportIssueDayId,
+          passportIssueMonthId,
+          passportIssueYearId
+        )
+      }
     } else {
       radioSelect(passportNoId)
     }
@@ -174,20 +176,22 @@ object DbsPersonalInfoPage extends CivilServiceJobsBasePage {
     if (dbsPersonalInfoDetails.haveDrivingLicence) {
       radioSelect(drivingLicenceYesId)
       enterDetails(drivingLicenceNumberId, dbsPersonalInfoDetails.drivingLicenceNumber)
-      enterDate(
-        dbsPersonalInfoDetails.drivingLicenceDob,
-        drivingLicenceDobDayId,
-        drivingLicenceDobMonthId,
-        drivingLicenceDobYearId
-      )
-      selectDropdownOption(drivingLicenceTypeId, dbsPersonalInfoDetails.drivingLicenceType)
-      enterDate(
-        dbsPersonalInfoDetails.drivingLicenceValidFromDate,
-        drivingLicenceValidDayId,
-        drivingLicenceValidMonthId,
-        drivingLicenceValidYearId
-      )
-      selectDropdownOption(drivingLicenceCountryIssueId, dbsPersonalInfoDetails.drivingLicenceCountryIssue)
+      if (vXCrcLevel == "Standard" || vXCrcLevel == "Enhanced") {
+        enterStartOrEndDate(
+          dbsPersonalInfoDetails.drivingLicenceDob,
+          drivingLicenceDobDayId,
+          drivingLicenceDobMonthId,
+          drivingLicenceDobYearId
+        )
+        selectDropdownOption(drivingLicenceTypeId, dbsPersonalInfoDetails.drivingLicenceType)
+        enterStartOrEndDate(
+          dbsPersonalInfoDetails.drivingLicenceValidFromDate,
+          drivingLicenceValidDayId,
+          drivingLicenceValidMonthId,
+          drivingLicenceValidYearId
+        )
+        selectDropdownOption(drivingLicenceCountryIssueId, dbsPersonalInfoDetails.drivingLicenceCountryIssue)
+      }
     } else {
       radioSelect(drivingLicenceNoId)
     }
@@ -252,7 +256,7 @@ object DbsPersonalInfoPage extends CivilServiceJobsBasePage {
   def dbsPersonalInfoPage(pecFormDetails: PecFormDetails): Unit =
     if (
       vXCrcLevel != "None" && vXCrcCheckProvider.contains("DBS") && !vXPecCrc.contains("Not Applicable") && vXPecCrc
-        .contains(s"$vXApproach Candidates")
+        .contains(s"$vXTypeOfCandidate Candidates")
     ) {
       dbsPersonalInfoPageCheck()
       personalInfo.foreach { f =>

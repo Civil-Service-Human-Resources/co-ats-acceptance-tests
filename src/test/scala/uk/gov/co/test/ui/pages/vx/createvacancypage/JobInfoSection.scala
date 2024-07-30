@@ -5,6 +5,7 @@ import org.openqa.selenium.{By, WebDriver}
 import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXBusinessArea, vXBusinessAreaDetail, vXJobInfoDepartment, vXLineManagerDuties, vXNoOfJobsAvailable, vXPositionIdentifier, vXProfession, vXTypeOfRole, vacancyFormId}
 import uk.gov.co.test.ui.data.vx.vacancy.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
+import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.templateSelect
 
 import scala.collection.mutable.ListBuffer
 
@@ -53,20 +54,25 @@ object JobInfoSection extends VacancyBasePage {
   }
 
   private def selectBusinessArea(jobInfoDetails: JobInfoDetails): Unit = {
-    vXBusinessArea           = jobInfoDetails.businessArea
+    vXBusinessArea = jobInfoDetails.businessArea
     scrollToElement(By.id(businessAreaId))
-    val businessArea    = waitForVisibilityOfElementById(businessAreaId)
+    val businessArea = waitForVisibilityOfElementById(businessAreaId)
     businessArea.click()
     if (vXJobInfoDepartment != "HM Revenue and Customs") {
-      val wait = new WebDriverWait(driver, 210, 3000)
-      wait.until { (d: WebDriver) =>
-        d.findElement(By.id(businessAreaId)).getAttribute("title").equals("Choose one...")
+      if (templateSelect.getText == "DO NOT USE- Automation Test Template") {
+        val wait            = new WebDriverWait(driver, 210, 3000)
+        wait.until { (d: WebDriver) =>
+          d.findElement(By.id(businessAreaId)).getAttribute("title").equals("Choose one...")
+        }
+        val noOfListOptions = driver.findElements(By.xpath(listOptionsPath)).size()
+        if (noOfListOptions < 3) {
+          action().moveToElement(waitForDropdownOption(vXBusinessArea)).perform()
+          waitForDropdownOption(vXBusinessArea).click()
+        } else selectOption(generalInput, vXBusinessArea)
+      } else {
+        Thread.sleep(5000)
+        selectOption(generalInput, vXBusinessArea)
       }
-    }
-    val noOfListOptions = driver.findElements(By.xpath(listOptionsPath)).size()
-    if (noOfListOptions < 3) {
-      action().moveToElement(waitForDropdownOption(vXBusinessArea)).perform()
-      waitForDropdownOption(vXBusinessArea).click()
     } else selectOption(generalInput, vXBusinessArea)
   }
 

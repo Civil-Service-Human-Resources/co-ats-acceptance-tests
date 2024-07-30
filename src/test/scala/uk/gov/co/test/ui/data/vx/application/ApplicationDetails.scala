@@ -16,6 +16,7 @@ case class ApplicationDetails(
   interviewTwoDetails: InterviewTwoDetails,
   interviewThreeDetails: InterviewThreeDetails,
   interviewFourDetails: InterviewFourDetails,
+  ogdSecurityChecksDetails: OgdSecurityChecksDetails,
   postingNoticeDetails: PostingNoticeDetails,
   newEntrantNoticeDetails: NewEntrantNoticeDetails
 )

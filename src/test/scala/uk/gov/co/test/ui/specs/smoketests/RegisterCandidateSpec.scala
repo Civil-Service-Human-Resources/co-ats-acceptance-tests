@@ -1,6 +1,7 @@
 package uk.gov.co.test.ui.specs.smoketests
 
 import uk.gov.co.test.ui.data.v9.applicants.{REGISTERED_CANDIDATE, REGISTER_CANDIDATE}
+import uk.gov.co.test.ui.flows.v9.DacAudit24TestCandidates.createDacTestCandidates
 import uk.gov.co.test.ui.flows.v9.GenerateNewCandidates.createMultipleCandidates
 import uk.gov.co.test.ui.flows.v9.RegisterCandidateFlow.fillNewCandidateDetails
 import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.applicationCentrePageTitle
@@ -38,6 +39,17 @@ class RegisterCandidateSpec extends BaseFeatureSpec {
 
     Scenario("V9: Create Multiple Candidate Accounts", RunInV9) {
       createMultipleCandidates(5)
+    }
+
+    Scenario("VX: Create DAC Candidate Accounts For All Requests", RunInV9) {
+      createDacTestCandidates(1, "0000", 20)
+      createDacTestCandidates(2, "10349", 20)
+      createDacTestCandidates(3, "10350", 20)
+      createDacTestCandidates(4, "10348", 20)
+      createDacTestCandidates(5, "0000", 20)
+      createDacTestCandidates(6, "10349", 10)
+      createDacTestCandidates(7, "10350", 10)
+      createDacTestCandidates(8, "10350", 20)
     }
   }
 }

@@ -25,14 +25,14 @@ object IDVT_VACANCY_DATA
       IDVT_ADDITIONAL_QUESTIONS,
       IDVT_CRITERIA,
       IDVT_MANAGEMENT,
-      IDVT_ONLINE_IDVT_CHECK_FORMS,
-      IDVT_IDVT_CHECK_FORMS
+      IDVT_ONLINE_PEC_CHECK_FORMS,
+      IDVT_PEC_CHECK_FORMS
     )
 
 object IDVT_BASIC_DETAILS
     extends BasicDetails(
       "DO NOT USE- Automation Test Template",
-      s"Insolvency - " + generateRandomJobPosition(),
+      s"Automation: IDVT Regression-CO - " + generateRandomJobPosition(),
       true,
       "Prawf awtomeiddio",
       32
@@ -40,19 +40,14 @@ object IDVT_BASIC_DETAILS
 object IDVT_JOB_INFORMATION
     extends JobInfoDetails(
       true,
-      "Insolvency Service",
-      "Insolvency - Information and Technology Directorate",
+      "Cabinet Office",
+      "CO - Central Digital & Data Office",
       true,
       "Prawf awtomeiddio",
       "Autotest - Business area detail",
       "Autotest - Position identifier",
       typeOfRole = ListBuffer(
-        "Accountancy",
-        "Analytical",
-        "Audit",
-        "Corporate Finance",
-        "Engineering",
-        "Tax Profession"
+        "Accountancy"
       ),
       "Other",
       "1",
@@ -61,11 +56,11 @@ object IDVT_JOB_INFORMATION
 object IDVT_APPROACH
     extends ApproachDetails(
       "External",
-      true,
+      false,
       "Autotest - Eligibility statement",
-      true,
+      false,
       "Prawf awtomeiddio",
-      "This vacancy is open to employees who already hold the substantive grade for the post and were appointed to the Civil Service on merit following a fair and open competition; or were appointed to a permanent Civil Service post through an exception in the Civil Service Commissioners’ rules."
+      "Autotest - standard statement"
     )
 
 object IDVT_APPROVAL
@@ -78,7 +73,7 @@ object IDVT_APPROVAL
 
 object IDVT_RESERVE_LIST
     extends ReserveListDetails(
-      true,
+      false,
       "12 Months",
       false,
       "6 Months"
@@ -93,7 +88,7 @@ object IDVT_LOCATIONS
       "Germany",
       "Newcastle, Liverpool, Cardiff",
       false,
-      true,
+      false,
       "All communities",
       false,
       "3",
@@ -139,15 +134,19 @@ object IDVT_CONTACT_DETAILS
 object IDVT_VETTING_DETAILS
     extends VettingDetails(
       true,
-      "Basic",
+      "None",
       "Disclosure barring service (DBS)",
-      "Security check",
-      true
+      true,
+      true,
+      true,
+      true,
+      "None",
+      false
     )
 
 object IDVT_INTERVIEWS_DETAILS
     extends InterviewsDetails(
-      "1",
+      "No interviews",
       "Interview",
       "Assessment",
       "Telephone",
@@ -158,10 +157,10 @@ object IDVT_INTERVIEWS_DETAILS
 object IDVT_SUCCESS_PROFILES
     extends SuccessProfilesDetails(
       false,
-      true,
-      true,
-      true,
-      true,
+      false,
+      false,
+      false,
+      false,
       Some(IDVT_ABILITIES),
       Some(IDVT_BEHAVIOURS),
       Some(IDVT_EXPERIENCES),
@@ -206,28 +205,29 @@ object IDVT_BEHAVIOURS
 
 object IDVT_EXPERIENCES
     extends ExperienceDetails(
-      true,
+      false,
       "0 - 100",
-      true,
-      true,
-      true,
-      true,
+      false,
+      false,
+      false,
+      false,
       "0 - 7",
       500,
-      true,
+      false,
       "Autotest - Enter guidance text for the candidate",
-      true,
+      false,
       "Autotest - Specific past experience/skills",
-      licences =
-        Some(MandatoryRequirements(requirements = true, requirementsInfo = "Autotest - Specific licence requirements")),
+      licences = Some(
+        MandatoryRequirements(requirements = false, requirementsInfo = "Autotest - Specific licence requirements")
+      ),
       memberships = Some(
-        MandatoryRequirements(requirements = true, requirementsInfo = "Autotest - Specific memberships requirements")
+        MandatoryRequirements(requirements = false, requirementsInfo = "Autotest - Specific memberships requirements")
       ),
       languages = Some(
-        MandatoryRequirements(requirements = true, requirementsInfo = "Autotest - Specific language requirements")
+        MandatoryRequirements(requirements = false, requirementsInfo = "Autotest - Specific language requirements")
       ),
       qualifications = Some(
-        MandatoryRequirements(requirements = true, requirementsInfo = "Autotest - Specific qualification requirements")
+        MandatoryRequirements(requirements = false, requirementsInfo = "Autotest - Specific qualification requirements")
       )
     )
 
@@ -400,7 +400,7 @@ object IDVT_GROUP_C_TESTS
 
 object IDVT_ADDITIONAL_QUESTIONS
     extends AdditionalQuestionsDetails(
-      true,
+      anyAdditionalQuestions = Some(false),
       3,
       "Autotest - Question 1",
       "Autotest - Question 2",
@@ -409,7 +409,7 @@ object IDVT_ADDITIONAL_QUESTIONS
 
 object IDVT_CRITERIA
     extends CriteriaDetails(
-      campaignID = Some("Autotest - If this vacancy is linked to a campaign, enter the campaign ID (optional)"),
+      campaignID = None,
       probationIncomplete = true,
       promotionApply = true,
       misconductLive = true,
@@ -417,21 +417,21 @@ object IDVT_CRITERIA
       attendancePoor = true,
       nationalityRequirements = true,
       rightToRemainUK = true,
-      licencesNotHeld = true,
-      membershipsNotHeld = true,
-      languagesSkillsNotHeld = true,
-      qualificationsHeld = true,
-      preSiftRequired = true,
-      uploadAttachment = true,
+      licencesNotHeld = false,
+      membershipsNotHeld = false,
+      languagesSkillsNotHeld = false,
+      qualificationsHeld = false,
+      preSiftRequired = false,
+      uploadAttachment = false,
       candidateInstructions = "Autotest - Instructions for candidate"
     )
 
 object IDVT_MANAGEMENT
     extends ManagementDetails(
-      true,
-      true,
+      false,
+      false,
       "Other",
-      true,
+      false,
       assignTo = Option(s"$contactEmailVxConfig"),
       assignTo2 = Option(s"$contactEmailVxConfig"),
       true,
@@ -439,52 +439,51 @@ object IDVT_MANAGEMENT
       "Menu",
       true,
       true,
-      linkToProject = Option(true),
+      linkToProject = Option(false),
       projectName = Option("Autotest - Project name"),
       deptComplaintsProcess = Option("Autotest - Your department's complaints process"),
       vacancyComments = Option("Autotest - Comments on this vacancy")
     )
 
-object IDVT_ONLINE_IDVT_CHECK_FORMS
+object IDVT_ONLINE_PEC_CHECK_FORMS
     extends OnlinePecCheckFormsDetails(
       true,
-      true,
+      false,
       true,
       s"$contactEmailVxConfig"
     )
 
-object IDVT_IDVT_CHECK_FORMS
+object IDVT_PEC_CHECK_FORMS
     extends PecCheckFormsDetails(
       rtwCheck = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
       "Before pre employment checks",
-      "Right to work and criminal record check",
+      "Right to work only",
       true,
-      "Autotest - Details of the identity documents the candidate needs to provide",
+      "Autotest - Passport",
       false,
       generalInfo = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
-      referenceChecks = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
-      bankruptcyChecks = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      referenceChecks = ListBuffer("Not Applicable"),
+      workplaceMisconductCheck =
+        ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      bankruptcyChecks = ListBuffer("Not Applicable"),
       crcChecks = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
       nsvChecks = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
       "Show recruiter and candidate forms",
-      jobHistoryChecks = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
-      healthRefChecks = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      jobHistoryChecks = ListBuffer("Not Applicable"),
+      healthRefChecks = ListBuffer("Not Applicable"),
       "Show recruiter and candidate forms",
-      overseasCheck = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
-      pensionsCheck = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
-      previousCsJobCheck =
-        ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
-      internalFraudCheck =
-        ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
-      selfEmploymentCheck =
-        ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      overseasCheck = ListBuffer("Not Applicable"),
+      pensionsCheck = ListBuffer("Not Applicable"),
+      previousCsJobCheck = ListBuffer("Not Applicable"),
+      internalFraudCheck = ListBuffer("Not Applicable"),
+      selfEmploymentCheck = ListBuffer("Not Applicable"),
       true,
-      true,
-      true,
+      false,
+      false,
       "Autotest - Name of check",
       additionalCheck = ListBuffer("Not Applicable"),
-      nenOnboarding = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      nenOnboarding = ListBuffer("External Candidates", "OGD Candidates", "NDPB Candidates"),
       s"$contactEmailVxConfig",
-      pnOnboarding = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      pnOnboarding = ListBuffer("Internal Candidates"),
       s"$contactEmailVxConfig"
     )

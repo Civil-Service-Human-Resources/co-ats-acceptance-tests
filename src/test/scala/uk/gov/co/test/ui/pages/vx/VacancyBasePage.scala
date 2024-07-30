@@ -6,7 +6,7 @@ import org.scalatest.concurrent.Eventually.eventually
 import org.scalatest.matchers.should.Matchers
 import uk.gov.co.test.ui.conf.TestConfiguration
 import uk.gov.co.test.ui.conf.TestConfiguration.readProperty
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXApplicationClosingDate, vacancyId}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.vXApplicationClosingDate
 import uk.gov.co.test.ui.data.vx.recruiters.{RECRUITER, RecruiterDetails}
 import uk.gov.co.test.ui.driver.BrowserDriver
 import uk.gov.co.test.ui.flows.v9.RegisterCandidateFlow.checkV9LogoutState
@@ -169,12 +169,14 @@ trait VacancyBasePage extends Matchers with BasePage with BrowserDriver {
   }
 
   def enterRoles(value: List[String], inputId: String): Unit = {
+    scrollToElement(By.id(inputId))
     clearField(inputId)
     for (role <- value)
       selectTypeOfRoles(role, inputId)
   }
 
   def enterTypeRoles(value: ListBuffer[String], inputId: String): Unit = {
+    scrollToElement(By.id(inputId))
     clearField(inputId)
     for (role <- value)
       selectTypeOfRoles(role, inputId)
@@ -216,7 +218,6 @@ trait VacancyBasePage extends Matchers with BasePage with BrowserDriver {
     searchOn()
     confirmAndActivateVacancy()
     addExternalPosting()
-    println(s"Vacancy ID: $vacancyId")
   }
 
   def repostVacancy(): Unit = {}
@@ -245,10 +246,10 @@ trait VacancyBasePage extends Matchers with BasePage with BrowserDriver {
     extractTabFormId()
   }
 
-  def moveVacancyOnAndSendEmail(barId: String, tabPath: String, sendEMail: String): Unit = {
+  def moveVacancyOnAndSendEmail(barId: String, tabPath: String, sendEmail: String): Unit = {
     clickOn(barId)
     waitForVisibilityOfElementByPath(tabPath).isDisplayed
-    waitForVisibilityOfElementById(sendEMail).click()
+    waitForVisibilityOfElementById(sendEmail).click()
   }
 
   def selectDropdownOption(selectId: String, selectOption: String): Unit = {
@@ -295,4 +296,18 @@ trait VacancyBasePage extends Matchers with BasePage with BrowserDriver {
       }
       fieldId.sendKeys(Keys.BACK_SPACE)
     }
+
+  def formattedDate(atDate: LocalDate): String = {
+    val formatter     = DateTimeFormatter.ofPattern("dd/MM/yyyy")
+    val formattedDate = atDate.format(formatter)
+    formattedDate
+  }
+
+  def selectDropdownById(id: String, value: String): Unit = {
+    scrollToElement(By.id(id))
+    waitForVisibilityOfElementById(id).click()
+    val dept = new Select(waitForVisibilityOfElementById(id))
+    dept.selectByVisibleText(value)
+  }
+
 }

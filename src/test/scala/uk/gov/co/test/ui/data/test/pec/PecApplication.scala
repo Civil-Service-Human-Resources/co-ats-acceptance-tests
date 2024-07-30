@@ -20,6 +20,7 @@ object PEC_APPLICATION_DATA
       PEC_APPLICATION_INTERVIEW_TWO_EVALUATION,
       PEC_APPLICATION_INTERVIEW_THREE_EVALUATION,
       PEC_APPLICATION_INTERVIEW_FOUR_EVALUATION,
+      PEC_APPLICATION_OGD_SECURITY_CHECKS,
       PEC_APPLICATION_POSTING_NOTICE,
       PEC_APPLICATION_NEW_ENTRANT_NOTICE
     )
@@ -402,6 +403,12 @@ object PEC_APPLICATION_INTERVIEW_FOUR_EVALUATION
       declarationStatement = """Declaration
                              |
                              |By submitting this form you are agreeing to and accepting that you have no conflict of interest with this applicant and the evaluation reflects the views of all the selection panel members.""".stripMargin
+    )
+
+object PEC_APPLICATION_OGD_SECURITY_CHECKS
+    extends OgdSecurityChecksDetails(
+      true,
+      true
     )
 
 object PEC_APPLICATION_POSTING_NOTICE

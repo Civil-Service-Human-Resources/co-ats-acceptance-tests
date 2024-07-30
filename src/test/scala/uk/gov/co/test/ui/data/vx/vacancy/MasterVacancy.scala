@@ -31,7 +31,7 @@ object MASTER_VACANCY_DATA
 object MASTER_BASIC_DETAILS
     extends BasicDetails(
       "DO NOT USE- Automation Test Template",
-      s"HMRC - " + generateRandomJobPosition(),
+      s"Automation: DWP - " + generateRandomJobPosition(),
       true,
       "Prawf awtomeiddio",
       32
@@ -40,7 +40,7 @@ object MASTER_JOB_INFORMATION
     extends JobInfoDetails(
       true,
       "Department for Work and Pensions",
-      "DWP - Communications",
+      "DWP - Digital",
       true,
       "Prawf awtomeiddio",
       "Autotest - Business area detail",
@@ -61,7 +61,7 @@ object MASTER_APPROACH
     extends ApproachDetails(
       "External",
       true,
-      "Autotest - Eligibility statement",
+      "Autotest - eligibility statement",
       true,
       "Prawf awtomeiddio",
       "This vacancy is open to employees who already hold the substantive grade for the post and were appointed to the Civil Service on merit following a fair and open competition; or were appointed to a permanent Civil Service post through an exception in the Civil Service Commissioners’ rules."
@@ -101,7 +101,7 @@ object MASTER_LOCATIONS
 object MASTER_CONTRACT_DETAILS
     extends ContractDetails(
       List("Permanent", "Temporary", "Loan", "Secondment", "Returner"),
-      "Autotest - Maximum characters: 255. Any text over this limit will not show on the advert.",
+      "Autotest - length of employment",
       true,
       "Prawf awtomeiddio",
       List("Full-time", "Part-time", "Compressed Hours", "Flexible working", "Homeworking"),
@@ -137,19 +137,23 @@ object MASTER_CONTACT_DETAILS
 object MASTER_VETTING_DETAILS
     extends VettingDetails(
       true,
-      "Basic",
+      "Enhanced",
       "Disclosure barring service (DBS)",
-      "Security check",
+      true,
+      true,
+      true,
+      true,
+      "Developed vetting",
       true
     )
 
 object MASTER_INTERVIEWS_DETAILS
     extends InterviewsDetails(
-      "4",
-      "Telephone",
+      "2",
+      "Interview",
       "Assessment",
       "Video",
-      "Interview",
+      "Telephone",
       false
     )
 
@@ -398,7 +402,7 @@ object MASTER_GROUP_C_TESTS
 
 object MASTER_ADDITIONAL_QUESTIONS
     extends AdditionalQuestionsDetails(
-      true,
+      anyAdditionalQuestions = Some(true),
       3,
       "Autotest - Question 1",
       "Autotest - Question 2",
@@ -407,7 +411,7 @@ object MASTER_ADDITIONAL_QUESTIONS
 
 object MASTER_CRITERIA
     extends CriteriaDetails(
-      campaignID = Some("Autotest - If this vacancy is linked to a campaign, enter the campaign ID (optional)"),
+      campaignID = None,
       probationIncomplete = true,
       promotionApply = true,
       misconductLive = true,
@@ -457,10 +461,12 @@ object MASTER_PEC_CHECK_FORMS
       "Before pre employment checks",
       "Right to work and criminal record check",
       true,
-      "Autotest - Details of the identity documents the candidate needs to provide",
-      false,
+      "Passport",
+      true,
       generalInfo = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
       referenceChecks = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      workplaceMisconductCheck =
+        ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
       bankruptcyChecks = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
       crcChecks = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
       nsvChecks = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
@@ -479,7 +485,7 @@ object MASTER_PEC_CHECK_FORMS
       true,
       false,
       true,
-      "Autotest - Name of check",
+      "Autotest - additional check",
       additionalCheck = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
       nenOnboarding = ListBuffer("External Candidates", "OGD Candidates", "NDPB Candidates"),
       s"$contactEmailVxConfig",

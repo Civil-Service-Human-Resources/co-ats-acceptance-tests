@@ -32,7 +32,7 @@ object OGD_VACANCY_DATA
 object OGD_BASIC_DETAILS
     extends BasicDetails(
       "DO NOT USE- Automation Test Template",
-      s"CRX827: CO-OGD Automation - " + generateRandomJobPosition(),
+      s"Automation: CRX827 - CO-OGD - " + generateRandomJobPosition(),
       true,
       "Prawf awtomeiddio",
       32
@@ -141,6 +141,10 @@ object OGD_VETTING_DETAILS
       false,
       "None",
       "Disclosure barring service (DBS)",
+      true,
+      true,
+      true,
+      true,
       "None",
       false
     )
@@ -400,7 +404,7 @@ object OGD_GROUP_C_TESTS
 
 object OGD_ADDITIONAL_QUESTIONS
     extends AdditionalQuestionsDetails(
-      false,
+      anyAdditionalQuestions = Some(false),
       3,
       "Autotest - Question 1",
       "Autotest - Question 2",
@@ -409,7 +413,7 @@ object OGD_ADDITIONAL_QUESTIONS
 
 object OGD_CRITERIA
     extends CriteriaDetails(
-      campaignID = Some("Autotest - If this vacancy is linked to a campaign, enter the campaign ID (optional)"),
+      campaignID = None,
       probationIncomplete = false,
       promotionApply = false,
       misconductLive = false,
@@ -463,6 +467,7 @@ object OGD_OGD_CHECK_FORMS
       false,
       generalInfo = ListBuffer("External Candidates"),
       referenceChecks = ListBuffer("Not Applicable"),
+      workplaceMisconductCheck = ListBuffer("Not Applicable"),
       bankruptcyChecks = ListBuffer("Not Applicable"),
       crcChecks = ListBuffer("External Candidates", "OGD Candidates"),
       nsvChecks = ListBuffer("External Candidates", "OGD Candidates"),

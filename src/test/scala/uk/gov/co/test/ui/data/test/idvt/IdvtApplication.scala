@@ -20,6 +20,7 @@ object IDVT_APPLICATION_DATA
       IDVT_APPLICATION_INTERVIEW_TWO_EVALUATION,
       IDVT_APPLICATION_INTERVIEW_THREE_EVALUATION,
       IDVT_APPLICATION_INTERVIEW_FOUR_EVALUATION,
+      IDVT_APPLICATION_OGD_SECURITY_CHECKS,
       IDVT_APPLICATION_POSTING_NOTICE,
       IDVT_APPLICATION_NEW_ENTRANT_NOTICE
     )
@@ -402,6 +403,12 @@ object IDVT_APPLICATION_INTERVIEW_FOUR_EVALUATION
       declarationStatement = """Declaration
                              |
                              |By submitting this form you are agreeing to and accepting that you have no conflict of interest with this applicant and the evaluation reflects the views of all the selection panel members.""".stripMargin
+    )
+
+object IDVT_APPLICATION_OGD_SECURITY_CHECKS
+    extends OgdSecurityChecksDetails(
+      true,
+      true
     )
 
 object IDVT_APPLICATION_POSTING_NOTICE

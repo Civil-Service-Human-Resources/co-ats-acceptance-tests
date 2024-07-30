@@ -120,12 +120,6 @@ object EmploymentHistoryTab extends VacancyBasePage {
       uploadEehcEvidence(historyDetails)
     } else radioClick(receivedHistoryCheckNoId)
 
-  def formattedDate(atDate: LocalDate): String = {
-    val formatter     = DateTimeFormatter.ofPattern("dd/MM/yyyy")
-    val formattedDate = atDate.format(formatter)
-    formattedDate
-  }
-
   private def enterDateHistoryCheckStarted(historyDetails: HistoryDetails): Unit =
     enterDateFields(
       formattedDate(historyDetails.historyCheckStarted),

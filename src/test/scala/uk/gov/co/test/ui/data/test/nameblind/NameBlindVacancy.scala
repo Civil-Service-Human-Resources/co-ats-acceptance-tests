@@ -1,4 +1,4 @@
-package uk.gov.co.test.ui.data.test.pec
+package uk.gov.co.test.ui.data.test.nameblind
 
 import uk.gov.co.test.ui.data.vx.vacancy.NewVacancyDetails
 import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.{contactEmailVxConfig, contactNameVxConfig}
@@ -7,41 +7,41 @@ import uk.gov.co.test.ui.pages.vx.createvacancypage._
 
 import scala.collection.mutable.ListBuffer
 
-object PEC_VACANCY_DATA
+object NON_NAME_BLIND_VACANCY_DATA
     extends NewVacancyDetails(
-      PEC_BASIC_DETAILS,
-      PEC_JOB_INFORMATION,
-      PEC_APPROACH,
-      PEC_APPROVAL,
-      PEC_RESERVE_LIST,
-      PEC_LOCATIONS,
-      PEC_CONTRACT_DETAILS,
-      PEC_ADVERT,
-      PEC_CONTACT_DETAILS,
-      PEC_VETTING_DETAILS,
-      PEC_INTERVIEWS_DETAILS,
-      PEC_SUCCESS_PROFILES,
-      PEC_VACANCY_TESTS,
-      PEC_ADDITIONAL_QUESTIONS,
-      PEC_CRITERIA,
-      PEC_MANAGEMENT,
-      PEC_ONLINE_PEC_CHECK_FORMS,
-      PEC_PEC_CHECK_FORMS
+      NON_NAME_BLIND_BASIC_DETAILS,
+      NON_NAME_BLIND_JOB_INFORMATION,
+      NON_NAME_BLIND_APPROACH,
+      NON_NAME_BLIND_APPROVAL,
+      NON_NAME_BLIND_RESERVE_LIST,
+      NON_NAME_BLIND_LOCATIONS,
+      NON_NAME_BLIND_CONTRACT_DETAILS,
+      NON_NAME_BLIND_ADVERT,
+      NON_NAME_BLIND_CONTACT_DETAILS,
+      NON_NAME_BLIND_VETTING_DETAILS,
+      NON_NAME_BLIND_INTERVIEWS_DETAILS,
+      NON_NAME_BLIND_SUCCESS_PROFILES,
+      NON_NAME_BLIND_VACANCY_TESTS,
+      NON_NAME_BLIND_ADDITIONAL_QUESTIONS,
+      NON_NAME_BLIND_CRITERIA,
+      NON_NAME_BLIND_MANAGEMENT,
+      NON_NAME_BLIND_ONLINE_NON_NAME_BLIND_CHECK_FORMS,
+      NON_NAME_BLIND_NON_NAME_BLIND_CHECK_FORMS
     )
 
-object PEC_BASIC_DETAILS
+object NON_NAME_BLIND_BASIC_DETAILS
     extends BasicDetails(
-      "DO NOT USE- Automation Test Template",
-      s"Automation: PEC - " + generateRandomJobPosition(),
+      "Government Commercial Function - Apply Online",
+      s"Automation: GCF-Non Name-Blind - " + generateRandomJobPosition(),
       true,
       "Prawf awtomeiddio",
       32
     )
-object PEC_JOB_INFORMATION
+object NON_NAME_BLIND_JOB_INFORMATION
     extends JobInfoDetails(
       true,
-      "Ministry of Defence",
-      "MOD - Air",
+      "Government Commercial Function",
+      "GCF - Cabinet Office",
       true,
       "Prawf awtomeiddio",
       "Autotest - Business area detail",
@@ -58,7 +58,7 @@ object PEC_JOB_INFORMATION
       "1",
       false
     )
-object PEC_APPROACH
+object NON_NAME_BLIND_APPROACH
     extends ApproachDetails(
       "External",
       true,
@@ -68,7 +68,7 @@ object PEC_APPROACH
       "This vacancy is open to employees who already hold the substantive grade for the post and were appointed to the Civil Service on merit following a fair and open competition; or were appointed to a permanent Civil Service post through an exception in the Civil Service Commissioners’ rules."
     )
 
-object PEC_APPROVAL
+object NON_NAME_BLIND_APPROVAL
     extends ApprovalDetails(
       true,
       "Autotest - budgetary authorisation info",
@@ -76,7 +76,7 @@ object PEC_APPROVAL
       "Test-T&Cs.pdf"
     )
 
-object PEC_RESERVE_LIST
+object NON_NAME_BLIND_RESERVE_LIST
     extends ReserveListDetails(
       false,
       "12 Months",
@@ -84,7 +84,7 @@ object PEC_RESERVE_LIST
       "6 Months"
     )
 
-object PEC_LOCATIONS
+object NON_NAME_BLIND_LOCATIONS
     extends LocationsDetails(
       "Postcodes",
       "M1 4RJ",
@@ -95,12 +95,12 @@ object PEC_LOCATIONS
       false,
       true,
       "All communities",
-      false,
+      true,
       "3",
       otherLocations = ListBuffer("London", "Southampton", "Manchester")
     )
 
-object PEC_CONTRACT_DETAILS
+object NON_NAME_BLIND_CONTRACT_DETAILS
     extends ContractDetails(
       List("Permanent", "Temporary", "Loan", "Secondment", "Returner"),
       "Autotest - Maximum characters: 255. Any text over this limit will not show on the advert.",
@@ -117,7 +117,7 @@ object PEC_CONTRACT_DETAILS
       18750
     )
 
-object PEC_ADVERT
+object NON_NAME_BLIND_ADVERT
     extends AdvertDetails(
       "Autotest - Job summary",
       "Autotest - Job description",
@@ -126,7 +126,7 @@ object PEC_ADVERT
       "Autotest - Selection process details"
     )
 
-object PEC_CONTACT_DETAILS
+object NON_NAME_BLIND_CONTACT_DETAILS
     extends ContactDetails(
       s"$contactNameVxConfig",
       s"$contactEmailVxConfig",
@@ -136,10 +136,10 @@ object PEC_CONTACT_DETAILS
       s"$contactEmailVxConfig"
     )
 
-object PEC_VETTING_DETAILS
+object NON_NAME_BLIND_VETTING_DETAILS
     extends VettingDetails(
       true,
-      "Enhanced",
+      "Standard",
       "Disclosure barring service (DBS)",
       true,
       true,
@@ -149,38 +149,38 @@ object PEC_VETTING_DETAILS
       true
     )
 
-object PEC_INTERVIEWS_DETAILS
+object NON_NAME_BLIND_INTERVIEWS_DETAILS
     extends InterviewsDetails(
-      "No interviews",
+      "1",
       "Interview",
       "Assessment",
-      "Telephone",
       "Video",
+      "Telephone",
       false
     )
 
-object PEC_SUCCESS_PROFILES
+object NON_NAME_BLIND_SUCCESS_PROFILES
     extends SuccessProfilesDetails(
-      false,
-      false,
-      false,
-      false,
-      false,
-      Some(PEC_ABILITIES),
-      Some(PEC_BEHAVIOURS),
-      Some(PEC_EXPERIENCES),
-      Some(PEC_STRENGTHS),
-      Some(PEC_TECH_SKILLS)
+      true,
+      true,
+      true,
+      true,
+      true,
+      Some(NON_NAME_BLIND_ABILITIES),
+      Some(NON_NAME_BLIND_BEHAVIOURS),
+      Some(NON_NAME_BLIND_EXPERIENCES),
+      Some(NON_NAME_BLIND_STRENGTHS),
+      Some(NON_NAME_BLIND_TECH_SKILLS)
     )
 
-object PEC_ABILITIES
+object NON_NAME_BLIND_ABILITIES
     extends AbilitiesDetails(
       """The following online tests can be used to assess abilities:
                            |Civil Service Numerical Test
                            |Civil Service Verbal Test""".stripMargin
     )
 
-object PEC_BEHAVIOURS
+object NON_NAME_BLIND_BEHAVIOURS
     extends BehavioursDetails(
       assessBehaviours = """The following online tests can be used to assess behaviours:
           |Civil Service Judgement Test
@@ -208,7 +208,7 @@ object PEC_BEHAVIOURS
       )
     )
 
-object PEC_EXPERIENCES
+object NON_NAME_BLIND_EXPERIENCES
     extends ExperienceDetails(
       true,
       "0 - 100",
@@ -235,7 +235,7 @@ object PEC_EXPERIENCES
       )
     )
 
-object PEC_STRENGTHS
+object NON_NAME_BLIND_STRENGTHS
     extends StrengthsDetails(
       8,
       "Adaptable",
@@ -248,7 +248,7 @@ object PEC_STRENGTHS
       "Service Focussed"
     )
 
-object PEC_TECH_SKILLS
+object NON_NAME_BLIND_TECH_SKILLS
     extends TechSkillsDetails(
       8,
       TechSkill(
@@ -301,7 +301,7 @@ object PEC_TECH_SKILLS
       )
     )
 
-object PEC_VACANCY_TESTS
+object NON_NAME_BLIND_VACANCY_TESTS
     extends VacancyTestsDetails(
       false,
       "Online Tests",
@@ -359,13 +359,13 @@ object PEC_VACANCY_TESTS
       ),
       false,
       "Autotest - Additional details for the recruitment team",
-      Some(PEC_RECRUITER_TESTS),
-      Some(PEC_GROUP_A_TESTS),
-      Some(PEC_GROUP_B_TESTS),
-      Some(PEC_GROUP_C_TESTS)
+      Some(NON_NAME_BLIND_RECRUITER_TESTS),
+      Some(NON_NAME_BLIND_GROUP_A_TESTS),
+      Some(NON_NAME_BLIND_GROUP_B_TESTS),
+      Some(NON_NAME_BLIND_GROUP_C_TESTS)
     )
 
-object PEC_RECRUITER_TESTS
+object NON_NAME_BLIND_RECRUITER_TESTS
     extends RecruiterTestsDetails(
       "Before the tests",
       "Auto-progress after each test",
@@ -374,7 +374,7 @@ object PEC_RECRUITER_TESTS
       "Autotest - Online test instructions"
     )
 
-object PEC_GROUP_A_TESTS
+object NON_NAME_BLIND_GROUP_A_TESTS
     extends GroupATestsDetails(
       "First",
       "Three",
@@ -384,7 +384,7 @@ object PEC_GROUP_A_TESTS
       7
     )
 
-object PEC_GROUP_B_TESTS
+object NON_NAME_BLIND_GROUP_B_TESTS
     extends GroupBTestsDetails(
       "Second",
       "Two",
@@ -393,7 +393,7 @@ object PEC_GROUP_B_TESTS
       5
     )
 
-object PEC_GROUP_C_TESTS
+object NON_NAME_BLIND_GROUP_C_TESTS
     extends GroupCTestsDetails(
       "Third",
       "Two",
@@ -402,16 +402,16 @@ object PEC_GROUP_C_TESTS
       3
     )
 
-object PEC_ADDITIONAL_QUESTIONS
+object NON_NAME_BLIND_ADDITIONAL_QUESTIONS
     extends AdditionalQuestionsDetails(
-      anyAdditionalQuestions = Some(false),
+      anyAdditionalQuestions = Some(true),
       3,
       "Autotest - Question 1",
       "Autotest - Question 2",
       "Autotest - Question 3"
     )
 
-object PEC_CRITERIA
+object NON_NAME_BLIND_CRITERIA
     extends CriteriaDetails(
       campaignID = None,
       probationIncomplete = true,
@@ -425,12 +425,12 @@ object PEC_CRITERIA
       membershipsNotHeld = true,
       languagesSkillsNotHeld = true,
       qualificationsHeld = true,
-      preSiftRequired = false,
-      uploadAttachment = false,
+      preSiftRequired = true,
+      uploadAttachment = true,
       candidateInstructions = "Autotest - Instructions for candidate"
     )
 
-object PEC_MANAGEMENT
+object NON_NAME_BLIND_MANAGEMENT
     extends ManagementDetails(
       true,
       true,
@@ -449,7 +449,7 @@ object PEC_MANAGEMENT
       vacancyComments = Option("Autotest - Comments on this vacancy")
     )
 
-object PEC_ONLINE_PEC_CHECK_FORMS
+object NON_NAME_BLIND_ONLINE_NON_NAME_BLIND_CHECK_FORMS
     extends OnlinePecCheckFormsDetails(
       true,
       false,
@@ -457,7 +457,7 @@ object PEC_ONLINE_PEC_CHECK_FORMS
       s"$contactEmailVxConfig"
     )
 
-object PEC_PEC_CHECK_FORMS
+object NON_NAME_BLIND_NON_NAME_BLIND_CHECK_FORMS
     extends PecCheckFormsDetails(
       rtwCheck = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
       "Before pre employment checks",

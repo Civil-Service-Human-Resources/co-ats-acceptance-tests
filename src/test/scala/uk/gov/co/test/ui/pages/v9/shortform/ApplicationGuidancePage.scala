@@ -2,6 +2,7 @@ package uk.gov.co.test.ui.pages.v9.shortform
 
 import org.openqa.selenium.By
 import org.scalatest.concurrent.Eventually.eventually
+import uk.gov.co.test.ui.data.MasterVacancyDetails.v9RunInWelsh
 import uk.gov.co.test.ui.data.v9.shortform.ShortFormDetails
 import uk.gov.co.test.ui.pages.v9.ApplicationsPage.{navigateToApplicationsPage, reviewUpdateValue}
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
@@ -12,20 +13,22 @@ case class AppGuidanceDetails(
 
 object ApplicationGuidancePage extends CivilServiceJobsBasePage {
 
-  private lazy val appGuidanceTitle = "Application Guidance - Civil Service Jobs - GOV.UK"
-  private lazy val findCSJobsTitle  = "Welcome to our recruitment portal - Civil Service Jobs - GOV.UK"
-  private lazy val appDeadline      = "The deadline is 11:55PM on 22 November 2023."
-  val returnBackToSearchResultsPath = ".//a[@title='Return to search results']"
-  val formIdPath                    = ".//form[@onsubmit='return submit_form()']"
-  var shortFormId: String           = ""
+  private lazy val appGuidanceTitle      = "Application Guidance - Civil Service Jobs - GOV.UK"
+  private lazy val welshAppGuidanceTitle = "Canllaw Gwneud Cais - Civil Service Jobs - GOV.UK"
+  private lazy val findCSJobsTitle       = "Welcome to our recruitment portal - Civil Service Jobs - GOV.UK"
+  private lazy val appDeadline           = "The deadline is 11:55PM on 22 November 2023."
+  val returnBackToSearchResultsPath      = ".//a[@title='Return to search results']"
+//  val formIdPath                    = ".//form[@onsubmit='return submit_form()']"
+  val formIdPath                         = ".//form[@enctype='multipart/form-data']"
+  var shortFormId: String                = ""
 
   private def confirmApplicationGuidance(appGuidanceDetails: AppGuidanceDetails): Unit = {
     if (driver.getTitle != findCSJobsTitle) {
-      eventually(onPage(appGuidanceTitle))
+      if (v9RunInWelsh) eventually(onPage(welshAppGuidanceTitle)) else eventually(onPage(appGuidanceTitle))
     } else {
       navigateToApplicationsPage()
       reviewUpdateValue().click()
-      eventually(onPage(appGuidanceTitle))
+      if (v9RunInWelsh) eventually(onPage(welshAppGuidanceTitle)) else eventually(onPage(appGuidanceTitle))
     }
     if (vXSearchCookiesById().isDisplayed) {
       vXAcceptAllCookies()

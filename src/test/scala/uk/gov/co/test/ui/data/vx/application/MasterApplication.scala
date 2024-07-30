@@ -18,6 +18,7 @@ object MASTER_APPLICATION_DATA
       MASTER_APPLICATION_INTERVIEW_TWO_EVALUATION,
       MASTER_APPLICATION_INTERVIEW_THREE_EVALUATION,
       MASTER_APPLICATION_INTERVIEW_FOUR_EVALUATION,
+      MASTER_APPLICATION_OGD_SECURITY_CHECKS,
       MASTER_APPLICATION_POSTING_NOTICE,
       MASTER_APPLICATION_NEW_ENTRANT_NOTICE
     )
@@ -103,7 +104,7 @@ object MASTER_APPLICATION_INTERVIEW_SCHEDULE
       "Prawf awtomeiddio",
       true,
       "Prawf awtomeiddio",
-      s"HMRC Government Offices Great George Street I%s",
+      s"DWP Government Offices I%s",
       false,
       24,
       "Use System Default",
@@ -402,6 +403,12 @@ object MASTER_APPLICATION_INTERVIEW_FOUR_EVALUATION
                              |By submitting this form you are agreeing to and accepting that you have no conflict of interest with this applicant and the evaluation reflects the views of all the selection panel members.""".stripMargin
     )
 
+object MASTER_APPLICATION_OGD_SECURITY_CHECKS
+    extends OgdSecurityChecksDetails(
+      true,
+      true
+    )
+
 object MASTER_APPLICATION_POSTING_NOTICE
     extends PostingNoticeDetails(
       "1234",
@@ -415,7 +422,7 @@ object MASTER_APPLICATION_POSTING_NOTICE
       "Autotest address",
       true,
       "autotest - 2nd location",
-      "Temporary",
+      "Fixed Term Appointment",
       "The post is time limited and is being advertised as an apprenticeship for the advertised period. The fixed-term will end when the apprenticeship has completed.",
       "autotest - key responsibilities",
       contractEndDate = LocalDate.now(),

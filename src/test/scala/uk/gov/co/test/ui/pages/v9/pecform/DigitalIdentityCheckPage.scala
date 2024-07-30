@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.pages.v9.pecform
 
 import org.scalatest.concurrent.Eventually.eventually
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{v9BiometricPassportOrId, v9IdvtDataConsent, v9InDateDrivingLicence, v9RtwHoldPassport, v9SmartphoneAccess, vXCrcLevel, vXRtwChecks, vXWhichIdentityChecks}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{v9BiometricPassportOrId, v9BiometricResidenceCard, v9EussStatus, v9IdvtDataConsent, v9InDateDrivingLicence, v9RtwBritishIrishPassport, v9SmartphoneAccess, vXCrcLevel, vXPecCrc, vXRtwChecks, vXTypeOfCandidate, vXWhichIdentityChecks}
 import uk.gov.co.test.ui.data.v9.pecform.PecFormDetails
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
 import uk.gov.co.test.ui.pages.v9.pecform.YourDetailsPage.pecFormId
@@ -65,11 +65,18 @@ object DigitalIdentityCheckPage extends CivilServiceJobsBasePage {
   }
 
   private def selectBiometricPassportOrId(digitalIdentityDetails: DigitalIdentityDetails): Unit = {
-    println(s"CRC Level is: $vXCrcLevel")
-    println(s"Identity Check Level is: $vXWhichIdentityChecks")
     v9BiometricPassportOrId = digitalIdentityDetails.biometricPassportOrId
     if (
-      vXCrcLevel != "None" && vXWhichIdentityChecks != "No digital checks" && vXRtwChecks.contains("Not Applicable")
+      (vXWhichIdentityChecks == "Right to work and criminal record check" &&
+        ((v9EussStatus == "I have settled status" || v9EussStatus == "I have pre-settled status" || v9EussStatus == "I have applied for the settlement scheme and await confirmation of my status") ||
+          v9BiometricResidenceCard))
+      ||
+      (
+        (vXRtwChecks.contains("Not Applicable") || !vXRtwChecks.contains(s"$vXTypeOfCandidate Candidates")) &&
+          vXWhichIdentityChecks == "Right to work and criminal record check" &&
+          (vXCrcLevel != "None" || (!vXPecCrc
+            .contains("Not Applicable") && vXPecCrc.contains(s"$vXTypeOfCandidate Candidates")))
+      )
     ) {
       waitForVisibilityOfElementById(
         biometricPassportOrIdQuestionId
@@ -82,7 +89,10 @@ object DigitalIdentityCheckPage extends CivilServiceJobsBasePage {
 
   private def selectInDateDrivingLicence(digitalIdentityDetails: DigitalIdentityDetails): Unit = {
     v9InDateDrivingLicence = digitalIdentityDetails.inDateDrivingLicence
-    if (vXCrcLevel == "Standard" || vXCrcLevel == "Enhanced" && vXWhichIdentityChecks == "Right to work and criminal record check") {
+    if (
+      (vXCrcLevel == "Standard" || vXCrcLevel == "Enhanced") &&
+      vXWhichIdentityChecks == "Right to work and criminal record check"
+    ) {
       waitForVisibilityOfElementById(
         inDateDrivingLicenceQuestionId
       ).getText shouldEqual digitalIdentityDetails.inDateDrivingLicenceQuestion
@@ -98,7 +108,20 @@ object DigitalIdentityCheckPage extends CivilServiceJobsBasePage {
   )
 
   def digitalIdentityCheckPage(pecFormDetails: PecFormDetails): Unit =
-    if (vXWhichIdentityChecks != "No digital checks" && v9RtwHoldPassport) {
+    if (
+      (vXWhichIdentityChecks != "No digital checks" && (v9RtwBritishIrishPassport ||
+        (v9EussStatus == "I have settled status" ||
+          v9EussStatus == "I have pre-settled status" ||
+          v9EussStatus == "I have applied for the settlement scheme and await confirmation of my status") ||
+        v9BiometricResidenceCard) &&
+        ((!vXPecCrc.contains("Not Applicable") || vXPecCrc.contains(s"$vXTypeOfCandidate Candidates")) ||
+          (vXWhichIdentityChecks == "Right to work and criminal record check" &&
+            (!vXPecCrc.contains("Not Applicable") || vXPecCrc.contains(s"$vXTypeOfCandidate Candidates")))))
+      ||
+      (vXWhichIdentityChecks == "Right to work and criminal record check" &&
+        (vXCrcLevel != "None") &&
+        (vXRtwChecks.contains("Not Applicable") || !vXRtwChecks.contains(s"$vXTypeOfCandidate Candidates")))
+    ) {
       digitalIdentityPageCheck()
       idvt.foreach { f =>
         f(pecFormDetails.digitalIdentityDetails)

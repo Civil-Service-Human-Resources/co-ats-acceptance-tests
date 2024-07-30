@@ -140,6 +140,10 @@ object REDEPLOYMENT_VETTING_DETAILS
       true,
       "Basic",
       "Disclosure barring service (DBS)",
+      true,
+      true,
+      true,
+      true,
       "Security check",
       true
     )
@@ -399,7 +403,7 @@ object REDEPLOYMENT_GROUP_C_TESTS
 
 object REDEPLOYMENT_ADDITIONAL_QUESTIONS
     extends AdditionalQuestionsDetails(
-      true,
+      anyAdditionalQuestions = Some(true),
       3,
       "Autotest - Question 1",
       "Autotest - Question 2",
@@ -408,7 +412,7 @@ object REDEPLOYMENT_ADDITIONAL_QUESTIONS
 
 object REDEPLOYMENT_CRITERIA
     extends CriteriaDetails(
-      campaignID = Some("Autotest - If this vacancy is linked to a campaign, enter the campaign ID (optional)"),
+      campaignID = None,
       probationIncomplete = true,
       promotionApply = true,
       misconductLive = true,
@@ -462,6 +466,8 @@ object REDEPLOYMENT_PEC_CHECK_FORMS
       false,
       generalInfo = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
       referenceChecks = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      workplaceMisconductCheck =
+        ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
       bankruptcyChecks = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
       crcChecks = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
       nsvChecks = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),

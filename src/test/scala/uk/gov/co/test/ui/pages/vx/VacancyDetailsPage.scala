@@ -2,8 +2,13 @@ package uk.gov.co.test.ui.pages.vx
 
 import org.openqa.selenium.{By, WebElement}
 import org.scalatest.concurrent.Eventually.eventually
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXAbilitiesRequired, vXAnyAdditionalQuestions, vXAnyOnlineTests, vXApplicationClosingDate, vXApplicationLiveDate, vXApproach, vXAttachmentRequired, vXAvailableOutsideInNI, vXBehaviourApplicationRequired, vXBehaviourInterviewRequired, vXBehavioursRequired, vXBudgetaryApproval, vXBusinessArea, vXBusinessAreaDetail, vXCandidateInstructions, vXCandidateUploadIdentityDocs, vXCommunitiesInNIR, vXContactName, vXCostCentre, vXCrcCheckProvider, vXCrcLevel, vXCvScoreRange, vXDesirablePastExperience, vXDetailsForUploadIdentityDocs, vXEmailForQuestions, vXExperiencesRequired, vXFullQualification, vXGiveLocationPreference, vXGreatForVeterans, vXHavePecMailbox, vXHowManyBehaviours, vXHowManyQuestions, vXHowManySkills, vXHowManyStrengths, vXInterviewExpectedRounds, vXInterviewFourType, vXInterviewNumber, vXInterviewOneType, vXInterviewThreeType, vXInterviewTwoType, vXJobGradeEquivalent, vXJobGrades, vXJobHistory, vXJobInfoDepartment, vXLanguagesMandatory, vXLicencesMandatory, vXListOfChosenBehaviours, vXListOfSkillsApplicationRequired, vXListOfSkillsInterviewRequired, vXListOfStrengths, vXListOfTechSkills, vXListOfTechSkillsDescription, vXLocationDisplay, vXLocationType, vXManuallyCheckIdentityDocs, vXMaxLocations, vXMedicalRequired, vXMembershipsMandatory, vXNoOfJobsAvailable, vXNoPecOgdTransfer, vXNonReserved, vXOtherLocations, vXPecAdditionalCheck, vXPecBankruptcyCheck, vXPecCrc, vXPecEmploymentHistoryCheck, vXPecFraudCheck, vXPecGeneralInfo, vXPecHealthDisplayOptions, vXPecHealthRefCheck, vXPecHrEmailForNen, vXPecHrEmailForPn, vXPecIncludeAdditionalCheck, vXPecMailbox, vXPecNameOfAdditionalCheck, vXPecNen, vXPecNsv, vXPecNsvDisplayOptions, vXPecOgdSecurityCheck, vXPecOverseasCheck, vXPecPensionsCheck, vXPecPn, vXPecPreviousCivilEmploymentCheck, vXPecReferenceCheck, vXPecSelfEmploymentCheck, vXPecUseOgdProcess, vXPersonalStatement, vXPreSiftRequired, vXPreviousExperiences, vXProfession, vXProfile, vXQualificationsMandatory, vXQuestionOne, vXQuestionThree, vXQuestionTwo, vXRejectApplyingOnPromotion, vXRejectLanguagesNotHeld, vXRejectLicencesNotHeld, vXRejectLiveMisconduct, vXRejectMembershipsNotHeld, vXRejectNationalityReq, vXRejectNoRightToRemain, vXRejectPoorAttendance, vXRejectPoorPerformance, vXRejectProbation, vXRejectQualificationsNotHeld, vXReserveExtendLength, vXReserveExtendRequired, vXReserveListLength, vXReserveListRequired, vXRtwChecks, vXSpecificLanguages, vXSpecificLicences, vXSpecificMemberships, vXSpecificPastExperience, vXSpecificQualifications, vXStatementGuidance, vXStatementGuidanceText, vXStatementScoreRange, vXStatementWordLimit, vXStrengthsRequired, vXTeamEmail, vXTechSkillsRequired, vXTypeOfRole, vXUseOnlinePecForms, vXVacanciesInNIR, vXVacancyHolderEmail, vXVacancyHolderName, vXVettingLevel, vXWhenRtwChecks, vXWhichIdentityChecks, vacancyFormId, vacancyId, vacancyName}
-import uk.gov.co.test.ui.pages.v9.ApplicationDetailsPage.resetApplicationDetails
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXAbilitiesRequired, vXAnyAdditionalQuestions, vXAnyOnlineTests, vXApplicationClosingDate, vXApplicationLiveDate, vXApproach, vXAttachmentRequired, vXAvailableOutsideInNI, vXBehaviourApplicationRequired, vXBehaviourInterviewRequired, vXBehavioursRequired, vXBudgetaryApproval, vXBusinessArea, vXBusinessAreaDetail, vXCandidateInstructions, vXCandidateUploadIdentityDocs, vXCommunitiesInNIR, vXContactName, vXCostCentre, vXCrcCheckProvider, vXCrcLevel, vXCvAttachment, vXCvScoreRange, vXDesirablePastExperience, vXDetailsForUploadIdentityDocs, vXEmailForQuestions, vXExperiencesRequired, vXFullQualification, vXGiveLocationPreference, vXGreatForVeterans, vXHavePecMailbox, vXHowManyBehaviours, vXHowManyQuestions, vXHowManySkills, vXHowManyStrengths, vXInterviewExpectedRounds, vXInterviewFourType, vXInterviewNumber, vXInterviewOneType, vXInterviewThreeType, vXInterviewTwoType, vXJobGradeEquivalent, vXJobGrades, vXJobHistory, vXJobInfoDepartment, vXLanguagesMandatory, vXLicencesMandatory, vXListOfChosenBehaviours, vXListOfSkillsApplicationRequired, vXListOfSkillsInterviewRequired, vXListOfStrengths, vXListOfTechSkills, vXListOfTechSkillsDescription, vXLocationDisplay, vXLocationType, vXManuallyCheckIdentityDocs, vXMaxLocations, vXMedicalRequired, vXMembershipsMandatory, vXNoOfJobsAvailable, vXNoPecOgdDigitalTransfer, vXNonReserved, vXOtherLocations, vXPecAdditionalCheck, vXPecBankruptcyCheck, vXPecCrc, vXPecEmploymentHistoryCheck, vXPecFraudCheck, vXPecGeneralInfo, vXPecHealthDisplayOptions, vXPecHealthRefCheck, vXPecHrEmailForNen, vXPecHrEmailForPn, vXPecIncludeAdditionalCheck, vXPecMailbox, vXPecNameOfAdditionalCheck, vXPecNen, vXPecNsv, vXPecNsvDisplayOptions, vXPecOgdSecurityCheck, vXPecOverseasCheck, vXPecPensionsCheck, vXPecPn, vXPecPreviousCivilEmploymentCheck, vXPecReferenceCheck, vXPecSelfEmploymentCheck, vXPecUseDigitalOgdProcess, vXPecWorkplaceMisconductCheck, vXPersonalStatement, vXPersonalStatementNameBlind, vXPreSiftRequired, vXPreviousExperiences, vXProfession, vXProfile, vXProvideNameBlindCv, vXQualificationsMandatory, vXQuestionOne, vXQuestionThree, vXQuestionTwo, vXRejectApplyingOnPromotion, vXRejectLanguagesNotHeld, vXRejectLicencesNotHeld, vXRejectLiveMisconduct, vXRejectMembershipsNotHeld, vXRejectNationalityReq, vXRejectNoRightToRemain, vXRejectPoorAttendance, vXRejectPoorPerformance, vXRejectProbation, vXRejectQualificationsNotHeld, vXReserveExtendLength, vXReserveExtendRequired, vXReserveListLength, vXReserveListRequired, vXRtwChecks, vXSpecificLanguages, vXSpecificLicences, vXSpecificMemberships, vXSpecificPastExperience, vXSpecificQualifications, vXStatementGuidance, vXStatementGuidanceText, vXStatementScoreRange, vXStatementWordLimit, vXStrengthsRequired, vXTeamEmail, vXTechSkillsRequired, vXTypeOfRole, vXUseOnlinePecForms, vXVacanciesInNIR, vXVacancyHolderEmail, vXVacancyHolderName, vXVettingLevel, vXWhenRtwChecks, vXWhichIdentityChecks, vacancyFormId, vacancyId, vacancyName}
+import uk.gov.co.test.ui.pages.vx.createvacancypage.PecCheckFormsSection.nenHrEmailHeaderId
+import uk.gov.co.test.ui.pages.vx.vacancytabs.InterviewFourEvaluationTab.{vXI4AssessmentsTotalScore, vXI4BehavioursTotalScore, vXI4ExperienceScore, vXI4StrengthsTotalScore, vXI4TechSkillsTotalScore}
+import uk.gov.co.test.ui.pages.vx.vacancytabs.InterviewOneEvaluationTab.{vXI1AssessmentsTotalScore, vXI1BehavioursTotalScore, vXI1ExperienceScore, vXI1StrengthsTotalScore, vXI1TechSkillsTotalScore}
+import uk.gov.co.test.ui.pages.vx.vacancytabs.InterviewThreeEvaluationTab.{vXI3AssessmentsTotalScore, vXI3BehavioursTotalScore, vXI3ExperienceScore, vXI3StrengthsTotalScore, vXI3TechSkillsTotalScore}
+import uk.gov.co.test.ui.pages.vx.vacancytabs.InterviewTwoEvaluationTab.{vXI2AssessmentsTotalScore, vXI2BehavioursTotalScore, vXI2ExperienceScore, vXI2StrengthsTotalScore, vXI2TechSkillsTotalScore}
+import uk.gov.co.test.ui.pages.vx.vacancytabs.SiftEvaluationTab.{vXBehavioursTotalScore, vXCVAssessmentScore, vXPersonalStatementScore, vXTechSkillsTotalScore}
 import uk.gov.co.test.ui.pages.vx.vacancytabs.SummaryTab.{vacancyActive, vacancyClosingDateId, vacancyLiveDateId}
 
 import scala.collection.mutable
@@ -24,6 +29,7 @@ object VacancyDetailsPage extends VacancyBasePage {
   private lazy val appIdPath               = ".//*[@class='app_id']"
   private lazy val vacancyNamePath         = ".//span[@class='obj_name']"
   private lazy val checkLabelPath          = ".//input[@checked='checked']/following-sibling::label[1]"
+  private lazy val checkLabelExistsPath    = ".//input[@checked='checked']"
 
   def departmentId                      = s"select2-${vacancyFormId}_datafield_155191_1_1-container"
   def businessAreaId                    = s"select2-${vacancyFormId}_datafield_155221_1_1-container"
@@ -57,11 +63,14 @@ object VacancyDetailsPage extends VacancyBasePage {
   def interviewThreeId                  = s"${vacancyFormId}_datafield_125063_1_1_fieldset"
   def interviewFourId                   = s"${vacancyFormId}_datafield_125066_1_1_fieldset"
   def interviewOfflineId                = s"${vacancyFormId}_datafield_125052_1_1_fieldset"
+  def provideNameBlindCvId              = s"${vacancyFormId}_datafield_59983_1_1_fieldset"
+  def cvAttachmentId                    = s"${vacancyFormId}_datafield_59980_1_1_fieldset"
   def cvScoreRangeId                    = s"${vacancyFormId}_datafield_187853_1_1_fieldset"
   def jobHistoryId                      = s"${vacancyFormId}_datafield_60080_1_1_fieldset"
   def fullQualificationsId              = s"${vacancyFormId}_datafield_60086_1_1_fieldset"
   def previousExperiencesId             = s"${vacancyFormId}_datafield_60090_1_1_fieldset"
-  def personalStatementId               = s"${vacancyFormId}_datafield_59992_1_1_fieldset"
+  def provideNameBlindStatementId       = s"${vacancyFormId}_datafield_59992_1_1_fieldset"
+  def provideStatementId                = s"${vacancyFormId}_datafield_59986_1_1_fieldset"
   def personalStatementScoreRangeId     = s"${vacancyFormId}_datafield_187857_1_1_fieldset"
   def personalStatementWordLimitId      = s"select2-${vacancyFormId}_datafield_72066_1_1-container"
   def specifyGuidanceId                 = s"${vacancyFormId}_datafield_59989_1_1_fieldset"
@@ -187,6 +196,7 @@ object VacancyDetailsPage extends VacancyBasePage {
   def pecManuallyUploadId               = s"${vacancyFormId}_datafield_181577_1_1_fieldset"
   def pecGeneralInfoId                  = s"select2-${vacancyFormId}_datafield_94582_1_1-container"
   def pecReferenceCheckId               = s"select2-${vacancyFormId}_datafield_94578_1_1-container"
+  def pecWorkplaceMisconductCheckId     = s"select2-${vacancyFormId}_datafield_209454_1_1-container"
   def pecBankruptcyCheckId              = s"select2-${vacancyFormId}_datafield_87979_1_1-container"
   def pecCrcId                          = s"select2-${vacancyFormId}_datafield_87982_1_1-container"
   def pecNsvId                          = s"select2-${vacancyFormId}_datafield_100822_1_1-container"
@@ -220,7 +230,6 @@ object VacancyDetailsPage extends VacancyBasePage {
 
   def extractVacancyId(): String = {
     vacancyId = waitForVisibilityOfElementByPath(appIdPath).getText
-    println(s"Vacancy ID: $vacancyId")
     vacancyId
   }
 
@@ -442,7 +451,6 @@ object VacancyDetailsPage extends VacancyBasePage {
       if (vXCrcLevel != "None") {
         vXCrcCheckProvider =
           waitForVisibilityOfElementById(crcCheckProviderId).findElement(By.xpath(checkLabelPath)).getText
-        if (vXCrcCheckProvider.contains("DBS")) vXCrcCheckProvider = "DBS"
       } else vXCrcCheckProvider = ""
     }
 
@@ -496,6 +504,47 @@ object VacancyDetailsPage extends VacancyBasePage {
     } else vXGreatForVeterans = false
   }
 
+  private def extractNameBlindCvAndStatement(): Unit = {
+    val provideNameBlindCvDisplayed = driver.findElements(By.id(provideNameBlindCvId))
+    if (!provideNameBlindCvDisplayed.isEmpty) {
+      val provideCv = waitForVisibilityOfElementById(provideNameBlindCvId).findElement(By.xpath(checkLabelPath))
+      if (provideCv.getText == "Yes") {
+        vXProvideNameBlindCv = true
+        extractCVScoreRange()
+        extractJobHistory()
+        extractFullQualificationDetails()
+        extractPreviousExperiences()
+      } else {
+        vXProvideNameBlindCv = false
+        vXJobHistory = false
+        vXFullQualification = false
+        vXPreviousExperiences = false
+      }
+      extractProvideNameBlindStatement()
+      vXCvAttachment = false
+      vXPersonalStatement = false
+    }
+  }
+
+  private def extractCvAttachmentAndStatement(): Unit = {
+    val provideCvDisplayed = driver.findElements(By.id(cvAttachmentId))
+    if (!provideCvDisplayed.isEmpty) {
+      val cvAttachment = waitForVisibilityOfElementById(cvAttachmentId).findElement(By.xpath(checkLabelPath))
+      if (cvAttachment.getText == "Yes") {
+        vXCvAttachment = true
+        extractCVScoreRange()
+      } else {
+        vXCvAttachment = false
+      }
+      extractProvideStatement()
+      vXProvideNameBlindCv = false
+      vXPersonalStatementNameBlind = false
+      vXJobHistory = false
+      vXFullQualification = false
+      vXPreviousExperiences = false
+    }
+  }
+
   private def extractCVScoreRange(): Unit = {
     val range = waitForVisibilityOfElementById(cvScoreRangeId).findElement(By.xpath(checkLabelPath))
     if (range.getText == "0 - 7") {
@@ -524,14 +573,30 @@ object VacancyDetailsPage extends VacancyBasePage {
     } else vXPreviousExperiences = false
   }
 
-  private def extractPersonalStatement(): Unit = {
-    val statement = waitForVisibilityOfElementById(personalStatementId).findElement(By.xpath(checkLabelPath))
+  private def extractProvideNameBlindStatement(): Unit = {
+    val statement = waitForVisibilityOfElementById(provideNameBlindStatementId).findElement(By.xpath(checkLabelPath))
     if (statement.getText == "Yes") {
-      vXPersonalStatement = true
+      vXPersonalStatementNameBlind = true
       extractStatementScoreRange()
       extractStatementWordLimit()
       extractSpecifyGuidance()
-    } else vXPersonalStatement = false
+    } else {
+      vXPersonalStatementNameBlind = false
+    }
+  }
+
+  private def extractProvideStatement(): Unit = {
+    val statement = waitForVisibilityOfElementById(provideStatementId).findElement(By.xpath(checkLabelPath))
+    if (statement.getText == "Yes") {
+      vXPersonalStatement = true
+      extractStatementScoreRange()
+      extractSpecifyGuidance()
+    } else {
+      vXPersonalStatement = false
+      vXStatementScoreRange = ""
+      vXStatementGuidance = false
+      vXStatementGuidanceText = ""
+    }
   }
 
   private def extractStatementScoreRange(): Unit = {
@@ -613,6 +678,38 @@ object VacancyDetailsPage extends VacancyBasePage {
   private def extractSpecificQualifications(): Unit =
     vXSpecificQualifications = waitForVisibilityOfElementById(specificQualificationsId).getText
 
+  def clearScores(): Unit = {
+    //sift scores
+    vXBehavioursTotalScore.clear()
+    vXTechSkillsTotalScore.clear()
+    vXCVAssessmentScore = 0
+    vXPersonalStatementScore = 0
+    //interview 1 scores
+    vXI1BehavioursTotalScore.clear()
+    vXI1TechSkillsTotalScore.clear()
+    vXI1StrengthsTotalScore.clear()
+    vXI1AssessmentsTotalScore.clear()
+    vXI1ExperienceScore = 0
+    //interview 2 scores
+    vXI2BehavioursTotalScore.clear()
+    vXI2TechSkillsTotalScore.clear()
+    vXI2StrengthsTotalScore.clear()
+    vXI2AssessmentsTotalScore.clear()
+    vXI2ExperienceScore = 0
+    //interview 3 scores
+    vXI3BehavioursTotalScore.clear()
+    vXI3TechSkillsTotalScore.clear()
+    vXI3StrengthsTotalScore.clear()
+    vXI3AssessmentsTotalScore.clear()
+    vXI3ExperienceScore = 0
+    //interview 4 scores
+    vXI4BehavioursTotalScore.clear()
+    vXI4TechSkillsTotalScore.clear()
+    vXI4StrengthsTotalScore.clear()
+    vXI4AssessmentsTotalScore.clear()
+    vXI4ExperienceScore = 0
+  }
+
   private def extractAbilities(): Unit = {
     val abilities = waitForVisibilityOfElementById(abilitiesId).getAttribute("checked")
     if (abilities != null) {
@@ -621,12 +718,18 @@ object VacancyDetailsPage extends VacancyBasePage {
   }
 
   private def extractBehaviours(): Unit = {
+    vXHowManyBehaviours = 0
+    vXListOfChosenBehaviours.clear()
+    vXBehaviourApplicationRequired.clear()
+    vXBehaviourInterviewRequired.clear()
     val behaviours = waitForVisibilityOfElementById(behavioursId).getAttribute("checked")
     if (behaviours != null) {
       vXBehavioursRequired = true
       extractHowManyBehaviours()
       extractAssessedBehaviours()
-    } else vXBehavioursRequired = false
+    } else {
+      vXBehavioursRequired = false
+    }
   }
 
   private def extractHowManyBehaviours(): Unit =
@@ -685,10 +788,7 @@ object VacancyDetailsPage extends VacancyBasePage {
   private def extractBehaviourEight(): Unit =
     extractBehaviourValues(behaviourEightNameId, behaviourEightApplicationId, behaviourEightInterviewId)
 
-  private def extractAssessedBehaviours(): Unit = {
-    vXListOfChosenBehaviours.clear()
-    vXBehaviourApplicationRequired.clear()
-    vXBehaviourInterviewRequired.clear()
+  private def extractAssessedBehaviours(): Unit =
     vXHowManyBehaviours match {
       case 1 =>
         extractBehaviourOne()
@@ -735,17 +835,41 @@ object VacancyDetailsPage extends VacancyBasePage {
         extractBehaviourSeven()
         extractBehaviourEight()
     }
-  }
 
   private def extractExperience(): Unit = {
+    vXProvideNameBlindCv = false
+    vXCvAttachment = false
+    vXCvScoreRange = ""
+    vXJobHistory = false
+    vXFullQualification = false
+    vXPreviousExperiences = false
+    vXPersonalStatementNameBlind = false
+    vXStatementScoreRange = ""
+    vXStatementWordLimit = 0
+    vXStatementGuidance = false
+    vXStatementGuidanceText = ""
+    vXDesirablePastExperience = false
+    vXSpecificPastExperience = ""
+    vXLicencesMandatory = false
+    vXSpecificLicences = ""
+    vXMembershipsMandatory = false
+    vXSpecificMemberships = ""
+    vXLanguagesMandatory = false
+    vXSpecificLanguages = ""
+    vXQualificationsMandatory = false
+    vXSpecificQualifications = ""
     val experience = waitForVisibilityOfElementById(experienceId).getAttribute("checked")
     if (experience != null) {
       vXExperiencesRequired = true
       extractExperienceSection()
-    } else vXExperiencesRequired = false
+    } else {
+      vXExperiencesRequired = false
+    }
   }
 
   private def extractStrengths(): Unit = {
+    vXHowManyStrengths = 0
+    vXListOfStrengths.clear()
     val strengths = waitForVisibilityOfElementById(strengthsId).getAttribute("checked")
     if (strengths != null) {
       vXStrengthsRequired = true
@@ -753,8 +877,6 @@ object VacancyDetailsPage extends VacancyBasePage {
       extractStrengthTests()
     } else {
       vXStrengthsRequired = false
-      vXHowManyStrengths = 0
-      vXListOfStrengths.clear()
     }
   }
 
@@ -766,8 +888,7 @@ object VacancyDetailsPage extends VacancyBasePage {
     vXListOfStrengths += name
   }
 
-  private def extractStrengthTests(): Unit = {
-    vXListOfStrengths.clear()
+  private def extractStrengthTests(): Unit =
     vXHowManyStrengths match {
       case 1 =>
         extractStrengthName(strengthOneId)
@@ -814,9 +935,13 @@ object VacancyDetailsPage extends VacancyBasePage {
         extractStrengthName(strengthSevenId)
         extractStrengthName(strengthEightId)
     }
-  }
 
   private def extractTechnicalSkills(): Unit = {
+    vXHowManySkills = 0
+    vXListOfTechSkills.clear()
+    vXListOfTechSkillsDescription.clear()
+    vXListOfSkillsApplicationRequired.clear()
+    vXListOfSkillsInterviewRequired.clear()
     val skills = waitForVisibilityOfElementById(technicalSkillsId).getAttribute("checked")
     if (skills != null) {
       vXTechSkillsRequired = true
@@ -928,11 +1053,7 @@ object VacancyDetailsPage extends VacancyBasePage {
       techSkillsEightInterviewId
     )
 
-  private def extractAssessedTechSkills(): Unit = {
-    vXListOfTechSkills.clear()
-    vXListOfTechSkillsDescription.clear()
-    vXListOfSkillsApplicationRequired.clear()
-    vXListOfSkillsInterviewRequired.clear()
+  private def extractAssessedTechSkills(): Unit =
     vXHowManySkills match {
       case 1 =>
         extractTechSkillOne()
@@ -979,7 +1100,6 @@ object VacancyDetailsPage extends VacancyBasePage {
         extractTechSkillSeven()
         extractTechSkillEight()
     }
-  }
 
   private def extractRejectProbation(): Unit = {
     val reject = waitForVisibilityOfElementById(rejectProbationId).findElement(By.xpath(checkLabelPath))
@@ -1085,13 +1205,20 @@ object VacancyDetailsPage extends VacancyBasePage {
   }
 
   private def extractAdditionalQuestions(): Unit = {
-    val questions = waitForVisibilityOfElementById(additionalQuestionsId).findElement(By.xpath(checkLabelPath))
-    if (questions.getText == "Yes") {
-      vXAnyAdditionalQuestions = true
-      extractHowManyQuestions()
-    } else {
-      vXAnyAdditionalQuestions = false
-      vXHowManyQuestions = 0
+    vXAnyAdditionalQuestions = Some(false)
+    vXHowManyQuestions = 0
+    vXQuestionOne = ""
+    vXQuestionTwo = ""
+    vXQuestionThree = ""
+    val anyChecked = waitForVisibilityOfElementById(additionalQuestionsId).findElements(By.xpath(checkLabelExistsPath))
+    if (anyChecked.size() != 0) {
+      val questions = waitForVisibilityOfElementById(additionalQuestionsId).findElement(By.xpath(checkLabelPath))
+      if (questions.getText == "Yes") {
+        vXAnyAdditionalQuestions = Some(true)
+        extractHowManyQuestions()
+      } else {
+        vXAnyAdditionalQuestions = Some(false)
+      }
     }
   }
 
@@ -1116,7 +1243,7 @@ object VacancyDetailsPage extends VacancyBasePage {
     useOnlinePecForm match {
       case "Yes" =>
         vXUseOnlinePecForms = true
-        vXNoPecOgdTransfer = false
+        vXNoPecOgdDigitalTransfer = false
         val havePecMailbox = waitForVisibilityOfElementById(havePecMailboxId).getAttribute("title")
         havePecMailbox match {
           case "Yes" =>
@@ -1137,8 +1264,8 @@ object VacancyDetailsPage extends VacancyBasePage {
   private def extractOgdTransfer(): Unit = {
     val ogdTransfer = waitForVisibilityOfElementById(ogdTransferId).getAttribute("title")
     if (ogdTransfer == "Yes") {
-      vXNoPecOgdTransfer = true
-    } else vXNoPecOgdTransfer = false
+      vXNoPecOgdDigitalTransfer = true
+    } else vXNoPecOgdDigitalTransfer = false
   }
 
   private def extractRtwCandidateTypes(): Unit = {
@@ -1191,6 +1318,11 @@ object VacancyDetailsPage extends VacancyBasePage {
   private def extractReferenceCheckTypes(): Unit = {
     vXPecReferenceCheck.clear()
     extractValues(pecReferenceCheckId, vXPecReferenceCheck)
+  }
+
+  private def extractWorkplaceMisconductCheckTypes(): Unit = {
+    vXPecWorkplaceMisconductCheck.clear()
+    extractValues(pecWorkplaceMisconductCheckId, vXPecWorkplaceMisconductCheck)
   }
 
   private def extractBankruptcyCheckTypes(): Unit = {
@@ -1263,15 +1395,15 @@ object VacancyDetailsPage extends VacancyBasePage {
     val ogdSecurity = waitForVisibilityOfElementById(pecOgdTransferProcessId).findElement(By.xpath(checkLabelPath))
     if (ogdSecurity.getText == "Yes") {
       vXPecOgdSecurityCheck = true
-      extractUseOgdTransferProcess()
+//      extractUseOgdTransferProcess()
     } else vXPecOgdSecurityCheck = false
   }
 
   private def extractUseOgdTransferProcess(): Unit = {
     val ogdTransfer = waitForVisibilityOfElementById(pecUseOgdTransferProcessId).findElement(By.xpath(checkLabelPath))
     if (ogdTransfer.getText == "Yes") {
-      vXPecUseOgdProcess = true
-    } else vXPecUseOgdProcess = false
+      vXPecUseDigitalOgdProcess = true
+    } else vXPecUseDigitalOgdProcess = false
   }
 
   private def extractIncludeAdditionalCheck(): Unit = {
@@ -1302,8 +1434,10 @@ object VacancyDetailsPage extends VacancyBasePage {
   }
 
   private def extractNenHrEmail(): Unit =
-    if (!vXPecNen.contains("Not Applicable")) {
-      vXPecHrEmailForNen = waitForVisibilityOfElementById(pecNenHrEmailId).getAttribute("value")
+    if (driver.findElement(By.id(nenHrEmailHeaderId)).getText.nonEmpty) {
+      if (!vXPecNen.contains("Not Applicable")) {
+        vXPecHrEmailForNen = waitForVisibilityOfElementById(pecNenHrEmailId).getAttribute("value")
+      }
     }
 
   private def extractPnTypes(): Unit = {
@@ -1312,8 +1446,10 @@ object VacancyDetailsPage extends VacancyBasePage {
   }
 
   private def extractPnHrEmail(): Unit =
-    if (!vXPecPn.contains("Not Applicable")) {
-      vXPecHrEmailForPn = waitForVisibilityOfElementById(pecPnHrEmailId).getAttribute("value")
+    if (driver.findElement(By.id(nenHrEmailHeaderId)).getText.nonEmpty) {
+      if (!vXPecPn.contains("Not Applicable")) {
+        vXPecHrEmailForPn = waitForVisibilityOfElementById(pecPnHrEmailId).getAttribute("value")
+      }
     }
 
   private def jobInformationDetails(): Unit = {
@@ -1370,11 +1506,8 @@ object VacancyDetailsPage extends VacancyBasePage {
   }
 
   private def extractExperienceSection(): Unit = {
-    extractCVScoreRange()
-    extractJobHistory()
-    extractFullQualificationDetails()
-    extractPreviousExperiences()
-    extractPersonalStatement()
+    extractNameBlindCvAndStatement()
+    extractCvAttachmentAndStatement()
     extractDesirablePastExperience()
     extractLicencesMandatory()
     extractMembershipsMandatory()
@@ -1383,6 +1516,7 @@ object VacancyDetailsPage extends VacancyBasePage {
   }
 
   private def successProfiles(): Unit = {
+    clearScores()
     extractAbilities()
     extractExperience()
     extractBehaviours()
@@ -1426,6 +1560,7 @@ object VacancyDetailsPage extends VacancyBasePage {
       extractDigitalIdentityChecks()
       extractGeneralInfoTypes()
       extractReferenceCheckTypes()
+      extractWorkplaceMisconductCheckTypes()
       extractBankruptcyCheckTypes()
       extractCrcTypes()
       extractNsvTypes()
@@ -1445,7 +1580,7 @@ object VacancyDetailsPage extends VacancyBasePage {
     }
 
   def extractAllVacancyDetails(vacancyToExtract: String): Unit = {
-    resetApplicationDetails()
+//    resetApplicationDetails()
     searchForVacancy(vacancyToExtract)
     navigateToVacancyForms()
     jobInformationDetails()

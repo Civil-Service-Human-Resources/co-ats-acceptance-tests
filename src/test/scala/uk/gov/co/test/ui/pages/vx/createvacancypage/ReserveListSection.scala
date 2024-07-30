@@ -82,7 +82,8 @@ object ReserveListSection extends VacancyBasePage {
       clickOnRadioButton(reserveListYesId)
       lengthOfReserveList(reserveLength)
       if (reserveLength == "12 Months") {
-        if (extendRequired.isDefined && extendRequired.get.equals(true)) {
+//        if (extendRequired.isDefined && extendRequired.get.equals(true)) {
+        if (extendRequired.isDefined && extendRequired.get) {
           clickOnRadioButton(approvalToExtendYesId)
           waitForVisibilityOfElementById(extendLengthId).click()
           action().moveToElement(waitForDropdownOption(extendLength.getOrElse(""))).perform()
@@ -97,13 +98,8 @@ object ReserveListSection extends VacancyBasePage {
     totalReserveExpiryLength()
   }
 
-  def totalReserveExpiryLength(): Unit = {
+  def totalReserveExpiryLength(): Unit =
     if (vXReserveExtendRequired) {
       vXReserveListTotalLength = s"$vXReserveListLength + $vXReserveExtendLength"
     } else { vXReserveListTotalLength = s"$vXReserveListLength" }
-    println(s"1. Reserve list length is: $vXReserveListLength")
-    println(s"2. Reserve extend required is: $vXReserveExtendRequired")
-    println(s"3. Reserve extend length is: $vXReserveExtendLength")
-    println(s"4. Reserve list total length is: $vXReserveListTotalLength")
-  }
 }

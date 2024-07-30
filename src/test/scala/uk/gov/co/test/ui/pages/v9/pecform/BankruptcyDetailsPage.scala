@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.pages.v9.pecform
 
 import org.scalatest.concurrent.Eventually.eventually
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXApproach, vXPecBankruptcyCheck}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXApproach, vXPecBankruptcyCheck, vXTypeOfCandidate}
 import uk.gov.co.test.ui.data.v9.pecform.PecFormDetails
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
 import uk.gov.co.test.ui.pages.v9.pecform.YourDetailsPage.pecFormId
@@ -78,7 +78,7 @@ object BankruptcyDetailsPage extends CivilServiceJobsBasePage {
   def bankruptcyDetailsPage(pecFormDetails: PecFormDetails): Unit =
     if (
       !vXPecBankruptcyCheck.contains("Not Applicable") &&
-      vXPecBankruptcyCheck.contains(s"$vXApproach Candidates")
+      vXPecBankruptcyCheck.contains(s"$vXTypeOfCandidate Candidates")
     ) {
       bankruptcyDetailsPageCheck()
       bankruptcy.foreach { f =>

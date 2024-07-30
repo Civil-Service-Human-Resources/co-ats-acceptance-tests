@@ -3,6 +3,8 @@ package uk.gov.co.test.ui.pages.v9
 import org.openqa.selenium.support.ui.WebDriverWait
 import org.openqa.selenium.{By, Keys, WebDriver}
 import org.scalatest.concurrent.Eventually.eventually
+import uk.gov.co.test.ui.data.MasterVacancyDetails.v9RunInWelsh
+import uk.gov.co.test.ui.pages.v9.ApplicationsPage.extractApplicationInfo
 
 object SearchJobsPage extends CivilServiceJobsBasePage {
 
@@ -42,29 +44,27 @@ object SearchJobsPage extends CivilServiceJobsBasePage {
     searchField.sendKeys(jobId)
   }
 
-//  def waitForVacancy(jobId: String, jobTitle: String, searchPathway: String): Unit = {
-//    val jobDetailsPath: String     = s".//a[text()='$jobTitle']"
-//    val jobListed                  = driver.findElements(By.xpath(jobDetailsPath))
-//    val oneResultReturnedPageTitle = s"1 Job found with job reference $jobId - Civil Service Jobs - GOV.UK"
-//    while (jobListed.isEmpty && driver.getTitle != oneResultReturnedPageTitle) {
-//      driver.navigate().refresh()
-//      enterSearchCriteria(jobId, searchPathway)
-//    }
-//    val title                      = waitForElementClickableByPath(jobDetailsPath)
-//    title.click()
-//  }
-
-  def checkForNewVacancy(jobId: String, jobTitle: String, searchPathway: String): Unit = {
-    val jobDetailsPath: String     = s".//a[text()='$jobTitle']"
+  def searchForVacancyFlow(jobId: String, searchPathway: String): Unit = {
     val oneResultReturnedPageTitle = s"1 Job found with job reference $jobId - Civil Service Jobs - GOV.UK"
-    val wait                       = new WebDriverWait(driver, 210, 3000)
+    val wait                       = new WebDriverWait(driver, 210, 1000)
     wait.until { (d: WebDriver) =>
       driver.navigate().refresh()
       enterSearchCriteria(jobId, searchPathway)
       d.getTitle.equals(oneResultReturnedPageTitle)
     }
-    val title                      = waitForElementClickableByPath(jobDetailsPath)
+  }
+
+  def checkForNewVacancy(jobId: String, jobTitle: String, searchPathway: String): Unit = {
+    val jobDetailsPath: String = s".//a[text()='$jobTitle']"
+    searchForVacancyFlow(jobId, searchPathway)
+    val title                  = waitForElementClickableByPath(jobDetailsPath)
     title.click()
+    if (!driver.findElements(By.linkText("Cannot view job")).isEmpty) {
+      println("Vacancy search resulted in 'Cannot view job' error pathway!")
+      waitForVisibilityOfElementByPath(navigateToHomeSearchPath).click()
+      waitForVisibilityOfElementByTag("h1").getText shouldEqual cSJobSearchHeader
+      searchForVacancyFlow(jobId, searchPathway)
+    }
   }
 
   def enterSearchCriteria(jobId: String, searchPathway: String): Unit = {
@@ -82,10 +82,11 @@ object SearchJobsPage extends CivilServiceJobsBasePage {
     waitForVisibilityOfElementByPath(navigateToHomeSearchPath).click()
     eventually(onPage(civilServiceJobsPageTitle))
     enterSearchCriteria(jobId, searchPathway)
-//    waitForVacancy(jobId, jobTitle, searchPathway)
     checkForNewVacancy(jobId, jobTitle, searchPathway)
     eventually(onPage(s"$jobTitle - Civil Service Jobs - GOV.UK"))
-    clickOn("login_button")
+    if (v9RunInWelsh) waitForVisibilityOfElementByPath(".//*[@title='Cymraeg']").click()
+    waitForVisibilityOfElementByPath(".//*[@name='login_button']").click()
     driver.navigate().refresh()
+    extractApplicationInfo()
   }
 }

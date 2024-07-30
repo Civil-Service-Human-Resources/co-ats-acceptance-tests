@@ -33,7 +33,8 @@ object MasterVacancyDetails extends VacancyBasePage {
   var vXLineManagerDuties: Boolean = _
 
   //vx VACANCY approach
-  var vXApproach = ""
+  var vXApproach        = ""
+  var vXTypeOfCandidate = ""
 
   //vX VACANCY approval
   var vXBudgetaryApproval = true
@@ -104,25 +105,28 @@ object MasterVacancyDetails extends VacancyBasePage {
   //vx VACANCY abilities TODO
 
   //vx VACANCY experience
-  var vXJobHistory: Boolean              = _
-  var vXFullQualification: Boolean       = _
-  var vXCvScoreRange: String             = ""
-  var vXPreviousExperiences: Boolean     = _
-  var vXPersonalStatement: Boolean       = _
-  var vXStatementScoreRange: String      = ""
-  var vXStatementGuidance: Boolean       = _
-  var vXStatementGuidanceText: String    = ""
-  var vXStatementWordLimit: Int          = 250
-  var vXDesirablePastExperience: Boolean = _
-  var vXSpecificPastExperience: String   = ""
-  var vXLicencesMandatory: Boolean       = _
-  var vXSpecificLicences: String         = ""
-  var vXMembershipsMandatory: Boolean    = _
-  var vXSpecificMemberships: String      = ""
-  var vXLanguagesMandatory: Boolean      = _
-  var vXSpecificLanguages: String        = ""
-  var vXQualificationsMandatory: Boolean = _
-  var vXSpecificQualifications: String   = ""
+  var vXJobHistory: Boolean                 = _
+  var vXFullQualification: Boolean          = _
+  var vXProvideNameBlindCv: Boolean         = _
+  var vXCvAttachment: Boolean               = _
+  var vXCvScoreRange: String                = ""
+  var vXPreviousExperiences: Boolean        = _
+  var vXPersonalStatementNameBlind: Boolean = _
+  var vXPersonalStatement: Boolean          = _
+  var vXStatementScoreRange: String         = ""
+  var vXStatementGuidance: Boolean          = _
+  var vXStatementGuidanceText: String       = ""
+  var vXStatementWordLimit: Int             = 250
+  var vXDesirablePastExperience: Boolean    = _
+  var vXSpecificPastExperience: String      = ""
+  var vXLicencesMandatory: Boolean          = _
+  var vXSpecificLicences: String            = ""
+  var vXMembershipsMandatory: Boolean       = _
+  var vXSpecificMemberships: String         = ""
+  var vXLanguagesMandatory: Boolean         = _
+  var vXSpecificLanguages: String           = ""
+  var vXQualificationsMandatory: Boolean    = _
+  var vXSpecificQualifications: String      = ""
 
   //vx VACANCY behaviours
   var vXHowManyBehaviours: Int                            = _
@@ -142,14 +146,15 @@ object MasterVacancyDetails extends VacancyBasePage {
   var vXListOfStrengths: ListBuffer[String] = ListBuffer()
 
   //vx VACANCY online tests
-  var vXAnyOnlineTests: Boolean = _
+  var vXAnyOnlineTests: Boolean     = _
+  var vXWhenFullApplication: String = ""
 
   //vx VACANCY additional questions
-  var vXAnyAdditionalQuestions: Boolean = _
-  var vXHowManyQuestions: Int           = _
-  var vXQuestionOne                     = ""
-  var vXQuestionTwo                     = ""
-  var vXQuestionThree                   = ""
+  var vXAnyAdditionalQuestions: Option[Boolean] = _
+  var vXHowManyQuestions: Int                   = _
+  var vXQuestionOne                             = ""
+  var vXQuestionTwo                             = ""
+  var vXQuestionThree                           = ""
 
   //vx VACANCY eligibility and rejection criteria
   var vXRejectProbation: Boolean             = true
@@ -172,10 +177,10 @@ object MasterVacancyDetails extends VacancyBasePage {
   var vXGrsVacancy: Boolean       = true
 
   //vx VACANCY online pre-employment check forms
-  var vXUseOnlinePecForms: Boolean = _
-  var vXNoPecOgdTransfer: Boolean  = _
-  var vXHavePecMailbox: Boolean    = _
-  var vXPecMailbox                 = ""
+  var vXUseOnlinePecForms: Boolean       = _
+  var vXNoPecOgdDigitalTransfer: Boolean = _
+  var vXHavePecMailbox: Boolean          = _
+  var vXPecMailbox                       = ""
 
   //vx VACANCY pre-employment check forms
   var vXRtwChecks                            = new ListBuffer[String]()
@@ -186,6 +191,7 @@ object MasterVacancyDetails extends VacancyBasePage {
   var vXManuallyCheckIdentityDocs: Boolean   = _
   var vXPecGeneralInfo                       = new ListBuffer[String]()
   var vXPecReferenceCheck                    = new ListBuffer[String]()
+  var vXPecWorkplaceMisconductCheck          = new ListBuffer[String]()
   var vXPecBankruptcyCheck                   = new ListBuffer[String]()
   var vXPecCrc                               = new ListBuffer[String]()
   var vXPecNsv                               = new ListBuffer[String]()
@@ -199,7 +205,7 @@ object MasterVacancyDetails extends VacancyBasePage {
   var vXPecFraudCheck                        = new ListBuffer[String]()
   var vXPecSelfEmploymentCheck               = new ListBuffer[String]()
   var vXPecOgdSecurityCheck: Boolean         = _
-  var vXPecUseOgdProcess: Boolean            = _
+  var vXPecUseDigitalOgdProcess: Boolean     = false
   var vXPecIncludeAdditionalCheck: Boolean   = _
   var vXPecNameOfAdditionalCheck             = ""
   var vXPecAdditionalCheck                   = new ListBuffer[String]()
@@ -218,8 +224,10 @@ object MasterVacancyDetails extends VacancyBasePage {
   var preferredTeleNumber: String = ""
 
   //v9 SHORT FORM eligibility page
+  var v9RunInWelsh: Boolean    = false
   var v9CivilServant: Boolean  = _
-  var v9HomeDepartment: String = "Independent Parliamentary Standards Authority"
+  var v9HomeDepartment: String = ""
+//  var v9HomeDepartment: String = "Animal and Plant Health Agency"
 
   //v9 SHORT FORM personal info page
   var v9ReasonableAdjustments = false
@@ -228,10 +236,14 @@ object MasterVacancyDetails extends VacancyBasePage {
   //v9 SHORT FORM applications page
   var applicationId: String = ""
 
+  //v9 PEC FORM required
+  var v9PecRequired: Boolean = _
+
   //v9 PEC FORM rtw
-  var v9RtwBritishCitizen: Boolean = true
-  var v9RtwHoldPassport: Boolean   = true
-  var v9EussStatus: String         = ""
+  var v9RtwBritishCitizen: Boolean       = _
+  var v9RtwBritishIrishPassport: Boolean = _
+  var v9EussStatus: String               = ""
+  var v9BiometricResidenceCard: Boolean  = _
 
   //v9 PEC FORM digital identity checks
   var v9IdvtDataConsent: Boolean       = true

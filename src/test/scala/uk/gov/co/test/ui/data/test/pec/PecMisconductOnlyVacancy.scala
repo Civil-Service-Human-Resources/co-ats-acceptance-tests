@@ -7,29 +7,29 @@ import uk.gov.co.test.ui.pages.vx.createvacancypage._
 
 import scala.collection.mutable.ListBuffer
 
-object PEC_VACANCY_DATA
+object PEC_MISCONDUCT_ONLY_VACANCY_DATA
     extends NewVacancyDetails(
-      PEC_BASIC_DETAILS,
-      PEC_JOB_INFORMATION,
-      PEC_APPROACH,
-      PEC_APPROVAL,
-      PEC_RESERVE_LIST,
-      PEC_LOCATIONS,
-      PEC_CONTRACT_DETAILS,
-      PEC_ADVERT,
-      PEC_CONTACT_DETAILS,
-      PEC_VETTING_DETAILS,
-      PEC_INTERVIEWS_DETAILS,
-      PEC_SUCCESS_PROFILES,
-      PEC_VACANCY_TESTS,
-      PEC_ADDITIONAL_QUESTIONS,
-      PEC_CRITERIA,
-      PEC_MANAGEMENT,
-      PEC_ONLINE_PEC_CHECK_FORMS,
-      PEC_PEC_CHECK_FORMS
+      PEC_MISCONDUCT_ONLY_BASIC_DETAILS,
+      PEC_MISCONDUCT_ONLY_JOB_INFORMATION,
+      PEC_MISCONDUCT_ONLY_APPROACH,
+      PEC_MISCONDUCT_ONLY_APPROVAL,
+      PEC_MISCONDUCT_ONLY_RESERVE_LIST,
+      PEC_MISCONDUCT_ONLY_LOCATIONS,
+      PEC_MISCONDUCT_ONLY_CONTRACT_DETAILS,
+      PEC_MISCONDUCT_ONLY_ADVERT,
+      PEC_MISCONDUCT_ONLY_CONTACT_DETAILS,
+      PEC_MISCONDUCT_ONLY_VETTING_DETAILS,
+      PEC_MISCONDUCT_ONLY_INTERVIEWS_DETAILS,
+      PEC_MISCONDUCT_ONLY_SUCCESS_PROFILES,
+      PEC_MISCONDUCT_ONLY_VACANCY_TESTS,
+      PEC_MISCONDUCT_ONLY_ADDITIONAL_QUESTIONS,
+      PEC_MISCONDUCT_ONLY_CRITERIA,
+      PEC_MISCONDUCT_ONLY_MANAGEMENT,
+      PEC_MISCONDUCT_ONLY_ONLINE_PEC_MISCONDUCT_ONLY_CHECK_FORMS,
+      PEC_MISCONDUCT_ONLY_PEC_MISCONDUCT_ONLY_CHECK_FORMS
     )
 
-object PEC_BASIC_DETAILS
+object PEC_MISCONDUCT_ONLY_BASIC_DETAILS
     extends BasicDetails(
       "DO NOT USE- Automation Test Template",
       s"Automation: PEC - " + generateRandomJobPosition(),
@@ -37,7 +37,7 @@ object PEC_BASIC_DETAILS
       "Prawf awtomeiddio",
       32
     )
-object PEC_JOB_INFORMATION
+object PEC_MISCONDUCT_ONLY_JOB_INFORMATION
     extends JobInfoDetails(
       true,
       "Ministry of Defence",
@@ -58,7 +58,7 @@ object PEC_JOB_INFORMATION
       "1",
       false
     )
-object PEC_APPROACH
+object PEC_MISCONDUCT_ONLY_APPROACH
     extends ApproachDetails(
       "External",
       true,
@@ -68,7 +68,7 @@ object PEC_APPROACH
       "This vacancy is open to employees who already hold the substantive grade for the post and were appointed to the Civil Service on merit following a fair and open competition; or were appointed to a permanent Civil Service post through an exception in the Civil Service Commissioners’ rules."
     )
 
-object PEC_APPROVAL
+object PEC_MISCONDUCT_ONLY_APPROVAL
     extends ApprovalDetails(
       true,
       "Autotest - budgetary authorisation info",
@@ -76,7 +76,7 @@ object PEC_APPROVAL
       "Test-T&Cs.pdf"
     )
 
-object PEC_RESERVE_LIST
+object PEC_MISCONDUCT_ONLY_RESERVE_LIST
     extends ReserveListDetails(
       false,
       "12 Months",
@@ -84,7 +84,7 @@ object PEC_RESERVE_LIST
       "6 Months"
     )
 
-object PEC_LOCATIONS
+object PEC_MISCONDUCT_ONLY_LOCATIONS
     extends LocationsDetails(
       "Postcodes",
       "M1 4RJ",
@@ -100,7 +100,7 @@ object PEC_LOCATIONS
       otherLocations = ListBuffer("London", "Southampton", "Manchester")
     )
 
-object PEC_CONTRACT_DETAILS
+object PEC_MISCONDUCT_ONLY_CONTRACT_DETAILS
     extends ContractDetails(
       List("Permanent", "Temporary", "Loan", "Secondment", "Returner"),
       "Autotest - Maximum characters: 255. Any text over this limit will not show on the advert.",
@@ -117,7 +117,7 @@ object PEC_CONTRACT_DETAILS
       18750
     )
 
-object PEC_ADVERT
+object PEC_MISCONDUCT_ONLY_ADVERT
     extends AdvertDetails(
       "Autotest - Job summary",
       "Autotest - Job description",
@@ -126,7 +126,7 @@ object PEC_ADVERT
       "Autotest - Selection process details"
     )
 
-object PEC_CONTACT_DETAILS
+object PEC_MISCONDUCT_ONLY_CONTACT_DETAILS
     extends ContactDetails(
       s"$contactNameVxConfig",
       s"$contactEmailVxConfig",
@@ -136,7 +136,7 @@ object PEC_CONTACT_DETAILS
       s"$contactEmailVxConfig"
     )
 
-object PEC_VETTING_DETAILS
+object PEC_MISCONDUCT_ONLY_VETTING_DETAILS
     extends VettingDetails(
       true,
       "Enhanced",
@@ -149,7 +149,7 @@ object PEC_VETTING_DETAILS
       true
     )
 
-object PEC_INTERVIEWS_DETAILS
+object PEC_MISCONDUCT_ONLY_INTERVIEWS_DETAILS
     extends InterviewsDetails(
       "No interviews",
       "Interview",
@@ -159,28 +159,28 @@ object PEC_INTERVIEWS_DETAILS
       false
     )
 
-object PEC_SUCCESS_PROFILES
+object PEC_MISCONDUCT_ONLY_SUCCESS_PROFILES
     extends SuccessProfilesDetails(
       false,
       false,
       false,
       false,
       false,
-      Some(PEC_ABILITIES),
-      Some(PEC_BEHAVIOURS),
-      Some(PEC_EXPERIENCES),
-      Some(PEC_STRENGTHS),
-      Some(PEC_TECH_SKILLS)
+      Some(PEC_MISCONDUCT_ONLY_ABILITIES),
+      Some(PEC_MISCONDUCT_ONLY_BEHAVIOURS),
+      Some(PEC_MISCONDUCT_ONLY_EXPERIENCES),
+      Some(PEC_MISCONDUCT_ONLY_STRENGTHS),
+      Some(PEC_MISCONDUCT_ONLY_TECH_SKILLS)
     )
 
-object PEC_ABILITIES
+object PEC_MISCONDUCT_ONLY_ABILITIES
     extends AbilitiesDetails(
       """The following online tests can be used to assess abilities:
                            |Civil Service Numerical Test
                            |Civil Service Verbal Test""".stripMargin
     )
 
-object PEC_BEHAVIOURS
+object PEC_MISCONDUCT_ONLY_BEHAVIOURS
     extends BehavioursDetails(
       assessBehaviours = """The following online tests can be used to assess behaviours:
           |Civil Service Judgement Test
@@ -208,7 +208,7 @@ object PEC_BEHAVIOURS
       )
     )
 
-object PEC_EXPERIENCES
+object PEC_MISCONDUCT_ONLY_EXPERIENCES
     extends ExperienceDetails(
       true,
       "0 - 100",
@@ -235,7 +235,7 @@ object PEC_EXPERIENCES
       )
     )
 
-object PEC_STRENGTHS
+object PEC_MISCONDUCT_ONLY_STRENGTHS
     extends StrengthsDetails(
       8,
       "Adaptable",
@@ -248,7 +248,7 @@ object PEC_STRENGTHS
       "Service Focussed"
     )
 
-object PEC_TECH_SKILLS
+object PEC_MISCONDUCT_ONLY_TECH_SKILLS
     extends TechSkillsDetails(
       8,
       TechSkill(
@@ -301,7 +301,7 @@ object PEC_TECH_SKILLS
       )
     )
 
-object PEC_VACANCY_TESTS
+object PEC_MISCONDUCT_ONLY_VACANCY_TESTS
     extends VacancyTestsDetails(
       false,
       "Online Tests",
@@ -359,13 +359,13 @@ object PEC_VACANCY_TESTS
       ),
       false,
       "Autotest - Additional details for the recruitment team",
-      Some(PEC_RECRUITER_TESTS),
-      Some(PEC_GROUP_A_TESTS),
-      Some(PEC_GROUP_B_TESTS),
-      Some(PEC_GROUP_C_TESTS)
+      Some(PEC_MISCONDUCT_ONLY_RECRUITER_TESTS),
+      Some(PEC_MISCONDUCT_ONLY_GROUP_A_TESTS),
+      Some(PEC_MISCONDUCT_ONLY_GROUP_B_TESTS),
+      Some(PEC_MISCONDUCT_ONLY_GROUP_C_TESTS)
     )
 
-object PEC_RECRUITER_TESTS
+object PEC_MISCONDUCT_ONLY_RECRUITER_TESTS
     extends RecruiterTestsDetails(
       "Before the tests",
       "Auto-progress after each test",
@@ -374,7 +374,7 @@ object PEC_RECRUITER_TESTS
       "Autotest - Online test instructions"
     )
 
-object PEC_GROUP_A_TESTS
+object PEC_MISCONDUCT_ONLY_GROUP_A_TESTS
     extends GroupATestsDetails(
       "First",
       "Three",
@@ -384,7 +384,7 @@ object PEC_GROUP_A_TESTS
       7
     )
 
-object PEC_GROUP_B_TESTS
+object PEC_MISCONDUCT_ONLY_GROUP_B_TESTS
     extends GroupBTestsDetails(
       "Second",
       "Two",
@@ -393,7 +393,7 @@ object PEC_GROUP_B_TESTS
       5
     )
 
-object PEC_GROUP_C_TESTS
+object PEC_MISCONDUCT_ONLY_GROUP_C_TESTS
     extends GroupCTestsDetails(
       "Third",
       "Two",
@@ -402,7 +402,7 @@ object PEC_GROUP_C_TESTS
       3
     )
 
-object PEC_ADDITIONAL_QUESTIONS
+object PEC_MISCONDUCT_ONLY_ADDITIONAL_QUESTIONS
     extends AdditionalQuestionsDetails(
       anyAdditionalQuestions = Some(false),
       3,
@@ -411,7 +411,7 @@ object PEC_ADDITIONAL_QUESTIONS
       "Autotest - Question 3"
     )
 
-object PEC_CRITERIA
+object PEC_MISCONDUCT_ONLY_CRITERIA
     extends CriteriaDetails(
       campaignID = None,
       probationIncomplete = true,
@@ -430,7 +430,7 @@ object PEC_CRITERIA
       candidateInstructions = "Autotest - Instructions for candidate"
     )
 
-object PEC_MANAGEMENT
+object PEC_MISCONDUCT_ONLY_MANAGEMENT
     extends ManagementDetails(
       true,
       true,
@@ -449,7 +449,7 @@ object PEC_MANAGEMENT
       vacancyComments = Option("Autotest - Comments on this vacancy")
     )
 
-object PEC_ONLINE_PEC_CHECK_FORMS
+object PEC_MISCONDUCT_ONLY_ONLINE_PEC_MISCONDUCT_ONLY_CHECK_FORMS
     extends OnlinePecCheckFormsDetails(
       true,
       false,
@@ -457,38 +457,35 @@ object PEC_ONLINE_PEC_CHECK_FORMS
       s"$contactEmailVxConfig"
     )
 
-object PEC_PEC_CHECK_FORMS
+object PEC_MISCONDUCT_ONLY_PEC_MISCONDUCT_ONLY_CHECK_FORMS
     extends PecCheckFormsDetails(
-      rtwCheck = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      rtwCheck = ListBuffer("Not Applicable"),
       "Before pre employment checks",
       "Right to work and criminal record check",
       true,
       "Autotest - Passport",
       true,
-      generalInfo = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
-      referenceChecks = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      generalInfo = ListBuffer("Not Applicable"),
+      referenceChecks = ListBuffer("Not Applicable"),
       workplaceMisconductCheck =
         ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
-      bankruptcyChecks = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
-      crcChecks = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
-      nsvChecks = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      bankruptcyChecks = ListBuffer("Not Applicable"),
+      crcChecks = ListBuffer("Not Applicable"),
+      nsvChecks = ListBuffer("Not Applicable"),
       "Show recruiter and candidate forms",
-      jobHistoryChecks = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
-      healthRefChecks = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      jobHistoryChecks = ListBuffer("Not Applicable"),
+      healthRefChecks = ListBuffer("Not Applicable"),
       "Show recruiter and candidate forms",
-      overseasCheck = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
-      pensionsCheck = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
-      previousCsJobCheck =
-        ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
-      internalFraudCheck =
-        ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
-      selfEmploymentCheck =
-        ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      overseasCheck = ListBuffer("Not Applicable"),
+      pensionsCheck = ListBuffer("Not Applicable"),
+      previousCsJobCheck = ListBuffer("Not Applicable"),
+      internalFraudCheck = ListBuffer("Not Applicable"),
+      selfEmploymentCheck = ListBuffer("Not Applicable"),
       true,
       false,
-      true,
+      false,
       "Autotest - name of additional check",
-      additionalCheck = ListBuffer("Internal Candidates", "External Candidates", "OGD Candidates", "NDPB Candidates"),
+      additionalCheck = ListBuffer("Not Applicable"),
       nenOnboarding = ListBuffer("External Candidates", "OGD Candidates", "NDPB Candidates"),
       s"$contactEmailVxConfig",
       pnOnboarding = ListBuffer("Internal Candidates"),

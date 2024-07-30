@@ -172,6 +172,7 @@ object InterviewOneEvaluationTab extends VacancyBasePage {
   def overallScoreId                             = s"${vacancyFormId}_field_24019_1"
   def overallOverrideScoreId                     = s"${vacancyFormId}_datafield_116074_1_1"
   def outcomeTitleId                             = s"${vacancyFormId}_label_23489_1"
+  def formProblemStatusId                        = "form_page_status_header"
   def outcomeId                                  = s"select2-${vacancyFormId}_datafield_38894_1_1-container"
   def outcomeCommentsId                          = s"${vacancyFormId}_datafield_24276_1_1"
   def uploadIDTitleId                            = s"${vacancyFormId}_label_56054_1"
@@ -359,10 +360,9 @@ object InterviewOneEvaluationTab extends VacancyBasePage {
   )
 
   private def behavioursOutcome(interviewOneDetails: InterviewOneDetails): Unit =
-    if (vXBehavioursRequired) {
+    if (vXBehavioursRequired && vXBehaviourInterviewRequired.contains(true)) {
       waitForVisibilityOfElementById(behaviourAssessmentHeaderId).getText shouldEqual "Behaviour assessment"
       waitForVisibilityOfElementById(behaviourScoringGuideId).getText          should include(interviewOneDetails.scoringGuide)
-      vXI1BehavioursTotalScore.clear()
       behaviourOutcome.take(vXHowManyBehaviours).foreach { f =>
         f(interviewOneDetails)
       }
@@ -501,11 +501,10 @@ object InterviewOneEvaluationTab extends VacancyBasePage {
   )
 
   private def techSkillOutcome(interviewOneDetails: InterviewOneDetails): Unit =
-    if (vXTechSkillsRequired) {
+    if (vXTechSkillsRequired && vXListOfSkillsInterviewRequired.contains(true)) {
       scrollToElement(By.id(techSkillsHeaderId))
       waitForVisibilityOfElementById(techSkillsHeaderId).getText  shouldEqual "Technical Skill assessment"
       waitForVisibilityOfElementById(techSkillsScoringGuideId).getText should include(interviewOneDetails.scoringGuide)
-      vXI1TechSkillsTotalScore.clear()
       skillOutcome.take(vXHowManySkills).foreach { f =>
         f(interviewOneDetails)
       }
@@ -522,10 +521,6 @@ object InterviewOneEvaluationTab extends VacancyBasePage {
       interviewOneDetails.strengthOne.comment
     )
     vXI1StrengthsTotalScore += interviewOneDetails.strengthOne.score
-    println(vXListOfStrengths)
-    println(s"Strength 1  \n${vXListOfStrengths.head}")
-    println(vXI1StrengthsTotalScore)
-    println("Done")
   }
 
   private def enterStrengthTwoOutcome(interviewOneDetails: InterviewOneDetails): Unit = {
@@ -630,7 +625,6 @@ object InterviewOneEvaluationTab extends VacancyBasePage {
       waitForVisibilityOfElementById(strengthScoringGuideId).getText should include(
         interviewOneDetails.strengthScoringGuide
       )
-      vXI1StrengthsTotalScore.clear()
       strengths.take(vXHowManyStrengths).foreach { f =>
         f(interviewOneDetails)
       }
@@ -725,16 +719,17 @@ object InterviewOneEvaluationTab extends VacancyBasePage {
   )
 
   private def assessmentsOutcome(interviewOneDetails: InterviewOneDetails): Unit = {
-    howManyAssessments(interviewOneDetails)
     waitForVisibilityOfElementById(assessmentHeaderId).getText shouldEqual "Additional assessments"
-    waitForVisibilityOfElementById(
-      assessmentInfoId
-    ).getText                                                       should endWith("Additional assessment names, scores and comments will be visible to the applicant")
-    vXI1AssessmentsTotalScore.clear()
-    assessments.take(interviewOneDetails.additionalAssessments.toInt).foreach { f =>
-      f(interviewOneDetails)
-    }
-    totalScore(vXI1AssessmentsTotalScore)
+    waitForVisibilityOfElementById(assessmentInfoId).getText        should endWith(
+      "Additional assessment names, scores and comments will be visible to the applicant"
+    )
+    howManyAssessments(interviewOneDetails)
+    if (interviewOneDetails.additionalAssessments != "0") {
+      assessments.take(interviewOneDetails.additionalAssessments.toInt).foreach { f =>
+        f(interviewOneDetails)
+      }
+      totalScore(vXI1AssessmentsTotalScore)
+    } else vXI1AssessmentsTotalScore += 0
   }
 
   private def enterExperienceOutcome(interviewOneDetails: InterviewOneDetails): Unit =
@@ -759,15 +754,26 @@ object InterviewOneEvaluationTab extends VacancyBasePage {
       vXI1StrengthsTotalScore
     ) + totalScore(vXI1AssessmentsTotalScore) + vXI1ExperienceScore
     waitForVisibilityOfElementById(overallScoreId).getText should endWith(s"$overallScore")
-//    waitForVisibilityOfElementById(overallScoreId).getText shouldEqual s"Overall score\n  $overallScore"
   }
 
   private def enterOutcome(interviewOneDetails: InterviewOneDetails): Unit = {
-    vXInterviewOneOutcome = interviewOneDetails.finalOutcome
+    val i1FinalOutcome = interviewOneDetails.finalOutcome
+    if (vXExperiencesRequired && vXBehavioursRequired && vXTechSkillsRequired && vXStrengthsRequired) {
+      checkForNewValueId(formProblemStatusId, "There is a problem")
+      scrollToElement(By.id(outcomeTitleId))
+    }
+    scrollToElement(By.id(outcomeTitleId))
     waitForVisibilityOfElementById(outcomeTitleId).getText shouldEqual "Outcome"
+    Thread.sleep(5000)
     waitForVisibilityOfElementById(outcomeId).click()
-    action().moveToElement(waitForDropdownOption(vXInterviewOneOutcome)).perform()
-    waitForDropdownOption(vXInterviewOneOutcome).click()
+//    waitForElementByOutcomeId(outcomeId)
+    if (vXInterviewOneOutcome.isEmpty) {
+      action().moveToElement(waitForDropdownOption(i1FinalOutcome)).perform()
+      waitForDropdownOption(i1FinalOutcome).click()
+    } else {
+      action().moveToElement(waitForDropdownOption(vXInterviewOneOutcome)).perform()
+      waitForDropdownOption(vXInterviewOneOutcome).click()
+    }
     enterValue(outcomeCommentsId, s"Autotest - I1 - $randomFirstName $randomLastName overall performed very well!")
   }
 

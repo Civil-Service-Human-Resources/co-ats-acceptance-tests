@@ -1,11 +1,12 @@
 package uk.gov.co.test.ui.pages.vx.vacancytabs
 
 import org.openqa.selenium.By
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{randomFirstName, randomLastName, vXBehavioursRequired, vXHowManyBehaviours, vXHowManySkills, vXHowManyStrengths, vXInterviewThreeOutcome, vXListOfChosenBehaviours, vXListOfStrengths, vXListOfTechSkills, vXStrengthsRequired, vXTechSkillsRequired, vacancyFormId}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{randomFirstName, randomLastName, vXBehaviourInterviewRequired, vXBehavioursRequired, vXExperiencesRequired, vXHowManyBehaviours, vXHowManySkills, vXHowManyStrengths, vXInterviewThreeOutcome, vXListOfChosenBehaviours, vXListOfSkillsInterviewRequired, vXListOfStrengths, vXListOfTechSkills, vXStrengthsRequired, vXTechSkillsRequired, vacancyFormId}
 import uk.gov.co.test.ui.data.vx.application.{ApplicationDetails, AssessmentOutcome, Outcome}
 import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.applicationStateAfterInterview
 import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.{availableBarItems, completeI3EvaluationBarId, interviewEvaluation, noShowI3BarId, withdrawAtInterviewBarId}
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
+import uk.gov.co.test.ui.pages.vx.vacancytabs.InterviewOneEvaluationTab.{formProblemStatusId, outcomeTitleId, scrollToElement}
 
 import scala.collection.mutable.ListBuffer
 
@@ -218,106 +219,125 @@ object InterviewThreeEvaluationTab extends VacancyBasePage {
   }
 
   private def enterBehaviourOneOutcome(interviewThreeDetails: InterviewThreeDetails): Unit = {
-    waitForVisibilityOfElementById(
-      behaviourAssessmentHeaderId
-    ).getText                                                  shouldEqual "Behaviour Assessment" //TODO different to I2
-    waitForVisibilityOfElementById(behaviourScoringGuideId).getText should include(interviewThreeDetails.scoringGuide)
-    enterOutcome(
-      behaviourOneTitleId,
-      vXListOfChosenBehaviours.head,
-      behaviourOneScoreId,
-      interviewThreeDetails.behaviourOne.score,
-      behaviourOneCommentsId,
-      interviewThreeDetails.behaviourOne.comment
-    )
-    vXI3BehavioursTotalScore.clear()
-    vXI3BehavioursTotalScore += interviewThreeDetails.behaviourOne.score
+    val interviewRequired = vXBehaviourInterviewRequired.headOption.get
+    if (interviewRequired) {
+      enterOutcome(
+        behaviourOneTitleId,
+        vXListOfChosenBehaviours.head,
+        behaviourOneScoreId,
+        interviewThreeDetails.behaviourOne.score,
+        behaviourOneCommentsId,
+        interviewThreeDetails.behaviourOne.comment
+      )
+      vXI3BehavioursTotalScore += interviewThreeDetails.behaviourOne.score
+    }
   }
 
   private def enterBehaviourTwoOutcome(interviewThreeDetails: InterviewThreeDetails): Unit = {
-    enterOutcome(
-      behaviourTwoTitleId,
-      vXListOfChosenBehaviours(1),
-      behaviourTwoScoreId,
-      interviewThreeDetails.behaviourTwo.score,
-      behaviourTwoCommentsId,
-      interviewThreeDetails.behaviourTwo.comment
-    )
-    vXI3BehavioursTotalScore += interviewThreeDetails.behaviourTwo.score
+    val interviewRequired = vXBehaviourInterviewRequired.lift(1).get
+    if (interviewRequired) {
+      enterOutcome(
+        behaviourTwoTitleId,
+        vXListOfChosenBehaviours(1),
+        behaviourTwoScoreId,
+        interviewThreeDetails.behaviourTwo.score,
+        behaviourTwoCommentsId,
+        interviewThreeDetails.behaviourTwo.comment
+      )
+      vXI3BehavioursTotalScore += interviewThreeDetails.behaviourTwo.score
+    }
   }
 
   private def enterBehaviourThreeOutcome(interviewThreeDetails: InterviewThreeDetails): Unit = {
-    enterOutcome(
-      behaviourThreeTitleId,
-      vXListOfChosenBehaviours(2),
-      behaviourThreeScoreId,
-      interviewThreeDetails.behaviourThree.score,
-      behaviourThreeCommentsId,
-      interviewThreeDetails.behaviourThree.comment
-    )
-    vXI3BehavioursTotalScore += interviewThreeDetails.behaviourThree.score
+    val interviewRequired = vXBehaviourInterviewRequired.lift(2).get
+    if (interviewRequired) {
+      enterOutcome(
+        behaviourThreeTitleId,
+        vXListOfChosenBehaviours(2),
+        behaviourThreeScoreId,
+        interviewThreeDetails.behaviourThree.score,
+        behaviourThreeCommentsId,
+        interviewThreeDetails.behaviourThree.comment
+      )
+      vXI3BehavioursTotalScore += interviewThreeDetails.behaviourThree.score
+    }
   }
 
   private def enterBehaviourFourOutcome(interviewThreeDetails: InterviewThreeDetails): Unit = {
-    scrollToElement(By.id(behaviourFourTitleId))
-    enterOutcome(
-      behaviourFourTitleId,
-      vXListOfChosenBehaviours(3),
-      behaviourFourScoreId,
-      interviewThreeDetails.behaviourFour.score,
-      behaviourFourCommentsId,
-      interviewThreeDetails.behaviourFour.comment
-    )
-    vXI3BehavioursTotalScore += interviewThreeDetails.behaviourFour.score
+    val interviewRequired = vXBehaviourInterviewRequired.lift(3).get
+    if (interviewRequired) {
+      scrollToElement(By.id(behaviourFourTitleId))
+      enterOutcome(
+        behaviourFourTitleId,
+        vXListOfChosenBehaviours(3),
+        behaviourFourScoreId,
+        interviewThreeDetails.behaviourFour.score,
+        behaviourFourCommentsId,
+        interviewThreeDetails.behaviourFour.comment
+      )
+      vXI3BehavioursTotalScore += interviewThreeDetails.behaviourFour.score
+    }
   }
 
   private def enterBehaviourFiveOutcome(interviewThreeDetails: InterviewThreeDetails): Unit = {
-    enterOutcome(
-      behaviourFiveTitleId,
-      vXListOfChosenBehaviours(4),
-      behaviourFiveScoreId,
-      interviewThreeDetails.behaviourFive.score,
-      behaviourFiveCommentsId,
-      interviewThreeDetails.behaviourFive.comment
-    )
-    vXI3BehavioursTotalScore += interviewThreeDetails.behaviourFive.score
+    val interviewRequired = vXBehaviourInterviewRequired.lift(4).get
+    if (interviewRequired) {
+      enterOutcome(
+        behaviourFiveTitleId,
+        vXListOfChosenBehaviours(4),
+        behaviourFiveScoreId,
+        interviewThreeDetails.behaviourFive.score,
+        behaviourFiveCommentsId,
+        interviewThreeDetails.behaviourFive.comment
+      )
+      vXI3BehavioursTotalScore += interviewThreeDetails.behaviourFive.score
+    }
   }
 
   private def enterBehaviourSixOutcome(interviewThreeDetails: InterviewThreeDetails): Unit = {
-    scrollToElement(By.id(behaviourSixTitleId))
-    enterOutcome(
-      behaviourSixTitleId,
-      vXListOfChosenBehaviours(5),
-      behaviourSixScoreId,
-      interviewThreeDetails.behaviourSix.score,
-      behaviourSixCommentsId,
-      interviewThreeDetails.behaviourSix.comment
-    )
-    vXI3BehavioursTotalScore += interviewThreeDetails.behaviourSix.score
+    val interviewRequired = vXBehaviourInterviewRequired.lift(5).get
+    if (interviewRequired) {
+      scrollToElement(By.id(behaviourSixTitleId))
+      enterOutcome(
+        behaviourSixTitleId,
+        vXListOfChosenBehaviours(5),
+        behaviourSixScoreId,
+        interviewThreeDetails.behaviourSix.score,
+        behaviourSixCommentsId,
+        interviewThreeDetails.behaviourSix.comment
+      )
+      vXI3BehavioursTotalScore += interviewThreeDetails.behaviourSix.score
+    }
   }
 
   private def enterBehaviourSevenOutcome(interviewThreeDetails: InterviewThreeDetails): Unit = {
-    enterOutcome(
-      behaviourSevenTitleId,
-      vXListOfChosenBehaviours(6),
-      behaviourSevenScoreId,
-      interviewThreeDetails.behaviourSeven.score,
-      behaviourSevenCommentsId,
-      interviewThreeDetails.behaviourSeven.comment //TODO Not optional as star denotes mandatory?
-    )
-    vXI3BehavioursTotalScore += interviewThreeDetails.behaviourSeven.score
+    val interviewRequired = vXBehaviourInterviewRequired.lift(6).get
+    if (interviewRequired) {
+      enterOutcome(
+        behaviourSevenTitleId,
+        vXListOfChosenBehaviours(6),
+        behaviourSevenScoreId,
+        interviewThreeDetails.behaviourSeven.score,
+        behaviourSevenCommentsId,
+        interviewThreeDetails.behaviourSeven.comment //TODO Not optional as star denotes mandatory?
+      )
+      vXI3BehavioursTotalScore += interviewThreeDetails.behaviourSeven.score
+    }
   }
 
   private def enterBehaviourEightOutcome(interviewThreeDetails: InterviewThreeDetails): Unit = {
-    enterOutcome(
-      behaviourEightTitleId,
-      vXListOfChosenBehaviours(7),
-      behaviourEightScoreId,
-      interviewThreeDetails.behaviourEight.score,
-      behaviourEightCommentsId,
-      interviewThreeDetails.behaviourEight.comment
-    )
-    vXI3BehavioursTotalScore += interviewThreeDetails.behaviourEight.score
+    val interviewRequired = vXBehaviourInterviewRequired.lift(7).get
+    if (interviewRequired) {
+      enterOutcome(
+        behaviourEightTitleId,
+        vXListOfChosenBehaviours(7),
+        behaviourEightScoreId,
+        interviewThreeDetails.behaviourEight.score,
+        behaviourEightCommentsId,
+        interviewThreeDetails.behaviourEight.comment
+      )
+      vXI3BehavioursTotalScore += interviewThreeDetails.behaviourEight.score
+    }
   }
 
   private def totalScore(runningScore: ListBuffer[Int]): Int = {
@@ -338,115 +358,138 @@ object InterviewThreeEvaluationTab extends VacancyBasePage {
   )
 
   private def behavioursOutcome(interviewThreeDetails: InterviewThreeDetails): Unit =
-    if (vXBehavioursRequired) {
+    if (vXBehavioursRequired && vXBehaviourInterviewRequired.contains(true)) {
+      waitForVisibilityOfElementById(
+        behaviourAssessmentHeaderId
+      ).getText                                                  shouldEqual "Behaviour Assessment" //TODO different to I2
+      waitForVisibilityOfElementById(behaviourScoringGuideId).getText should include(interviewThreeDetails.scoringGuide)
       behaviourOutcome.take(vXHowManyBehaviours).foreach { f =>
         f(interviewThreeDetails)
       }
-      waitForVisibilityOfElementById(
-        behaviourTotalScoreId
-      ).getText shouldEqual s"Behaviour Total Score  \n${totalScore(vXI3BehavioursTotalScore)}" //TODO I2 is different, no Pascal Case
+      checkForTotalValueId(
+        behaviourTotalScoreId,
+        s"${totalScore(vXI3BehavioursTotalScore)}"
+      ) //TODO I2 is different, no Pascal Case
     }
 
   private def enterTechSkillOneOutcome(interviewThreeDetails: InterviewThreeDetails): Unit = {
-    scrollToElement(By.id(techSkillsHeaderId))
-    waitForVisibilityOfElementById(
-      techSkillsHeaderId
-    ).getText                                                   shouldEqual "Technical Skills" //TODO I2 different, no Pascal Case
-    waitForVisibilityOfElementById(techSkillsScoringGuideId).getText should include(interviewThreeDetails.scoringGuide)
-    enterOutcome(
-      techSkillOneTitleId,
-      vXListOfTechSkills.head,
-      techSkillOneScoreId,
-      interviewThreeDetails.techSkillOne.score,
-      techSkillOneCommentsId,
-      interviewThreeDetails.techSkillOne.comment
-    )
-    vXI3TechSkillsTotalScore.clear()
-    vXI3TechSkillsTotalScore += interviewThreeDetails.techSkillOne.score
+    val interviewRequired = vXListOfSkillsInterviewRequired.headOption.get
+    if (interviewRequired) {
+      enterOutcome(
+        techSkillOneTitleId,
+        vXListOfTechSkills.head,
+        techSkillOneScoreId,
+        interviewThreeDetails.techSkillOne.score,
+        techSkillOneCommentsId,
+        interviewThreeDetails.techSkillOne.comment
+      )
+      vXI3TechSkillsTotalScore += interviewThreeDetails.techSkillOne.score
+    }
   }
 
   private def enterTechSkillTwoOutcome(interviewThreeDetails: InterviewThreeDetails): Unit = {
-    enterOutcome(
-      techSkillTwoTitleId,
-      vXListOfTechSkills(1),
-      techSkillTwoScoreId,
-      interviewThreeDetails.techSkillTwo.score,
-      techSkillTwoCommentsId,
-      interviewThreeDetails.techSkillTwo.comment
-    )
-    vXI3TechSkillsTotalScore += interviewThreeDetails.techSkillTwo.score
+    val interviewRequired = vXListOfSkillsInterviewRequired.lift(1).get
+    if (interviewRequired) {
+      enterOutcome(
+        techSkillTwoTitleId,
+        vXListOfTechSkills(1),
+        techSkillTwoScoreId,
+        interviewThreeDetails.techSkillTwo.score,
+        techSkillTwoCommentsId,
+        interviewThreeDetails.techSkillTwo.comment
+      )
+      vXI3TechSkillsTotalScore += interviewThreeDetails.techSkillTwo.score
+    }
   }
 
   private def enterTechSkillThreeOutcome(interviewThreeDetails: InterviewThreeDetails): Unit = {
-    enterOutcome(
-      techSkillThreeTitleId,
-      vXListOfTechSkills(2),
-      techSkillThreeScoreId,
-      interviewThreeDetails.techSkillThree.score,
-      techSkillThreeCommentsId,
-      interviewThreeDetails.techSkillThree.comment
-    )
-    vXI3TechSkillsTotalScore += interviewThreeDetails.techSkillThree.score
+    val interviewRequired = vXListOfSkillsInterviewRequired.lift(2).get
+    if (interviewRequired) {
+      enterOutcome(
+        techSkillThreeTitleId,
+        vXListOfTechSkills(2),
+        techSkillThreeScoreId,
+        interviewThreeDetails.techSkillThree.score,
+        techSkillThreeCommentsId,
+        interviewThreeDetails.techSkillThree.comment
+      )
+      vXI3TechSkillsTotalScore += interviewThreeDetails.techSkillThree.score
+    }
   }
 
   private def enterTechSkillFourOutcome(interviewThreeDetails: InterviewThreeDetails): Unit = {
-    enterOutcome(
-      techSkillFourTitleId,
-      vXListOfTechSkills(3),
-      techSkillFourScoreId,
-      interviewThreeDetails.techSkillFour.score,
-      techSkillFourCommentsId,
-      interviewThreeDetails.techSkillFour.comment
-    )
-    vXI3TechSkillsTotalScore += interviewThreeDetails.techSkillFour.score
+    val interviewRequired = vXListOfSkillsInterviewRequired.lift(3).get
+    if (interviewRequired) {
+      enterOutcome(
+        techSkillFourTitleId,
+        vXListOfTechSkills(3),
+        techSkillFourScoreId,
+        interviewThreeDetails.techSkillFour.score,
+        techSkillFourCommentsId,
+        interviewThreeDetails.techSkillFour.comment
+      )
+      vXI3TechSkillsTotalScore += interviewThreeDetails.techSkillFour.score
+    }
   }
 
   private def enterTechSkillFiveOutcome(interviewThreeDetails: InterviewThreeDetails): Unit = {
-    enterOutcome(
-      techSkillFiveTitleId,
-      vXListOfTechSkills(4),
-      techSkillFiveScoreId,
-      interviewThreeDetails.techSkillFive.score,
-      techSkillFiveCommentsId,
-      interviewThreeDetails.techSkillFive.comment
-    )
-    vXI3TechSkillsTotalScore += interviewThreeDetails.techSkillFive.score
+    val interviewRequired = vXListOfSkillsInterviewRequired.lift(4).get
+    if (interviewRequired) {
+      enterOutcome(
+        techSkillFiveTitleId,
+        vXListOfTechSkills(4),
+        techSkillFiveScoreId,
+        interviewThreeDetails.techSkillFive.score,
+        techSkillFiveCommentsId,
+        interviewThreeDetails.techSkillFive.comment
+      )
+      vXI3TechSkillsTotalScore += interviewThreeDetails.techSkillFive.score
+    }
   }
 
   private def enterTechSkillSixOutcome(interviewThreeDetails: InterviewThreeDetails): Unit = {
-    enterOutcome(
-      techSkillSixTitleId,
-      vXListOfTechSkills(5),
-      techSkillSixScoreId,
-      interviewThreeDetails.techSkillSix.score,
-      techSkillSixCommentsId,
-      interviewThreeDetails.techSkillSix.comment
-    )
-    vXI3TechSkillsTotalScore += interviewThreeDetails.techSkillSix.score
+    val interviewRequired = vXListOfSkillsInterviewRequired.lift(5).get
+    if (interviewRequired) {
+      enterOutcome(
+        techSkillSixTitleId,
+        vXListOfTechSkills(5),
+        techSkillSixScoreId,
+        interviewThreeDetails.techSkillSix.score,
+        techSkillSixCommentsId,
+        interviewThreeDetails.techSkillSix.comment
+      )
+      vXI3TechSkillsTotalScore += interviewThreeDetails.techSkillSix.score
+    }
   }
 
   private def enterTechSkillSevenOutcome(interviewThreeDetails: InterviewThreeDetails): Unit = {
-    enterOutcome(
-      techSkillSevenTitleId,
-      vXListOfTechSkills(6),
-      techSkillSevenScoreId,
-      interviewThreeDetails.techSkillSeven.score,
-      techSkillSevenCommentsId,
-      interviewThreeDetails.techSkillSeven.comment
-    )
-    vXI3TechSkillsTotalScore += interviewThreeDetails.techSkillSeven.score
+    val interviewRequired = vXListOfSkillsInterviewRequired.lift(6).get
+    if (interviewRequired) {
+      enterOutcome(
+        techSkillSevenTitleId,
+        vXListOfTechSkills(6),
+        techSkillSevenScoreId,
+        interviewThreeDetails.techSkillSeven.score,
+        techSkillSevenCommentsId,
+        interviewThreeDetails.techSkillSeven.comment
+      )
+      vXI3TechSkillsTotalScore += interviewThreeDetails.techSkillSeven.score
+    }
   }
 
   private def enterTechSkillEightOutcome(interviewThreeDetails: InterviewThreeDetails): Unit = {
-    enterOutcome(
-      techSkillEightTitleId,
-      vXListOfTechSkills(7),
-      techSkillEightScoreId,
-      interviewThreeDetails.techSkillEight.score,
-      techSkillEightCommentsId,
-      interviewThreeDetails.techSkillEight.comment
-    )
-    vXI3TechSkillsTotalScore += interviewThreeDetails.techSkillEight.score
+    val interviewRequired = vXListOfSkillsInterviewRequired.lift(7).get
+    if (interviewRequired) {
+      enterOutcome(
+        techSkillEightTitleId,
+        vXListOfTechSkills(7),
+        techSkillEightScoreId,
+        interviewThreeDetails.techSkillEight.score,
+        techSkillEightCommentsId,
+        interviewThreeDetails.techSkillEight.comment
+      )
+      vXI3TechSkillsTotalScore += interviewThreeDetails.techSkillEight.score
+    }
   }
 
   private val skillOutcome: Seq[InterviewThreeDetails => Unit] = Seq(
@@ -461,21 +504,25 @@ object InterviewThreeEvaluationTab extends VacancyBasePage {
   )
 
   private def techSkillOutcome(interviewThreeDetails: InterviewThreeDetails): Unit =
-    if (vXTechSkillsRequired) {
+    if (vXTechSkillsRequired && vXListOfSkillsInterviewRequired.contains(true)) {
+      scrollToElement(By.id(techSkillsHeaderId))
+      waitForVisibilityOfElementById(
+        techSkillsHeaderId
+      ).getText                                                   shouldEqual "Technical Skills" //TODO I2 different, no Pascal Case
+      waitForVisibilityOfElementById(techSkillsScoringGuideId).getText should include(
+        interviewThreeDetails.scoringGuide
+      )
+      vXI3TechSkillsTotalScore.clear()
       skillOutcome.take(vXHowManySkills).foreach { f =>
         f(interviewThreeDetails)
       }
-      waitForVisibilityOfElementById(
-        techSkillTotalScoreId
-      ).getText shouldEqual s"Technical Skill Overall Score  \n${totalScore(vXI3TechSkillsTotalScore)}" //TODO I2 different wording case
+      checkForTotalValueId(
+        techSkillTotalScoreId,
+        s"${totalScore(vXI3TechSkillsTotalScore)}"
+      ) //TODO I2 different wording case
     }
 
   private def enterStrengthOneOutcome(interviewThreeDetails: InterviewThreeDetails): Unit = {
-    scrollToElement(By.id(strengthsHeaderId))
-    waitForVisibilityOfElementById(strengthsHeaderId).getText shouldEqual "Strength assessment"
-    waitForVisibilityOfElementById(strengthScoringGuideId).getText should include(
-      interviewThreeDetails.strengthScoringGuide
-    )
     enterOutcome(
       strengthOneTitleId,
       s"Strength 1  \n${vXListOfStrengths.head}",
@@ -484,7 +531,6 @@ object InterviewThreeEvaluationTab extends VacancyBasePage {
       strengthOneCommentsId,
       interviewThreeDetails.strengthOne.comment
     )
-    vXI3StrengthsTotalScore.clear()
     vXI3StrengthsTotalScore += interviewThreeDetails.strengthOne.score
   }
 
@@ -585,12 +631,18 @@ object InterviewThreeEvaluationTab extends VacancyBasePage {
 
   private def strengthsOutcome(interviewThreeDetails: InterviewThreeDetails): Unit =
     if (vXStrengthsRequired) {
+      scrollToElement(By.id(strengthsHeaderId))
+      waitForVisibilityOfElementById(strengthsHeaderId).getText shouldEqual "Strength assessment"
+      waitForVisibilityOfElementById(strengthScoringGuideId).getText should include(
+        interviewThreeDetails.strengthScoringGuide
+      )
       strengths.take(vXHowManyStrengths).foreach { f =>
         f(interviewThreeDetails)
       }
-      waitForVisibilityOfElementById(
-        strengthTotalScoreId
-      ).getText shouldEqual s"Strengths Total Score  \n${totalScore(vXI3StrengthsTotalScore)}" //TODO I2 has different casing
+      checkForTotalValueId(
+        strengthTotalScoreId,
+        s"${totalScore(vXI3StrengthsTotalScore)}"
+      ) //TODO I2 has different casing
     }
 
   private def howManyAssessments(interviewThreeDetails: InterviewThreeDetails): Unit = {
@@ -600,10 +652,6 @@ object InterviewThreeEvaluationTab extends VacancyBasePage {
   }
 
   private def enterAssessmentOneOutcome(interviewThreeDetails: InterviewThreeDetails): Unit = {
-    waitForVisibilityOfElementById(assessmentHeaderId).getText shouldEqual "Additional assessments"
-    waitForVisibilityOfElementById(
-      assessmentInfoId
-    ).getText                                                       should endWith("Additional assessment names, scores and comments will be visible to the applicant")
     enterAssessmentOutcome(
       assessmentOneNameId,
       interviewThreeDetails.assessmentOne.name,
@@ -612,7 +660,6 @@ object InterviewThreeEvaluationTab extends VacancyBasePage {
       assessmentOneCommentsId,
       interviewThreeDetails.assessmentOne.comment
     )
-    vXI3AssessmentsTotalScore.clear()
     vXI3AssessmentsTotalScore += interviewThreeDetails.assessmentOne.score
   }
 
@@ -686,24 +733,31 @@ object InterviewThreeEvaluationTab extends VacancyBasePage {
   )
 
   private def assessmentsOutcome(interviewThreeDetails: InterviewThreeDetails): Unit = {
+    waitForVisibilityOfElementById(assessmentHeaderId).getText shouldEqual "Additional assessments"
+    waitForVisibilityOfElementById(assessmentInfoId).getText        should endWith(
+      "Additional assessment names, scores and comments will be visible to the applicant"
+    )
     howManyAssessments(interviewThreeDetails)
-    assessments.take(interviewThreeDetails.additionalAssessments.toInt).foreach { f =>
-      f(interviewThreeDetails)
-    }
-    totalScore(vXI3AssessmentsTotalScore)
+    if (interviewThreeDetails.additionalAssessments != "0") {
+      assessments.take(interviewThreeDetails.additionalAssessments.toInt).foreach { f =>
+        f(interviewThreeDetails)
+      }
+      totalScore(vXI3AssessmentsTotalScore)
+    } else vXI3AssessmentsTotalScore += 0
   }
 
-  private def enterExperienceOutcome(interviewThreeDetails: InterviewThreeDetails): Unit = {
-    enterOutcome(
-      experienceTitleId,
-      "Experience", //TODO this is different in I2, "Experience assessment"
-      experienceScoreId,
-      interviewThreeDetails.experience.score,
-      experienceDescriptionId,
-      interviewThreeDetails.experience.comment
-    )
-    vXI3ExperienceScore = interviewThreeDetails.experience.score
-  }
+  private def enterExperienceOutcome(interviewThreeDetails: InterviewThreeDetails): Unit =
+    if (vXExperiencesRequired) {
+      enterOutcome(
+        experienceTitleId,
+        "Experience", //TODO this is different in I2, "Experience assessment"
+        experienceScoreId,
+        interviewThreeDetails.experience.score,
+        experienceDescriptionId,
+        interviewThreeDetails.experience.comment
+      )
+      vXI3ExperienceScore = interviewThreeDetails.experience.score
+    } else vXI3ExperienceScore = 0
 
   private def checkOverallScore(interviewThreeDetails: InterviewThreeDetails): Unit = {
     waitForVisibilityOfElementByPath(overallScoreTitlePath).getText should endWith(
@@ -720,6 +774,11 @@ object InterviewThreeEvaluationTab extends VacancyBasePage {
 
   private def enterOutcome(interviewThreeDetails: InterviewThreeDetails): Unit = {
     vXInterviewThreeOutcome = interviewThreeDetails.finalOutcome
+    if (vXExperiencesRequired && vXBehavioursRequired && vXTechSkillsRequired && vXStrengthsRequired) {
+      checkForNewValueId(formProblemStatusId, "There is a problem")
+      scrollToElement(By.id(outcomeTitleId))
+    }
+    scrollToElement(By.id(outcomeTitleId))
     waitForVisibilityOfElementById(outcomeTitleId).getText shouldEqual "Outcome"
     waitForVisibilityOfElementById(outcomeId).click()
     action().moveToElement(waitForDropdownOption(vXInterviewThreeOutcome)).perform()
