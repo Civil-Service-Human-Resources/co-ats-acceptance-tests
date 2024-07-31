@@ -30,7 +30,7 @@ object MASTER_PEC_FORM_DATA
 object MASTER_PEC_FORM_YOUR_DETAILS
     extends YourDetails(
       "Mr",
-      true,
+      false,
       "JA123456D",
       "Autotest - Provide details on your nino application status",
       "01/01/1980",
