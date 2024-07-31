@@ -6,12 +6,14 @@ import uk.gov.co.test.ui.data.MasterVacancyDetails.{randomFirstName, randomLastN
 import uk.gov.co.test.ui.data.v9.pecform.PecFormDetails
 import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
 
+import java.time.LocalDate
+
 case class YourDetails(
   candidateTitle: String,
   haveNino: Boolean,
   nino: String,
   ninoApplicationStatus: String,
-  dob: String,
+  dob: LocalDate,
   gender: String,
   maritalStatus: String,
   homeOfficeStartCS: String,
@@ -96,17 +98,20 @@ object YourDetailsPage extends CivilServiceJobsBasePage {
   }
 
   private def selectCandidateTitle(yourDetails: YourDetails): Unit = {
-    if (!v9RunInWelsh) {
-      waitForVisibilityOfElementById(titleHeaderId).getText shouldEqual "Title"
-      selectDropdownOption(titleId, yourDetails.candidateTitle)
-    } else {}
-    confirmNames()
+    val titleHeader = waitForVisibilityOfElementById(titleHeaderId).getText
+    selectDropdownOption(titleId, yourDetails.candidateTitle)
+    if (!v9RunInWelsh) titleHeader shouldEqual "Title" else titleHeader shouldEqual "Teitl"
   }
 
-  private def confirmNames(): Unit = {
+  private def confirmNames(yourDetails: YourDetails): Unit = {
+    val firstNameHeader = waitForVisibilityOfElementById(firstNameHeaderId).getText
+    val lastNameHeader  = waitForVisibilityOfElementById(lastNameHeaderId).getText
     if (!v9RunInWelsh) {
-      waitForVisibilityOfElementById(firstNameHeaderId).getText startsWith "First name:"
-      waitForVisibilityOfElementById(firstNameHeaderId).getText startsWith "Last name:"
+      firstNameHeader startsWith "First name:"
+      lastNameHeader startsWith "Last name:"
+    } else {
+      firstNameHeader startsWith "Enw cyntaf" //TODO no colon
+      lastNameHeader startsWith "Enw olaf" //TODO no colon
     }
     waitForVisibilityOfElementByPath(firstNamePath).getText shouldEqual randomFirstName
     waitForVisibilityOfElementByPath(lastNamePath).getText  shouldEqual randomLastName
@@ -125,18 +130,16 @@ object YourDetailsPage extends CivilServiceJobsBasePage {
           "It's on your National Insurance Card, Benefit letter, payslip or P60. For example, 'QQ123456C'."
         )
       } else {
-        ninoHeader                                                  shouldEqual ""
-        yesNinoDetails.findElement(By.xpath(wordStylePath)).getText shouldEqual ""
-        yesNinoDetails.getText                                           should endWith("")
+        ninoHeader                                                  shouldEqual "Oes gennych chi rif Yswiriant Gwladol?"
+        yesNinoDetails.findElement(By.xpath(wordStylePath)).getText shouldEqual "Rhif yswiriant gwladol"
+        yesNinoDetails.getText                                           should endWith(
+          "Mae ar eich Cerdyn Yswiriant Gwladol, Llythyr budd-dal, slip cyflog neu P60. Er enghraifft, 'QQ123456C'."
+        )
       }
     } else {
       radioSelect(ninoNoId)
       enterDetails(ninoNoInputId, yourDetails.ninoApplicationStatus)
       val noNinoDetails = waitForVisibilityOfElementById(ninoNoHeaderId)
-      noNinoDetails
-        .findElement(By.xpath(".//a"))
-        .getAttribute("href")
-        .endsWith("www.gov.uk/apply-national-insurance-number")
       if (!v9RunInWelsh) {
         ninoHeader       shouldEqual "Do you have a National Insurance number?"
         noNinoDetails
@@ -145,52 +148,70 @@ object YourDetailsPage extends CivilServiceJobsBasePage {
         noNinoDetails.getText should endWith(
           """If you have not yet applied for a national insurance number, you will need to begin an application to get one. Apply for a National Insurance number (opens in a new window)""".stripMargin
         )
+        noNinoDetails
+          .findElement(By.xpath(".//a"))
+          .getAttribute("href")
+          .endsWith("www.gov.uk/apply-national-insurance-number")
       } else {
-        ninoHeader                                                 shouldEqual ""
-        noNinoDetails.findElement(By.xpath(wordStylePath)).getText shouldEqual ""
-        noNinoDetails.getText                                           should endWith("")
+        ninoHeader       shouldEqual "Oes gennych chi rif Yswiriant Gwladol?"
+        noNinoDetails
+          .findElement(By.xpath(wordStylePath))
+          .getText       shouldEqual "Rhowch fanylion ar eich statws cais rhif yswiriant gwladol"
+        noNinoDetails.getText should endWith(
+          "Os nad ydych eto wedi gwneud cais am rif yswiriant gwladol, bydd angen i chi ddechrau cais i gael un. Gwneud cais am Rif Yswiriant Gwladol (agor mewn tab newydd)"
+        )
+        noNinoDetails
+          .findElement(By.xpath(".//a"))
+          .getAttribute("href")
+          .endsWith("www.gov.uk/gwneud-cais-am-rif-yswiriant-gwladol")
       }
     }
   }
 
   private def enterDob(yourDetails: YourDetails): Unit = {
     val dobHeader          = waitForVisibilityOfElementById(dobHeaderId).getText
+    val (day, month, year) = splitLocalDate(yourDetails.dob)
+    enterDate(dobDayId, day)
+    enterDate(dobYearId, year)
     if (!v9RunInWelsh) {
       dobHeader shouldEqual "Date of birth"
-    } else dobHeader shouldEqual ""
-    val (day, month, year) = splitDate(yourDetails.dob)
-    enterDate(dobDayId, day)
-    enterDate(dobMonthId, month)
-    enterDate(dobYearId, year)
+      selectFromOptions(dobMonthId, month)
+    } else {
+      dobHeader shouldEqual "Dyddiad geni"
+      selectWelshMonth(dobMonthId, month)
+    }
   }
 
   private def selectGender(yourDetails: YourDetails): Unit = {
     val genderHeader = waitForVisibilityOfElementById(genderHeaderId).getText
     if (!v9RunInWelsh) {
       genderHeader shouldEqual "Gender"
-      selectDropdownOption(genderId, yourDetails.gender)
+      selectFromOptions(genderId, yourDetails.gender)
     } else {
-      genderHeader shouldEqual ""
-      selectDropdownOption(genderId, "Dyn")
+      genderHeader shouldEqual "Rhyw"
+      yourDetails.gender match {
+        case "Man"                     => selectFromOptions(genderId, "Dyn")
+        case "Woman"                   => selectFromOptions(genderId, "Dynes")
+        case "Prefer to self-describe" => selectFromOptions(genderId, "Gwell gennyf hunan-ddisgrifio")
+        case "Prefer not to disclose"  => selectFromOptions(genderId, "Gwell gennyf beidio datgelu")
+      }
     }
   }
 
   private def selectMaritalStatus(yourDetails: YourDetails): Unit = {
     val maritalStatusHeader = waitForVisibilityOfElementById(maritalStatusHeaderId).getText
-    if (!v9RunInWelsh) {
-      maritalStatusHeader shouldEqual "Marital status"
-      yourDetails.maritalStatus match {
-        case "Prefer not to say" => radioSelect(maritalStatusNotSayId)
-        case "Married"           => radioSelect(maritalStatusMarriedId)
-        case "Single"            => radioSelect(maritalStatusSingleId)
-      }
-    } else {
-      maritalStatusHeader shouldEqual ""
-      yourDetails.maritalStatus match {
-        case "Prefer not to say" => radioSelect(maritalStatusNotSayId)
-        case "Married"           => radioSelect(maritalStatusMarriedId)
-        case "Single"            => radioSelect(maritalStatusSingleId)
-      }
+    if (!v9RunInWelsh) maritalStatusHeader shouldEqual "Marital status"
+    else maritalStatusHeader               shouldEqual "Statws priodasol"
+    yourDetails.maritalStatus match {
+      case "Prefer not to say" =>
+        if (!v9RunInWelsh) radioSelect(maritalStatusNotSayId)
+        else waitForVisibilityOfElementByPath("//*[contains(text(), 'Gwell gennyf beidio â dweud')]").click()
+      case "Married"           =>
+        if (!v9RunInWelsh) radioSelect(maritalStatusMarriedId)
+        else waitForVisibilityOfElementByPath("//*[contains(text(), 'Priod')]").click()
+      case "Single"            =>
+        if (!v9RunInWelsh) radioSelect(maritalStatusSingleId)
+        else waitForVisibilityOfElementByPath("//*[contains(text(), 'Sengl')]").click()
     }
   }
 
@@ -243,16 +264,16 @@ object YourDetailsPage extends CivilServiceJobsBasePage {
       cityOrTownHeader          shouldEqual "City/Town"
       countyHeader              shouldEqual "County"
       countryHeader             shouldEqual "Country"
-      selectDropdownOption(countryId, yourDetails.country)
+      selectFromOptions(countryId, yourDetails.country)
     } else {
       homeAddressHeader.getText shouldEqual ""
       homeAddressSubHeader      shouldEqual ""
-      addressLineOneHeader      shouldEqual ""
-      addressLineTwoHeader      shouldEqual ""
-      cityOrTownHeader          shouldEqual ""
-      countyHeader              shouldEqual ""
-      countryHeader             shouldEqual ""
-      selectDropdownOption(countryId, "Y Deyrnas Unedig")
+      addressLineOneHeader      shouldEqual "Llinell cyfeiriad 1"
+      addressLineTwoHeader      shouldEqual "Llinell cyfeiriad 2 (Dewisol)"
+      cityOrTownHeader          shouldEqual "Dinas/Tref"
+      countyHeader              shouldEqual "Sir"
+      countryHeader             shouldEqual "Gwlad"
+      selectFromOptions(countryId, "Y Deyrnas Unedig")
     }
     enterDetails(addressLineOneId, yourDetails.addressLineOne)
     enterDetails(addressLineTwoId, yourDetails.addressLineTwo.get)
@@ -267,7 +288,7 @@ object YourDetailsPage extends CivilServiceJobsBasePage {
       if (!v9RunInWelsh) {
         postcodeHeader shouldEqual "Postcode"
       } else {
-        postcodeHeader shouldEqual ""
+        postcodeHeader shouldEqual "Cod post"
       }
       enterDetails(postcodeId, yourDetails.postcode)
     }
@@ -277,20 +298,26 @@ object YourDetailsPage extends CivilServiceJobsBasePage {
     val preferredTeleMainHeader = preferredTeleHeader.findElement(By.xpath(wordStylePath)).getText
     if (!v9RunInWelsh) {
       preferredTeleMainHeader shouldEqual "Preferred telephone number"
-      preferredTeleHeader.getText  should endWith(
-        """For example, 01632 960 001, 07700 900 982 or +44 808 157 0192
-          |
-          |For numbers outside of the UK, include the country code.""".stripMargin
-      )
+      preferredTeleHeader.getText  should endWith("""For example, 01632 960 001, 07700 900 982 or +44 808 157 0192
+         |
+         |For numbers outside of the UK, include the country code.""".stripMargin)
     } else {
-      preferredTeleMainHeader shouldEqual ""
-      preferredTeleHeader.getText  should endWith("""""".stripMargin)
+      preferredTeleMainHeader     shouldEqual "Rhif ffôn dewisol." //TODO requires full-stop to be removed
+      preferredTeleHeader.getText shouldEqual """Rhif ffôn dewisol.
+                                                 |Er enghraifft, 01632 960 001, 07700 900 982 or +44 808 157 0192.
+                                                 |Ar gyfer rhifau tu allan i’r DU, dylech gynnwys y cod gwlad""".stripMargin
     }
     enterDetails(preferredTeleNoId, yourDetails.preferredTeleNo)
   }
 
+  private def checkForToolTips(): Unit = {
+    val toolTips = driver.findElements(By.xpath(".//*[@id='qtip-0']"))
+    toolTips shouldBe empty
+  }
+
   private val yourDetails: Seq[YourDetails => Unit] = Seq(
     selectCandidateTitle,
+    confirmNames,
     selectNino,
     enterDob,
     selectGender,
@@ -306,6 +333,7 @@ object YourDetailsPage extends CivilServiceJobsBasePage {
     yourDetails.foreach { f =>
       f(pecFormDetails.yourDetails)
     }
+    checkForToolTips()
     clickOn(pageContinue)
   }
 }

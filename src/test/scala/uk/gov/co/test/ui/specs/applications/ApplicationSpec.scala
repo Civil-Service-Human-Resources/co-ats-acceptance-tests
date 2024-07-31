@@ -14,8 +14,8 @@ class ApplicationSpec extends BaseFeatureSpec {
   Feature("Recruiter & Candidate Complete Full Application Process") {
     Scenario("VX: All Forms; Master Application Process", RunInVX) {
       Given("new vacancy is created and posted")
-//      fillNewVacancyForm(MASTER_VACANCY_DATA)
-      extractAllVacancyDetails("10459")
+      fillNewVacancyForm(MASTER_VACANCY_DATA)
+//      extractAllVacancyDetails("10459")
 
       When("recruiter & new candidate complete the full application")
       fillNewCandidateDetails(MASTER_REGISTER_CANDIDATE)

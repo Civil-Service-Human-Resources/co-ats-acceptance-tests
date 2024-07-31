@@ -34,7 +34,7 @@ object PEC_FORM_YOUR_DETAILS
       true,
       "JA123456D",
       "Autotest - Provide details on your nino application status",
-      "01/01/1980",
+      LocalDate.now().minusYears(40),
       "Man",
       "Single",
       "01/12/2020",

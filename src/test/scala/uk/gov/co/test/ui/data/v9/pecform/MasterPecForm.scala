@@ -33,7 +33,7 @@ object MASTER_PEC_FORM_YOUR_DETAILS
       false,
       "JA123456D",
       "Autotest - Provide details on your nino application status",
-      "01/01/1980",
+      dob = LocalDate.now().minusYears(40).plusDays(1),
       "Man",
       "Single",
       "01/12/2020",
