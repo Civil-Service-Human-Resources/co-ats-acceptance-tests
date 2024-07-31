@@ -80,7 +80,7 @@ object YourDetailsPage extends CivilServiceJobsBasePage {
   def countryId                              = s"${pecFormId}_datafield_123207_1_1"
   def postcodeId                             = s"${pecFormId}_datafield_76801_1_1"
   def preferredTeleNoHeaderId                = s"${pecFormId}_field_que_76821_1"
-  def wordStylePath               = ".//p[@style='font-weight:bold;color:black;']"
+  def wordStylePath                          = ".//p[@style='font-weight:bold;color:black;']"
   def preferredTeleNoId                      = s"${pecFormId}_datafield_76821_1_1"
   def boldBlackTextStyle                     = "font-weight:bold;color:black;"
   var pecFormId                              = ""
@@ -112,39 +112,46 @@ object YourDetailsPage extends CivilServiceJobsBasePage {
     waitForVisibilityOfElementByPath(lastNamePath).getText  shouldEqual randomLastName
   }
 
-
   private def selectNino(yourDetails: YourDetails): Unit = {
     val ninoHeader = waitForVisibilityOfElementById(ninoHeaderId).getText
     if (yourDetails.haveNino) {
       radioSelect(ninoYesId)
       enterDetails(ninoYesInputId, yourDetails.nino)
+      val yesNinoDetails = waitForVisibilityOfElementById(ninoYesHeaderId)
       if (!v9RunInWelsh) {
-        ninoHeader shouldEqual "Do you have a National Insurance number?"
-        waitForVisibilityOfElementById(ninoYesHeaderId).findElement(By.xpath(wordStylePath)).getText shouldEqual "National insurance number"
-        waitForVisibilityOfElementById(ninoYesHeaderId).getText should endWith("It's on your National Insurance Card, Benefit letter, payslip or P60. For example, 'QQ123456C'.")
+        ninoHeader                                                  shouldEqual "Do you have a National Insurance number?"
+        yesNinoDetails.findElement(By.xpath(wordStylePath)).getText shouldEqual "National insurance number"
+        yesNinoDetails.getText                                           should endWith(
+          "It's on your National Insurance Card, Benefit letter, payslip or P60. For example, 'QQ123456C'."
+        )
       } else {
-        ninoHeader shouldEqual ""
-        waitForVisibilityOfElementById(ninoYesHeaderId).findElement(By.xpath(wordStylePath)).getText shouldEqual ""
-        waitForVisibilityOfElementById(ninoYesHeaderId).getText should endWith("")
+        ninoHeader                                                  shouldEqual ""
+        yesNinoDetails.findElement(By.xpath(wordStylePath)).getText shouldEqual ""
+        yesNinoDetails.getText                                           should endWith("")
       }
     } else {
       radioSelect(ninoNoId)
       enterDetails(ninoNoInputId, yourDetails.ninoApplicationStatus)
       val noNinoDetails = waitForVisibilityOfElementById(ninoNoHeaderId)
-      noNinoDetails.findElement(By.xpath(".//a")).getAttribute("href").endsWith("www.gov.uk/apply-national-insurance-number")
+      noNinoDetails
+        .findElement(By.xpath(".//a"))
+        .getAttribute("href")
+        .endsWith("www.gov.uk/apply-national-insurance-number")
       if (!v9RunInWelsh) {
-        ninoHeader shouldEqual "Do you have a National Insurance number?"
-        noNinoDetails.findElement(By.xpath(wordStylePath)).getText shouldEqual "Provide details on your national insurance number application status"
-        waitForVisibilityOfElementById(ninoNoHeaderId).getText should endWith("""If you have not yet applied for a national insurance number, you will need to begin an application to get one. Apply for a National Insurance number (opens in a new window)""".stripMargin)
+        ninoHeader       shouldEqual "Do you have a National Insurance number?"
+        noNinoDetails
+          .findElement(By.xpath(wordStylePath))
+          .getText       shouldEqual "Provide details on your national insurance number application status"
+        noNinoDetails.getText should endWith(
+          """If you have not yet applied for a national insurance number, you will need to begin an application to get one. Apply for a National Insurance number (opens in a new window)""".stripMargin
+        )
       } else {
-        ninoHeader shouldEqual ""
-        waitForVisibilityOfElementById(ninoNoHeaderId).findElement(By.xpath(wordStylePath)).getText shouldEqual ""
-        waitForVisibilityOfElementById(ninoNoHeaderId).getText should endWith("")
+        ninoHeader                                                 shouldEqual ""
+        noNinoDetails.findElement(By.xpath(wordStylePath)).getText shouldEqual ""
+        noNinoDetails.getText                                           should endWith("")
       }
     }
   }
-
-
 
   private def enterDob(yourDetails: YourDetails): Unit = {
     val dobHeader          = waitForVisibilityOfElementById(dobHeaderId).getText
