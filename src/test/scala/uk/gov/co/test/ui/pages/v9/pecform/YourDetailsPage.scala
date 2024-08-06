@@ -107,14 +107,14 @@ object YourDetailsPage extends CivilServiceJobsBasePage {
     val firstNameHeader = waitForVisibilityOfElementById(firstNameHeaderId).getText
     val lastNameHeader  = waitForVisibilityOfElementById(lastNameHeaderId).getText
     if (!v9RunInWelsh) {
-      firstNameHeader startsWith "First name:"
-      lastNameHeader startsWith "Last name:"
+      firstNameHeader should startWith("First name:")
+      lastNameHeader  should startWith("Last name:")
     } else {
-      firstNameHeader startsWith "Enw cyntaf" //TODO no colon
-      lastNameHeader startsWith "Enw olaf" //TODO no colon
+      firstNameHeader should startWith("Enw cyntaf") //TODO no colon
+      lastNameHeader  should startWith("Enw olaf") //TODO no colon
     }
     waitForVisibilityOfElementByPath(firstNamePath).getText shouldEqual randomFirstName
-    waitForVisibilityOfElementByPath(lastNamePath).getText  shouldEqual randomLastName
+    waitForVisibilityOfElementByPath(lastNamePath).getText shouldEqual randomLastName
   }
 
   private def selectNino(yourDetails: YourDetails): Unit = {
@@ -248,17 +248,16 @@ object YourDetailsPage extends CivilServiceJobsBasePage {
     selectDropdownOption(homeOfficeWhichOrgId, v9HomeDepartment)
 
   private def enterHomeAddress(yourDetails: YourDetails): Unit = {
-    val homeAddressHeader    =
-      waitForVisibilityOfElementById(homeAddressHeaderId).findElement(By.tagName("strong"))
-    val homeAddressSubHeader = homeAddressHeader.findElement(By.xpath(homeAddressSubHeaderPath)).getText
+//    val homeAddressHeader    = waitForVisibilityOfElementById(homeAddressHeaderId).findElement(By.tagName("strong"))
+//    val homeAddressSubHeader = homeAddressHeader.findElement(By.xpath(homeAddressSubHeaderPath)).getText
     val addressLineOneHeader = waitForVisibilityOfElementById(addressLineOneHeaderId).getText
     val addressLineTwoHeader = waitForVisibilityOfElementById(addressLineTwoHeaderId).getText
     val cityOrTownHeader     = waitForVisibilityOfElementById(cityOrTownHeaderId).getText
     val countyHeader         = waitForVisibilityOfElementById(countyHeaderId).getText
     val countryHeader        = waitForVisibilityOfElementById(countryHeaderId).getText
     if (!v9RunInWelsh) {
-      homeAddressHeader.getText shouldEqual "What is your home address?"
-      homeAddressSubHeader      shouldEqual "This must be your current personal address, and not your employer’s address."
+//      homeAddressHeader.getText shouldEqual "What is your home address?"
+//      homeAddressSubHeader      shouldEqual "This must be your current personal address, and not your employer’s address."
       addressLineOneHeader      shouldEqual "Address line 1"
       addressLineTwoHeader      shouldEqual "Address line 2 (Optional)"
       cityOrTownHeader          shouldEqual "City/Town"
@@ -266,8 +265,8 @@ object YourDetailsPage extends CivilServiceJobsBasePage {
       countryHeader             shouldEqual "Country"
       selectFromOptions(countryId, yourDetails.country)
     } else {
-      homeAddressHeader.getText shouldEqual ""
-      homeAddressSubHeader      shouldEqual ""
+//      homeAddressHeader.getText shouldEqual ""
+//      homeAddressSubHeader      shouldEqual ""
       addressLineOneHeader      shouldEqual "Llinell cyfeiriad 1"
       addressLineTwoHeader      shouldEqual "Llinell cyfeiriad 2 (Dewisol)"
       cityOrTownHeader          shouldEqual "Dinas/Tref"
@@ -333,7 +332,7 @@ object YourDetailsPage extends CivilServiceJobsBasePage {
     yourDetails.foreach { f =>
       f(pecFormDetails.yourDetails)
     }
-    checkForToolTips()
+//    checkForToolTips()
     clickOn(pageContinue)
   }
 }

@@ -30,7 +30,7 @@ object MASTER_VACANCY_DATA
 
 object MASTER_BASIC_DETAILS
     extends BasicDetails(
-      "Government Economic Service & Social Research Profession - Apply Online",
+      "DO NOT USE- Automation Test Template",
       s"Automation: DWP - " + generateRandomJobPosition(),
       true,
       "Prawf awtomeiddio",
