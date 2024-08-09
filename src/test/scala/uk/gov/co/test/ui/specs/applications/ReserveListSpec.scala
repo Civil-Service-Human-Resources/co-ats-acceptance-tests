@@ -1,6 +1,5 @@
 package uk.gov.co.test.ui.specs.applications
 
-import uk.gov.co.test.ui.data.MasterVacancyDetails.vacancyId
 import uk.gov.co.test.ui.data.test.reserve.RESERVE_VACANCY_DATA
 import uk.gov.co.test.ui.data.v9.applicants._
 import uk.gov.co.test.ui.flows.e2e.FullApplicationFlow.reserveListFlow
@@ -18,7 +17,6 @@ class ReserveListSpec extends BaseFeatureSpec {
     Scenario("VX: Recruiter Checks 3 Months Reserve List", RunInVX) {
       Given("a recruiter changes the reserve list to 3 months for a vacancy")
       fillNewVacancyForm(RESERVE_VACANCY_DATA)
-//      vacancyId = "10527"
       changeReserveListDetails("3 Months")
       repostExternalPosting()
 

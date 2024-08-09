@@ -258,20 +258,20 @@ object YourDetailsPage extends CivilServiceJobsBasePage {
     if (!v9RunInWelsh) {
 //      homeAddressHeader.getText shouldEqual "What is your home address?"
 //      homeAddressSubHeader      shouldEqual "This must be your current personal address, and not your employer’s address."
-      addressLineOneHeader      shouldEqual "Address line 1"
-      addressLineTwoHeader      shouldEqual "Address line 2 (Optional)"
-      cityOrTownHeader          shouldEqual "City/Town"
-      countyHeader              shouldEqual "County"
-      countryHeader             shouldEqual "Country"
+      addressLineOneHeader shouldEqual "Address line 1"
+      addressLineTwoHeader shouldEqual "Address line 2 (Optional)"
+      cityOrTownHeader     shouldEqual "City/Town"
+      countyHeader         shouldEqual "County"
+      countryHeader        shouldEqual "Country"
       selectFromOptions(countryId, yourDetails.country)
     } else {
 //      homeAddressHeader.getText shouldEqual ""
 //      homeAddressSubHeader      shouldEqual ""
-      addressLineOneHeader      shouldEqual "Llinell cyfeiriad 1"
-      addressLineTwoHeader      shouldEqual "Llinell cyfeiriad 2 (Dewisol)"
-      cityOrTownHeader          shouldEqual "Dinas/Tref"
-      countyHeader              shouldEqual "Sir"
-      countryHeader             shouldEqual "Gwlad"
+      addressLineOneHeader shouldEqual "Llinell cyfeiriad 1"
+      addressLineTwoHeader shouldEqual "Llinell cyfeiriad 2 (Dewisol)"
+      cityOrTownHeader     shouldEqual "Dinas/Tref"
+      countyHeader         shouldEqual "Sir"
+      countryHeader        shouldEqual "Gwlad"
       selectFromOptions(countryId, "Y Deyrnas Unedig")
     }
     enterDetails(addressLineOneId, yourDetails.addressLineOne)
@@ -297,14 +297,17 @@ object YourDetailsPage extends CivilServiceJobsBasePage {
     val preferredTeleMainHeader = preferredTeleHeader.findElement(By.xpath(wordStylePath)).getText
     if (!v9RunInWelsh) {
       preferredTeleMainHeader shouldEqual "Preferred telephone number"
-      preferredTeleHeader.getText  should endWith("""For example, 01632 960 001, 07700 900 982 or +44 808 157 0192
-         |
-         |For numbers outside of the UK, include the country code.""".stripMargin)
+      preferredTeleHeader.getText  should endWith(
+        """For example, 01632 960 001, 07700 900 982 or +44 808 157 0192
+        |
+        |For numbers outside of the UK, include the country code.""".stripMargin
+      )
     } else {
-      preferredTeleMainHeader     shouldEqual "Rhif ffôn dewisol." //TODO requires full-stop to be removed
-      preferredTeleHeader.getText shouldEqual """Rhif ffôn dewisol.
-                                                 |Er enghraifft, 01632 960 001, 07700 900 982 or +44 808 157 0192.
-                                                 |Ar gyfer rhifau tu allan i’r DU, dylech gynnwys y cod gwlad""".stripMargin
+      preferredTeleMainHeader shouldEqual "Rhif dewisol"
+      preferredTeleHeader.getText  should endWith(
+        """Er enghraifft, 01632 960 001, 07700 900 982 or +44 808 157 0192
+        |Ar gyfer rhifau tu allan DU, dylech gynnwys y cod gwlad""".stripMargin
+      )
     }
     enterDetails(preferredTeleNoId, yourDetails.preferredTeleNo)
   }
