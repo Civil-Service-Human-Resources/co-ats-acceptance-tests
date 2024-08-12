@@ -14,7 +14,7 @@ class NonNameBlindSpec extends BaseFeatureSpec {
     Scenario("VX: All Forms; Master Application Process", RunInVX) {
       Given("new non name-blind vacancy is created and posted")
       fillNewVacancyForm(NON_NAME_BLIND_VACANCY_DATA)
-//      extractAllVacancyDetails("10431")
+//      extractAllVacancyDetails("10585")
 
       When("new candidate registers for new application")
       fillNewCandidateDetails(REGISTER_CANDIDATE_NAME_BLIND)

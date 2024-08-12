@@ -2,7 +2,7 @@ package uk.gov.co.test.ui.pages.vx.createvacancypage
 
 import org.openqa.selenium.support.ui.WebDriverWait
 import org.openqa.selenium.{By, WebDriver}
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXBusinessArea, vXBusinessAreaDetail, vXJobInfoDepartment, vXLineManagerDuties, vXNoOfJobsAvailable, vXPositionIdentifier, vXProfession, vXTypeOfRole, vacancyFormId}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{v9HomeDepartment, vXBusinessArea, vXBusinessAreaDetail, vXJobInfoDepartment, vXLineManagerDuties, vXNoOfJobsAvailable, vXPositionIdentifier, vXProfession, vXTypeOfRole, vacancyFormId}
 import uk.gov.co.test.ui.data.vx.vacancy.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 import uk.gov.co.test.ui.pages.vx.createvacancypage.BasicDetailsSection.templateSelect
@@ -54,6 +54,7 @@ object JobInfoSection extends VacancyBasePage {
   }
 
   private def selectBusinessArea(jobInfoDetails: JobInfoDetails): Unit = {
+    v9HomeDepartment = ""
     vXBusinessArea = jobInfoDetails.businessArea
     scrollToElement(By.id(businessAreaId))
     val businessArea = waitForVisibilityOfElementById(businessAreaId)
