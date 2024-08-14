@@ -31,7 +31,7 @@ case class YourDetails(
 
 object YourDetailsPage extends CivilServiceJobsBasePage {
 
-  private lazy val yourDetailsPageTitle      = "Your Details - Civil Service Jobs - GOV.UK"
+  private lazy val yourDetailsPageTitle      = "Your details - Civil Service Jobs - GOV.UK"
   private lazy val welshYourDetailsPageTitle = "Eich manylion - Civil Service Jobs - GOV.UK"
   private lazy val formIdPath                = ".//form[@enctype='multipart/form-data']"
   def titleHeaderId                          = s"${pecFormId}_field_que_114326_1"
@@ -248,30 +248,30 @@ object YourDetailsPage extends CivilServiceJobsBasePage {
     selectDropdownOption(homeOfficeWhichOrgId, v9HomeDepartment)
 
   private def enterHomeAddress(yourDetails: YourDetails): Unit = {
-//    val homeAddressHeader    = waitForVisibilityOfElementById(homeAddressHeaderId).findElement(By.tagName("strong"))
-//    val homeAddressSubHeader = homeAddressHeader.findElement(By.xpath(homeAddressSubHeaderPath)).getText
+    val homeAddressHeader    = waitForVisibilityOfElementById(homeAddressHeaderId).findElement(By.tagName("strong"))
+    val homeAddressSubHeader = homeAddressHeader.findElement(By.xpath(homeAddressSubHeaderPath)).getText
     val addressLineOneHeader = waitForVisibilityOfElementById(addressLineOneHeaderId).getText
     val addressLineTwoHeader = waitForVisibilityOfElementById(addressLineTwoHeaderId).getText
     val cityOrTownHeader     = waitForVisibilityOfElementById(cityOrTownHeaderId).getText
     val countyHeader         = waitForVisibilityOfElementById(countyHeaderId).getText
     val countryHeader        = waitForVisibilityOfElementById(countryHeaderId).getText
     if (!v9RunInWelsh) {
-//      homeAddressHeader.getText shouldEqual "What is your home address?"
-//      homeAddressSubHeader      shouldEqual "This must be your current personal address, and not your employer’s address."
-      addressLineOneHeader shouldEqual "Address line 1"
-      addressLineTwoHeader shouldEqual "Address line 2 (Optional)"
-      cityOrTownHeader     shouldEqual "City/Town"
-      countyHeader         shouldEqual "County"
-      countryHeader        shouldEqual "Country"
+      homeAddressHeader.getText shouldEqual "What is your home address?"
+      homeAddressSubHeader      shouldEqual "This must be your current personal address, and not your employer’s address."
+      addressLineOneHeader      shouldEqual "Address line 1"
+      addressLineTwoHeader      shouldEqual "Address line 2 (Optional)"
+      cityOrTownHeader          shouldEqual "City/Town"
+      countyHeader              shouldEqual "County"
+      countryHeader             shouldEqual "Country"
       selectFromOptions(countryId, yourDetails.country)
     } else {
-//      homeAddressHeader.getText shouldEqual ""
-//      homeAddressSubHeader      shouldEqual ""
-      addressLineOneHeader shouldEqual "Llinell cyfeiriad 1"
-      addressLineTwoHeader shouldEqual "Llinell cyfeiriad 2 (Dewisol)"
-      cityOrTownHeader     shouldEqual "Dinas/Tref"
-      countyHeader         shouldEqual "Sir"
-      countryHeader        shouldEqual "Gwlad"
+      homeAddressHeader.getText shouldEqual "Beth yw eich cyfeiriad cartref?"
+      homeAddressSubHeader      shouldEqual "Mae'n rhaid i hwn fod eich cyfeiriad personol presennol ac nid cyfeiriad eich cyflogwr."
+      addressLineOneHeader      shouldEqual "Llinell cyfeiriad 1"
+      addressLineTwoHeader      shouldEqual "Llinell cyfeiriad 2 (Dewisol)"
+      cityOrTownHeader          shouldEqual "Dinas/Tref"
+      countyHeader              shouldEqual "Sir"
+      countryHeader             shouldEqual "Gwlad"
       selectFromOptions(countryId, "Y Deyrnas Unedig")
     }
     enterDetails(addressLineOneId, yourDetails.addressLineOne)

@@ -21,7 +21,7 @@ case class EmploymentHistoryDetails(
 
 object EmploymentHistoryPage extends CivilServiceJobsBasePage {
 
-  private lazy val employmentHistoryPageTitle = "Employment History - Civil Service Jobs - GOV.UK"
+  private lazy val employmentHistoryPageTitle = "Employment history - Civil Service Jobs - GOV.UK"
   private lazy val addAnotherEmployerId       = ".//input[@value='Add Another Employer']"
   private lazy val removeEmployerId           = ".//input[@value='Remove Employer']"
   def employedWithin3YearsYesId               = s"${pecFormId}_datafield_123622_1_1_1_label"

@@ -36,7 +36,7 @@ case class SelfEmploymentDetails(
 
 object SelfEmploymentPage extends CivilServiceJobsBasePage {
 
-  private lazy val selfEmploymentPageTitle    = "Self Employment - Civil Service Jobs - GOV.UK"
+  private lazy val selfEmploymentPageTitle    = "Self employment - Civil Service Jobs - GOV.UK"
   def selfEmploymentLast3YearsYesId           = s"${pecFormId}_datafield_182053_1_1_1_label"
   def selfEmploymentLast3YearsNoId            = s"${pecFormId}_datafield_182053_1_1_2_label"
   def employmentStartDayId                    = s"${pecFormId}_datafield_80400_1_1--DAY"

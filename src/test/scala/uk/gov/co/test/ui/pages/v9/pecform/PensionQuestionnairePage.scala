@@ -36,7 +36,7 @@ case class PensionDetails(
 
 object PensionQuestionnairePage extends CivilServiceJobsBasePage {
 
-  private lazy val pensionPageTitle = "Pension Questionnaire - Civil Service Jobs - GOV.UK"
+  private lazy val pensionPageTitle = "Pension questionnaire - Civil Service Jobs - GOV.UK"
   def pensionInfoHeaderId           = s"${pecFormId}_label_85749_1"
   def pensionMemberCSArrangementsId = s"${pecFormId}_datafield_85753_1_1_15258_label"
   def pensionMemberByAnalogyId      = s"${pecFormId}_datafield_85753_1_1_15259_label"

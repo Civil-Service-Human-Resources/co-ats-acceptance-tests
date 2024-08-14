@@ -19,7 +19,7 @@ case class BankruptcyDetails(
 
 object BankruptcyDetailsPage extends CivilServiceJobsBasePage {
 
-  private lazy val bankruptcyDetailsPageTitle = "Bankruptcy Details - Civil Service Jobs - GOV.UK"
+  private lazy val bankruptcyDetailsPageTitle = "Bankruptcy details - Civil Service Jobs - GOV.UK"
   def undischargedBankruptYesId               = s"${pecFormId}_datafield_79628_1_1_1_label"
   def undischargedBankruptNoId                = s"${pecFormId}_datafield_79628_1_1_2_label"
   def bankruptcyStatusInputId                 = s"${pecFormId}_datafield_79632_1_1"

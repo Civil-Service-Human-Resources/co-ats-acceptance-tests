@@ -25,7 +25,7 @@ case class HealthDeclarationDetails(
 
 object HealthDeclarationPage extends CivilServiceJobsBasePage {
 
-  private lazy val healthDeclarationPageTitle      = "Health Declaration - Civil Service Jobs - GOV.UK"
+  private lazy val healthDeclarationPageTitle      = "Health declaration - Civil Service Jobs - GOV.UK"
   def needAdjustmentsForWorkYesId                  = s"${pecFormId}_datafield_78770_1_1_1_label"
   def needAdjustmentsForWorkNoId                   = s"${pecFormId}_datafield_78770_1_1_2_label"
   def anyAdjustmentsDetailsId                      = s"${pecFormId}_datafield_78774_1_1"
