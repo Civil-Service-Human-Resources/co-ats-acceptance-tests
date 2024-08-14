@@ -20,7 +20,6 @@ class PecVacancySpec extends BaseFeatureSpec {
       fillNewCandidateDetails(REGISTER_CANDIDATE_PEC_1)
 
       When("candidate completes all forms")
-//      v9HomeDepartment = vXJobInfoDepartment
       fillFullApplicationDetails()
 
       Then("the candidate is able to fully complete the pec form")
