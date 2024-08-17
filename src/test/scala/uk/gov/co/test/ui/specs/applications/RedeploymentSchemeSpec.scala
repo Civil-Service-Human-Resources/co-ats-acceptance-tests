@@ -16,6 +16,7 @@ class RedeploymentSchemeSpec extends BaseFeatureSpec {
     Scenario("VX: Candidate Selects Home Departments Eligible For Redeployment Scheme", RunInVX) {
       Given("a vacancy is included in the redeployment scheme")
       fillNewVacancyForm(REDEPLOYMENT_VACANCY_DATA)
+//      extractAllVacancyDetails("10651")
 
       When("a candidate selects an eligible home department")
       fillNewCandidateDetails(REGISTER_CANDIDATE_REDEPLOYMENT_SCHEME_1)
@@ -38,6 +39,7 @@ class RedeploymentSchemeSpec extends BaseFeatureSpec {
     Scenario("VX: Vacancy Does Not Meet Criteria For Redeployment Scheme", RunInVX) {
       Given("a vacancy is not included in the redeployment scheme")
       fillNewVacancyForm(NON_REDEPLOYMENT_VACANCY_DATA)
+//      extractAllVacancyDetails("10652")
 
       When("a candidate selects an eligible home department")
       fillNewCandidateDetails(REGISTER_CANDIDATE_REDEPLOYMENT_SCHEME_3)
@@ -49,6 +51,7 @@ class RedeploymentSchemeSpec extends BaseFeatureSpec {
     Scenario("VX: Vacancy & Home Department Do Not Meet Criteria For Redeployment Scheme", RunInVX) {
       Given("a vacancy is not included in the redeployment scheme")
       extractAllVacancyDetails(vacancyId)
+//      extractAllVacancyDetails("10652")
 
       When("a candidate selects an eligible home department")
       fillNewCandidateDetails(REGISTER_CANDIDATE_REDEPLOYMENT_SCHEME_4)

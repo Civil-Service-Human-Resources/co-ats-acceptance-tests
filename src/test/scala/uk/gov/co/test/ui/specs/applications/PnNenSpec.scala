@@ -20,7 +20,7 @@ class PnNenSpec extends BaseFeatureSpec {
     Scenario("VX: A Recruiter Completes The NEN Form (DEFRA)", RunInVX) {
       Given("candidate registers for new job application")
       fillNewVacancyForm(PN_NEN_VACANCY_DATA)
-//      extractAllVacancyDetails("10587")
+//      extractAllVacancyDetails("10650")
       fillNewCandidateDetails(REGISTER_CANDIDATE_NEN_DEFRA)
 
       When("external candidate completes all forms until nen form")

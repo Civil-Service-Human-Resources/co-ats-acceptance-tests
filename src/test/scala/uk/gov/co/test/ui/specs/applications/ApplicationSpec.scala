@@ -15,7 +15,7 @@ class ApplicationSpec extends BaseFeatureSpec {
     Scenario("VX: All Forms; Master Application Process", RunInVX) {
       Given("new vacancy is created and posted")
       fillNewVacancyForm(MASTER_VACANCY_DATA)
-//      extractAllVacancyDetails("10584")
+//      extractAllVacancyDetails("10647")
 
       When("recruiter & new candidate complete the full application")
       v9HomeDepartment = vXJobInfoDepartment
