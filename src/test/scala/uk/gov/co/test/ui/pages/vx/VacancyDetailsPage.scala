@@ -500,10 +500,12 @@ object VacancyDetailsPage extends VacancyBasePage {
   }
 
   private def extractGreatForVeterans(): Unit = {
-    val veterans = waitForVisibilityOfElementById(greatForVeteransId).findElement(By.xpath(checkLabelPath))
-    if (veterans != null && veterans.getText == "Yes") {
-      vXGreatForVeterans = true
-    } else vXGreatForVeterans = false
+    if (vXApproach == "External") {
+      val veterans = waitForVisibilityOfElementById(greatForVeteransId).findElement(By.xpath(checkLabelPath))
+      if (veterans != null && veterans.getText == "Yes") {
+        vXGreatForVeterans = true
+      } else vXGreatForVeterans = false
+    }
   }
 
   private def extractNameBlindCvAndStatement(): Unit = {
