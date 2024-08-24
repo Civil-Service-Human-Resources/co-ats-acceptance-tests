@@ -15,6 +15,7 @@ object SearchJobsPage extends CivilServiceJobsBasePage {
   val accountCreatedSuccessMessage1 = "Success"
   val accountCreatedSuccessMessage2 = "Account created"
   val navigateToHomeSearchPath      = ".//a[@title='Search for jobs']"
+  val homePagePath                  = ".//a[@title='Home']"
   val searchForJobsId               = "search_button"
 
   def accountCreatedSuccess1(): String =
@@ -61,10 +62,10 @@ object SearchJobsPage extends CivilServiceJobsBasePage {
     title.click()
     if (driver.findElement(By.tagName("h1")).getText == "Cannot view job") {
       println("Vacancy search resulted in 'Cannot view job' error pathway!")
-      waitForVisibilityOfElementByPath(navigateToHomeSearchPath).click()
+      waitForVisibilityOfElementByPath(homePagePath).click()
       waitForVisibilityOfElementByTag("h1").getText shouldEqual cSJobSearchHeader
       searchForVacancyFlow(jobId, searchPathway)
-      val title                  = waitForElementClickableByPath(jobDetailsPath)
+      val title = waitForElementClickableByPath(jobDetailsPath)
       title.click()
     }
   }
