@@ -7,9 +7,9 @@ import scala.util.Try
 object TestConfiguration {
   val config: Config = ConfigFactory.load()
 
-  def url(service: String): String = {
-    val host = s"${environmentHost(service)}"
-    s"$host${serviceRoute(service)}"
+  def url(serviceName: String): String = {
+    val host = s"${environmentHost(serviceName)}"
+    s"$host${serviceRoute(serviceName)}"
   }
 
   def urlHost(service: String): String =

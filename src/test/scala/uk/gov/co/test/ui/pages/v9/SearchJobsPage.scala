@@ -62,7 +62,7 @@ object SearchJobsPage extends CivilServiceJobsBasePage {
     title.click()
     if (driver.findElement(By.tagName("h1")).getText == "Cannot view job") {
       println("Vacancy search resulted in 'Cannot view job' error pathway!")
-      waitForVisibilityOfElementByPath(homePagePath).click()
+      go to url
       waitForVisibilityOfElementByTag("h1").getText shouldEqual cSJobSearchHeader
       searchForVacancyFlow(jobId, searchPathway)
       val title = waitForElementClickableByPath(jobDetailsPath)
