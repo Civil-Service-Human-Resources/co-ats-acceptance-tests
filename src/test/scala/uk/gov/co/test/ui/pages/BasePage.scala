@@ -273,4 +273,12 @@ trait BasePage extends Matchers with Page with WebBrowser with PatienceConfigura
     }
     refreshPage()
   }
+
+  def waitForDataSaved()(implicit driver: WebDriver): Unit = {
+    val wait = new WebDriverWait(driver, 120, 1000)
+    val messageIconPath = ".//*[@class='msg_icon']"
+    wait.until { (d: WebDriver) =>
+      !d.findElements(By.xpath(messageIconPath)).isEmpty
+    }
+  }
 }

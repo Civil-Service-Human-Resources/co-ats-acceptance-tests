@@ -2,7 +2,7 @@ package uk.gov.co.test.ui.pages.vx
 
 import org.openqa.selenium.{By, WebElement}
 import org.scalatest.concurrent.Eventually.eventually
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{v9HomeDepartment, vXAbilitiesRequired, vXAnyAdditionalQuestions, vXAnyOnlineTests, vXApplicationClosingDate, vXApplicationLiveDate, vXApproach, vXAttachmentRequired, vXAvailableOutsideInNI, vXBehaviourApplicationRequired, vXBehaviourInterviewRequired, vXBehavioursRequired, vXBudgetaryApproval, vXBusinessArea, vXBusinessAreaDetail, vXCandidateInstructions, vXCandidateUploadIdentityDocs, vXCommunitiesInNIR, vXContactName, vXCostCentre, vXCrcCheckProvider, vXCrcLevel, vXCvAttachment, vXCvScoreRange, vXDesirablePastExperience, vXDetailsForUploadIdentityDocs, vXEmailForQuestions, vXExperiencesRequired, vXFullQualification, vXGiveLocationPreference, vXGreatForVeterans, vXHavePecMailbox, vXHowManyBehaviours, vXHowManyQuestions, vXHowManySkills, vXHowManyStrengths, vXInterviewExpectedRounds, vXInterviewFourType, vXInterviewNumber, vXInterviewOneType, vXInterviewThreeType, vXInterviewTwoType, vXJobGradeEquivalent, vXJobGrades, vXJobHistory, vXJobInfoDepartment, vXLanguagesMandatory, vXLicencesMandatory, vXListOfChosenBehaviours, vXListOfSkillsApplicationRequired, vXListOfSkillsInterviewRequired, vXListOfStrengths, vXListOfTechSkills, vXListOfTechSkillsDescription, vXLocationDisplay, vXLocationType, vXManuallyCheckIdentityDocs, vXMaxLocations, vXMedicalRequired, vXMembershipsMandatory, vXNoOfJobsAvailable, vXNoPecOgdDigitalTransfer, vXNonReserved, vXOtherLocations, vXPecAdditionalCheck, vXPecBankruptcyCheck, vXPecCrc, vXPecEmploymentHistoryCheck, vXPecFraudCheck, vXPecGeneralInfo, vXPecHealthDisplayOptions, vXPecHealthRefCheck, vXPecHrEmailForNen, vXPecHrEmailForPn, vXPecIncludeAdditionalCheck, vXPecMailbox, vXPecNameOfAdditionalCheck, vXPecNen, vXPecNsv, vXPecNsvDisplayOptions, vXPecOgdSecurityCheck, vXPecOverseasCheck, vXPecPensionsCheck, vXPecPn, vXPecPreviousCivilEmploymentCheck, vXPecReferenceCheck, vXPecSelfEmploymentCheck, vXPecUseDigitalOgdProcess, vXPecWorkplaceMisconductCheck, vXPersonalStatement, vXPersonalStatementNameBlind, vXPreSiftRequired, vXPreviousExperiences, vXProfession, vXProfile, vXProvideNameBlindCv, vXQualificationsMandatory, vXQuestionOne, vXQuestionThree, vXQuestionTwo, vXRejectApplyingOnPromotion, vXRejectLanguagesNotHeld, vXRejectLicencesNotHeld, vXRejectLiveMisconduct, vXRejectMembershipsNotHeld, vXRejectNationalityReq, vXRejectNoRightToRemain, vXRejectPoorAttendance, vXRejectPoorPerformance, vXRejectProbation, vXRejectQualificationsNotHeld, vXReserveExtendLength, vXReserveExtendRequired, vXReserveListLength, vXReserveListRequired, vXRtwChecks, vXSpecificLanguages, vXSpecificLicences, vXSpecificMemberships, vXSpecificPastExperience, vXSpecificQualifications, vXStatementGuidance, vXStatementGuidanceText, vXStatementScoreRange, vXStatementWordLimit, vXStrengthsRequired, vXTeamEmail, vXTechSkillsRequired, vXTypeOfRole, vXUseOnlinePecForms, vXVacanciesInNIR, vXVacancyHolderEmail, vXVacancyHolderName, vXVettingLevel, vXWhenRtwChecks, vXWhichIdentityChecks, vacancyFormId, vacancyId, vacancyName}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{v9HomeDepartment, vXAbilitiesRequired, vXAnyAdditionalQuestions, vXAnyOnlineTests, vXApplicationClosingDate, vXApplicationLiveDate, vXApproach, vXAttachmentRequired, vXAvailableOutsideInNI, vXBehaviourApplicationRequired, vXBehaviourInterviewRequired, vXBehavioursRequired, vXBudgetaryApproval, vXBusinessArea, vXBusinessAreaDetail, vXCandidateInstructions, vXCandidateUploadIdentityDocs, vXCommunitiesInNIR, vXContactName, vXCostCentre, vXCrcCheckProvider, vXCrcLevel, vXCvAttachment, vXCvScoreRange, vXDesirablePastExperience, vXDetailsForUploadIdentityDocs, vXEmailForQuestions, vXExperiencesRequired, vXFullQualification, vXGiveLocationPreference, vXGreatForVeterans, vXHavePecMailbox, vXHowManyBehaviours, vXHowManyQuestions, vXHowManySkills, vXHowManyStrengths, vXInterviewExpectedRounds, vXInterviewFourType, vXInterviewNumber, vXInterviewOneType, vXInterviewThreeType, vXInterviewTwoType, vXJobGradeEquivalent, vXJobGrades, vXJobHistory, vXJobInfoDepartment, vXLanguagesMandatory, vXLicencesMandatory, vXListOfChosenBehaviours, vXListOfSkillsApplicationRequired, vXListOfSkillsInterviewRequired, vXListOfStrengths, vXListOfTechSkills, vXListOfTechSkillsDescription, vXLocationDisplay, vXLocationType, vXManuallyCheckIdentityDocs, vXMaxLocations, vXMedicalRequired, vXMembershipsMandatory, vXNoOfJobsAvailable, vXNoPecOgdDigitalTransfer, vXNonReserved, vXOfferCivilServicePension, vXOtherLocations, vXPecAdditionalCheck, vXPecBankruptcyCheck, vXPecCrc, vXPecEmploymentHistoryCheck, vXPecFraudCheck, vXPecGeneralInfo, vXPecHealthDisplayOptions, vXPecHealthRefCheck, vXPecHrEmailForNen, vXPecHrEmailForPn, vXPecIncludeAdditionalCheck, vXPecMailbox, vXPecNameOfAdditionalCheck, vXPecNen, vXPecNsv, vXPecNsvDisplayOptions, vXPecOgdSecurityCheck, vXPecOverseasCheck, vXPecPensionsCheck, vXPecPn, vXPecPreviousCivilEmploymentCheck, vXPecReferenceCheck, vXPecSelfEmploymentCheck, vXPecUseDigitalOgdProcess, vXPecWorkplaceMisconductCheck, vXPersonalStatement, vXPersonalStatementNameBlind, vXPreSiftRequired, vXPreviousExperiences, vXProfession, vXProfile, vXProvideNameBlindCv, vXQualificationsMandatory, vXQuestionOne, vXQuestionThree, vXQuestionTwo, vXRejectApplyingOnPromotion, vXRejectLanguagesNotHeld, vXRejectLicencesNotHeld, vXRejectLiveMisconduct, vXRejectMembershipsNotHeld, vXRejectNationalityReq, vXRejectNoRightToRemain, vXRejectPoorAttendance, vXRejectPoorPerformance, vXRejectProbation, vXRejectQualificationsNotHeld, vXReserveExtendLength, vXReserveExtendRequired, vXReserveListLength, vXReserveListRequired, vXRtwChecks, vXSalaryMaximum, vXSalaryMinimum, vXSalaryMoreDetails, vXSpecificLanguages, vXSpecificLicences, vXSpecificMemberships, vXSpecificPastExperience, vXSpecificQualifications, vXStatementGuidance, vXStatementGuidanceText, vXStatementScoreRange, vXStatementWordLimit, vXStrengthsRequired, vXTeamEmail, vXTechSkillsRequired, vXTypeOfRole, vXUseOnlinePecForms, vXVacanciesInNIR, vXVacancyHolderEmail, vXVacancyHolderName, vXVettingLevel, vXWhenRtwChecks, vXWhichIdentityChecks, vacancyFormId, vacancyId, vacancyName}
 import uk.gov.co.test.ui.pages.vx.createvacancypage.PecCheckFormsSection.nenHrEmailHeaderId
 import uk.gov.co.test.ui.pages.vx.vacancytabs.InterviewFourEvaluationTab.{vXI4AssessmentsTotalScore, vXI4BehavioursTotalScore, vXI4ExperienceScore, vXI4StrengthsTotalScore, vXI4TechSkillsTotalScore}
 import uk.gov.co.test.ui.pages.vx.vacancytabs.InterviewOneEvaluationTab.{vXI1AssessmentsTotalScore, vXI1BehavioursTotalScore, vXI1ExperienceScore, vXI1StrengthsTotalScore, vXI1TechSkillsTotalScore}
@@ -183,6 +183,10 @@ object VacancyDetailsPage extends VacancyBasePage {
   def pecMailboxId                      = s"${vacancyFormId}_datafield_154303_1_1"
   def pecRtwCheckId                     = s"select2-${vacancyFormId}_datafield_98824_1_1-container"
   def jobGradeId                        = s"select2-${vacancyFormId}_datafield_154973_1_1-container"
+  def salaryMinimumId                   = s"${vacancyFormId}_datafield_155044_1_1"
+  def salaryMaximumId                   = s"${vacancyFormId}_datafield_155051_1_1"
+  def salaryMoreDetailsId               = s"${vacancyFormId}_datafield_155058_1_1_en-GB"
+  def offerCivilServicePensionId        = s"${vacancyFormId}_datafield_198564_1_1_fieldset"
   def jobGradeEquivalentId              = s"${vacancyFormId}_datafield_154981_1_1_en-GB"
   def vacancyHolderNameId               = s"${vacancyFormId}_datafield_115926_1_1"
   def contactNameId                     = s"${vacancyFormId}_datafield_59444_1_1"
@@ -421,6 +425,22 @@ object VacancyDetailsPage extends VacancyBasePage {
   private def extractJobGradeEquivalent(): Unit =
     vXJobGradeEquivalent = waitForVisibilityOfElementById(jobGradeEquivalentId).getAttribute("value")
 
+  private def extractSalaryMinimum(): Unit =
+    vXSalaryMinimum = waitForVisibilityOfElementById(salaryMinimumId).getAttribute("value")
+
+  private def extractSalaryMaximum(): Unit =
+    vXSalaryMaximum = waitForVisibilityOfElementById(salaryMaximumId).getAttribute("value")
+
+  private def extractSalaryMoreDetails(): Unit =
+    vXSalaryMoreDetails = waitForVisibilityOfElementById(salaryMoreDetailsId).getAttribute("value")
+
+  private def extractOfferCivilServicePension(): Unit = {
+    val pension = waitForVisibilityOfElementById(offerCivilServicePensionId).findElement(By.xpath(checkLabelPath))
+    if (pension.getText == "Yes") {
+      vXOfferCivilServicePension = true
+    } else vXOfferCivilServicePension = false
+  }
+
   private def extractContactName(): Unit =
     vXContactName = waitForVisibilityOfElementById(contactNameId).getAttribute("value")
 
@@ -499,14 +519,13 @@ object VacancyDetailsPage extends VacancyBasePage {
     }
   }
 
-  private def extractGreatForVeterans(): Unit = {
+  private def extractGreatForVeterans(): Unit =
     if (vXApproach == "External") {
       val veterans = waitForVisibilityOfElementById(greatForVeteransId).findElement(By.xpath(checkLabelPath))
       if (veterans != null && veterans.getText == "Yes") {
         vXGreatForVeterans = true
       } else vXGreatForVeterans = false
     }
-  }
 
   private def extractNameBlindCvAndStatement(): Unit = {
     val provideNameBlindCvDisplayed = driver.findElements(By.id(provideNameBlindCvId))
@@ -1483,9 +1502,13 @@ object VacancyDetailsPage extends VacancyBasePage {
     extractGiveLocationPreferences()
   }
 
-  private def contractDetails(): Unit = {
+  def contractDetails(): Unit = {
     extractJobGrades()
     extractJobGradeEquivalent()
+    extractSalaryMinimum()
+    extractSalaryMaximum()
+    extractSalaryMoreDetails()
+    extractOfferCivilServicePension()
   }
 
   private def contactDetails(): Unit = {

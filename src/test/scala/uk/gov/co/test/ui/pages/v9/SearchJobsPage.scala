@@ -3,7 +3,7 @@ package uk.gov.co.test.ui.pages.v9
 import org.openqa.selenium.support.ui.WebDriverWait
 import org.openqa.selenium.{By, Keys, WebDriver}
 import org.scalatest.concurrent.Eventually.eventually
-import uk.gov.co.test.ui.data.MasterVacancyDetails.v9RunInWelsh
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{v9RunInWelsh, vacancyId, vacancyName}
 import uk.gov.co.test.ui.pages.v9.ApplicationsPage.extractApplicationInfo
 
 object SearchJobsPage extends CivilServiceJobsBasePage {
@@ -15,7 +15,6 @@ object SearchJobsPage extends CivilServiceJobsBasePage {
   val accountCreatedSuccessMessage1 = "Success"
   val accountCreatedSuccessMessage2 = "Account created"
   val navigateToHomeSearchPath      = ".//a[@title='Search for jobs']"
-  val homePagePath                  = ".//a[@title='Home']"
   val searchForJobsId               = "search_button"
 
   def accountCreatedSuccess1(): String =
@@ -55,18 +54,28 @@ object SearchJobsPage extends CivilServiceJobsBasePage {
     }
   }
 
+  def errorSearchForVacancyFlow(jobId: String, searchPathway: String, jobDetailsPath: String): Unit = {
+    val wait = new WebDriverWait(driver, 210, 1000)
+    wait.until { (d: WebDriver) =>
+      println("Vacancy search resulted in 'Cannot view job' error pathway!")
+      d.navigate().refresh()
+      goTo(url)
+      eventually(onPage(civilServiceJobsPageTitle))
+      enterSearchCriteria(jobId, searchPathway)
+      searchForVacancyFlow(jobId, searchPathway)
+      val title = waitForElementClickableByPath(jobDetailsPath)
+      title.click()
+      waitForVisibilityOfElementByTag("h1").getText != "Cannot view job"
+    }
+  }
+
   def checkForNewVacancy(jobId: String, jobTitle: String, searchPathway: String): Unit = {
     val jobDetailsPath: String = s".//a[text()='$jobTitle']"
     searchForVacancyFlow(jobId, searchPathway)
     val title                  = waitForElementClickableByPath(jobDetailsPath)
     title.click()
     if (driver.findElement(By.tagName("h1")).getText == "Cannot view job") {
-      println("Vacancy search resulted in 'Cannot view job' error pathway!")
-      go to url
-      waitForVisibilityOfElementByTag("h1").getText shouldEqual cSJobSearchHeader
-      searchForVacancyFlow(jobId, searchPathway)
-      val title = waitForElementClickableByPath(jobDetailsPath)
-      title.click()
+      errorSearchForVacancyFlow(jobId, searchPathway, jobDetailsPath)
     }
   }
 
@@ -79,6 +88,15 @@ object SearchJobsPage extends CivilServiceJobsBasePage {
       }
     }
     clickOn(searchForJobsId)
+  }
+
+  def jobSearchToCheckPensionDetails(): Unit = {
+    waitForVisibilityOfElementByPath(navigateToHomeSearchPath).click()
+    eventually(onPage(civilServiceJobsPageTitle))
+    enterSearchCriteria(vacancyId, "what")
+    checkForNewVacancy(vacancyId, vacancyName, "what")
+    eventually(onPage(s"$vacancyName - Civil Service Jobs - GOV.UK"))
+    if (v9RunInWelsh) waitForVisibilityOfElementByPath(".//*[@title='Cymraeg']").click()
   }
 
   def jobSearchAndApplyFlow(jobTitle: String, jobId: String, searchPathway: String): Unit = {

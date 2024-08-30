@@ -6,6 +6,7 @@ import uk.gov.co.test.ui.data.vx.application.{ApplicationDetails, AssessmentOutc
 import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.applicationStateAfterInterview
 import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.{availableBarItems, completeI1EvaluationBarId, interviewEvaluation, noShowI1BarId, withdrawAtInterviewBarId}
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
+import uk.gov.co.test.ui.pages.vx.vacancytabs.InterviewTwoEvaluationTab.scrollToElement
 
 import scala.collection.mutable.ListBuffer
 
@@ -187,6 +188,7 @@ object InterviewOneEvaluationTab extends VacancyBasePage {
     commentsId: String,
     comment: Option[String] = None
   ): Unit = {
+    scrollToElement(By.id(titleId))
     waitForVisibilityOfElementById(titleId).getText shouldEqual expectedTitle
     scrollToElement(By.id(scoreId))
     waitForVisibilityOfElementById(scoreId).click()
@@ -205,6 +207,7 @@ object InterviewOneEvaluationTab extends VacancyBasePage {
     commentsId: String,
     comment: Option[String] = None
   ): Unit = {
+    scrollToElement(By.id(nameId))
     waitForVisibilityOfElementById(nameId).sendKeys(assessmentName)
     waitForVisibilityOfElementById(scoreId).click()
     action().moveToElement(waitForDropdownOption(score.toString)).perform()
@@ -268,7 +271,6 @@ object InterviewOneEvaluationTab extends VacancyBasePage {
   private def enterBehaviourFourOutcome(interviewOneDetails: InterviewOneDetails): Unit = {
     val interviewRequired = vXBehaviourInterviewRequired.lift(3).get
     if (interviewRequired) {
-      scrollToElement(By.id(behaviourFourTitleId))
       enterOutcome(
         behaviourFourTitleId,
         vXListOfChosenBehaviours(3),

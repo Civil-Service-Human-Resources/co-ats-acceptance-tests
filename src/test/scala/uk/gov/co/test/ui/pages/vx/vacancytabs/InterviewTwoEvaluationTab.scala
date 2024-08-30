@@ -184,6 +184,7 @@ object InterviewTwoEvaluationTab extends VacancyBasePage {
     commentsId: String,
     comment: Option[String] = None
   ): Unit = {
+    scrollToElement(By.id(titleId))
     waitForVisibilityOfElementById(titleId).getText shouldEqual expectedTitle
     waitForVisibilityOfElementById(scoreId).click()
     action().moveToElement(waitForDropdownOption(score.toString)).perform()

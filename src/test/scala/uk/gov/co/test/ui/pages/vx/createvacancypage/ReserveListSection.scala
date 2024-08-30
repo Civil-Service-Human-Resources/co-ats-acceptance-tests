@@ -5,6 +5,7 @@ import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXReserveExtendLength, vXRes
 import uk.gov.co.test.ui.data.vx.vacancy.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 import uk.gov.co.test.ui.pages.vx.VacancyDetailsPage.{extractAllVacancyDetails, navigateToVacancyForms, reserveList, searchForVacancy}
+import uk.gov.co.test.ui.pages.vx.createvacancypage.ContractDetailsSection.waitForDataSaved
 
 case class ReserveListDetails(
   reserveList: Boolean,
@@ -23,6 +24,7 @@ object ReserveListSection extends VacancyBasePage {
   def approvalToExtendNoId           = s"${vacancyFormId}_datafield_177141_1_1_2"
   def extendLengthId                 = s"select2-${vacancyFormId}_datafield_205583_1_1-container"
   def approveForPublicationMessageId = s"${vacancyFormId}_label_72537_1"
+  def dataSavedIconId                = ".//*[@class='msg_icon']"
 
   def selectReserveList(reserveListDetails: ReserveListDetails): Unit = {
     scrollToElement(By.id(reserveListId))
@@ -82,7 +84,6 @@ object ReserveListSection extends VacancyBasePage {
       clickOnRadioButton(reserveListYesId)
       lengthOfReserveList(reserveLength)
       if (reserveLength == "12 Months") {
-//        if (extendRequired.isDefined && extendRequired.get.equals(true)) {
         if (extendRequired.isDefined && extendRequired.get) {
           clickOnRadioButton(approvalToExtendYesId)
           waitForVisibilityOfElementById(extendLengthId).click()
@@ -93,6 +94,7 @@ object ReserveListSection extends VacancyBasePage {
       scrollToElement(By.id(submitForm))
       clickOn(submitForm)
       waitForVisibilityOfElementById(approveForPublicationMessageId).isDisplayed
+      waitForDataSaved()
     }
     extractAllVacancyDetails(vacancyId)
     totalReserveExpiryLength()
