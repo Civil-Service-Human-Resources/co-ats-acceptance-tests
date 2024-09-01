@@ -4,7 +4,7 @@ import org.openqa.selenium.By
 import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXReserveExtendLength, vXReserveExtendRequired, vXReserveListLength, vXReserveListRequired, vXReserveListTotalLength, vacancyFormId, vacancyId}
 import uk.gov.co.test.ui.data.vx.vacancy.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
-import uk.gov.co.test.ui.pages.vx.VacancyDetailsPage.{extractAllVacancyDetails, navigateToVacancyForms, reserveList, searchForVacancy}
+import uk.gov.co.test.ui.pages.vx.VacancyDetailsPage.{extractAllApplyOnlyVacancyDetails, navigateToVacancyForms, reserveList, searchForVacancy}
 import uk.gov.co.test.ui.pages.vx.createvacancypage.ContractDetailsSection.waitForDataSaved
 
 case class ReserveListDetails(
@@ -96,7 +96,7 @@ object ReserveListSection extends VacancyBasePage {
       waitForVisibilityOfElementById(approveForPublicationMessageId).isDisplayed
       waitForDataSaved()
     }
-    extractAllVacancyDetails(vacancyId)
+    extractAllApplyOnlyVacancyDetails(vacancyId)
     totalReserveExpiryLength()
   }
 

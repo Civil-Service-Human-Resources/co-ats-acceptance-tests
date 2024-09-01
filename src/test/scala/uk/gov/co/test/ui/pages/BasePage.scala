@@ -9,8 +9,10 @@ import org.scalatest.concurrent.PatienceConfiguration
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.time.{Millis, Seconds, Span}
 import org.scalatestplus.selenium.{Page, WebBrowser}
+import uk.gov.co.test.ui.conf.TestConfiguration
 import uk.gov.co.test.ui.flows.v9.LoginCandidateFlow.loginNewCandidate
 import uk.gov.co.test.ui.pages.v9.SignInPage.signOut
+import uk.gov.co.test.ui.pages.vx.DashboardPage.switchToV9Test
 
 import java.util
 import java.util.UUID
@@ -275,10 +277,13 @@ trait BasePage extends Matchers with Page with WebBrowser with PatienceConfigura
   }
 
   def waitForDataSaved()(implicit driver: WebDriver): Unit = {
-    val wait = new WebDriverWait(driver, 120, 1000)
+    val wait            = new WebDriverWait(driver, 120, 1000)
     val messageIconPath = ".//*[@class='msg_icon']"
     wait.until { (d: WebDriver) =>
       !d.findElements(By.xpath(messageIconPath)).isEmpty
     }
   }
+
+  def navigateToV9()(implicit driver: WebDriver): Unit =
+    if (currentUrl.startsWith(TestConfiguration.urlHost("vxconfig"))) switchToV9Test()
 }

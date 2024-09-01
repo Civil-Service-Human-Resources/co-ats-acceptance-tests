@@ -1502,6 +1502,12 @@ object VacancyDetailsPage extends VacancyBasePage {
     extractGiveLocationPreferences()
   }
 
+  private def locationsForAdvertOnly(): Unit = {
+    extractLocationType()
+    extractLocationDisplay()
+    extractVacancyInNI()
+  }
+
   def contractDetails(): Unit = {
     extractJobGrades()
     extractJobGradeEquivalent()
@@ -1606,7 +1612,7 @@ object VacancyDetailsPage extends VacancyBasePage {
       extractPnHrEmail()
     }
 
-  def extractAllVacancyDetails(vacancyToExtract: String): Unit = {
+  def extractAllApplyOnlyVacancyDetails(vacancyToExtract: String): Unit = {
 //    resetApplicationDetails()
     searchForVacancy(vacancyToExtract)
     navigateToVacancyForms()
@@ -1627,5 +1633,20 @@ object VacancyDetailsPage extends VacancyBasePage {
     vacancyManagement()
     onlinePreEmploymentCheckForms()
     preEmploymentCheckForms()
+  }
+
+  def extractAllAdvertOnlyVacancyDetails(vacancyToExtract: String): Unit = {
+    searchForVacancy(vacancyToExtract)
+    navigateToVacancyForms()
+    jobInformationDetails()
+    approach()
+    approval()
+    locationsForAdvertOnly()
+    contractDetails() //TODO not all things covered
+    //    theAdvert() TODO
+    contactDetails()
+    checkingAndVetting()
+    successProfiles()
+    vacancyManagement()
   }
 }

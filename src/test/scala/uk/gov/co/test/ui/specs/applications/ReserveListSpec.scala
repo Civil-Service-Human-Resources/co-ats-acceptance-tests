@@ -7,7 +7,7 @@ import uk.gov.co.test.ui.flows.e2e.FullApplicationFlow.reserveListFlow
 import uk.gov.co.test.ui.flows.v9.RegisterCandidateFlow.fillNewCandidateDetails
 import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.fillNewVacancyForm
 import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.reserveExpiryList
-import uk.gov.co.test.ui.pages.vx.VacancyDetailsPage.extractAllVacancyDetails
+import uk.gov.co.test.ui.pages.vx.VacancyDetailsPage.extractAllApplyOnlyVacancyDetails
 import uk.gov.co.test.ui.pages.vx.createvacancypage.ReserveListSection.changeReserveListDetails
 import uk.gov.co.test.ui.pages.vx.vacancytabs.ExternalPostingsTab.repostExternalPosting
 import uk.gov.co.test.ui.pages.vx.vacancytabs.ReserveListsTab.{reserveListExpiryChecks, reserveListHistoryEmailChecks, reserveListHistoryProcessChecks}

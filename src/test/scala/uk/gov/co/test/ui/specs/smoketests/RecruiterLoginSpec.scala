@@ -6,7 +6,7 @@ import uk.gov.co.test.ui.flows.e2e.InterviewFlow.untagVacancies
 import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.vxConfigHomePageTitle
 import uk.gov.co.test.ui.flows.vx.RecruiterLoginFlow.loginWithRecruiterDetails
 import uk.gov.co.test.ui.pages.v9.SignInPage.onPage
-import uk.gov.co.test.ui.pages.vx.VacancyDetailsPage.extractAllVacancyDetails
+import uk.gov.co.test.ui.pages.vx.VacancyDetailsPage.extractAllApplyOnlyVacancyDetails
 import uk.gov.co.test.ui.specs.BaseFeatureSpec
 import uk.gov.co.test.ui.tags.RunInVX
 
@@ -24,7 +24,7 @@ class RecruiterLoginSpec extends BaseFeatureSpec {
     }
 
     Scenario("VX: A Recruiter Extracts All Vacancy Details", RunInVX) {
-      extractAllVacancyDetails(vacancyId)
+      extractAllApplyOnlyVacancyDetails(vacancyId)
     }
 
     Scenario("VX: A Recruiter Untags Vacancy Details", RunInVX) {

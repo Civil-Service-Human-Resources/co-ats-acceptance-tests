@@ -9,7 +9,7 @@ import uk.gov.co.test.ui.flows.v9.RegisterCandidateFlow.fillNewCandidateDetails
 import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.fillNewVacancyForm
 import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.{confirmApplicationUpdateState, passedPecChecks}
 import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.{onboardingNenComplete, postingNoticeCompleted}
-import uk.gov.co.test.ui.pages.vx.VacancyDetailsPage.extractAllVacancyDetails
+import uk.gov.co.test.ui.pages.vx.VacancyDetailsPage.extractAllApplyOnlyVacancyDetails
 import uk.gov.co.test.ui.pages.vx.vacancytabs.NewEntrantNoticeTab.newEntrantNoticeFlow
 import uk.gov.co.test.ui.pages.vx.vacancytabs.PostingNoticeTab.postingNoticeFlow
 import uk.gov.co.test.ui.specs.BaseFeatureSpec
@@ -34,7 +34,7 @@ class PnNenSpec extends BaseFeatureSpec {
 
     Scenario("VX: A Recruiter Completes The PN Form (DEFRA)", RunInVX) {
       Given("candidate registers for new job application")
-      extractAllVacancyDetails(vacancyId)
+      extractAllApplyOnlyVacancyDetails(vacancyId)
       fillNewCandidateDetails(REGISTER_CANDIDATE_PN_DEFRA)
 
       When("internal candidate completes all forms until pn form")

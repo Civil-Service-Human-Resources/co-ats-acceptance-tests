@@ -94,6 +94,7 @@ object SearchJobsPage extends CivilServiceJobsBasePage {
   }
 
   def jobSearchToCheckPensionDetails(): Unit = {
+    navigateToV9
     waitForVisibilityOfElementByPath(navigateToHomeSearchPath).click()
     eventually(onPage(civilServiceJobsPageTitle))
     enterSearchCriteria(vacancyId, "what")

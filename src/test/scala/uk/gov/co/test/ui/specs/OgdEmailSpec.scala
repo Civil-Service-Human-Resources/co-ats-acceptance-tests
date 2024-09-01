@@ -7,7 +7,7 @@ import uk.gov.co.test.ui.flows.e2e.FullApplicationFlow.ogdFlow
 import uk.gov.co.test.ui.flows.v9.RegisterCandidateFlow.fillNewCandidateDetails
 import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.fillNewVacancyForm
 import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.acceptsOfferAgain
-import uk.gov.co.test.ui.pages.vx.VacancyDetailsPage.extractAllVacancyDetails
+import uk.gov.co.test.ui.pages.vx.VacancyDetailsPage.extractAllApplyOnlyVacancyDetails
 import uk.gov.co.test.ui.pages.vx.vacancytabs.HistoryTab.{emailHistoryChecks, ogdTransferEmailChecks, ogdTransferHistoryChecks, setBackToProvisionalOfferOnline}
 import uk.gov.co.test.ui.tags.RunInVX
 
@@ -63,7 +63,7 @@ class OgdEmailSpec extends BaseFeatureSpec {
 
     Scenario("VX: Email Sent For OGD Transfer Department (DWP)", RunInVX) {
       Given("a vacancy is created with grs recruitment stage type set to bau")
-      extractAllVacancyDetails("10053")
+      extractAllApplyOnlyVacancyDetails("10053")
       fillNewCandidateDetails(REGISTER_CANDIDATE_OGD_DEFRA)
 
       When("candidate selects ogd on offer")
@@ -82,7 +82,7 @@ class OgdEmailSpec extends BaseFeatureSpec {
 
     Scenario("VX: Email Sent For OGD Transfer Department (HSE)", RunInVX) {
       Given("a vacancy is created with grs recruitment stage type set to bau")
-      extractAllVacancyDetails("10053")
+      extractAllApplyOnlyVacancyDetails("10053")
       fillNewCandidateDetails(REGISTER_CANDIDATE_OGD_DEFRA)
 
       When("candidate selects ogd on offer")
@@ -101,7 +101,7 @@ class OgdEmailSpec extends BaseFeatureSpec {
 
     Scenario("VX: Email Sent For OGD Transfer Department (RPA)", RunInVX) {
       Given("a vacancy is created with grs recruitment stage type set to bau")
-      extractAllVacancyDetails("10053")
+      extractAllApplyOnlyVacancyDetails("10053")
       fillNewCandidateDetails(REGISTER_CANDIDATE_OGD_DEFRA)
 
       When("candidate selects ogd on offer")
@@ -120,7 +120,7 @@ class OgdEmailSpec extends BaseFeatureSpec {
 
     Scenario("VX: Email Sent For OGD Transfer Department (VMD)", RunInVX) {
       Given("a vacancy is created with grs recruitment stage type set to bau")
-      extractAllVacancyDetails("10053")
+      extractAllApplyOnlyVacancyDetails("10053")
       fillNewCandidateDetails(REGISTER_CANDIDATE_OGD_DEFRA)
 
       When("candidate selects ogd on offer")
@@ -139,7 +139,7 @@ class OgdEmailSpec extends BaseFeatureSpec {
 
     Scenario("VX: Email Sent For OGD Transfer Department (GPA)", RunInVX) {
       Given("a vacancy is created with grs recruitment stage type set to bau")
-      extractAllVacancyDetails("10053")
+      extractAllApplyOnlyVacancyDetails("10053")
       fillNewCandidateDetails(REGISTER_CANDIDATE_OGD_DEFRA)
 
       When("candidate selects ogd on offer")
@@ -158,7 +158,7 @@ class OgdEmailSpec extends BaseFeatureSpec {
 
     Scenario("VX: Email Sent For OGD Transfer Department (GDS)", RunInVX) {
       Given("a vacancy is created with grs recruitment stage type set to bau")
-      extractAllVacancyDetails("10053")
+      extractAllApplyOnlyVacancyDetails("10053")
       fillNewCandidateDetails(REGISTER_CANDIDATE_OGD_DEFRA)
 
       When("candidate selects ogd on offer")
@@ -177,7 +177,7 @@ class OgdEmailSpec extends BaseFeatureSpec {
 
     Scenario("VX: Email Sent For OGD Transfer Department (CDDO)", RunInVX) {
       Given("a vacancy is created with grs recruitment stage type set to bau")
-      extractAllVacancyDetails("10053")
+      extractAllApplyOnlyVacancyDetails("10053")
       fillNewCandidateDetails(REGISTER_CANDIDATE_OGD_DEFRA)
 
       When("candidate selects ogd on offer")
@@ -196,7 +196,7 @@ class OgdEmailSpec extends BaseFeatureSpec {
 
     Scenario("VX: Email Sent For OGD Transfer Department (GCF)", RunInVX) {
       Given("a vacancy is created with grs recruitment stage type set to bau")
-      extractAllVacancyDetails("10053")
+      extractAllApplyOnlyVacancyDetails("10053")
       fillNewCandidateDetails(REGISTER_CANDIDATE_OGD_DEFRA)
 
       When("candidate selects ogd on offer")
@@ -215,7 +215,7 @@ class OgdEmailSpec extends BaseFeatureSpec {
 
     Scenario("VX: Email Sent For OGD Transfer Department (CEFAS)", RunInVX) {
       Given("a vacancy is created with grs recruitment stage type set to bau")
-      extractAllVacancyDetails("10047")
+      extractAllApplyOnlyVacancyDetails("10047")
       fillNewCandidateDetails(REGISTER_CANDIDATE_OGD_DEFRA)
 
       When("candidate selects ogd on offer")
@@ -234,7 +234,7 @@ class OgdEmailSpec extends BaseFeatureSpec {
 
     Scenario("VX: Email Sent For OGD Transfer Department (MOD)", RunInVX) {
       Given("a vacancy is created with grs recruitment stage type set to bau")
-      extractAllVacancyDetails("10053")
+      extractAllApplyOnlyVacancyDetails("10053")
       fillNewCandidateDetails(REGISTER_CANDIDATE_OGD_DEFRA)
 
       When("candidate selects ogd on offer")
@@ -253,7 +253,7 @@ class OgdEmailSpec extends BaseFeatureSpec {
 
     Scenario("VX: Email Sent For OGD Transfer Department (UKHO)", RunInVX) {
       Given("a vacancy is created with grs recruitment stage type set to bau")
-      extractAllVacancyDetails("10053")
+      extractAllApplyOnlyVacancyDetails("10053")
       fillNewCandidateDetails(REGISTER_CANDIDATE_OGD_DEFRA)
 
       When("candidate selects ogd on offer")
@@ -272,7 +272,7 @@ class OgdEmailSpec extends BaseFeatureSpec {
 
     Scenario("VX: Email Sent For OGD Transfer Department (APHA)", RunInVX) {
       Given("a vacancy is created with grs recruitment stage type set to bau")
-      extractAllVacancyDetails("10053")
+      extractAllApplyOnlyVacancyDetails("10053")
       fillNewCandidateDetails(REGISTER_CANDIDATE_OGD_DEFRA)
 
       When("candidate selects ogd on offer")

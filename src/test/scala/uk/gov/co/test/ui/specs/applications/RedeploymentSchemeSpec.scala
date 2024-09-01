@@ -7,7 +7,7 @@ import uk.gov.co.test.ui.data.v9.shortform.MASTER_SHORT_FORM_DATA
 import uk.gov.co.test.ui.flows.v9.RegisterCandidateFlow.fillNewCandidateDetails
 import uk.gov.co.test.ui.flows.v9.ShortFormFlow.{checkForNoRedeploymentScheme, checkForRedeploymentScheme}
 import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.fillNewVacancyForm
-import uk.gov.co.test.ui.pages.vx.VacancyDetailsPage.extractAllVacancyDetails
+import uk.gov.co.test.ui.pages.vx.VacancyDetailsPage.extractAllApplyOnlyVacancyDetails
 import uk.gov.co.test.ui.specs.BaseFeatureSpec
 import uk.gov.co.test.ui.tags.RunInVX
 
@@ -27,7 +27,7 @@ class RedeploymentSchemeSpec extends BaseFeatureSpec {
 
     Scenario("VX: Candidate Selects Home Departments Ineligible For Redeployment Scheme", RunInVX) {
       Given("a vacancy is included in the redeployment scheme")
-      extractAllVacancyDetails(vacancyId)
+      extractAllApplyOnlyVacancyDetails(vacancyId)
 
       When("a candidate selects an ineligible home department")
       fillNewCandidateDetails(REGISTER_CANDIDATE_REDEPLOYMENT_SCHEME_2)
@@ -50,7 +50,7 @@ class RedeploymentSchemeSpec extends BaseFeatureSpec {
 
     Scenario("VX: Vacancy & Home Department Do Not Meet Criteria For Redeployment Scheme", RunInVX) {
       Given("a vacancy is not included in the redeployment scheme")
-      extractAllVacancyDetails(vacancyId)
+      extractAllApplyOnlyVacancyDetails(vacancyId)
 //      extractAllVacancyDetails("10652")
 
       When("a candidate selects an eligible home department")

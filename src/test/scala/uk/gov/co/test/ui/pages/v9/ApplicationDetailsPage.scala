@@ -2,7 +2,7 @@ package uk.gov.co.test.ui.pages.v9
 
 import org.openqa.selenium.support.ui.WebDriverWait
 import org.openqa.selenium.{By, WebDriver}
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{v9BiometricPassportOrId, v9BiometricResidenceCard, v9EussStatus, v9IdvtDataConsent, v9InDateDrivingLicence, v9RtwBritishCitizen, v9RtwBritishIrishPassport, v9RunInWelsh, v9SmartphoneAccess, vXOfferCivilServicePension, vXSalaryMaximum, vXSalaryMinimum, vXSalaryMoreDetails, vacancyName}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{v9BiometricPassportOrId, v9BiometricResidenceCard, v9EussStatus, v9IdvtDataConsent, v9InDateDrivingLicence, v9RtwBritishCitizen, v9RtwBritishIrishPassport, v9RunInWelsh, v9SmartphoneAccess, vXJobInfoDepartment, vXOfferCivilServicePension, vXSalaryMaximum, vXSalaryMinimum, vXSalaryMoreDetails, vacancyName}
 import uk.gov.co.test.ui.pages.v9.SearchJobsPage.{changeToEnglish, changeToWelsh}
 
 import java.text.NumberFormat
@@ -102,7 +102,7 @@ object ApplicationDetailsPage extends CivilServiceJobsBasePage {
       val benefitsPensionLink                 = benefitsLinkText.getAttribute("href")
       if (!v9RunInWelsh) {
         benefitsSectionText.getText shouldEqual
-          s"""Alongside your salary of £$formattedSalaryMin, Ofwat (Water Services Regulation Authority) contributes £${formatter
+          s"""Alongside your salary of £$formattedSalaryMin, $vXJobInfoDepartment contributes £${formatter
             .format(
               employeeContribution.toInt
             )} towards you being a member of the Civil Service Defined Benefit Pension scheme. Find out what benefits a Civil Service Pension provides.""".stripMargin

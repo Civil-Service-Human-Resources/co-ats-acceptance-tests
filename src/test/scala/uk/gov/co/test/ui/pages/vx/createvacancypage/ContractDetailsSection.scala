@@ -1,10 +1,11 @@
 package uk.gov.co.test.ui.pages.vx.createvacancypage
 
 import org.openqa.selenium.By
+import org.scalatest.TestData
 import uk.gov.co.test.ui.data.MasterVacancyDetails.{v9RunInWelsh, vXJobGradeEquivalent, vXJobGrades, vacancyFormId, vacancyId}
 import uk.gov.co.test.ui.data.vx.vacancy.NewVacancyDetails
-import uk.gov.co.test.ui.pages.vx.VacancyBasePage
-import uk.gov.co.test.ui.pages.vx.VacancyDetailsPage.{extractAllVacancyDetails, navigateToVacancyForms, searchForVacancy}
+import uk.gov.co.test.ui.pages.vx.{VacancyBasePage, VacancyDetailsPage}
+import uk.gov.co.test.ui.pages.vx.VacancyDetailsPage.{extractAllApplyOnlyVacancyDetails, navigateToVacancyForms, searchForVacancy}
 import uk.gov.co.test.ui.pages.vx.createvacancypage.ReserveListSection.approveForPublicationMessageId
 
 import scala.collection.mutable.ListBuffer
@@ -204,6 +205,8 @@ object ContractDetailsSection extends VacancyBasePage {
     clickOn(submitForm)
     waitForVisibilityOfElementById(approveForPublicationMessageId).isDisplayed
     waitForDataSaved()
-    extractAllVacancyDetails(vacancyId)
+    searchForVacancy(vacancyId)
+    navigateToVacancyForms()
+    VacancyDetailsPage.contractDetails()
   }
 }
