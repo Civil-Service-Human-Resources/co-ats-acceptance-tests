@@ -16,6 +16,9 @@ object SearchJobsPage extends CivilServiceJobsBasePage {
   val accountCreatedSuccessMessage2 = "Account created"
   val navigateToHomeSearchPath      = ".//a[@title='Search for jobs']"
   val searchForJobsId               = "search_button"
+  val changeToWelsh                 = ".//*[@title='Cymraeg']"
+  val changeToEnglish               = ".//*[@title='English']"
+  val applyForJob                   = ".//*[@name='login_button']"
 
   def accountCreatedSuccess1(): String =
     waitForElementClickableByTag("h2").getText
@@ -96,7 +99,6 @@ object SearchJobsPage extends CivilServiceJobsBasePage {
     enterSearchCriteria(vacancyId, "what")
     checkForNewVacancy(vacancyId, vacancyName, "what")
     eventually(onPage(s"$vacancyName - Civil Service Jobs - GOV.UK"))
-    if (v9RunInWelsh) waitForVisibilityOfElementByPath(".//*[@title='Cymraeg']").click()
   }
 
   def jobSearchAndApplyFlow(jobTitle: String, jobId: String, searchPathway: String): Unit = {
@@ -105,8 +107,8 @@ object SearchJobsPage extends CivilServiceJobsBasePage {
     enterSearchCriteria(jobId, searchPathway)
     checkForNewVacancy(jobId, jobTitle, searchPathway)
     eventually(onPage(s"$jobTitle - Civil Service Jobs - GOV.UK"))
-    if (v9RunInWelsh) waitForVisibilityOfElementByPath(".//*[@title='Cymraeg']").click()
-    waitForVisibilityOfElementByPath(".//*[@name='login_button']").click()
+    if (v9RunInWelsh) waitForVisibilityOfElementByPath(changeToWelsh).click()
+    waitForVisibilityOfElementByPath(applyForJob).click()
     driver.navigate().refresh()
     extractApplicationInfo()
   }

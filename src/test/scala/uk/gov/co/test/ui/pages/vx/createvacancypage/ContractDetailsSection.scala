@@ -1,7 +1,7 @@
 package uk.gov.co.test.ui.pages.vx.createvacancypage
 
 import org.openqa.selenium.By
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXJobGradeEquivalent, vXJobGrades, vacancyFormId, vacancyId}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{v9RunInWelsh, vXJobGradeEquivalent, vXJobGrades, vacancyFormId, vacancyId}
 import uk.gov.co.test.ui.data.vx.vacancy.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 import uk.gov.co.test.ui.pages.vx.VacancyDetailsPage.{extractAllVacancyDetails, navigateToVacancyForms, searchForVacancy}
@@ -27,25 +27,28 @@ case class ContractDetails(
 
 object ContractDetailsSection extends VacancyBasePage {
 
-  def contractDetailsSectionId      = s"${vacancyFormId}_section_154771_col_0"
-  def currencyId                    = s"select2-${vacancyFormId}_datafield_155065_1_1-container"
-  def workingPatternId              = s"select2-${vacancyFormId}_datafield_154969_1_1-container"
-  def jobGradeId                    = s"select2-${vacancyFormId}_datafield_154973_1_1-container"
-  def contractTypeId                = s"select2-${vacancyFormId}_datafield_154977_1_1-container"
-  def lengthOfEmploymentInput       = s"${vacancyFormId}_datafield_154962_1_1_en-GB"
-  def addWelshEmploymentLengthId()  = "clicky_154962"
-  def welshEmploymentLengthInput    = "datafield_154962_1_1_cy"
-  def updateWelshLengthId()         = "lbledit_datafield_154962_1_1-update"
-  def equivalentGradeId             = s"${vacancyFormId}_datafield_154981_1_1_en-GB"
-  def scsAssignmentDurationId       = s"select2-${vacancyFormId}_datafield_179266_1_1-container"
-  def reasonForAssignmentDurationId = s"select2-${vacancyFormId}_datafield_179270_1_1-container"
-  def minimumSalaryId               = s"${vacancyFormId}_datafield_155044_1_1"
-  def maximumSalaryId               = s"${vacancyFormId}_datafield_155051_1_1"
-  def moreDetailsId                 = s"${vacancyFormId}_datafield_155058_1_1_en-GB"
-  def civilServiceId                = s"${vacancyFormId}_field_value_198564_1"
-  def civilServicePensionYesId      = s"${vacancyFormId}_datafield_198564_1_1_1"
-  def civilServicePensionNoId       = s"${vacancyFormId}_datafield_198564_1_1_2"
-  def employerContributionInput     = s"${vacancyFormId}_datafield_198577_1_1"
+  def contractDetailsSectionId               = s"${vacancyFormId}_section_154771_col_0"
+  def currencyId                             = s"select2-${vacancyFormId}_datafield_155065_1_1-container"
+  def workingPatternId                       = s"select2-${vacancyFormId}_datafield_154969_1_1-container"
+  def jobGradeId                             = s"select2-${vacancyFormId}_datafield_154973_1_1-container"
+  def contractTypeId                         = s"select2-${vacancyFormId}_datafield_154977_1_1-container"
+  def lengthOfEmploymentInput                = s"${vacancyFormId}_datafield_154962_1_1_en-GB"
+  def addWelshEmploymentLengthId()           = "clicky_154962"
+  def welshEmploymentLengthInput             = "datafield_154962_1_1_cy"
+  def updateWelshLengthId()                  = "lbledit_datafield_154962_1_1-update"
+  def equivalentGradeId                      = s"${vacancyFormId}_datafield_154981_1_1_en-GB"
+  def scsAssignmentDurationId                = s"select2-${vacancyFormId}_datafield_179266_1_1-container"
+  def reasonForAssignmentDurationId          = s"select2-${vacancyFormId}_datafield_179270_1_1-container"
+  def minimumSalaryId                        = s"${vacancyFormId}_datafield_155044_1_1"
+  def maximumSalaryId                        = s"${vacancyFormId}_datafield_155051_1_1"
+  def moreDetailsId                          = s"${vacancyFormId}_datafield_155058_1_1_en-GB"
+  def civilServiceId                         = s"${vacancyFormId}_field_value_198564_1"
+  def civilServicePensionYesId               = s"${vacancyFormId}_datafield_198564_1_1_1"
+  def civilServicePensionNoId                = s"${vacancyFormId}_datafield_198564_1_1_2"
+  def employerContributionInput              = s"${vacancyFormId}_datafield_198577_1_1"
+  def welshAddTranslationSalaryMoreDetailsId = "clicky_155058"
+  def welshSalaryMoreDetailsId               = "datafield_155058_1_1_cy"
+  def updateWelshSalaryMoreDetailsId         = "lbledit_datafield_155058_1_1-update"
 
   private def selectContractType(contractDetails: ContractDetails): Unit = {
     val typeRequiresLength: Seq[String] = List("Temporary", "Fixed Term Appointment", "Loan", "Secondment")
@@ -156,10 +159,25 @@ object ContractDetailsSection extends VacancyBasePage {
       textField(maximumSalaryId).clear()
     }
 
-  private def changeSalaryMoreDetails(salaryMoreDetails: Option[String] = None): Unit =
-    if (salaryMoreDetails.isDefined) {
+//  private def changeSalaryMoreDetails(salaryMoreDetails: Option[String] = None): Unit =
+//    if (salaryMoreDetails.isDefined) {
+//      textField(moreDetailsId).clear()
+//      textField(moreDetailsId).value = salaryMoreDetails.get
+//    } else {
+//      textField(moreDetailsId).clear()
+//    }
+
+  private def changeSalaryMoreDetails(salaryMoreDetails: Option[Boolean] = None): Unit =
+    if (salaryMoreDetails.get) {
       textField(moreDetailsId).clear()
-      textField(moreDetailsId).value = salaryMoreDetails.get
+      textField(moreDetailsId).value = "Autotest - salary more details"
+      addWelshTranslation(
+        addWelsh = true,
+        welshAddTranslationSalaryMoreDetailsId,
+        welshSalaryMoreDetailsId,
+        "Awtomatiaeth - mwy o fanylion am gyflog",
+        updateWelshSalaryMoreDetailsId
+      )
     } else {
       textField(moreDetailsId).clear()
     }
@@ -168,7 +186,7 @@ object ContractDetailsSection extends VacancyBasePage {
     jobGrades: ListBuffer[String],
     salaryMinimum: String,
     salaryMaximum: Option[String] = None,
-    salaryMoreDetails: Option[String] = None,
+    salaryMoreDetails: Option[Boolean] = None,
     offerCSPension: Boolean
   ): Unit = {
     searchForVacancy(vacancyId)

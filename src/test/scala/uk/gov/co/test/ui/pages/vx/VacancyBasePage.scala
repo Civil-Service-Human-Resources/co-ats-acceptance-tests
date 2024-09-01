@@ -192,6 +192,7 @@ trait VacancyBasePage extends Matchers with BasePage with BrowserDriver {
     if (addWelsh) {
       clickOn(addTranslation)
       val field = waitForVisibilityOfElementById(welshInput)
+      field.clear()
       field.sendKeys(welsh)
       clickOn(updateId)
     }

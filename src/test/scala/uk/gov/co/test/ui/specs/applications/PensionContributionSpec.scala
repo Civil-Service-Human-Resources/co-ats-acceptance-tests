@@ -1,8 +1,9 @@
 package uk.gov.co.test.ui.specs.applications
 
+import uk.gov.co.test.ui.data.MasterVacancyDetails.v9RunInWelsh
 import uk.gov.co.test.ui.data.v9.applicants._
 import uk.gov.co.test.ui.flows.v9.RegisterCandidateFlow.fillNewCandidateDetails
-import uk.gov.co.test.ui.pages.v9.ApplicationDetailsPage.confirmSalaryAndBenefitSections
+import uk.gov.co.test.ui.pages.v9.ApplicationDetailsPage.{confirmSalaryAndBenefitSectionsInEnglish, confirmSalaryAndBenefitSectionsInWelsh}
 import uk.gov.co.test.ui.pages.v9.SearchJobsPage.jobSearchToCheckPensionDetails
 import uk.gov.co.test.ui.pages.vx.VacancyDetailsPage.extractAllVacancyDetails
 import uk.gov.co.test.ui.pages.vx.createvacancypage.ContractDetailsSection.changeSalaryAndOfferCSPensionDetails
@@ -20,8 +21,8 @@ class PensionContributionSpec extends BaseFeatureSpec {
       changeSalaryAndOfferCSPensionDetails(
         ListBuffer("Administrative Assistant"),
         "19490",
-        Some("28000"),
-        Some("test-salary more details"),
+        salaryMaximum = Some("28000"),
+        salaryMoreDetails = Some(true),
         offerCSPension = true
       )
       repostExternalPosting()
@@ -30,8 +31,11 @@ class PensionContributionSpec extends BaseFeatureSpec {
       fillNewCandidateDetails(REGISTER_CANDIDATE_PENSION_1)
       jobSearchToCheckPensionDetails()
 
-      Then("the salary and benefit sections display pension contribution")
-      confirmSalaryAndBenefitSections()
+      Then("in english - sections displays pension contribution")
+      confirmSalaryAndBenefitSectionsInEnglish()
+
+      And("in welsh - sections displays pension contribution")
+      confirmSalaryAndBenefitSectionsInWelsh()
     }
 
     Scenario("VX: Candidate Checks Pension Contribution For 'Executive Officer' Grade", RunInVX) {
@@ -41,7 +45,7 @@ class PensionContributionSpec extends BaseFeatureSpec {
         ListBuffer("Executive Officer"),
         "21490",
         Some("29000"),
-        Some(""),
+        Some(false),
         offerCSPension = true
       )
       repostExternalPosting()
@@ -50,8 +54,11 @@ class PensionContributionSpec extends BaseFeatureSpec {
       fillNewCandidateDetails(REGISTER_CANDIDATE_PENSION_2)
       jobSearchToCheckPensionDetails()
 
-      Then("the salary and benefit sections display pension contribution")
-      confirmSalaryAndBenefitSections()
+      Then("in english - sections displays pension contribution")
+      confirmSalaryAndBenefitSectionsInEnglish()
+
+      And("in welsh - sections displays pension contribution")
+      confirmSalaryAndBenefitSectionsInWelsh()
     }
 
     Scenario("VX: Candidate Checks Pension Contribution For 'Administrative Officer' Grade", RunInVX) {
@@ -61,7 +68,7 @@ class PensionContributionSpec extends BaseFeatureSpec {
         ListBuffer("Administrative Officer"),
         "24490",
         Some("23000"),
-        Some("test salary more info"),
+        Some(true),
         offerCSPension = true
       )
       repostExternalPosting()
@@ -70,8 +77,11 @@ class PensionContributionSpec extends BaseFeatureSpec {
       fillNewCandidateDetails(REGISTER_CANDIDATE_PENSION_3)
       jobSearchToCheckPensionDetails()
 
-      Then("the salary and benefit sections display pension contribution")
-      confirmSalaryAndBenefitSections()
+      Then("in english - sections displays pension contribution")
+      confirmSalaryAndBenefitSectionsInEnglish()
+
+      And("in welsh - sections displays pension contribution")
+      confirmSalaryAndBenefitSectionsInWelsh()
     }
 
     Scenario("VX: Candidate Checks Pension Contribution For 'Grade 7' Grade", RunInVX) {
@@ -81,7 +91,7 @@ class PensionContributionSpec extends BaseFeatureSpec {
         ListBuffer("Grade 7"),
         "28490",
         Some(""),
-        Some("test salary more info"),
+        Some(true),
         offerCSPension = true
       )
       repostExternalPosting()
@@ -90,8 +100,11 @@ class PensionContributionSpec extends BaseFeatureSpec {
       fillNewCandidateDetails(REGISTER_CANDIDATE_PENSION_4)
       jobSearchToCheckPensionDetails()
 
-      Then("the salary and benefit sections display pension contribution")
-      confirmSalaryAndBenefitSections()
+      Then("in english - sections displays pension contribution")
+      confirmSalaryAndBenefitSectionsInEnglish()
+
+      And("in welsh - sections displays pension contribution")
+      confirmSalaryAndBenefitSectionsInWelsh()
     }
 
     Scenario("VX: Candidate Checks Pension Contribution For 'SCS Pay Band 1' Grade", RunInVX) {
@@ -101,7 +114,7 @@ class PensionContributionSpec extends BaseFeatureSpec {
         ListBuffer("SCS Pay Band 1"),
         "25000",
         Some("27550"),
-        Some("test salary more info"),
+        Some(true),
         offerCSPension = true
       )
       repostExternalPosting()
@@ -110,8 +123,11 @@ class PensionContributionSpec extends BaseFeatureSpec {
       fillNewCandidateDetails(REGISTER_CANDIDATE_PENSION_5)
       jobSearchToCheckPensionDetails()
 
-      Then("the salary and benefit sections display pension contribution")
-      confirmSalaryAndBenefitSections()
+      Then("in english - sections displays pension contribution")
+      confirmSalaryAndBenefitSectionsInEnglish()
+
+      And("in welsh - sections displays pension contribution")
+      confirmSalaryAndBenefitSectionsInWelsh()
     }
 
     Scenario("VX: Candidate Checks Pension Contribution For 'Senior Executive Officer' Grade", RunInVX) {
@@ -121,7 +137,7 @@ class PensionContributionSpec extends BaseFeatureSpec {
         ListBuffer("Senior Executive Officer"),
         "26900",
         Some(""),
-        Some("test salary more info"),
+        Some(true),
         offerCSPension = true
       )
       repostExternalPosting()
@@ -130,8 +146,11 @@ class PensionContributionSpec extends BaseFeatureSpec {
       fillNewCandidateDetails(REGISTER_CANDIDATE_PENSION_6)
       jobSearchToCheckPensionDetails()
 
-      Then("the salary and benefit sections display pension contribution")
-      confirmSalaryAndBenefitSections()
+      Then("in english - sections displays pension contribution")
+      confirmSalaryAndBenefitSectionsInEnglish()
+
+      And("in welsh - sections displays pension contribution")
+      confirmSalaryAndBenefitSectionsInWelsh()
     }
 
     Scenario("VX: Candidate Checks Pension Contribution For Multiple Grades", RunInVX) {
@@ -141,7 +160,7 @@ class PensionContributionSpec extends BaseFeatureSpec {
         ListBuffer("Senior Executive Officer", "Industrial", "SCS Pay Band 1"),
         "29900",
         Some("33670"),
-        Some("test salary more info"),
+        Some(true),
         offerCSPension = true
       )
       repostExternalPosting()
@@ -150,8 +169,11 @@ class PensionContributionSpec extends BaseFeatureSpec {
       fillNewCandidateDetails(REGISTER_CANDIDATE_PENSION_7)
       jobSearchToCheckPensionDetails()
 
-      Then("the salary and benefit sections display pension contribution")
-      confirmSalaryAndBenefitSections()
+      Then("in english - sections displays pension contribution")
+      confirmSalaryAndBenefitSectionsInEnglish()
+
+      And("in welsh - sections displays pension contribution")
+      confirmSalaryAndBenefitSectionsInWelsh()
     }
 
     Scenario("VX: No Pension Contribution For 'Senior Executive Officer' Grade", RunInVX) {
@@ -161,7 +183,7 @@ class PensionContributionSpec extends BaseFeatureSpec {
         ListBuffer("Senior Executive Officer"),
         "0",
         Some(""),
-        Some("test salary more info"),
+        Some(true),
         offerCSPension = true
       )
       repostExternalPosting()
@@ -170,8 +192,11 @@ class PensionContributionSpec extends BaseFeatureSpec {
       fillNewCandidateDetails(REGISTER_CANDIDATE_PENSION_8)
       jobSearchToCheckPensionDetails()
 
-      Then("the salary and benefit sections display pension contribution")
-      confirmSalaryAndBenefitSections()
+      Then("in english - sections displays no pension contribution")
+      confirmSalaryAndBenefitSectionsInEnglish()
+
+      And("in welsh - sections displays no pension contribution")
+      confirmSalaryAndBenefitSectionsInWelsh()
     }
 
     Scenario("VX: Candidate Checks Pension Contribution For 'Higher Executive Officer' Grade", RunInVX) {
@@ -181,7 +206,7 @@ class PensionContributionSpec extends BaseFeatureSpec {
         ListBuffer("Higher Executive Officer"),
         "33500",
         Some("35000"),
-        Some("test salary more info"),
+        Some(true),
         offerCSPension = true
       )
       repostExternalPosting()
@@ -190,8 +215,11 @@ class PensionContributionSpec extends BaseFeatureSpec {
       fillNewCandidateDetails(REGISTER_CANDIDATE_PENSION_9)
       jobSearchToCheckPensionDetails()
 
-      Then("the salary and benefit sections display pension contribution")
-      confirmSalaryAndBenefitSections()
+      Then("in english - sections displays pension contribution")
+      confirmSalaryAndBenefitSectionsInEnglish()
+
+      And("in welsh - sections displays pension contribution")
+      confirmSalaryAndBenefitSectionsInWelsh()
     }
 
     Scenario("VX: No Pension Contribution For 'Higher Executive Officer' Grade", RunInVX) {
@@ -201,7 +229,7 @@ class PensionContributionSpec extends BaseFeatureSpec {
         ListBuffer("Higher Executive Officer"),
         "39500",
         Some("39501"),
-        Some("test salary more info"),
+        Some(true),
         offerCSPension = false
       )
       repostExternalPosting()
@@ -210,8 +238,11 @@ class PensionContributionSpec extends BaseFeatureSpec {
       fillNewCandidateDetails(REGISTER_CANDIDATE_PENSION_10)
       jobSearchToCheckPensionDetails()
 
-      Then("the salary and benefit sections display pension contribution")
-      confirmSalaryAndBenefitSections()
+      Then("in english - sections displays no pension contribution")
+      confirmSalaryAndBenefitSectionsInEnglish()
+
+      And("in welsh - sections displays no pension contribution")
+      confirmSalaryAndBenefitSectionsInWelsh()
     }
 
     Scenario("VX: Zero Pension Contribution For 'Higher Executive Officer' Grade", RunInVX) {
@@ -221,7 +252,7 @@ class PensionContributionSpec extends BaseFeatureSpec {
         ListBuffer("Higher Executive Officer"),
         "0",
         Some(""),
-        Some("test salary more info"),
+        Some(true),
         offerCSPension = false
       )
       repostExternalPosting()
@@ -230,8 +261,11 @@ class PensionContributionSpec extends BaseFeatureSpec {
       fillNewCandidateDetails(REGISTER_CANDIDATE_PENSION_11)
       jobSearchToCheckPensionDetails()
 
-      Then("the salary and benefit sections display pension contribution")
-      confirmSalaryAndBenefitSections()
+      Then("in english - sections displays no pension contribution")
+      confirmSalaryAndBenefitSectionsInEnglish()
+
+      And("in welsh - sections displays no pension contribution")
+      confirmSalaryAndBenefitSectionsInWelsh()
     }
 
     Scenario("VX: Salary Range; No Pension Contribution For 'Higher Executive Officer' Grade", RunInVX) {
@@ -241,7 +275,7 @@ class PensionContributionSpec extends BaseFeatureSpec {
         ListBuffer("Higher Executive Officer"),
         "0",
         Some("25000"),
-        Some("test salary more info"),
+        Some(true),
         offerCSPension = false
       )
       repostExternalPosting()
@@ -250,8 +284,11 @@ class PensionContributionSpec extends BaseFeatureSpec {
       fillNewCandidateDetails(REGISTER_CANDIDATE_PENSION_12)
       jobSearchToCheckPensionDetails()
 
-      Then("the salary and benefit sections display pension contribution")
-      confirmSalaryAndBenefitSections()
+      Then("in english - sections displays no pension contribution")
+      confirmSalaryAndBenefitSectionsInEnglish()
+
+      And("in welsh - sections displays no pension contribution")
+      confirmSalaryAndBenefitSectionsInWelsh()
     }
 
     Scenario("VX: Salary Range; Pension Contribution For 'Higher Executive Officer' Grade", RunInVX) {
@@ -261,7 +298,7 @@ class PensionContributionSpec extends BaseFeatureSpec {
         ListBuffer("Higher Executive Officer"),
         "0",
         Some("29000"),
-        Some("test salary more info"),
+        Some(true),
         offerCSPension = true
       )
       repostExternalPosting()
@@ -270,8 +307,11 @@ class PensionContributionSpec extends BaseFeatureSpec {
       fillNewCandidateDetails(REGISTER_CANDIDATE_PENSION_13)
       jobSearchToCheckPensionDetails()
 
-      Then("the salary and benefit sections display pension contribution")
-      confirmSalaryAndBenefitSections()
+      Then("in english - sections displays no pension contribution")
+      confirmSalaryAndBenefitSectionsInEnglish()
+
+      And("in welsh - sections displays no pension contribution")
+      confirmSalaryAndBenefitSectionsInWelsh()
     }
 
     Scenario("VX: Zero Range; Pension Contribution For Multiple Grades", RunInVX) {
@@ -281,7 +321,7 @@ class PensionContributionSpec extends BaseFeatureSpec {
         ListBuffer("Industrial", "SCS Pay Band 1"),
         "0",
         Some("0"),
-        Some(""),
+        Some(false),
         offerCSPension = true
       )
       repostExternalPosting()
@@ -290,8 +330,11 @@ class PensionContributionSpec extends BaseFeatureSpec {
       fillNewCandidateDetails(REGISTER_CANDIDATE_PENSION_14)
       jobSearchToCheckPensionDetails()
 
-      Then("the salary and benefit sections display pension contribution")
-      confirmSalaryAndBenefitSections()
+      Then("in english - sections displays no pension contribution")
+      confirmSalaryAndBenefitSectionsInEnglish()
+
+      And("in welsh - sections displays no pension contribution")
+      confirmSalaryAndBenefitSectionsInWelsh()
     }
 
     Scenario("VX: High Salary Range; Pension Contribution For 'Higher Executive Officer' Grade", RunInVX) {
@@ -301,7 +344,7 @@ class PensionContributionSpec extends BaseFeatureSpec {
         ListBuffer("Higher Executive Officer"),
         "105500",
         Some("125999"),
-        Some("higher salary test"),
+        Some(true),
         offerCSPension = true
       )
       repostExternalPosting()
@@ -310,8 +353,11 @@ class PensionContributionSpec extends BaseFeatureSpec {
       fillNewCandidateDetails(REGISTER_CANDIDATE_PENSION_15)
       jobSearchToCheckPensionDetails()
 
-      Then("the salary and benefit sections display pension contribution")
-      confirmSalaryAndBenefitSections()
+      Then("in english - sections displays pension contribution")
+      confirmSalaryAndBenefitSectionsInEnglish()
+
+      And("in welsh - sections displays pension contribution")
+      confirmSalaryAndBenefitSectionsInWelsh()
     }
 
     Scenario("VX: No Salary Range; No Pension Contribution For Multiple Grades", RunInVX) {
@@ -321,7 +367,7 @@ class PensionContributionSpec extends BaseFeatureSpec {
         ListBuffer("Higher Executive Officer", "Senior Executive Officer"),
         "125999",
         Some(""),
-        Some("higher salary test"),
+        Some(true),
         offerCSPension = false
       )
       repostExternalPosting()
@@ -330,8 +376,11 @@ class PensionContributionSpec extends BaseFeatureSpec {
       fillNewCandidateDetails(REGISTER_CANDIDATE_PENSION_16)
       jobSearchToCheckPensionDetails()
 
-      Then("the salary and benefit sections display pension contribution")
-      confirmSalaryAndBenefitSections()
+      Then("in english - sections displays no pension contribution")
+      confirmSalaryAndBenefitSectionsInEnglish()
+
+      And("in welsh - sections displays no pension contribution")
+      confirmSalaryAndBenefitSectionsInWelsh()
     }
 
     Scenario("VX: Same Salary Range; Pension Contribution For Multiple Grades", RunInVX) {
@@ -341,7 +390,7 @@ class PensionContributionSpec extends BaseFeatureSpec {
         ListBuffer("Senior Executive Officer", "SCS Pay Band 1"),
         "126999",
         Some("126999"),
-        Some(""),
+        Some(false),
         offerCSPension = true
       )
       repostExternalPosting()
@@ -350,8 +399,11 @@ class PensionContributionSpec extends BaseFeatureSpec {
       fillNewCandidateDetails(REGISTER_CANDIDATE_PENSION_17)
       jobSearchToCheckPensionDetails()
 
-      Then("the salary and benefit sections display pension contribution")
-      confirmSalaryAndBenefitSections()
+      Then("in english - sections displays pension contribution")
+      confirmSalaryAndBenefitSectionsInEnglish()
+
+      And("in welsh - sections displays pension contribution")
+      confirmSalaryAndBenefitSectionsInWelsh()
     }
   }
 }

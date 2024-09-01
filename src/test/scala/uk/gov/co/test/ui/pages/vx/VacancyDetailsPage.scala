@@ -1280,7 +1280,7 @@ object VacancyDetailsPage extends VacancyBasePage {
         vXUseOnlinePecForms = false
         vXHavePecMailbox = false
         vXPecMailbox = ""
-        extractOgdTransfer()
+//        extractOgdTransfer() //TODO Speak to Dave Cullen
     }
   }
 
