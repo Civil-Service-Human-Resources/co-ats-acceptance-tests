@@ -1,22 +1,20 @@
 package uk.gov.co.test.ui.specs.applications
 
-import uk.gov.co.test.ui.data.MasterVacancyDetails.vacancyId
+import org.scalatest.tagobjects.Retryable
 import uk.gov.co.test.ui.data.test.reserve.RESERVE_VACANCY_DATA
 import uk.gov.co.test.ui.data.v9.applicants._
 import uk.gov.co.test.ui.flows.e2e.FullApplicationFlow.reserveListFlow
 import uk.gov.co.test.ui.flows.v9.RegisterCandidateFlow.fillNewCandidateDetails
 import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.fillNewVacancyForm
 import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.reserveExpiryList
-import uk.gov.co.test.ui.pages.vx.VacancyDetailsPage.extractAllApplyOnlyVacancyDetails
 import uk.gov.co.test.ui.pages.vx.createvacancypage.ReserveListSection.changeReserveListDetails
 import uk.gov.co.test.ui.pages.vx.vacancytabs.ExternalPostingsTab.repostExternalPosting
 import uk.gov.co.test.ui.pages.vx.vacancytabs.ReserveListsTab.{reserveListExpiryChecks, reserveListHistoryEmailChecks, reserveListHistoryProcessChecks}
 import uk.gov.co.test.ui.specs.BaseFeatureSpec
-import uk.gov.co.test.ui.tags.RunInVX
 
 class ReserveListSpec extends BaseFeatureSpec {
   Feature("Recruiter Checks The Reserve List For Rejected Status") {
-    Scenario("VX: Recruiter Checks 3 Months Reserve List", RunInVX) {
+    Scenario("VX: Recruiter Checks 3 Months Reserve List", Retryable) {
       Given("a recruiter changes the reserve list to 3 months for a vacancy")
       fillNewVacancyForm(RESERVE_VACANCY_DATA)
 //      extractAllVacancyDetails("10653")
@@ -34,7 +32,7 @@ class ReserveListSpec extends BaseFeatureSpec {
       reserveListHistoryEmailChecks()
     }
 
-    Scenario("VX: Recruiter Checks 6 Months Reserve List", RunInVX) {
+    Scenario("VX: Recruiter Checks 6 Months Reserve List", Retryable) {
       Given("a recruiter changes the reserve list to 6 months for a vacancy")
       changeReserveListDetails("6 Months")
       repostExternalPosting()
@@ -50,7 +48,7 @@ class ReserveListSpec extends BaseFeatureSpec {
       reserveListHistoryEmailChecks()
     }
 
-    Scenario("VX: Recruiter Checks 9 Months Reserve List", RunInVX) {
+    Scenario("VX: Recruiter Checks 9 Months Reserve List", Retryable) {
       Given("a recruiter changes the reserve list to 9 months for a vacancy")
       changeReserveListDetails("9 Months")
       repostExternalPosting()
@@ -66,7 +64,7 @@ class ReserveListSpec extends BaseFeatureSpec {
       reserveListHistoryEmailChecks()
     }
 
-    Scenario("VX: Recruiter Checks 12 Months Reserve List", RunInVX) {
+    Scenario("VX: Recruiter Checks 12 Months Reserve List", Retryable) {
       Given("a recruiter changes the reserve list to 12 months for a vacancy")
       changeReserveListDetails("12 Months", Some(false), None)
       repostExternalPosting()
@@ -82,7 +80,7 @@ class ReserveListSpec extends BaseFeatureSpec {
       reserveListHistoryEmailChecks()
     }
 
-    Scenario("VX: Recruiter Checks 12 Months and 2 Weeks Reserve List", RunInVX) {
+    Scenario("VX: Recruiter Checks 12 Months and 2 Weeks Reserve List", Retryable) {
       Given("a recruiter changes the reserve list to 12 months and 2 weeks for a vacancy")
       changeReserveListDetails("12 Months", Some(true), Some("2 weeks"))
       repostExternalPosting()
@@ -98,7 +96,7 @@ class ReserveListSpec extends BaseFeatureSpec {
       reserveListHistoryEmailChecks()
     }
 
-    Scenario("VX: Recruiter Checks 12 Months and 4 Weeks Reserve List", RunInVX) {
+    Scenario("VX: Recruiter Checks 12 Months and 4 Weeks Reserve List", Retryable) {
       Given("a recruiter changes the reserve list to 12 months and 4 weeks for a vacancy")
       changeReserveListDetails("12 Months", Some(true), Some("4 weeks"))
       repostExternalPosting()
@@ -114,7 +112,7 @@ class ReserveListSpec extends BaseFeatureSpec {
       reserveListHistoryEmailChecks()
     }
 
-    Scenario("VX: Recruiter Checks 12 Months and 6 Weeks Reserve List", RunInVX) {
+    Scenario("VX: Recruiter Checks 12 Months and 6 Weeks Reserve List", Retryable) {
       Given("a recruiter changes the reserve list to 12 months and 6 weeks for a vacancy")
       changeReserveListDetails("12 Months", Some(true), Some("6 weeks"))
       repostExternalPosting()
@@ -130,7 +128,7 @@ class ReserveListSpec extends BaseFeatureSpec {
       reserveListHistoryEmailChecks()
     }
 
-    Scenario("VX: Recruiter Checks 12 Months and 8 Weeks Reserve List", RunInVX) {
+    Scenario("VX: Recruiter Checks 12 Months and 8 Weeks Reserve List", Retryable) {
       Given("a recruiter changes the reserve list to 12 months and 8 weeks for a vacancy")
       changeReserveListDetails("12 Months", Some(true), Some("8 weeks"))
       repostExternalPosting()

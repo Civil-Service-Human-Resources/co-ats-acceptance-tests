@@ -21,6 +21,7 @@ trait BaseFeatureSpec
     with BeforeAndAfterAll
     with BeforeAndAfterEachTestData
     with OneInstancePerTest
+    with Retries
     with Matchers
     with WebBrowser
     with BrowserDriver
@@ -55,12 +56,14 @@ trait BaseFeatureSpec
   }
 
   override def withFixture(test: NoArgTest): Outcome =
-    super.withFixture(test) match {
-      case f: Failed    =>
-        SingletonScreenshotReport.takeScreenshot(driver, test.name)
-        f
-      case otherOutcome => otherOutcome
-    }
+    if (isRetryable(test)) withRetry(super.withFixture(test))
+    else
+      super.withFixture(test) match {
+        case f: Failed    =>
+          SingletonScreenshotReport.takeScreenshot(driver, test.name)
+          f
+        case otherOutcome => otherOutcome
+      }
 
   def isSystemError()(implicit driver: WebDriver): Boolean =
     find(cssSelector("h1")).get.text == "System error"

@@ -1,5 +1,6 @@
 package uk.gov.co.test.ui.specs.applications
 
+import org.scalatest.tagobjects.Retryable
 import uk.gov.co.test.ui.data.MasterVacancyDetails.{v9HomeDepartment, vXJobInfoDepartment, vacancyId}
 import uk.gov.co.test.ui.data.test.pnnen.PN_NEN_VACANCY_DATA
 import uk.gov.co.test.ui.data.v9.applicants.{REGISTER_CANDIDATE_NEN_DEFRA, REGISTER_CANDIDATE_PN_DEFRA}
@@ -13,11 +14,10 @@ import uk.gov.co.test.ui.pages.vx.VacancyDetailsPage.extractAllApplyOnlyVacancyD
 import uk.gov.co.test.ui.pages.vx.vacancytabs.NewEntrantNoticeTab.newEntrantNoticeFlow
 import uk.gov.co.test.ui.pages.vx.vacancytabs.PostingNoticeTab.postingNoticeFlow
 import uk.gov.co.test.ui.specs.BaseFeatureSpec
-import uk.gov.co.test.ui.tags.RunInVX
 
 class PnNenSpec extends BaseFeatureSpec {
   Feature("Recruiter Completes The PN/NEN Forms") {
-    Scenario("VX: A Recruiter Completes The NEN Form (DEFRA)", RunInVX) {
+    Scenario("VX: A Recruiter Completes The NEN Form (DEFRA)", Retryable) {
       Given("candidate registers for new job application")
       fillNewVacancyForm(PN_NEN_VACANCY_DATA)
 //      extractAllVacancyDetails("10650")
@@ -32,7 +32,7 @@ class PnNenSpec extends BaseFeatureSpec {
       passedPecChecks()
     }
 
-    Scenario("VX: A Recruiter Completes The PN Form (DEFRA)", RunInVX) {
+    Scenario("VX: A Recruiter Completes The PN Form (DEFRA)", Retryable) {
       Given("candidate registers for new job application")
       extractAllApplyOnlyVacancyDetails(vacancyId)
       fillNewCandidateDetails(REGISTER_CANDIDATE_PN_DEFRA)
