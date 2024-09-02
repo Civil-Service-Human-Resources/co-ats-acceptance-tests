@@ -40,10 +40,10 @@ class PensionContributionSpec extends BaseFeatureSpec {
       Given("a recruiter changes the vacancy contract details")
       extractAllApplyOnlyVacancyDetails(applyOnlyVacancyId)
       changeSalaryAndOfferCSPensionDetails(
-        ListBuffer("Executive Officer"),
-        "21490",
-        Some("29000"),
-        Some(false),
+        jobGrades = ListBuffer("Executive Officer"),
+        salaryMinimum = "21490",
+        salaryMaximum = Some("29000"),
+        salaryMoreDetails = Some(false),
         offerCSPension = true
       )
       repostExternalPosting()
@@ -62,10 +62,10 @@ class PensionContributionSpec extends BaseFeatureSpec {
       Given("a recruiter changes the vacancy contract details")
       extractAllApplyOnlyVacancyDetails(applyOnlyVacancyId)
       changeSalaryAndOfferCSPensionDetails(
-        ListBuffer("Administrative Officer"),
-        "24490",
-        Some("23000"),
-        Some(true),
+        jobGrades = ListBuffer("Administrative Officer"),
+        salaryMinimum = "24490",
+        salaryMaximum = Some("23000"),
+        salaryMoreDetails = Some(true),
         offerCSPension = true
       )
       repostExternalPosting()
@@ -84,10 +84,10 @@ class PensionContributionSpec extends BaseFeatureSpec {
       Given("a recruiter changes the vacancy contract details")
       extractAllApplyOnlyVacancyDetails(applyOnlyVacancyId)
       changeSalaryAndOfferCSPensionDetails(
-        ListBuffer("Grade 7"),
-        "28490",
-        Some(""),
-        Some(true),
+        jobGrades = ListBuffer("Grade 7"),
+        salaryMinimum = "28490",
+        salaryMaximum = Some(""),
+        salaryMoreDetails = Some(true),
         offerCSPension = true
       )
       repostExternalPosting()
@@ -106,10 +106,10 @@ class PensionContributionSpec extends BaseFeatureSpec {
       Given("a recruiter changes the vacancy contract details")
       extractAllApplyOnlyVacancyDetails(applyOnlyVacancyId)
       changeSalaryAndOfferCSPensionDetails(
-        ListBuffer("SCS Pay Band 1"),
-        "25000",
-        Some("27550"),
-        Some(true),
+        jobGrades = ListBuffer("SCS Pay Band 1"),
+        salaryMinimum = "25000",
+        salaryMaximum = Some("27550"),
+        salaryMoreDetails = Some(true),
         offerCSPension = true
       )
       repostExternalPosting()
@@ -128,10 +128,10 @@ class PensionContributionSpec extends BaseFeatureSpec {
       Given("a recruiter changes the vacancy contract details")
       extractAllApplyOnlyVacancyDetails(applyOnlyVacancyId)
       changeSalaryAndOfferCSPensionDetails(
-        ListBuffer("Senior Executive Officer"),
-        "26900",
-        Some(""),
-        Some(true),
+        jobGrades = ListBuffer("Senior Executive Officer"),
+        salaryMinimum = "26900",
+        salaryMaximum = Some(""),
+        salaryMoreDetails = Some(true),
         offerCSPension = true
       )
       repostExternalPosting()
@@ -150,10 +150,10 @@ class PensionContributionSpec extends BaseFeatureSpec {
       Given("a recruiter changes the vacancy contract details")
       extractAllApplyOnlyVacancyDetails(applyOnlyVacancyId)
       changeSalaryAndOfferCSPensionDetails(
-        ListBuffer("Senior Executive Officer", "Industrial", "SCS Pay Band 1"),
-        "29900",
-        Some("33670"),
-        Some(true),
+        jobGrades = ListBuffer("Senior Executive Officer", "Industrial", "SCS Pay Band 1"),
+        salaryMinimum = "29900",
+        salaryMaximum = Some("33670"),
+        salaryMoreDetails = Some(true),
         offerCSPension = true
       )
       repostExternalPosting()
@@ -172,10 +172,10 @@ class PensionContributionSpec extends BaseFeatureSpec {
       Given("a recruiter changes the vacancy contract details")
       extractAllApplyOnlyVacancyDetails(applyOnlyVacancyId)
       changeSalaryAndOfferCSPensionDetails(
-        ListBuffer("Senior Executive Officer"),
-        "0",
-        Some(""),
-        Some(true),
+        jobGrades = ListBuffer("Senior Executive Officer"),
+        salaryMinimum = "0",
+        salaryMaximum = Some(""),
+        salaryMoreDetails = Some(true),
         offerCSPension = true
       )
       repostExternalPosting()
@@ -194,10 +194,10 @@ class PensionContributionSpec extends BaseFeatureSpec {
       Given("a recruiter changes the vacancy contract details")
       extractAllApplyOnlyVacancyDetails(applyOnlyVacancyId)
       changeSalaryAndOfferCSPensionDetails(
-        ListBuffer("Higher Executive Officer"),
-        "33500",
-        Some("35000"),
-        Some(true),
+        jobGrades = ListBuffer("Higher Executive Officer"),
+        salaryMinimum = "33500",
+        salaryMaximum = Some("35000"),
+        salaryMoreDetails = Some(true),
         offerCSPension = true
       )
       repostExternalPosting()
@@ -216,10 +216,10 @@ class PensionContributionSpec extends BaseFeatureSpec {
       Given("a recruiter changes the vacancy contract details")
       extractAllApplyOnlyVacancyDetails(applyOnlyVacancyId)
       changeSalaryAndOfferCSPensionDetails(
-        ListBuffer("Higher Executive Officer"),
-        "39500",
-        Some("39501"),
-        Some(true),
+        jobGrades = ListBuffer("Higher Executive Officer"),
+        salaryMinimum = "39500",
+        salaryMaximum = Some("39501"),
+        salaryMoreDetails = Some(true),
         offerCSPension = false
       )
       repostExternalPosting()
@@ -238,10 +238,10 @@ class PensionContributionSpec extends BaseFeatureSpec {
       Given("a recruiter changes the vacancy contract details")
       extractAllApplyOnlyVacancyDetails(applyOnlyVacancyId)
       changeSalaryAndOfferCSPensionDetails(
-        ListBuffer("Higher Executive Officer"),
-        "0",
-        Some(""),
-        Some(true),
+        jobGrades = ListBuffer("Higher Executive Officer"),
+        salaryMinimum = "0",
+        salaryMaximum = Some(""),
+        salaryMoreDetails = Some(true),
         offerCSPension = false
       )
       repostExternalPosting()
@@ -260,10 +260,10 @@ class PensionContributionSpec extends BaseFeatureSpec {
       Given("a recruiter changes the vacancy contract details")
       extractAllApplyOnlyVacancyDetails(applyOnlyVacancyId)
       changeSalaryAndOfferCSPensionDetails(
-        ListBuffer("Higher Executive Officer"),
-        "0",
-        Some("25000"),
-        Some(true),
+        jobGrades = ListBuffer("Higher Executive Officer"),
+        salaryMinimum = "0",
+        salaryMaximum = Some("25000"),
+        salaryMoreDetails = Some(true),
         offerCSPension = false
       )
       repostExternalPosting()
@@ -282,10 +282,10 @@ class PensionContributionSpec extends BaseFeatureSpec {
       Given("a recruiter changes the vacancy contract details")
       extractAllApplyOnlyVacancyDetails(applyOnlyVacancyId)
       changeSalaryAndOfferCSPensionDetails(
-        ListBuffer("Higher Executive Officer"),
-        "0",
-        Some("29000"),
-        Some(true),
+        jobGrades = ListBuffer("Higher Executive Officer"),
+        salaryMinimum = "0",
+        salaryMaximum = Some("29000"),
+        salaryMoreDetails = Some(true),
         offerCSPension = true
       )
       repostExternalPosting()
@@ -304,10 +304,10 @@ class PensionContributionSpec extends BaseFeatureSpec {
       Given("a recruiter changes the vacancy contract details")
       extractAllApplyOnlyVacancyDetails(applyOnlyVacancyId)
       changeSalaryAndOfferCSPensionDetails(
-        ListBuffer("Industrial", "SCS Pay Band 1"),
-        "0",
-        Some("0"),
-        Some(false),
+        jobGrades = ListBuffer("Industrial", "SCS Pay Band 1"),
+        salaryMinimum = "0",
+        salaryMaximum = Some("0"),
+        salaryMoreDetails = Some(false),
         offerCSPension = true
       )
       repostExternalPosting()
@@ -326,10 +326,10 @@ class PensionContributionSpec extends BaseFeatureSpec {
       Given("a recruiter changes the vacancy contract details")
       extractAllApplyOnlyVacancyDetails(applyOnlyVacancyId)
       changeSalaryAndOfferCSPensionDetails(
-        ListBuffer("Higher Executive Officer"),
-        "105500",
-        Some("125999"),
-        Some(true),
+        jobGrades = ListBuffer("Higher Executive Officer"),
+        salaryMinimum = "105500",
+        salaryMaximum = Some("125999"),
+        salaryMoreDetails = Some(true),
         offerCSPension = true
       )
       repostExternalPosting()
@@ -348,10 +348,10 @@ class PensionContributionSpec extends BaseFeatureSpec {
       Given("a recruiter changes the vacancy contract details")
       extractAllApplyOnlyVacancyDetails(applyOnlyVacancyId)
       changeSalaryAndOfferCSPensionDetails(
-        ListBuffer("Higher Executive Officer", "Senior Executive Officer"),
-        "125999",
-        Some(""),
-        Some(true),
+        jobGrades = ListBuffer("Higher Executive Officer", "Senior Executive Officer"),
+        salaryMinimum = "125999",
+        salaryMaximum = Some(""),
+        salaryMoreDetails = Some(true),
         offerCSPension = false
       )
       repostExternalPosting()
@@ -370,10 +370,10 @@ class PensionContributionSpec extends BaseFeatureSpec {
       Given("a recruiter changes the vacancy contract details")
       extractAllApplyOnlyVacancyDetails(applyOnlyVacancyId)
       changeSalaryAndOfferCSPensionDetails(
-        ListBuffer("Senior Executive Officer", "SCS Pay Band 1"),
-        "126999",
-        Some("126999"),
-        Some(false),
+        jobGrades = ListBuffer("Senior Executive Officer", "SCS Pay Band 1"),
+        salaryMinimum = "126999",
+        salaryMaximum = Some("126999"),
+        salaryMoreDetails = Some(false),
         offerCSPension = true
       )
       repostExternalPosting()
@@ -394,8 +394,8 @@ class PensionContributionSpec extends BaseFeatureSpec {
       Given("a recruiter changes the vacancy contract details")
       extractAllAdvertOnlyVacancyDetails(advertOnlyVacancyId)
       changeSalaryAndOfferCSPensionDetails(
-        ListBuffer("Administrative Assistant"),
-        "22500",
+        jobGrades = ListBuffer("Administrative Assistant"),
+        salaryMinimum = "22500",
         salaryMaximum = Some("23200"),
         salaryMoreDetails = Some(true),
         offerCSPension = true
@@ -416,10 +416,10 @@ class PensionContributionSpec extends BaseFeatureSpec {
       Given("a recruiter changes the vacancy contract details")
       extractAllAdvertOnlyVacancyDetails(advertOnlyVacancyId)
       changeSalaryAndOfferCSPensionDetails(
-        ListBuffer("Executive Officer"),
-        "21490",
-        Some("29000"),
-        Some(false),
+        jobGrades = ListBuffer("Executive Officer"),
+        salaryMinimum = "21490",
+        salaryMaximum = Some("29000"),
+        salaryMoreDetails = Some(false),
         offerCSPension = true
       )
       repostExternalPosting()
@@ -438,10 +438,10 @@ class PensionContributionSpec extends BaseFeatureSpec {
       Given("a recruiter changes the vacancy contract details")
       extractAllAdvertOnlyVacancyDetails(advertOnlyVacancyId)
       changeSalaryAndOfferCSPensionDetails(
-        ListBuffer("Administrative Officer"),
-        "24490",
-        Some("23000"),
-        Some(true),
+        jobGrades = ListBuffer("Administrative Officer"),
+        salaryMinimum = "24490",
+        salaryMaximum = Some("23000"),
+        salaryMoreDetails = Some(true),
         offerCSPension = true
       )
       repostExternalPosting()
@@ -460,10 +460,10 @@ class PensionContributionSpec extends BaseFeatureSpec {
       Given("a recruiter changes the vacancy contract details")
       extractAllAdvertOnlyVacancyDetails(advertOnlyVacancyId)
       changeSalaryAndOfferCSPensionDetails(
-        ListBuffer("Grade 7"),
-        "28490",
-        Some(""),
-        Some(true),
+        jobGrades = ListBuffer("Grade 7"),
+        salaryMinimum = "28490",
+        salaryMaximum = Some(""),
+        salaryMoreDetails = Some(true),
         offerCSPension = true
       )
       repostExternalPosting()
@@ -482,10 +482,10 @@ class PensionContributionSpec extends BaseFeatureSpec {
       Given("a recruiter changes the vacancy contract details")
       extractAllAdvertOnlyVacancyDetails(advertOnlyVacancyId)
       changeSalaryAndOfferCSPensionDetails(
-        ListBuffer("SCS Pay Band 1"),
-        "25000",
-        Some("27550"),
-        Some(true),
+        jobGrades = ListBuffer("SCS Pay Band 1"),
+        salaryMinimum = "25000",
+        salaryMaximum = Some("27550"),
+        salaryMoreDetails = Some(true),
         offerCSPension = true
       )
       repostExternalPosting()
@@ -504,10 +504,10 @@ class PensionContributionSpec extends BaseFeatureSpec {
       Given("a recruiter changes the vacancy contract details")
       extractAllAdvertOnlyVacancyDetails(advertOnlyVacancyId)
       changeSalaryAndOfferCSPensionDetails(
-        ListBuffer("Senior Executive Officer"),
-        "26900",
-        Some(""),
-        Some(true),
+        jobGrades = ListBuffer("Senior Executive Officer"),
+        salaryMinimum = "26900",
+        salaryMaximum = Some(""),
+        salaryMoreDetails = Some(true),
         offerCSPension = true
       )
       repostExternalPosting()
@@ -526,10 +526,10 @@ class PensionContributionSpec extends BaseFeatureSpec {
       Given("a recruiter changes the vacancy contract details")
       extractAllAdvertOnlyVacancyDetails(advertOnlyVacancyId)
       changeSalaryAndOfferCSPensionDetails(
-        ListBuffer("Senior Executive Officer", "Industrial", "SCS Pay Band 1"),
-        "29900",
-        Some("33670"),
-        Some(true),
+        jobGrades = ListBuffer("Senior Executive Officer", "Industrial", "SCS Pay Band 1"),
+        salaryMinimum = "29900",
+        salaryMaximum = Some("33670"),
+        salaryMoreDetails = Some(true),
         offerCSPension = true
       )
       repostExternalPosting()
@@ -548,10 +548,10 @@ class PensionContributionSpec extends BaseFeatureSpec {
       Given("a recruiter changes the vacancy contract details")
       extractAllAdvertOnlyVacancyDetails(advertOnlyVacancyId)
       changeSalaryAndOfferCSPensionDetails(
-        ListBuffer("Senior Executive Officer"),
-        "0",
-        Some(""),
-        Some(true),
+        jobGrades = ListBuffer("Senior Executive Officer"),
+        salaryMinimum = "0",
+        salaryMaximum = Some(""),
+        salaryMoreDetails = Some(true),
         offerCSPension = true
       )
       repostExternalPosting()
@@ -570,10 +570,10 @@ class PensionContributionSpec extends BaseFeatureSpec {
       Given("a recruiter changes the vacancy contract details")
       extractAllAdvertOnlyVacancyDetails(advertOnlyVacancyId)
       changeSalaryAndOfferCSPensionDetails(
-        ListBuffer("Higher Executive Officer"),
-        "33500",
-        Some("35000"),
-        Some(true),
+        jobGrades = ListBuffer("Higher Executive Officer"),
+        salaryMinimum = "33500",
+        salaryMaximum = Some("35000"),
+        salaryMoreDetails = Some(true),
         offerCSPension = true
       )
       repostExternalPosting()
@@ -592,10 +592,10 @@ class PensionContributionSpec extends BaseFeatureSpec {
       Given("a recruiter changes the vacancy contract details")
       extractAllAdvertOnlyVacancyDetails(advertOnlyVacancyId)
       changeSalaryAndOfferCSPensionDetails(
-        ListBuffer("Higher Executive Officer"),
-        "39500",
-        Some("39501"),
-        Some(true),
+        jobGrades = ListBuffer("Higher Executive Officer"),
+        salaryMinimum = "39500",
+        salaryMaximum = Some("39501"),
+        salaryMoreDetails = Some(true),
         offerCSPension = false
       )
       repostExternalPosting()
@@ -614,10 +614,10 @@ class PensionContributionSpec extends BaseFeatureSpec {
       Given("a recruiter changes the vacancy contract details")
       extractAllAdvertOnlyVacancyDetails(advertOnlyVacancyId)
       changeSalaryAndOfferCSPensionDetails(
-        ListBuffer("Higher Executive Officer"),
-        "0",
-        Some(""),
-        Some(true),
+        jobGrades = ListBuffer("Higher Executive Officer"),
+        salaryMinimum = "0",
+        salaryMaximum = Some(""),
+        salaryMoreDetails = Some(true),
         offerCSPension = false
       )
       repostExternalPosting()
@@ -636,10 +636,10 @@ class PensionContributionSpec extends BaseFeatureSpec {
       Given("a recruiter changes the vacancy contract details")
       extractAllAdvertOnlyVacancyDetails(advertOnlyVacancyId)
       changeSalaryAndOfferCSPensionDetails(
-        ListBuffer("Higher Executive Officer"),
-        "0",
-        Some("25000"),
-        Some(true),
+        jobGrades = ListBuffer("Higher Executive Officer"),
+        salaryMinimum = "0",
+        salaryMaximum = Some("25000"),
+        salaryMoreDetails = Some(true),
         offerCSPension = false
       )
       repostExternalPosting()
@@ -658,10 +658,10 @@ class PensionContributionSpec extends BaseFeatureSpec {
       Given("a recruiter changes the vacancy contract details")
       extractAllAdvertOnlyVacancyDetails(advertOnlyVacancyId)
       changeSalaryAndOfferCSPensionDetails(
-        ListBuffer("Higher Executive Officer"),
-        "0",
-        Some("29000"),
-        Some(true),
+        jobGrades = ListBuffer("Higher Executive Officer"),
+        salaryMinimum = "0",
+        salaryMaximum = Some("29000"),
+        salaryMoreDetails = Some(true),
         offerCSPension = true
       )
       repostExternalPosting()
@@ -680,10 +680,10 @@ class PensionContributionSpec extends BaseFeatureSpec {
       Given("a recruiter changes the vacancy contract details")
       extractAllAdvertOnlyVacancyDetails(advertOnlyVacancyId)
       changeSalaryAndOfferCSPensionDetails(
-        ListBuffer("Industrial", "SCS Pay Band 1"),
-        "0",
-        Some("0"),
-        Some(false),
+        jobGrades = ListBuffer("Industrial", "SCS Pay Band 1"),
+        salaryMinimum = "0",
+        salaryMaximum = Some("0"),
+        salaryMoreDetails = Some(false),
         offerCSPension = true
       )
       repostExternalPosting()
@@ -702,10 +702,10 @@ class PensionContributionSpec extends BaseFeatureSpec {
       Given("a recruiter changes the vacancy contract details")
       extractAllAdvertOnlyVacancyDetails(advertOnlyVacancyId)
       changeSalaryAndOfferCSPensionDetails(
-        ListBuffer("Higher Executive Officer"),
-        "105500",
-        Some("125999"),
-        Some(true),
+        jobGrades = ListBuffer("Higher Executive Officer"),
+        salaryMinimum = "105500",
+        salaryMaximum = Some("125999"),
+        salaryMoreDetails = Some(true),
         offerCSPension = true
       )
       repostExternalPosting()
@@ -724,10 +724,10 @@ class PensionContributionSpec extends BaseFeatureSpec {
       Given("a recruiter changes the vacancy contract details")
       extractAllAdvertOnlyVacancyDetails(advertOnlyVacancyId)
       changeSalaryAndOfferCSPensionDetails(
-        ListBuffer("Higher Executive Officer", "Senior Executive Officer"),
-        "125999",
-        Some(""),
-        Some(true),
+        jobGrades = ListBuffer("Higher Executive Officer", "Senior Executive Officer"),
+        salaryMinimum = "125999",
+        salaryMaximum = Some(""),
+        salaryMoreDetails = Some(true),
         offerCSPension = false
       )
       repostExternalPosting()
@@ -746,10 +746,10 @@ class PensionContributionSpec extends BaseFeatureSpec {
       Given("a recruiter changes the vacancy contract details")
       extractAllAdvertOnlyVacancyDetails(advertOnlyVacancyId)
       changeSalaryAndOfferCSPensionDetails(
-        ListBuffer("Senior Executive Officer", "SCS Pay Band 1"),
-        "126999",
-        Some("126999"),
-        Some(false),
+        jobGrades = ListBuffer("Senior Executive Officer", "SCS Pay Band 1"),
+        salaryMinimum = "126999",
+        salaryMaximum = Some("126999"),
+        salaryMoreDetails = Some(false),
         offerCSPension = true
       )
       repostExternalPosting()

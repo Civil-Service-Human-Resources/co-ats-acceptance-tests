@@ -15,7 +15,7 @@ object ApplicationDetailsPage extends CivilServiceJobsBasePage {
   val welshSalaryPath                  = ".//*[contains(text(), 'Cyflog')]//..//*[@class='vac_display_field_value']"
   val salaryMoreDetailsPath            = "(//*[@class='vac_display_field_value'])[3]"
   val pensionContributionRatePath      = "//div[starts-with(., 'A ')]"
-  val welshPensionContributionRatePath = "//*[contains(text(), 'chyfraniad cyflogwr o 28.97%')]"
+  val welshPensionContributionRatePath = "//*[contains(text(), 'cyfraniad cyflogwr o 28.97%')]"
   val benefitsSectionId                = "section_link_benefits"
   val benefitsPensionTextPath          = "//div[starts-with(., 'Alongside your salary of')]"
   val welshBenefitsPensionTextPath     = "//div[starts-with(., 'Ochr yn ochr ')]"
@@ -79,7 +79,7 @@ object ApplicationDetailsPage extends CivilServiceJobsBasePage {
         civilServiceLinkText.getText shouldEqual "Civil Service Pension"
         civilServiceLink             shouldEqual "https://www.civilservicepensionscheme.org.uk/joining-the-pension-scheme/benefits-of-the-pension-scheme/"
       } else {
-        pensionRate.getText          shouldEqual "Pensiwn y Gwasanaeth Sifil gyda chyfraniad cyflogwr o 28.97%"
+        pensionRate.getText          shouldEqual "Pensiwn y Gwasanaeth Sifil gyda cyfraniad cyflogwr o 28.97%"
         civilServiceLinkText.getText shouldEqual "Pensiwn y Gwasanaeth Sifil"
         civilServiceLink             shouldEqual "https://www.civilservicepensionscheme.org.uk/joining-the-pension-scheme/benefits-of-the-pension-scheme/"
       }
