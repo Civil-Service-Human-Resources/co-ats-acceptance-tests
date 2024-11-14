@@ -7,7 +7,7 @@ import org.scalatest.concurrent.Eventually.eventually
 import org.scalatest.matchers.should.Matchers
 import uk.gov.co.test.ui.conf.TestConfiguration
 import uk.gov.co.test.ui.conf.TestConfiguration.readProperty
-import uk.gov.co.test.ui.data.MasterVacancyDetails.{preferredFirstName, randomEmail, randomFirstName, randomJobPosition, randomLastName, randomPassword}
+import uk.gov.co.test.ui.data.MasterVacancyDetails.{preferredFirstName, randomEmail, randomFirstName, randomJobPosition, randomLastName, randomPassword, v9RunInWelsh}
 import uk.gov.co.test.ui.driver.BrowserDriver
 import uk.gov.co.test.ui.pages.BasePage
 import uk.gov.co.test.ui.pages.v9.SearchJobsPage.civilServiceJobsPageTitle
@@ -187,9 +187,44 @@ trait CivilServiceJobsBasePage extends Matchers with BasePage with BrowserDriver
     (_day, _month, _year)
   }
 
+  def splitLocalDate(givenDate: LocalDate): (String, String, String) = {
+    val formatter = DateTimeFormatter.ofPattern("d MMMM yyyy")
+    val date      = givenDate.format(formatter)
+    val parts     = date.split(" ")
+    val _day      = parts(0)
+    val _month    = parts(1)
+    val _year     = parts(2)
+    (_day, _month, _year)
+  }
+
   def enterDate(id: String, value: String): Unit = {
     val dateValue = new Select(waitForVisibilityOfElementById(id))
     dateValue.selectByValue(value)
+  }
+
+  def selectFromOptions(id: String, value: String): Unit = {
+    val optionValue = new Select(waitForVisibilityOfElementById(id))
+    optionValue.selectByVisibleText(value)
+  }
+
+  def selectWelshMonth(id: String, monthValue: String): Unit = {
+    val selectField = new Select(waitForVisibilityOfElementById(id))
+    if (v9RunInWelsh) {
+      monthValue match {
+        case "January"   => selectField.selectByVisibleText("Ionawr")
+        case "February"  => selectField.selectByVisibleText("Chwefror")
+        case "March"     => selectField.selectByVisibleText("Mawrth")
+        case "April"     => selectField.selectByVisibleText("Ebrill")
+        case "May"       => selectField.selectByVisibleText("Mai")
+        case "June"      => selectField.selectByVisibleText("Mehefin")
+        case "July"      => selectField.selectByVisibleText("Gorffennaf")
+        case "August"    => selectField.selectByVisibleText("Awst")
+        case "September" => selectField.selectByVisibleText("Medi")
+        case "October"   => selectField.selectByVisibleText("Hydref")
+        case "November"  => selectField.selectByVisibleText("Tachwedd")
+        case "December"  => selectField.selectByVisibleText("Rhagfyr")
+      }
+    }
   }
 
   def enterStartOrEndDate(date: String, dayId: String, monthId: String, yearId: String): Unit = {

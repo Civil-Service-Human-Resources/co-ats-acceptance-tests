@@ -18,7 +18,7 @@ case class DbsAddressDetails(
 
 object DbsAddressDetailsPage extends CivilServiceJobsBasePage {
 
-  private lazy val dbsAddressDetailsPageTitle = "DBS - Address Details - Civil Service Jobs - GOV.UK"
+  private lazy val dbsAddressDetailsPageTitle = "DBS - address details - Civil Service Jobs - GOV.UK"
   def addressLineOneId                        = s"${pecFormId}_datafield_55115_1_1"
   def addressLineTwoId                        = s"${pecFormId}_datafield_55121_1_1"
   def townOrCityId                            = s"${pecFormId}_datafield_55127_1_1"

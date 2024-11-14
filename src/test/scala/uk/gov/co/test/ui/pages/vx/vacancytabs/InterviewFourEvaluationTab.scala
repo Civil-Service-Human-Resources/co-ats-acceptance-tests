@@ -7,6 +7,7 @@ import uk.gov.co.test.ui.pages.v9.ApplicationCentrePage.applicationStateAfterInt
 import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.{availableBarItems, completeI4EvaluationBarId, interviewEvaluation, noShowI4BarId, withdrawAtInterviewBarId}
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 import uk.gov.co.test.ui.pages.vx.vacancytabs.InterviewOneEvaluationTab.{formProblemStatusId, outcomeTitleId, scrollToElement}
+import uk.gov.co.test.ui.pages.vx.vacancytabs.InterviewTwoEvaluationTab.scrollToElement
 
 import scala.collection.mutable.ListBuffer
 
@@ -186,6 +187,7 @@ object InterviewFourEvaluationTab extends VacancyBasePage {
     commentsId: String,
     comment: Option[String] = None
   ): Unit = {
+    scrollToElement(By.id(titleId))
     waitForVisibilityOfElementById(titleId).getText shouldEqual expectedTitle
     waitForVisibilityOfElementById(scoreId).click()
     action().moveToElement(waitForDropdownOption(score.toString)).perform()

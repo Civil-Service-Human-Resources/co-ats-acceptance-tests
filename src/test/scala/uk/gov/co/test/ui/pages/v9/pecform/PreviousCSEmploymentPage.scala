@@ -19,7 +19,7 @@ case class PreviousCSEmploymentDetails(
 
 object PreviousCSEmploymentPage extends CivilServiceJobsBasePage {
 
-  private lazy val previousCSEmploymentPageTitle = "Previous Civil Service Employment - Civil Service Jobs - GOV.UK"
+  private lazy val previousCSEmploymentPageTitle = "Previous Civil Service employment - Civil Service Jobs - GOV.UK"
   def previousCSEmploymentYesId                  = s"${pecFormId}_datafield_81036_1_1_1_label"
   def previousCSEmploymentNoId                   = s"${pecFormId}_datafield_81036_1_1_2_label"
   def everDismissedFromCSYesId                   = s"${pecFormId}_datafield_81040_1_1_1_label"

@@ -58,8 +58,12 @@ object MasterVacancyDetails extends VacancyBasePage {
   var vXOtherLocations: ListBuffer[String] = ListBuffer("London", "Southampton", "Manchester")
 
   //vx VACANCY contract details TODO finish off
-  var vXJobGrades                  = new ListBuffer[String]()
-  var vXJobGradeEquivalent: String = ""
+  var vXJobGrades                         = new ListBuffer[String]()
+  var vXJobGradeEquivalent: String        = ""
+  var vXSalaryMinimum: String             = ""
+  var vXSalaryMaximum: String             = ""
+  var vXSalaryMoreDetails: String         = ""
+  var vXOfferCivilServicePension: Boolean = _
 
   //vx VACANCY advert TODO
 

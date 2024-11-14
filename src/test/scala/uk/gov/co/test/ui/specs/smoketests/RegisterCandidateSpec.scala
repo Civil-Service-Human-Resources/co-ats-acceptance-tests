@@ -1,5 +1,6 @@
 package uk.gov.co.test.ui.specs.smoketests
 
+import org.scalatest.tagobjects.Retryable
 import uk.gov.co.test.ui.data.v9.applicants.{REGISTERED_CANDIDATE, REGISTER_CANDIDATE}
 import uk.gov.co.test.ui.flows.v9.DacAudit24TestCandidates.createDacTestCandidates
 import uk.gov.co.test.ui.flows.v9.GenerateNewCandidates.createMultipleCandidates
@@ -8,11 +9,10 @@ import uk.gov.co.test.ui.flows.vx.NewVacancyFlow.applicationCentrePageTitle
 import uk.gov.co.test.ui.pages.v9.SearchJobsPage.{accountCreatedSuccess1, accountCreatedSuccess2, accountCreatedSuccessMessage1, accountCreatedSuccessMessage2, candidateDisplayName, navigateToSignInOrCreateAccount}
 import uk.gov.co.test.ui.pages.v9.SignInPage.{candidateFullName, candidateSignIn, editAccountDetails, onPage}
 import uk.gov.co.test.ui.specs.BaseFeatureSpec
-import uk.gov.co.test.ui.tags.RunInV9
 
 class RegisterCandidateSpec extends BaseFeatureSpec {
   Feature("Registration Of Candidates On Civil Service Jobs") {
-    Scenario("V9: A Registered Candidate Logs In To Civil Service Jobs", RunInV9) {
+    Scenario("V9: A Registered Candidate Logs In To Civil Service Jobs") {
       Given("A registered candidate navigates to the sign in page")
       navigateToSignInOrCreateAccount()
 
@@ -23,7 +23,7 @@ class RegisterCandidateSpec extends BaseFeatureSpec {
       candidateDisplayName() shouldEqual candidateFullName(REGISTERED_CANDIDATE)
     }
 
-    Scenario("V9: A Candidate Creates An Account On Civil Service Jobs", RunInV9) {
+    Scenario("V9: A Candidate Creates An Account On Civil Service Jobs") {
       Given("candidate newly registers their details")
       fillNewCandidateDetails(REGISTER_CANDIDATE)
 
@@ -37,11 +37,11 @@ class RegisterCandidateSpec extends BaseFeatureSpec {
       onPage(applicationCentrePageTitle)
     }
 
-    Scenario("V9: Create Multiple Candidate Accounts", RunInV9) {
+    Scenario("V9: Create Multiple Candidate Accounts") {
       createMultipleCandidates(5)
     }
 
-    Scenario("VX: Create DAC Candidate Accounts For All Requests", RunInV9) {
+    Scenario("VX: Create DAC Candidate Accounts For All Requests") {
       createDacTestCandidates(1, "0000", 20)
       createDacTestCandidates(2, "10349", 20)
       createDacTestCandidates(3, "10350", 20)

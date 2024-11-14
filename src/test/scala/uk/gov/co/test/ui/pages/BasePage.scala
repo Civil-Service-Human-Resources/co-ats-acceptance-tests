@@ -9,8 +9,10 @@ import org.scalatest.concurrent.PatienceConfiguration
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.time.{Millis, Seconds, Span}
 import org.scalatestplus.selenium.{Page, WebBrowser}
+import uk.gov.co.test.ui.conf.TestConfiguration
 import uk.gov.co.test.ui.flows.v9.LoginCandidateFlow.loginNewCandidate
 import uk.gov.co.test.ui.pages.v9.SignInPage.signOut
+import uk.gov.co.test.ui.pages.vx.DashboardPage.switchToV9Test
 
 import java.util
 import java.util.UUID
@@ -57,6 +59,15 @@ trait BasePage extends Matchers with Page with WebBrowser with PatienceConfigura
     val wait = new WebDriverWait(driver, 60, 500)
     try wait.until { (d: WebDriver) =>
       d.findElement(By.xpath(statusPath)).getText.endsWith(expectedStatus)
+    } catch {
+      case staleError: StaleElementReferenceException => println(staleError)
+    }
+  }
+
+  def checkForNewTitle(expectedStatus: String)(implicit driver: WebDriver): Unit = {
+    val wait = new WebDriverWait(driver, 30, 500)
+    try wait.until { (d: WebDriver) =>
+      pageTitle.equals(expectedStatus)
     } catch {
       case staleError: StaleElementReferenceException => println(staleError)
     }
@@ -273,4 +284,15 @@ trait BasePage extends Matchers with Page with WebBrowser with PatienceConfigura
     }
     refreshPage()
   }
+
+  def waitForDataSaved()(implicit driver: WebDriver): Unit = {
+    val wait            = new WebDriverWait(driver, 120, 1000)
+    val messageIconPath = ".//*[@class='msg_icon']"
+    wait.until { (d: WebDriver) =>
+      !d.findElements(By.xpath(messageIconPath)).isEmpty
+    }
+  }
+
+  def navigateToV9()(implicit driver: WebDriver): Unit =
+    if (currentUrl.startsWith(TestConfiguration.urlHost("vxconfig"))) switchToV9Test()
 }

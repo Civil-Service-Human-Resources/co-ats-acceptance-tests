@@ -143,8 +143,8 @@ object PostingNoticeTab extends VacancyBasePage {
   }
 
   private def vacancyInfoSection(postingNoticeDetails: PostingNoticeDetails): Unit = {
-    scrollToElement(By.id(pnVacancyInfoHeaderId))
     waitForVisibilityOfElementById(pnVacancyInfoHeaderId).getText shouldEqual "Vacancy Information"
+    scrollToElement(By.id(pnVacancyInfoHeaderId))
     waitForVisibilityOfElementById(vacancyRefId).getText               should endWith(vacancyId)
     waitForVisibilityOfElementById(vacancyTitleId).getText             should endWith(vacancyName)
     waitForVisibilityOfElementById(vacancyDeptId).getText              should endWith(vXJobInfoDepartment)
@@ -155,8 +155,8 @@ object PostingNoticeTab extends VacancyBasePage {
   }
 
   private def newEntrantInfoSection(postingNoticeDetails: PostingNoticeDetails): Unit = {
-    scrollToElement(By.id(newEntrantHeaderId))
     waitForVisibilityOfElementById(newEntrantHeaderId).getText  shouldEqual "New Entrant Information"
+    scrollToElement(By.id(newEntrantHeaderId))
     waitForVisibilityOfElementById(forenameId).getText               should endWith(randomFirstName)
     waitForVisibilityOfElementById(preferredNameId).getText          should endWith(preferredFirstName)
     waitForVisibilityOfElementById(surnameId).getText                should endWith(randomLastName)
@@ -166,8 +166,8 @@ object PostingNoticeTab extends VacancyBasePage {
   }
 
   private def postingInfoSection(postingNoticeDetails: PostingNoticeDetails): Unit = {
-    scrollToElement(By.id(postingInfoHeaderId))
     waitForVisibilityOfElementById(postingInfoHeaderId).getText shouldEqual "Posting Information"
+    scrollToElement(By.id(postingInfoHeaderId))
     enterStartDate(postingNoticeDetails)
     enterStartTimeFirstDay(postingNoticeDetails)
     enterPnValue(premOfficeAddressId, postingNoticeDetails.premOfficeAddress)
@@ -196,8 +196,8 @@ object PostingNoticeTab extends VacancyBasePage {
   }
 
   private def lineManagerDetailsSection(postingNoticeDetails: PostingNoticeDetails): Unit = {
-    scrollToElement(By.id(lineManagerDetailsHeaderId))
     waitForVisibilityOfElementById(lineManagerDetailsHeaderId).getText shouldEqual "Line Manager Details"
+    scrollToElement(By.id(lineManagerDetailsHeaderId))
     enterPnValue(lineManagersFullNameId, postingNoticeDetails.lineManagersFullName)
     enterPnValue(lineManagersTelNoId, postingNoticeDetails.lineManagersTeleNo)
     enterPnValue(lineManagersEmailId, postingNoticeDetails.lineManagersEmail)

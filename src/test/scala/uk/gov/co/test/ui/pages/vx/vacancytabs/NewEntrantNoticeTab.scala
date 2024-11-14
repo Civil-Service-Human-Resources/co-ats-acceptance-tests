@@ -6,6 +6,7 @@ import uk.gov.co.test.ui.data.vx.application.ApplicationDetails
 import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.{completeNewEntrantFormBarId, finaliseNenBarId, firstDayArrangementsAfterNenBarId, onboardingCompleteNen, onboardingFinaliseNen, requestUpdatedNenBarId}
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 import uk.gov.co.test.ui.pages.vx.VacancyDetailsPage.extractTabFormId
+import uk.gov.co.test.ui.pages.vx.vacancytabs.PostingNoticeTab.{pnVacancyInfoHeaderId, scrollToElement}
 
 import java.time.LocalDate
 import scala.collection.mutable.ListBuffer
@@ -178,6 +179,7 @@ object NewEntrantNoticeTab extends VacancyBasePage {
 
   private def vacancyInfoSection(newEntrantNoticeDetails: NewEntrantNoticeDetails): Unit = {
     waitForVisibilityOfElementById(nenVacancyInfoHeaderId).getText shouldEqual "Vacancy Information"
+    scrollToElement(By.id(nenVacancyInfoHeaderId))
     waitForVisibilityOfElementById(vacancyRefId).getText                should endWith(vacancyId)
     waitForVisibilityOfElementById(vacancyTitleId).getText              should endWith(vacancyName)
     waitForVisibilityOfElementById(vacancyDeptId).getText               should endWith(vXJobInfoDepartment)
@@ -189,6 +191,7 @@ object NewEntrantNoticeTab extends VacancyBasePage {
 
   private def newEntrantInfoSection(newEntrantNoticeDetails: NewEntrantNoticeDetails): Unit = {
     waitForVisibilityOfElementById(newEntrantNotificationHeaderId).getText shouldEqual "New Entrant Notification"
+    scrollToElement(By.id(newEntrantNotificationHeaderId))
     waitForVisibilityOfElementById(forenameId).getText                          should endWith(randomFirstName)
     waitForVisibilityOfElementById(preferredNameId).getText                     should endWith(preferredFirstName)
     waitForVisibilityOfElementById(surnameId).getText                           should endWith(randomLastName)
@@ -197,6 +200,7 @@ object NewEntrantNoticeTab extends VacancyBasePage {
 
   private def postingInfoSection(newEntrantNoticeDetails: NewEntrantNoticeDetails): Unit = {
     waitForVisibilityOfElementById(postingInfoHeaderId).getText shouldEqual "Posting Information"
+    scrollToElement(By.id(postingInfoHeaderId))
     selectNewEntrantType(newEntrantNoticeDetails)
     selectFairAndOpenRecruitment(newEntrantNoticeDetails)
     enterStartDate(newEntrantNoticeDetails)
@@ -229,11 +233,13 @@ object NewEntrantNoticeTab extends VacancyBasePage {
   private def otherGovernmentDeptInfoSection(newEntrantNoticeDetails: NewEntrantNoticeDetails): Unit =
     if (newEntrantNoticeDetails.newEntrantType == "OGD") {
       waitForVisibilityOfElementById(ogdInfoHeaderId).getText shouldEqual "Other Government Department Info"
+      scrollToElement(By.id(ogdInfoHeaderId))
       enterOgdEntryDate(newEntrantNoticeDetails)
     }
 
   private def lineManagerDetailsSection(newEntrantNoticeDetails: NewEntrantNoticeDetails): Unit = {
     waitForVisibilityOfElementById(lineManagerDetailsHeaderId).getText shouldEqual "Line Manager Details"
+    scrollToElement(By.id(lineManagerDetailsHeaderId))
     enterNenValue(lineManagersFullNameId, newEntrantNoticeDetails.lineManagersFullName)
     waitForVisibilityOfElementById(lineManagersTelNoCodeId).click()
     selectOption(generalInput, newEntrantNoticeDetails.lineManagersTeleCode)

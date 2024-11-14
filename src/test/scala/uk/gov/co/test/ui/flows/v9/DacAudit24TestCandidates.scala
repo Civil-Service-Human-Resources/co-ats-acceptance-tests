@@ -15,7 +15,7 @@ import uk.gov.co.test.ui.pages.v9.CivilServiceJobsBasePage
 import uk.gov.co.test.ui.pages.v9.CreateAccountPage.{enterConfirmDacPasswordLoop, enterConfirmEmailLoop, enterDacPasswordLoop, enterEmailLoop, enterFirstNameLoop, enterLastNameLoop, navigateToCreateAccountPage, registerNewAccount, selectEmployeeTypeLoop, selectTermsAndConditionsLoop}
 import uk.gov.co.test.ui.pages.vx.ApplicationSummaryPage.{invitedToDigitalIdentityCheck, moveAndAcceptOffer, progressApplicationToOffer, selectedForOffer}
 import uk.gov.co.test.ui.pages.vx.DashboardPage.switchToV9Test
-import uk.gov.co.test.ui.pages.vx.VacancyDetailsPage.extractAllVacancyDetails
+import uk.gov.co.test.ui.pages.vx.VacancyDetailsPage.extractAllApplyOnlyVacancyDetails
 import uk.gov.co.test.ui.pages.vx.vacancytabs.PreSiftEvaluationTab.PreSiftEvaluationFlow
 import uk.gov.co.test.ui.pages.vx.vacancytabs.SiftEvaluationTab.SiftEvaluationFlow
 
@@ -40,8 +40,8 @@ object DacAudit24TestCandidates extends CivilServiceJobsBasePage {
     val vacancies     = List("10348", "10349", "10350", "10416", "10417")
 
     for (i <- 1 to candidatesRequired) {
-      if (requestNumber == 1 || requestNumber == 5) extractAllVacancyDetails(vacancies.getRandomElement.get)
-      else extractAllVacancyDetails(vacancy)
+      if (requestNumber == 1 || requestNumber == 5) extractAllApplyOnlyVacancyDetails(vacancies.getRandomElement.get)
+      else extractAllApplyOnlyVacancyDetails(vacancy)
 
       if (currentUrl.startsWith(TestConfiguration.urlHost("vxconfig"))) switchToV9Test()
       //application flow

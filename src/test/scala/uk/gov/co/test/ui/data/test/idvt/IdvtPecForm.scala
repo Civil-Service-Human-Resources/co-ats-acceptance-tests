@@ -34,7 +34,7 @@ object IDVT_PEC_FORM_YOUR_DETAILS
       true,
       "JA123456D",
       "Autotest - Provide details on your nino application status",
-      "01/01/1980",
+      LocalDate.now().minusYears(40),
       "Man",
       "Single",
       "01/12/2020",
@@ -195,7 +195,7 @@ object IDVT_PEC_FORM_DIGITAL_IDENTITY_CHECK
       true,
       "Do you have access to a smartphone or tablet with a camera?",
       true,
-      "Do you have an in-date biometric passport or biometric ID card?",
+      "Do you have an in-date biometric passport or biometric national identity card?",
       true,
       "Do you have an in-date photocard driving licence?",
       true

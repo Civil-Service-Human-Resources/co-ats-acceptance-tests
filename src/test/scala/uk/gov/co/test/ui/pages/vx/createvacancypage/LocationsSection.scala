@@ -39,7 +39,7 @@ object LocationsSection extends VacancyBasePage {
   def protestantId            = s"${vacancyFormId}_datafield_155869_1_1_15462"
   def romanCatholicId         = s"${vacancyFormId}_datafield_155869_1_1_15463"
   def allCommunitiesId        = s"${vacancyFormId}_datafield_155869_1_1_17360"
-  def locationOverrideInput   = s"${vacancyFormId}_datafield_155654_1_1_en-GB"
+  def locationOverridePath   = ".//textarea[@name='datafield_155654_1_1_en-GB']"
   def locationPreferenceNoId  = s"${vacancyFormId}_datafield_155799_1_1_2"
   def locationPreferenceYesId = s"${vacancyFormId}_datafield_155799_1_1_1"
   def maxLocationId           = s"select2-${vacancyFormId}_datafield_155818_1_1-container"
@@ -120,8 +120,9 @@ object LocationsSection extends VacancyBasePage {
     selectOption(generalInput, country)
   }
 
-  def locationOverride(overrideLocations: String): Unit =
-    textField(locationOverrideInput).value = overrideLocations
+  def locationOverride(overrideLocations: String): Unit = {
+    waitForVisibilityOfElementByPath(locationOverridePath).sendKeys(overrideLocations)
+  }
 
   def selectLocationPreference(locationsDetails: LocationsDetails): Unit = {
     vXGiveLocationPreference = locationsDetails.giveLocationPreference

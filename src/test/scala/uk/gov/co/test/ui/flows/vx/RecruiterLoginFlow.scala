@@ -22,6 +22,8 @@ object RecruiterLoginFlow extends VacancyBasePage {
       enterPassword(recruiterDetails)
     }
     vxLogin()
-    vXProfile = waitForVisibilityOfElementByPath(".//span[@class='user_profile']").getText
+    vXProfile = waitForVisibilityOfElementByPath(
+      ".//p[@class='ng-tns-c777076404-0 ng-trigger ng-trigger-basicFade ng-star-inserted']"
+    ).getText
   }
 }

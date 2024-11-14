@@ -41,7 +41,7 @@ case class DbsPersonalInfoDetails(
 
 object DbsPersonalInfoPage extends CivilServiceJobsBasePage {
 
-  private lazy val dbsPersonalInfoPageTitle = "DBS - Personal Information - Civil Service Jobs - GOV.UK"
+  private lazy val dbsPersonalInfoPageTitle = "DBS - personal information - Civil Service Jobs - GOV.UK"
   def dbsTitleId                            = s"${pecFormId}_datafield_54761_1_1"
   def firstNameId                           = s"${pecFormId}_datafield_120720_1_1"
   def haveMiddleNameYesId                   = s"${pecFormId}_datafield_116033_1_1_1_label"
@@ -253,7 +253,10 @@ object DbsPersonalInfoPage extends CivilServiceJobsBasePage {
     selectHaveConvictions
   )
 
-  def dbsPersonalInfoPage(pecFormDetails: PecFormDetails): Unit =
+  def dbsPersonalInfoPage(pecFormDetails: PecFormDetails): Unit = {
+    println(s"vXCrcLevel is $vXCrcLevel")
+    println(s"vXCrcCheckProvider is $vXCrcCheckProvider")
+    println(s"vXPecCrc is $vXPecCrc")
     if (
       vXCrcLevel != "None" && vXCrcCheckProvider.contains("DBS") && !vXPecCrc.contains("Not Applicable") && vXPecCrc
         .contains(s"$vXTypeOfCandidate Candidates")
@@ -264,4 +267,5 @@ object DbsPersonalInfoPage extends CivilServiceJobsBasePage {
       }
       clickOn(pageContinue)
     }
+  }
 }

@@ -475,7 +475,6 @@ object ApplicationCentrePage extends CivilServiceJobsBasePage {
     advertDetailsFunction().isEnabled
     applicationForVacancyText shouldEqual s"Application For $vacancyName"
     getApplicationState shouldEqual s"Application status: $status"
-
     getApplicationConfirmation shouldEqual s"""Congratulations, we'd like to invite you $inviteType.
                                              |To book your interview slot click 'Schedule interview'.
                                              |To get your preferred time we recommend you book as early as possible.
