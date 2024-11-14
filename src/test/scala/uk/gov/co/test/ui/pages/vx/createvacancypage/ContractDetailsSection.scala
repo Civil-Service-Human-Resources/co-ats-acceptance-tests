@@ -117,8 +117,8 @@ object ContractDetailsSection extends VacancyBasePage {
   }
 
   private def enterMoreDetails(contractDetails: ContractDetails): Unit = {
-    val moreDetails = textField(moreDetailsId)
-    moreDetails.value = contractDetails.moreDetails
+    val moreDetails = waitForVisibilityOfElementById(moreDetailsId)
+    moreDetails.sendKeys(contractDetails.moreDetails)
   }
 
   def selectCivilServicePension(contractDetails: ContractDetails): Unit = {

@@ -12,7 +12,7 @@ import uk.gov.co.test.ui.specs.BaseFeatureSpec
 
 class RecruiterLoginSpec extends BaseFeatureSpec {
   Feature("Recruiter Login To VX Config System") {
-    Scenario("An Existing Recruiter Logs In VX Config", Retryable) {
+    Scenario("An Existing Recruiter Logs In VX Config") {
       Given("A recruiter navigates to the login page")
       val registeredRecruiter = RECRUITER
 
@@ -23,11 +23,11 @@ class RecruiterLoginSpec extends BaseFeatureSpec {
       eventually(onPage(vxConfigHomePageTitle))
     }
 
-    Scenario("VX: A Recruiter Extracts All Vacancy Details", Retryable) {
+    Scenario("VX: A Recruiter Extracts All Vacancy Details") {
       extractAllApplyOnlyVacancyDetails(vacancyId)
     }
 
-    Scenario("VX: A Recruiter Untags Vacancy Details", Retryable) {
+    Scenario("VX: A Recruiter Untags Vacancy Details") {
       untagVacancies("9615")
     }
   }

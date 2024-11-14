@@ -15,9 +15,8 @@ object ReserveListsTab extends VacancyBasePage {
   private lazy val reserveListLengthHeaderPath    = "(//h4)[7]"
   private lazy val reserveExpiryListHeaderPath    = "(//h4)[8]"
   private lazy val reserveListLengthSubHeaderPath = "(//*[@class='form_row form_label hform_label'])[2]"
-  private lazy val reserveProcessRuleSeeMorePath  = "(//*[@class='detail-grid-tr'])[1]//a"
   private lazy val historySectionId               = "summary_tabs_history_tab"
-  private lazy val reserveExpiryScheduledFor      = "//*[@class='history-entry-div']"
+  private lazy val reserveExpiryScheduledDatePath      = "(//*[@class='detail-grid-tl'])[1]"
   private lazy val reserveListExpiryEmail         = "(//*[@class='detail-grid-tl'])[3]"
   private lazy val reserveListExpiryEmailSeeMore  = "(//*[@class='detail-grid-tr'])[3]//a"
   private lazy val reserveListExpiryEmailPreview  = "//*[@class='email_preview ']//tbody/tr[2]"
@@ -98,8 +97,7 @@ object ReserveListsTab extends VacancyBasePage {
     waitForVisibilityOfElementByPath(historyTabPath).click()
     waitForVisibilityOfElementById(historySectionId).isDisplayed
     val scheduleDate = reserveScheduleDetails()
-    waitForVisibilityOfElementByPath(reserveProcessRuleSeeMorePath).click()
-    val scheduledFor = waitForVisibilityOfElementByPath(reserveExpiryScheduledFor).getText
+    val scheduledFor = waitForVisibilityOfElementByPath(reserveExpiryScheduledDatePath).getText
     if (vXReserveExtendRequired) {
       scheduleDate should startWith(
         s"Process rule: Scheduled move - ${vXReserveListLength.toLowerCase} and $vXReserveExtendLength expiry date"

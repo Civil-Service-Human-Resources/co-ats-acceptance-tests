@@ -188,9 +188,16 @@ object ApplicationSummaryPage extends VacancyBasePage {
     }
   }
 
+  def moveAndAcceptOfferStaffTransfers(): Unit = {
+    selectedForOffer()
+    progressApplicationToOffer()
+    candidateAcceptsOffer()
+    changeSystem("recruiter")
+  }
+
   def pecFieldsRequired(): Unit =
     if (
-      (!vXPecGeneralInfo.contains("Not Applicable") && vXPecGeneralInfo.contains(s"$vXTypeOfCandidate Candidates")) ||
+//      (!vXPecGeneralInfo.contains("Not Applicable") && vXPecGeneralInfo.contains(s"$vXTypeOfCandidate Candidates")) ||
       (!vXPecReferenceCheck
         .contains("Not Applicable") && vXPecReferenceCheck.contains(s"$vXTypeOfCandidate Candidates")) ||
       (!vXPecWorkplaceMisconductCheck
@@ -229,6 +236,12 @@ object ApplicationSummaryPage extends VacancyBasePage {
       v9ConfirmOfferAcceptedState()
       vXProvisionalOfferAccepted()
     }
+  }
+
+  def acceptsOfferAgainStaffTransfers(): Unit = {
+    candidateAcceptsOffer()
+    offerDecisionFlow("Accept")
+    changeSystem("recruiter")
   }
 
   def selectedForOffer(): Unit = {

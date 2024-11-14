@@ -171,9 +171,9 @@ object HistoryTab extends VacancyBasePage {
     val status       = ogdEmailDetails("4")
     val emailPreview = waitForVisibilityOfElementByPath("//*[@class='email_preview ']").getText
     templateId   shouldEqual "410"
-    destination  shouldEqual "civilservicetransfers@service-now.com"
+    destination  shouldEqual "cstransfertest@service-now.com"
     subject      shouldEqual "Start Civil Service Employee Transfer Process"
-    status       shouldEqual "civilservicetransfers@service-now.com: Not sent yet"
+    status       shouldEqual "cstransfertest@service-now.com: Not sent yet"
     emailPreview shouldEqual
       s"""Candidate information
          |First name: $randomFirstName
@@ -187,7 +187,9 @@ object HistoryTab extends VacancyBasePage {
          |Vacancy reference number: $vacancyId
          |Grade advertised: ${vXJobGrades.toString().replaceFirst("ListBuffer", "").filterNot("[]()".contains(_))}
          |Additional grade information: $vXJobGradeEquivalent
-         |Vacancy holder’s email address: $vXVacancyHolderEmail""".stripMargin
+         |Recruiter/recruitment team email address: $vXVacancyHolderEmail
+         |Vacancy holder’s email address: $vXVacancyHolderEmail
+         |Email address for candidate questions: $vXVacancyHolderEmail""".stripMargin
   }
 
   def ogdEmailDetails(position: String): String = {
@@ -201,6 +203,9 @@ object HistoryTab extends VacancyBasePage {
     waitForVisibilityOfElementById("summary_tabs_history_tab").isDisplayed
     waitForVisibilityOfElementByPath(
       "(//*[@class='detail-grid-tl'])[16]"
+    ).getText should not be s"Subject: Start Civil Service Employee Transfer Process"
+    waitForVisibilityOfElementByPath(
+      "(//*[@class='detail-grid-tl'])[6]"
     ).getText should not be s"Subject: Start Civil Service Employee Transfer Process"
   }
 

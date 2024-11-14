@@ -13,7 +13,7 @@ import uk.gov.co.test.ui.specs.BaseFeatureSpec
 
 class RedeploymentSchemeSpec extends BaseFeatureSpec {
   Feature("Candidate To Be Considered Under The Redeployment Scheme") {
-    Scenario("VX: Candidate Selects Home Departments Eligible For Redeployment Scheme", Retryable) {
+    Scenario("VX: Candidate Selects Home Departments Eligible For Redeployment Scheme") {
       Given("a vacancy is included in the redeployment scheme")
       fillNewVacancyForm(REDEPLOYMENT_VACANCY_DATA)
 //      extractAllVacancyDetails("10651")
@@ -25,7 +25,7 @@ class RedeploymentSchemeSpec extends BaseFeatureSpec {
       checkForRedeploymentScheme(MASTER_SHORT_FORM_DATA, vacancyInScheme = true)
     }
 
-    Scenario("VX: Candidate Selects Home Departments Ineligible For Redeployment Scheme", Retryable) {
+    Scenario("VX: Candidate Selects Home Departments Ineligible For Redeployment Scheme") {
       Given("a vacancy is included in the redeployment scheme")
       extractAllApplyOnlyVacancyDetails(vacancyId)
 
@@ -36,7 +36,7 @@ class RedeploymentSchemeSpec extends BaseFeatureSpec {
       checkForNoRedeploymentScheme(MASTER_SHORT_FORM_DATA)
     }
 
-    Scenario("VX: Vacancy Does Not Meet Criteria For Redeployment Scheme", Retryable) {
+    Scenario("VX: Vacancy Does Not Meet Criteria For Redeployment Scheme") {
       Given("a vacancy is not included in the redeployment scheme")
       fillNewVacancyForm(NON_REDEPLOYMENT_VACANCY_DATA)
 //      extractAllVacancyDetails("10652")
@@ -48,7 +48,7 @@ class RedeploymentSchemeSpec extends BaseFeatureSpec {
       checkForRedeploymentScheme(MASTER_SHORT_FORM_DATA, vacancyInScheme = false)
     }
 
-    Scenario("VX: Vacancy & Home Department Do Not Meet Criteria For Redeployment Scheme", Retryable) {
+    Scenario("VX: Vacancy & Home Department Do Not Meet Criteria For Redeployment Scheme") {
       Given("a vacancy is not included in the redeployment scheme")
       extractAllApplyOnlyVacancyDetails(vacancyId)
 //      extractAllVacancyDetails("10652")

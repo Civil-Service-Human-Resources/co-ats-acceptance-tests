@@ -11,7 +11,7 @@ import uk.gov.co.test.ui.specs.BaseFeatureSpec
 
 class ApplicationSpec extends BaseFeatureSpec {
   Feature("Recruiter & Candidate Complete Full Application Process") {
-    Scenario("VX: All Forms; Master Application Process", Retryable) {
+    Scenario("VX: All Forms; Master Application Process") {
       Given("new vacancy is created and posted")
       fillNewVacancyForm(MASTER_VACANCY_DATA)
 //      extractAllVacancyDetails("10733")

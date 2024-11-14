@@ -30,7 +30,6 @@ trait BaseFeatureSpec
   OncePerSuiteRun.register("deleteScreenshots", () => SingletonScreenshotReport.clearReportDirectory())
 
   override protected def beforeEach(testData: TestData): Unit =
-//    driver.manage().window().maximize()
     if (testData.name.contains("V9")) {
       generateCandidateDetails()
       navigateToV9Test()
@@ -55,8 +54,14 @@ trait BaseFeatureSpec
     SingletonScreenshotReport.publishReport()
   }
 
-  override def withFixture(test: NoArgTest): Outcome =
-    if (isRetryable(test)) withRetry(super.withFixture(test))
+  override def withFixture(test: NoArgTest): Outcome = {
+    if (isRetryable(test)) withRetry(super.withFixture(test) match {
+      case f: Failed =>
+        println(s"Test case: '${test.name}' failed on first attempt")
+        SingletonScreenshotReport.takeScreenshot(driver, test.name)
+        f
+      case otherOutcome => otherOutcome
+    })
     else
       super.withFixture(test) match {
         case f: Failed    =>
@@ -64,6 +69,7 @@ trait BaseFeatureSpec
           f
         case otherOutcome => otherOutcome
       }
+  }
 
   def isSystemError()(implicit driver: WebDriver): Boolean =
     find(cssSelector("h1")).get.text == "System error"

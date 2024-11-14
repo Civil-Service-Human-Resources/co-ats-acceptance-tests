@@ -80,7 +80,8 @@ object DigitalIdentityCheckPage extends CivilServiceJobsBasePage {
     ) {
       waitForVisibilityOfElementById(
         biometricPassportOrIdQuestionId
-      ).getText shouldEqual digitalIdentityDetails.biometricPassportOrIdQuestion
+      ).getText shouldEqual s"""${digitalIdentityDetails.biometricPassportOrIdQuestion}
+                                     |UK Biometric Residence Permits are not accepted""".stripMargin
       if (v9BiometricPassportOrId) {
         radioSelect(biometricPassportOrIdYesId)
       } else radioSelect(biometricPassportOrIdNoId)

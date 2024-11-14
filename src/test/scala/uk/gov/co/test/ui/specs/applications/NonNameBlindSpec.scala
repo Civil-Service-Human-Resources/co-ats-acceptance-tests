@@ -10,7 +10,7 @@ import uk.gov.co.test.ui.specs.BaseFeatureSpec
 
 class NonNameBlindSpec extends BaseFeatureSpec {
   Feature("Recruiter & Candidate Complete Full Application Process For Non Name-Blind Vacancy") {
-    Scenario("VX: All Forms; Master Application Process", Retryable) {
+    Scenario("VX: All Forms; Master Application Process") {
       Given("new non name-blind vacancy is created and posted")
       fillNewVacancyForm(NON_NAME_BLIND_VACANCY_DATA)
 //      extractAllVacancyDetails("10648")

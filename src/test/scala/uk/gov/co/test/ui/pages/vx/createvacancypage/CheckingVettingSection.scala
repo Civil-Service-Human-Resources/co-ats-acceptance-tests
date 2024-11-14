@@ -7,7 +7,7 @@ import uk.gov.co.test.ui.pages.vx.VacancyBasePage
 
 case class VettingDetails(
   reservedStatus: Boolean,
-  checkLevelRequired: String,
+  checkLevel: String,
   whichProvider: String,
   workingWithAdults: Boolean,
   workingWithChildren: Boolean,
@@ -22,6 +22,8 @@ object CheckingVettingSection extends VacancyBasePage {
   def reservedStatusId                  = s"${vacancyFormId}_datafield_59601_1_1_fieldset"
   def reservedYesId                     = s"${vacancyFormId}_datafield_59601_1_1_868"
   def reservedNoId                      = s"${vacancyFormId}_datafield_59601_1_1_869"
+  def checkLevelRequiredId              = s"${vacancyFormId}_datafield_211739_1_1"
+  def checkLevelId                      = s"${vacancyFormId}_datafield_211739_1_1"
   def basicCheckId                      = s"${vacancyFormId}_datafield_59611_1_1_12650"
   def standardCheckId                   = s"${vacancyFormId}_datafield_59611_1_1_11340"
   def enhancedCheckId                   = s"${vacancyFormId}_datafield_59611_1_1_11341"
@@ -55,8 +57,8 @@ object CheckingVettingSection extends VacancyBasePage {
     if (vXNonReserved) clickOnRadioButton(reservedYesId) else clickOnRadioButton(reservedNoId)
   }
 
-  private def selectCheckLevelRequired(vettingDetails: VettingDetails): Unit = {
-    vXCrcLevel = vettingDetails.checkLevelRequired
+  private def selectCheckLevel(vettingDetails: VettingDetails): Unit = {
+    vXCrcLevel = vettingDetails.checkLevel
     vXCrcLevel match {
       case "Basic"    => clickOnRadioButton(basicCheckId)
       case "Standard" => clickOnRadioButton(standardCheckId)
@@ -74,6 +76,14 @@ object CheckingVettingSection extends VacancyBasePage {
         case "Access NI"                        => checkbox(accessNIProviderId).select()
       }
     }
+  }
+
+  private def selectCheckLevelRequired(vettingDetails: VettingDetails): Unit = {
+    val checkLevelRequired = waitForVisibilityOfElementById(checkLevelRequiredId)
+    checkLevelRequired.click()
+    selectCheckLevel(vettingDetails)
+    checkWhichProvider(vettingDetails)
+    selectDbsEnhancedChecksOnly(vettingDetails)
   }
 
   private def selectDbsEnhancedChecksOnly(vettingDetails: VettingDetails): Unit =
@@ -136,8 +146,6 @@ object CheckingVettingSection extends VacancyBasePage {
   private val checkAndVetting: Seq[VettingDetails => Unit] = Seq(
     selectReservedStatus,
     selectCheckLevelRequired,
-    checkWhichProvider,
-    selectDbsEnhancedChecksOnly,
     selectVettingLevelRequired,
     selectMedicalRequired
   )

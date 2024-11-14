@@ -17,7 +17,7 @@ import uk.gov.co.test.ui.specs.BaseFeatureSpec
 
 class PnNenSpec extends BaseFeatureSpec {
   Feature("Recruiter Completes The PN/NEN Forms") {
-    Scenario("VX: A Recruiter Completes The NEN Form (DEFRA)", Retryable) {
+    Scenario("VX: A Recruiter Completes The NEN Form (DEFRA)") {
       Given("candidate registers for new job application")
       fillNewVacancyForm(PN_NEN_VACANCY_DATA)
 //      extractAllVacancyDetails("10650")
@@ -32,7 +32,7 @@ class PnNenSpec extends BaseFeatureSpec {
       passedPecChecks()
     }
 
-    Scenario("VX: A Recruiter Completes The PN Form (DEFRA)", Retryable) {
+    Scenario("VX: A Recruiter Completes The PN Form (DEFRA)") {
       Given("candidate registers for new job application")
       extractAllApplyOnlyVacancyDetails(vacancyId)
       fillNewCandidateDetails(REGISTER_CANDIDATE_PN_DEFRA)

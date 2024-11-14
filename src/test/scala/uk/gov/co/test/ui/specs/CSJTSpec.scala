@@ -11,7 +11,7 @@ import uk.gov.co.test.ui.pages.vx.VacancyDetailsPage.extractAllApplyOnlyVacancyD
 
 class CSJTSpec extends BaseFeatureSpec {
   Feature("Candidate Completes CS Numerical Tests Online") {
-    Scenario("VX: Recruiter Creates A Master Vacancy With One CSNT Online", Retryable) {
+    Scenario("VX: Recruiter Creates A Master Vacancy With One CSNT Online") {
       Given("a recruiter creates & posts a new vacancy with csnt")
       fillNewVacancyForm(CSJT_VACANCY_DATA)
       fillNewCandidateDetails(MASTER_REGISTER_CANDIDATE)
@@ -23,7 +23,7 @@ class CSJTSpec extends BaseFeatureSpec {
       println("Done!")
     }
 
-    Scenario("VX: All Forms; Master Application Process fot DAC TEST CANDIDATES", Retryable) {
+    Scenario("VX: All Forms; Master Application Process fot DAC TEST CANDIDATES") {
       Given("new vacancy is created and posted")
 //      fillNewVacancyForm(MASTER_VACANCY_DATA)
       extractAllApplyOnlyVacancyDetails("10358")

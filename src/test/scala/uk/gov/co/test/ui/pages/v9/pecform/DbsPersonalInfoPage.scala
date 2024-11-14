@@ -253,7 +253,10 @@ object DbsPersonalInfoPage extends CivilServiceJobsBasePage {
     selectHaveConvictions
   )
 
-  def dbsPersonalInfoPage(pecFormDetails: PecFormDetails): Unit =
+  def dbsPersonalInfoPage(pecFormDetails: PecFormDetails): Unit = {
+    println(s"vXCrcLevel is $vXCrcLevel")
+    println(s"vXCrcCheckProvider is $vXCrcCheckProvider")
+    println(s"vXPecCrc is $vXPecCrc")
     if (
       vXCrcLevel != "None" && vXCrcCheckProvider.contains("DBS") && !vXPecCrc.contains("Not Applicable") && vXPecCrc
         .contains(s"$vXTypeOfCandidate Candidates")
@@ -264,4 +267,5 @@ object DbsPersonalInfoPage extends CivilServiceJobsBasePage {
       }
       clickOn(pageContinue)
     }
+  }
 }

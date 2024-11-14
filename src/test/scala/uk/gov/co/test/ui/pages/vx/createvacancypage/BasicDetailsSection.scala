@@ -5,6 +5,7 @@ import org.scalatest.concurrent.Eventually.eventually
 import uk.gov.co.test.ui.data.MasterVacancyDetails.{vXAppConvertedClosingDate, vXApplicationClosingDate, vXApplicationClosingTime, vXApplicationLiveDate, vXApplicationLiveTime, vXConvertedClosingDateTime, vXConvertedLiveDateTime, vacancyFormId, vacancyName}
 import uk.gov.co.test.ui.data.vx.vacancy.NewVacancyDetails
 import uk.gov.co.test.ui.pages.vx.VacancyBasePage
+import uk.gov.co.test.ui.pages.vx.createvacancypage.ReserveListSection.{action, waitForDropdownOption}
 
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -21,8 +22,8 @@ object BasicDetailsSection extends VacancyBasePage {
 
   val displayWelshPath      = ".//input[@name='datafield_179408_1_1']"
   val createVacancyTitle    = "Create New Vacancy : Civil Service Jobs - GOV.UK"
-  val newVacancyPath        = ".//a[contains(@href,'recruiter/opportunities/vacancy/create')]"
-  val vacancySectionPath    = "//*[@id='lm-vacancies']/h3/a"
+  val newVacancyPath        = ".//a[contains(@href,'recruiter%2Fopportunities%2Fvacancy%2Fcreate')]"
+  val vacancySectionPath    = "//*[@aria-controls='sub_nav_vacancies']"
   val closingDateId         = "edit_opp_form_pcd"
   val liveHourPath          = ".//select[@id='edit_opp_form_pld_hh']//option[@selected='selected']"
   val closingHourPath       = ".//select[@id='edit_opp_form_pcd_hh']//option[@selected='selected']"
@@ -34,17 +35,21 @@ object BasicDetailsSection extends VacancyBasePage {
   val addWelshTranslationId = "edit_opp_form_title_button"
   val welshTitleInput       = "edit_opp_form_title_cy"
   val updateWelshId         = "lbledit_edit_opp_form_title-update"
+  val scrollViewPath         = ".//*[@class='scroll-viewport']"
+  val pinLHMPath         = "(.//*[@class='mat-mdc-button-touch-target'])[5]"
 
   def newVacancy: WebElement     = waitForVisibilityOfElementByPathLast(newVacancyPath)
   def vacancySection: WebElement = waitForVisibilityOfElementByPathLast(vacancySectionPath)
 
   def createNewVacancy(): Unit = {
+//    action().moveToElement(waitForVisibilityOfElementByPath(scrollViewPath)).clickAndHold()
+//    waitForVisibilityOfElementByPath(pinLHMPath).click()
     if (newVacancy.getText == "Create New Vacancy") newVacancy.click()
     else {
       vacancySection.click()
       newVacancy.click()
     }
-    eventually(onPage(createVacancyTitle))
+    checkForNewTitle(createVacancyTitle)
   }
 
   private def displayWelshVersion(): WebElement =

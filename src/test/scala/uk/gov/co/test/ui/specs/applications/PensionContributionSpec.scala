@@ -14,7 +14,7 @@ class PensionContributionSpec extends BaseFeatureSpec {
   val applyOnlyVacancyId  = "10733"
   val advertOnlyVacancyId = "10738"
   Feature("Pension Contribution Checks For Apply Only Vacancy") {
-    Scenario("VX: Candidate Checks Pension Contribution For 'Administrative Assistant' Grade", Retryable) {
+    Scenario("VX: Candidate Checks Pension Contribution For 'Administrative Assistant' Grade") {
       Given("a recruiter changes the vacancy contract details")
       extractAllApplyOnlyVacancyDetails(applyOnlyVacancyId)
       changeSalaryAndOfferCSPensionDetails(
@@ -36,7 +36,7 @@ class PensionContributionSpec extends BaseFeatureSpec {
       confirmSalaryAndBenefitSectionsInWelsh()
     }
 
-    Scenario("VX: Candidate Checks Pension Contribution For 'Executive Officer' Grade", Retryable) {
+    Scenario("VX: Candidate Checks Pension Contribution For 'Executive Officer' Grade") {
       Given("a recruiter changes the vacancy contract details")
       extractAllApplyOnlyVacancyDetails(applyOnlyVacancyId)
       changeSalaryAndOfferCSPensionDetails(
@@ -58,7 +58,7 @@ class PensionContributionSpec extends BaseFeatureSpec {
       confirmSalaryAndBenefitSectionsInWelsh()
     }
 
-    Scenario("VX: Candidate Checks Pension Contribution For 'Administrative Officer' Grade", Retryable) {
+    Scenario("VX: Candidate Checks Pension Contribution For 'Administrative Officer' Grade") {
       Given("a recruiter changes the vacancy contract details")
       extractAllApplyOnlyVacancyDetails(applyOnlyVacancyId)
       changeSalaryAndOfferCSPensionDetails(
@@ -80,7 +80,7 @@ class PensionContributionSpec extends BaseFeatureSpec {
       confirmSalaryAndBenefitSectionsInWelsh()
     }
 
-    Scenario("VX: Candidate Checks Pension Contribution For 'Grade 7' Grade", Retryable) {
+    Scenario("VX: Candidate Checks Pension Contribution For 'Grade 7' Grade") {
       Given("a recruiter changes the vacancy contract details")
       extractAllApplyOnlyVacancyDetails(applyOnlyVacancyId)
       changeSalaryAndOfferCSPensionDetails(
@@ -102,7 +102,7 @@ class PensionContributionSpec extends BaseFeatureSpec {
       confirmSalaryAndBenefitSectionsInWelsh()
     }
 
-    Scenario("VX: Candidate Checks Pension Contribution For 'SCS Pay Band 1' Grade", Retryable) {
+    Scenario("VX: Candidate Checks Pension Contribution For 'SCS Pay Band 1' Grade") {
       Given("a recruiter changes the vacancy contract details")
       extractAllApplyOnlyVacancyDetails(applyOnlyVacancyId)
       changeSalaryAndOfferCSPensionDetails(
@@ -124,7 +124,7 @@ class PensionContributionSpec extends BaseFeatureSpec {
       confirmSalaryAndBenefitSectionsInWelsh()
     }
 
-    Scenario("VX: Candidate Checks Pension Contribution For 'Senior Executive Officer' Grade", Retryable) {
+    Scenario("VX: Candidate Checks Pension Contribution For 'Senior Executive Officer' Grade") {
       Given("a recruiter changes the vacancy contract details")
       extractAllApplyOnlyVacancyDetails(applyOnlyVacancyId)
       changeSalaryAndOfferCSPensionDetails(
@@ -146,7 +146,7 @@ class PensionContributionSpec extends BaseFeatureSpec {
       confirmSalaryAndBenefitSectionsInWelsh()
     }
 
-    Scenario("VX: Candidate Checks Pension Contribution For Multiple Grades", Retryable) {
+    Scenario("VX: Candidate Checks Pension Contribution For Multiple Grades") {
       Given("a recruiter changes the vacancy contract details")
       extractAllApplyOnlyVacancyDetails(applyOnlyVacancyId)
       changeSalaryAndOfferCSPensionDetails(
@@ -168,7 +168,7 @@ class PensionContributionSpec extends BaseFeatureSpec {
       confirmSalaryAndBenefitSectionsInWelsh()
     }
 
-    Scenario("VX: No Pension Contribution For 'Senior Executive Officer' Grade", Retryable) {
+    Scenario("VX: No Pension Contribution For 'Senior Executive Officer' Grade") {
       Given("a recruiter changes the vacancy contract details")
       extractAllApplyOnlyVacancyDetails(applyOnlyVacancyId)
       changeSalaryAndOfferCSPensionDetails(
@@ -190,7 +190,7 @@ class PensionContributionSpec extends BaseFeatureSpec {
       confirmSalaryAndBenefitSectionsInWelsh()
     }
 
-    Scenario("VX: Candidate Checks Pension Contribution For 'Higher Executive Officer' Grade", Retryable) {
+    Scenario("VX: Candidate Checks Pension Contribution For 'Higher Executive Officer' Grade") {
       Given("a recruiter changes the vacancy contract details")
       extractAllApplyOnlyVacancyDetails(applyOnlyVacancyId)
       changeSalaryAndOfferCSPensionDetails(
@@ -212,7 +212,7 @@ class PensionContributionSpec extends BaseFeatureSpec {
       confirmSalaryAndBenefitSectionsInWelsh()
     }
 
-    Scenario("VX: No Pension Contribution For 'Higher Executive Officer' Grade", Retryable) {
+    Scenario("VX: No Pension Contribution For 'Higher Executive Officer' Grade") {
       Given("a recruiter changes the vacancy contract details")
       extractAllApplyOnlyVacancyDetails(applyOnlyVacancyId)
       changeSalaryAndOfferCSPensionDetails(
@@ -234,7 +234,7 @@ class PensionContributionSpec extends BaseFeatureSpec {
       confirmSalaryAndBenefitSectionsInWelsh()
     }
 
-    Scenario("VX: Zero Pension Contribution For 'Higher Executive Officer' Grade", Retryable) {
+    Scenario("VX: Zero Pension Contribution For 'Higher Executive Officer' Grade") {
       Given("a recruiter changes the vacancy contract details")
       extractAllApplyOnlyVacancyDetails(applyOnlyVacancyId)
       changeSalaryAndOfferCSPensionDetails(
@@ -256,7 +256,7 @@ class PensionContributionSpec extends BaseFeatureSpec {
       confirmSalaryAndBenefitSectionsInWelsh()
     }
 
-    Scenario("VX: Salary Range; No Pension Contribution For 'Higher Executive Officer' Grade", Retryable) {
+    Scenario("VX: Salary Range; No Pension Contribution For 'Higher Executive Officer' Grade") {
       Given("a recruiter changes the vacancy contract details")
       extractAllApplyOnlyVacancyDetails(applyOnlyVacancyId)
       changeSalaryAndOfferCSPensionDetails(
@@ -278,7 +278,7 @@ class PensionContributionSpec extends BaseFeatureSpec {
       confirmSalaryAndBenefitSectionsInWelsh()
     }
 
-    Scenario("VX: Salary Range; Pension Contribution For 'Higher Executive Officer' Grade", Retryable) {
+    Scenario("VX: Salary Range; Pension Contribution For 'Higher Executive Officer' Grade") {
       Given("a recruiter changes the vacancy contract details")
       extractAllApplyOnlyVacancyDetails(applyOnlyVacancyId)
       changeSalaryAndOfferCSPensionDetails(
@@ -300,7 +300,7 @@ class PensionContributionSpec extends BaseFeatureSpec {
       confirmSalaryAndBenefitSectionsInWelsh()
     }
 
-    Scenario("VX: Zero Range; Pension Contribution For Multiple Grades", Retryable) {
+    Scenario("VX: Zero Range; Pension Contribution For Multiple Grades") {
       Given("a recruiter changes the vacancy contract details")
       extractAllApplyOnlyVacancyDetails(applyOnlyVacancyId)
       changeSalaryAndOfferCSPensionDetails(
@@ -322,7 +322,7 @@ class PensionContributionSpec extends BaseFeatureSpec {
       confirmSalaryAndBenefitSectionsInWelsh()
     }
 
-    Scenario("VX: High Salary Range; Pension Contribution For 'Higher Executive Officer' Grade", Retryable) {
+    Scenario("VX: High Salary Range; Pension Contribution For 'Higher Executive Officer' Grade") {
       Given("a recruiter changes the vacancy contract details")
       extractAllApplyOnlyVacancyDetails(applyOnlyVacancyId)
       changeSalaryAndOfferCSPensionDetails(
@@ -344,7 +344,7 @@ class PensionContributionSpec extends BaseFeatureSpec {
       confirmSalaryAndBenefitSectionsInWelsh()
     }
 
-    Scenario("VX: No Salary Range; No Pension Contribution For Multiple Grades", Retryable) {
+    Scenario("VX: No Salary Range; No Pension Contribution For Multiple Grades") {
       Given("a recruiter changes the vacancy contract details")
       extractAllApplyOnlyVacancyDetails(applyOnlyVacancyId)
       changeSalaryAndOfferCSPensionDetails(
@@ -366,7 +366,7 @@ class PensionContributionSpec extends BaseFeatureSpec {
       confirmSalaryAndBenefitSectionsInWelsh()
     }
 
-    Scenario("VX: Same Salary Range; Pension Contribution For Multiple Grades", Retryable) {
+    Scenario("VX: Same Salary Range; Pension Contribution For Multiple Grades") {
       Given("a recruiter changes the vacancy contract details")
       extractAllApplyOnlyVacancyDetails(applyOnlyVacancyId)
       changeSalaryAndOfferCSPensionDetails(
@@ -390,7 +390,7 @@ class PensionContributionSpec extends BaseFeatureSpec {
   }
 
   Feature("Pension Contribution Checks For Advert Only Vacancy") {
-    Scenario("VX: Candidate Checks Pension Contribution For 'Administrative Assistant' Grade", Retryable) {
+    Scenario("VX: Candidate Checks Pension Contribution For 'Administrative Assistant' Grade") {
       Given("a recruiter changes the vacancy contract details")
       extractAllAdvertOnlyVacancyDetails(advertOnlyVacancyId)
       changeSalaryAndOfferCSPensionDetails(
@@ -412,7 +412,7 @@ class PensionContributionSpec extends BaseFeatureSpec {
       confirmSalaryAndBenefitSectionsInWelsh()
     }
 
-    Scenario("VX: Candidate Checks Pension Contribution For 'Executive Officer' Grade", Retryable) {
+    Scenario("VX: Candidate Checks Pension Contribution For 'Executive Officer' Grade") {
       Given("a recruiter changes the vacancy contract details")
       extractAllAdvertOnlyVacancyDetails(advertOnlyVacancyId)
       changeSalaryAndOfferCSPensionDetails(
@@ -434,7 +434,7 @@ class PensionContributionSpec extends BaseFeatureSpec {
       confirmSalaryAndBenefitSectionsInWelsh()
     }
 
-    Scenario("VX: Candidate Checks Pension Contribution For 'Administrative Officer' Grade", Retryable) {
+    Scenario("VX: Candidate Checks Pension Contribution For 'Administrative Officer' Grade") {
       Given("a recruiter changes the vacancy contract details")
       extractAllAdvertOnlyVacancyDetails(advertOnlyVacancyId)
       changeSalaryAndOfferCSPensionDetails(
@@ -456,7 +456,7 @@ class PensionContributionSpec extends BaseFeatureSpec {
       confirmSalaryAndBenefitSectionsInWelsh()
     }
 
-    Scenario("VX: Candidate Checks Pension Contribution For 'Grade 7' Grade", Retryable) {
+    Scenario("VX: Candidate Checks Pension Contribution For 'Grade 7' Grade") {
       Given("a recruiter changes the vacancy contract details")
       extractAllAdvertOnlyVacancyDetails(advertOnlyVacancyId)
       changeSalaryAndOfferCSPensionDetails(
@@ -478,7 +478,7 @@ class PensionContributionSpec extends BaseFeatureSpec {
       confirmSalaryAndBenefitSectionsInWelsh()
     }
 
-    Scenario("VX: Candidate Checks Pension Contribution For 'SCS Pay Band 1' Grade", Retryable) {
+    Scenario("VX: Candidate Checks Pension Contribution For 'SCS Pay Band 1' Grade") {
       Given("a recruiter changes the vacancy contract details")
       extractAllAdvertOnlyVacancyDetails(advertOnlyVacancyId)
       changeSalaryAndOfferCSPensionDetails(
@@ -500,7 +500,7 @@ class PensionContributionSpec extends BaseFeatureSpec {
       confirmSalaryAndBenefitSectionsInWelsh()
     }
 
-    Scenario("VX: Candidate Checks Pension Contribution For 'Senior Executive Officer' Grade", Retryable) {
+    Scenario("VX: Candidate Checks Pension Contribution For 'Senior Executive Officer' Grade") {
       Given("a recruiter changes the vacancy contract details")
       extractAllAdvertOnlyVacancyDetails(advertOnlyVacancyId)
       changeSalaryAndOfferCSPensionDetails(
@@ -522,7 +522,7 @@ class PensionContributionSpec extends BaseFeatureSpec {
       confirmSalaryAndBenefitSectionsInWelsh()
     }
 
-    Scenario("VX: Candidate Checks Pension Contribution For Multiple Grades", Retryable) {
+    Scenario("VX: Candidate Checks Pension Contribution For Multiple Grades") {
       Given("a recruiter changes the vacancy contract details")
       extractAllAdvertOnlyVacancyDetails(advertOnlyVacancyId)
       changeSalaryAndOfferCSPensionDetails(
@@ -544,7 +544,7 @@ class PensionContributionSpec extends BaseFeatureSpec {
       confirmSalaryAndBenefitSectionsInWelsh()
     }
 
-    Scenario("VX: No Pension Contribution For 'Senior Executive Officer' Grade", Retryable) {
+    Scenario("VX: No Pension Contribution For 'Senior Executive Officer' Grade") {
       Given("a recruiter changes the vacancy contract details")
       extractAllAdvertOnlyVacancyDetails(advertOnlyVacancyId)
       changeSalaryAndOfferCSPensionDetails(
@@ -566,7 +566,7 @@ class PensionContributionSpec extends BaseFeatureSpec {
       confirmSalaryAndBenefitSectionsInWelsh()
     }
 
-    Scenario("VX: Candidate Checks Pension Contribution For 'Higher Executive Officer' Grade", Retryable) {
+    Scenario("VX: Candidate Checks Pension Contribution For 'Higher Executive Officer' Grade") {
       Given("a recruiter changes the vacancy contract details")
       extractAllAdvertOnlyVacancyDetails(advertOnlyVacancyId)
       changeSalaryAndOfferCSPensionDetails(
@@ -588,7 +588,7 @@ class PensionContributionSpec extends BaseFeatureSpec {
       confirmSalaryAndBenefitSectionsInWelsh()
     }
 
-    Scenario("VX: No Pension Contribution For 'Higher Executive Officer' Grade", Retryable) {
+    Scenario("VX: No Pension Contribution For 'Higher Executive Officer' Grade") {
       Given("a recruiter changes the vacancy contract details")
       extractAllAdvertOnlyVacancyDetails(advertOnlyVacancyId)
       changeSalaryAndOfferCSPensionDetails(
@@ -610,7 +610,7 @@ class PensionContributionSpec extends BaseFeatureSpec {
       confirmSalaryAndBenefitSectionsInWelsh()
     }
 
-    Scenario("VX: Zero Pension Contribution For 'Higher Executive Officer' Grade", Retryable) {
+    Scenario("VX: Zero Pension Contribution For 'Higher Executive Officer' Grade") {
       Given("a recruiter changes the vacancy contract details")
       extractAllAdvertOnlyVacancyDetails(advertOnlyVacancyId)
       changeSalaryAndOfferCSPensionDetails(
@@ -632,7 +632,7 @@ class PensionContributionSpec extends BaseFeatureSpec {
       confirmSalaryAndBenefitSectionsInWelsh()
     }
 
-    Scenario("VX: Salary Range; No Pension Contribution For 'Higher Executive Officer' Grade", Retryable) {
+    Scenario("VX: Salary Range; No Pension Contribution For 'Higher Executive Officer' Grade") {
       Given("a recruiter changes the vacancy contract details")
       extractAllAdvertOnlyVacancyDetails(advertOnlyVacancyId)
       changeSalaryAndOfferCSPensionDetails(
@@ -654,7 +654,7 @@ class PensionContributionSpec extends BaseFeatureSpec {
       confirmSalaryAndBenefitSectionsInWelsh()
     }
 
-    Scenario("VX: Salary Range; Pension Contribution For 'Higher Executive Officer' Grade", Retryable) {
+    Scenario("VX: Salary Range; Pension Contribution For 'Higher Executive Officer' Grade") {
       Given("a recruiter changes the vacancy contract details")
       extractAllAdvertOnlyVacancyDetails(advertOnlyVacancyId)
       changeSalaryAndOfferCSPensionDetails(
@@ -676,7 +676,7 @@ class PensionContributionSpec extends BaseFeatureSpec {
       confirmSalaryAndBenefitSectionsInWelsh()
     }
 
-    Scenario("VX: Zero Range; Pension Contribution For Multiple Grades", Retryable) {
+    Scenario("VX: Zero Range; Pension Contribution For Multiple Grades") {
       Given("a recruiter changes the vacancy contract details")
       extractAllAdvertOnlyVacancyDetails(advertOnlyVacancyId)
       changeSalaryAndOfferCSPensionDetails(
@@ -698,7 +698,7 @@ class PensionContributionSpec extends BaseFeatureSpec {
       confirmSalaryAndBenefitSectionsInWelsh()
     }
 
-    Scenario("VX: High Salary Range; Pension Contribution For 'Higher Executive Officer' Grade", Retryable) {
+    Scenario("VX: High Salary Range; Pension Contribution For 'Higher Executive Officer' Grade") {
       Given("a recruiter changes the vacancy contract details")
       extractAllAdvertOnlyVacancyDetails(advertOnlyVacancyId)
       changeSalaryAndOfferCSPensionDetails(
@@ -720,7 +720,7 @@ class PensionContributionSpec extends BaseFeatureSpec {
       confirmSalaryAndBenefitSectionsInWelsh()
     }
 
-    Scenario("VX: No Salary Range; No Pension Contribution For Multiple Grades", Retryable) {
+    Scenario("VX: No Salary Range; No Pension Contribution For Multiple Grades") {
       Given("a recruiter changes the vacancy contract details")
       extractAllAdvertOnlyVacancyDetails(advertOnlyVacancyId)
       changeSalaryAndOfferCSPensionDetails(
@@ -742,7 +742,7 @@ class PensionContributionSpec extends BaseFeatureSpec {
       confirmSalaryAndBenefitSectionsInWelsh()
     }
 
-    Scenario("VX: Same Salary Range; Pension Contribution For Multiple Grades", Retryable) {
+    Scenario("VX: Same Salary Range; Pension Contribution For Multiple Grades") {
       Given("a recruiter changes the vacancy contract details")
       extractAllAdvertOnlyVacancyDetails(advertOnlyVacancyId)
       changeSalaryAndOfferCSPensionDetails(

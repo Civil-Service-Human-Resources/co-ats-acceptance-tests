@@ -64,6 +64,15 @@ trait BasePage extends Matchers with Page with WebBrowser with PatienceConfigura
     }
   }
 
+  def checkForNewTitle(expectedStatus: String)(implicit driver: WebDriver): Unit = {
+    val wait = new WebDriverWait(driver, 30, 500)
+    try wait.until { (d: WebDriver) =>
+      pageTitle.equals(expectedStatus)
+    } catch {
+      case staleError: StaleElementReferenceException => println(staleError)
+    }
+  }
+
   def checkForNewValueId(valueId: String, expectedValue: String)(implicit driver: WebDriver): Unit = {
     val wait = new WebDriverWait(driver, 25, 500)
     try wait.until { (d: WebDriver) =>
